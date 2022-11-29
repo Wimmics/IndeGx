@@ -519,6 +519,7 @@
         [
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
             INSERT {
                 GRAPH ?originalDescriptionGraph {
                     ?linkset a void:Linkset .
