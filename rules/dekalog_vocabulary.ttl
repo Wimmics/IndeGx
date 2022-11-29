@@ -1,0 +1,119 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix http: <http://www.w3.org/2011/http> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp> .
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+
+kgi: dcterms:creator "Pierre Maillot" ;
+    dcterms:creator <https://orcid.org/0000-0002-9814-439X> ;
+    dcterms:publisher "INRIA, Team WIMMICS" ;
+    dcterms:title  "IndeGx vocabulary" ;
+    dcterms:description "Vocabulary to complete the manifest and EARL vocabularies for the declaration of the IndeGx framework" ;
+    dcterms:date "2021-10" ;
+    dcterms:format "RDF" ;
+    dcterms:identifier kgi: .
+
+kgi:original rdf:type rdf:Property ;
+    rdfs:label "Original description resources." ;
+    rdfs:comment "Description resources connected to the endpoint URL extracted from the KB"@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain prov:Entity ;
+    rdfs:range prov:Entity .
+
+kgi:curated rdf:type rdf:Property ;
+    rdfs:label "Generated description resources." ;
+    rdfs:comment "Description resources generated from the interrogation of the endpoint URL and the curation of the available original resources descriptions."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain prov:Entity ;
+    rdfs:range prov:Entity .
+
+kgi:trace rdf:type rdf:Property ;
+    rdfs:label "Trace report of the metadata generation." ;
+    rdfs:comment "EARL report resulting in the execution of a query during the generation of the metadata."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain prov:Entity ;
+    rdfs:range earl:Assertion .
+
+kgi:endpoint rdf:type rdf:Property ;
+    rdfs:label "Indicates the endpoint to send a test or action." ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:sentQuery rdf:type rdf:Property ;
+    rdfs:comment "String representation of the SPARQL query sent to the server after transformation to adapt it to the endpoint, if necessary." ;
+    rdfs:label "Query sent to the server" ;
+    rdfs:domain earl:TestResult ;
+    rdfs:range xsd:string .
+
+kgi:TestQuery rdf:type rdfs:Class ;
+    rdfs:label "Test of rdf:type SPARQL query execution" ;
+    rdfs:comment "Test the result of the execution of rdf:type query in the manner of rdf:type SHACL shape but allows declaration of constraints on the HTTP response and the result." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:subClassOf earl:TestCase .
+
+kgi:onSuccess rdf:type rdf:Property ;
+    rdfs:label "List of actions triggered by the success of the test present at the URI of the entry." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain mf:ManifestEntry ;
+    rdfs:range rdf:List .
+
+kgi:onFailure rdf:type rdf:Property ;
+    rdfs:label "List of actions triggered by the failure of the test present at the URI of the entry." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain mf:ManifestEntry ;
+    rdfs:range rdf:List .
+
+kgi:federation rdf:type rdfs:Resource ;
+    rdfs:label "Placeholder endpoint URL to indicate that the query of a rule must be sent to a federation server choosen by the user." ;
+    rdfs:comment "Some tests and actions use the federation server to unload some computation from the described endpoint. The user responsbile for the generation of the description must give a federation server endpoint URL. If no URL is given, the rule is not applied." ;
+    rdfs:domain mf:ManifestEntry .
+
+kgi:DummyTest rdf:type rdf:Class ;
+    rdfs:label "Placeholder class for the test of a rule only affecting the index data." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:comment "Some tests and actions are 'meta' rules that do not need interaction with remote endpoints. This class is for a test that always succeed for these rules." ;
+    rdfs:subClassOf earl:TestCase .
+
+kgi:catalogRoot rdf:type rdfs:Resource ;
+    rdfs:label "Root of a catalog." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:comment "Default resource used to represent the catalog at the root of the index." .
+
+kgi:timeout rdf:type rdf:Property ;
+    rdfs:label "Specify a timeout for a test or action." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:comment "Queries sent during test and actions may need a specific timeout, generally longer than normal. This property specify the timeout for a test or an action." ;
+    rdfs:range xsd:duration .
+
+kgi:linkset rdf:type rdf:Property ;
+    rdfs:label "Link a dataset description to the linkset that were retrieved during its indexation" ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain void:Dataset ;
+    rdfs:range void:Linkset .
+
+kgi:resourceHostname rdf:type rdf:Property ;
+    rdfs:label "Hostname of the resources of the dataset" ;
+    rdfs:comment "Linked to URIs representing the hostnames of the resources of the dataset." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain void:Dataset .
+
+kgi:hostnamePartition rdf:type rdf:Property ;
+    rdfs:label "Partition of the dataset according to the hostname used the URIs of instances" ;
+    rdfs:comment "This property is to be used on the same model as void:classPartition and void:propertyPartition." ;
+    rdfs:subPropertyOf void:subset ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain void:Dataset .
+
+kgi:vocabularyPartition rdf:type rdf:Property ;
+    rdfs:label "Partition of the dataset according to the vocabulary used in triples" ;
+    rdfs:comment "This property is to be used on the same model as void:classPartition and void:propertyPartition." ;
+    rdfs:subPropertyOf void:subset ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:domain void:Dataset .

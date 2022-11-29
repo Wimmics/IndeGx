@@ -1,0 +1,546 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> a mf:Manifest ;
+    mf:entries  (
+            <endpointDescResource.ttl>
+            <datasetDescResource.ttl>
+            <linksets.ttl>
+        ) .
+
+<endpointDescResource.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResource.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResource.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                }
+                """
+        ]
+        [
+            mf:action """
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?originalDescriptionGraph {
+                        ?endpointDescription ?p ?o .
+                        ?endpointDescription a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject ;
+                            prov:wasDerivedFrom ?res ;
+                            sd:endpoint $rawEndpointUrl .
+                    }
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                             kgi:original ?originalDescriptionGraph .
+                    }
+                } WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
+                            {
+                                ?res sd:endpoint ?endpointUrl .
+                                ?res ?p ?o .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                    ?res sd:endpoint ?endpointUrl .
+                                    ?res ?p ?o .
+                                }
+                            }
+                        }
+                        UNION {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "https://", "http://")) AS ?endpointUrl)
+                            {
+                                ?res sd:endpoint ?endpointUrl .
+                                ?res ?p ?o .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                    ?res sd:endpoint ?endpointUrl .
+                                    ?res ?p ?o .
+                                }
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                }"""
+        ]
+        [
+            mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?originalDescriptionGraph {
+                       ?s ?p ?endpointDescription .
+                    }
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription kgi:original ?originalDescriptionGraph .
+                    }
+                } WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
+                            {
+                               ?res sd:endpoint ?endpointUrl .
+                               ?s ?p ?res .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                   ?res sd:endpoint ?endpointUrl .
+                                   ?s ?p ?res .
+                                }
+                            }
+                        }
+                        UNION {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "https://", "http://")) AS ?endpointUrl)
+                            {
+                               ?res sd:endpoint ?endpointUrl .
+                               ?s ?p ?res .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                   ?res sd:endpoint ?endpointUrl .
+                                   ?s ?p ?res .
+                                }
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                }"""
+        ]
+        <../../meta/modifiedUpdate.ttl>
+    ) ;
+    kgi:onFailure (
+        <endpointDescResourceLocalhost.ttl>
+    ).
+
+<endpointDescResourceLocalhost.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResourceLocalhost.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResourceLocalhost.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?originalDescriptionGraph {
+                        ?endpointDescription ?p ?o ;
+                            a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject ;
+                            prov:wasDerivedFrom ?res ;
+                            sd:endpoint $rawEndpointUrl .
+                   }
+                   GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                             kgi:original ?originalDescriptionGraph .
+                   }
+                } WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            ?res sd:endpoint ?endpoint .
+                            ?res ?p ?o .
+                        }
+                        UNION {
+                            GRAPH ?g {
+                                ?res sd:endpoint ?endpoint .
+                                ?res ?p ?o .
+                            }
+                        }
+                    }
+                    FILTER(CONTAINS(str(?endpoint), "localhost"))
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                }"""
+        ]
+        [
+            mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?originalDescriptionGraph {
+                        ?s ?p ?endpointDescription .
+                    }
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription kgi:original ?originalDescriptionGraph .
+                    }
+                } WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            ?res sd:endpoint ?endpoint .
+                            ?s ?p ?res .
+                        }
+                        UNION {
+                            GRAPH ?g {
+                                ?res sd:endpoint ?endpoint .
+                                ?s ?p ?res .
+                            }
+                        }
+                    }
+                   FILTER(CONTAINS(str(?endpoint), "localhost"))
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                }"""
+        ]
+        <../../meta/modifiedUpdate.ttl>
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?endpointDescription a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject ;
+                            sd:endpoint $rawEndpointUrl .
+                    }
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                             kgi:curated ?curatedDescriptionGraph .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                }"""
+        ]
+        <../../meta/modifiedUpdate.ttl>
+    ) .
+
+<datasetDescResource.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [ mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?originalDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResource.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResource.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                        ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity ;
+                            prov:wasDerivedFrom ?res ;
+                            ?pp ?o .
+                    }
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                            kgi:original ?originalDescriptionGraph .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
+                            {
+                                { ?res a dcat:Dataset }
+                                UNION { ?res a void:Dataset }
+                                ?res ?p ?endpointUrl .
+                                ?res ?pp ?o .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                    { ?res a dcat:Dataset }
+                                    UNION { ?res a void:Dataset }
+                                    ?res ?p ?endpointUrl .
+                                    ?res ?pp ?o .
+                                }
+                            }
+                        }
+                        UNION {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "https://", "http://")) AS ?endpointUrl)
+                            {
+                                { ?res a dcat:Dataset }
+                                UNION { ?res a void:Dataset }
+                                ?res ?p ?endpointUrl .
+                                ?res ?pp ?o .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                    { ?res a dcat:Dataset }
+                                    UNION { ?res a void:Dataset }
+                                    ?res ?p ?endpointUrl .
+                                    ?res ?pp ?o .
+                                }
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                 }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                            kgi:original ?originalDescriptionGraph .
+                    }
+                    GRAPH ?originalDescriptionGraph {
+                        ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity ;
+                            prov:wasDerivedFrom ?res .
+                        ?s ?pp ?datasetDescription .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
+                            {
+                                { ?res a dcat:Dataset }
+                                UNION { ?res a void:Dataset }
+                                ?res ?p ?endpointUrl .
+                                ?s ?pp ?res .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                    { ?res a dcat:Dataset }
+                                    UNION { ?res a void:Dataset }
+                                    ?res ?p ?endpointUrl .
+                                    ?s ?pp ?res .
+                                }
+                            }
+                        }
+                        UNION {
+                            BIND(Iri(REPLACE(str($rawEndpointUrl), "https://", "http://")) AS ?endpointUrl)
+                            {
+                                { ?res a dcat:Dataset }
+                                UNION { ?res a void:Dataset }
+                                ?res ?p ?endpointUrl .
+                                ?s ?pp ?res .
+                            }
+                            UNION {
+                                GRAPH ?g {
+                                    { ?res a dcat:Dataset }
+                                    UNION { ?res a void:Dataset }
+                                    ?res ?p ?endpointUrl .
+                                    ?s ?pp ?res .
+                                }
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                 }"""
+        ]
+        <../../meta/modifiedUpdate.ttl>
+        ) ;
+        kgi:onFailure (
+            <datasetDescResourceLocalhost.ttl>
+        ) .
+
+<datasetDescResourceLocalhost.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [ mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?originalDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResourceLocalhost.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                        ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity ;
+                            prov:wasDerivedFrom ?res ;
+                            ?pp ?o .
+                    }
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                            prov:wasDerivedFrom ?res ;
+                            kgi:original ?originalDescriptionGraph .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            { ?res a dcat:Dataset }
+                            UNION { ?res a void:Dataset }
+                            ?res ?p ?endpoint .
+                            ?res ?pp ?o .
+                        }
+                        UNION {
+                            GRAPH ?g {
+                                { ?res a dcat:Dataset }
+                                UNION { ?res a void:Dataset }
+                                ?res ?p ?endpoint .
+                                ?res ?pp ?o .
+                            }
+                        }
+                    }
+                    FILTER( CONTAINS( str(?endpoint), "localhost") )
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                 }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                            prov:wasDerivedFrom ?res ;
+                            kgi:original ?originalDescriptionGraph .
+                    }
+                    GRAPH ?originalDescriptionGraph {
+                        ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity .
+                        ?s ?pp ?datasetDescription .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    SERVICE ?coreseEndpoint {
+                        {
+                            { ?res a dcat:Dataset }
+                            UNION { ?res a void:Dataset }
+                            ?res ?p ?endpoint .
+                            ?s ?pp ?res .
+                        }
+                        UNION {
+                            GRAPH ?g {
+                                { ?res a dcat:Dataset }
+                                UNION { ?res a void:Dataset }
+                                ?res ?p ?endpoint .
+                                ?s ?pp ?res .
+                            }
+                        }
+                    }
+                    FILTER( CONTAINS( str(?endpoint), "localhost") )
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                 }"""
+        ]
+        <../../meta/modifiedUpdate.ttl>
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?originalDescriptionGraph {
+                        ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity .
+                    }
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                            kgi:original ?originalDescriptionGraph .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                }"""
+        ]
+        <../../meta/modifiedUpdate.ttl>
+    ) .
+
+<linksets.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?originalDescriptionGraph {
+                    ?linkset a void:Linkset .
+                    ?linkset ?p ?o .
+                    ?datasetDescription kgi:linkset ?linkset .
+                }
+                GRAPH ?metadataDescriptionGraph {
+                    ?linkset prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/linksets.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/linksets.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/linksets.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            } WHERE {
+                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                SERVICE ?coreseEndpoint {
+                    ?linkset a void:Linkset .
+                    ?linkset ?p ?o .
+                    FILTER( ! isBlank(?o) )
+                }
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+    ) .

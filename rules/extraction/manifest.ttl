@@ -1,0 +1,11 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> a mf:Manifest ;
+    mf:include  (
+            <asserted/manifest.ttl>
+            <computed/manifest.ttl>
+        ) .

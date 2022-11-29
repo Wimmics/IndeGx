@@ -1,0 +1,35 @@
+{
+    "name": "indegx",
+    "type": "module",
+    "dependencies": {
+        "@types/node-fetch": "^2.6.2",
+        "@types/rdflib": "^1.2.0",
+        "dayjs": "^1.11.6",
+        "gulp-cli": "^2.3.0",
+        "md5": "^2.3.0",
+        "node-fetch": "^3.2.10",
+        "rdflib": "^2.2.20",
+        "replaceall": "^0.1.6",
+        "sparqljs": "^3.6.1"
+    },
+    "devDependencies": {
+        "@types/node": "^18.11.9",
+        "assert": "^2.0.0",
+        "browserify-zlib": "^0.2.0",
+        "buffer": "^6.0.3",
+        "events": "^3.3.0",
+        "https-browserify": "^1.0.0",
+        "path-browserify": "^1.0.1",
+        "process": "^0.11.10",
+        "querystring-es3": "^0.2.1",
+        "stream-browserify": "^3.0.0",
+        "stream-http": "^3.2.0",
+        "typescript": "^4.8.4",
+        "url": "^0.11.0",
+        "util": "^0.12.5"
+    },
+    "scripts": {
+        "start": "java -jar corese-server-4.3.0-jar-with-dependencies.jar -su > corese.log",
+        "devbuild": "npx tsc && node src/Indegx.js"
+    }
+}

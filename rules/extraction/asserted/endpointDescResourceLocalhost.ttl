@@ -1,0 +1,39 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+
+<> rdf:type kgi:TestQuery , earl:TestCase ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Extraction of endpoint description resources" ;
+    dcterms:description "Extraction of an endpoint description resource from the example endpointif it describes a 'localhost' endpoint." ;
+    kgi:query """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        ASK {
+            {
+                {
+                    ?res sd:endpoint ?endpointUrl .
+                    FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                }
+                UNION {
+                    GRAPH ?g {
+                        ?res sd:endpoint ?endpointUrl .
+                        FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                    }
+                }
+            }
+            UNION {
+                {
+                    ?res sd:endpoint ?endpointUrl .
+                    FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                }
+                UNION {
+                    GRAPH ?g {
+                        ?res sd:endpoint ?endpointUrl .
+                        FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                    }
+                }
+            }
+        }
+        """ .

@@ -1,0 +1,20 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Extraction of the namespace of properties and classes."@en ;
+    kgi:timeout "PT120S"^^xsd:duration ;
+    kgi:query """ASK {
+    SELECT DISTINCT ?ns
+        WHERE {
+            { SELECT DISTINCT ?elem { { ?s ?elem ?o . }
+                 UNION { ?s a ?elem . }
+            } }
+            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
+        } LIMIT 1
+        }""" .

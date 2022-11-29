@@ -1,0 +1,69 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dkg: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+kgi:catalogTest a dcat:Catalog ;
+#    dcat:dataset kgi:dekalog, kgi:BNBDataset, kgi:dbpedia, kgi:orkg .
+    dcat:dataset kgi:testDekalog , kgi:testDekalogEmpty .
+
+kgi:BNBDataset void:sparqlEndpoint <https://bnb.data.bl.uk/sparql> ;
+    rdfs:label "BNB".
+
+kgi:AgroLDDataset void:sparqlEndpoint <http://agrold.southgreen.fr/sparql> ;
+    schema:name "AgroLD".
+
+kgi:AgroPortalDataset void:sparqlEndpoint <http://sparql.agroportal.lirmm.fr/sparql/> ;
+    dcterms:title "AgroPortal" .
+
+kgi:FCUDataset void:sparqlEndpoint <http://ontology.inrae.fr/frenchcropusage/query> ;
+    dcterms:title "FCU" .
+
+kgi:ScholarlyData void:sparqlEndpoint <http://www.scholarlydata.org/sparql> ;
+    rdfs:label "ScholarlyData".
+
+kgi:TestDataset void:sparqlEndpoint <http://localhost:8890/sparql> ;
+    rdfs:label "Test" .
+
+kgi:orkg void:sparqlEndpoint <https://www.orkg.org/orkg/triplestore> ;
+    rdfs:label "Open Research Knowledge Graph (ORKG)" .
+
+kgi:dekalog void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql> ;
+    rdfs:label "IndeGx" .
+
+kgi:dbpedia void:sparqlEndpoint <http://dbpedia.org/sparql> ;
+    rdfs:label "DBpedia" .
+
+kgi:wasabi void:sparqlEndpoint <http://wasabi.inria.fr/sparql> ;
+    rdfs:label "WASABI" .
+
+kgi:local void:sparqlEndpoint <http://localhost:3030/experiment/query> ;
+    rdfs:label "local" .
+
+kgi:testD1 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-ref> ;
+    rdfs:label "D1" .
+
+kgi:testD1Alt void:sparqlEndpoint <http://localhost:3030/Inclusion-D-ref-alt> ;
+    rdfs:label "D1 alt" .
+
+kgi:testD2 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-2> ;
+    rdfs:label "D2" .
+
+kgi:testD3 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-3> ;
+    rdfs:label "D3" .
+
+kgi:testD4 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-4> ;
+    rdfs:label "D4" .
+
+kgi:mimo void:sparqlEndpoint <http://data.mimo-db.eu/sparql> .
+
+kgi:testDekalog void:sparqlEndpoint <http://localhost:3030/DekalogDebug/sparql> .
+
+kgi:testDekalogEmpty void:sparqlEndpoint <http://localhost:3030/DekalogDebugEmpty/sparql> .

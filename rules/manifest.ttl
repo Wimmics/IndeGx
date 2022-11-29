@@ -1,0 +1,10 @@
+@prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+
+<> a mf:Manifest ;
+    mf:include (
+            <check/manifest.ttl>
+            <sparqles/manifest.ttl>
+            <extraction/manifest.ttl>
+            <statistics/manifest.ttl>
+            <meta/manifest.ttl>
+        ) .

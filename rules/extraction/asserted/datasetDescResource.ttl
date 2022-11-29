@@ -1,0 +1,35 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:title "Extraction of dataset description resources" ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:description "Extraction of the dataset description resource the example endpoint, if there are any. The resources are instances of dcat: or void: Dataset." ;
+    kgi:query """PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX void: <http://rdfs.org/ns/void#>
+        ASK {
+                {
+                    BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
+                    { ?res a dcat:Dataset }
+                    UNION { ?res a void:Dataset }
+                    UNION { GRAPH ?g { ?res a dcat:Dataset } }
+                    UNION { GRAPH ?g { ?res a void:Dataset } }
+                    { ?res ?p $rawEndpointUrl }
+                    UNION { GRAPH ?g { ?res ?p ?endpointUrl } } .
+                }
+                UNION {
+                    BIND(Iri(REPLACE(str($rawEndpointUrl), "https://", "http://")) AS ?endpointUrl)
+                    { ?res a dcat:Dataset }
+                    UNION { ?res a void:Dataset }
+                    UNION { GRAPH ?g { ?res a dcat:Dataset } }
+                    UNION { GRAPH ?g { ?res a void:Dataset } }
+                    { ?res ?p $rawEndpointUrl }
+                    UNION { GRAPH ?g { ?res ?p ?endpointUrl } } .
+                }
+        }""" .
