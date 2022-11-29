@@ -44,8 +44,8 @@
                         sd:feature sparqles:ASK .
                 }
                 GRAPH ?metadataDescriptionGraph {
-                    ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_ASK.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_ASK.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_ASK.ttl> ;
+                    ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_ASK.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_ASK.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_ASK.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {
@@ -74,8 +74,8 @@
                         sd:feature sparqles:CON .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CON.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CON.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CON.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CON.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CON.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CON.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -104,8 +104,8 @@
                             sd:feature sparqles:CONOPT .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CONOPT.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CONOPT.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CONOPT.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CONOPT.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CONOPT.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CONOPT.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -134,8 +134,8 @@
                         sd:feature sparqles:CONJOIN .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CONJOIN.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CONJOIN.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_CONJOIN.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CONJOIN.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CONJOIN.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_CONJOIN.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -164,8 +164,8 @@
                             sd:feature sparqles:SEL-DISTINCT .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL-DISTINCT.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL-DISTINCT.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL-DISTINCT.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL-DISTINCT.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL-DISTINCT.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL-DISTINCT.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -194,8 +194,8 @@
                             sd:feature sparqles:SEL-REDUCED .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL-REDUCED.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL-REDUCED.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL-REDUCED.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL-REDUCED.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL-REDUCED.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL-REDUCED.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -224,8 +224,8 @@
                             sd:feature sparqles:SEL .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SEL.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SEL.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -254,8 +254,8 @@
                             sd:feature sparqles:SELBNODE .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELBNODE.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELBNODE.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELBNODE.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELBNODE.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELBNODE.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELBNODE.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -284,8 +284,8 @@
                             sd:feature sparqles:SELEMPTY .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELEMPTY.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELEMPTY.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELEMPTY.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELEMPTY.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELEMPTY.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELEMPTY.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -314,8 +314,8 @@
                             sd:feature sparqles:SELFILNOTBOUND .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILNOTBOUND.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILNOTBOUND.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILNOTBOUND.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILNOTBOUND.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILNOTBOUND.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILNOTBOUND.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -344,8 +344,8 @@
                             sd:feature sparqles:SELFILBLANK .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILBLANK.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILBLANK.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILBLANK.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILBLANK.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILBLANK.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILBLANK.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -374,8 +374,8 @@
                             sd:feature sparqles:SELFILBOOL .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILBOOL.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILBOOL.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILBOOL.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILBOOL.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILBOOL.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILBOOL.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -404,8 +404,8 @@
                             sd:feature sparqles:SELFILIRI .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILIRI.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILIRI.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILIRI.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILIRI.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILIRI.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILIRI.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -434,8 +434,8 @@
                             sd:feature sparqles:SELFILNUM .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILNUM.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILNUM.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILNUM.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILNUM.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILNUM.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILNUM.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -464,8 +464,8 @@
                             sd:feature sparqles:SELFILREGEX-i .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX-i.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX-i.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX-i.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX-i.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX-i.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX-i.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -494,8 +494,8 @@
                             sd:feature sparqles:SELFILREGEX .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILREGEX.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -524,8 +524,8 @@
                             sd:feature sparqles:SELFILSTR .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILSTR.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILSTR.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFILSTR.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILSTR.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILSTR.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFILSTR.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -554,8 +554,8 @@
                             sd:feature sparqles:SELFROM .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFROM.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFROM.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELFROM.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFROM.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFROM.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELFROM.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -584,8 +584,8 @@
                             sd:feature sparqles:SELGRAPHJOIN .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHJOIN.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHJOIN.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHJOIN.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHJOIN.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHJOIN.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHJOIN.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -614,8 +614,8 @@
                             sd:feature sparqles:SELGRAPHUNION .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHUNION.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHUNION.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHUNION.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHUNION.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHUNION.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPHUNION.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -644,8 +644,8 @@
                             sd:feature sparqles:SELGRAPH .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPH.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPH.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELGRAPH.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPH.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPH.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELGRAPH.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -674,8 +674,8 @@
                             sd:feature sparqles:SELJOIN .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELJOIN.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELJOIN.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELJOIN.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELJOIN.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELJOIN.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELJOIN.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -704,8 +704,8 @@
                             sd:feature sparqles:SELOPT .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELOPT.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELOPT.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELOPT.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELOPT.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELOPT.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELOPT.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -734,8 +734,8 @@
                             sd:feature sparqles:SELUNION .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELUNION.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELUNION.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SELUNION.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELUNION.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELUNION.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SELUNION.ttl> ;
                                     prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
@@ -760,8 +760,8 @@
                 PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SPARQL10.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SPARQL10.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/sparqles/SPARQL10/SPARQLES_SPARQL10.ttl> ;
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SPARQL10.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SPARQL10.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/sparqles/SPARQL10/SPARQLES_SPARQL10.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                     GRAPH ?curatedDescriptionGraph {

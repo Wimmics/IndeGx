@@ -194,7 +194,7 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT DATA {
                     kgi:catalogRoot skos:example kgi:example14 .
-                    kgi:example14 dcterms:subject "PREFIX void: <http://rdfs.org/ns/void#> PREFIX dcat: <http://www.w3.org/ns/dcat#> PREFIX earl: <http://www.w3.org/ns/earl#> PREFIX kgi: <http://ns.inria.fr/kg/index#> PREFIX voidex: <http://ldf.fi/void-ext#> PREFIX dqv: <http://www.w3.org/ns/dqv#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT (count(DISTINCT ?endpoint) AS ?count) WHERE {   ?endpointDesc dcat:endpointURL ?endpoint .   ?measurement dqv:computedOn ?endpointDesc .   ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/check/reachability.ttl> .   ?measurement dqv:value 'true'^^xsd:boolean }" ;
+                    kgi:example14 dcterms:subject "PREFIX void: <http://rdfs.org/ns/void#> PREFIX dcat: <http://www.w3.org/ns/dcat#> PREFIX earl: <http://www.w3.org/ns/earl#> PREFIX kgi: <http://ns.inria.fr/kg/index#> PREFIX voidex: <http://ldf.fi/void-ext#> PREFIX dqv: <http://www.w3.org/ns/dqv#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT (count(DISTINCT ?endpoint) AS ?count) WHERE {   ?endpointDesc dcat:endpointURL ?endpoint .   ?measurement dqv:computedOn ?endpointDesc .   ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/reachability.ttl> .   ?measurement dqv:value 'true'^^xsd:boolean }" ;
                         dcterms:description "Returns the number of tests that passed the availability test." .
                 }"""
         ]

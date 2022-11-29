@@ -20,8 +20,8 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResource.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResource.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/endpointDescResource.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/endpointDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/endpointDescResource.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 }
@@ -147,8 +147,8 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResourceLocalhost.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/endpointDescResourceLocalhost.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/endpointDescResourceLocalhost.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/endpointDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/endpointDescResourceLocalhost.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 }
@@ -269,8 +269,8 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?originalDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResource.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResource.ttl> ;
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                         ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity ;
                             prov:wasDerivedFrom ?res ;
@@ -404,8 +404,8 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?originalDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/datasetDescResourceLocalhost.ttl> ;
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                         ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity ;
                             prov:wasDerivedFrom ?res ;
@@ -527,8 +527,8 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
                 GRAPH ?metadataDescriptionGraph {
-                    ?linkset prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/linksets.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/linksets.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/asserted/linksets.ttl> ;
+                    ?linkset prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/linksets.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/linksets.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/linksets.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {

@@ -29,8 +29,8 @@
                         ?datasetDescription dcterms:language ?lang .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/languages.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/languages.ttl> ;
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                         ?metadata kgi:curated ?curatedDescriptionGraph .
                     }
@@ -64,8 +64,8 @@ kgi:onSuccess (
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/datatypes.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/datatypes.ttl> ;
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/datatypes.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/datatypes.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
                 GRAPH ?curatedDescriptionGraph {
@@ -104,8 +104,8 @@ kgi:onSuccess (
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/graphList.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/graphList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/graphList.ttl> ;
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     ?metadataDescription a prov:Entity , earl:TestSubject ;
                         prov:wasDerivedFrom ?endpointUrl ;
@@ -153,8 +153,8 @@ kgi:onSuccess (
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             INSERT {
                 GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/graphListCorese.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/graphListCorese.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/graphListCorese.ttl> ;
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphListCorese.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphListCorese.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphListCorese.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
                 GRAPH ?curatedDescriptionGraph {
@@ -195,8 +195,8 @@ kgi:onSuccess (
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl> ;
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                         ?metadataDescription a prov:Entity , earl:TestSubject ;
                             prov:wasDerivedFrom $rawEndpointUrl ;
@@ -233,8 +233,8 @@ kgi:onSuccess (
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl> ;
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                         ?metadataDescription a prov:Entity , earl:TestSubject ;
                             prov:wasDerivedFrom $rawEndpointUrl ;
@@ -283,8 +283,8 @@ kgi:onSuccess (
                     PREFIX dcterms: <http://purl.org/dc/terms/>
                     INSERT {
                         GRAPH ?metadataDescriptionGraph {
-                            ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyListLOV.ttl#activity> ;
-                                prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyListLOV.ttl> ;
+                            ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl#activity> ;
+                                prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl> ;
                                 prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X>  .
                             ?metadataDescription a prov:Entity , earl:TestSubject ;
                                 prov:wasDerivedFrom $rawEndpointUrl ;
@@ -333,8 +333,8 @@ kgi:onSuccess (
                     PREFIX voaf: <http://purl.org/vocommons/voaf#>
                     INSERT {
                         GRAPH ?metadataDescriptionGraph {
-                            ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyListLOV.ttl#activity> ;
-                                prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyListLOV.ttl> ;
+                            ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl#activity> ;
+                                prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl> ;
                                 prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X>  .
                             ?metadataDescription a prov:Entity , earl:TestSubject ;
                                 prov:wasDerivedFrom $rawEndpointUrl ;
@@ -381,8 +381,8 @@ kgi:onSuccess (
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/timezone.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/timezone.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/timezone.ttl> ;
+                        ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/timezone.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/timezone.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/timezone.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                     GRAPH ?curatedDescriptionGraph {
@@ -412,8 +412,8 @@ kgi:onSuccess (
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/resourceNamespaces.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/resourceNamespaces.ttl> ;
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/resourceNamespaces.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/resourceNamespaces.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                     GRAPH ?curatedDescriptionGraph {
@@ -445,8 +445,8 @@ kgi:onSuccess (
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/resourceNamespaces.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/computed/resourceNamespaces.ttl> ;
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/resourceNamespaces.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/resourceNamespaces.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                     GRAPH ?curatedDescriptionGraph {
