@@ -12,7 +12,7 @@ export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQue
     } else if (isSparqlAsk(query)) {
         return fetchJSONPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout, jsonHeaders).catch(() => { boolean:false})
     } else if ( isSparqlConstruct(query)) {
-        return fetchPromise(endpoint + '?query=' + encodeURIComponent(query) + '&timeout=' + timeout).catch(error => { Logger.error(endpoint, query, error); throw error })
+        return fetchJSONPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout).catch(error => { Logger.error(endpoint, query, error); throw error })
     }else if(isSparqlUpdate(query)) {
         return updateQuery(endpoint, query).catch(error => { Logger.error(endpoint, query, error); throw error });
     } else {

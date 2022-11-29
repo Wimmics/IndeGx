@@ -768,34 +768,36 @@
                         ?endpointDescription sd:feature sd:SPARQL10Query .
                     }
                 } WHERE {
-                    ?endpointDescription sd:feature
-                        sparqles:ASK ,
-                        sparqles:CON ,
-                        sparqles:CONJOIN ,
-                        sparqles:CONOPT ,
-                        sparqles:SEL-DISTINCT ,
-                        sparqles:SEL-REDUCED ,
-                        sparqles:SEL ,
-                        sparqles:SELBNODE ,
-                        sparqles:SELEMPTY ,
-                        sparqles:SELFILBLANK ,
-                        sparqles:SELFILBOOL ,
-                        sparqles:SELFILIRI ,
-                        sparqles:SELFILNOTBOUND ,
-                        sparqles:SELFILNUM ,
-                        sparqles:SELFILREGEX-i ,
-                        sparqles:SELFILREGEX ,
-                        sparqles:SELFILSTR ,
-                        sparqles:SELFROM ,
-                        sparqles:SELGRAPH ,
-                        sparqles:SELGRAPHJOIN ,
-                        sparqles:SELGRAPHUNION ,
-                        sparqles:SELJOIN ,
-                        sparqles:SELOPT ,
-                        sparqles:SELUNION .
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    GRAPH ?curatedDescriptionGraph {
+                        ?endpointDescription sd:feature
+                            sparqles:ASK ,
+                            sparqles:CON ,
+                            sparqles:CONJOIN ,
+                            sparqles:CONOPT ,
+                            sparqles:SEL-DISTINCT ,
+                            sparqles:SEL-REDUCED ,
+                            sparqles:SEL ,
+                            sparqles:SELBNODE ,
+                            sparqles:SELEMPTY ,
+                            sparqles:SELFILBLANK ,
+                            sparqles:SELFILBOOL ,
+                            sparqles:SELFILIRI ,
+                            sparqles:SELFILNOTBOUND ,
+                            sparqles:SELFILNUM ,
+                            sparqles:SELFILREGEX-i ,
+                            sparqles:SELFILREGEX ,
+                            sparqles:SELFILSTR ,
+                            sparqles:SELFROM ,
+                            sparqles:SELGRAPH ,
+                            sparqles:SELGRAPHJOIN ,
+                            sparqles:SELGRAPHUNION ,
+                            sparqles:SELJOIN ,
+                            sparqles:SELOPT ,
+                            sparqles:SELUNION .
+                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    }
                 }
                 """
             ]

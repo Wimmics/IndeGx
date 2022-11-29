@@ -17,6 +17,7 @@ export function sendUpdate(endpoint: string, queryString: string, timeout?: numb
             return result;
         }).catch(error => {
             Logger.error(error)
+            throw error;
         });
     }
 }
@@ -41,7 +42,8 @@ export function sendConstruct(endpoint: string, queryString: string, timeout?: n
         return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
             return result;
         }).catch(error => {
-            Logger.error(error)
+            Logger.error(error);
+            throw error;
         });
     }
 }
@@ -61,13 +63,10 @@ export function sendSelect(endpoint: string, queryString: string, timeout?: numb
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(surroundingQueryObject);
         return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
-            try {
                 return result;
-            } catch (error) {
-                throw error;
-            }
         }).catch(error => {
             Logger.error(error)
+            throw error;
         });
     } else {
         throw new Error("sendAsk only accept ASK queries")
@@ -96,7 +95,7 @@ export function sendAsk(endpoint: string, queryString: string, timeout?: number)
             }
         }).catch(error => {
             Logger.error(endpoint, queryString, error)
-            return new Promise((resolve, reject) => resolve(false))
+            throw error;
         });
     } else {
         throw new Error("sendAsk only accept ASK queries")

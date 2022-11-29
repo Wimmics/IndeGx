@@ -81,9 +81,15 @@ export function sendAskWithTraceHandling(endpointUrl : string, queryString: stri
 function sendQueryWithTraceHandling(queryFunction : (a: string, b: string, c?: number) => Promise<any>, endpointUrl : string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number) : Promise<any>{
     return queryFunction(endpointUrl, queryString, timeout).then(results => {
         const endTime = dayjs();
-        return sendSuccessReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime).then(() => {
-            return results;
-        });
+        if(results.error !== undefined) {
+            return sendFailureReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime, results.error).then(() => {
+                return results;
+            });
+        } else {
+            return sendSuccessReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime).then(() => {
+                return results;
+            });
+        }
     }).catch(error => {
         const endTime = dayjs();
         Logger.error(error);

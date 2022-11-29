@@ -33,43 +33,51 @@ function applyGenerationAsset(endpointUrl: string, entryObject: RuleTree.Manifes
             if(entryObject.test != undefined) {
                 Logger.info(endpointUrl,"Test " , entryObject.test.uri, "succeeded")
             }
-            Logger.info(endpointUrl, "Starting success actions for " , entryObject.uri)
-            entryObject.actionsSuccess.forEach(action => {
-                if (RuleTree.isManifestEntry(action)) {
-                    const followUpEntry = action as RuleTree.ManifestEntry;
-                    actionPool.push(applyGenerationAsset(endpointUrl, followUpEntry).catch(error => {
-                        Logger.error(error)
-                    }));
-                } else if (RuleTree.isAction(action)) {
-                    const actionObject = action as RuleTree.Action;
-                    actionPool.push(applyAction(endpointUrl, actionObject, entryObject).catch(error => {
-                        Logger.error(error)
-                    }));
-                } else {
-                    throw new Error("Unexpected action type")
-                }
-            })
+            if(entryObject.actionsSuccess.length > 0) {
+                Logger.info(endpointUrl, "Starting", entryObject.actionsSuccess.length, "success actions for " , entryObject.uri)
+                entryObject.actionsSuccess.forEach(action => {
+                    if (RuleTree.isManifestEntry(action)) {
+                        const followUpEntry = action as RuleTree.ManifestEntry;
+                        actionPool.push(applyGenerationAsset(endpointUrl, followUpEntry).catch(error => {
+                            Logger.error(error)
+                        }));
+                    } else if (RuleTree.isAction(action)) {
+                        const actionObject = action as RuleTree.Action;
+                        actionPool.push(applyAction(endpointUrl, actionObject, entryObject).catch(error => {
+                            Logger.error(error)
+                        }));
+                    } else {
+                        throw new Error("Unexpected action type")
+                    }
+                })
+            } else {
+                Logger.info(endpointUrl, "No success actions for " , entryObject.uri)
+            }
         } else {
             if(entryObject.test != undefined) {
                 Logger.info(endpointUrl,"Test " , entryObject.test.uri, "failed")
             }
             var actionPool = [];
-            Logger.info(endpointUrl, "Starting failure actions for " , entryObject.uri)
-            entryObject.actionsFailure.forEach(action => {
-                if (RuleTree.isManifestEntry(action)) {
-                    const followUpEntry = action as RuleTree.ManifestEntry;
-                    actionPool.push(applyGenerationAsset(endpointUrl, followUpEntry).catch(error => {
-                        Logger.error(error, followUpEntry)
-                    }));
-                } else if (RuleTree.isAction(action)) {
-                    const actionObject = action as RuleTree.Action;
-                    actionPool.push(applyAction(endpointUrl, actionObject, entryObject).catch(error => {
-                        Logger.error(error, actionObject)
-                    }));
-                } else {
-                    throw new Error("Unexpected action type " + typeof action)
-                }
-            })
+            if(entryObject.actionsFailure.length > 0) {
+                Logger.info(endpointUrl, "Starting", entryObject.actionsFailure.length, "failure actions for " , entryObject.uri)
+                entryObject.actionsFailure.forEach(action => {
+                    if (RuleTree.isManifestEntry(action)) {
+                        const followUpEntry = action as RuleTree.ManifestEntry;
+                        actionPool.push(applyGenerationAsset(endpointUrl, followUpEntry).catch(error => {
+                            Logger.error(error, followUpEntry)
+                        }));
+                    } else if (RuleTree.isAction(action)) {
+                        const actionObject = action as RuleTree.Action;
+                        actionPool.push(applyAction(endpointUrl, actionObject, entryObject).catch(error => {
+                            Logger.error(error, actionObject)
+                        }));
+                    } else {
+                        throw new Error("Unexpected action type " + typeof action)
+                    }
+                })
+            } else {
+                Logger.info(endpointUrl, "No failure actions for " , entryObject.uri)
+            }
         }
         return Promise.allSettled(actionPool).then(() => {
             Logger.info(endpointUrl, "Finished actions for " , entryObject.uri)
@@ -86,19 +94,37 @@ function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: 
         var testsPool = [];
         testQueries.forEach(testQuery => {
             if (SPARQLUtils.isSparqlAsk(testQuery)) {
-                testsPool.push(sendAskWithTraceHandling(endpointUrl, testQuery, entryObject, startTime))
+                testsPool.push(sendAskWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(askResult => {
+                    if(askResult.error !== undefined) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }).finally(() => false));
             } else if (SPARQLUtils.isSparqlSelect(testQuery)) {
                 testsPool.push(sendSelectWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(selectResult => {
-                    return true;
-                }));
+                    if(selectResult.error !== undefined) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }).finally(() => false));
             } else if(SPARQLUtils.isSparqlConstruct(testQuery)) {
                 testsPool.push(sendConstructWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(constructResult => {
-                    return true;
-                }));
+                    if(constructResult.error !== undefined) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }).finally(() => false));
             } else if(SPARQLUtils.isSparqlUpdate(testQuery)) {
-                testsPool.push(sendUpdateWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(() => {
-                    return true;
-                }));
+                testsPool.push(sendUpdateWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(updateResponse => {
+                    if(updateResponse.error !== undefined) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }).finally(() => false));
             }
         })
         return Promise.allSettled(testsPool).then(resultPromises => {
