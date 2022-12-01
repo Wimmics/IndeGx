@@ -1,0 +1,3242 @@
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dkg:     <http://ns.inria.fr/kg/index#> .
+@prefix earl:    <http://www.w3.org/ns/earl#> .
+@prefix kgi:     <http://ns.inria.fr/kg/index#> .
+@prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix ns0:     <http://purl.org/dc/terms/> .
+@prefix ns1:     <https://linkedwiki.com/dataset/> .
+@prefix ns10:    <https://api.parliament.uk/> .
+@prefix ns100:   <http://sparql.wikipathways.org/> .
+@prefix ns101:   <https://query.wikidata.org/> .
+@prefix ns102:   <https://linkeddata1.calcul.u-psud.fr/> .
+@prefix ns103:   <https://yago-knowledge.org/> .
+@prefix ns104:   <http://collection.britishart.yale.edu/> .
+@prefix ns105:   <http://bbc.openlinksw.com/> .
+@prefix ns106:   <http://data.culture.fr/thesaurus/> .
+@prefix ns107:   <http://data.persee.fr/> .
+@prefix ns108:   <https://datos.gob.es/virtuoso/> .
+@prefix ns109:   <https://isidore.science/> .
+@prefix ns11:    <https://triplestore.sireneld.io/sirene/> .
+@prefix ns110:   <http://www.scholarlydata.org/> .
+@prefix ns111:   <http://dbtune.org/bbc/peel/> .
+@prefix ns112:   <http://de.dbpedia.org/> .
+@prefix ns113:   <https://es.dbpedia.org/> .
+@prefix ns114:   <http://dbtune.org/jamendo/> .
+@prefix ns115:   <http://dbtune.org/magnatune/> .
+@prefix ns116:   <http://dbtune.org/musicbrainz/> .
+@prefix ns117:   <https://cedropendata.mfcr.cz/c3lod/cedr/> .
+@prefix ns118:   <https://ld.cultural.jp/> .
+@prefix ns119:   <https://opendata.mfcr.cz/pages/> .
+@prefix ns12:    <https://linkedwiki.com/> .
+@prefix ns120:   <https://data.cssz.cz/> .
+@prefix ns121:   <https://xn--slovnk-7va.gov.cz/> .
+@prefix ns122:   <https://www.dictionnairedesfrancophones.org/> .
+@prefix ns123:   <http://edan.si.edu/saam/> .
+@prefix ns124:   <http://dblp.l3s.de/d2r/> .
+@prefix ns125:   <https://identifiers.org/services/> .
+@prefix ns126:   <http://id.nlm.nih.gov/mesh/> .
+@prefix ns127:   <http://www.europeandataportal.eu/> .
+@prefix ns128:   <http://nomisma.org/> .
+@prefix ns129:   <https://lod.abes.fr/> .
+@prefix ns13:    <https://io.datascience-paris-saclay.fr/> .
+@prefix ns130:   <http://zbw.eu/beta/sparql/stw/> .
+@prefix ns131:   <http://bfs.270a.info/> .
+@prefix ns132:   <http://collection.britishmuseum.org/> .
+@prefix ns133:   <https://agrovoc.fao.org/> .
+@prefix ns134:   <http://opencitations.net/> .
+@prefix ns135:   <http://zbw.eu/beta/sparql/gnd/> .
+@prefix ns136:   <http://lov.okfn.org/dataset/lov/> .
+@prefix ns137:   <http://data.nationallibrary.fi/bib/> .
+@prefix ns138:   <http://data.americanartcollaborative.org/> .
+@prefix ns139:   <http://fr.dbpedia.org/> .
+@prefix ns14:    <http://linkedgeodata.org/> .
+@prefix ns140:   <http://ja.dbpedia.org/> .
+@prefix ns141:   <http://dbpedia.org/> .
+@prefix ns142:   <http://data.archiveshub.ac.uk/> .
+@prefix ns143:   <http://lod.kipo.kr/data/> .
+@prefix ns144:   <http://data.cervantesvirtual.com/openrdf-sesame/repositories/> .
+@prefix ns145:   <http://lod.nl.go.kr/> .
+@prefix ns146:   <http://www4.wiwiss.fu-berlin.de/dailymed/> .
+@prefix ns147:   <http://dati.beniculturali.it/> .
+@prefix ns148:   <http://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/> .
+@prefix ns149:   <http://data.odw.tw/> .
+@prefix ns15:    <http://collection.britishart.yale.edu/> .
+@prefix ns150:   <http://hkcan.julac.org/lod/> .
+@prefix ns151:   <https://www.govdata.de/> .
+@prefix ns152:   <https://lingualibre.fr/bigdata/namespace/wdq/> .
+@prefix ns153:   <https://lingualibre.org/bigdata/namespace/wdq/> .
+@prefix ns154:   <http://opendatacommunities.org/> .
+@prefix ns155:   <http://api.finto.fi/> .
+@prefix ns156:   <https://ldf.fi/mufi/> .
+@prefix ns157:   <http://ldf.fi/kirjasampo/> .
+@prefix ns158:   <http://semantic.eea.europa.eu/> .
+@prefix ns159:   <http://collection.britishart.yale.edu/openrdf-sesame/repositories/> .
+@prefix ns16:    <http://factforge.net/repositories/> .
+@prefix ns160:   <http://cultura.linkeddata.es/> .
+@prefix ns161:   <http://sparql.kupkb.org/> .
+@prefix ns162:   <http://dati.camera.it/> .
+@prefix ns163:   <http://www.genome.jp/sparql/> .
+@prefix ns164:   <http://bnb.data.bl.uk/> .
+@prefix ns165:   <https://data.gov.cz/> .
+@prefix ns166:   <https://datos.gob.es/es/> .
+@prefix ns167:   <http://digital-agenda-data.eu/data/> .
+@prefix ns17:    <http://data.digitalculture.tw/taichung/> .
+@prefix ns18:    <http://ldf.fi/SERVICE/> .
+@prefix ns19:    <http://ldf.fi/folklore/> .
+@prefix ns20:    <http://vocabs.ands.org.au/repository/api/sparql/> .
+@prefix ns21:    <https://colil.dbcls.jp/> .
+@prefix ns22:    <http://data.allie.dbcls.jp/> .
+@prefix ns23:    <http://ma-graph.org/> .
+@prefix ns24:    <http://data.mimo-db.eu/> .
+@prefix ns25:    <http://statistics.data.gov.uk/> .
+@prefix ns26:    <http://vocab.getty.edu/> .
+@prefix ns27:    <https://tora.entryscape.net/> .
+@prefix ns28:    <http://genome.microbedb.jp/> .
+@prefix ns29:    <https://www.orpha.net/> .
+@prefix ns3:     <https://query.wikidata.org/> .
+@prefix ns30:    <http://vulcan.cs.uga.edu/> .
+@prefix ns31:    <https://sparql.uniprot.org/> .
+@prefix ns32:    <https://sparql.orthodb.org/> .
+@prefix ns33:    <http://bio2rdf.org/> .
+@prefix ns34:    <http://data.nobelprize.org/> .
+@prefix ns35:    <https://www.ebi.ac.uk/rdf/services/> .
+@prefix ns36:    <http://db.artsdata.ca/repositories/> .
+@prefix ns37:    <http://data.culture.fr/thesaurus/> .
+@prefix ns38:    <https://data.idref.fr/> .
+@prefix ns39:    <http://vocabulary.curriculum.edu.au/PoolParty/sparql/> .
+@prefix ns4:     <https://linkeddata.uriburner.com/> .
+@prefix ns40:    <http://sparql.archives-ouvertes.fr/> .
+@prefix ns41:    <https://digits2.mainzed.org/covid19/> .
+@prefix ns42:    <https://bnb.data.bl.uk/> .
+@prefix ns43:    <http://data.archaeologydataservice.ac.uk/sparql/repositories/> .
+@prefix ns44:    <http://agrovoc.uniroma2.it/> .
+@prefix ns45:    <https://bgee.org/> .
+@prefix ns46:    <https://sparql.proconsortium.org/virtuoso/> .
+@prefix ns47:    <https://slod.fiz-karlsruhe.de/> .
+@prefix ns48:    <https://www.genome.jp/sparql/> .
+@prefix ns49:    <http://lod.openaire.eu/> .
+@prefix ns5:     <http://data.persee.fr/> .
+@prefix ns50:    <https://w3id.org/oc/> .
+@prefix ns51:    <https://sparql.rhea-db.org/> .
+@prefix ns52:    <https://id.nlm.nih.gov/mesh/> .
+@prefix ns53:    <http://bbc.openlinksw.com/> .
+@prefix ns54:    <https://lov.linkeddata.es/dataset/lov/> .
+@prefix ns55:    <https://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/> .
+@prefix ns56:    <https://datos.gob.es/virtuoso/> .
+@prefix ns57:    <https://dati.camera.it/> .
+@prefix ns58:    <http://sparql.wikipathways.org/> .
+@prefix ns59:    <https://edh-www.adw.uni-heidelberg.de/data/> .
+@prefix ns6:     <https://isidore.science/> .
+@prefix ns60:    <http://id.sgcb.mcu.es/> .
+@prefix ns61:    <http://data.cervantesvirtual.com/bvmc-lod/repositories/> .
+@prefix ns62:    <https://data.nationallibrary.fi/bib/> .
+@prefix ns63:    <https://datos-abertos.galiciana.gal/pt/> .
+@prefix ns64:    <https://zbw.eu/beta/sparql/gnd/> .
+@prefix ns65:    <https://zbw.eu/beta/sparql/stw/> .
+@prefix ns66:    <https://zbw.eu/beta/sparql/econ_pers/> .
+@prefix ns67:    <https://zbw.eu/beta/sparql/econ_corp/> .
+@prefix ns68:    <https://zbw.eu/beta/sparql/pm20/> .
+@prefix ns69:    <https://opendatacommunities.org/> .
+@prefix ns7:     <http://landregistry.data.gov.uk/landregistry/> .
+@prefix ns70:    <http://lod.kipo.kr/data/patent/> .
+@prefix ns71:    <http://lod.kipo.kr/data/oversea_patent/> .
+@prefix ns72:    <http://lod.kipo.kr/data/admin_processes/> .
+@prefix ns73:    <http://lod.kipo.kr/data/classification/> .
+@prefix ns74:    <http://lod.kipo.kr/data/thesaurus/> .
+@prefix ns75:    <https://sophox.org/> .
+@prefix ns76:    <https://lod.nl.go.kr/> .
+@prefix ns77:    <https://semantic.eea.europa.eu/> .
+@prefix ns78:    <http://datos.bne.es/> .
+@prefix ns79:    <https://www.europeandataportal.eu/> .
+@prefix ns8:     <https://opendata.aragon.es/> .
+@prefix ns80:    <https://zbw.eu/beta/sparql/stwv/> .
+@prefix ns81:    <https://data.escr.fr/> .
+@prefix ns82:    <https://opendata.mfcr.cz/lod/> .
+@prefix ns83:    <https://yago-knowledge.org/> .
+@prefix ns84:    <http://publications.europa.eu/webapi/rdf/> .
+@prefix ns85:    <https://linkeddata1.calcul.u-psud.fr/> .
+@prefix ns86:    <https://data.europa.eu/euodp/> .
+@prefix ns87:    <https://rdf.insee.fr/> .
+@prefix ns88:    <https://rpp-opendata.egon.gov.cz/odrpp/> .
+@prefix ns89:    <http://sparql.bioontology.org/> .
+@prefix ns9:     <https://data.epo.org/linked-data/> .
+@prefix ns90:    <https://fuseki.gwascentral.org/gc/> .
+@prefix ns91:    <https://linkedlifedata.com/> .
+@prefix ns92:    <https://data.ordnancesurvey.co.uk/datasets/code-point-open/apis/> .
+@prefix ns93:    <https://data.ordnancesurvey.co.uk/datasets/opennames/apis/> .
+@prefix ns94:    <https://data.ordnancesurvey.co.uk/datasets/boundary-line/apis/> .
+@prefix ns95:    <https://data.ordnancesurvey.co.uk/datasets/50k-gazetteer/apis/> .
+@prefix ns96:    <https://cs.dbpedia.org/> .
+@prefix ns97:    <https://api.parliament.uk/> .
+@prefix ns98:    <http://ns.inria.fr/kg/index#> .
+@prefix ns99:    <http://www.w3.org/ns/dcat#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:  <http://schema.org/> .
+@prefix sd:      <http://www.w3.org/ns/sparql-service-description#> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix voidex:  <http://ldf.fi/void-ext#> .
+
+dkg:catalogRoot  rdf:type  dcat:Catalog ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Linked Stage Graph" ;
+                        void:sparqlEndpoint  ns47:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "neXtProt" ;
+                        void:sparqlEndpoint  <https://sparql.nextprot.org/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Spanish DBpedia" ;
+                        void:sparqlEndpoint  ns113:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "API path" ;
+                        void:sparqlEndpoint  <https://api.data.muziekweb.nl/datasets/muziekweborganization/Muziekweb/services/Muziekweb/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "IODS" ;
+                        void:sparqlEndpoint  ns13:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://linkedspl.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql" ;
+                        void:sparqlEndpoint  <http://api.kasabi.com/dataset/un-hazardous-material-numbers/apis/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q483420" ;
+                        void:sparqlEndpoint  ns143:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "IndeGx experiment endpoint" ;
+                        void:sparqlEndpoint  <http://prod-dekalog.inria.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://api.talis.com/stores/schemapedia/services/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q6352575" ;
+                        void:sparqlEndpoint  <http://collection.britishart.yale.edu/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sabiork.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://rdf.farmbio.uu.se/chembl/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "FactForge" ;
+                        void:sparqlEndpoint  ns16:ff-news
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Orphanet Rare Disease Ontology" ;
+                        void:sparqlEndpoint  ns29:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://utep.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q4785478" ;
+                        void:sparqlEndpoint  ns43:archives
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://hgnc.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "The German National Library's Integrated Authority File" ;
+                        void:sparqlEndpoint  ns64:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "International Chronostratigraphic Chart data set" ;
+                        void:sparqlEndpoint  ns20:csiro_international-chronostratigraphic-chart_2018
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://pathwaycommons.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Medical Subject Headings (MeSH) RDF Linked Data" ;
+                        void:sparqlEndpoint  ns52:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ASCDC LODDatasets - SPARQL Queries" ;
+                        void:sparqlEndpoint  <https://data.ascdc.tw/en/sparql.php>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "University of Pennsylvania" ;
+                        void:sparqlEndpoint  <https://eagle-i.itmat.upenn.edu/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://interpro.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://lofd.tw.rpi.edu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://nkod.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "eagle-i Global Repository" ;
+                        void:sparqlEndpoint  <https://global.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q905695" ;
+                        void:sparqlEndpoint  ns31:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q55118584" ;
+                        void:sparqlEndpoint  ns46:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint of Taiwan Indigenous People " ;
+                        void:sparqlEndpoint  <http://lod.apc.gov.tw/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://utsa.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Semantic Kalevala" ;
+                        void:sparqlEndpoint  ns19:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q4903493" ;
+                        void:sparqlEndpoint  ns144:data
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q61976518" ;
+                        void:sparqlEndpoint  ns19:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "FCU" ;
+                        void:sparqlEndpoint  <http://ontology.inrae.fr/frenchcropusage/query>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q56650909" ;
+                        void:sparqlEndpoint  ns150:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "CELLAR - Query Service of the Publications Office of the European Union" ;
+                        void:sparqlEndpoint  ns84:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q56292285" ;
+                        void:sparqlEndpoint  ns149:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql EndPoint" ;
+                        void:sparqlEndpoint  <http://data.utpl.edu.ec/ecuadorresearch/lod/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.openmobilenetwork.org>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "INSEE" ;
+                        void:sparqlEndpoint  ns87:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "CaLiGraph SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://caligraph.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "OpenLifeData" ;
+                        void:sparqlEndpoint  <http://sparql.openlifedata.org/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Rhea" ;
+                        void:sparqlEndpoint  ns51:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q4787279" ;
+                        void:sparqlEndpoint  ns142:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q465" ;
+                        void:sparqlEndpoint  ns139:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.lider-project.eu/usage/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q99843931" ;
+                        void:sparqlEndpoint  ns167:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Geologic Unit Type" ;
+                        void:sparqlEndpoint  ns20:ga_geologic-unit-type_v0-1
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://goa.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q58926304" ;
+                        void:sparqlEndpoint  ns17:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL-Endpoint" ;
+                        void:sparqlEndpoint  <http://vocabulary.wolterskluwer.de/PoolParty/sparql/arbeitsrecht>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Hellenic Fire Brigade SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://greek-lod.auth.gr/fire-brigade/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Biblioteca Nacional de España" ;
+                        void:sparqlEndpoint  ns78:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Ponce School of Medicine and Health Sciences" ;
+                        void:sparqlEndpoint  <https://psm.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL end point" ;
+                        void:sparqlEndpoint  <http://linked-data.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "OpenStreetMap" ;
+                        void:sparqlEndpoint  ns75:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "GECO" ;
+                        void:sparqlEndpoint  <http://geco.ecophytopic.fr:8890/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://linkeddata.ge.imati.cnr.it:8890/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "IEEE" ;
+                        void:sparqlEndpoint  <http://ieee.rkbexplorer.com/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "IdRef" ;
+                        void:sparqlEndpoint  ns38:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://howard.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q6120337" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q61976546" ;
+                        void:sparqlEndpoint  ns157:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q199897" ;
+                        void:sparqlEndpoint  ns126:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Covid-on-the-Web SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://covidontheweb.inria.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linkeddata4.dia.fi.upm.es:8907/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Aragon Open Data Sparql endpoint" ;
+                        void:sparqlEndpoint  ns8:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://mlode.nlp2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Microsoft Academic Knowledge Graph (MAKG)" ;
+                        void:sparqlEndpoint  ns23:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "PO2" ;
+                        void:sparqlEndpoint  <http://quantum.agroparistech.fr/graphdb/repositories/Composite_making_process>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q65050032" ;
+                        void:sparqlEndpoint  ns25:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Polish LGU financial statements - SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://185.94.71.25:62020/snorql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q548721" ;
+                        void:sparqlEndpoint  ns148:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Artsdata.ca" ;
+                        void:sparqlEndpoint  ns36:artsdata
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1520117" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://homologene.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Schools Online Thesaurus" ;
+                        void:sparqlEndpoint  ns39:scot
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://webconf.rkbexplorer.com/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "sparql endpoint" ;
+                        void:sparqlEndpoint  <http://wiktionary.dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Galiciana" ;
+                        void:sparqlEndpoint  ns63:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://ichoose.tw.rpi.edu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q285453" ;
+                        void:sparqlEndpoint  ns131:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "WikiPathways" ;
+                        void:sparqlEndpoint  ns100:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "UniProt" ;
+                        void:sparqlEndpoint  ns31:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "RISM SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.rism.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "PathoPhenoDB" ;
+                        void:sparqlEndpoint  <http://patho.phenomebrowser.net/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q19938912" ;
+                        void:sparqlEndpoint  <http://data.bnf.fr/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Data Persée" ;
+                        void:sparqlEndpoint  ns107:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "RISM SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.rism.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://ldf.fi/ww1lod/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://api.talis.com/stores/eurobarometer/services/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Kalikratis municipalities SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://greek-lod.math.auth.gr/kalikratis/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "MuseumFinland" ;
+                        void:sparqlEndpoint  ns18:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q632988" ;
+                        void:sparqlEndpoint  ns158:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q64192549" ;
+                        void:sparqlEndpoint  ns22:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "KEGG" ;
+                        void:sparqlEndpoint  ns48:linkdb
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://biomodels.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q841424" ;
+                        void:sparqlEndpoint  ns162:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q34478116" ;
+                        void:sparqlEndpoint  ns15:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q131566" ;
+                        void:sparqlEndpoint  <http://ieee.rkbexplorer.com/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "UK Parliament" ;
+                        void:sparqlEndpoint  ns10:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint to the DIKB" ;
+                        void:sparqlEndpoint  <https://dbmi-icode-01.dbmi.pitt.edu/dikb/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Oregon Health and Science University" ;
+                        void:sparqlEndpoint  <https://ohsu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Official statistics from MHCLG" ;
+                        void:sparqlEndpoint  ns69:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "data.culture.fr" ;
+                        void:sparqlEndpoint  ns37:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "USGS-LOD SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://usgs-stko.geog.ucsb.edu:8080/sparql/select>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "main sparql EndPoint" ;
+                        void:sparqlEndpoint  <http://dati.isprambiente.it/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL end point" ;
+                        void:sparqlEndpoint  <http://km.aifb.kit.edu/services/xlike-lexicon/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://cr.eionet.europa.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://cau.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "EconStor" ;
+                        void:sparqlEndpoint  <http://linkeddata.econstor.eu/beta/snorql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Scholarly Linked Open Data" ;
+                        void:sparqlEndpoint  <http://www.scholarlydata.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Harvard University" ;
+                        void:sparqlEndpoint  <https://harvard.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns107:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "MetaNetX" ;
+                        void:sparqlEndpoint  <https://rdf.metanetx.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ALMA Sparql" ;
+                        void:sparqlEndpoint  <https://alma.uni.lu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "LIBRIS SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://libris.kb.se/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://ecb.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://eur-lex.publicdata.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://pomelo.iis.sinica.edu.tw:2020/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Naturopathy knowledge Graph (Ontology and Dataset) - RDF distribution of the naturopathy dataset." ;
+                        void:sparqlEndpoint  <http://sensormeasurement.appspot.com/dataset/naturopathy-dataset>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint hosted by Huygens ING" ;
+                        void:sparqlEndpoint  <http://dutchshipsandsailors.nl/data/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "eagle-i Network Shared Resource Repository" ;
+                        void:sparqlEndpoint  <https://shared.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "20th Century Press Archives (PM20)" ;
+                        void:sparqlEndpoint  ns68:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://ckan.eurohelp.es:8890/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1550070" ;
+                        void:sparqlEndpoint  ns24:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint for SNIK" ;
+                        void:sparqlEndpoint  <https://www.snik.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "main sparql EndPoint" ;
+                        void:sparqlEndpoint  ns162:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://linkeddata.finki.ukim.mk/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Geological Timescale - 2020 edition - SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://vocabs.ardc.edu.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_geologic-time-scale-2020>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Florida Agricultural and Mechanical University" ;
+                        void:sparqlEndpoint  <https://famu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://mlode.nlp2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Europeana Cultural Data" ;
+                        void:sparqlEndpoint  <http://sparql.europeana.eu>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q26836418" ;
+                        void:sparqlEndpoint  ns24:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://futurewavehosting.com:3030/my-family-lineage/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL ENDPOINT" ;
+                        void:sparqlEndpoint  <http://140.109.28.64:2020/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Ordnance Survey" ;
+                        void:sparqlEndpoint  ns55:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://vocab.nerc.ac.uk/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://xula.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://lod.ac/bdls/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q750403" ;
+                        void:sparqlEndpoint  ns160:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "BioGateway" ;
+                        void:sparqlEndpoint  <http://ssb4.nt.ntnu.no:33020/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Colil" ;
+                        void:sparqlEndpoint  <http://colil.dbcls.jp/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q101201850" ;
+                        void:sparqlEndpoint  ns117:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.contextdatacloud.org>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ASCDC-Linked Taiwan Artists - SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <https://linkedart.ascdc.tw/live_sparql.php>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://mgi.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q21819923" ;
+                        void:sparqlEndpoint  ns127:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q105974809" ;
+                        void:sparqlEndpoint  ns122:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  ns131:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Chamber of Deputies of Italy" ;
+                        void:sparqlEndpoint  ns57:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://lsd.taxonconcept.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://bis.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://n-lex.publicdata.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://www4.wiwiss.fu-berlin.de/eccompetition/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q47757534" ;
+                        void:sparqlEndpoint  ns38:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://www.influencetracker.com:8890/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Endpoint" ;
+                        void:sparqlEndpoint  <https://sparql.crssnky.xyz/spql/imas/query>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q101199977" ;
+                        void:sparqlEndpoint  ns120:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        void:sparqlEndpoint  <http://agrold.southgreen.fr/sparql> ;
+                        schema:name          "AgroLD"
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q3016893" ;
+                        void:sparqlEndpoint  <https://www.data.gouv.fr/catalog.rdf>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q25344041" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns23:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://www.ebi.ac.uk/rdf/services/atlas/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "British National Bibliography" ;
+                        void:sparqlEndpoint  ns42:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Dataset of Korean Intellectual Property Office about admin processes" ;
+                        void:sparqlEndpoint  ns72:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint for Dutch Ships and Sailors" ;
+                        void:sparqlEndpoint  <http://semanticweb.cs.vu.nl/dss/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q29279836" ;
+                        void:sparqlEndpoint  ns134:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WASABI SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://wasabi.inria.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "neXtProt SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <https://sparql.nextprot.org/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Morehouse School of Medicine" ;
+                        void:sparqlEndpoint  <https://msm.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Colil" ;
+                        void:sparqlEndpoint  ns21:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q91205721" ;
+                        void:sparqlEndpoint  <https://sandbox.mainzed.org/covid19/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "hongsejingdian gequ " ;
+                        void:sparqlEndpoint  <http://baixue.com>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "DBpedia" ;
+                        void:sparqlEndpoint  <https://dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint to LinkedSPL" ;
+                        void:sparqlEndpoint  <https://dbmi-icode-01.dbmi.pitt.edu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.bnf.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Official SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns31:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WASABI" ;
+                        void:sparqlEndpoint  <http://wasabi.inria.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q97285695" ;
+                        void:sparqlEndpoint  ns166:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://zhishi.me/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Editor" ;
+                        void:sparqlEndpoint  ns29:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "BNB" ;
+                        void:sparqlEndpoint  ns42:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Jamendo" ;
+                        void:sparqlEndpoint  ns114:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://genage.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://mlode.nlp2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "CELLAR - Query Service of the Publications Office of the European Union " ;
+                        void:sparqlEndpoint  ns84:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q64148880" ;
+                        void:sparqlEndpoint  ns20:csiro_international-chronostratigraphic-chart_2018
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "GCAM sparql endpoint" ;
+                        void:sparqlEndpoint  <http://ct-linkdata.aegean.gr/gcam/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "ADS" ;
+                        void:sparqlEndpoint  ns43:archives
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://api.talis.com/stores/elections/services/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://rdf.disgenet.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://labs.mondeca.com/endpoint/ends>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q292649" ;
+                        void:sparqlEndpoint  ns133:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://apps.morelab.deusto.es/labman/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Linked open EP data of European Patent Office" ;
+                        void:sparqlEndpoint  ns9:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://www.eclap.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "eagle-i Network Shared Resource Repository" ;
+                        void:sparqlEndpoint  <https://global.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q2013" ;
+                        void:sparqlEndpoint  ns101:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://datos.bcn.cl/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://ctd.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <https://eagle-i.ea.vanderbilt.edu/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://tuskegee.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "backstage.bbc.co.uk" ;
+                        void:sparqlEndpoint  ns105:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Epigraphic Database Heidelberg" ;
+                        void:sparqlEndpoint  ns59:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "HAL" ;
+                        void:sparqlEndpoint  ns40:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.odw.tw>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint voor de BAG" ;
+                        void:sparqlEndpoint  <https://data.pdok.nl/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ODW SPARQL Endpoint" ;
+                        void:sparqlEndpoint  ns149:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL enpdoint 2" ;
+                        void:sparqlEndpoint  <http://data.colinda.org/endpoint.php>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "OMWN" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Research Vocabularies Australia" ;
+                        void:sparqlEndpoint  <https://vocabs.ands.org.au/repository/api/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.lenka.no/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q25106053" ;
+                        void:sparqlEndpoint  ns49:endpoint
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "MeSH" ;
+                        void:sparqlEndpoint  ns52:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sudoc SPARQL endpoint (via Sindice)" ;
+                        void:sparqlEndpoint  <http://sparql.sindice.com/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "50K Gazetteer Linked Data" ;
+                        void:sparqlEndpoint  ns95:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://tkm.kiom.re.kr/ontology/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "LinkDB" ;
+                        void:sparqlEndpoint  ns163:linkdb
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://rdf.muninn-project.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Custom server" ;
+                        void:sparqlEndpoint  <http://13.125.246.132/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "B3Kat SPARQL-Endpoint" ;
+                        void:sparqlEndpoint  <http://lod.b3kat.de/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://transparency.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Linked Logainm SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.logainm.ie/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "LSDB Archive @ NBDC" ;
+                        void:sparqlEndpoint  <https://dba-rdf.biosciencedbc.jp/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q6352575" ;
+                        void:sparqlEndpoint  ns159:ycba
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://demo.spraakdata.gu.se/ltlod/test/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://www.icane.es/opendata/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Chinese Red Classic Song Linked Data Dataset endpoint" ;
+                        void:sparqlEndpoint  <http://47.97.223.173:3030>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://demo.spraakdata.gu.se/ltlod/test/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Montana State University" ;
+                        void:sparqlEndpoint  <https://montana.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "FORUM Knowledge graph Database" ;
+                        void:sparqlEndpoint  <https://forum.semantic-metabolomics.fr/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://libver.math.auth.gr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q16335166" ;
+                        void:sparqlEndpoint  ns125:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://aliada.scanbit.net:8891/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Allie" ;
+                        void:sparqlEndpoint  ns22:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q5412398" ;
+                        void:sparqlEndpoint  ns86:sparqlep
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://pubmed.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql endpoint of the colls-lib-bib subset" ;
+                        void:sparqlEndpoint  <http://data.hnm.hu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://agencies.publicdata.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "National Library of Korea" ;
+                        void:sparqlEndpoint  ns76:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "DrugBank" ;
+                        void:sparqlEndpoint  <http://wifo5-04.informatik.uni-mannheim.de/drugbank/snorql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Life Science Dictionary" ;
+                        void:sparqlEndpoint  <http://lsd.dbcls.jp/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "BioSamples SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://www.ebi.ac.uk/rdf/services/biosamples/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "OpenCitations" ;
+                        void:sparqlEndpoint  ns50:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://clinicaltrials.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL API" ;
+                        void:sparqlEndpoint  <https://api.cooperationdatabank.org/datasets/coda/databank/services/databank/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "DBKERO@RDF Portal" ;
+                        void:sparqlEndpoint  <https://integbio.jp/rdf/kero/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sider.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q420747" ;
+                        void:sparqlEndpoint  ns137:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q292649" ;
+                        void:sparqlEndpoint  ns44:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "MIMO" ;
+                        void:sparqlEndpoint  ns24:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q59273239" ;
+                        void:sparqlEndpoint  ns151:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "ESCR" ;
+                        void:sparqlEndpoint  ns81:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q156616" ;
+                        void:sparqlEndpoint  ns87:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Wikidata" ;
+                        void:sparqlEndpoint  ns101:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Linked Life Data" ;
+                        void:sparqlEndpoint  ns91:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "UniProt sparql endpoint" ;
+                        void:sparqlEndpoint  ns31:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "NRA IATE données" ;
+                        void:sparqlEndpoint  <https://ico.iate.inra.fr/fuseki/annotation/query>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q533822" ;
+                        void:sparqlEndpoint  <http://wordnet.rkbexplorer.com/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "KUPKB Sparql" ;
+                        void:sparqlEndpoint  ns161:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q7104395" ;
+                        void:sparqlEndpoint  ns32:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql EndPoint" ;
+                        void:sparqlEndpoint  <http://data.utpl.edu.ec/utpl/lod/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q56241725" ;
+                        void:sparqlEndpoint  ns20:anzsrc-for
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "AgroLD" ;
+                        void:sparqlEndpoint  <http://agrold.southgreen.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "dati.beniculturali.it" ;
+                        void:sparqlEndpoint  ns147:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://commons.dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "OpenAIRE" ;
+                        void:sparqlEndpoint  ns49:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "GlyConnect RDF" ;
+                        void:sparqlEndpoint  <https://glyconnect.expasy.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://ldf.fi/warsa/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns34:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "NoiPA SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <https://sparql-noipa.mef.gov.it/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "LEMB" ;
+                        void:sparqlEndpoint  ns60:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Ontology IRSTEA" ;
+                        void:sparqlEndpoint  <http://ontology.irstea.fr/weather>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://frb.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns139:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "European Environment Agency" ;
+                        void:sparqlEndpoint  ns77:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://demo.spraakdata.gu.se/ltlod/test/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://dbkwik.webdatacommons.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "DDBJ@RDF Portal" ;
+                        void:sparqlEndpoint  <https://integbio.jp/rdf/ddbj/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql EndPoint" ;
+                        void:sparqlEndpoint  <http://serendipity.utpl.edu.ec/lod/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://drugbank.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://data.linkededucation.org/request/lak-conference/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q65047015" ;
+                        void:sparqlEndpoint  <http://patho.phenomebrowser.net/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://harvard.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Reactome" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://156.35.82.103/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "TORA" ;
+                        void:sparqlEndpoint  ns27:snorql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Big Data End Point" ;
+                        void:sparqlEndpoint  <https://query.wikidata.org/bigdata/namespace/wdq/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "ONS Open Geography Portal" ;
+                        void:sparqlEndpoint  ns25:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q28693488" ;
+                        void:sparqlEndpoint  ns132:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "PRO" ;
+                        void:sparqlEndpoint  ns46:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Wikidata Query Service" ;
+                        void:sparqlEndpoint  ns101:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql" ;
+                        void:sparqlEndpoint  <http://202.73.13.50:55824/catalogs/performance/repositories/jita>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Jackson State University" ;
+                        void:sparqlEndpoint  <https://jsu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://famu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Agronomic Linked Data (AgroLD)" ;
+                        void:sparqlEndpoint  <http://sparql.southgreen.fr/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q919757" ;
+                        void:sparqlEndpoint  ns164:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ChEMBL SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://www.ebi.ac.uk/rdf/services/chembl/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Linked Stage Graph" ;
+                        void:sparqlEndpoint  <http://slod.fiz-karlsruhe.de/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://tsu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Texas Southern University" ;
+                        void:sparqlEndpoint  <https://tsu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://taxref.mnhn.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://agalpha.mathbiol.org/repositories/tcga>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "neXtProt" ;
+                        void:sparqlEndpoint  <https://sparql.nextprot.org/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q101200819" ;
+                        void:sparqlEndpoint  <https://idsm.elixir-czech.cz/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q61976493" ;
+                        void:sparqlEndpoint  ns156:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "YAGO" ;
+                        void:sparqlEndpoint  ns85:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://worldbank.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Bgee, a gene expression database" ;
+                        void:sparqlEndpoint  ns45:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q96585608" ;
+                        void:sparqlEndpoint  ns47:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQLViewer" ;
+                        void:sparqlEndpoint  <https://linkeddata.cultureelerfgoed.nl/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Australian and New Zealand Standard Research Classification" ;
+                        void:sparqlEndpoint  ns20:anzsrc-for
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q64193442" ;
+                        void:sparqlEndpoint  ns21:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "University of Alaska Fairbanks" ;
+                        void:sparqlEndpoint  <https://alaska.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "LOV" ;
+                        void:sparqlEndpoint  ns54:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql" ;
+                        void:sparqlEndpoint  <http://api.kasabi.com/dataset/pali-english-lexicon/apis/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "CELLAR - Query Service of the Publications Office of the European Union" ;
+                        void:sparqlEndpoint  ns84:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q24265951" ;
+                        void:sparqlEndpoint  ns51:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://mesh.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "isidore.science" ;
+                        void:sparqlEndpoint  ns109:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://wormbase.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://lsr.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Magnatune" ;
+                        void:sparqlEndpoint  ns115:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Hellenic Police SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://greek-lod.auth.gr/police/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://eu.dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql" ;
+                        void:sparqlEndpoint  <http://api.kasabi.com/dataset/foodista/apis/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "IDEAL" ;
+                        void:sparqlEndpoint  <https://ideal-rdf.dbcls.jp/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "UriBurner" ;
+                        void:sparqlEndpoint  ns4:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Query Service" ;
+                        void:sparqlEndpoint  <https://data.cinematheque.qc.ca/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q68272620" ;
+                        void:sparqlEndpoint  ns27:snorql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint " ;
+                        void:sparqlEndpoint  <http://core.kmi.open.ac.uk/s>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "main sparql EndPoint" ;
+                        void:sparqlEndpoint  ns162:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Getty Vocabulary Program" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q54985720" ;
+                        void:sparqlEndpoint  ns45:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q4914638" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint for dbnary" ;
+                        void:sparqlEndpoint  <http://kaiko.getalp.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ABS SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://abs.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WHO Crona Virus infected case " ;
+                        void:sparqlEndpoint  <https://purl.org/whonto/onto>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.uniprot.org>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://ncbigene.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://data.szepmuveszeti.hu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ScholarlyData" ;
+                        void:sparqlEndpoint  ns110:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1515833" ;
+                        void:sparqlEndpoint  ns29:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q97010743" ;
+                        void:sparqlEndpoint  ns165:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Open Data Catalogue of Ministry of Finance of the Czech Republic" ;
+                        void:sparqlEndpoint  ns82:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint (updated daily)" ;
+                        void:sparqlEndpoint  <http://publicspending.medialab.ntua.gr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Tuskegee University" ;
+                        void:sparqlEndpoint  <https://tuskegee.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Czech DBPedia" ;
+                        void:sparqlEndpoint  ns96:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "GlyCosmos" ;
+                        void:sparqlEndpoint  <https://ts.glycosmos.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q24254958" ;
+                        void:sparqlEndpoint  ns29:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1192305" ;
+                        void:sparqlEndpoint  ns123:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "MicrobeDB" ;
+                        void:sparqlEndpoint  ns28:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1347027" ;
+                        void:sparqlEndpoint  ns59:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://greek-lod.math.auth.gr/intervalue/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <https://hdt.lod.labs.vu.nl/?g=LOD-a-lot>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Hunter College, CUNY" ;
+                        void:sparqlEndpoint  <https://hunter-cuny.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns165:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://geoname.linkedopendata.tw/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://api.talis.com/stores/eupmedia/services/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "P9258" ;
+                        void:sparqlEndpoint  <https://labs.onb.ac.at/en/tool/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://202.45.139.84:10035/catalogs/fao/repositories/agris>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "main sparql EndPoint" ;
+                        void:sparqlEndpoint  <http://dati.isprambiente.it/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.dive.beeldengeluid.nl/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Dataset of Korean Intellectual Property Office about oversea patents" ;
+                        void:sparqlEndpoint  ns71:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Aragon Open Data SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns8:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://mlode.nlp2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q76709591" ;
+                        void:sparqlEndpoint  ns161:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q62338567" ;
+                        void:sparqlEndpoint  <https://jpsearch.go.jp/rdf/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Rhea" ;
+                        void:sparqlEndpoint  ns51:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://156.35.31.156/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.sstu.ru:3030/speciality-vocabulary/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q7999828" ;
+                        void:sparqlEndpoint  ns100:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint " ;
+                        void:sparqlEndpoint  <http://babelnet.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Cultuurhistorische Thesaurus Sparql" ;
+                        void:sparqlEndpoint  <https://digitaalerfgoed.poolparty.biz/PoolParty/sparql/term/id/cht>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q26903352" ;
+                        void:sparqlEndpoint  ns130:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://dartmouth.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://lobid.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Pathway Commons" ;
+                        void:sparqlEndpoint  <http://rdf.pathwaycommons.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://ohsu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "AOP-Wiki SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://aopwiki.rdf.bigcat-bioinformatics.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "AISHE SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://103.102.234.109:3030/dataset.html?tab=query&ds=/aishephd>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://affymetrix.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://gendr.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Pathway Commons" ;
+                        void:sparqlEndpoint  <https://rdf.pathwaycommons.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q60024037" ;
+                        void:sparqlEndpoint  ns152:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Big Data" ;
+                        void:sparqlEndpoint  <https://query.wikidata.org/bigdata/namespace/wdq/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Howard University" ;
+                        void:sparqlEndpoint  <https://howard.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "polyadenylation-sites-in-magnaporthe-oryza" ;
+                        void:sparqlEndpoint  <https://dydra.com/markw/polyadenylation-sites-in-magnaporthe-oryza/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q5554720" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q3144107" ;
+                        void:sparqlEndpoint  ns40:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://jsu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://datos.artium.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql" ;
+                        void:sparqlEndpoint  <http://api.kasabi.com/dataset/sanskrit-english-lexicon/apis/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "TheSoz SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://lod.gesis.org/thesoz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "YCBA LOD" ;
+                        void:sparqlEndpoint  ns15:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "HM Land Registry Open Data" ;
+                        void:sparqlEndpoint  ns7:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q63468524" ;
+                        void:sparqlEndpoint  ns20:csiro_international-chronostratigraphic-chart_international-chronostratigraphic-chart
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL EndPoint" ;
+                        void:sparqlEndpoint  <http://es.dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "PDBj-BMRB" ;
+                        void:sparqlEndpoint  <http://bmrbpub.protein.osaka-u.ac.jp/search/rdf>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "University of Hawai'i Manoa" ;
+                        void:sparqlEndpoint  <https://hawaii.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q52897564" ;
+                        void:sparqlEndpoint  ns147:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "University of Puerto Rico" ;
+                        void:sparqlEndpoint  <https://upr.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://chembl.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://fao.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "PreMOn Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://premon.fbk.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Thesaurus of Korean Intellectual Property Office" ;
+                        void:sparqlEndpoint  ns74:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://nlg.okfn.gr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q953058" ;
+                        void:sparqlEndpoint  <http://virhp07.libris.kb.se/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://uccaribe.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q97621285" ;
+                        void:sparqlEndpoint  <https://wcqs-beta.wmflabs.org/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q4839746" ;
+                        void:sparqlEndpoint  ns105:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "eagle-i Global Repository" ;
+                        void:sparqlEndpoint  <https://shared.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://demo.spraakdata.gu.se/ltlod/test/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://orphanet.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "VK SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://semanticweb.cs.vu.nl/verrijktkoninkrijk/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q5227103" ;
+                        void:sparqlEndpoint  ns25:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://tcga.deri.ie>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q97319022" ;
+                        void:sparqlEndpoint  []
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "El Viajero' SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://webenemasuno.linkeddata.es/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Environment Agency Bathing Water Quality Data SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://environment.data.gov.uk/sparql/bwq/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "EMBL-EBI" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://webisa.webdatacommons.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "MusicBrainz" ;
+                        void:sparqlEndpoint  ns116:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns22:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Open Research Knowledge Graph (ORKG)" ;
+                        void:sparqlEndpoint  <https://www.orkg.org/orkg/triplestore>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "OrthoDB @ sib.swiss" ;
+                        void:sparqlEndpoint  <http://sparql.orthodb.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ASCDC LODDatasets - SPARQL Queries" ;
+                        void:sparqlEndpoint  <https://data.ascdc.tw/en/sparql.php>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.jesandco.org:8890/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "GWAS Central" ;
+                        void:sparqlEndpoint  ns90:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WikiPathways" ;
+                        void:sparqlEndpoint  ns100:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "BioModels" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://lexinfo.net/corpora/alpino/query.php>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.cwrc.ca/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "NCBO BioPortal" ;
+                        void:sparqlEndpoint  ns89:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "European Union Open Data Portal" ;
+                        void:sparqlEndpoint  ns84:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "FactForge" ;
+                        void:sparqlEndpoint  ns16:ff-news
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://unodc.publicdata.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://linkeddata.finki.ukim.mk/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "PGxLOD SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <https://pgxlod.loria.fr/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "datos.gob.es" ;
+                        void:sparqlEndpoint  ns108:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "GLIC SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://sparql.glycoinfo.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql endpoint (RDF4J) for the current version of UFO" ;
+                        void:sparqlEndpoint  <http://onto.fel.cvut.cz/rdf4j-server/repositories/ufo-current>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q50553544" ;
+                        void:sparqlEndpoint  ns37:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "AGROVOC" ;
+                        void:sparqlEndpoint  ns44:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "BBC John Peel sessions" ;
+                        void:sparqlEndpoint  ns111:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://healthdata.tw.rpi.edu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://hawaii.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "gadgasg" ;
+                        void:sparqlEndpoint  <http://geo.linkeddata.es/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Bio2RDF" ;
+                        void:sparqlEndpoint  ns33:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Economics institutions subset of GND" ;
+                        void:sparqlEndpoint  ns67:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q69986810" ;
+                        void:sparqlEndpoint  ns34:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q78153350" ;
+                        void:sparqlEndpoint  ns28:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "YASGUI interface" ;
+                        void:sparqlEndpoint  <https://data.muziekweb.nl/MuziekwebOrganization/Muziekweb/sparql/Muziekweb>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q936" ;
+                        void:sparqlEndpoint  ns75:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q41147961" ;
+                        void:sparqlEndpoint  <https://vocabs.ands.org.au/repository/api/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Nobel Foundation database" ;
+                        void:sparqlEndpoint  ns34:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q23687322" ;
+                        void:sparqlEndpoint  <http://data.fondazionezeri.unibo.it/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q36578" ;
+                        void:sparqlEndpoint  ns135:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q55840137" ;
+                        void:sparqlEndpoint  ns75:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql End Point" ;
+                        void:sparqlEndpoint  <http://agrinepaldata.com/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Open Names Linked Data" ;
+                        void:sparqlEndpoint  ns93:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Thesaurus of Geographic Names LOD Dataset" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://europeana.ontotext.com/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  ns78:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q100741405" ;
+                        void:sparqlEndpoint  ns119:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q16166037" ;
+                        void:sparqlEndpoint  <http://citeseer.rkbexplorer.com/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://eurostat.linked-statistics.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q100287877" ;
+                        void:sparqlEndpoint  ns118:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  ns140:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "API" ;
+                        void:sparqlEndpoint  <https://data.gov.uz/uz/docs/do/view/usage>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "BioModels SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://www.ebi.ac.uk/rdf/services/biomodels/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SocialLink's SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sociallink.futuro.media/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "AgroPortal" ;
+                        void:sparqlEndpoint  <http://sparql.agroportal.lirmm.fr/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "YAGO 4" ;
+                        void:sparqlEndpoint  ns83:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "WordNet" ;
+                        void:sparqlEndpoint  <http://wordnet.rkbexplorer.com/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "DisGeNET" ;
+                        void:sparqlEndpoint  <http://rdf.disgenet.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/twc/arrayexpress/virtuoso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "CiteSeer" ;
+                        void:sparqlEndpoint  <http://citeseer.rkbexplorer.com/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://www.linklion.org:8890/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Europeana" ;
+                        void:sparqlEndpoint  <http://sparql.europeana.eu/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Nomisma.org SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns128:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://upr.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://psm.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://provenanceweb.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q2494649" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q24578999" ;
+                        void:sparqlEndpoint  ns128:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/twc/arrayexpress/virtuoso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint for the CPC" ;
+                        void:sparqlEndpoint  ns9:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q7144881" ;
+                        void:sparqlEndpoint  <http://rdf.pathwaycommons.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "PathoPhenoDB" ;
+                        void:sparqlEndpoint  <http://patho.phenomebrowser.net/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://ieeevis.tw.rpi.edu/nosparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Xavier University of Louisiana" ;
+                        void:sparqlEndpoint  <https://xula.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint API" ;
+                        void:sparqlEndpoint  <http://data.organic-edunet.eu/snorql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q28856388" ;
+                        void:sparqlEndpoint  ns16:ff-news
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Public SPARQL endpoint" ;
+                        void:sparqlEndpoint  ns44:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://nl.dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://imf.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "City College of New York, CUNY" ;
+                        void:sparqlEndpoint  <https://ccny-cuny.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q601819" ;
+                        void:sparqlEndpoint  ns154:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q2134522" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q909442" ;
+                        void:sparqlEndpoint  ns163:linkdb
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://meharry.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "AGROVOC" ;
+                        void:sparqlEndpoint  ns133:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint for TCGA" ;
+                        void:sparqlEndpoint  <http://hcls.deri.org:8080/openrdf-sesame/repositories/tcga>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Register of rights and responsibilities of public authorities of Czechia" ;
+                        void:sparqlEndpoint  ns88:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint for European Patent Information" ;
+                        void:sparqlEndpoint  ns9:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q63464453" ;
+                        void:sparqlEndpoint  ns20:ga_geologic-unit-type_v0-1
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://api.talis.com/stores/whoiswho/services/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1224715" ;
+                        void:sparqlEndpoint  ns124:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://taxonomy.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q44012825" ;
+                        void:sparqlEndpoint  ns14:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q495005" ;
+                        void:sparqlEndpoint  ns145:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Endpoint Sparql" ;
+                        void:sparqlEndpoint  <http://lod.xdams.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://omim.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "National Library of Finland" ;
+                        void:sparqlEndpoint  ns62:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Bgee" ;
+                        void:sparqlEndpoint  ns45:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://lod.sztaki.hu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Microbial Genome Database for Comparative Analysis (MBGD)" ;
+                        void:sparqlEndpoint  <http://sparql.nibb.ac.jp/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "HeBIS SPARQL-Endpoint" ;
+                        void:sparqlEndpoint  <http://lod.hebis.de/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL-Endpoint" ;
+                        void:sparqlEndpoint  <http://vocabulary.wolterskluwer.de/PoolParty/sparql/court>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Memory of Taichung Database" ;
+                        void:sparqlEndpoint  ns17:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q4914599" ;
+                        void:sparqlEndpoint  ns33:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "European Data Portal" ;
+                        void:sparqlEndpoint  ns79:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Universidad Central del Caribe" ;
+                        void:sparqlEndpoint  <https://uccaribe.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q465" ;
+                        void:sparqlEndpoint  ns140:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q91205721" ;
+                        void:sparqlEndpoint  ns41:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ODW SPARQL Endpoint (virtuso)" ;
+                        void:sparqlEndpoint  <http://sparql.odw.tw/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "NBDC RDF Portal" ;
+                        void:sparqlEndpoint  <http://integbio.jp/rdf/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "University of Texas at El Paso" ;
+                        void:sparqlEndpoint  <https://utep.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Japan Search" ;
+                        void:sparqlEndpoint  <https://jpsearch.go.jp/rdf/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql endpoint" ;
+                        void:sparqlEndpoint  <http://lab.environment.data.gov.au/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q6983890" ;
+                        void:sparqlEndpoint  <https://sparql.nextprot.org/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://heritagedata.org/live/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql endpoint" ;
+                        void:sparqlEndpoint  <http://wordnet.okfn.gr:8890/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://pharmgkb.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q16570543" ;
+                        void:sparqlEndpoint  ns63:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://ccny-cuny.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://uis.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q27921423" ;
+                        void:sparqlEndpoint  <http://sparql.kpath.khaos.uma.es/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "LinkedGeoData" ;
+                        void:sparqlEndpoint  ns14:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q60024037" ;
+                        void:sparqlEndpoint  ns153:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql endpoint" ;
+                        void:sparqlEndpoint  ns29:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://irefindex.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL EndPoint" ;
+                        void:sparqlEndpoint  <http://onto.beef.org.pl/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Wikidata" ;
+                        void:sparqlEndpoint  ns101:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "ChEMBL" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Reactome SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://www.ebi.ac.uk/rdf/services/reactome/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "P920" ;
+                        void:sparqlEndpoint  ns60:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://montana.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1344256" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://bioportal.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Economists subset of GND" ;
+                        void:sparqlEndpoint  ns66:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "CELLAR - Query Service of the Publications Office of the European Union" ;
+                        void:sparqlEndpoint  ns84:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "European Environment Agency" ;
+                        void:sparqlEndpoint  ns77:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "DisGeNET" ;
+                        void:sparqlEndpoint  <http://rdf.disgenet.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Allie" ;
+                        void:sparqlEndpoint  ns22:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://ld.panlex.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint for LinkedSpending" ;
+                        void:sparqlEndpoint  <http://linkedspending.aksw.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "HAMAP" ;
+                        void:sparqlEndpoint  <https://hamap.expasy.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "asdf" ;
+                        void:sparqlEndpoint  <http://mtimo.de/234>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://mlode.nlp2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "BVMC SPARQL endpoint " ;
+                        void:sparqlEndpoint  <http://data.cervantesvirtual.com/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1122544" ;
+                        void:sparqlEndpoint  <http://wifo5-04.informatik.uni-mannheim.de/drugbank/snorql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q97621285" ;
+                        void:sparqlEndpoint  <https://query.wikidata.org>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "MIcrobeDB.jp" ;
+                        void:sparqlEndpoint  ns28:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q39392701" ;
+                        void:sparqlEndpoint  ns136:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "MSC2010-SKOS SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sparql.msc2010.org>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q61677804" ;
+                        void:sparqlEndpoint  ns155:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://data.cnr.it/sparql-proxy/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Endpoint Sparql" ;
+                        void:sparqlEndpoint  <http://lod.xdams.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "LinkedWiki" ;
+                        void:sparqlEndpoint  ns12:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Lotico" ;
+                        void:sparqlEndpoint  <http://www.lotico.com:3030/lotico/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "SireneLD" ;
+                        void:sparqlEndpoint  ns11:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q32193244" ;
+                        void:sparqlEndpoint  <https://query.inventaire.io>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q10465472" ;
+                        void:sparqlEndpoint  <http://rdf.disgenet.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://el.dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q56292285" ;
+                        void:sparqlEndpoint  <http://sparql.odw.tw/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q465" ;
+                        void:sparqlEndpoint  ns141:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "URIBurner" ;
+                        void:sparqlEndpoint  <http://uriburner.com/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ODW SPARQL Endpoint (virtuso)" ;
+                        void:sparqlEndpoint  <http://sparql.odw.tw/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q2597810" ;
+                        void:sparqlEndpoint  ns129:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q750403" ;
+                        void:sparqlEndpoint  ns78:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint 1" ;
+                        void:sparqlEndpoint  <http://colinda.org/endpoint.php>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "IATI Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://semanticweb.cs.vu.nl/iati/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Linked COVID-19 Data" ;
+                        void:sparqlEndpoint  ns41:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Dataset of Korean Intellectual Property Office about classification" ;
+                        void:sparqlEndpoint  ns73:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Union List of Artist Names" ;
+                        void:sparqlEndpoint  ns26:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "University of Texas at San Antonio" ;
+                        void:sparqlEndpoint  <https://utsa.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Dataset of Korean Intellectual Property Office about patents" ;
+                        void:sparqlEndpoint  ns70:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL page" ;
+                        void:sparqlEndpoint  <http://kasabi.com/api/sparql-endpoint-foodista>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q46092234" ;
+                        void:sparqlEndpoint  ns138:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Biblioteca Virtual Miguel de Cervantes" ;
+                        void:sparqlEndpoint  ns61:data
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://data.organic-edunet.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Meharry Medical College" ;
+                        void:sparqlEndpoint  <https://meharry.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "RUIAN SPARQL endpoint" ;
+                        void:sparqlEndpoint  <https://ruian.linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://foodpedia.tk/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q87243424" ;
+                        void:sparqlEndpoint  <http://tadirah.dariah.eu/vocab/sparql.php>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Charles R. Drew University of Medicine and Science" ;
+                        void:sparqlEndpoint  <https://cdrewu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://alaska.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Aragon Open Data SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://opendata.aragon.es/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "ProKinO" ;
+                        void:sparqlEndpoint  ns30:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "STW Thesarus for Economics" ;
+                        void:sparqlEndpoint  ns65:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Microsoft Academic Knowledge Graph" ;
+                        void:sparqlEndpoint  ns23:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ODW SPARQL Endpoint" ;
+                        void:sparqlEndpoint  ns149:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q5209305" ;
+                        void:sparqlEndpoint  ns146:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q1341845" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "FirstAuthor Navigation" ;
+                        void:sparqlEndpoint  <http://navi.first.lifesciencedb.jp/fanavi/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Code-Point Open Linked Data" ;
+                        void:sparqlEndpoint  ns92:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://sgd.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q18635431" ;
+                        void:sparqlEndpoint  ns75:
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://dbsnp.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://oecd.270a.info/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Protein Ontology" ;
+                        void:sparqlEndpoint  ns46:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "WESO SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/weso/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q76180364" ;
+                        void:sparqlEndpoint  ns36:artsdata
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://virtuoso-eurosentiment.paradigmatecnologico.com/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://ecb.publicdata.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "ProKinO" ;
+                        void:sparqlEndpoint  ns30:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q78154036" ;
+                        void:sparqlEndpoint  ns30:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Uniprot" ;
+                        void:sparqlEndpoint  ns31:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://hunter-cuny.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://helheim.deusto.es/hedatuz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint in Virtuoso" ;
+                        void:sparqlEndpoint  <https://www.foodie-cloud.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "VulneraPedia_Sparql" ;
+                        void:sparqlEndpoint  <http://minsky.gsi.dit.upm.es/semanticwiki/index.php/Special:SPARQLEndpoint>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "AnaEE" ;
+                        void:sparqlEndpoint  <http://147.100.179.235:8082/blazegraph/namespace/undefined/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  ns164:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Bio2RDF" ;
+                        void:sparqlEndpoint  ns33:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "OMA Orthology database" ;
+                        void:sparqlEndpoint  <https://sparql.omabrowser.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q101200416" ;
+                        void:sparqlEndpoint  ns121:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Boundary Line Linked Data" ;
+                        void:sparqlEndpoint  ns94:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Ensembl" ;
+                        void:sparqlEndpoint  ns35:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "RIKEN MetaDatabase" ;
+                        void:sparqlEndpoint  <http://metadb.riken.jp/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "SKOS-history of ZBW Leibniz Information Centre of Economics" ;
+                        void:sparqlEndpoint  ns80:query
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://wikipathways.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://prelex.publicdata.eu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "OBO/OntoBee" ;
+                        void:sparqlEndpoint  <http://sparql.hegroup.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://opendap.tw.rpi.edu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://purl.org/twc/hub/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://iproclass.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "EXTBI SPARQL Endpoint " ;
+                        void:sparqlEndpoint  <http://extbi.lab.aau.dk/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "German DBpedia" ;
+                        void:sparqlEndpoint  ns112:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://api.talis.com/stores/eumida/services/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://msm.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "French DBpedia" ;
+                        void:sparqlEndpoint  <https://fr.dbpedia.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q234110" ;
+                        void:sparqlEndpoint  <http://sparql.europeana.eu/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "OrthoDB" ;
+                        void:sparqlEndpoint  ns32:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL End Point" ;
+                        void:sparqlEndpoint  <http://spatial.ucd.ie/lod/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://ndc.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://cdrewu.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q60683589" ;
+                        void:sparqlEndpoint  ns23:sparql
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Clark Atlanta University" ;
+                        void:sparqlEndpoint  <https://cau.eagle-i.net/sparqler/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Opendata.cz SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://linked.opendata.cz/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "API" ;
+                        void:sparqlEndpoint  <https://data.gov.uz/en/docs/do>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Q65000093" ;
+                        void:sparqlEndpoint  ns39:scot
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL endpoint" ;
+                        void:sparqlEndpoint  <http://nextprot.bio2rdf.org/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Rensselaer LOGD SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://logd.tw.rpi.edu/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "EUROPA" ;
+                        void:sparqlEndpoint  ns86:sparqlep
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        dcterms:title        "Open Data Web" ;
+                        void:sparqlEndpoint  <http://sparql.odw.tw/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "SPARQL Endpoint" ;
+                        void:sparqlEndpoint  <http://omwn.linguistic-lod.org/sparql/>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "OrphaData" ;
+                        void:sparqlEndpoint  <http://www.orpha.net/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Linked Life Data" ;
+                        void:sparqlEndpoint  <http://linkedlifedata.com/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "BioRDF.net SPARQL enpoint" ;
+                        void:sparqlEndpoint  <http://biordf.net/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "Sparql Endpoint" ;
+                        void:sparqlEndpoint  <http://visualdataweb.infor.uva.es/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "GlyGen" ;
+                        void:sparqlEndpoint  <http://sparql.glygen.org:8880/sparql>
+                      ] ;
+        dcat:dataset  [ rdf:type             dcat:Dataset ;
+                        rdfs:label           "NRA IATE ontologie" ;
+                        void:sparqlEndpoint  <https://ico.iate.inra.fr/fuseki/ontology/query>
+                      ] .

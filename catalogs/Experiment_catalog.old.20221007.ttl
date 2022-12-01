@@ -1,0 +1,646 @@
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns1:	<http://ns.inria.fr/kg/index#> .
+@prefix void:	<http://rdfs.org/ns/void#> .
+@prefix ns3:	<http://agrold.southgreen.fr/> .
+@prefix ns4:	<http://147.100.179.235:8082/blazegraph/namespace/undefined/> .
+@prefix ns5:	<http://ontology.inrae.fr/frenchcropusage/> .
+@prefix ns6:	<http://geco.ecophytopic.fr:8890/> .
+@prefix ns7:	<https://ico.iate.inra.fr/fuseki/annotation/> .
+@prefix ns8:	<https://ico.iate.inra.fr/fuseki/ontology/> .
+@prefix ns9:	<http://ontology.irstea.fr/> .
+@prefix ns10:	<http://quantum.agroparistech.fr/graphdb/repositories/> .
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns12:	<http://www.w3.org/ns/dcat#> .
+@prefix ns13:	<https://linkedwiki.com/dataset/> .
+@prefix ns14:	<http://www.wikidata.org/entity/> .
+@prefix ns15:	<https://www.orkg.org/orkg/> .
+@prefix ns16:	<https://zbw.eu/beta/sparql/stw/> .
+@prefix ns17:	<https://zbw.eu/beta/sparql/pm20/> .
+@prefix ns18:	<https://data.ordnancesurvey.co.uk/datasets/50k-gazetteer/apis/> .
+@prefix ns19:	<http://data.archaeologydataservice.ac.uk/sparql/repositories/> .
+@prefix ns20:	<http://agrovoc.uniroma2.it/> .
+@prefix ns21:	<http://data.allie.dbcls.jp/> .
+@prefix ns22:	<https://opendata.aragon.es/> .
+@prefix ns23:	<http://db.artsdata.ca/repositories/> .
+@prefix ns24:	<http://vocabs.ands.org.au/repository/api/sparql/> .
+@prefix ns25:	<https://bgee.org/> .
+@prefix ns26:	<http://datos.bne.es/> .
+@prefix ns27:	<http://data.cervantesvirtual.com/bvmc-lod/repositories/> .
+@prefix ns28:	<http://bio2rdf.org/> .
+@prefix ns29:	<https://www.ebi.ac.uk/rdf/services/> .
+@prefix ns30:	<http://sparql.bioontology.org/> .
+@prefix ns31:	<https://data.ordnancesurvey.co.uk/datasets/boundary-line/apis/> .
+@prefix ns32:	<https://bnb.data.bl.uk/> .
+@prefix ns33:	<https://dati.camera.it/> .
+@prefix ns34:	<https://data.ordnancesurvey.co.uk/datasets/code-point-open/apis/> .
+@prefix ns35:	<https://colil.dbcls.jp/> .
+@prefix ns36:	<https://cs.dbpedia.org/> .
+@prefix ns37:	<http://lod.kipo.kr/data/admin_processes/> .
+@prefix ns38:	<http://lod.kipo.kr/data/classification/> .
+@prefix ns39:	<http://lod.kipo.kr/data/oversea_patent/> .
+@prefix ns40:	<https://data.escr.fr/> .
+@prefix ns41:	<https://data.europa.eu/euodp/> .
+@prefix ns42:	<https://zbw.eu/beta/sparql/econ_corp/> .
+@prefix ns43:	<https://zbw.eu/beta/sparql/econ_pers/> .
+@prefix ns44:	<https://edh-www.adw.uni-heidelberg.de/data/> .
+@prefix ns45:	<https://www.europeandataportal.eu/> .
+@prefix ns46:	<https://semantic.eea.europa.eu/> .
+@prefix ns47:	<http://publications.europa.eu/webapi/rdf/> .
+@prefix ns48:	<http://factforge.net/repositories/> .
+@prefix ns49:	<https://fuseki.gwascentral.org/gc/> .
+@prefix ns50:	<https://datos-abertos.galiciana.gal/pt/> .
+@prefix ns51:	<http://vocab.getty.edu/> .
+@prefix ns52:	<http://sparql.archives-ouvertes.fr/> .
+@prefix ns53:	<http://landregistry.data.gov.uk/landregistry/> .
+@prefix ns54:	<https://rdf.insee.fr/> .
+@prefix ns55:	<https://io.datascience-paris-saclay.fr/> .
+@prefix ns56:	<https://data.idref.fr/> .
+@prefix ns57:	<https://zbw.eu/beta/sparql/gnd/> .
+@prefix ns58:	<https://www.genome.jp/sparql/> .
+@prefix ns59:	<http://lod.kipo.kr/data/patent/> .
+@prefix ns60:	<http://id.sgcb.mcu.es/> .
+@prefix ns61:	<http://linkedgeodata.org/> .
+@prefix ns62:	<https://linkedwiki.com/> .
+@prefix ns63:	<https://digits2.mainzed.org/covid19/> .
+@prefix ns64:	<https://linkedlifedata.com/> .
+@prefix ns65:	<https://lov.linkeddata.es/dataset/lov/> .
+@prefix ns66:	<https://slod.fiz-karlsruhe.de/> .
+@prefix ns67:	<https://data.epo.org/linked-data/> .
+@prefix ns68:	<http://data.mimo-db.eu/> .
+@prefix ns69:	<https://id.nlm.nih.gov/mesh/> .
+@prefix ns70:	<http://data.digitalculture.tw/taichung/> .
+@prefix ns71:	<http://genome.microbedb.jp/> .
+@prefix ns72:	<http://ma-graph.org/> .
+@prefix ns73:	<http://ldf.fi/SERVICE/> .
+@prefix ns74:	<https://data.nationallibrary.fi/bib/> .
+@prefix ns75:	<https://lod.nl.go.kr/> .
+@prefix ns76:	<http://data.nobelprize.org/> .
+@prefix ns77:	<http://statistics.data.gov.uk/> .
+@prefix ns78:	<https://opendatacommunities.org/> .
+@prefix ns79:	<http://lod.openaire.eu/> .
+@prefix ns80:	<https://w3id.org/oc/> .
+@prefix ns81:	<https://sophox.org/> .
+@prefix ns82:	<https://opendata.mfcr.cz/lod/> .
+@prefix ns83:	<https://data.ordnancesurvey.co.uk/datasets/opennames/apis/> .
+@prefix ns84:	<https://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/> .
+@prefix ns85:	<https://www.orpha.net/> .
+@prefix ns86:	<https://sparql.orthodb.org/> .
+@prefix ns87:	<https://sparql.proconsortium.org/virtuoso/> .
+@prefix ns88:	<http://vulcan.cs.uga.edu/> .
+@prefix ns89:	<https://rpp-opendata.egon.gov.cz/odrpp/> .
+@prefix ns90:	<https://sparql.rhea-db.org/> .
+@prefix ns91:	<https://zbw.eu/beta/sparql/stwv/> .
+@prefix ns92:	<http://vocabulary.curriculum.edu.au/PoolParty/sparql/> .
+@prefix ns93:	<http://ldf.fi/folklore/> .
+@prefix ns94:	<https://triplestore.sireneld.io/sirene/> .
+@prefix ns95:	<https://tora.entryscape.net/> .
+@prefix ns96:	<http://lod.kipo.kr/data/thesaurus/> .
+@prefix ns97:	<https://api.parliament.uk/> .
+@prefix ns98:	<https://sparql.uniprot.org/> .
+@prefix ns99:	<https://linkeddata.uriburner.com/> .
+@prefix ns100:	<http://sparql.wikipathways.org/> .
+@prefix ns101:	<https://query.wikidata.org/> .
+@prefix ns102:	<https://linkeddata1.calcul.u-psud.fr/> .
+@prefix ns103:	<https://yago-knowledge.org/> .
+@prefix ns104:	<http://collection.britishart.yale.edu/> .
+@prefix ns105:	<http://bbc.openlinksw.com/> .
+@prefix ns106:	<http://data.culture.fr/thesaurus/> .
+@prefix ns107:	<http://data.persee.fr/> .
+@prefix ns108:	<https://datos.gob.es/virtuoso/> .
+@prefix ns109:	<https://isidore.science/> .
+@prefix ns110:	<http://www.scholarlydata.org/> .
+@prefix ns111:	<http://dbtune.org/bbc/peel/> .
+@prefix ns112:	<http://de.dbpedia.org/> .
+@prefix ns113:	<https://es.dbpedia.org/> .
+@prefix ns114:	<http://dbtune.org/jamendo/> .
+@prefix ns115:	<http://dbtune.org/magnatune/> .
+@prefix ns116:	<http://dbtune.org/musicbrainz/> .
+@prefix ns117:	<https://cedropendata.mfcr.cz/c3lod/cedr/> .
+@prefix ns118:	<https://ld.cultural.jp/> .
+@prefix ns119:	<https://opendata.mfcr.cz/pages/> .
+@prefix ns120:	<https://data.cssz.cz/> .
+@prefix ns121:	<https://xn--slovnk-7va.gov.cz/> .
+@prefix ns122:	<https://www.dictionnairedesfrancophones.org/> .
+@prefix ns123:	<http://edan.si.edu/saam/> .
+@prefix ns124:	<http://dblp.l3s.de/d2r/> .
+@prefix ns125:	<https://identifiers.org/services/> .
+@prefix ns126:	<http://id.nlm.nih.gov/mesh/> .
+@prefix ns127:	<http://www.europeandataportal.eu/> .
+@prefix ns128:	<http://nomisma.org/> .
+@prefix ns129:	<https://lod.abes.fr/> .
+@prefix ns130:	<http://zbw.eu/beta/sparql/stw/> .
+@prefix ns131:	<http://bfs.270a.info/> .
+@prefix ns132:	<http://collection.britishmuseum.org/> .
+@prefix ns133:	<https://agrovoc.fao.org/> .
+@prefix ns134:	<http://opencitations.net/> .
+@prefix ns135:	<http://zbw.eu/beta/sparql/gnd/> .
+@prefix ns136:	<http://lov.okfn.org/dataset/lov/> .
+@prefix ns137:	<http://data.nationallibrary.fi/bib/> .
+@prefix ns138:	<http://data.americanartcollaborative.org/> .
+@prefix ns139:	<http://fr.dbpedia.org/> .
+@prefix ns140:	<http://ja.dbpedia.org/> .
+@prefix ns141:	<http://dbpedia.org/> .
+@prefix ns142:	<http://data.archiveshub.ac.uk/> .
+@prefix ns143:	<http://lod.kipo.kr/data/> .
+@prefix ns144:	<http://data.cervantesvirtual.com/openrdf-sesame/repositories/> .
+@prefix ns145:	<http://lod.nl.go.kr/> .
+@prefix ns146:	<http://www4.wiwiss.fu-berlin.de/dailymed/> .
+@prefix ns147:	<http://dati.beniculturali.it/> .
+@prefix ns148:	<http://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/> .
+@prefix ns149:	<http://data.odw.tw/> .
+@prefix ns150:	<http://hkcan.julac.org/lod/> .
+@prefix ns151:	<https://www.govdata.de/> .
+@prefix ns152:	<https://lingualibre.fr/bigdata/namespace/wdq/> .
+@prefix ns153:	<https://lingualibre.org/bigdata/namespace/wdq/> .
+@prefix ns154:	<http://opendatacommunities.org/> .
+@prefix ns155:	<http://api.finto.fi/> .
+@prefix ns156:	<https://ldf.fi/mufi/> .
+@prefix ns157:	<http://ldf.fi/kirjasampo/> .
+@prefix ns158:	<http://semantic.eea.europa.eu/> .
+@prefix ns159:	<http://collection.britishart.yale.edu/openrdf-sesame/repositories/> .
+@prefix ns160:	<http://cultura.linkeddata.es/> .
+@prefix ns161:	<http://sparql.kupkb.org/> .
+@prefix ns162:	<http://dati.camera.it/> .
+@prefix ns163:	<http://www.genome.jp/sparql/> .
+@prefix ns164:	<http://bnb.data.bl.uk/> .
+@prefix ns165:	<https://data.gov.cz/> .
+@prefix ns166:	<https://datos.gob.es/es/> .
+@prefix ns167:	<http://digital-agenda-data.eu/data/> .
+
+ns1:AgroLDDataset
+	rdfs:label	"AgroLD" ;
+	void:sparqlEndpoint	ns3:sparql .
+ns1:AgroPortalDataset
+	void:sparqlEndpoint	<http://sparql.agroportal.lirmm.fr/sparql/> .
+ns1:AnaEE
+	void:sparqlEndpoint	ns4:sparql .
+ns1:FCUDataset
+	void:sparqlEndpoint	ns5:query .
+ns1:GECO
+	void:sparqlEndpoint	ns6:sparql .
+ns1:INRA_IATE_data
+	void:sparqlEndpoint	ns7:query .
+ns1:INRA_IATE_onto
+	void:sparqlEndpoint	ns8:query .
+ns1:OntologyIRSTEA
+	void:sparqlEndpoint	ns9:weather .
+ns1:PO2
+	void:sparqlEndpoint	ns10:Composite_making_process .
+ns1:catalogRoot
+	rdf:type	ns12:Catalog ;
+	ns12:dataset	ns1:AgroLDDataset , ns1:AgroPortalDataset , ns1:AnaEE , ns1:FCUDataset , ns1:GECO , ns1:INRA_IATE_data , ns1:INRA_IATE_onto , ns1:OntologyIRSTEA , ns1:PO2 , ns1:orkg , ns13:STW_Thesarus_for_Economics , <https://linkedwiki.com/dataset/20th_Century_Press_Archives_(PM20)> , <https://linkedwiki.com/dataset/50K_Gazetteer_Linked_Data> , ns13:ADS , ns13:AGROVOC , ns13:Allie , ns13:Aragon_Open_Data_Sparql_endpoint , <https://linkedwiki.com/dataset/Artsdata.ca> , ns13:Australian_and_New_Zealand_Standard_Research_Classification , ns13:Bgee , ns13:Biblioteca_Nacional_de_Espana , ns13:Biblioteca_Virtual_Miguel_de_Cervantes , ns13:Bio2RDF , ns13:BioModels , ns13:BioPortal , ns13:Boundary_Line_Linked_Data , ns13:British_National_Bibliography , ns13:ChEMBL , ns13:Chamber_of_Deputies_of_Italy , ns13:CiteSeer , ns13:Code-Point_Open_Linked_Data , ns13:Colil , ns13:Czech_DBPedia , ns13:Dataset_of_Korean_Intellectual_Property_Office_about_admin_processes , ns13:Dataset_of_Korean_Intellectual_Property_Office_about_classification , ns13:Dataset_of_Korean_Intellectual_Property_Office_about_oversea_patents , ns13:DisGeNET , ns13:DrugBank , ns13:EMBL-EBI , ns13:ESCR , ns13:EUROPA , ns13:EconStor , ns13:Economics_institutions_subset_of_GND , ns13:Economists_subset_of_GND , ns13:Ensembl , ns13:Epigraphic_Database_Heidelberg , ns13:European_Data_Portal , ns13:European_Environment_Agency , ns13:European_Union_Open_Data_Portal , ns13:Europeana , ns13:Europeana_Cultural_Data , ns13:FactForge , ns13:GWAS_Central , ns13:Galiciana , ns13:Geologic_Unit_Type , ns13:Getty_Vocabulary_Program , ns13:HAL , ns13:HM_Land_Registry_Open_Data , ns13:IEEE , ns13:INSEE , ns13:IODS , ns13:IdRef , ns13:Integrated_Authority_File_GND , ns13:International_Chronostratigraphic_Chart_data_set , ns13:Japan_Search , ns13:KEGG , ns13:Korean_Intellectual_Property_Office , ns13:LEMB , ns13:LinkedGeoData , ns13:LinkedWiki , ns13:Linked_COVID-19_Data , ns13:Linked_Life_Data , ns13:Linked_Open_Vocabularies , ns13:Linked_Stage_Graph , ns13:Linked_open_EP_data , ns13:MIMO , ns13:MeSH , ns13:Memory_of_Taichung_Database , ns13:MicrobeDB , ns13:Microsoft_Academic_Knowledge_Graph , ns13:MuseumFinland , ns13:National_Library_of_Finland , ns13:National_Library_of_Korea , ns13:Nobel_Foundation_database , ns13:ONS_Open_Geography_Portal , ns13:Official_statistics_from_MHCLG , ns13:OpenAIRE , ns13:OpenCitations , ns13:OpenStreetMap , ns13:Open_Data_Catalogue_of_Ministry_of_Finance_of_the_Czech_Republic , ns13:Open_Data_Web , ns13:Open_Names_Linked_Data , ns13:Ordnance_Survey , ns13:Orphanet_Rare_Disease_Ontology , ns13:OrthoDB , ns13:PRO , ns13:PathoPhenoDB , ns13:Pathway_Commons , ns13:ProKinO , ns13:Reactome , ns13:Register_of_rights_and_responsibilities_of_public_authorities_of_Czechia , ns13:Research_Vocabularies_Australia , ns13:Rhea , ns13:SKOS-history_of_ZBW_Leibniz_Information_Centre_of_Economics , ns13:Scholarly_Linked_Open_Data , ns13:Schools_Online_Thesaurus , ns13:Semantic_Kalevala , ns13:SireneLD , ns13:TORA , ns13:Thesaurus_of_Geographic_Names_LOD_Dataset , ns13:Thesaurus_of_Korean_Intellectual_Property_Office , ns13:UK_Parliament , ns13:Union_List_of_Artist_Names , ns13:Uniprot , ns13:UriBurner , ns13:WikiPathways , ns13:Wikidata , ns13:WordNet , ns13:YAGO , ns13:YAGO_4 , ns13:YCBA_LOD , <https://linkedwiki.com/dataset/backstage.bbc.co.uk> , <https://linkedwiki.com/dataset/data.culture.fr> , <https://linkedwiki.com/dataset/data.persee.fr> , <https://linkedwiki.com/dataset/dati.beniculturali.it> , <https://linkedwiki.com/dataset/datos.gob.es> , ns13:isidore , ns13:neXtProt , ns1:BNBDataset , ns1:ScholarlyData , ns1:bbcpeel , ns1:dbpediaDe , ns1:dbpediaEs , ns1:eea , ns1:jamendo , ns1:magnatune , ns1:musicbrainz , ns1:uriburner , ns14:Q101201850 , ns14:P920 , ns14:P9258 , ns14:Q100287877 , ns14:Q100741405 , ns14:Q101199977 , ns14:Q101200416 , ns14:Q101200819 , ns14:Q10465472 , ns14:Q105974809 , ns14:Q1122544 , ns14:Q1192305 , ns14:Q1224715 , ns14:Q131566 , ns14:Q1341845 , ns14:Q1344256 , ns14:Q1347027 , ns14:Q1515833 , ns14:Q1520117 , ns14:Q1550070 , ns14:Q156616 , ns14:Q16166037 , ns14:Q16335166 , ns14:Q16570543 , ns14:Q18635431 , ns14:Q19938912 , ns14:Q199897 , ns14:Q2013 , ns14:Q2134522 , ns14:Q21819923 , ns14:Q234110 , ns14:Q23687322 , ns14:Q24254958 , ns14:Q24265951 , ns14:Q24578999 , ns14:Q2494649 , ns14:Q25106053 , ns14:Q25344041 , ns14:Q2597810 , ns14:Q26836418 , ns14:Q26903352 , ns14:Q27921423 , ns14:Q285453 , ns14:Q28693488 , ns14:Q28856388 , ns14:Q292649 , ns14:Q29279836 , ns14:Q3016893 , ns14:Q3144107 , ns14:Q32193244 , ns14:Q34478116 , ns14:Q36578 , ns14:Q39392701 , ns14:Q41147961 , ns14:Q420747 , ns14:Q44012825 , ns14:Q46092234 , ns14:Q465 , ns14:Q47757534 , ns14:Q4785478 , ns14:Q4787279 , ns14:Q483420 , ns14:Q4839746 , ns14:Q4903493 , ns14:Q4914599 , ns14:Q4914638 , ns14:Q495005 , ns14:Q50553544 , ns14:Q5209305 , ns14:Q5227103 , ns14:Q52897564 , ns14:Q533822 , ns14:Q5412398 , ns14:Q548721 , ns14:Q54985720 , ns14:Q55118584 , ns14:Q5554720 , ns14:Q55840137 , ns14:Q56241725 , ns14:Q56292285 , ns14:Q56650909 , ns14:Q58926304 , ns14:Q59273239 , ns14:Q60024037 , ns14:Q601819 , ns14:Q60683589 , ns14:Q6120337 , ns14:Q61677804 , ns14:Q61976493 , ns14:Q61976518 , ns14:Q61976546 , ns14:Q62338567 , ns14:Q632988 , ns14:Q63464453 , ns14:Q63468524 , ns14:Q6352575 , ns14:Q64148880 , ns14:Q64192549 , ns14:Q64193442 , ns14:Q65000093 , ns14:Q65047015 , ns14:Q65050032 , ns14:Q68272620 , ns14:Q6983890 , ns14:Q69986810 , ns14:Q7104395 , ns14:Q7144881 , ns14:Q750403 , ns14:Q76180364 , ns14:Q76709591 , ns14:Q78153350 , ns14:Q78154036 , ns14:Q7999828 , ns14:Q841424 , ns14:Q87243424 , ns14:Q905695 , ns14:Q909442 , ns14:Q91205721 , ns14:Q919757 , ns14:Q936 , ns14:Q953058 , ns14:Q96585608 , ns14:Q97010743 , ns14:Q97285695 , ns14:Q97319022 , ns14:Q97621285 , ns14:Q99843931 .
+ns1:orkg
+	rdfs:label	"Open Research Knowledge Graph (ORKG)" ;
+	void:sparqlEndpoint	ns15:triplestore .
+ns13:STW_Thesarus_for_Economics
+	void:sparqlEndpoint	ns16:query .
+<https://linkedwiki.com/dataset/20th_Century_Press_Archives_(PM20)>
+	void:sparqlEndpoint	ns17:query .
+<https://linkedwiki.com/dataset/50K_Gazetteer_Linked_Data>
+	void:sparqlEndpoint	ns18:sparql .
+ns13:AGROVOC
+	void:sparqlEndpoint	ns20:sparql .
+ns13:Allie
+	void:sparqlEndpoint	ns21:sparql .
+ns13:Aragon_Open_Data_Sparql_endpoint
+	void:sparqlEndpoint	ns22:sparql .
+<https://linkedwiki.com/dataset/Artsdata.ca>
+	void:sparqlEndpoint	ns23:artsdata .
+ns13:Australian_and_New_Zealand_Standard_Research_Classification
+	void:sparqlEndpoint	ns24:anzsrc-for .
+ns13:Bgee
+	void:sparqlEndpoint	ns25:sparql .
+ns13:Biblioteca_Nacional_de_Espana
+	void:sparqlEndpoint	ns26:sparql .
+ns13:Biblioteca_Virtual_Miguel_de_Cervantes
+	void:sparqlEndpoint	ns27:data .
+ns13:Bio2RDF
+	void:sparqlEndpoint	ns28:sparql .
+ns13:BioPortal
+	void:sparqlEndpoint	ns30:sparql .
+ns13:Boundary_Line_Linked_Data
+	void:sparqlEndpoint	ns31:sparql .
+ns13:ChEMBL
+	void:sparqlEndpoint	ns29:sparql .
+ns13:Chamber_of_Deputies_of_Italy
+	void:sparqlEndpoint	ns33:sparql .
+ns13:CiteSeer
+	void:sparqlEndpoint	<http://citeseer.rkbexplorer.com/sparql/> .
+ns13:Code-Point_Open_Linked_Data
+	void:sparqlEndpoint	ns34:sparql .
+ns13:Colil
+	void:sparqlEndpoint	ns35:sparql .
+ns13:Czech_DBPedia
+	void:sparqlEndpoint	ns36:sparql .
+ns13:Dataset_of_Korean_Intellectual_Property_Office_about_admin_processes
+	void:sparqlEndpoint	ns37:sparql .
+ns13:Dataset_of_Korean_Intellectual_Property_Office_about_classification
+	void:sparqlEndpoint	ns38:sparql .
+ns13:Dataset_of_Korean_Intellectual_Property_Office_about_oversea_patents
+	void:sparqlEndpoint	ns39:sparql .
+ns13:DisGeNET
+	void:sparqlEndpoint	<http://rdf.disgenet.org/sparql/> .
+ns13:DrugBank
+	void:sparqlEndpoint	<http://wifo5-04.informatik.uni-mannheim.de/drugbank/snorql/> .
+ns13:ESCR
+	void:sparqlEndpoint	ns40:sparql .
+ns13:EUROPA
+	void:sparqlEndpoint	ns41:sparqlep .
+ns13:EconStor
+	void:sparqlEndpoint	<http://linkeddata.econstor.eu/beta/snorql/> .
+ns13:Economics_institutions_subset_of_GND
+	void:sparqlEndpoint	ns42:query .
+ns13:Economists_subset_of_GND
+	void:sparqlEndpoint	ns43:query .
+ns13:Epigraphic_Database_Heidelberg
+	void:sparqlEndpoint	ns44:query .
+ns13:European_Data_Portal
+	void:sparqlEndpoint	ns45:sparql .
+ns13:European_Union_Open_Data_Portal
+	void:sparqlEndpoint	ns47:sparql .
+ns13:Europeana
+	void:sparqlEndpoint	<http://sparql.europeana.eu/> .
+ns13:Europeana_Cultural_Data
+	void:sparqlEndpoint	<http://sparql.europeana.eu> .
+ns13:FactForge
+	void:sparqlEndpoint	ns48:ff-news .
+ns13:GWAS_Central
+	void:sparqlEndpoint	ns49:query .
+ns13:Galiciana
+	void:sparqlEndpoint	ns50:sparql .
+ns13:Geologic_Unit_Type
+	void:sparqlEndpoint	ns24:ga_geologic-unit-type_v0-1 .
+ns13:HAL
+	void:sparqlEndpoint	ns52:sparql .
+ns13:HM_Land_Registry_Open_Data
+	void:sparqlEndpoint	ns53:query .
+ns13:IEEE
+	void:sparqlEndpoint	<http://ieee.rkbexplorer.com/sparql/> .
+ns13:INSEE
+	void:sparqlEndpoint	ns54:sparql .
+ns13:IODS
+	void:sparqlEndpoint	ns55:sparql .
+ns13:IdRef
+	void:sparqlEndpoint	ns56:sparql .
+ns13:Integrated_Authority_File_GND
+	void:sparqlEndpoint	ns57:query .
+ns13:International_Chronostratigraphic_Chart_data_set
+	void:sparqlEndpoint	ns24:csiro_international-chronostratigraphic-chart_2018 .
+ns13:Japan_Search
+	void:sparqlEndpoint	<https://jpsearch.go.jp/rdf/sparql/> .
+ns13:KEGG
+	void:sparqlEndpoint	ns58:linkdb .
+ns13:Korean_Intellectual_Property_Office
+	void:sparqlEndpoint	ns59:sparql .
+ns13:LEMB
+	void:sparqlEndpoint	ns60:sparql .
+ns13:LinkedGeoData
+	void:sparqlEndpoint	ns61:sparql .
+ns13:LinkedWiki
+	void:sparqlEndpoint	ns62:sparql .
+ns13:Linked_COVID-19_Data
+	void:sparqlEndpoint	ns63:sparql .
+ns13:Linked_Life_Data
+	void:sparqlEndpoint	ns64:sparql .
+ns13:Linked_Open_Vocabularies
+	void:sparqlEndpoint	ns65:sparql .
+ns13:Linked_Stage_Graph
+	void:sparqlEndpoint	ns66:sparql .
+ns13:Linked_open_EP_data
+	void:sparqlEndpoint	ns67:query .
+ns13:MIMO
+	void:sparqlEndpoint	ns68:sparql .
+ns13:MeSH
+	void:sparqlEndpoint	ns69:sparql .
+ns13:Memory_of_Taichung_Database
+	void:sparqlEndpoint	ns70:sparql .
+ns13:MicrobeDB
+	void:sparqlEndpoint	ns71:sparql .
+ns13:Microsoft_Academic_Knowledge_Graph
+	void:sparqlEndpoint	ns72:sparql .
+ns13:MuseumFinland
+	void:sparqlEndpoint	ns73:sparql .
+ns13:National_Library_of_Finland
+	void:sparqlEndpoint	ns74:sparql .
+ns13:National_Library_of_Korea
+	void:sparqlEndpoint	ns75:sparql .
+ns13:Nobel_Foundation_database
+	void:sparqlEndpoint	ns76:sparql .
+ns13:ONS_Open_Geography_Portal
+	void:sparqlEndpoint	ns77:sparql .
+ns13:Official_statistics_from_MHCLG
+	void:sparqlEndpoint	ns78:sparql .
+ns13:OpenAIRE
+	void:sparqlEndpoint	ns79:sparql .
+ns13:OpenCitations
+	void:sparqlEndpoint	ns80:sparql .
+ns13:OpenStreetMap
+	void:sparqlEndpoint	ns81:sparql .
+ns13:Open_Data_Catalogue_of_Ministry_of_Finance_of_the_Czech_Republic
+	void:sparqlEndpoint	ns82:sparql .
+ns13:Open_Data_Web
+	void:sparqlEndpoint	<http://sparql.odw.tw/> .
+ns13:Open_Names_Linked_Data
+	void:sparqlEndpoint	ns83:sparql .
+ns13:Ordnance_Survey
+	void:sparqlEndpoint	ns84:sparql .
+ns13:Orphanet_Rare_Disease_Ontology
+	void:sparqlEndpoint	ns85:sparql .
+ns13:OrthoDB
+	void:sparqlEndpoint	ns86:sparql .
+ns13:PRO
+	void:sparqlEndpoint	ns87:sparql .
+ns13:PathoPhenoDB
+	void:sparqlEndpoint	<http://patho.phenomebrowser.net/sparql/> .
+ns13:Pathway_Commons
+	void:sparqlEndpoint	<https://rdf.pathwaycommons.org/sparql/> .
+ns13:ProKinO
+	void:sparqlEndpoint	ns88:sparql .
+ns13:Register_of_rights_and_responsibilities_of_public_authorities_of_Czechia
+	void:sparqlEndpoint	ns89:sparql .
+ns13:Research_Vocabularies_Australia
+	void:sparqlEndpoint	<https://vocabs.ands.org.au/repository/api/sparql/> .
+ns13:Rhea
+	void:sparqlEndpoint	ns90:sparql .
+ns13:SKOS-history_of_ZBW_Leibniz_Information_Centre_of_Economics
+	void:sparqlEndpoint	ns91:query .
+ns13:Scholarly_Linked_Open_Data
+	void:sparqlEndpoint	<http://www.scholarlydata.org/sparql/> .
+ns13:Schools_Online_Thesaurus
+	void:sparqlEndpoint	ns92:scot .
+ns13:Semantic_Kalevala
+	void:sparqlEndpoint	ns93:sparql .
+ns13:SireneLD
+	void:sparqlEndpoint	ns94:sparql .
+ns13:TORA
+	void:sparqlEndpoint	ns95:snorql .
+ns13:Thesaurus_of_Geographic_Names_LOD_Dataset
+	void:sparqlEndpoint	ns51:sparql .
+ns13:Thesaurus_of_Korean_Intellectual_Property_Office
+	void:sparqlEndpoint	ns96:sparql .
+ns13:UK_Parliament
+	void:sparqlEndpoint	ns97:sparql .
+ns13:Uniprot
+	void:sparqlEndpoint	ns98:sparql .
+ns13:UriBurner
+	void:sparqlEndpoint	ns99:sparql .
+ns13:WikiPathways
+	void:sparqlEndpoint	ns100:sparql .
+ns13:Wikidata
+	void:sparqlEndpoint	ns101:sparql .
+ns13:WordNet
+	void:sparqlEndpoint	<http://wordnet.rkbexplorer.com/sparql/> .
+ns13:YAGO
+	void:sparqlEndpoint	ns102:sparql .
+ns13:YAGO_4
+	void:sparqlEndpoint	ns103:sparql .
+ns13:YCBA_LOD
+	void:sparqlEndpoint	ns104:sparql .
+<https://linkedwiki.com/dataset/backstage.bbc.co.uk>
+	void:sparqlEndpoint	ns105:sparql .
+<https://linkedwiki.com/dataset/data.culture.fr>
+	void:sparqlEndpoint	ns106:sparql .
+<https://linkedwiki.com/dataset/data.persee.fr>
+	void:sparqlEndpoint	ns107:sparql .
+<https://linkedwiki.com/dataset/dati.beniculturali.it>
+	void:sparqlEndpoint	ns147: .
+<https://linkedwiki.com/dataset/datos.gob.es>
+	void:sparqlEndpoint	ns108:sparql .
+ns13:isidore
+	void:sparqlEndpoint	ns109:sparql .
+ns13:neXtProt
+	void:sparqlEndpoint	<https://sparql.nextprot.org/> .
+ns1:BNBDataset
+	rdfs:label	"BNB" ;
+	void:sparqlEndpoint	ns32:sparql .
+ns1:ScholarlyData
+	rdfs:label	"ScholarlyData" ;
+	void:sparqlEndpoint	ns110:sparql .
+ns1:bbcpeel
+	rdfs:label	"BBC John Peel sessions" ;
+	void:sparqlEndpoint	ns111:sparql .
+ns1:dbpediaDe
+	rdfs:label	"German DBpedia" ;
+	void:sparqlEndpoint	ns112:sparql .
+ns1:dbpediaEs
+	rdfs:label	"Spanish DBpedia" ;
+	void:sparqlEndpoint	ns113:sparql .
+ns1:eea
+	rdfs:label	"European Environment Agency" ;
+	void:sparqlEndpoint	ns46:sparql .
+ns1:jamendo
+	rdfs:label	"Jamendo" ;
+	void:sparqlEndpoint	ns114:sparql .
+ns1:magnatune
+	rdfs:label	"Magnatune" ;
+	void:sparqlEndpoint	ns115:sparql .
+ns1:musicbrainz
+	rdfs:label	"MusicBrainz" ;
+	void:sparqlEndpoint	ns116:sparql .
+ns1:uriburner
+	rdfs:label	"URIBurner" ;
+	void:sparqlEndpoint	<http://uriburner.com/sparql/> .
+ns14:Q101201850
+	rdfs:label	"Q101201850" ;
+	void:sparqlEndpoint	ns117:sparql .
+ns14:P9258
+	rdfs:label	"P9258" ;
+	void:sparqlEndpoint	<https://labs.onb.ac.at/en/tool/sparql/> .
+ns14:Q100287877
+	rdfs:label	"Q100287877" ;
+	void:sparqlEndpoint	ns118:sparql .
+ns14:Q100741405
+	rdfs:label	"Q100741405" ;
+	void:sparqlEndpoint	ns119:sparql .
+ns14:Q101199977
+	rdfs:label	"Q101199977" ;
+	void:sparqlEndpoint	ns120:sparql .
+ns14:Q101200416
+	rdfs:label	"Q101200416" ;
+	void:sparqlEndpoint	ns121:sparql .
+ns14:Q101200819
+	rdfs:label	"Q101200819" ;
+	void:sparqlEndpoint	<https://idsm.elixir-czech.cz/sparql/> .
+ns14:Q10465472
+	rdfs:label	"Q10465472" ;
+	void:sparqlEndpoint	<http://rdf.disgenet.org/sparql/> .
+ns14:Q105974809
+	rdfs:label	"Q105974809" ;
+	void:sparqlEndpoint	ns122:sparql .
+ns14:Q1122544
+	rdfs:label	"Q1122544" ;
+	void:sparqlEndpoint	<http://wifo5-04.informatik.uni-mannheim.de/drugbank/snorql/> .
+ns14:Q1192305
+	rdfs:label	"Q1192305" ;
+	void:sparqlEndpoint	ns123:sparql .
+ns14:Q1224715
+	rdfs:label	"Q1224715" ;
+	void:sparqlEndpoint	ns124:sparql .
+ns14:Q131566
+	rdfs:label	"Q131566" ;
+	void:sparqlEndpoint	<http://ieee.rkbexplorer.com/sparql/> .
+ns14:Q16166037
+	rdfs:label	"Q16166037" ;
+	void:sparqlEndpoint	<http://citeseer.rkbexplorer.com/sparql/> .
+ns14:Q16335166
+	rdfs:label	"Q16335166" ;
+	void:sparqlEndpoint	ns125:sparql .
+ns14:Q19938912
+	rdfs:label	"Q19938912" ;
+	void:sparqlEndpoint	<http://data.bnf.fr/sparql/> .
+ns14:Q199897
+	rdfs:label	"Q199897" ;
+	void:sparqlEndpoint	ns126:sparql .
+ns14:Q21819923
+	rdfs:label	"Q21819923" ;
+	void:sparqlEndpoint	ns127:sparql .
+ns14:Q234110
+	rdfs:label	"Q234110" ;
+	void:sparqlEndpoint	<http://sparql.europeana.eu/> .
+ns14:Q23687322
+	rdfs:label	"Q23687322" ;
+	void:sparqlEndpoint	<http://data.fondazionezeri.unibo.it/sparql/> .
+ns14:Q24578999
+	rdfs:label	"Q24578999" ;
+	void:sparqlEndpoint	ns128:query .
+ns14:Q2597810
+	rdfs:label	"Q2597810" ;
+	void:sparqlEndpoint	ns129:sparql .
+ns14:Q26903352
+	rdfs:label	"Q26903352" ;
+	void:sparqlEndpoint	ns130:query .
+ns14:Q27921423
+	rdfs:label	"Q27921423" ;
+	void:sparqlEndpoint	<http://sparql.kpath.khaos.uma.es/> .
+ns14:Q285453
+	rdfs:label	"Q285453" ;
+	void:sparqlEndpoint	ns131:sparql .
+ns14:Q28693488
+	rdfs:label	"Q28693488" ;
+	void:sparqlEndpoint	ns132:sparql .
+ns14:Q29279836
+	rdfs:label	"Q29279836" ;
+	void:sparqlEndpoint	ns134:sparql .
+ns14:Q3016893
+	rdfs:label	"Q3016893" ;
+	void:sparqlEndpoint	<https://www.data.gouv.fr/catalog.rdf> .
+ns14:Q32193244
+	rdfs:label	"Q32193244" ;
+	void:sparqlEndpoint	<https://query.inventaire.io> .
+ns14:Q36578
+	rdfs:label	"Q36578" ;
+	void:sparqlEndpoint	ns135:query .
+ns14:Q39392701
+	rdfs:label	"Q39392701" ;
+	void:sparqlEndpoint	ns136:sparql .
+ns14:Q41147961
+	rdfs:label	"Q41147961" ;
+	void:sparqlEndpoint	<https://vocabs.ands.org.au/repository/api/sparql/> .
+ns14:Q420747
+	rdfs:label	"Q420747" ;
+	void:sparqlEndpoint	ns137:sparql .
+ns14:Q46092234
+	rdfs:label	"Q46092234" ;
+	void:sparqlEndpoint	ns138:sparql .
+ns14:Q465
+	rdfs:label	"Q465" ;
+	void:sparqlEndpoint	ns139:sparql , ns140:sparql , ns141:sparql .
+ns14:Q4785478
+	rdfs:label	"Q4785478" ;
+	void:sparqlEndpoint	ns19:archives .
+ns14:Q4787279
+	rdfs:label	"Q4787279" ;
+	void:sparqlEndpoint	ns142:sparql .
+ns14:Q483420
+	rdfs:label	"Q483420" ;
+	void:sparqlEndpoint	ns143:sparql .
+ns14:Q4903493
+	rdfs:label	"Q4903493" ;
+	void:sparqlEndpoint	ns144:data .
+ns14:Q495005
+	rdfs:label	"Q495005" ;
+	void:sparqlEndpoint	ns145:sparql .
+ns14:Q5209305
+	rdfs:label	"Q5209305" ;
+	void:sparqlEndpoint	ns146:sparql .
+ns14:Q533822
+	rdfs:label	"Q533822" ;
+	void:sparqlEndpoint	<http://wordnet.rkbexplorer.com/sparql/> .
+ns14:Q548721
+	rdfs:label	"Q548721" ;
+	void:sparqlEndpoint	ns148:sparql .
+ns14:Q56292285
+	rdfs:label	"Q56292285" ;
+	void:sparqlEndpoint	<http://sparql.odw.tw/> , ns149:sparql .
+ns14:Q56650909
+	rdfs:label	"Q56650909" ;
+	void:sparqlEndpoint	ns150:sparql .
+ns14:Q59273239
+	rdfs:label	"Q59273239" ;
+	void:sparqlEndpoint	ns151:sparql .
+ns14:Q60024037
+	rdfs:label	"Q60024037" ;
+	void:sparqlEndpoint	ns152:sparql , ns153:sparql .
+ns14:Q601819
+	rdfs:label	"Q601819" ;
+	void:sparqlEndpoint	ns154:sparql .
+ns14:Q61677804
+	rdfs:label	"Q61677804" ;
+	void:sparqlEndpoint	ns155:sparql .
+ns14:Q61976493
+	rdfs:label	"Q61976493" ;
+	void:sparqlEndpoint	ns156:sparql .
+ns14:Q61976546
+	rdfs:label	"Q61976546" ;
+	void:sparqlEndpoint	ns157:sparql .
+ns14:Q62338567
+	rdfs:label	"Q62338567" ;
+	void:sparqlEndpoint	<https://jpsearch.go.jp/rdf/sparql/> .
+ns14:Q632988
+	rdfs:label	"Q632988" ;
+	void:sparqlEndpoint	ns158:sparql .
+ns14:Q63468524
+	rdfs:label	"Q63468524" ;
+	void:sparqlEndpoint	ns24:csiro_international-chronostratigraphic-chart_international-chronostratigraphic-chart .
+ns14:Q6352575
+	rdfs:label	"Q6352575" ;
+	void:sparqlEndpoint	ns159:ycba , <http://collection.britishart.yale.edu/sparql/> .
+ns14:Q65047015
+	rdfs:label	"Q65047015" ;
+	void:sparqlEndpoint	<http://patho.phenomebrowser.net/sparql/> .
+ns14:Q6983890
+	rdfs:label	"Q6983890" ;
+	void:sparqlEndpoint	<https://sparql.nextprot.org/> .
+ns14:Q7144881
+	rdfs:label	"Q7144881" ;
+	void:sparqlEndpoint	<http://rdf.pathwaycommons.org/sparql/> .
+ns14:Q76709591
+	rdfs:label	"Q76709591" ;
+	void:sparqlEndpoint	ns161:sparql .
+ns14:Q841424
+	rdfs:label	"Q841424" ;
+	void:sparqlEndpoint	ns162:sparql .
+ns14:Q87243424
+	rdfs:label	"Q87243424" ;
+	void:sparqlEndpoint	<http://tadirah.dariah.eu/vocab/sparql.php> .
+ns14:Q909442
+	rdfs:label	"Q909442" ;
+	void:sparqlEndpoint	ns163:linkdb .
+ns14:Q919757
+	rdfs:label	"Q919757" ;
+	void:sparqlEndpoint	ns164:sparql .
+ns14:Q953058
+	rdfs:label	"Q953058" ;
+	void:sparqlEndpoint	<http://virhp07.libris.kb.se/sparql/> .
+ns14:Q97010743
+	rdfs:label	"Q97010743" ;
+	void:sparqlEndpoint	ns165:sparql .
+ns14:Q97285695
+	rdfs:label	"Q97285695" ;
+	void:sparqlEndpoint	ns166:sparql .
+ns14:Q97621285
+	rdfs:label	"Q97621285" ;
+	void:sparqlEndpoint	<https://wcqs-beta.wmflabs.org/> , <https://query.wikidata.org> .
+ns14:Q99843931
+	rdfs:label	"Q99843931" ;
+	void:sparqlEndpoint	ns167:sparql .

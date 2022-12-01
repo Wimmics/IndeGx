@@ -1,0 +1,71 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dkg: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+kgi:dbpediaCatalog a dcat:Catalog ;
+    dcat:dataset kgi:dbpedia, kgi:dbpediaAr, kgi:dbpediaEu, kgi:dbpediaCa, kgi:dbpediaCs, kgi:dbpediaNl, kgi:dbpediaEo, kgi:dbpediaFr, kgi:dbpediaFrProd, kgi:dbpediaEl, kgi:dbpediaDe, kgi:dbpediaHu, kgi:dbpediaId, kgi:dbpediaJa, kgi:dbpediaKo, kgi:dbpediaPl, kgi:dbpediaPt, kgi:dbpediaSv, kgi:dbpediaUk .
+
+kgi:dbpedia void:sparqlEndpoint <http://dbpedia.org/sparql> ;
+    rdfs:label "English DBpedia chapter" .
+
+kgi:dbpediaAr void:sparqlEndpoint <https://ar.dbpedia.org/sparql> ;
+    rdfs:label "DBpedia Arabic Chapter" .
+
+kgi:dbpediaEu void:sparqlEndpoint <https://eu.dbpedia.org/sparql> ;
+    rdfs:label "Basque Dbpedia chapter" .
+
+kgi:dbpediaCa void:sparqlEndpoint <http://dbpedia-ca.upf.edu/sparql/> ;
+    rdfs:label "Catalan DBpedia chapter" .
+
+kgi:dbpediaCs void:sparqlEndpoint <https://cs.dbpedia.org/sparql> ;
+    rdfs:label "Czech DBpedia chapter" .
+
+kgi:dbpediaNl void:sparqlEndpoint <http://nl.dbpedia.org/sparql> ;
+    rdfs:label "Dutch DBpedia chapter" .
+
+kgi:dbpediaEo void:sparqlEndpoint <https://eo.dbpedia.org/sparql> ;
+    rdfs:label "Esperanto DBpedia chapter" .
+
+kgi:dbpediaFr void:sparqlEndpoint <http://fr.dbpedia.org/sparql> ;
+    rdfs:label "French DBpedia chapter" .
+
+kgi:dbpediaFrProd void:sparqlEndpoint <http://prod-dbpedia.inria.fr/> ;
+    rdfs:label "Temporary French DBpedia chapter" .
+
+kgi:dbpediaEl void:sparqlEndpoint <http://el.dbpedia.org/sparql> ;
+    rdfs:label "Greek DBpedia chapter" .
+
+kgi:dbpediaDe void:sparqlEndpoint <http://de.dbpedia.org/sparql> ;
+    rdfs:label "German DBpedia chapter" .
+
+kgi:dbpediaHu void:sparqlEndpoint <https://hu.dbpedia.org/sparql/> ;
+    rdfs:label "Hungarian DBpedia chapter" .
+
+kgi:dbpediaId void:sparqlEndpoint <http://id.dbpedia.org/sparql> ;
+    rdfs:label "Indonesian DBpedia chapter" .
+
+kgi:dbpediaJa void:sparqlEndpoint <http://ja.dbpedia.org/sparql> ;
+    rdfs:label "Japanese DBpedia chapter" .
+
+kgi:dbpediaKo void:sparqlEndpoint <http://ko.dbpedia.org/sparql> ;
+    rdfs:label "Korean DBpedia chapter" .
+
+kgi:dbpediaPl void:sparqlEndpoint <http://pl.dbpedia.org/sparql> ;
+    rdfs:label "Polish DBpedia chapter" .
+
+kgi:dbpediaPt void:sparqlEndpoint <http://pt.dbpedia.org/sparql> ;
+    rdfs:label "Portugese DBpedia chapter" .
+
+kgi:dbpediaSv void:sparqlEndpoint <https://sv.dbpedia.org/sparql> ;
+    rdfs:label "Swedish DBpedia chapter" .
+
+kgi:dbpediaUk void:sparqlEndpoint <https://uk.dbpedia.org/sparql> ;
+    rdfs:label "Ukranian DBpedia chapter" .
