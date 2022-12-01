@@ -19,6 +19,7 @@
 <languages.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX schema: <http://schema.org/>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -59,6 +60,7 @@
 <datatypes.ttl> a mf:ManifestEntry ;
 kgi:onSuccess (
     [
+        kgi:recommendedPagination 1000 ;
         mf:action """PREFIX schema: <http://schema.org/>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -90,11 +92,13 @@ kgi:onSuccess (
         """
     ]
     <../../meta/modifiedUpdate.ttl>
+    <../../meta/inclusionByDatatypes.ttl>
 ) .
 
 <graphList.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 100 ;
             kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -147,6 +151,7 @@ kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:endpoint kgi:federation ;
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -189,6 +194,7 @@ kgi:onSuccess (
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -226,6 +232,7 @@ kgi:onSuccess (
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -263,6 +270,7 @@ kgi:onSuccess (
         ]
         <vocabularyListLOV.ttl>
         <../../check/knownVocabularies.ttl>
+        <../../meta/inclusionByVocabularies.ttl>
         <../../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
@@ -274,6 +282,7 @@ kgi:onSuccess (
             [
                 kgi:timeout "PT120S"^^xsd:duration ;
                 kgi:endpoint kgi:federation ;
+                kgi:recommendedPagination 100 ;
                 mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                     PREFIX prov: <http://www.w3.org/ns/prov#>
                     PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -324,6 +333,7 @@ kgi:onSuccess (
             [
                 kgi:timeout "PT120S"^^xsd:duration ;
                 kgi:endpoint kgi:federation ;
+                kgi:recommendedPagination 100 ;
                 mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                     PREFIX prov: <http://www.w3.org/ns/prov#>
                     PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -406,6 +416,7 @@ kgi:onSuccess (
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
+                kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -439,6 +450,7 @@ kgi:onSuccess (
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -472,11 +484,13 @@ kgi:onSuccess (
         """
         ]
         <../../meta/modifiedUpdate.ttl>
+        <../../meta/inclusionByResourceHostname.ttl>
     ) .
 
 <sameAs.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -503,6 +517,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -530,6 +545,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -557,6 +573,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -589,6 +606,7 @@ kgi:onSuccess (
 <sameAsNamespace.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -631,6 +649,7 @@ kgi:onSuccess (
 <linksets.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -670,6 +689,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -709,6 +729,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -748,6 +769,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -787,6 +809,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -833,6 +856,7 @@ kgi:onSuccess (
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>

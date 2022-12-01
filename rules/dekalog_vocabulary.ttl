@@ -117,3 +117,9 @@ kgi:vocabularyPartition rdf:type rdf:Property ;
     rdfs:subPropertyOf void:subset ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain void:Dataset .
+
+kgi:recommendedPagination rdf:type rdf:Property ;
+    rdfs:label "Recommended size for pagination during retrieval of the results of the actions" ;
+    rdfs:comment "This indicates the size of the page to use in the actions queries." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:range xsd:integer .

@@ -32,6 +32,7 @@
                 """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -86,6 +87,7 @@
                 }"""
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -159,6 +161,7 @@
             """
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -198,6 +201,7 @@
                 }"""
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -261,7 +265,9 @@
 
 <datasetDescResource.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+        [
+            kgi:recommendedPagination 1000 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
@@ -327,6 +333,7 @@
                  }"""
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -396,7 +403,9 @@
 
 <datasetDescResourceLocalhost.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+        [
+            kgi:recommendedPagination 1000 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
@@ -443,6 +452,7 @@
                  }"""
         ]
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -497,7 +507,8 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?originalDescriptionGraph {
-                        ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity .
+                        ?datasetDescription a dcat:Dataset , void:Dataset , prov:Entity ;
+                            void:sparqlEndpoint $rawEndpointUrl .
                     }
                     GRAPH ?metadataDescriptionGraph {
                         ?metadataDescription a prov:Entity , earl:TestSubject ;
@@ -517,6 +528,7 @@
 <linksets.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>

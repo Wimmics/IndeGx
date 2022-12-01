@@ -45,7 +45,8 @@
 
 <reachability.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+        [ 
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
@@ -99,7 +100,8 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+        [ 
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
@@ -154,7 +156,8 @@
 
 <provenance.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -183,7 +186,8 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -214,7 +218,9 @@
 
 <basicProvenance.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            kgi:recommendedPagination 1000 ;
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -281,6 +287,7 @@
 <shortUris.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -300,7 +307,7 @@
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
                     SERVICE ?coreseEndpoint {
                         {
                             SELECT (COUNT(?urisShort) AS ?countShort) {
@@ -335,6 +342,7 @@
 <RDFDataStructures.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -354,7 +362,7 @@
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
+                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
                     SERVICE ?coreseEndpoint {
                         {
                             SELECT (COUNT(DISTINCT *) AS ?countStruct) {
@@ -391,6 +399,7 @@
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:endpoint kgi:federation ;
+            kgi:recommendedPagination 10 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -449,6 +458,7 @@
 <blankNodeUsage.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -498,6 +508,7 @@
 <readableLabels.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -567,6 +578,7 @@
 <multipleLanguages.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -628,7 +640,8 @@
 
 <uriPattern.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -657,7 +670,8 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -688,7 +702,8 @@
 
 <coolUri.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -717,7 +732,8 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -748,7 +764,9 @@
 
 <indicatesUsedVocabularies.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [ 
+            kgi:recommendedPagination 1000 ;
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
