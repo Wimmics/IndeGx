@@ -25,12 +25,12 @@ export function applyRuleTree(endpointUrl: string, manifestObject: RuleTree.Mani
 
 function applyGenerationAsset(endpointUrl: string, entryObject: RuleTree.ManifestEntry) {
     return applyTest(endpointUrl, entryObject.test, entryObject).then(success => {
-        if(entryObject.test != undefined) {
+        if(entryObject.test != undefined && ! RuleTree.isDummyTest(entryObject.test)) {
             Logger.info(endpointUrl, "Test " , entryObject.test.uri, "finished")
         }
         var actionPool = [];
         if (success) {
-            if(entryObject.test != undefined) {
+            if(entryObject.test != undefined && ! RuleTree.isDummyTest(entryObject.test)) {
                 Logger.info(endpointUrl,"Test " , entryObject.test.uri, "succeeded")
             }
             if(entryObject.actionsSuccess.length > 0) {
@@ -89,7 +89,7 @@ function applyGenerationAsset(endpointUrl: string, entryObject: RuleTree.Manifes
 
 function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry): Promise<boolean> {
     const startTime = dayjs();
-    if (testObject != undefined && testObject.query != undefined) {
+    if (testObject != undefined && RuleTree.isTest(testObject) && ! RuleTree.isDummyTest(testObject)) {
         var testQueries = testObject.query;
         var testsPool = [];
         testQueries.forEach(testQuery => {
@@ -98,7 +98,7 @@ function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: 
                     if(askResult.error !== undefined) {
                         return false;
                     } else {
-                        return true;
+                        return askResult;
                     }
                 }).finally(() => false));
             } else if (SPARQLUtils.isSparqlSelect(testQuery)) {
