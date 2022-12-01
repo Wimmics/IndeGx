@@ -17,6 +17,7 @@ const kgiOnFailureProperty = KGI("onFailure");
 const kgiQueryProperty = KGI("query");
 const kgiEndpointProperty = KGI("endpoint");
 const kgiTimeoutProperty = KGI("timeout");
+const kgiPaginationProperty = KGI("recommendedPagination");
 const kgiTestQueryType = KGI("TestQuery");
 const kgiDummyTestType = KGI("DummyTest");
 
@@ -143,6 +144,11 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                 const timeoutString = store.the(actionNode, kgiTimeoutProperty, null).value;
                 const timeout = dayjs.duration(timeoutString);
                 actionObject.timeout = timeout.asSeconds();
+            }
+            if(store.holds(actionNode, kgiPaginationProperty, null)) {
+                const paginationString = store.the(actionNode, kgiPaginationProperty, null).value;
+                const pagination = Number.parseInt(paginationString);
+                actionObject.pagination = pagination;
             }
 
             return actionObject;

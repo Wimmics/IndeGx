@@ -22,10 +22,12 @@ export interface Test {
 export interface Action {
     endpoint?: string | undefined;
     timeout?: number | undefined;
+    pagination?: number;
     action: Array<string>;
 }
 
 export function isManifestEntry(object: any): boolean { return ( object.uri !== undefined && object.test !== undefined && object.actionsSuccess !== undefined && object.actionsFailure !== undefined) }
 export function isManifest(object: any): boolean { return ( object.uri !== undefined && object.entries !== undefined && object.includes !== undefined) }
 export function isTest(object: any): boolean { return ( object.uri !== undefined) && ! isManifest(object) && ! isManifestEntry(object) }
+export function isDummyTest(object: any): boolean { return isTest(object) && object.query === undefined }
 export function isAction(object: any): boolean { return ( object.action !== undefined) }
