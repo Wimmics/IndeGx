@@ -13,11 +13,14 @@ RUN set -eux; \
 
 WORKDIR /
 
+COPY rules .
+COPY post .
+
 RUN mkdir corese
-COPY corese-server-4.3.0-jar-with-dependencies.jar /corese
+COPY code/corese-server-4.3.0-jar-with-dependencies.jar /corese
 
 RUN mkdir indegx
-COPY kgindex.jar /indegx
+COPY code/kgindex.jar /indegx
 
 # Volume containing the catalogs
 VOLUME ["/input"]
