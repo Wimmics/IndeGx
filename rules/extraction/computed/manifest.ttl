@@ -33,7 +33,6 @@
                         ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> .
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                        ?metadata kgi:curated ?curatedDescriptionGraph .
                     }
                 }
                 WHERE {
@@ -47,10 +46,10 @@
                             }
                         }
                     }
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -58,7 +57,7 @@
     ) .
 
 <datatypes.ttl> a mf:ManifestEntry ;
-kgi:onSuccess (
+    kgi:onSuccess (
     [
         kgi:recommendedPagination 1000 ;
         mf:action """PREFIX schema: <http://schema.org/>
@@ -85,9 +84,9 @@ kgi:onSuccess (
                     }
                 }
                 FILTER( ?datatype != "" )
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
         """
     ]
@@ -111,9 +110,6 @@ kgi:onSuccess (
                     ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl#activity> .
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    ?metadataDescription a prov:Entity , earl:TestSubject ;
-                        prov:wasDerivedFrom ?endpointUrl ;
-                        kgi:curated ?curatedDescriptionGraph .
                 }
                 GRAPH ?curatedDescriptionGraph {
                     ?endpointDescription sd:availableGraphs ?datasetDescription .
@@ -131,12 +127,12 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?graph))), "Graph")) AS ?graphResource)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?graph))), "Graph")) AS ?graphResource)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
@@ -180,11 +176,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?graph))), "Graph")) AS ?graphResource)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?graph))), "Graph")) AS ?graphResource)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
         <../../meta/modifiedUpdate.ttl>
@@ -204,9 +200,6 @@ kgi:onSuccess (
                         ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> .
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            prov:wasDerivedFrom $rawEndpointUrl ;
-                            kgi:curated ?curatedDescriptionGraph .
                     }
 
                     GRAPH ?curatedDescriptionGraph {
@@ -223,10 +216,10 @@ kgi:onSuccess (
                     }
                 }
                 BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
         """
         ]
@@ -243,9 +236,6 @@ kgi:onSuccess (
                         ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> .
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            prov:wasDerivedFrom $rawEndpointUrl ;
-                            kgi:curated ?curatedDescriptionGraph .
                     }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:vocabulary ?ns .
@@ -261,15 +251,14 @@ kgi:onSuccess (
                     }
                 }
                 BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
         <vocabularyListLOV.ttl>
-        <../../check/knownVocabularies.ttl>
         <../../meta/inclusionByVocabularies.ttl>
         <../../meta/modifiedUpdate.ttl>
     ) ;
@@ -295,9 +284,6 @@ kgi:onSuccess (
                             ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl#activity> ;
                                 prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl> ;
                                 prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X>  .
-                            ?metadataDescription a prov:Entity , earl:TestSubject ;
-                                prov:wasDerivedFrom $rawEndpointUrl ;
-                                kgi:curated ?curatedDescriptionGraph .
                         }
                         GRAPH ?curatedDescriptionGraph {
                             ?datasetDescription void:vocabulary ?vocabURI .
@@ -323,10 +309,10 @@ kgi:onSuccess (
                                     dcterms:title ?title .
                             }
                         }
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     }
                 """
             ]
@@ -346,9 +332,6 @@ kgi:onSuccess (
                             ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl#activity> ;
                                 prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl> ;
                                 prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X>  .
-                            ?metadataDescription a prov:Entity , earl:TestSubject ;
-                                prov:wasDerivedFrom $rawEndpointUrl ;
-                                kgi:curated ?curatedDescriptionGraph .
                         }
                         GRAPH ?curatedDescriptionGraph {
                             ?datasetDescription void:vocabulary ?vocabURI .
@@ -374,10 +357,11 @@ kgi:onSuccess (
                                     dcterms:title ?title .
                             }
                         }
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                        BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
                     }
                 """
             ]
@@ -389,6 +373,7 @@ kgi:onSuccess (
         [
             mf:action """PREFIX schema: <https://schema.org/>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kgindex#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
                         ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/timezone.ttl#activity> .
@@ -404,9 +389,10 @@ kgi:onSuccess (
                         BIND(TZ(NOW()) AS ?timezone)
                     }
                     FILTER(?timezone != "")
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
                 }"""
         ]
         <../../meta/modifiedUpdate.ttl>
@@ -442,9 +428,10 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
         """
         ]
@@ -477,9 +464,10 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
         """
         ]
@@ -509,10 +497,11 @@ kgi:onSuccess (
                         } LIMIT 1
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -537,10 +526,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -565,10 +555,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -593,10 +584,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -635,10 +627,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs), str(?nsS), str(?nsO))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs), str(?nsS), str(?nsO))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -681,10 +674,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?uriSpace), str(?nsO))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?uriSpace), str(?nsO))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -721,10 +715,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsS), str(?uriSpace))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsS), str(?uriSpace))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -761,10 +756,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsS), str(?uriRegex))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsS), str(?uriRegex))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -801,10 +797,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsO), str(?uriRegex))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsO), str(?uriRegex))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -848,10 +845,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsO), str(?nsExample))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsO), str(?nsExample))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
@@ -895,10 +893,11 @@ kgi:onSuccess (
                         }
                     }
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsO), str(?nsExample))), "Linkset")) AS ?linkset)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p), str(?nsO), str(?nsExample))), "Linkset")) AS ?linkset)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]

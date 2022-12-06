@@ -10,16 +10,27 @@
 <modifiedUpdate.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            mf:action """
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 DELETE {
-                    ?metadataDescription dcterms:modified ?mod .
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription dcterms:modified ?mod .
+                    }
                 }
                 INSERT {
-                    ?metadataDescription dcterms:modified ?dateLiteral .
+                    GRAPH ?metadataDescriptionGraph {
+                        ?metadataDescription dcterms:modified ?dateLiteral .
+                    }
                 }
                 WHERE {
-                    OPTIONAL { ?metadataDescription dcterms:modified ?mod . }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    OPTIONAL { 
+                        GRAPH ?metadataDescriptionGraph {
+                            ?metadataDescription dcterms:modified ?mod . 
+                        }
+                    }
                     BIND(NOW() AS ?dateLiteral)
                 }
             """

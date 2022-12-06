@@ -1,4 +1,5 @@
 @prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
 
 <> a mf:Manifest ;
     mf:include (
@@ -7,4 +8,102 @@
             <extraction/manifest.ttl>
             <statistics/manifest.ttl>
             <meta/manifest.ttl>
-        ) .
+        ) ;
+    mf:entries (
+        <initialization.ttl>
+    ) .
+
+<initialization.ttl>  a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription a void:Dataset , dcat:Dataset , prov:Entity , earl:TestSubject ;
+                        prov:wasGeneratedAtTime ?time ;
+                        dcat:service ?endpointDescription ;
+                        dcat:distribution ?datasetDistribution ;
+                        dcat:endpointURL $rawEndpointUrl ;
+                        void:sparqlEndpoint $rawEndpointUrl .
+                    ?datasetDistribution a dcat:Distribution ;
+                        dcat:accessUrl $rawEndpointUrl ;
+                        dcat:mediaType "application/sparql-query" .
+                    ?endpointDescription sd:endpoint $rawEndpointUrl ;
+                        dcat:servesDataset ?datasetDescription ;
+                        dcat:endpointURL $rawEndpointUrl ;
+                        a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject .
+                }
+                GRAPH ?metadataDescriptionGraph {
+                    ?metadataDescription a prov:Entity , earl:TestSubject ;
+                        prov:wasGeneratedAtTime ?time ;
+                        prov:wasDerivedFrom $rawEndpointUrl ;
+                        kgi:curated ?datasetDescription , ?endpointDescription .
+                }
+                kgi:catalogRoot a dcat:Catalog ;
+                    dcat:service ?endpointDescription .
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
+            PREFIX owl:         <http://www.w3.org/2002/07/owl#> 
+            PREFIX xsd:         <http://www.w3.org/2001/XMLSchema#> 
+            PREFIX dcat:        <http://www.w3.org/ns/dcat#>
+            PREFIX foaf:        <http://xmlns.com/foaf/0.1/> 
+            PREFIX prov:        <http://www.w3.org/ns/prov#> 
+            PREFIX schema:		<http://schema.org/> 
+            PREFIX void:        <http://rdfs.org/ns/void#> 
+            PREFIX sd:          <http://www.w3.org/ns/sparql-service-description#> 
+            PREFIX dct:         <http://purl.org/dc/terms/> 
+            PREFIX skos:        <http://www.w3.org/2004/02/skos/core#> 
+            PREFIX kgi:         <http://ns.inria.fr/kg/index#> 
+            PREFIX virtrdf:     <http://www.openlinksw.com/schemas/virtrdf#> 
+            PREFIX bif:         <bif:> 
+            PREFIX sql:         <sql:> 
+            PREFIX formats:     <http://www.w3.org/ns/formats/> 
+            PREFIX dekalog:     <http://prod-dekalog.inria.fr/> 
+
+            INSERT {
+                kgi:catalogRoot sd:namedGraph ?curatedDescriptionGraph , ?metadataDescriptionGraph , ?originalDescriptionGraph .
+                ?curatedDescriptionGraph sd:name ?curatedDescriptionGraph ;
+                    prov:wasGeneratedBy ?indexationActivity ;
+                    prov:wasDerivedFrom ?endpointDescription .
+                ?originalDescriptionGraph sd:name ?originalDescriptionGraph ;
+                    prov:wasGeneratedBy ?indexationActivity ;
+                    prov:wasDerivedFrom ?endpointDescription .
+                ?metadataDescriptionGraph sd:name ?metadataDescriptionGraph ;
+                    prov:wasGeneratedBy ?indexationActivity ;
+                    prov:wasDerivedFrom ?endpointDescription .
+                
+                ?indexationActivity a prov:Activity ;
+                    prov:used <https://github.com/Wimmics/IndeGx> ;
+                    prov:generatedAtTime  ?time .
+
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_", "Indexation")) AS ?indexationActivity)
+                BIND(NOW() AS ?time)
+            }
+            """
+        ]
+    ) .
