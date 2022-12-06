@@ -70,11 +70,6 @@ kgi:onFailure rdf:type rdf:Property ;
     rdfs:domain mf:ManifestEntry ;
     rdfs:range rdf:List .
 
-kgi:federation rdf:type rdfs:Resource ;
-    rdfs:label "Placeholder endpoint URL to indicate that the query of a rule must be sent to a federation server choosen by the user." ;
-    rdfs:comment "Some tests and actions use the federation server to unload some computation from the described endpoint. The user responsbile for the generation of the description must give a federation server endpoint URL. If no URL is given, the rule is not applied." ;
-    rdfs:domain mf:ManifestEntry .
-
 kgi:DummyTest rdf:type rdf:Class ;
     rdfs:label "Placeholder class for the test of a rule only affecting the index data." ;
     rdfs:isDefinedBy kgi: ;

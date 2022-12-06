@@ -137,55 +137,8 @@
             """
         ]
         <../../meta/modifiedUpdate.ttl>
-    ) ;
-    kgi:onFailure (
-        <graphListCorese.ttl>
     ) .
-
-<graphListCorese.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:endpoint kgi:federation ;
-            kgi:recommendedPagination 1000 ;
-            mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            INSERT {
-                GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphListCorese.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphListCorese.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphListCorese.ttl> ;
-                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                }
-                GRAPH ?curatedDescriptionGraph {
-                    ?endpointDescription sd:availableGraphs ?graphList .
-                    ?datasetDescription sd:namedGraph ?graphResource .
-                    ?graphResource a sd:NamedGraph ;
-                        sd:name ?graph .
-                }
-            }
-            WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
-                    {
-                        SELECT DISTINCT ?graph WHERE {
-                            SERVICE $rawEndpointUrl {
-                                GRAPH ?graph { ?s ?p ?o . }
-                            }
-                        }
-                    }
-                }
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
-                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?graph))), "Graph")) AS ?graphResource)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
-            }"""
-        ]
-        <../../meta/modifiedUpdate.ttl>
-    ) .
-
+    
 <vocabularyList.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
@@ -270,7 +223,6 @@
         kgi:onSuccess (
             [
                 kgi:timeout "PT120S"^^xsd:duration ;
-                kgi:endpoint kgi:federation ;
                 kgi:recommendedPagination 100 ;
                 mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                     PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -318,7 +270,6 @@
             ]
             [
                 kgi:timeout "PT120S"^^xsd:duration ;
-                kgi:endpoint kgi:federation ;
                 kgi:recommendedPagination 100 ;
                 mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                     PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -402,7 +353,7 @@
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-                kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
