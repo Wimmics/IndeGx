@@ -33,33 +33,20 @@ function getSuccessPattern(): Promise<string> {
 
 function sendFailureReportUpdate(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error): Promise<any> {
     return getFailurePattern().then(template => {
-        const query = replacePatternPlaceholders(template, queryString, entryObject, startTime, endTime, error);
+        const query = replacePatternPlaceholders(template, endpointUrl, queryString, entryObject, startTime, endTime, error);
         return Corese.sendUpdate(endpointUrl, query);
     });
 }
 
 function sendSuccessReportUpdate(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs): Promise<any> {
     return getSuccessPattern().then(template => {
-        const query = replacePatternPlaceholders(template, queryString, entryObject, startTime, endTime);
+        const query = replacePatternPlaceholders(template, endpointUrl, queryString, entryObject, startTime, endTime);
         return Corese.sendUpdate(endpointUrl, query);
     });
 }
 
-function replacePatternPlaceholders(template : string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error = undefined): string {
-    var query = template;
-    const queriesStringLiteral = $rdf.literal(queryString);
-    const testStringLiteral = $rdf.sym(entryObject.uri);
-    const startTimeLiteral = $rdf.literal(startTime.toISOString(), XSD("datetime"))
-    const endTimeLiteral = $rdf.literal(endTime.toISOString(), XSD("datetime"))
-    query = replaceall("$query", util.format("%s", queriesStringLiteral.toNT()), query);
-    query = replaceall("$test", testStringLiteral.toNT(), query);
-    query = replaceall("$startTime", startTimeLiteral.toNT(), query);
-    query = replaceall("$endTime", endTimeLiteral.toNT(), query);
-    if(error !== undefined) {
-        const errorStringLiteral = $rdf.literal(JSON.stringify(error));
-        query = replaceall("$reason", errorStringLiteral.toNT(), query);
-    }
-    return template;
+function replacePatternPlaceholders(template : string, endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error = undefined): string {
+    return GlobalUtils.replaceKeywords(template, { endpointUrlString: endpointUrl, queryString:queryString, testString: entryObject.uri, startTime:startTime, endTime:endTime, errorString:error })
 }
 
 export function sendUpdateWithTraceHandling(endpointUrl : string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {

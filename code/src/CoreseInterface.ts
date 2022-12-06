@@ -2,12 +2,13 @@ import { isSparqlAsk, isSparqlConstruct, isSparqlSelect, isSparqlUpdate, sparqlQ
 import * as $rdf from "rdflib";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
+import { replaceKeywords } from "./GlobalUtils.js";
 
 export const coreseServerUrl = "http://localhost:8080/sparql";
 export const coreseDefaultGraphURI = "http://ns.inria.fr/corese/kgram/default";
 
 function rewriteKeywords(endpointUrl: string, queryString: string): string {
-    return queryString.replace(/\$rawEndpointUrl/g, $rdf.sym(endpointUrl).toNT());
+    return replaceKeywords(queryString, { endpointUrlString: endpointUrl });
 }
 
 export function sendUpdate(endpoint: string, queryString: string, timeout?: number) {
@@ -63,7 +64,7 @@ export function sendSelect(endpoint: string, queryString: string, timeout?: numb
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(surroundingQueryObject);
         return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
-                return result;
+            return result;
         }).catch(error => {
             Logger.error(error)
             throw error;
@@ -91,7 +92,7 @@ export function sendAsk(endpoint: string, queryString: string, timeout?: number)
             if (result != undefined && result.boolean != undefined) {
                 return result.boolean;
             } else {
-                throw new Error("Expected boolean property of the JSON result not found for " + queryString  + " sent to " + endpoint);
+                throw new Error("Expected boolean property of the JSON result not found for " + queryString + " sent to " + endpoint);
             }
         }).catch(error => {
             Logger.error(endpoint, queryString, error)

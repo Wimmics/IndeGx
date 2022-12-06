@@ -7,7 +7,7 @@ import * as Logger from "./LogUtils.js"
 import { writeIndex } from "./IndexOutput.js";
 
 Logger.info("Reading manifest tree")
-readRules("/user/pmaillot/home/git/dekalog/rules/manifest.ttl").then(manifests => {
+readRules("/user/pmaillot/home/git/IndeGx/rules/manifest.ttl").then(manifests => {
 // readRules("./testManifest.ttl").then(manifests => {
     Logger.info("Manifest tree read")
     writeFile("manifestTree.json", JSON.stringify(manifests))
