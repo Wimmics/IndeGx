@@ -5,6 +5,7 @@ import * as SPARQLUtils from "./SPARQLUtils.js" ;
 import * as Logger from "./LogUtils.js"
 import dayjs from "dayjs";
 import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling} from "./ReportUtils.js";
+import { replacePlaceholders } from "./QueryRewrite.js";
 
 export function applyRuleTree(endpointUrl: string, manifestObject: RuleTree.Manifest) {
     var applicationPool = [];
@@ -93,6 +94,7 @@ function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: 
         var testQueries = testObject.query;
         var testsPool = [];
         testQueries.forEach(testQuery => {
+            testQuery = replacePlaceholders(testQuery, {endpointUrlString: endpointUrl})
             if (SPARQLUtils.isSparqlAsk(testQuery)) {
                 testsPool.push(sendAskWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(askResult => {
                     if(askResult.error !== undefined) {
@@ -149,6 +151,7 @@ function applyAction(endpointUrl: string, actionObject: RuleTree.Action, entryOb
     var actionUpdatePromiseArgumentsPool = [];
     var actionConstructPromiseArgumentsPool = [];
     actionObject.action.forEach(queryString => {
+        queryString = replacePlaceholders(queryString, {endpointUrlString: endpointUrl})
         if (SPARQLUtils.isSparqlUpdate(queryString)) {
             if (actionObject.timeout != undefined) {
                 const actionTimeout = actionObject.timeout;
