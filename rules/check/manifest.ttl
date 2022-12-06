@@ -23,7 +23,7 @@
         [
             mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX kgi: <http://ns.inria.fr/kgindex#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
                         ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/basicFederatedQuery.ttl#activity> .

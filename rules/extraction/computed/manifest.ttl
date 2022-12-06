@@ -227,7 +227,7 @@
                 mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                     PREFIX prov: <http://www.w3.org/ns/prov#>
                     PREFIX earl: <http://www.w3.org/ns/earl#>
-                    PREFIX kgi: <http://ns.inria.fr/kgindex#>
+                    PREFIX kgi: <http://ns.inria.fr/kg/index#>
                     PREFIX vann: <http://purl.org/vocab/vann/>
                     PREFIX voaf: <http://purl.org/vocommons/voaf#>
                     PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -274,7 +274,7 @@
                 mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                     PREFIX prov: <http://www.w3.org/ns/prov#>
                     PREFIX earl: <http://www.w3.org/ns/earl#>
-                    PREFIX kgi: <http://ns.inria.fr/kgindex#>
+                    PREFIX kgi: <http://ns.inria.fr/kg/index#>
                     PREFIX dcterms: <http://purl.org/dc/terms/>
                     PREFIX vann: <http://purl.org/vocab/vann/>
                     PREFIX voaf: <http://purl.org/vocommons/voaf#>
@@ -324,7 +324,7 @@
         [
             mf:action """PREFIX schema: <https://schema.org/>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX kgi: <http://ns.inria.fr/kgindex#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
                         ?endpointDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/timezone.ttl#activity> .
