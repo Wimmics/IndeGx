@@ -1,16 +1,13 @@
 import * as Corese from "./CoreseInterface.js";
 import * as GlobalUtils from "./GlobalUtils.js";
+import * as Rewrite from "./QueryRewrite.js";
 import * as RuleTree from "./RuleTree.js";
-import * as $rdf from "rdflib";
 import * as SPARQLUtils from "./SPARQLUtils.js";
 import * as Logger from "./LogUtils.js"
-import * as util from "node:util"
 import dayjs from "dayjs";
-import { XSD } from "./RDFUtils.js";
-import replaceall from "replaceall";
 
-export var successTemplateFilename = "templates/generationAssetApplicationFailure.sparql";
-export var failureTemplateFilename = "templates/generationAssetApplicationSuccess.sparql";
+export var successTemplateFilename = "templates/generationAssetApplicationSuccess.sparql";
+export var failureTemplateFilename = "templates/generationAssetApplicationFailure.sparql";
 
 var failurePattern = null;
 var successPattern = null;
@@ -46,7 +43,8 @@ function sendSuccessReportUpdate(endpointUrl: string, queryString: string, entry
 }
 
 function replacePatternPlaceholders(template : string, endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error = undefined): string {
-    return GlobalUtils.replaceKeywords(template, { endpointUrlString: endpointUrl, queryString:queryString, testString: entryObject.uri, startTime:startTime, endTime:endTime, errorString:error })
+    const result = Rewrite.replacePlaceholders(template, { endpointUrlString: endpointUrl, queryString:queryString, testString: entryObject.uri, startTime:startTime, endTime:endTime, reasonString:error });
+    return result;
 }
 
 export function sendUpdateWithTraceHandling(endpointUrl : string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {

@@ -1,13 +1,8 @@
 
 import fetch from 'node-fetch';
 import { RequestInit, HeadersInit } from 'node-fetch';
-import { XSD } from "./RDFUtils.js";
 import * as fs from 'node:fs/promises';
 import * as Logger from "./LogUtils.js"
-import * as $rdf from "rdflib";
-import replaceall from "replaceall";
-import * as util from "node:util"
-import dayjs from "dayjs";
 
 export function appendToFile(filename, content) {
     fs.writeFile(filename, content, { flag: 'a+' }).catch(err => {
@@ -102,40 +97,4 @@ export function fetchJSONPromise(url, otherHeaders = new Map()) {
 export function urlToBaseURI(url: string) {
     const baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
     return baseURI;
-}
-
-export interface KeywordReplacementObject {
-    endpointUrlString: string,
-    queryString?: string,
-    testString?: string,
-    startTime?: dayjs.Dayjs,
-    endTime?: dayjs.Dayjs,
-    errorString?
-}
-
-export function replaceKeywords(inputString: string, keywordReplacementObject: KeywordReplacementObject) {
-    var result = inputString;
-    result = result.replace(/\$rawEndpointUrl/g, $rdf.sym(keywordReplacementObject.endpointUrlString).toNT());
-    if (keywordReplacementObject.queryString !== undefined) {
-        const queriesStringLiteral = $rdf.literal(keywordReplacementObject.queryString);
-        result = replaceall("$query", util.format("%s", queriesStringLiteral.toNT()), result);
-    }
-    if (keywordReplacementObject.testString !== undefined) {
-        const testStringLiteral = $rdf.sym(keywordReplacementObject.testString);
-        result = replaceall("$test", testStringLiteral.toNT(), result);
-    }
-    if (keywordReplacementObject.startTime !== undefined) {
-        const startTimeLiteral = $rdf.literal(keywordReplacementObject.startTime.toISOString(), XSD("datetime"))
-        result = replaceall("$startTime", startTimeLiteral.toNT(), result);
-    }
-    if (keywordReplacementObject.endTime !== undefined) {
-        const endTimeLiteral = $rdf.literal(keywordReplacementObject.endTime.toISOString(), XSD("datetime"))
-        result = replaceall("$endTime", endTimeLiteral.toNT(), result);
-    }
-    if (keywordReplacementObject.errorString !== undefined) {
-        const errorStringLiteral = $rdf.literal(JSON.stringify(keywordReplacementObject.errorString));
-        result = replaceall("$reason", errorStringLiteral.toNT(), result);
-    }
-    Logger.log(result)
-    return result;
 }

@@ -2,17 +2,12 @@ import { isSparqlAsk, isSparqlConstruct, isSparqlSelect, isSparqlUpdate, sparqlQ
 import * as $rdf from "rdflib";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
-import { replaceKeywords } from "./GlobalUtils.js";
+import * as Global from "./GlobalUtils.js";
 
 export const coreseServerUrl = "http://localhost:8080/sparql";
 export const coreseDefaultGraphURI = "http://ns.inria.fr/corese/kgram/default";
 
-function rewriteKeywords(endpointUrl: string, queryString: string): string {
-    return replaceKeywords(queryString, { endpointUrlString: endpointUrl });
-}
-
 export function sendUpdate(endpoint: string, queryString: string, timeout?: number) {
-    queryString = rewriteKeywords(endpoint, queryString);
     if (isSparqlUpdate(queryString)) {
         return sparqlQueryPromise(coreseServerUrl, queryString, timeout).then(result => {
             return result;
@@ -20,11 +15,12 @@ export function sendUpdate(endpoint: string, queryString: string, timeout?: numb
             Logger.error(error)
             throw error;
         });
+    } else {
+        throw new Error("Query is not an update: " + queryString)
     }
 }
 
 export function sendConstruct(endpoint: string, queryString: string, timeout?: number) {
-    queryString = rewriteKeywords(endpoint, queryString);
     var parser = new sparqljs.Parser();
     const parsedQuery = parser.parse(queryString);
     if (isSparqlConstruct(queryString)) {
@@ -50,7 +46,6 @@ export function sendConstruct(endpoint: string, queryString: string, timeout?: n
 }
 
 export function sendSelect(endpoint: string, queryString: string, timeout?: number) {
-    queryString = rewriteKeywords(endpoint, queryString);
     var parser = new sparqljs.Parser();
     const parsedQuery = parser.parse(queryString);
     if (isSparqlSelect(queryString)) {
@@ -75,7 +70,6 @@ export function sendSelect(endpoint: string, queryString: string, timeout?: numb
 }
 
 export function sendAsk(endpoint: string, queryString: string, timeout?: number): Promise<boolean> {
-    queryString = rewriteKeywords(endpoint, queryString);
     if (isSparqlAsk(queryString)) {
         var parser = new sparqljs.Parser();
         const parsedQuery = parser.parse(queryString);
