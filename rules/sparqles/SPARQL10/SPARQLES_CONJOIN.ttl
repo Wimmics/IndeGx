@@ -10,7 +10,7 @@
     dcterms:title "CONSTRUCT query" ;
     dcterms:description "SPARQL CONSTRUCT query with two triple patterns and a join returning an RDF graph of resources and their types." ;
     kgi:query """
-        CONSTRUCT { ?x <http://example.org/type> ?v }
+        CONSTRUCT { <http://nonsensical.com/1> <http://example.org/type> ?v }
         WHERE
         {
         <http://nonsensical.com/1> <http://example.org/type> ?o .
