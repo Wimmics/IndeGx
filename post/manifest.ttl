@@ -1,0 +1,234 @@
+@prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+
+<> a mf:Manifest ;
+    mf:include (
+            # <performance/manifest.ttl>
+            # <equivalences/manifest.ttl>
+            <inclusion/manifest.ttl>
+        ) ;
+    mf:entries (
+        <initialization.ttl>
+    ) .
+
+<initialization.ttl>  a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+            PREFIX owl:        <http://www.w3.org/2002/07/owl#> .
+            PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#> .
+            PREFIX dcat:       <http://www.w3.org/ns/dcat#>.
+            PREFIX foaf:       <http://xmlns.com/foaf/0.1/> .
+            PREFIX prov:       <http://www.w3.org/ns/prov#> .
+            PREFIX schema:		<http://schema.org/> .
+            PREFIX void:       <http://rdfs.org/ns/void#> .
+            PREFIX sd:     	<http://www.w3.org/ns/sparql-service-description#> .
+            PREFIX dct:        <http://purl.org/dc/terms/> .
+            PREFIX skos:       <http://www.w3.org/2004/02/skos/core#> .
+            PREFIX kgi:        <http://ns.inria.fr/kg/index#> .
+            PREFIX virtrdf:	<http://www.openlinksw.com/schemas/virtrdf#> .
+            PREFIX bif:	<bif:> .
+            PREFIX sql:	<sql:> .
+            PREFIX formats:	<http://www.w3.org/ns/formats/> .
+            PREFIX dekalog:	<http://prod-dekalog.inria.fr/> .
+
+            INSERT DATA {
+                kgi:catalogRoot
+                    a   dcat:Dataset, schema:Dataset, void:Dataset, prov:Entity, sd:Dataset ;
+                    dct:title       "IndeGx datasets descriptions"@en ;
+                    dct:description     "This dataset contains les results of IndeGx extraction of descriptions of datasets and endpoints."@en ;
+
+                    foaf:homepage       <http://prod-dekalog.inria.fr> ;
+
+                    dcat:contactPoint   "pierre.maillot@inria.fr" ;
+
+                    dct:creator             <https://orcid.org/0000-0002-9814-439X> ;
+                    dct:publisher           <https://ror.org/0496p8026> , <https://ror.org/02kvxyf05> , <https://ror.org/02feahw73> , <https://team.inria.fr/wimmics/> ;
+                    prov:wasAttributedTo    <https://orcid.org/0000-0002-9814-439X> ;
+                    schema:editor           <https://orcid.org/0000-0002-9814-439X> , <https://orcid.org/0000-0001-9064-0463> , <https://orcid.org/0000-0001-5959-5561> ;
+                    dct:contributor         <https://orcid.org/0000-0001-9064-0463> , <https://orcid.org/0000-0001-5959-5561> ;
+
+                    dct:license     <https://www.gnu.org/licenses/gpl-3.0> ;
+
+                    dct:language        "en" , "de" , "fi" ;
+                    void:vocabulary     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> , <http://www.w3.org/2000/01/rdf-schema#> , <http://www.w3.org/2002/07/owl#> , <http://purl.org/dc/terms/> , <http://www.w3.org/ns/sparql-service-description#> , <http://rdfs.org/ns/void#> , <http://www.w3.org/ns/dcat#> , <http://ns.inria.fr/kg/index#> , <http://www.w3.org/ns/prov#> , <http://schema.org/> , <http://ldf.fi/void-ext#> , <http://creativecommons.org/ns#> , <http://www.w3.org/2004/02/skos/core#> , <http://xmlns.com/foaf/0.1/> , <http://purl.org/dc/elements/1.1/> , <http://www.w3.org/ns/earl#> , <http://spdx.org/rdf/terms#> , <http://www.w3.org/ns/dqv#> , <http://purl.org/nkos/> , <https://schema.org/> , <http://purl.org/goodrelations/v1#> , <http://www.w3.org/ns/hydra/core#> , <http://www.openlinksw.com/schemas/VSPX#> , <http://www.w3.org/2001/vcard-rdf/3.0#> , <http://ldf.fi/schema/ldf/> , <http://www.ebusiness-unibw.org/ontologies/eclass/5.1.4/#> ;
+
+                    prov:wasGeneratedBy     <https://github.com/Wimmics/IndeGx> ;
+
+                    dcat:keyword    "Metadata" , "Quality" ;
+
+                    void:uriSpace           "http://ns.inria.fr/kg/index#" ;
+                    void:uriRegexPattern    "http://ns.inria.fr/kg/index#*" ;
+
+                    void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql> ;
+                    dcat:distribution [
+                        a               dcat:Distribution ;
+                        dct:title       "IndeGx's endpoint" ;
+                        dcat:accessURL  <http://prod-dekalog.inria.fr/sparql> ;
+                        dcat:mediaType  "application/sparql-query" ;
+                        dcat:accessService <http://prod-dekalog.inria.fr/sparql-sd> 
+                    ] ;
+
+                    dcat:service <http://prod-dekalog.inria.fr/sparql-sd> .
+
+                <http://prod-dekalog.inria.fr/sparql-sd>
+                    a sd:Service, dcat:DataService , prov:Entity ;
+                    dcat:servesDataset kgi:catalogRoot ;
+                    sd:availableGraphs kgi:catalogRoot ;
+                    sd:endpoint             dekalog:sparql ;
+                    dcat:endpointUrl        dekalog:sparql ;
+                    dct:creator             <https://orcid.org/0000-0002-9814-439X> , <https://orcid.org/0000-0001-9064-0463> ;
+                    prov:wasAttributedTo    <https://orcid.org/0000-0002-9814-439X> , <https://orcid.org/0000-0001-9064-0463> ;
+                    sd:feature 	sd:UnionDefaultGraph ,
+                            sd:RequiresDataset ,
+                            sd:EmptyGraphs ,
+                            sd:BasicFederatedQuery ;
+                    sd:resultFormat formats:N3 ,
+                            formats:N-triples ,
+                            formats:RDFa ,
+                            formats:RDF_XML ,
+                            formats:SPARQL_Results_XML ,
+                            formats:SPARQL_Results_JSON ,
+                            formats:SPARQL_Results_CSV ,
+                            formats:Turtle ,
+                            virtrdf:FileFormat_SPARQL_Results_HTML ,
+                            virtrdf:FileFormat_SPARQL_Results_Spreadsheet ,
+                            virtrdf:FileFormat_SPARQL_Results_Javascript ,
+                            virtrdf:FileFormat_SPARQL_Results_CXML ,
+                            virtrdf:FileFormat_SPARQL_Results_CXML_QR ,
+                            virtrdf:FileFormat_Triples_RDF_JSON ,
+                            virtrdf:FileFormat_Triples_XHTML_RDFa ,
+                            virtrdf:FileFormat_Triples_ATOM_XML ,
+                            virtrdf:FileFormat_Triples_ODATA_JSON ,
+                            virtrdf:FileFormat_Triples_HTML_list ,
+                            virtrdf:FileFormat_Triples_HTML_table ,
+                            virtrdf:FileFormat_Triples_HTML_Microdata ,
+                            virtrdf:FileFormat_Triples_Microdata_JSON ,
+                            virtrdf:FileFormat_Triples_CSV ,
+                            virtrdf:FileFormat_Triples_CXML ,
+                            virtrdf:FileFormat_Triples_CXML_QR ,
+                            virtrdf:FileFormat_Quads_TriG ;
+                    sd:supportedLanguage sd:SPARQL10Query ,
+                            sd:SPARQL11Query ;
+                    sd:languageExtension	virtrdf:SSG_SD_QUAD_MAP ,
+                        virtrdf:SSG_SD_OPTION ,
+                        virtrdf:SSG_SD_IN ,
+                        virtrdf:SSG_SD_LIKE ,
+                        virtrdf:SSG_SD_GLOBALS ,
+                        virtrdf:SSG_SD_BI ,
+                        virtrdf:SSG_SD_VIRTSPECIFIC ,
+                        virtrdf:SSG_SD_SERVICE ,
+                        virtrdf:SSG_SD_TRANSIT ,
+                        virtrdf:SSG_SD_SPARQL11_DRAFT ;
+                    sd:propertyFeature	bif:contains ;
+                    sd:extensionFunction	bif:abs ;
+                    sd:extensionAggregate	sql:STDDEV .
+
+                <https://ror.org/0496p8026>
+                    a foaf:Organization, prov:Organization;
+                    foaf:name "University Côte d'Azur";
+                    foaf:homepage <https://univ-cotedazur.fr>.
+
+                <https://ror.org/02kvxyf05>
+                    a foaf:Organization, prov:Organization;
+                    foaf:name "Inria";
+                    foaf:homepage <https://www.inria.fr>.
+
+                <https://ror.org/02feahw73>
+                    a foaf:Organization, prov:Organization;
+                    foaf:name "CNRS";
+                    foaf:homepage <https://www.cnrs.fr>.
+
+                <https://team.inria.fr/wimmics/> a foaf:Organization, prov:Organization; 
+                    dct:isPartOf <https://ror.org/02kvxyf05> ;
+                    foaf:name "Wimmics research team".
+
+                <https://orcid.org/0000-0002-9814-439X>
+                    a foaf:Person , prov:Person;
+                    prov:actedOnBehalfOf  <https://team.inria.fr/wimmics/> ;
+                    foaf:name "Pierre MAILLOT" ;
+                    schema:name "Pierre MAILLOT" ;
+                    schema:sameAs <https://cv.archives-ouvertes.fr/pierre-maillot>, <https://www.researchgate.net/profile/Pierre-Maillot> .
+
+                <https://orcid.org/0000-0001-9064-0463>
+                    a foaf:Person, prov:Person;
+                    prov:actedOnBehalfOf  <https://team.inria.fr/wimmics/> ;
+                    foaf:name "Franck MICHEL";
+                    schema:name "Franck MICHEL";
+                    foaf:homepage <https://w3id.org/people/franckmichel>;
+                    schema:sameAs <https://cv.archives-ouvertes.fr/fmichel/>, <https://www.researchgate.net/profile/Franck_Michel3>.
+
+                <https://orcid.org/0000-0001-5959-5561>
+                    a foaf:Person, prov:Person;
+                    prov:actedOnBehalfOf  <https://team.inria.fr/wimmics/> ;
+                    schema:name "Catherine FARON";
+                    foaf:name "Catherine FARON";
+                    foaf:homepage <http://www.i3s.unice.fr/~faron/>;
+                    schema:sameAs <https://cv.archives-ouvertes.fr/catherine-faron-zucker>,
+                        <https://www.researchgate.net/profile/Catherine_Faron-Zucker>.
+
+                <https://github.com/Wimmics/IndeGx> a prov:SoftwareAgent .
+            } 
+            """
+        ]
+    ) .
+
+# <knownVocabularies.ttl> a mf:ManifestEntry ;
+#     kgi:onSuccess (
+#         [
+#             kgi:timeout "PT120S"^^xsd:duration ;
+#             kgi:endpoint kgi:federation ;
+#             kgi:recommendedPagination 10 ;
+#             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+#             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#             PREFIX kgi: <http://ns.inria.fr/kg/index#>
+#             PREFIX prov: <http://www.w3.org/ns/prov#>
+#             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+#             PREFIX voaf: <http://purl.org/vocommons/voaf#>
+#             PREFIX vann: <http://purl.org/vocab/vann/>
+#             PREFIX void: <http://rdfs.org/ns/void#>
+#             INSERT {
+#                 GRAPH ?metadataDescriptionGraph {
+#                     ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/knownVocabularies.ttl#activity> ;
+#                         dqv:hasQualityMeasurement ?endpointknowVocabulariesMeasurement .
+#                     ?endpointknowVocabulariesMeasurement a dqv:QualityMeasurement ;
+#                         rdfs:label "Known vocabularies are used in the dataset."@en ;
+#                         dqv:computedOn ?endpointDescription ;
+#                         dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/knownVocabularies.ttl> ;
+#                         dqv:value ?measure .
+#                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/knownVocabularies.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/knownVocabularies.ttl> ;
+#                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+#                 }
+#             } WHERE {
+#                 {
+#                     SELECT (COUNT(?vocabPrefix) AS ?countUsedVocab) {
+#                         GRAPH ?curatedDescriptionGraph {
+#                             ?datasetDescription void:vocabulary ?vocabPrefix .
+#                         }
+#                     }
+#                 }
+#                 {
+#                     SELECT (COUNT(?vocabPrefix) AS ?countKnownVocab) {
+#                         GRAPH ?curatedDescriptionGraph {
+#                             ?datasetDescription void:vocabulary ?vocabPrefix .
+#                         }
+#                         SERVICE <https://lov.linkeddata.es/dataset/lov/sparql?mode=loop&limit=10> {
+#                             GRAPH <https://lov.linkeddata.es/dataset/lov> {
+#                                 ?vocabURI a voaf:Vocabulary.
+#                                 ?vocabURI vann:preferredNamespaceUri ?vocabPrefix.
+#                             }
+#                         }
+#                     }
+#                 }
+#                 BIND( (?countKnownVocab/?countUsedVocab) AS ?measure)
+#                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/knownVocabularies.ttl")), "Measure")) AS ?endpointknowVocabulariesMeasurement)
+#                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+#                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+#                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+#                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+#                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+#             }
+#             """
+#         ]
+#     ) .
