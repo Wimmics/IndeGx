@@ -14,15 +14,16 @@ export interface ManifestEntry {
 
 export interface Test {
     uri: string;
-    query?: Array<string> | undefined;
-    description?: Array<string> | undefined;
-    title?: Array<string> | undefined;
+    query?: Array<string>;
+    description?: Array<string>;
+    title?: Array<string>;
 }
 
 export interface Action {
-    endpoint?: string | undefined;
-    timeout?: number | undefined;
+    endpoint?: string;
+    timeout?: number;
     pagination?: number;
+    title?: Array<string>;
     action: Array<string>;
 }
 

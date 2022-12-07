@@ -152,6 +152,10 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                 const pagination = Number.parseInt(paginationString);
                 actionObject.pagination = pagination;
             }
+            if(store.holds(actionNode, dctTitle, null)) {
+                const titles = store.statementsMatching(actionNode, dctTitle, null).map(statement => statement.object.value);
+                actionObject.title = titles;
+            }
 
             return actionObject;
         }
