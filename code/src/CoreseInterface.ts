@@ -85,6 +85,8 @@ export function sendAsk(endpoint: string, queryString: string, timeout?: number)
         return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
             if (result != undefined && result.boolean != undefined) {
                 return result.boolean;
+            } else if(result != undefined && result.boolean == undefined) {
+                return result;
             } else {
                 throw new Error("Expected boolean property of the JSON result not found for " + queryString + " sent to " + endpoint);
             }
