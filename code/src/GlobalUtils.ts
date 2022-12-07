@@ -1,8 +1,11 @@
-
-import fetch from 'node-fetch';
+import fetch, { FetchError } from 'node-fetch';
 import { RequestInit, HeadersInit } from 'node-fetch';
 import * as fs from 'node:fs/promises';
+import { setTimeout } from 'node:timers/promises';
 import * as Logger from "./LogUtils.js"
+
+const nbFetchRetries = 10;
+const millisecondsBetweenRetries = 5000;
 
 export function appendToFile(filename, content) {
     fs.writeFile(filename, content, { flag: 'a+' }).catch(err => {
@@ -43,7 +46,7 @@ export function iterativePromises(args: Array<Array<any>>, promiseCreationFuncti
     return new Promise<void>((resolve, reject) => resolve());
 }
 
-export function fetchPromise(url, header = new Map(), method = "GET", query = "") {
+export function fetchPromise(url, header = new Map(), method = "GET", query = "", numTry = 0) {
     var myHeaders = new Map();
     myHeaders.set('pragma', 'no-cache');
     myHeaders.set('cache-control', 'no-cache');
@@ -67,6 +70,18 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
             } else {
                 throw response;
             }
+        }).catch(error => {
+            if(error instanceof FetchError) {
+                Logger.error(error.type, error.message)
+                Logger.info("Try:",numTry, "Fetch " , method , url , query );
+                if(numTry < nbFetchRetries) {
+                    return setTimeout(millisecondsBetweenRetries).then(fetchPromise(url, header, method, query, numTry+1));
+                } else {
+                    throw error;
+                }
+            } else {
+                throw error;
+            }
         });
 }
 
@@ -88,7 +103,7 @@ export function fetchJSONPromise(url, otherHeaders = new Map()) {
         try {
             return JSON.parse(response);
         } catch (error) {
-            Logger.error(url, error, JSON.stringify(response))
+            Logger.error(url, error, response)
             throw error
         }
     });
