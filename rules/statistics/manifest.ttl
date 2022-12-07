@@ -246,7 +246,7 @@
                         }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?class))), "Partition")) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?class))), "ClassPartition")) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
@@ -584,7 +584,6 @@
                 }
             """
         ]
-        <../meta/inclusionByClasses.ttl>
         <sportalClassPartitionTriples.ttl>
     ) .
 
@@ -616,7 +615,7 @@
                         }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), MD5(str(?c)))) AS ?classPartition)
+  					BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))) , "ClassPartition" )) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
@@ -966,7 +965,6 @@
         <sportalPropertyPartitionTriples.ttl>
         <sportalPropertyPartitionDistinctSubject.ttl>
         <sportalPropertyPartitionDistinctObject.ttl>
-        <../meta/inclusionByProperties.ttl>
     ) .
 
 <sportalPropertyPartitionTriples.ttl> a mf:ManifestEntry ;

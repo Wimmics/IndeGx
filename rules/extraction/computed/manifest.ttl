@@ -91,7 +91,6 @@
         """
     ]
     <../../meta/modifiedUpdate.ttl>
-    <../../meta/inclusionByDatatypes.ttl>
 ) .
 
 <graphList.ttl> a mf:ManifestEntry ;
@@ -212,7 +211,6 @@
             """
         ]
         <vocabularyListLOV.ttl>
-        <../../meta/inclusionByVocabularies.ttl>
         <../../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
@@ -423,7 +421,6 @@
         """
         ]
         <../../meta/modifiedUpdate.ttl>
-        <../../meta/inclusionByResourceHostname.ttl>
     ) .
 
 <sameAs.ttl> a mf:ManifestEntry ;
