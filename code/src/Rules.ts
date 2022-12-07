@@ -20,6 +20,8 @@ const kgiTimeoutProperty = KGI("timeout");
 const kgiPaginationProperty = KGI("recommendedPagination");
 const kgiTestQueryType = KGI("TestQuery");
 const kgiDummyTestType = KGI("DummyTest");
+const dctTitle = DCT("title");
+const dctDescription = DCT("description");
 
 export function readRules(rootManifest: string): Promise<Manifest[]> {
     var store = createStore();
@@ -113,12 +115,12 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
         if (store.holds(generationAssetResource, rdfTypeProperty, kgiTestQueryType)) {
             const sparqlQueries = store.statementsMatching(generationAssetResource, kgiQueryProperty, null).map(statement => statement.object.value);
             var descriptions = [];
-            if (store.holds(generationAssetResource, DCT("description"), null)) {
-                descriptions = store.statementsMatching(generationAssetResource, DCT("description"), null).map(statement => statement.object.value);
+            if (store.holds(generationAssetResource, dctDescription, null)) {
+                descriptions = store.statementsMatching(generationAssetResource, dctDescription, null).map(statement => statement.object.value);
             }
             var titles = [];
-            if (store.holds(generationAssetResource, DCT("title"), null)) {
-                titles = store.statementsMatching(generationAssetResource, DCT("title"), null).map(statement => statement.object.value);
+            if (store.holds(generationAssetResource, dctTitle, null)) {
+                titles = store.statementsMatching(generationAssetResource, dctTitle, null).map(statement => statement.object.value);
             }
             var gaTest: Test = {
                 uri: generationAssetResource.uri,

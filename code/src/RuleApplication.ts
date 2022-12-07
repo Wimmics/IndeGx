@@ -1,41 +1,41 @@
-import * as Corese from "./CoreseInterface.js";
-import * as GlobalUtils from "./GlobalUtils.js"; 
+import * as Global from "./GlobalUtils.js";
 import * as RuleTree from "./RuleTree.js";
-import * as SPARQLUtils from "./SPARQLUtils.js" ;
+import * as SPARQLUtils from "./SPARQLUtils.js";
 import * as Logger from "./LogUtils.js"
 import dayjs from "dayjs";
-import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling} from "./ReportUtils.js";
+import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling } from "./ReportUtils.js";
 import { replacePlaceholders } from "./QueryRewrite.js";
 
 export function applyRuleTree(endpointUrl: string, manifestObject: RuleTree.Manifest) {
-    var applicationPool = [];
+    var subTreeApplicationPool = [];
+    var entriesApplicationPool = [];
     try {
         manifestObject.includes.forEach(subManifest => {
-            applicationPool.push(applyRuleTree(endpointUrl, subManifest).catch(error => Logger.error(error)));
+            subTreeApplicationPool.push(applyRuleTree(endpointUrl, subManifest).catch(error => Logger.error(error)));
         });
         manifestObject.entries.forEach(entry => {
-            applicationPool.push(applyGenerationAsset(endpointUrl, entry).catch(error => Logger.error(error)));
+            entriesApplicationPool.push([endpointUrl, entry])
         })
     } catch (error) {
         Logger.error(error)
     }
-    return Promise.allSettled(applicationPool).catch(error => {
+    return Global.iterativePromises(entriesApplicationPool, applyGenerationAsset).then(() => Promise.allSettled(subTreeApplicationPool)).catch(error => {
         Logger.error(error)
     });
 }
 
 function applyGenerationAsset(endpointUrl: string, entryObject: RuleTree.ManifestEntry) {
     return applyTest(endpointUrl, entryObject.test, entryObject).then(success => {
-        if(entryObject.test != undefined && ! RuleTree.isDummyTest(entryObject.test)) {
-            Logger.info(endpointUrl, "Test " , entryObject.test.uri, "finished")
+        if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
+            Logger.info(endpointUrl, "Test ", entryObject.test.uri, "finished")
         }
         var actionPool = [];
         if (success) {
-            if(entryObject.test != undefined && ! RuleTree.isDummyTest(entryObject.test)) {
-                Logger.info(endpointUrl,"Test " , entryObject.test.uri, "succeeded")
+            if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
+                Logger.info(endpointUrl, "Test ", entryObject.test.uri, "succeeded")
             }
-            if(entryObject.actionsSuccess.length > 0) {
-                Logger.info(endpointUrl, "Starting", entryObject.actionsSuccess.length, "success actions for " , entryObject.uri)
+            if (entryObject.actionsSuccess.length > 0) {
+                Logger.info(endpointUrl, "Starting", entryObject.actionsSuccess.length, "success actions for ", entryObject.uri)
                 entryObject.actionsSuccess.forEach(action => {
                     if (RuleTree.isManifestEntry(action)) {
                         const followUpEntry = action as RuleTree.ManifestEntry;
@@ -52,15 +52,15 @@ function applyGenerationAsset(endpointUrl: string, entryObject: RuleTree.Manifes
                     }
                 })
             } else {
-                Logger.info(endpointUrl, "No success actions for " , entryObject.uri)
+                Logger.info(endpointUrl, "No success actions for ", entryObject.uri)
             }
         } else {
-            if(entryObject.test != undefined) {
-                Logger.info(endpointUrl,"Test " , entryObject.test.uri, "failed")
+            if (entryObject.test != undefined) {
+                Logger.info(endpointUrl, "Test ", entryObject.test.uri, "failed")
             }
             var actionPool = [];
-            if(entryObject.actionsFailure.length > 0) {
-                Logger.info(endpointUrl, "Starting", entryObject.actionsFailure.length, "failure actions for " , entryObject.uri)
+            if (entryObject.actionsFailure.length > 0) {
+                Logger.info(endpointUrl, "Starting", entryObject.actionsFailure.length, "failure actions for ", entryObject.uri)
                 entryObject.actionsFailure.forEach(action => {
                     if (RuleTree.isManifestEntry(action)) {
                         const followUpEntry = action as RuleTree.ManifestEntry;
@@ -77,27 +77,27 @@ function applyGenerationAsset(endpointUrl: string, entryObject: RuleTree.Manifes
                     }
                 })
             } else {
-                Logger.info(endpointUrl, "No failure actions for " , entryObject.uri)
+                Logger.info(endpointUrl, "No failure actions for ", entryObject.uri)
             }
         }
         return Promise.allSettled(actionPool).then(() => {
-            Logger.info(endpointUrl, "Finished actions for " , entryObject.uri)
+            Logger.info(endpointUrl, "Finished actions for ", entryObject.uri)
         }).catch(error => {
             Logger.error(error)
-        }) ;
+        });
     })
 }
 
 function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry): Promise<boolean> {
     const startTime = dayjs();
-    if (testObject != undefined && RuleTree.isTest(testObject) && ! RuleTree.isDummyTest(testObject)) {
+    if (testObject != undefined && RuleTree.isTest(testObject) && !RuleTree.isDummyTest(testObject)) {
         var testQueries = testObject.query;
         var testsPool = [];
         testQueries.forEach(testQuery => {
-            testQuery = replacePlaceholders(testQuery, {endpointUrlString: endpointUrl})
+            testQuery = replacePlaceholders(testQuery, { endpointUrlString: endpointUrl })
             if (SPARQLUtils.isSparqlAsk(testQuery)) {
                 testsPool.push(sendAskWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(askResult => {
-                    if(askResult.error !== undefined) {
+                    if (askResult.error !== undefined) {
                         return false;
                     } else {
                         return askResult;
@@ -105,23 +105,23 @@ function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: 
                 }).finally(() => false));
             } else if (SPARQLUtils.isSparqlSelect(testQuery)) {
                 testsPool.push(sendSelectWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(selectResult => {
-                    if(selectResult.error !== undefined) {
+                    if (selectResult.error !== undefined) {
                         return false;
                     } else {
                         return true;
                     }
                 }).finally(() => false));
-            } else if(SPARQLUtils.isSparqlConstruct(testQuery)) {
+            } else if (SPARQLUtils.isSparqlConstruct(testQuery)) {
                 testsPool.push(sendConstructWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(constructResult => {
-                    if(constructResult.error !== undefined) {
+                    if (constructResult.error !== undefined) {
                         return false;
                     } else {
                         return true;
                     }
                 }).finally(() => false));
-            } else if(SPARQLUtils.isSparqlUpdate(testQuery)) {
+            } else if (SPARQLUtils.isSparqlUpdate(testQuery)) {
                 testsPool.push(sendUpdateWithTraceHandling(endpointUrl, testQuery, entryObject, startTime).then(updateResponse => {
-                    if(updateResponse.error !== undefined) {
+                    if (updateResponse.error !== undefined) {
                         return false;
                     } else {
                         return true;
@@ -131,7 +131,7 @@ function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: 
         })
         return Promise.allSettled(testsPool).then(resultPromises => {
             return resultPromises.map(settledObject => {
-                if(settledObject.status.localeCompare("fulfilled") == 0) {
+                if (settledObject.status.localeCompare("fulfilled") == 0) {
                     return (settledObject as PromiseFulfilledResult<boolean>).value
                 } else {
                     return false;
@@ -143,7 +143,7 @@ function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: 
     }
 }
 
-function applyAction(endpointUrl: string, actionObject: RuleTree.Action, entryObject: RuleTree.ManifestEntry) : Promise<any> {
+function applyAction(endpointUrl: string, actionObject: RuleTree.Action, entryObject: RuleTree.ManifestEntry): Promise<any> {
     const startTime = dayjs();
     if (actionObject.endpoint != undefined) {
         endpointUrl = actionObject.endpoint
@@ -151,7 +151,7 @@ function applyAction(endpointUrl: string, actionObject: RuleTree.Action, entryOb
     var actionUpdatePromiseArgumentsPool = [];
     var actionConstructPromiseArgumentsPool = [];
     actionObject.action.forEach(queryString => {
-        queryString = replacePlaceholders(queryString, {endpointUrlString: endpointUrl})
+        queryString = replacePlaceholders(queryString, { endpointUrlString: endpointUrl })
         if (SPARQLUtils.isSparqlUpdate(queryString)) {
             if (actionObject.timeout != undefined) {
                 const actionTimeout = actionObject.timeout;
@@ -160,7 +160,7 @@ function applyAction(endpointUrl: string, actionObject: RuleTree.Action, entryOb
             } else {
                 actionUpdatePromiseArgumentsPool.push([endpointUrl, queryString]);
             }
-        } else if(SPARQLUtils.isSparqlConstruct(queryString)) {
+        } else if (SPARQLUtils.isSparqlConstruct(queryString)) {
             actionConstructPromiseArgumentsPool.push([endpointUrl, queryString]);
         } else {
             throw new Error("Expecting Update action for " + JSON.stringify(actionObject));
@@ -175,7 +175,7 @@ function applyAction(endpointUrl: string, actionObject: RuleTree.Action, entryOb
         return sendConstructWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout);
     }
 
-    var actionPool = [GlobalUtils.iterativePromises(actionUpdatePromiseArgumentsPool, updateWithTraceHandling)]
-    actionPool.push(GlobalUtils.iterativePromises(actionConstructPromiseArgumentsPool, constructWithTraceHandling))
+    var actionPool = [Global.iterativePromises(actionUpdatePromiseArgumentsPool, updateWithTraceHandling)]
+    actionPool.push(Global.iterativePromises(actionConstructPromiseArgumentsPool, constructWithTraceHandling))
     return Promise.allSettled(actionPool);
 }

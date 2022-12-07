@@ -1,4 +1,4 @@
-import { fetchJSONPromise, fetchPOSTPromise, fetchPromise } from "./GlobalUtils.js";
+import { fetchJSONPromise, fetchPOSTPromise } from "./GlobalUtils.js";
 import * as sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
 
