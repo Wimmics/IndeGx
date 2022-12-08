@@ -89,6 +89,7 @@ function applyGenerationAsset(endpointUrl: string, entryObject: RuleTree.Manifes
 }
 
 function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry): Promise<boolean> {
+    Logger.info(endpointUrl, "Test ", entryObject.test.uri, "starting")
     const startTime = dayjs();
     if (testObject != undefined && RuleTree.isTest(testObject) && !RuleTree.isDummyTest(testObject)) {
         var testQueries = testObject.query;
