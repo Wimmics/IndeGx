@@ -21,6 +21,11 @@ kgi: dcterms:creator "Pierre Maillot" ;
     dcterms:format "RDF" ;
     dcterms:identifier kgi: .
 
+kgi:catalogRoot rdf:type rdfs:Resource ;
+    rdfs:label "Root of a catalog." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:comment "Default resource used to represent the catalog at the root of the index." .
+
 kgi:original rdf:type rdf:Property ;
     rdfs:label "Original description resources." ;
     rdfs:comment "Description resources connected to the endpoint URL extracted from the KB"@en ;
@@ -76,16 +81,21 @@ kgi:DummyTest rdf:type rdf:Class ;
     rdfs:comment "Some tests and actions are 'meta' rules that do not need interaction with remote endpoints. This class is for a test that always succeed for these rules." ;
     rdfs:subClassOf earl:TestCase .
 
-kgi:catalogRoot rdf:type rdfs:Resource ;
-    rdfs:label "Root of a catalog." ;
-    rdfs:isDefinedBy kgi: ;
-    rdfs:comment "Default resource used to represent the catalog at the root of the index." .
+# properties to give parameter to the indexation
 
 kgi:timeout rdf:type rdf:Property ;
     rdfs:label "Specify a timeout for a test or action." ;
     rdfs:isDefinedBy kgi: ;
     rdfs:comment "Queries sent during test and actions may need a specific timeout, generally longer than normal. This property specify the timeout for a test or an action." ;
     rdfs:range xsd:duration .
+
+kgi:recommendedPagination rdf:type rdf:Property ;
+    rdfs:label "Recommended size for pagination during retrieval of the results of the actions" ;
+    rdfs:comment "This indicates the size of the page to use in the actions queries." ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:range xsd:integer .
+
+# Pseudo-partitions and linksets
 
 kgi:linkset rdf:type rdf:Property ;
     rdfs:label "Link a dataset description to the linkset that were retrieved during its indexation" ;
@@ -113,8 +123,60 @@ kgi:vocabularyPartition rdf:type rdf:Property ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain void:Dataset .
 
-kgi:recommendedPagination rdf:type rdf:Property ;
-    rdfs:label "Recommended size for pagination during retrieval of the results of the actions" ;
-    rdfs:comment "This indicates the size of the page to use in the actions queries." ;
-    rdfs:isDefinedBy kgi: ;
-    rdfs:range xsd:integer .
+# Description of the common elements between datasets
+
+kgi:CommonalityDescription rdf:type rdf:Class ;
+    rdf:label "";
+    rdfs:comment "";
+    rdfs:isDefinedBy kgi: .
+
+kgi:VocabularyCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:ClassCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:PropertyCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:ResourceHostnameCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:vocabulary rdf:type rdf:Property ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:domain kgi:VocabularyCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:class rdf:type rdf:Property ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:domain kgi:ClassCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:property rdf:type rdf:Property ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:domain kgi:PropertyCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:resourceHostname rdf:type rdf:Property ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:domain kgi:ResourceHostnameCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:dataset rdf:type rdf:Property ;
+    rdf:label "" ;
+    rdfs:comment "" ;
+    rdfs:domain kgi:CommonalityDescription ;
+    rdfs:range void:Dataset ;
+    rdfs:isDefinedBy kgi: .
