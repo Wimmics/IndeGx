@@ -11,27 +11,29 @@
     dcterms:description "Extraction of an endpoint description resource from the example endpointif it describes a 'localhost' endpoint." ;
     kgi:query """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
         ASK {
-            {
+            SERVICE $rawEndpointUrl {
                 {
-                    ?res sd:endpoint ?endpointUrl .
-                    FILTER(CONTAINS(str(?endpointUrl), "localhost"))
-                }
-                UNION {
-                    GRAPH ?g {
+                    {
                         ?res sd:endpoint ?endpointUrl .
                         FILTER(CONTAINS(str(?endpointUrl), "localhost"))
                     }
-                }
-            }
-            UNION {
-                {
-                    ?res sd:endpoint ?endpointUrl .
-                    FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                    UNION {
+                        GRAPH ?g {
+                            ?res sd:endpoint ?endpointUrl .
+                            FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                        }
+                    }
                 }
                 UNION {
-                    GRAPH ?g {
+                    {
                         ?res sd:endpoint ?endpointUrl .
                         FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                    }
+                    UNION {
+                        GRAPH ?g {
+                            ?res sd:endpoint ?endpointUrl .
+                            FILTER(CONTAINS(str(?endpointUrl), "localhost"))
+                        }
                     }
                 }
             }

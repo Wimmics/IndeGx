@@ -12,10 +12,12 @@
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             ASK {
-                {
-                    SELECT (count(?o) AS ?value) WHERE {
-                        ?s ?p ?o .
-                        FILTER(isLiteral(?o))
+                SERVICE $rawEndpointUrl { 
+                    {
+                        SELECT (count(?o) AS ?value) WHERE {
+                            ?s ?p ?o .
+                            FILTER(isLiteral(?o))
+                        }
                     }
                 }
             } """

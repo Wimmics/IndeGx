@@ -11,5 +11,10 @@
     dcterms:title "Multiple languages quality test"@en ;
 	dcterms:description "The proportion of literal with at least one language tag." ;
     kgi:query """ASK {
-        ?sWithLang ?pWithLang ?litWithLang . FILTER( isLiteral(?litWithLang) ) FILTER(lang(?litWithLang) != "")
-    }""" .
+            SERVICE $rawEndpointUrl {
+                ?sWithLang ?pWithLang ?litWithLang . 
+                FILTER( isLiteral(?litWithLang) ) 
+                FILTER(lang(?litWithLang) != "")
+            }
+        }
+    """ .

@@ -9,4 +9,5 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a single-triple pattern returning no results (using a non existing URI)." ;
-    kgi:query """SELECT * WHERE { ?s <http://example.org/type> <http://nonsensical.com/1> } LIMIT 10"""  .
+    kgi:query """SELECT * WHERE { 
+            SERVICE $rawEndpointUrl { ?s <http://example.org/type> <http://nonsensical.com/1> } } LIMIT 10"""  .

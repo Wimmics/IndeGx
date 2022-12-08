@@ -7,7 +7,13 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query selecting using the average aggregate function" ;
-    kgi:query """SELECT (AVG(?o) AS ?avg)
-        WHERE {
-        	<http://nonsensical.com/1> ?p ?o
-        } LIMIT 10"""  .
+    kgi:query """ASK {
+            SERVICE $rawEndpointUrl {
+                { 
+                    SELECT (AVG(?o) AS ?avg)
+                    WHERE {
+                        <http://nonsensical.com/1> ?p ?o
+                    } LIMIT 10 
+                }
+            }
+        } """  .

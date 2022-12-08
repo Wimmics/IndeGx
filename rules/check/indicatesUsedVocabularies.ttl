@@ -11,5 +11,8 @@
     dcterms:title "Test the presence of the list of vocabularies"@en ;
     kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
         ASK {
-        ?desc void:vocabulary ?vocab .
+            SERVICE $rawEndpointUrl {
+                { ?desc void:vocabulary ?vocab . }
+                UNION { GRAPH ?g { ?desc void:vocabulary ?vocab . } }
+            }
     }""" .

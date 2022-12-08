@@ -14,5 +14,7 @@
     kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
         ASK {
-            ?s owl:sameAs ?o .
+            SERVICE $rawEndpointUrl {
+                ?s owl:sameAs ?o .
+            }
         }""" .

@@ -14,14 +14,16 @@
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             ASK {
-                ?res void:properties ?extractedValue .
-                ?res ?p $rawEndpointUrl .
-                { ?res a dcat:Dataset }
-                UNION { ?res a void:Dataset }
-                {
-                    SELECT (count(DISTINCT ?p) AS ?value) WHERE {
-                        ?s ?p ?o .
+                SERVICE $rawEndpointUrl { 
+                    ?res void:properties ?extractedValue .
+                    ?res ?p $rawEndpointUrl .
+                    { ?res a dcat:Dataset }
+                    UNION { ?res a void:Dataset }
+                    {
+                        SELECT (count(DISTINCT ?p) AS ?value) WHERE {
+                            ?s ?p ?o .
+                        }
                     }
+                    FILTER ( ?value != ?extractedValue )
                 }
-                FILTER ( ?value != ?extractedValue )
             } """ .

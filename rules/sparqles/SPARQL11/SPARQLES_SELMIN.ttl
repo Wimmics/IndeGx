@@ -7,8 +7,14 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query using the MIN average function" ;
-    kgi:query """SELECT (MIN(?o) AS ?min)
-        WHERE {
-        	<http://nonsensical.com/1> <http://example.org/type>  ?o
-        }
-        LIMIT 10"""  .
+    kgi:query """ASK {
+            SERVICE $rawEndpointUrl { 
+                {
+                    SELECT (MIN(?o) AS ?min)
+                    WHERE {
+                        <http://nonsensical.com/1> <http://example.org/type>  ?o
+                    }
+                    LIMIT 10
+                }
+            }
+        }"""  .

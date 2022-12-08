@@ -10,5 +10,7 @@
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a GRAPH operator and a single triple pattern" ;
     kgi:query """SELECT * {
-            GRAPH ?g { <http://nonsensical.com/1> <http://example.org/type> ?o }
+            SERVICE $rawEndpointUrl {
+                GRAPH ?g { <http://nonsensical.com/1> <http://example.org/type> ?o }
+            }
         } LIMIT 10"""  .

@@ -9,4 +9,5 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a UNION of two triple patterns" ;
-    kgi:query """SELECT * WHERE { {?s <http://example.org/type> <http://example.org/thing>} UNION {?s <http://example.org/type> <http://example.org/string>}} LIMIT 10"""  .
+    kgi:query """SELECT * WHERE { 
+            SERVICE $rawEndpointUrl { {?s <http://example.org/type> <http://example.org/thing>} UNION {?s <http://example.org/type> <http://example.org/string>} } } LIMIT 10"""  .

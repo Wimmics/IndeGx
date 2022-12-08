@@ -9,4 +9,5 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a single-triple pattern and a FILTER operator filtering for variables being an IRI" ;
-    kgi:query """SELECT * WHERE { <http://nonsensical.com/1> <http://example.org/type> ?v . FILTER isIRI(?v) . } LIMIT 10"""  .
+    kgi:query """SELECT * WHERE { 
+            SERVICE $rawEndpointUrl { <http://nonsensical.com/1> <http://example.org/type> ?v . FILTER isIRI(?v) . } } LIMIT 10"""  .

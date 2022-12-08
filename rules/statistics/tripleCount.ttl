@@ -13,9 +13,11 @@
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             ASK
             WHERE {
-                {
-                    SELECT (count(*) AS ?value) WHERE {
-                        ?s ?p ?o .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT (count(*) AS ?value) WHERE {
+                            ?s ?p ?o .
+                        } LIMIT 1
                     }
                 }
             } """

@@ -13,5 +13,7 @@
         CONSTRUCT { <http://nonsensical.com/1> <http://example.org/type> ?o }
         WHERE
         {
-          <http://nonsensical.com/1> <http://example.org/type> ?o .
+          SERVICE $rawEndpointUrl {
+            <http://nonsensical.com/1> <http://example.org/type> ?o .
+          }
         } LIMIT 10"""  .

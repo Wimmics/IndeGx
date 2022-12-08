@@ -7,10 +7,11 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query using the MINUS operator" ;
-    kgi:query """SELECT *
-        WHERE
-        {	<http://nonsensical.com/1> <http://example.org/type> ?type .
-        	MINUS {
-        		?type <http://example.org/sameAs> ?same
-        	}
+    kgi:query """SELECT * {
+            SERVICE $rawEndpointUrl { 
+                <http://nonsensical.com/1> <http://example.org/type> ?type .
+                MINUS {
+                    ?type <http://example.org/sameAs> ?same
+                }
+            }
         } LIMIT 10"""  .

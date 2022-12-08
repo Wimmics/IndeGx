@@ -9,5 +9,11 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a single-triple pattern and a FROM NAMED clause" ;
-    kgi:query """SELECT * FROM <http://non.default.graph.com/graph1>
-        FROM NAMED <http://non.default.graph.com/graph2> { <http://nonsensical.com/1> <http://example.org/type> ?o } LIMIT 10"""  .
+    kgi:query """
+        SELECT * 
+        FROM <http://non.default.graph.com/graph1>
+        FROM NAMED <http://non.default.graph.com/graph2> { 
+            SERVICE $rawEndpointUrl { 
+                <http://nonsensical.com/1> <http://example.org/type> ?o 
+            }
+        } LIMIT 10 """  .

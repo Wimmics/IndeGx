@@ -9,8 +9,11 @@
     dcterms:description "SPARQL 1.1 SELECT query filtering for non existing triple patterns (FILTER NOT EXISTS operator)" ;
     kgi:query """SELECT *
         WHERE
-        {	?s <http://example.org/type> <http://example.org/thing> .
-        	FILTER NOT EXISTS {
-        		?s <http://example.org/sameAs> <http://nonsensical.com/1>
-        	}
+        {	
+            SERVICE $rawEndpointUrl { 
+                ?s <http://example.org/type> <http://example.org/thing> .
+                FILTER NOT EXISTS {
+                    ?s <http://example.org/sameAs> <http://nonsensical.com/1>
+                }
+            }
         } LIMIT 10"""  .

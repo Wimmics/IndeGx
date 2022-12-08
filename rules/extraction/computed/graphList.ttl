@@ -10,5 +10,7 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     kgi:query """ASK
         WHERE {
-            GRAPH ?graph { ?s ?p ?o }
+            SERVICE $rawEndpointUrl {
+                GRAPH ?graph { ?s ?p ?o }
+            }
         }""" .

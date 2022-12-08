@@ -9,5 +9,7 @@
     dcterms:title "ASK query" ;
     dcterms:description "SPARQL ASK." ;
     kgi:query """ASK {
-    ?s ?p ?o
+            SERVICE $rawEndpointUrl {
+            ?s ?p ?o
+        }
     }"""  .

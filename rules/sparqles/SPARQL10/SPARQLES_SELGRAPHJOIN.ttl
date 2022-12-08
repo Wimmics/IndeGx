@@ -10,6 +10,8 @@
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a join of two triple patterns using GRAPH in one of the triple patterns" ;
     kgi:query """SELECT * {
-          <http://nonsensical.com/1> <http://example.org/type> ?o .
-            GRAPH ?g { ?o <http://example.org/type> ?q }
+            SERVICE $rawEndpointUrl {
+              <http://nonsensical.com/1> <http://example.org/type> ?o .
+              GRAPH ?g { ?o <http://example.org/type> ?q }
+            }
         } LIMIT 10"""  .

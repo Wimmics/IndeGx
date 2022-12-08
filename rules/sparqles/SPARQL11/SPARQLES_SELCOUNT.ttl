@@ -7,7 +7,14 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query using the COUNT counting function" ;
-    kgi:query """SELECT (COUNT(?o) AS ?count)
-        WHERE {
-        	<http://nonsensical.com/1> <http://example.org/type> ?o
-        } LIMIT 10"""  .
+    kgi:query """ASK {
+            SERVICE $rawEndpointUrl { 
+                {
+                    SELECT (COUNT(?o) AS ?count)
+                    WHERE {
+                        <http://nonsensical.com/1> <http://example.org/type> ?o
+                    } LIMIT 10
+                }
+            }
+        }
+        """  .

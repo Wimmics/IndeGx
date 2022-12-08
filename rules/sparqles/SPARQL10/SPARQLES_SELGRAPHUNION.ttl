@@ -11,7 +11,9 @@
     dcterms:description "SPARQL SELECT query with a UNION of two triple patterns using GRAPH in one of the union sides" ;
     kgi:query """SELECT *
         {
-           { <http://nonsensical.com/1> <http://example.org/type> ?o }
-          UNION
-           { GRAPH ?g { ?s <http://example.org/type> ?o } }
+            SERVICE $rawEndpointUrl {
+                { <http://nonsensical.com/1> <http://example.org/type> ?o }
+                UNION
+                { GRAPH ?g { ?s <http://example.org/type> ?o } }
+           }
         } LIMIT 10"""  .

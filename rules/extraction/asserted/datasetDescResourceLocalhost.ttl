@@ -14,6 +14,7 @@
     kgi:query """PREFIX dcat: <http://www.w3.org/ns/dcat#>
         PREFIX void: <http://rdfs.org/ns/void#>
         ASK  {
+            SERVICE $rawEndpointUrl {
                 {
                     FILTER(CONTAINS(str(?endpointUrl), "localhost"))
                     { ?res a dcat:Dataset }
@@ -32,4 +33,5 @@
                     { ?res ?p ?endpointUrl }
                     UNION { GRAPH ?g { ?res ?p ?endpointUrl } } .
                 }
+            }
         }""" .

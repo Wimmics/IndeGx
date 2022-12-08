@@ -8,5 +8,4 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Test of the Linked Open Vocabulary endpoint reachability"@en ;
-    kgi:endpoint <https://lov.linkeddata.es/dataset/lov/sparql> ;
-    kgi:query """ASK WHERE { ?s ?p ?o }""" .
+    kgi:query """ASK { SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> { ?s ?p ?o } }""" .

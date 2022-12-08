@@ -9,11 +9,8 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Extraction of the counts of instances for each classes."@en ;
     kgi:timeout "PT120S"^^xsd:duration ;
-    kgi:query """SELECT ?class (count(?instance) AS ?count) WHERE {
-        SELECT DISTINCT ?class ?instance
-        
-        WHERE {
-            ?instance a ?class .
-        }
-    }
-    GROUP BY ?class""" .
+    kgi:query """ASK {
+            SERVICE $rawEndpointUrl { 
+                ?instance a ?class .
+            }
+    }""" .

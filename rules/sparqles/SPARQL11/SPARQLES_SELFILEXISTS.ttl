@@ -8,9 +8,11 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query filtering for existing triple patterns (FILTER EXISTS operator)" ;
     kgi:query """SELECT *
-            WHERE
-            {	?s <http://example.org/type> <http://example.org/thing> .
-            	FILTER EXISTS {
-            		?s <http://example.org/sameAs> <http://nonsensical.com/1>
-            	}
+            WHERE {	
+                SERVICE $rawEndpointUrl { 
+                    ?s <http://example.org/type> <http://example.org/thing> .
+                    FILTER EXISTS {
+                        ?s <http://example.org/sameAs> <http://nonsensical.com/1>
+                    }
+                }
             } LIMIT 10"""  .

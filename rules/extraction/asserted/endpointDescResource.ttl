@@ -11,6 +11,7 @@
     dcterms:description "Extraction of the endpoint description resource the example endpoint, if there are any. The resources are the subject of the property sd:endpoint." ;
     kgi:query """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
         ASK  {
+            SERVICE $rawEndpointUrl {
                 {
                     BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                     {
@@ -33,5 +34,6 @@
                         }
                     }
                 }
+            }
         }
         """ .

@@ -11,6 +11,8 @@
     dcterms:description "PARQL SELECT query with a single-triple pattern and a FILTER operator filtering variables containing the 'thi' string, case sensitive" ;
     kgi:query """SELECT *
         WHERE {
-        	<http://nonsensical.com/1> <http://example.org/type> ?val
-        	FILTER regex(?val, "thi")
+            SERVICE $rawEndpointUrl {
+                <http://nonsensical.com/1> <http://example.org/type> ?val
+                FILTER regex(?val, "thi")
+            }
         } LIMIT 10"""  .

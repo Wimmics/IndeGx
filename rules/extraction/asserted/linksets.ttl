@@ -13,5 +13,7 @@
     dcterms:description "Extraction of the linksets defined in the dataset." ;
     kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
         ASK {
-            ?linkset a void:Linkset .
+            SERVICE $rawEndpointUrl {
+                ?linkset a void:Linkset .
+            }
         }""" .

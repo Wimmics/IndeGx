@@ -4,7 +4,7 @@
 <> a mf:Manifest ;
     mf:entries (
         <SPARQLES_ASKFILNOTIN.ttl>
-        <SPARQLES_CON-.ttl>
+        # <SPARQLES_CON-.ttl> # No way to test the syntax using a federated query
         <SPARQLES_SELAVG.ttl>
         <SPARQLES_SELBIND.ttl>
         <SPARQLES_SELFILNOTEXISTS.ttl>
@@ -634,7 +634,7 @@
                 } WHERE {
                     ?endpointDescription sd:feature
                         sparqles:ASKFILNOTIN ,
-                        sparqles:CON- ,
+                        # sparqles:CON- ,
                         sparqles:SELAVG ,
                         sparqles:SELBIND ,
                         sparqles:SELFILNOTEXISTS ,

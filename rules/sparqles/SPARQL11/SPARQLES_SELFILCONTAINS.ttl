@@ -8,6 +8,8 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query using filtering results using the string CONTAINS operator" ;
     kgi:query """SELECT * WHERE {
-        	<http://nonsensical.com/1> <http://example.org/type> ?str
-        	FILTER CONTAINS(?str, "a")
+            SERVICE $rawEndpointUrl { 
+                <http://nonsensical.com/1> <http://example.org/type> ?str
+                FILTER CONTAINS(?str, "a")
+            }
         } LIMIT 10"""  .

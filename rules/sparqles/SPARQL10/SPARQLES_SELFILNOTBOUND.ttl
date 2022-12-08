@@ -11,8 +11,10 @@
     dcterms:description "SPARQL SELECT query with a single-triple pattern filtering only unbound optional nodes" ;
     kgi:query """SELECT *
         WHERE
-            { <http://nonsensical.com/1> <http://example.org/type> ?c .
+            { 
+            SERVICE $rawEndpointUrl { <http://nonsensical.com/1> <http://example.org/type> ?c .
               OPTIONAL
                 { ?c <http://example.org/type> ?e } .
               FILTER (! bound(?e))
+              }
             } LIMIT 10"""  .

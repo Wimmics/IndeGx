@@ -11,6 +11,8 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Presence of a timezone in the execution time returned by the server." ;
     kgi:query """ASK {
-            BIND(TZ(NOW()) AS ?timezone)
+            SERVICE $rawEndpointUrl {
+                BIND(TZ(NOW()) AS ?timezone)
+            }
             FILTER(?timezone != "")
         }""" .

@@ -12,9 +12,12 @@
 	dcterms:description "The description of the pattern used to generate new URIs in the dataset." ;
     kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
         ASK {
-        {
-            ?desc void:uriRegexPattern ?pattern .
-        } UNION {
-            ?desc void:uriSpace ?pattern .
+            SERVICE $rawEndpointUrl {
+                {
+                    ?desc void:uriRegexPattern ?pattern .
+                } UNION {
+                    ?desc void:uriSpace ?pattern .
+                }
+            }
         }
-    }""" .
+    """ .

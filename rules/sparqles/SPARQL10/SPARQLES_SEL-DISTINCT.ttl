@@ -9,4 +9,8 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "SELECT DISTINCT query" ;
     dcterms:description "SPARQL SELECT query with a single-triple pattern using DISTINCT." ;
-    kgi:query """SELECT DISTINCT * WHERE { <http://nonsensical.com/1> <http://example.org/type> ?o } LIMIT 10"""  .
+    kgi:query """SELECT DISTINCT * WHERE { 
+            SERVICE $rawEndpointUrl {
+                <http://nonsensical.com/1> <http://example.org/type> ?o 
+            }
+        } LIMIT 10"""  .

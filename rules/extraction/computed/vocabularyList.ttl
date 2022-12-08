@@ -10,11 +10,13 @@
     dcterms:title "Extraction of the namespace of properties and classes."@en ;
     kgi:timeout "PT120S"^^xsd:duration ;
     kgi:query """ASK {
-    SELECT DISTINCT ?ns
-        WHERE {
-            { SELECT DISTINCT ?elem { { ?s ?elem ?o . }
-                 UNION { ?s a ?elem . }
-            } }
+            SERVICE $rawEndpointUrl {
+                { 
+                    SELECT DISTINCT ?elem { 
+                        { ?s ?elem ?o . }
+                        UNION { ?s a ?elem . }
+                    } 
+                }
+            }
             BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
-        } LIMIT 1
         }""" .

@@ -8,5 +8,9 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 ASK query filtering using the NOT IN operator" ;
     kgi:query """ASK {
-        	FILTER(2 NOT IN ())
+            {
+                SERVICE $rawEndpointUrl {
+                    FILTER(2 NOT IN ())
+                }
+            }
         }"""  .

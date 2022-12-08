@@ -8,5 +8,7 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query containing a Property Path expression" ;
     kgi:query """SELECT * WHERE {
-            <http://nonsensical.com/1> <http://example.org/type>* ?z
+            SERVICE $rawEndpointUrl { 
+                <http://nonsensical.com/1> <http://example.org/type>* ?z
+            }
         }  LIMIT 10"""  .

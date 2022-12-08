@@ -10,5 +10,7 @@
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a single-triple pattern and an integer in the object position" ;
     kgi:query """SELECT * WHERE {
-        ?s ?o 12
+            SERVICE $rawEndpointUrl {
+                ?s ?o 12
+            }
         } LIMIT 10"""  .

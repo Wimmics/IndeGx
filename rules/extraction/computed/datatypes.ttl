@@ -14,7 +14,9 @@
     dcterms:description "Check if there are datatypes associated to literals." ;
     kgi:timeout "PT120S"^^xsd:duration ;
     kgi:query """ASK {
-            SELECT DISTINCT (datatype(?o) as ?datatype) WHERE {
-                ?s ?p ?o . FILTER( isLiteral(?o) )
-            } LIMIT 1
+            SERVICE $rawEndpointUrl {
+                SELECT DISTINCT (datatype(?o) as ?datatype) WHERE {
+                    ?s ?p ?o . FILTER( isLiteral(?o) )
+                } LIMIT 1
+            }
         }""" .

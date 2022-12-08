@@ -10,6 +10,8 @@
     dcterms:title "Select with empty results" ;
     dcterms:description "SPARQL SELECT query with a single-triple pattern and a boolean in the object position" ;
     kgi:query """
-        SELECT * WHERE {
-        ?s ?o false
-        } LIMIT 10"""  .
+    SELECT * WHERE {
+        SERVICE $rawEndpointUrl {
+            ?s ?o false
+        }
+    } LIMIT 10"""  .

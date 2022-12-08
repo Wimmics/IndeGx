@@ -7,8 +7,14 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:description "SPARQL 1.1 SELECT query using with a subquery" ;
-    kgi:query """SELECT ?y
-        where {
-        {
-        	SELECT * where { <http://nonsensical.com/1> <http://example.org/type>  ?y}}
-        } LIMIT 10""" .
+    kgi:query """ASK {
+            SERVICE $rawEndpointUrl { 
+                {
+                    SELECT ?y
+                    where {
+                    {
+                        SELECT * where { <http://nonsensical.com/1> <http://example.org/type>  ?y}}
+                    } LIMIT 10
+                }
+            }
+        }""" .

@@ -11,6 +11,8 @@
     dcterms:description "SPARQL SELECT query with a single-triple pattern and a FILTER operator filtering variables containing the 'thi' string, ignoring case" ;
     kgi:query """SELECT *
         WHERE {
-        	<http://nonsensical.com/1> <http://example.org/type> ?val .
-        	FILTER regex(?val, "thi", "i")
+            SERVICE $rawEndpointUrl {
+                <http://nonsensical.com/1> <http://example.org/type> ?val .
+                FILTER regex(?val, "thi", "i")
+            }
         } LIMIT 10"""  .

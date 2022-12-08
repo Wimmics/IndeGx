@@ -9,4 +9,8 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Reachability test" ;
     dcterms:description "Reachability is tested with a simple query" ;
-    kgi:query """SELECT * WHERE { ?s ?p ?o . } LIMIT 1"""  .
+    kgi:query """ASK { 
+            SERVICE $rawEndpointUrl {
+                ?s ?p ?o . 
+            }
+        } LIMIT 1"""  .

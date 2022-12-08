@@ -9,4 +9,5 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Reachability test used as a placeholder for SPORTAL actions trigger." ;
     dcterms:description "Reachability is tested with a simple query" ;
-    kgi:query """SELECT * WHERE { ?s ?p ?o . } LIMIT 1"""  .
+    kgi:query """SELECT * WHERE { 
+                SERVICE $rawEndpointUrl { ?s ?p ?o . } } LIMIT 1"""  .

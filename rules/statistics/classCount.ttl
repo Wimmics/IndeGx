@@ -17,15 +17,17 @@
         PREFIX void: <http://rdfs.org/ns/void#>
         PREFIX dcat: <http://www.w3.org/ns/dcat#>
         ASK {
-                ?res void:classes ?extractedValue .
-                ?res ?p $rawEndpointUrl .
-                { ?res a dcat:Dataset }
-                UNION { ?res a void:Dataset }
-                {
-                    SELECT (count( DISTINCT ?c) AS ?value)
-                    WHERE {
-                        ?s a ?c .
+                SERVICE $rawEndpointUrl { 
+                    ?res void:classes ?extractedValue .
+                    ?res ?p $rawEndpointUrl .
+                    { ?res a dcat:Dataset }
+                    UNION { ?res a void:Dataset }
+                    {
+                        SELECT (count( DISTINCT ?c) AS ?value)
+                        WHERE {
+                            ?s a ?c .
+                        }
                     }
+                    FILTER(?extractedValue != ?value)
                 }
-                FILTER(?extractedValue != ?value)
         } """ .

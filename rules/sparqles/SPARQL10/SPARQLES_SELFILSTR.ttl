@@ -11,6 +11,8 @@
     dcterms:description "SPARQL SELECT query with a single-triple pattern and a FILTER operator filering for variables containing string values" ;
     kgi:query """PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         SELECT * WHERE {
-            <http://nonsensical.com/1> <http://example.org/type> ?v .
-            FILTER(datatype(xsd:string(?v)) = xsd:string) .
+            SERVICE $rawEndpointUrl {
+                <http://nonsensical.com/1> <http://example.org/type> ?v .
+                FILTER(datatype(xsd:string(?v)) = xsd:string) .
+            }
         } LIMIT 10"""  .
