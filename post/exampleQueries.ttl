@@ -6,4 +6,4 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <manifest.ttl> , <../check/manifest.ttl> , <../extraction/manifest.ttl> .
+    dcterms:isReferencedBy <manifest.ttl> .
