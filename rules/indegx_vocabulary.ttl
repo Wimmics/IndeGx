@@ -23,7 +23,7 @@ kgi: dcterms:creator "Pierre Maillot" ;
 
 # Index structuration vocabulary
 
-kgi:catalogRoot rdf:type rdfs:Resource ;
+kgi:IndeGxDataset rdf:type rdfs:Resource ;
     rdfs:label "Root of a catalog." ;
     rdfs:isDefinedBy kgi: ;
     rdfs:comment "Default resource used to represent the catalog at the root of the index." .
@@ -171,9 +171,20 @@ kgi:PropertyCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
     rdfs:comment "This shoud be used with kgi:property and kgi:dataset to list the properties common to a group of datasets" ;
     rdfs:isDefinedBy kgi: .
 
+kgi:DatatypeCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
+    rdf:label "Description of the common datatypes used in different datasets." ;
+    rdfs:comment "This shoud be used with kgi:datatype and kgi:dataset to list the datatypes common to a group of datasets" ;
+    rdfs:isDefinedBy kgi: .
+
 kgi:ResourceHostnameCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
     rdf:label "Description of the common resources hostnames used in different datasets." ;
     rdfs:comment "This shoud be used with kgi:hostname and kgi:dataset to list the resources hostnames common to a group of datasets" ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:commonVocabularyDescription rdf:type rdf:Property ;
+    rdf:label "Links a dataset to its vocabulary commonalities descriptions." ;
+    rdfs:domain void:Dataset ;
+    rdfs:range kgi:VocabularyCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:vocabulary rdf:type rdf:Property ;
@@ -181,14 +192,43 @@ kgi:vocabulary rdf:type rdf:Property ;
     rdfs:domain kgi:VocabularyCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
+kgi:commonClassDescription rdf:type rdf:Property ;
+    rdf:label "Links a dataset to its class commonalities descriptions." ;
+    rdfs:domain void:Dataset ;
+    rdfs:range kgi:ClassCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
 kgi:class rdf:type rdf:Property ;
     rdf:label "Indicates the classes that are common to a group of datasets in an instance of CommonalityDescription." ;
     rdfs:domain kgi:ClassCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
+kgi:commonPropertyDescription rdf:type rdf:Property ;
+    rdf:label "Links a dataset to its property commonalities descriptions." ;
+    rdfs:domain void:Dataset ;
+    rdfs:range kgi:PropertyCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
 kgi:property rdf:type rdf:Property ;
     rdf:label "Indicates the properties that are common to a group of datasets in an instance of CommonalityDescription." ;
     rdfs:domain kgi:PropertyCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:commonDatatypeDescription rdf:type rdf:Property ;
+    rdf:label "Links a dataset to its datatype commonalities descriptions." ;
+    rdfs:domain void:Dataset ;
+    rdfs:range kgi:DatatypeCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:datatype rdf:type rdf:Property ;
+    rdf:label "Indicates the datatypes that are common to a group of datasets in an instance of CommonalityDescription." ;
+    rdfs:domain kgi:DatatypeCommonalityDescription ;
+    rdfs:isDefinedBy kgi: .
+
+kgi:commonHostnameDescription rdf:type rdf:Property ;
+    rdf:label "Links a dataset to its hostname commonalities descriptions." ;
+    rdfs:domain void:Dataset ;
+    rdfs:range kgi:ResourceHostnameCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:hostname rdf:type rdf:Property ;

@@ -47,7 +47,7 @@
                         prov:wasDerivedFrom $rawEndpointUrl ;
                         kgi:curated ?datasetDescription , ?endpointDescription .
                 }
-                kgi:catalogRoot a dcat:Catalog ;
+                kgi:IndeGxDataset a dcat:Catalog ;
                     dcat:service ?endpointDescription .
             } WHERE {
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
@@ -79,7 +79,7 @@
             PREFIX dekalog:     <http://prod-dekalog.inria.fr/>
 
             INSERT {
-                kgi:catalogRoot sd:namedGraph ?curatedDescriptionGraph , ?metadataDescriptionGraph , ?originalDescriptionGraph .
+                kgi:IndeGxDataset sd:namedGraph ?curatedDescriptionGraph , ?metadataDescriptionGraph , ?originalDescriptionGraph .
                 ?curatedDescriptionGraph sd:name ?curatedDescriptionGraph ;
                     prov:wasGeneratedBy ?indexationActivity ;
                     prov:wasDerivedFrom ?endpointDescription .
