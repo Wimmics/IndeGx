@@ -60,23 +60,23 @@
         ]
         [
             mf:action """
-            PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#> 
-            PREFIX owl:         <http://www.w3.org/2002/07/owl#> 
-            PREFIX xsd:         <http://www.w3.org/2001/XMLSchema#> 
+            PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl:         <http://www.w3.org/2002/07/owl#>
+            PREFIX xsd:         <http://www.w3.org/2001/XMLSchema#>
             PREFIX dcat:        <http://www.w3.org/ns/dcat#>
-            PREFIX foaf:        <http://xmlns.com/foaf/0.1/> 
-            PREFIX prov:        <http://www.w3.org/ns/prov#> 
-            PREFIX schema:		<http://schema.org/> 
-            PREFIX void:        <http://rdfs.org/ns/void#> 
-            PREFIX sd:          <http://www.w3.org/ns/sparql-service-description#> 
-            PREFIX dct:         <http://purl.org/dc/terms/> 
-            PREFIX skos:        <http://www.w3.org/2004/02/skos/core#> 
-            PREFIX kgi:         <http://ns.inria.fr/kg/index#> 
-            PREFIX virtrdf:     <http://www.openlinksw.com/schemas/virtrdf#> 
-            PREFIX bif:         <bif:> 
-            PREFIX sql:         <sql:> 
-            PREFIX formats:     <http://www.w3.org/ns/formats/> 
-            PREFIX dekalog:     <http://prod-dekalog.inria.fr/> 
+            PREFIX foaf:        <http://xmlns.com/foaf/0.1/>
+            PREFIX prov:        <http://www.w3.org/ns/prov#>
+            PREFIX schema:		<http://schema.org/>
+            PREFIX void:        <http://rdfs.org/ns/void#>
+            PREFIX sd:          <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX dct:         <http://purl.org/dc/terms/>
+            PREFIX skos:        <http://www.w3.org/2004/02/skos/core#>
+            PREFIX kgi:         <http://ns.inria.fr/kg/index#>
+            PREFIX virtrdf:     <http://www.openlinksw.com/schemas/virtrdf#>
+            PREFIX bif:         <bif:>
+            PREFIX sql:         <sql:>
+            PREFIX formats:     <http://www.w3.org/ns/formats/>
+            PREFIX dekalog:     <http://prod-dekalog.inria.fr/>
 
             INSERT {
                 kgi:catalogRoot sd:namedGraph ?curatedDescriptionGraph , ?metadataDescriptionGraph , ?originalDescriptionGraph .
@@ -89,10 +89,11 @@
                 ?metadataDescriptionGraph sd:name ?metadataDescriptionGraph ;
                     prov:wasGeneratedBy ?indexationActivity ;
                     prov:wasDerivedFrom ?endpointDescription .
-                
+
                 ?indexationActivity a prov:Activity ;
                     prov:used <https://github.com/Wimmics/IndeGx> ;
-                    prov:generatedAtTime  ?time .
+                    prov:generatedAtTime  ?time ;
+                    prov:used ?endpointDescription .
 
             } WHERE {
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)

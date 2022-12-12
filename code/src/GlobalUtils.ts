@@ -6,6 +6,13 @@ import * as Logger from "./LogUtils.js"
 
 const nbFetchRetries = 10;
 const millisecondsBetweenRetries = 5000;
+var countConcurrentQueries = 0;
+const maxConccurentQueries = 300;
+const delayMillisecondsTimeForConccurentQuery = 300
+
+export function getCountConccurentQueries() {
+    return countConcurrentQueries;
+}
 
 export function appendToFile(filename, content) {
     fs.writeFile(filename, content, { flag: 'a+' }).catch(err => {
@@ -47,6 +54,7 @@ export function iterativePromises(args: Array<Array<any>>, promiseCreationFuncti
 }
 
 export function fetchPromise(url, header = new Map(), method = "GET", query = "", numTry = 0) {
+    Logger.log(query)
     var myHeaders = new Map();
     myHeaders.set('pragma', 'no-cache');
     myHeaders.set('cache-control', 'no-cache');
@@ -63,26 +71,38 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
     if (method.localeCompare("POST") == 0) {
         myInit.body = query;
     }
-    return fetch(url, myInit)
-        .then(response => {
-            if (response.ok) {
-                return response.blob().then(blob => blob.text())
-            } else {
-                throw response;
-            }
-        }).catch(error => {
-            if(error instanceof FetchError) {
-                Logger.error(error.type, error.message)
-                Logger.info("Try:",numTry, "Fetch " , method , url , query );
-                if(numTry < nbFetchRetries) {
-                    return setTimeout(millisecondsBetweenRetries).then(fetchPromise(url, header, method, query, numTry+1));
+    if (countConcurrentQueries >= maxConccurentQueries) {
+        Logger.log("Delaying", url, query)
+        return setTimeout(delayMillisecondsTimeForConccurentQuery).then(() => fetchPromise(url, header, method, query, numTry))
+    } else {
+        countConcurrentQueries++;
+        Logger.log("Concurrent query starts, total:", countConcurrentQueries)
+        return fetch(url, myInit)
+            .then(response => {
+                if (response.ok) {
+                    return response.blob().then(blob => blob.text())
+                } else {
+                    throw response;
+                }
+            }).catch(error => {
+                if (error instanceof FetchError) {
+                    Logger.error(error.type, error.message)
+                    Logger.info("Try:", numTry, "Fetch ", method, url, query);
+                    if (numTry < nbFetchRetries) {
+                        return setTimeout(millisecondsBetweenRetries).then(fetchPromise(url, header, method, query, numTry + 1));
+                    } else {
+                        throw error;
+                    }
                 } else {
                     throw error;
                 }
-            } else {
-                throw error;
-            }
-        });
+            }).finally(() => {
+                countConcurrentQueries--;
+                Logger.log("Concurrent query ends, total:", countConcurrentQueries)
+                return;
+            });
+
+    }
 }
 
 export function fetchGETPromise(url, header = new Map()) {
