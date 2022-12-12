@@ -5,5 +5,25 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-<> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <manifest.ttl> .
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Common properties" ;
+    dcterms:description "Any endpoint with common properties" ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                ASK {
+                            GRAPH ?curatedDescriptionGraph {
+                                ?datasetDescription void:propertyPartition ?propertyPartition .
+                                ?propertyPartition void:property ?property .
+                            }
+                            GRAPH ?otherCuratedDescriptionGraph {
+                                ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
+                                ?otherPropertyPartition void:property ?property .
+                            }
+                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                            FILTER(! strstarts(str(?property), "http://www.w3.org/2001/XMLSchema#"))
+                            FILTER(! strstarts(str(?property), "http://www.w3.org/2000/01/rdf-schema#"))
+                            FILTER(! strstarts(str(?property), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+                            FILTER(! strstarts(str(?property), "http://www.w3.org/2002/07/owl#"))
+                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonProperties ?otherDatasetDescription . } } )
+                }"""  .

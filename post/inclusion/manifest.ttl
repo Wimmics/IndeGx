@@ -24,26 +24,18 @@
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    {
-                        SELECT DISTINCT ?otherDatasetDescription {
-                            GRAPH ?curatedDescriptionGraph {
-                                ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
-                                ?datasetDescription void:vocabulary ?vocab .
-                            }
-                            GRAPH ?otherCuratedDescriptionGraph {
-                                ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
-                                ?otherDatasetDescription void:vocabulary ?vocab .
-                            }
-                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
-                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonVocabularies ?otherDatasetDescription . } } )
-                            FILTER(?vocab != <http://www.w3.org/2001/XMLSchema#>)
-                            FILTER(?vocab != <http://www.w3.org/2000/01/rdf-schema#>)
-                            FILTER(?vocab != <http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
-                            FILTER(?vocab != <http://www.w3.org/2002/07/owl#>)
-                        }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:vocabulary ?vocab .
                     }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:vocabulary ?vocab .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonVocabularies ?otherDatasetDescription . } } )
+                    FILTER(?vocab != <http://www.w3.org/2001/XMLSchema#>)
+                    FILTER(?vocab != <http://www.w3.org/2000/01/rdf-schema#>)
+                    FILTER(?vocab != <http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+                    FILTER(?vocab != <http://www.w3.org/2002/07/owl#>)
                 }
             """
         ]
@@ -69,30 +61,22 @@
                     }
                 }
                 WHERE {
-                    {
-                        SELECT DISTINCT ?otherDatasetDescription {
-                            GRAPH ?curatedDescriptionGraph {
-                                ?datasetDescription void:sparqlEndpoint ?endpointUrl .
-                                ?datasetDescription void:vocabulary ?vocab .
-                            }
-                            GRAPH ?otherCuratedDescriptionGraph {
-                                ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
-                                ?otherDatasetDescription void:vocabulary ?vocab .
-                            }
-                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
-                            FILTER( NOT EXISTS { 
-                                GRAPH ?curatedDescriptionGraph { 
-                                    ?datasetDescription kgi:commonVocabularyDescription ?commonVocabularyResource . 
-                                    ?commonVocabularyResource kgi:vocabulary ?vocab . 
-                                } 
-                            } )
-                            FILTER(?vocab != <http://www.w3.org/2001/XMLSchema#>)
-                            FILTER(?vocab != <http://www.w3.org/2000/01/rdf-schema#>)
-                            FILTER(?vocab != <http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
-                            FILTER(?vocab != <http://www.w3.org/2002/07/owl#>)
-                            BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonVocabularies")) AS ?commonVocabularyResource)
-                        }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription void:vocabulary ?vocab .
                     }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription void:vocabulary ?vocab .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    FILTER( NOT EXISTS { 
+                        GRAPH ?curatedDescriptionGraph { 
+                            ?datasetDescription kgi:commonVocabularyDescription ?commonVocabularyResource . 
+                            ?commonVocabularyResource kgi:vocabulary ?vocab . 
+                        } 
+                    } )
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonVocabularies")) AS ?commonVocabularyResource)
                 }
             """
         ]
@@ -112,24 +96,47 @@
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    {
-                        SELECT DISTINCT ?otherDatasetDescription {
-                            GRAPH ?otherCuratedDescriptionGraph {
-                                ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
-                                ?otherDatasetDescription kgi:availableLiteralDatatypes ?datatype .
-                            }
-                            GRAPH ?curatedDescriptionGraph {
-                                ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
-                                ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
-                            }
-                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
-                            FILTER(?datatype != <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>)
-                            FILTER(?datatype != <http://www.w3.org/2001/XMLSchema#string> )
-                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonDatatypes ?otherDatasetDescription . } } )
-                        }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:availableLiteralDatatypes ?datatype .
                     }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    FILTER(?datatype != <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>)
+                    FILTER(?datatype != <http://www.w3.org/2001/XMLSchema#string> )
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonDatatypes ?otherDatasetDescription . } } )
+                }
+            """
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:commonDatatypeDescription ?commonDatatypeResource .
+                        ?commonDatatypeResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:datatype ?datatype .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:commonDatatypeDescription ?commonDatatypeResource .
+                        ?commonDatatypeResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:datatype ?datatype .
+                    }
+                }
+                WHERE {
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription kgi:availableLiteralDatatypes ?datatype .
+                    }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonDatatypes")) AS ?commonDatatypeResource)
                 }
             """
         ]
@@ -149,28 +156,53 @@
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    {
-                        SELECT DISTINCT ?otherDatasetDescription {
-                            GRAPH ?curatedDescriptionGraph {
-                                ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
-                                ?datasetDescription void:classPartition ?classPartition .
-                                ?classPartition void:class ?class .
-                            }
-                            GRAPH ?otherCuratedDescriptionGraph {
-                                ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
-                                ?otherDatasetDescription void:classPartition ?otherClassPartition .
-                                ?otherClassPartition void:class ?class .
-                            }
-                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
-                            FILTER(! strstarts(str(?class), "http://www.w3.org/2001/XMLSchema#"))
-                            FILTER(! strstarts(str(?class), "http://www.w3.org/2000/01/rdf-schema#"))
-                            FILTER(! strstarts(str(?class), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
-                            FILTER(! strstarts(str(?class), "http://www.w3.org/2002/07/owl#"))
-                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph {  ?datasetDescription kgi:commonClasses ?otherDatasetDescription . } } )
-                        }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?class .
                     }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:classPartition ?otherClassPartition .
+                        ?otherClassPartition void:class ?class .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    FILTER(! strstarts(str(?class), "http://www.w3.org/2001/XMLSchema#"))
+                    FILTER(! strstarts(str(?class), "http://www.w3.org/2000/01/rdf-schema#"))
+                    FILTER(! strstarts(str(?class), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+                    FILTER(! strstarts(str(?class), "http://www.w3.org/2002/07/owl#"))
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph {  ?datasetDescription kgi:commonClasses ?otherDatasetDescription . } } )
+                }
+            """
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:commonClassDescription ?commonClassResource .
+                        ?commonClassResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:class ?datatype .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:commonClassDescription ?commonClassResource .
+                        ?commonClassResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:class ?datatype .
+                    }
+                }
+                WHERE {
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription void:classPartition ?otherClassPartition .
+                        ?otherClassPartition void:class ?class .
+                    }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?class .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonClasses")) AS ?commonClassResource)
                 }
             """
         ]
@@ -191,28 +223,53 @@
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    {
-                        SELECT DISTINCT ?otherDatasetDescription {
-                            GRAPH ?curatedDescriptionGraph {
-                                ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
-                                ?datasetDescription void:propertyPartition ?propertyPartition .
-                                ?propertyPartition void:property ?property .
-                            }
-                            GRAPH ?otherCuratedDescriptionGraph {
-                                ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
-                                ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
-                                ?otherPropertyPartition void:property ?property .
-                            }
-                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
-                            FILTER(! strstarts(str(?property), "http://www.w3.org/2001/XMLSchema#"))
-                            FILTER(! strstarts(str(?property), "http://www.w3.org/2000/01/rdf-schema#"))
-                            FILTER(! strstarts(str(?property), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
-                            FILTER(! strstarts(str(?property), "http://www.w3.org/2002/07/owl#"))
-                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonProperties ?otherDatasetDescription . } } )
-                        }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:propertyPartition ?propertyPartition .
+                        ?propertyPartition void:property ?property .
                     }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
+                        ?otherPropertyPartition void:property ?property .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    FILTER(! strstarts(str(?property), "http://www.w3.org/2001/XMLSchema#"))
+                    FILTER(! strstarts(str(?property), "http://www.w3.org/2000/01/rdf-schema#"))
+                    FILTER(! strstarts(str(?property), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+                    FILTER(! strstarts(str(?property), "http://www.w3.org/2002/07/owl#"))
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonProperties ?otherDatasetDescription . } } )
+                }
+            """
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:commonClassDescription ?commonPropertyResource .
+                        ?commonPropertyResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:property ?datatype .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:commonClassDescription ?commonPropertyResource .
+                        ?commonPropertyResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:property ?datatype .
+                    }
+                }
+                WHERE {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription void:propertyPartition ?propertyPartition .
+                        ?propertyPartition void:property ?property .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
+                        ?otherPropertyPartition void:property ?property .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonProperties")) AS ?commonPropertyResource)
                 }
             """
         ]
@@ -226,37 +283,31 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription kgi:commonClasses ?otherDatasetDescription .
+                        ?datasetDescription kgi:commonClassesAndProperties ?otherDatasetDescription .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription kgi:commonClasses ?datasetDescription .
+                        ?otherDatasetDescription kgi:commonClassesAndProperties ?datasetDescription .
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    {
-                        SELECT DISTINCT ?otherDatasetDescription {
-                            GRAPH ?curatedDescriptionGraph {
-                                ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
-                                ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
-                                ?datasetDescription void:classPartition ?classPartition .
-                                ?datasetDescription void:propertyPartition ?propertyPartition .
-                                ?propertyPartition void:property ?property .
-                                ?classPartition void:class ?class .
-                            }
-                            GRAPH ?otherCuratedDescriptionGraph {
-                                ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
-                                ?otherDatasetDescription void:classPartition ?otherClassPartition .
-                                ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
-                                ?otherPropertyPartition void:property ?property .
-                                ?otherClassPartition void:class ?class .
-                                ?otherDatasetDescription kgi:availableLiteralDatatypes ?datatype .
-                            }
-                            FILTER(?otherDatasetDescription < ?datasetDescription)
-                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonClasses ?otherDatasetDescription . } } )
-                        }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
+                        ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?datasetDescription void:propertyPartition ?propertyPartition .
+                        ?propertyPartition void:property ?property .
+                        ?classPartition void:class ?class .
                     }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription void:classPartition ?otherClassPartition .
+                        ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
+                        ?otherPropertyPartition void:property ?property .
+                        ?otherClassPartition void:class ?class .
+                        ?otherDatasetDescription kgi:availableLiteralDatatypes ?datatype .
+                    }
+                    FILTER(?otherDatasetDescription < ?datasetDescription)
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonClassesAndProperties ?otherDatasetDescription . } } )
                 }
             """
         ]
@@ -276,23 +327,56 @@
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    {
-                        SELECT DISTINCT ?otherDatasetDescription {
-                            GRAPH ?curatedDescriptionGraph {
-                                ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
-                                ?datasetDescription kgi:resourceHostname ?resourceHostname .
-                            }
-                            GRAPH ?otherCuratedDescriptionGraph {
-                                ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
-                                ?otherDatasetDescription kgi:resourceHostname ?resourceHostname .
-                            }
-                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
-                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonResourceHostname ?otherDatasetDescription . } } )
-                        }
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:resourceHostname ?resourceHostname .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:resourceHostname ?resourceHostname .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonResourceHostname ?otherDatasetDescription . } } )
+                }
+            """
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:commonHostnameDescription ?commonHostnameResource .
+                        ?commonHostnameResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:hostname ?resourceHostname .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:commonHostnameDescription ?commonHostnameResource .
+                        ?commonHostnameResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:hostname ?resourceHostname .
                     }
                 }
+                WHERE {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription kgi:resourceHostname ?resourceHostname .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription kgi:resourceHostname ?resourceHostname .
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonResourceHostnames")) AS ?commonHostnameResource)
+                }
+            """
+        ]
+    ) .
+
+# Inclusion if cooccurence of the same hostnames appear in two different bases
+<inclusionByHostnameCoOccurence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:endpoint kgi:federation ;
+            mf:action """
             """
         ]
     ) .
@@ -306,16 +390,6 @@
         ]
     ) .
 
-<inclusionByHostnameCoOccurence.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            kgi:endpoint kgi:federation ;
-            mf:action """
-            """
-        ]
-    ) .
-
-# Inclusion if cooccurence of the same hostnames appear in two different bases
 <inclusionByHostnameCoOccurence.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [

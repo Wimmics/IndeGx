@@ -5,5 +5,32 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-<> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <manifest.ttl> .
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Common classes" ;
+    dcterms:description "Any endpoint with common classes" ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                ASK {
+                            GRAPH ?curatedDescriptionGraph {
+                                ?datasetDescription void:classPartition ?classPartition .
+                                ?classPartition void:class ?class .
+                            }
+                            GRAPH ?otherCuratedDescriptionGraph {
+                                ?otherDatasetDescription void:classPartition ?otherClassPartition .
+                                ?otherClassPartition void:class ?class .
+                            }
+                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                            FILTER(! strstarts(str(?class), "http://www.w3.org/2001/XMLSchema#"))
+                            FILTER(! strstarts(str(?class), "http://www.w3.org/2000/01/rdf-schema#"))
+                            FILTER(! strstarts(str(?class), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+                            FILTER(! strstarts(str(?class), "http://www.w3.org/2002/07/owl#"))
+                            FILTER( 
+                                NOT EXISTS { 
+                                    GRAPH ?curatedDescriptionGraph {  
+                                        ?datasetDescription kgi:commonClasses ?otherDatasetDescription . 
+                                    } 
+                                } 
+                            )
+                }"""  .
+

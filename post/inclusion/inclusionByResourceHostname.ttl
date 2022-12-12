@@ -5,5 +5,19 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-<> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <manifest.ttl> .
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Common hostnames" ;
+    dcterms:description "Any endpoint with common hostnames" ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                ASK {
+                            GRAPH ?curatedDescriptionGraph {
+                                ?datasetDescription kgi:resourceHostname ?resourceHostname .
+                            }
+                            GRAPH ?otherCuratedDescriptionGraph {
+                                ?otherDatasetDescription kgi:resourceHostname ?resourceHostname .
+                            }
+                            FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                            FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonResourceHostname ?otherDatasetDescription . } } )
+                }"""  .
