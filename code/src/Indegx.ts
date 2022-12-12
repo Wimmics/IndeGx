@@ -40,4 +40,16 @@ readRules("/user/pmaillot/home/git/IndeGx/rules/manifest.ttl").then(manifests =>
     })
 }).then(() => {
     return writeIndex("index.trig")
+}).then(() => {
+    return readRules("/user/pmaillot/home/git/IndeGx/post/manifest.ttl").then(manifests => {
+        Logger.info("Post manifest tree read.");
+        Logger.info("Post treatment starts");
+        var manifestPool = [];
+        manifests.forEach(manifest => {
+            manifestPool.push(applyRuleTree(coreseServerUrl, manifest));
+        })
+        return Promise.allSettled(manifestPool).then(() => {
+            Logger.info("Post treatment ends");
+        })
+    })
 }).catch(error => { Logger.error(JSON.stringify(error)) });
