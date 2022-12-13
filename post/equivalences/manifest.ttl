@@ -1,0 +1,330 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+            <type.ttl>
+            <identifier.ttl>
+            <title.ttl>
+            <alternativeTitle.ttl>
+            <acronym.ttl>
+            <description.ttl>
+            <homepageUrl.ttl>
+            <otherPages.ttl>
+            <creator.ttl>
+            <editor.ttl>
+            <publisher.ttl>
+            <createdDate.ttl>
+            <modifiedDate.ttl>
+            <publishedDate.ttl>
+            <contactPoint.ttl>
+            <vocabularyUsed.ttl>
+            <topic.ttl>
+            <metaGraph.ttl>
+            <statistics.ttl>
+            <distributions.ttl>
+            <RESTAPI.ttl>
+            <sparqlEndpoint.ttl>
+            <exampleQueries.ttl>
+            <version.ttl>
+            <versionNotes.ttl>
+            <licence.ttl>
+            <keyword.ttl>
+            <publicationReferences.ttl>
+            <language.ttl>
+            <IRITemplate.ttl>
+            <linkedResources.ttl>
+            <accessStatement.ttl>
+            <otherVersion.ttl>
+            <source.ttl>
+            <spatialCoverage.ttl>
+            <temporalCoverage.ttl>
+        ) .
+
+<type.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<identifier.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<title.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<alternativeTitle.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<acronym.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<description.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<homepageUrl.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<otherPages.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<creator.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<editor.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<publisher.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<createdDate.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<modifiedDate.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<publishedDate.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<contactPoint.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<vocabularyUsed.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<topic.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<metaGraph.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<statistics.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<distributions.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<RESTAPI.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<sparqlEndpoint.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<exampleQueries.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<version.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<versionNotes.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<licence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<keyword.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<publicationReferences.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<language.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<IRITemplate.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<linkedResources.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<accessStatement.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<otherVersion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<source.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<spatialCoverage.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
+
+<temporalCoverage.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            """
+        ]
+    ) .
