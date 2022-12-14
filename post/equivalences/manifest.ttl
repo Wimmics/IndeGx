@@ -17,15 +17,12 @@
             <createdDate.ttl>
             <modifiedDate.ttl>
             <publishedDate.ttl>
-            <contactPoint.ttl>
             <vocabularyUsed.ttl>
             <topic.ttl>
             <metaGraph.ttl>
             <statistics.ttl>
-            <distributions.ttl>
             <RESTAPI.ttl>
             <sparqlEndpoint.ttl>
-            <exampleQueries.ttl>
             <version.ttl>
             <versionNotes.ttl>
             <licence.ttl>
@@ -45,6 +42,45 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res a schema:Dataset ,
+                    dcmitype:Dataset ,
+                    void:Dataset ,
+                    dcat:Dataset ,
+                    sd:Dataset ,
+                    prov:Entity ,
+                    skos:Concept .
+            } WHERE {
+                { ?res a schema:Dataset }
+                UNION { ?res a dcmitype:Dataset }
+                UNION { ?res a void:Dataset }
+                UNION { ?res a dcat:Dataset }
+                UNION { ?res a sd:Dataset }
+                UNION { ?res a prov:Entity }
+                UNION { ?res a skos:Concept }
+            }
             """
         ]
     ) .
@@ -53,6 +89,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:identifier ?id ;
+                    dct:identifier ?id ;
+                    adms:identifier ?id .
+            } WHERE {
+                { ?res schema:identifier ?id }
+                UNION { ?res dct:identifier ?id }
+                UNION { ?res adms:identifier ?id }
+            }
             """
         ]
     ) .
@@ -61,6 +128,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:name ?id ;
+                    dct:title ?id ;
+                    rdfs:label ?id .
+            } WHERE {
+                { ?res schema:name ?id }
+                UNION { ?res dct:title ?id }
+                UNION { ?res rdfs:label ?id }
+            }
             """
         ]
     ) .
@@ -69,6 +167,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:alternateName ?id ;
+                    dct:alternative ?id ;
+                    skos:altLabel ?id .
+            } WHERE {
+                { ?res schema:alternateName ?id }
+                UNION { ?res dct:alternative ?id }
+                UNION { ?res skos:altLabel ?id }
+            }
             """
         ]
     ) .
@@ -77,6 +206,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:termCode ?id ;
+                    <http://qudt.org/schema/qudt/acronym> ?id .
+            } WHERE {
+                { ?res schema:termCode ?id }
+                UNION { ?res <http://qudt.org/schema/qudt/acronym> ?id }
+            }
             """
         ]
     ) .
@@ -85,6 +243,39 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:description ?id ;
+                    dct:description ?id ;
+                    owl:comment ?id ;
+                    skos:note ?id .
+            } WHERE {
+                { ?res schema:description ?id }
+                UNION { ?res dct:description ?id }
+                UNION { ?res owl:comment ?id }
+                UNION { ?res skos:note ?id }
+            }
             """
         ]
     ) .
@@ -93,6 +284,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:url ?id ;
+                    dcat:landingPage ?id ;
+                    foaf:homepage ?id .
+            } WHERE {
+                { ?res schema:url ?id }
+                UNION { ?res dcat:landingPage ?id }
+                UNION { ?res foaf:homepage ?id }
+            }
             """
         ]
     ) .
@@ -101,6 +323,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:relatedLink ?id ;
+                    rdfs:seeAlso ?id .
+            } WHERE {
+                { ?res schema:relatedLink ?id }
+                UNION { ?res rdfs:seeAlso ?id }
+            }
             """
         ]
     ) .
@@ -109,6 +360,41 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:creator ?id ;
+                    dct:creator ?id ;
+                    prov:wasAttributedTo ?id ;
+                    pav:authoredBy ?id ;
+                    pav:createdBy ?id .
+            } WHERE {
+                { ?res schema:creator ?id }
+                UNION { ?res dct:creator ?id }
+                UNION { ?res prov:wasAttributedTo ?id }
+                UNION { ?res pav:authoredBy ?id }
+                UNION { ?res pav:createdBy ?id }
+            }
             """
         ]
     ) .
@@ -125,6 +411,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:editor ?id ;
+                    dct:contributor ?id ;
+                    pav:contributedBy ?id .
+            } WHERE {
+                { ?res schema:editor ?id }
+                UNION { ?res dct:contributor ?id }
+                UNION { ?res pav:contributedBy ?id }
+            }
             """
         ]
     ) .
@@ -133,6 +450,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:dateCreated ?id ;
+                    dct:created ?id ;
+                    pav:createdOn ?id .
+            } WHERE {
+                { ?res schema:dateCreated ?id }
+                UNION { ?res dct:created ?id }
+                UNION { ?res pav:createdOn ?id }
+            }
             """
         ]
     ) .
@@ -141,6 +489,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:dateCreated ?id ;
+                    dct:created ?id ;
+                    pav:createdOn ?id .
+            } WHERE {
+                { ?res schema:dateModified ?id }
+                UNION { ?res dct:modified ?id }
+                UNION { ?res pav:lastUpdateOn ?id }
+            }
             """
         ]
     ) .
@@ -149,14 +528,35 @@
     kgi:onSuccess (
         [
             mf:action """
-            """
-        ]
-    ) .
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
-<contactPoint.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            mf:action """
+            INSERT {
+                ?res schema:datePublished ?id ;
+                    dct:issued ?id .
+            } WHERE {
+                { ?res schema:datePublished ?id }
+                UNION { ?res dct:issued ?id }
+            }
             """
         ]
     ) .
@@ -165,6 +565,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res dct:conformsTo ?id ;
+                    void:vocabulary ?id .
+            } WHERE {
+                { ?res dct:conformsTo ?id }
+                UNION { ?res void:vocabulary ?id }
+            }
             """
         ]
     ) .
@@ -173,6 +602,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:about ?id ;
+                    dcat:theme ?id ;
+                    foaf:primaryTopic ?id .
+            } WHERE {
+                { ?res schema:about ?id }
+                UNION { ?res dcat:theme ?id }
+                UNION { ?res foaf:primaryTopic ?id }
+            }
             """
         ]
     ) .
@@ -181,14 +641,35 @@
     kgi:onSuccess (
         [
             mf:action """
-            """
-        ]
-    ) .
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
-<statistics.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            mf:action """
+            INSERT {
+                ?res schema:image ?id ;
+                    foaf:depiction ?id .
+            } WHERE {
+                { ?res schema:image ?id }
+                UNION { ?res foaf:depiction ?id }
+            }
             """
         ]
     ) .
@@ -197,6 +678,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:distribution ?id ;
+                    dcat:distribution ?id .
+            } WHERE {
+                { ?res schema:distribution ?id }
+                UNION { ?res dcat:distribution ?id }
+            }
             """
         ]
     ) .
@@ -205,6 +715,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:mainEntityOfPage ?id ;
+                    fabio:ApplicationProgrammingInterface ?id .
+            } WHERE {
+                { ?res schema:mainEntityOfPage ?id }
+                UNION { ?res fabio:ApplicationProgrammingInterface ?id }
+            }
             """
         ]
     ) .
@@ -213,14 +752,37 @@
     kgi:onSuccess (
         [
             mf:action """
-            """
-        ]
-    ) .
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
-<exampleQueries.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            mf:action """
+            INSERT {
+                ?res schema:mainEntityOfPage ?id ;
+                    void:sparqlEndpoint ?id ;
+                    dcat:endpointURL ?id .
+            } WHERE {
+                { ?res schema:contentURL ?id }
+                UNION { ?res void:sparqlEndpoint ?id }
+                UNION { ?res dcat:endpointURL ?id }
+            }
             """
         ]
     ) .
@@ -229,6 +791,41 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:version ?id ;
+                    dct:hasVersion ?id ;
+                    pav:version ?id ;
+                    pav:hasCurrentVersion ?id ;
+                    dcat:version ?id .
+            } WHERE {
+                { ?res schema:version ?id }
+                UNION { ?res dct:hasVersion ?id }
+                UNION { ?res dcat:version ?id }
+                UNION { ?res pav:version ?id }
+                UNION { ?res pav:hasCurrentVersion ?id }
+            }
             """
         ]
     ) .
@@ -237,6 +834,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res adms:versionNotes ?id ;
+                    owl:versionInfo ?id .
+            } WHERE {
+                { ?res adms:versionNotes ?id }
+                UNION { ?res owl:versionInfo ?id }
+            }
             """
         ]
     ) .
@@ -245,6 +871,47 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:license ?id ;
+                    dct:license ?id ;
+                    doap:license ?id ;
+                    dbpedia-owl:license ?id ;
+                    cc:license ?id ;
+                    xhv:license ?id ;
+                    sto:license ?id ;
+                    nie:license ?id .
+            } WHERE {
+                { ?res schema:license ?id }
+                UNION { ?res dct:license ?id }
+                UNION { ?res doap:license ?id }
+                UNION { ?res dbpedia-owl:license ?id }
+                UNION { ?res cc:license ?id }
+                UNION { ?res xhv:license ?id }
+                UNION { ?res sto:license ?id }
+                UNION { ?res nie:license ?id }
+            }
             """
         ]
     ) .
@@ -253,6 +920,72 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:keywords ?id ;
+                    dct:subject ?id ;
+                    dcat:keyword ?id .
+            } WHERE {
+                { ?res schema:keywords ?id }
+                UNION { ?res dct:subject ?id }
+                UNION { ?res dcat:keyword ?id }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:keywords ?id ;
+                    dct:subject ?id ;
+                    dcat:theme ?id .
+            } WHERE {
+                { ?res schema:keywords ?id }
+                UNION { ?res dct:subject ?id }
+                UNION { ?res dcat:theme ?id }
+            }
             """
         ]
     ) .
@@ -261,6 +994,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:publication ?id ;
+                    dct:references ?id .
+            } WHERE {
+                { ?res schema:publication ?id }
+                UNION { ?res dct:references ?id }
+            }
             """
         ]
     ) .
@@ -269,6 +1031,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:inLanguage ?id ;
+                    dct:language ?id .
+            } WHERE {
+                { ?res schema:inLanguage ?id }
+                UNION { ?res dct:language ?id }
+            }
             """
         ]
     ) .
@@ -277,6 +1068,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res void:uriRegexPattern ?id ;
+                    void:uriSpace ?id ;
+                    hydra:template ?id .
+            } WHERE {
+                { ?res void:uriRegexPattern ?id }
+                UNION { ?res void:uriSpace ?id }
+                UNION { ?res hydra:template ?id }
+            }
             """
         ]
     ) .
@@ -285,6 +1107,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res dct:relation ?id ;
+                    void:target ?id .
+            } WHERE {
+                { ?res dct:relation ?id }
+                UNION { ?res void:target ?id }
+            }
             """
         ]
     ) .
@@ -293,6 +1144,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res void:exampleResource ?id ;
+                    skos:example ?id .
+            } WHERE {
+                { ?res void:exampleResource ?id }
+                UNION { ?res skos:example ?id }
+            }
             """
         ]
     ) .
@@ -301,6 +1181,37 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res dct:isVersionOf ?id ;
+                    pav:previousVersion ?id ;
+                    owl:priorVersion ?id .
+            } WHERE {
+                { ?res dct:isVersionOf ?id }
+                UNION { ?res pav:previousVersion ?id }
+                UNION { ?res owl:priorVersion ?id }
+            }
             """
         ]
     ) .
@@ -309,6 +1220,41 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:isBasedOn ?id ;
+                    dct:source ?id ;
+                    dct:provenance ?id ;
+                    prov:hadPrimarySource ?id ;
+                    pav:derivedFrom ?id .
+            } WHERE {
+                { ?res schema:isBasedOn ?id }
+                UNION { ?res dct:source ?id }
+                UNION { ?res dct:provenance ?id }
+                UNION { ?res prov:hadPrimarySource ?id }
+                UNION { ?res pav:derivedFrom ?id }
+            }
             """
         ]
     ) .
@@ -317,6 +1263,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:spatialCoverage ?id ;
+                    dct:spatial ?id .
+            } WHERE {
+                { ?res schema:spatialCoverage ?id }
+                UNION { ?res dct:spatial ?id }
+            }
             """
         ]
     ) .
@@ -325,6 +1300,35 @@
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:temporalCoverage ?id ;
+                    dct:temporal ?id .
+            } WHERE {
+                { ?res schema:temporalCoverage ?id }
+                UNION { ?res dct:temporal ?id }
+            }
             """
         ]
     ) .
