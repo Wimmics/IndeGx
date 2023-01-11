@@ -194,12 +194,13 @@
                     BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
                     SERVICE ?coreseEndpoint {
                         {
+                            SELECT (COUNT(?o) AS ?count) {
                                 SELECT DISTINCT ?o
-
                                 WHERE {
                                    ?s ?p ?o .
                                    FILTER(isLiteral(?o))
                                 }
+                            }
                         }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)

@@ -43,7 +43,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -78,8 +78,6 @@
                 UNION { ?res a void:Dataset }
                 UNION { ?res a dcat:Dataset }
                 UNION { ?res a sd:Dataset }
-                UNION { ?res a prov:Entity }
-                UNION { ?res a skos:Concept }
             }
             """
         ]
@@ -90,7 +88,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -129,7 +127,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -168,7 +166,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -207,7 +205,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -244,7 +242,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -285,7 +283,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -324,7 +322,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -361,7 +359,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -403,16 +401,8 @@
     kgi:onSuccess (
         [
             mf:action """
-            """
-        ]
-    ) .
-
-<publisher.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -446,12 +436,51 @@
         ]
     ) .
 
+<publisher.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX schema: <http://schema.org/>
+            PREFIX dct: <http://purl.org/dc/terms/>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX fabio: <http://purl.org/spar/fabio/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
+
+            INSERT {
+                ?res schema:publisher ?id ;
+                    dct:publisher ?id ;
+                    pav:providedBy ?id .
+            } WHERE {
+                { ?res schema:publisher ?id }
+                UNION { ?res dct:publisher ?id }
+                UNION { ?res pav:providedBy ?id }
+            }
+            """
+        ]
+    ) .
+
 <createdDate.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -490,7 +519,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -529,7 +558,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -566,7 +595,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -603,7 +632,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -642,7 +671,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -679,7 +708,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -716,7 +745,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -753,7 +782,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -792,7 +821,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -835,7 +864,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -872,7 +901,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -921,7 +950,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -956,7 +985,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -995,7 +1024,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1032,7 +1061,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1069,7 +1098,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1108,7 +1137,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1145,7 +1174,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1182,7 +1211,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1221,7 +1250,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1264,7 +1293,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -1301,7 +1330,7 @@
         [
             mf:action """
             PREFIX schema: <http://schema.org/>
-            PREFIX dct: <http://purl.org/dc/terms/ >
+            PREFIX dct: <http://purl.org/dc/terms/>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
