@@ -25,10 +25,12 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:vocabulary ?vocab .
+                        ?datasetDescription a void:Dataset ;
+                            void:vocabulary ?vocab .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:vocabulary ?vocab .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:vocabulary ?vocab .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
                     FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonVocabularies ?otherDatasetDescription . } } )
@@ -62,11 +64,13 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
-                        ?datasetDescription void:vocabulary ?vocab .
+                        ?datasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?endpointUrl ;
+                            void:vocabulary ?vocab .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?otherEndpointUrl .
                         ?otherDatasetDescription void:vocabulary ?vocab .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
@@ -97,10 +101,12 @@
                 }
                 WHERE {
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription kgi:availableLiteralDatatypes ?datatype .
+                        ?otherDatasetDescription a void:Dataset ;
+                            kgi:availableLiteralDatatypes ?datatype .
                     }
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
+                        ?datasetDescription a void:Dataset ;
+                            kgi:availableLiteralDatatypes ?datatype .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
                     FILTER(?datatype != <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>)
@@ -128,11 +134,13 @@
                 }
                 WHERE {
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?otherEndpointUrl .
                         ?otherDatasetDescription kgi:availableLiteralDatatypes ?datatype .
                     }
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?endpointUrl .
                         ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
@@ -157,11 +165,13 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:classPartition ?classPartition .
+                        ?datasetDescription a void:Dataset ;
+                            void:classPartition ?classPartition .
                         ?classPartition void:class ?class .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:classPartition ?otherClassPartition .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:classPartition ?otherClassPartition .
                         ?otherClassPartition void:class ?class .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
@@ -192,12 +202,14 @@
                 }
                 WHERE {
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?otherEndpointUrl .
                         ?otherDatasetDescription void:classPartition ?otherClassPartition .
                         ?otherClassPartition void:class ?class .
                     }
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?endpointUrl .
                         ?datasetDescription void:classPartition ?classPartition .
                         ?classPartition void:class ?class .
                     }
@@ -224,11 +236,13 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:propertyPartition ?propertyPartition .
+                        ?datasetDescription a void:Dataset ;
+                            void:propertyPartition ?propertyPartition .
                         ?propertyPartition void:property ?property .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:propertyPartition ?otherPropertyPartition .
                         ?otherPropertyPartition void:property ?property .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
@@ -259,12 +273,14 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?endpointUrl .
                         ?datasetDescription void:propertyPartition ?propertyPartition .
                         ?propertyPartition void:property ?property .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?otherEndpointUrl .
                         ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
                         ?otherPropertyPartition void:property ?property .
                     }
@@ -291,7 +307,7 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:sparqlEndpoint $rawEndpointUrl .
+                        ?datasetDescription a void:Dataset .
                         ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
                         ?datasetDescription void:classPartition ?classPartition .
                         ?datasetDescription void:propertyPartition ?propertyPartition .
@@ -299,7 +315,7 @@
                         ?classPartition void:class ?class .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription a void:Dataset .
                         ?otherDatasetDescription void:classPartition ?otherClassPartition .
                         ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
                         ?otherPropertyPartition void:property ?property .
@@ -328,10 +344,12 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription kgi:resourceHostname ?resourceHostname .
+                        ?datasetDescription a void:Dataset ;
+                            kgi:resourceHostname ?resourceHostname .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription kgi:resourceHostname ?resourceHostname .
+                        ?otherDatasetDescription a void:Dataset ;
+                            kgi:resourceHostname ?resourceHostname .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
                     FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonResourceHostname ?otherDatasetDescription . } } )
@@ -357,11 +375,13 @@
                 }
                 WHERE {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:sparqlEndpoint ?endpointUrl .
+                        ?datasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?endpointUrl .
                         ?datasetDescription kgi:resourceHostname ?resourceHostname .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription void:sparqlEndpoint ?otherEndpointUrl .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?otherEndpointUrl .
                         ?otherDatasetDescription kgi:resourceHostname ?resourceHostname .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
