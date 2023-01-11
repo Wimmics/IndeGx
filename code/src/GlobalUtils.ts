@@ -54,7 +54,6 @@ export function iterativePromises(args: Array<Array<any>>, promiseCreationFuncti
 }
 
 export function fetchPromise(url, header = new Map(), method = "GET", query = "", numTry = 0) {
-    Logger.log(query)
     var myHeaders = new Map();
     myHeaders.set('pragma', 'no-cache');
     myHeaders.set('cache-control', 'no-cache');

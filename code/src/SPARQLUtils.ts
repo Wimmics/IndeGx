@@ -14,13 +14,13 @@ export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQue
     } else if ( isSparqlConstruct(query)) {
         return fetchJSONPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout).catch(error => { Logger.error(endpoint, query, error); throw error })
     }else if(isSparqlUpdate(query)) {
-        return updateQuery(endpoint, query).catch(error => { Logger.error(endpoint, query, error); throw error });
+        return sendUpdateQuery(endpoint, query).catch(error => { Logger.error(endpoint, query, error); throw error });
     } else {
         Logger.error(new Error("Unexpected query type"))
     }
 }
 
-export function updateQuery(endpoint, updateQuery) {
+export function sendUpdateQuery(endpoint, updateQuery) {
     var updateHeader = new Map();
     updateHeader.set('Content-Type', 'application/sparql-update');
     return fetchPOSTPromise(endpoint, updateQuery, updateHeader).then(response => {
