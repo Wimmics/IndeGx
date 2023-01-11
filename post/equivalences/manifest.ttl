@@ -804,7 +804,7 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:mainEntityOfPage ?id ;
+                ?res schema:contentURL ?id ;
                     void:sparqlEndpoint ?id ;
                     dcat:endpointURL ?id .
             } WHERE {
