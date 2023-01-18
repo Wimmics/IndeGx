@@ -11,6 +11,8 @@ Ths new version of IndeGx has new advantages compared to the previous one in the
 
 ## Commands
 
+
+### Development
 Compilation:
 `npx tsc`
 
@@ -21,4 +23,10 @@ Starting the Corese server:
 `npm run start`
 
 Developpement build:
-`npm run devbuild`
+`npm run build`
+
+Compile and run
+`npm run devrun`
+
+Run
+`npm run run`

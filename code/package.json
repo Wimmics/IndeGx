@@ -29,6 +29,8 @@
     },
     "scripts": {
         "start": "java -jar corese-server-4.3.0-jar-with-dependencies.jar -su > corese.log",
-        "devbuild": "npx tsc && node src/Indegx.js"
+        "build": "npx tsc",
+        "devrun": "npx tsc && node src/Indegx.js",
+        "run": "node src/Indegx.js"
     }
 }
