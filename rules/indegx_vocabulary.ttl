@@ -236,3 +236,8 @@ kgi:hostname rdf:type rdf:Property ;
     rdfs:comment "To not be confused with kgi:resourceHostname, which lists the resource hostnames appearing in a dataset." ;
     rdfs:domain kgi:ResourceHostnameCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
+
+kgi:summary rdf:type rdf:Property ;
+    rdf:label "Link between a dataset and a summary of its content." ;
+    rdfs:domain void:Dataset ;
+    rdfs:range sd:NamedGraph .
