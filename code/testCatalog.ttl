@@ -1,6 +1,5 @@
 @prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
-@prefix dkg: <http://ns.inria.fr/kg/index#> .
 @prefix earl: <http://www.w3.org/ns/earl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
@@ -11,8 +10,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 kgi:catalogTest a dcat:Catalog ;
-#    dcat:dataset kgi:dekalog, kgi:BNBDataset, kgi:dbpedia, kgi:orkg .
-    dcat:dataset kgi:testDekalog , kgi:testDekalogEmpty .
+    dcat:dataset kgi:lang , kgi:license .
 
 kgi:BNBDataset void:sparqlEndpoint <https://bnb.data.bl.uk/sparql> ;
     rdfs:label "BNB".
@@ -29,9 +27,6 @@ kgi:FCUDataset void:sparqlEndpoint <http://ontology.inrae.fr/frenchcropusage/que
 kgi:ScholarlyData void:sparqlEndpoint <http://www.scholarlydata.org/sparql> ;
     rdfs:label "ScholarlyData".
 
-kgi:TestDataset void:sparqlEndpoint <http://localhost:8890/sparql> ;
-    rdfs:label "Test" .
-
 kgi:orkg void:sparqlEndpoint <https://www.orkg.org/orkg/triplestore> ;
     rdfs:label "Open Research Knowledge Graph (ORKG)" .
 
@@ -44,26 +39,28 @@ kgi:dbpedia void:sparqlEndpoint <http://dbpedia.org/sparql> ;
 kgi:wasabi void:sparqlEndpoint <http://wasabi.inria.fr/sparql> ;
     rdfs:label "WASABI" .
 
-kgi:local void:sparqlEndpoint <http://localhost:3030/experiment/query> ;
-    rdfs:label "local" .
-
-kgi:testD1 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-ref> ;
-    rdfs:label "D1" .
-
-kgi:testD1Alt void:sparqlEndpoint <http://localhost:3030/Inclusion-D-ref-alt> ;
-    rdfs:label "D1 alt" .
-
-kgi:testD2 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-2> ;
-    rdfs:label "D2" .
-
-kgi:testD3 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-3> ;
-    rdfs:label "D3" .
-
-kgi:testD4 void:sparqlEndpoint <http://localhost:3030/Inclusion-D-4> ;
-    rdfs:label "D4" .
-
 kgi:mimo void:sparqlEndpoint <http://data.mimo-db.eu/sparql> .
 
 kgi:testDekalog void:sparqlEndpoint <http://localhost:3030/DekalogDebug/sparql> .
 
 kgi:testDekalogEmpty void:sparqlEndpoint <http://localhost:3030/DekalogDebugEmpty/sparql> .
+
+kgi:ekaw16 void:sparqlEndpoint <http://localhost:3030/EKAW16/sparql> .
+
+kgi:eswc17 void:sparqlEndpoint <http://localhost:3030/ESWC17/sparql> .
+
+kgi:iswc17 void:sparqlEndpoint <http://localhost:3030/ISWC17/sparql> .
+
+kgi:iswc18 void:sparqlEndpoint <http://localhost:3030/ISWC18/sparql> .
+
+kgi:iswc19 void:sparqlEndpoint <http://localhost:3030/ISWC19/sparql> .
+
+kgi:lang void:sparqlEndpoint <http://localhost:3030/lang/sparql> .
+
+kgi:license void:sparqlEndpoint <http://localhost:3030/Licenses/sparql> .
+
+kgi:Joconde void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> .
+
+kgi:calmip void:sparqlEndpoint <https://allegro.callisto.calmip.univ-toulouse.fr/#/repositories/sms> .
+
+kgi:dataportalwatch void:sparqlEndpoint <https://data.wu.ac.at/sparql/> .
