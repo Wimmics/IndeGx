@@ -42,7 +42,7 @@
 
 <reachability.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ 
+        [
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -79,7 +79,7 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ 
+        [
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -118,7 +118,7 @@
 
 <provenance.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ 
+        [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -148,7 +148,7 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ 
+        [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -180,7 +180,7 @@
 
 <basicProvenance.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ 
+        [
             kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -203,8 +203,7 @@
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT( DISTINCT ?datasetRaw) AS ?countDataset) {
                             { ?datasetRaw a void:Dataset . }
@@ -269,8 +268,7 @@
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             SELECT (COUNT(?urisShort) AS ?countShort) {
                                 { ?urisShort ?pShort ?oShort } UNION { ?sShort ?pShort ?urisShort }
@@ -324,8 +322,7 @@
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 } WHERE {
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             SELECT (COUNT(DISTINCT *) AS ?countStruct) {
                                 {
@@ -379,8 +376,7 @@
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT ?rIri) AS ?countIri) {
                             { ?rIri ?pIri ?oIri } UNION { ?sIri ?pIri ?rIri }
@@ -435,8 +431,7 @@
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT ?rRes) AS ?countResources) {
                              ?rRes ?pRes ?oRes .
@@ -505,8 +500,7 @@
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                             SELECT (COUNT(DISTINCT ?lit) AS ?countLits) {
                                 ?s ?p ?lit .
@@ -541,7 +535,7 @@
 
 <uriPattern.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ 
+        [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -571,7 +565,7 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ 
+        [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -603,7 +597,7 @@
 
 <coolUri.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ 
+        [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -633,7 +627,7 @@
         <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
-        [ 
+        [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -665,7 +659,7 @@
 
 <indicatesUsedVocabularies.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        [ 
+        [
             kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -686,8 +680,7 @@
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                 {
                     SELECT (COUNT(DISTINCT ?vocabUri) AS ?countUsedVocab){
                         {
