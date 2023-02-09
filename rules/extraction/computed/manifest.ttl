@@ -36,7 +36,6 @@
                     }
                 }
                 WHERE {
-
                     SERVICE $rawEndpointUrl {
                         {
                             SELECT DISTINCT (lang(?o) as ?lang)  WHERE {
@@ -74,7 +73,6 @@
                 }
             }
             WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT (datatype(?o) as ?datatype) {
@@ -158,7 +156,6 @@
                     }
             }
             WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT ?elem {
@@ -193,7 +190,6 @@
                     }
             }
             WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT ?elem {
@@ -330,7 +326,6 @@
                         ?endpointDescription schema:broadcastTimezone ?timezone .
                     }
                 } WHERE {
-
                     SERVICE $rawEndpointUrl {
                         BIND(TZ(NOW()) AS ?timezone)
                     }
@@ -364,7 +359,6 @@
                     }
             }
             WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT (IRI(REPLACE(str(?elem), ?urlEnd, "", "q" ) ) AS ?ns)  {
@@ -399,7 +393,6 @@
                     }
             }
             WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT (IRI(REPLACE(str(?elem), ?urlEnd, "", "q" ) ) AS ?ns)  {
@@ -434,7 +427,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT * {
@@ -463,7 +455,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT *) AS ?countSameAs) {
@@ -492,7 +483,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT ?s) AS ?countSubjectSameAs) {
@@ -521,7 +511,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT ?o) AS ?countObjectSameAs) {
@@ -558,7 +547,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     {
                         SELECT (IRI(REPLACE(str(?s), ?urlEndS, "", "q" ) ) AS ?nsS) (IRI(REPLACE(str(?o), ?urlEndO, "", "q" ) ) AS ?nsO) {
@@ -603,7 +591,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
@@ -644,7 +631,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
@@ -685,7 +671,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
@@ -726,7 +711,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
@@ -767,7 +751,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
@@ -815,7 +798,6 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-
                 SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }

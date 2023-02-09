@@ -34,7 +34,7 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Summary")) AS ?summaryDescriptionGraph)
             }
-            """ 
+            """
         ]
     ) .
 
@@ -42,7 +42,7 @@
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """
             PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX owl:        <http://www.w3.org/2002/07/owl#>
@@ -77,7 +77,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """
             PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX owl:        <http://www.w3.org/2002/07/owl#>

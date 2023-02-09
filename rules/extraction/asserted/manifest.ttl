@@ -55,8 +55,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             ?res sd:endpoint ?endpointUrl .
@@ -101,8 +100,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             GRAPH ?g {
@@ -139,8 +137,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             ?res sd:endpoint ?endpointUrl .
@@ -179,8 +176,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             GRAPH ?g {
@@ -250,8 +246,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         ?res sd:endpoint ?endpoint .
                         ?res ?p ?o .
                     }
@@ -290,8 +285,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         GRAPH ?g {
                             ?res sd:endpoint ?endpoint .
                             ?res ?p ?o .
@@ -320,8 +314,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         ?res sd:endpoint ?endpoint .
                         ?s ?p ?res .
                     }
@@ -354,8 +347,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         GRAPH ?g {
                             ?res sd:endpoint ?endpoint .
                             ?s ?p ?res .
@@ -398,8 +390,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             { ?res a dcat:Dataset }
@@ -452,8 +443,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             GRAPH ?g {
@@ -500,8 +490,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             { ?res a dcat:Dataset }
@@ -551,8 +540,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             BIND(Iri(REPLACE(str($rawEndpointUrl), "http://", "https://")) AS ?endpointUrl)
                             GRAPH ?g {
@@ -610,8 +598,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             ?res a dcat:Dataset
                         }
@@ -659,8 +646,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         GRAPH ?g {
                             { ?res a dcat:Dataset }
                             UNION { ?res a void:Dataset }
@@ -693,8 +679,7 @@
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             { ?res a dcat:Dataset }
                             UNION { ?res a void:Dataset }
@@ -740,8 +725,7 @@
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     ?linkset a void:Linkset .
                     ?linkset ?p ?o .
                     FILTER( ! isBlank(?o) )
