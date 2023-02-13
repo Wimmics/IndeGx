@@ -38,7 +38,6 @@
     kgi:onFailure (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -77,14 +76,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <propertyCount.ttl> a mf:ManifestEntry ;
     kgi:onFailure (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -121,14 +119,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <tripleCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -163,14 +160,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <literalCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -205,14 +201,14 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <classPopulation.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -248,14 +244,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctRDFNodes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -284,14 +279,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctUrisObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -320,14 +314,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctUrisSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -356,14 +349,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctBlankNodeSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -392,14 +384,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctBlankNodeObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -428,14 +419,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctBlankNodes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -465,14 +455,13 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctIRIReferences.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -500,14 +489,13 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalDistinctLiterals.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -536,14 +524,14 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalClassPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -578,7 +566,7 @@
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -607,14 +595,14 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalClassPartitionClasses.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -644,14 +632,14 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalClassPartitionProperties.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -682,14 +670,14 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalClassPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -719,14 +707,14 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalClassPartitionDistinctObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -755,7 +743,7 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sportalClassPartitionPropertyPartition.ttl> a mf:ManifestEntry ;
@@ -768,7 +756,7 @@
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -799,12 +787,12 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) ;
     kgi:onFailure (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -834,14 +822,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <sportalClassPartitionPropertyPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -872,12 +859,11 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -907,14 +893,13 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <sportalPropertyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -948,7 +933,7 @@
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -974,14 +959,13 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <sportalPropertyPartitionDistinctSubject.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -1006,14 +990,13 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <sportalPropertyPartitionDistinctObject.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -1038,14 +1021,13 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <vocabularyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -1087,7 +1069,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -1127,14 +1109,14 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <resourceHostnamePartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -1176,7 +1158,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -1218,7 +1200,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -1263,5 +1245,5 @@
                 }
         """
         ]
-        <../meta/modifiedUpdate.ttl>
+        
     ) .

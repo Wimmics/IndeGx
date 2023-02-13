@@ -34,7 +34,7 @@
                 """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -72,7 +72,7 @@
                 }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -122,7 +122,7 @@
                 }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -154,7 +154,7 @@
                 }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -197,7 +197,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 }"""
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
     ) ;
     kgi:onFailure (
         <endpointDescResourceLocalhost.ttl>
@@ -224,7 +224,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -256,7 +256,7 @@
                 }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -298,7 +298,7 @@
                 }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -324,7 +324,7 @@
                 }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -359,13 +359,13 @@
                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 }"""
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <datasetDescResource.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -411,7 +411,7 @@
                  }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -468,7 +468,7 @@
                  }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -511,7 +511,7 @@
                  }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -564,7 +564,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                  }"""
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
         ) ;
         kgi:onFailure (
             <datasetDescResourceLocalhost.ttl>
@@ -573,7 +573,7 @@
 <datasetDescResourceLocalhost.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -614,7 +614,7 @@
                  }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -660,7 +660,7 @@
                  }"""
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -703,13 +703,13 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
                  }"""
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <linksets.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>

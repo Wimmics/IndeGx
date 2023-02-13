@@ -181,7 +181,6 @@
 <basicProvenance.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -248,7 +247,6 @@
 <shortUris.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -302,7 +300,6 @@
 <RDFDataStructures.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -356,7 +353,6 @@
 <blankNodeUsage.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -405,7 +401,6 @@
 <readableLabels.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -474,7 +469,6 @@
 <multipleLanguages.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -660,7 +654,6 @@
 <indicatesUsedVocabularies.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
