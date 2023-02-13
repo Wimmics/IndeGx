@@ -1,5 +1,7 @@
 import { coreseDefaultGraphURI, coreseServerUrl, sendAsk, sendConstruct, sendSelect } from "./CoreseInterface.js";
 import { writeFile } from "./GlobalUtils.js";
+import * as GlobalUtils from "./GlobalUtils.js";
+import * as SparqlUtils from "./SPARQLUtils.js";
 import { applyRuleTree } from "./RuleApplication.js";
 import { readRules } from "./Rules.js";
 import { readCatalog } from "./CatalogInput.js";
@@ -8,25 +10,29 @@ import { writeIndex } from "./IndexOutput.js";
 process.env["NODE_CONFIG_DIR"] = "/user/pmaillot/home/git/IndeGx/code/config/";
 import config from "config";
 
-var currentConfig = config.get("dev");
-var manifest = currentConfig.get("manifest");
-var catalog = currentConfig.get("catalog");
-var post = currentConfig.get("catalog");
+let currentConfig = config.get("dev");
+let manifest = currentConfig.get("manifest");
+let catalog = currentConfig.get("catalog");
+let post = currentConfig.get("catalog");
+let nbFetchRetries = currentConfig.get("nbFetchRetries");
+let millisecondsBetweenRetries = currentConfig.get("millisecondsBetweenRetries");
+let maxConccurentQueries = currentConfig.get("maxConccurentQueries");
+let delayMillisecondsTimeForConccurentQuery = currentConfig.get("delayMillisecondsTimeForConccurentQuery");
+let defaultQueryTimeout = currentConfig.get("defaultQueryTimeout");
+GlobalUtils.setNbFetchRetries(nbFetchRetries);
+GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
+GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
+GlobalUtils.setDelayMillisecondsTimeForConccurentQuery(delayMillisecondsTimeForConccurentQuery);
+SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 
-Logger.info("Reading manifest tree")
+Logger.info("Reading manifest tree ", manifest)
 readRules(manifest).then(manifests => {
-// readRules("/user/pmaillot/home/git/IndeGx/rules/manifest.ttl").then(manifests => {
-// readRules("./testManifest.ttl").then(manifests => {
-// readRules("/user/pmaillot/home/git/IndeGx/rules/summary/manifest.ttl").then(manifests => {
     Logger.info("Manifest tree read")
     writeFile("manifestTree.json", JSON.stringify(manifests))
 
-    Logger.info("Reading catalog")
-    var endpointPool = [];
+    Logger.info("Reading catalog", catalog)
+    let endpointPool = [];
     return readCatalog(catalog).then(endpointList => {
-    // return readCatalog("../catalogs/DBpedia_catalog.ttl").then(endpointList => {
-    // return readCatalog("/user/pmaillot/home/git/IndeGx/catalogs/D2KAB_catalog.ttl").then(endpointList => {
-    // return readCatalog("/user/pmaillot/home/git/IndeGx/code/testCatalog.ttl").then(endpointList => {
         Logger.info("Catalog read")
         endpointList.forEach(endpoint => {
             Logger.info("START", endpoint)
@@ -50,18 +56,22 @@ readRules(manifest).then(manifests => {
         });
     })
 }).then(() => {
-    // return readRules("/user/pmaillot/home/git/IndeGx/post/manifest.ttl").then(manifests => {
-    return readRules(post).then(manifests => {
-        Logger.info("Post manifest tree read.");
-        Logger.info("Post treatment starts");
-        var manifestPool = [];
-        manifests.forEach(manifest => {
-            manifestPool.push(applyRuleTree(coreseServerUrl, manifest));
+    if(post !== undefined && post !== "") {
+        return readRules(post).then(manifests => {
+            Logger.info("Post manifest tree read.");
+            Logger.info("Post treatment starts");
+            let manifestPool = [];
+            manifests.forEach(manifest => {
+                manifestPool.push(applyRuleTree(coreseServerUrl, manifest));
+            })
+            return Promise.allSettled(manifestPool).then(() => {
+                Logger.info("Post treatment ends");
+            })
         })
-        return Promise.allSettled(manifestPool).then(() => {
-            Logger.info("Post treatment ends");
-        })
-    })
+    } else {
+        Logger.info("No post treatment specified");
+        return;
+    }
 }).then(() => {
     return writeIndex("index.trig")
 }).catch(error => { Logger.error(JSON.stringify(error)) });

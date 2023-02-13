@@ -24,15 +24,15 @@ const dctTitle = DCT("title");
 const dctDescription = DCT("description");
 
 export function readRules(rootManifest: string): Promise<Manifest[]> {
-    var store = createStore();
+    let store = createStore();
     return readManifest(rootManifest, store).then(manifests => { writeFile("manifests.json", JSON.stringify(manifests)); return manifests }).finally(() => { return [] });
 }
 
 function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Array<Manifest>> {
-    var result: Array<Manifest> = [];
-    var manifestReadingPool = [];
-    var baseURI = urlToBaseURI(manifestFilename);
-    var manifestURI = manifestFilename;
+    let result: Array<Manifest> = [];
+    let manifestReadingPool = [];
+    let baseURI = urlToBaseURI(manifestFilename);
+    let manifestURI = manifestFilename;
     if (!(manifestFilename.startsWith("http://") || manifestFilename.startsWith("https://") || manifestFilename.startsWith("file://"))) {
         manifestURI = "file://" + manifestFilename;
         baseURI = "file://" + baseURI;
@@ -41,19 +41,19 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
     return readFile(manifestFilename).then(manifestFileString => {
         $rdf.parse(manifestFileString, store, baseURI);
         const manifestResource = $rdf.sym(manifestURI);
-        var manifestObject: Manifest = {
+        let manifestObject: Manifest = {
             uri: manifestResource.toString(),
             entries: [],
             includes: []
         }
 
         // Inclusion
-        var inclusionCollection = store.statementsMatching(manifestResource, manifestIncludeProperty, null).map(statement => {
+        let inclusionCollection = store.statementsMatching(manifestResource, manifestIncludeProperty, null).map(statement => {
             return statement.object;
         });
         inclusionCollection.forEach(collection => {
             if (collection as $rdf.Collection) {
-                var rdfCollection = collection as $rdf.Collection;
+                let rdfCollection = collection as $rdf.Collection;
                 rdfCollection.elements.forEach(inclusionResource => {
                     manifestReadingPool.push(readManifest(inclusionResource.value, store).then(inclusionManifests => {
                         if (manifestObject.includes == undefined) {
@@ -70,11 +70,11 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         })
 
         // Entries
-        var entriesCollection = store.statementsMatching(manifestResource, manifestEntriesProperty, null).map(statement => statement.object);
-        var entriesURIArray = [];
+        let entriesCollection = store.statementsMatching(manifestResource, manifestEntriesProperty, null).map(statement => statement.object);
+        let entriesURIArray = [];
         entriesCollection.forEach(collection => {
             if (collection as $rdf.Collection) {
-                var rdfCollection = collection as $rdf.Collection;
+                let rdfCollection = collection as $rdf.Collection;
                 entriesURIArray = entriesURIArray.concat(rdfCollection.elements.map(node => node.value))
             }
         })
@@ -102,27 +102,27 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
 function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEntry> {
     const generationAssetResource = $rdf.sym(uri);
 
-    var resultGenerationAsset: ManifestEntry = {
+    let resultGenerationAsset: ManifestEntry = {
         uri: uri,
         test: { uri: uri },
         actionsSuccess: [],
         actionsFailure: []
     }
 
-    var promisePool = [];
+    let promisePool = [];
     try {
         // Test
         if (store.holds(generationAssetResource, rdfTypeProperty, kgiTestQueryType)) {
             const sparqlQueries = store.statementsMatching(generationAssetResource, kgiQueryProperty, null).map(statement => statement.object.value);
-            var descriptions = [];
+            let descriptions = [];
             if (store.holds(generationAssetResource, dctDescription, null)) {
                 descriptions = store.statementsMatching(generationAssetResource, dctDescription, null).map(statement => statement.object.value);
             }
-            var titles = [];
+            let titles = [];
             if (store.holds(generationAssetResource, dctTitle, null)) {
                 titles = store.statementsMatching(generationAssetResource, dctTitle, null).map(statement => statement.object.value);
             }
-            var gaTest: Test = {
+            let gaTest: Test = {
                 uri: generationAssetResource.uri,
                 query: sparqlQueries,
                 description: descriptions,
@@ -133,7 +133,7 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
 
         // Actions
         function getActionLeafNode(actionNode, store) {
-            var actionObject: Action = {
+            let actionObject: Action = {
                 action: []
             };
             const sparqlTestQueries = store.statementsMatching(actionNode, manifestActionProperty, null).map(statement => statement.object.value);
@@ -160,16 +160,16 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
             return actionObject;
         }
         // Success
-        var successActionsCollection = store.statementsMatching(generationAssetResource, kgiOnSuccessProperty, null).map(statement => statement.object);
+        let successActionsCollection = store.statementsMatching(generationAssetResource, kgiOnSuccessProperty, null).map(statement => statement.object);
         successActionsCollection.forEach(collection => {
             if (collection as $rdf.Collection) {
-                var rdfCollection = collection as $rdf.Collection;
+                let rdfCollection = collection as $rdf.Collection;
                 const successActionsNodeArray = rdfCollection.elements;
                 successActionsNodeArray.forEach(node => {
                     if (store.holds(node, manifestActionProperty, null)) {
                         // Action is a leaf node
                         if ($rdf.isBlankNode(node) || $rdf.isNamedNode(node)) {
-                            var actionNode = node;
+                            let actionNode = node;
                             const actionObject = getActionLeafNode(actionNode, store);
                             resultGenerationAsset.actionsSuccess.push(actionObject);
                         } else {
@@ -189,16 +189,16 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
         })
 
         // Failure
-        var failureActionsCollection = store.statementsMatching(generationAssetResource, kgiOnFailureProperty, null).map(statement => statement.object);
+        let failureActionsCollection = store.statementsMatching(generationAssetResource, kgiOnFailureProperty, null).map(statement => statement.object);
         failureActionsCollection.forEach(collection => {
             if (collection as $rdf.Collection) {
-                var rdfCollection = collection as $rdf.Collection;
+                let rdfCollection = collection as $rdf.Collection;
                 const failureActionsNodeArray = rdfCollection.elements;
                 failureActionsNodeArray.forEach(node => {
                     if (store.holds(node, manifestActionProperty, null)) {
                         // Action is a leaf node
                         if ($rdf.isBlankNode(node) || $rdf.isNamedNode(node)) {
-                            var actionNode = node;
+                            let actionNode = node;
                             const actionObject = getActionLeafNode(actionNode, store);
                             resultGenerationAsset.actionsFailure.push(actionObject);
                         }
