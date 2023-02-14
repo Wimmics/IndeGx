@@ -8,7 +8,8 @@
         "millisecondsBetweenRetries": 5000,
         "maxConccurentQueries": 300,
         "delayMillisecondsTimeForConccurentQuery": 1000,
-        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log"
+        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log",
+        "outputFile": "/user/pmaillot/home/git/IndeGx/code/index.trig"
     },
     "prod": {
         "manifest": "/user/pmaillot/home/git/IndeGx/rules/manifest.ttl",
@@ -19,6 +20,7 @@
         "millisecondsBetweenRetries": 5000,
         "maxConccurentQueries": 300,
         "delayMillisecondsTimeForConccurentQuery": 1000,
-        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log"
+        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log",
+        "outputFile": "/user/pmaillot/home/git/IndeGx/code/index.trig"
     }
 }
