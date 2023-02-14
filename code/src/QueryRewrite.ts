@@ -5,7 +5,7 @@ import { XSD } from "./RDFUtils.js";
 import * as Logger from "./LogUtils.js"
 
 function regexReplaceAll(inputString: string, regex: RegExp, replaceString: string) : string {
-    var result = inputString;
+    let result = inputString;
 
     function replacer(correspondance) {
         return replaceString;
@@ -35,7 +35,7 @@ const reasonPlaceholder = "$reason"
 const reasonPlaceholderRegex = /\$reason/g
 
 export function replacePlaceholders(inputString: string, keywordReplacementObject: PlaceholderReplacementObject) {
-    var result = inputString;
+    let result = inputString;
     result = regexReplaceAll(result, /\$rawEndpointUrl/g, $rdf.sym(keywordReplacementObject.endpointUrlString).toNT());
     if(result.includes(queryPlaceholder)) {
         if (keywordReplacementObject.queryString !== undefined) {

@@ -4,14 +4,46 @@ import * as fs from 'node:fs/promises';
 import { setTimeout } from 'node:timers/promises';
 import * as Logger from "./LogUtils.js"
 
-const nbFetchRetries = 10;
-const millisecondsBetweenRetries = 5000;
-var countConcurrentQueries = 0;
-const maxConccurentQueries = 300;
-const delayMillisecondsTimeForConccurentQuery = 300
+export let nbFetchRetries = 10;
+export let millisecondsBetweenRetries = 5000;
+let countConcurrentQueries = 0;
+export let maxConccurentQueries = 300;
+export let delayMillisecondsTimeForConccurentQuery = 1000
 
 export function getCountConccurentQueries() {
     return countConcurrentQueries;
+}
+
+export function setNbFetchRetries(nb: number) {
+    if(nb !== undefined && nb !== null && nb >= 0) {
+        nbFetchRetries = nb;
+    } else {
+        throw new Error("The number of retries must be a positive integer");
+    }
+}
+
+export function setMillisecondsBetweenRetries(milliseconds: number) {
+    if(milliseconds !== undefined && milliseconds !== null && milliseconds >= 0) {
+        millisecondsBetweenRetries = milliseconds;
+    } else {
+        throw new Error("The number of milliseconds between retries must be a positive integer");
+    }
+}
+
+export function setMaxConccurentQueries(max: number) {
+    if(max !== undefined && max !== null && max >= 0) {
+        maxConccurentQueries = max;
+    } else {
+        throw new Error("The number of maximum concurrent queries must be a positive integer");
+    }
+}
+
+export function setDelayMillisecondsTimeForConccurentQuery(milliseconds: number) {
+    if(milliseconds !== undefined && milliseconds !== null && milliseconds >= 0) {
+        delayMillisecondsTimeForConccurentQuery = milliseconds;
+    } else {
+        throw new Error("The number of milliseconds between queries must be a positive integer");
+    }
 }
 
 export function appendToFile(filename, content) {
@@ -27,7 +59,7 @@ export function writeFile(filename, content) {
 }
 
 export function readFile(filename: string): Promise<string> {
-    var readFilePromise = null;
+    let readFilePromise = null;
     if (filename.startsWith("http://") || filename.startsWith("https://")) {
         readFilePromise = fetchGETPromise(filename)
     } else if (filename.startsWith("file://")) {
@@ -42,8 +74,14 @@ type promiseCreationFunction = {
     (...args: any[]): Promise<any>;
 }
 
+/**
+ * Execute promises iteratively, on the opposite to Promise.all, which execute promises in parallel.
+ * @param args Array of the arguments to pass to the promiseCreationFunction. Each element of the array is an array of arguments to pass to the promiseCreationFunction.
+ * @param promiseCreationFunction A function generating a promise from the elements in the args arrays.
+ * @returns a promise resolved when all the promises created by the promiseCreationFunction are resolved.
+ */
 export function iterativePromises(args: Array<Array<any>>, promiseCreationFunction: promiseCreationFunction): Promise<any> {
-    var argsCopy = args.map(arg => arg);
+    let argsCopy = args.map(arg => arg);
     if (argsCopy.length > 0) {
         return promiseCreationFunction.apply(this, argsCopy[0]).then(() => {
             argsCopy.shift();
@@ -54,17 +92,15 @@ export function iterativePromises(args: Array<Array<any>>, promiseCreationFuncti
 }
 
 export function fetchPromise(url, header = new Map(), method = "GET", query = "", numTry = 0) {
-    var myHeaders = new Map();
+    let myHeaders = new Map();
     myHeaders.set('pragma', 'no-cache');
     myHeaders.set('cache-control', 'no-cache');
     header.forEach((value, key) => {
         myHeaders.set(key, value);
     });
-    var myInit: RequestInit = {
+    let myInit: RequestInit = {
         method: method,
         headers: myHeaders,
-        // mode: 'cors',
-        // cache: 'no-cache',
         redirect: 'follow',
     };
     if (method.localeCompare("POST") == 0) {
@@ -75,7 +111,6 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
         return setTimeout(delayMillisecondsTimeForConccurentQuery).then(() => fetchPromise(url, header, method, query, numTry))
     } else {
         countConcurrentQueries++;
-        Logger.log("Concurrent query starts, total:", countConcurrentQueries)
         return fetch(url, myInit)
             .then(response => {
                 if (response.ok) {
@@ -97,7 +132,6 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
                 }
             }).finally(() => {
                 countConcurrentQueries--;
-                Logger.log("Concurrent query ends, total:", countConcurrentQueries)
                 return;
             });
 
@@ -113,7 +147,7 @@ export function fetchPOSTPromise(url, query = "", header = new Map()) {
 }
 
 export function fetchJSONPromise(url, otherHeaders = new Map()) {
-    var header = new Map();
+    let header = new Map();
     header.set('Content-Type', 'application/json');
     otherHeaders.forEach((value, key) => {
         header.set(key, value)

@@ -19,7 +19,7 @@
 <languages.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX schema: <http://schema.org/>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -36,8 +36,7 @@
                     }
                 }
                 WHERE {
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         {
                             SELECT DISTINCT (lang(?o) as ?lang)  WHERE {
                                 ?s ?p ?o
@@ -53,13 +52,13 @@
                 }
             """
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <datatypes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
     [
-        kgi:recommendedPagination 1000 ;
+        kgi:recommendedPagination 100 ;
         mf:action """PREFIX schema: <http://schema.org/>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -74,8 +73,7 @@
                 }
             }
             WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT (datatype(?o) as ?datatype) {
                             ?s ?p ?o
@@ -90,7 +88,7 @@
             }
         """
     ]
-    <../../meta/modifiedUpdate.ttl>
+    
 ) .
 
 <graphList.ttl> a mf:ManifestEntry ;
@@ -118,8 +116,7 @@
                 }
             }
             WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=100")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT ?graph WHERE {
                             GRAPH ?graph { ?s ?p ?o }
@@ -135,14 +132,14 @@
             }
             """
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
     ) .
-    
+
 <vocabularyList.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -159,8 +156,7 @@
                     }
             }
             WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT ?elem {
                         ?s ?elem ?o .
@@ -177,7 +173,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -194,8 +190,7 @@
                     }
             }
             WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT ?elem {
                             ?s a ?elem .
@@ -211,7 +206,7 @@
             """
         ]
         <vocabularyListLOV.ttl>
-        <../../meta/modifiedUpdate.ttl>
+        
     ) ;
     kgi:onFailure (
         <vocabularyListLOV.ttl>
@@ -244,8 +239,7 @@
                         }
                     }
                     WHERE {
-                        BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=100")) AS ?coreseEndpoint)
-                        SERVICE ?coreseEndpoint {
+                        SERVICE $rawEndpointUrl {
                             SELECT DISTINCT ?elem WHERE {
                                 ?s a ?elem .
                             }
@@ -291,8 +285,7 @@
                         }
                     }
                     WHERE {
-                        BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=100")) AS ?coreseEndpoint)
-                        SERVICE ?coreseEndpoint {
+                        SERVICE $rawEndpointUrl {
                             SELECT DISTINCT ?elem WHERE {
                                 ?s ?elem ?o .
                             }
@@ -314,7 +307,7 @@
                     }
                 """
             ]
-            <../../meta/modifiedUpdate.ttl>
+            
         ) .
 
 <timezone.ttl> a mf:ManifestEntry ;
@@ -333,8 +326,7 @@
                         ?endpointDescription schema:broadcastTimezone ?timezone .
                     }
                 } WHERE {
-                    BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                    SERVICE ?coreseEndpoint {
+                    SERVICE $rawEndpointUrl {
                         BIND(TZ(NOW()) AS ?timezone)
                     }
                     FILTER(?timezone != "")
@@ -344,14 +336,14 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
                 }"""
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <resourceHostname.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -367,8 +359,7 @@
                     }
             }
             WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT (IRI(REPLACE(str(?elem), ?urlEnd, "", "q" ) ) AS ?ns)  {
                             ?elem ?p ?o .
@@ -386,7 +377,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -402,8 +393,7 @@
                     }
             }
             WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT DISTINCT (IRI(REPLACE(str(?elem), ?urlEnd, "", "q" ) ) AS ?ns)  {
                             ?s ?p ?elem .
@@ -420,13 +410,13 @@
             }
         """
         ]
-        <../../meta/modifiedUpdate.ttl>
+        
     ) .
 
 <sameAs.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -437,8 +427,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT * {
                             ?s owl:sameAs ?o .
@@ -454,7 +443,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -466,8 +455,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT *) AS ?countSameAs) {
                             ?s owl:sameAs ?o .
@@ -483,7 +471,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -495,8 +483,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT ?s) AS ?countSubjectSameAs) {
                             ?s owl:sameAs ?o .
@@ -512,7 +499,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -524,8 +511,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT (COUNT(DISTINCT ?o) AS ?countObjectSameAs) {
                             ?s owl:sameAs ?o .
@@ -546,7 +532,7 @@
 <sameAsNamespace.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -561,8 +547,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     {
                         SELECT (IRI(REPLACE(str(?s), ?urlEndS, "", "q" ) ) AS ?nsS) (IRI(REPLACE(str(?o), ?urlEndO, "", "q" ) ) AS ?nsO) {
                             ?s owl:sameAs ?o .
@@ -590,7 +575,7 @@
 <linksets.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -606,8 +591,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
                     ?dataset ?endpointLink $rawEndpointUrl .
@@ -631,7 +615,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -647,8 +631,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
                     ?dataset ?endpointLink $rawEndpointUrl .
@@ -672,7 +655,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -688,8 +671,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
                     ?dataset ?endpointLink $rawEndpointUrl .
@@ -713,7 +695,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -729,8 +711,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
                     ?dataset ?endpointLink $rawEndpointUrl .
@@ -754,7 +735,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -770,8 +751,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
                     ?dataset ?endpointLink $rawEndpointUrl .
@@ -802,7 +782,7 @@
             """
         ]
         [
-            kgi:recommendedPagination 1000 ;
+            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -818,8 +798,7 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                BIND(Iri(CONCAT(str($rawEndpointUrl), "?mode=loop&limit=1000")) AS ?coreseEndpoint)
-                SERVICE ?coreseEndpoint {
+                SERVICE $rawEndpointUrl {
                     { ?dataset a dcat:Dataset }
                     UNION { ?dataset a void:Dataset }
                     ?dataset ?endpointLink $rawEndpointUrl .

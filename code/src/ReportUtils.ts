@@ -4,13 +4,14 @@ import * as Rewrite from "./QueryRewrite.js";
 import * as RuleTree from "./RuleTree.js";
 import * as SPARQLUtils from "./SPARQLUtils.js";
 import * as Logger from "./LogUtils.js"
+import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 
-export var successTemplateFilename = "templates/generationAssetApplicationSuccess.sparql";
-export var failureTemplateFilename = "templates/generationAssetApplicationFailure.sparql";
+export let successTemplateFilename = "templates/generationAssetApplicationSuccess.sparql";
+export let failureTemplateFilename = "templates/generationAssetApplicationFailure.sparql";
 
-var failurePattern = null;
-var successPattern = null;
+let failurePattern = null;
+let successPattern = null;
 
 function getFailurePattern(): Promise<string> {
     if (failurePattern === null) {
@@ -51,7 +52,7 @@ export function sendUpdateWithTraceHandling(endpointUrl : string, queryString: s
     return sendQueryWithTraceHandling(Corese.sendUpdate, endpointUrl, queryString, entryObject, startTime, timeout);
 }
 
-export function sendConstructWithTraceHandling(endpointUrl : string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
+export function sendConstructWithTraceHandling(endpointUrl : string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout): Promise<$rdf.Store> {
     return sendQueryWithTraceHandling(Corese.sendConstruct, endpointUrl, queryString, entryObject, startTime, timeout).finally(() => "");
 }
 

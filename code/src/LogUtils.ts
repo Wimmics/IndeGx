@@ -2,7 +2,15 @@ import dayjs from "dayjs"
 import * as util from "node:util"
 import { appendToFile, writeFile } from "./GlobalUtils.js";
 
-const logFileName = "indegx.log"
+let logFileName = "indegx.log"
+
+export function setLogFileName(fileName: string) {
+    if(fileName == null || fileName == undefined || fileName == "") {
+        logFileName = "indegx.log";
+    } else {
+        logFileName = fileName;
+    }
+}
 
 export function log(logObject: any, ...o: any[]) : void {
     logging("LOG", logObject, ...o);

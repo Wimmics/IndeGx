@@ -1,5 +1,20 @@
 {
     "name": "indegx",
+    "author": "Pierre Maillot <pierre.maillot@inria.fr>",
+    "keywords": [
+        "sparql",
+        "rdf",
+        "index",
+        "metadata"
+    ],
+    "license": "Apache 2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Wimmics/IndeGx.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Wimmics/IndeGx/issues"
+    },
     "type": "module",
     "dependencies": {
         "@types/node-fetch": "^2.6.2",
