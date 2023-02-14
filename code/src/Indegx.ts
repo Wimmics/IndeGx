@@ -19,11 +19,13 @@ let millisecondsBetweenRetries = currentConfig.get("millisecondsBetweenRetries")
 let maxConccurentQueries = currentConfig.get("maxConccurentQueries");
 let delayMillisecondsTimeForConccurentQuery = currentConfig.get("delayMillisecondsTimeForConccurentQuery");
 let defaultQueryTimeout = currentConfig.get("defaultQueryTimeout");
+let logFile = currentConfig.get("logFile");
 GlobalUtils.setNbFetchRetries(nbFetchRetries);
 GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
 GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
 GlobalUtils.setDelayMillisecondsTimeForConccurentQuery(delayMillisecondsTimeForConccurentQuery);
 SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
+Logger.setLogFileName(logFile);
 
 Logger.info("Reading manifest tree ", manifest)
 readRules(manifest).then(manifests => {
@@ -72,6 +74,6 @@ readRules(manifest).then(manifests => {
         Logger.info("No post treatment specified");
         return;
     }
-}).then(() => {
+}).finally(() => {
     return writeIndex("index.trig")
 }).catch(error => { Logger.error(JSON.stringify(error)) });

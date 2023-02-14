@@ -1,14 +1,24 @@
 {
     "dev": {
         "manifest": "/user/pmaillot/home/git/IndeGx/rules/manifest.ttl",
-        "post": "/user/pmaillot/home/git/IndeGx/post/manifest.ttl",
+        "post": "",
         "catalog": "/user/pmaillot/home/git/IndeGx/code/testCatalog.ttl",
-        "timeout": 12000
-    }//,
-    // "prod": {
-    //     "manifest": "/user/pmaillot/home/git/IndeGx/rules/manifest.ttl",
-    //     "post": "/user/pmaillot/home/git/IndeGx/post/manifest.ttl",
-    //     "catalog": "/user/pmaillot/home/git/IndeGx/rules/catalog.ttl",
-    //     "timeout": 300
-    // }
+        "defaultQueryTimeout": 1200,
+        "nbFetchRetries": 10,
+        "millisecondsBetweenRetries": 5000,
+        "maxConccurentQueries": 300,
+        "delayMillisecondsTimeForConccurentQuery": 1000,
+        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log"
+    },
+    "prod": {
+        "manifest": "/user/pmaillot/home/git/IndeGx/rules/manifest.ttl",
+        "post": "/user/pmaillot/home/git/IndeGx/post/manifest.ttl",
+        "catalog": "/user/pmaillot/home/git/IndeGx/rules/catalog.ttl",
+        "defaultQueryTimeout": 300,
+        "nbFetchRetries": 10,
+        "millisecondsBetweenRetries": 5000,
+        "maxConccurentQueries": 300,
+        "delayMillisecondsTimeForConccurentQuery": 1000,
+        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log"
+    }
 }

@@ -1,4 +1,4 @@
-import { isSparqlAsk, isSparqlConstruct, isSparqlSelect, isSparqlUpdate, sparqlQueryPromise } from "./SPARQLUtils.js";
+import { isSparqlAsk, isSparqlConstruct, isSparqlSelect, isSparqlUpdate, sparqlQueryPromise, defaultQueryTimeout } from "./SPARQLUtils.js";
 import * as $rdf from "rdflib";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
@@ -7,7 +7,7 @@ import * as Global from "./GlobalUtils.js";
 export const coreseServerUrl = "http://localhost:8080/sparql";
 export const coreseDefaultGraphURI = "http://ns.inria.fr/corese/kgram/default";
 
-export function sendUpdate(endpoint: string, queryString: string, timeout?: number) {
+export function sendUpdate(endpoint: string, queryString: string, timeout: number = defaultQueryTimeout): Promise<any> {
     if (isSparqlUpdate(queryString)) {
         return sparqlQueryPromise(coreseServerUrl, queryString, timeout).then(result => {
             return result;
