@@ -1,0 +1,20 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+
+kgi:catalog a dcat:Catalog ;
+    dcat:dataset kgi:Joconde , kgi:calmip , kgi:dataportalwatch .
+
+kgi:Joconde void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> .
+
+kgi:calmip void:sparqlEndpoint <https://allegro.callisto.calmip.univ-toulouse.fr/#/repositories/sms> .
+
+kgi:dataportalwatch void:sparqlEndpoint <https://data.wu.ac.at/sparql/> .
