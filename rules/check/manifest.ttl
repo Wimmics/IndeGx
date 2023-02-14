@@ -37,7 +37,6 @@
                 }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <reachability.ttl> a mf:ManifestEntry ;
@@ -76,7 +75,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
         [
@@ -113,7 +111,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <provenance.ttl> a mf:ManifestEntry ;
@@ -145,7 +142,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
         [
@@ -175,7 +171,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <basicProvenance.ttl> a mf:ManifestEntry ;
@@ -241,7 +236,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <shortUris.ttl> a mf:ManifestEntry ;
@@ -294,7 +288,6 @@
                 }
                 """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <RDFDataStructures.ttl> a mf:ManifestEntry ;
@@ -347,7 +340,6 @@
                 }
                 """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <blankNodeUsage.ttl> a mf:ManifestEntry ;
@@ -395,7 +387,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <readableLabels.ttl> a mf:ManifestEntry ;
@@ -463,7 +454,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <multipleLanguages.ttl> a mf:ManifestEntry ;
@@ -524,7 +514,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <uriPattern.ttl> a mf:ManifestEntry ;
@@ -556,7 +545,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
         [
@@ -586,7 +574,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <coolUri.ttl> a mf:ManifestEntry ;
@@ -618,7 +605,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
         [
@@ -648,7 +634,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
 
 <indicatesUsedVocabularies.ttl> a mf:ManifestEntry ;
@@ -711,7 +696,6 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) ;
     kgi:onFailure (
         [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
@@ -740,5 +724,4 @@
             }
             """
         ]
-        <../meta/modifiedUpdate.ttl>
     ) .
