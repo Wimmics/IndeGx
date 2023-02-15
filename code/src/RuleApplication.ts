@@ -470,7 +470,6 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                 return sendConstructWithTraceHandling(endpointUrl, generatedQuery, entryObject, startTime).then(constructResult => {
                     if (constructResult !== undefined) {
                         if (constructResult.length > 0) {
-                            // Generate the INSERT DATA/DELETE DATA from the result of the construct query
                             let graphName = undefined;
                             if (object.graph !== undefined) {
                                 if (object.graphNameIsVariable != undefined && object.graphNameIsVariable) {
@@ -485,11 +484,12 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                     } else {
                                         throw new Error("Could not find the graph name for the variable " + object.graph + " " + JSON.stringify(constructResult.match(null, constructResult.sym(bogusGraphNameValuePropertyString), null)));
                                     }
-                                } else if (object.graphNameIsVariable != undefined && object.graphNameIsVariable) {
+                                } else if (object.graphNameIsVariable != undefined && ! object.graphNameIsVariable) {
                                     // The graph name is not a variable
                                     constructResult.removeMatches(null, constructResult.sym(bogusGraphNameValuePropertyString), null);
                                 }
                             }
+                            // Generate the INSERT DATA/DELETE DATA from the result of the construct query
                             return RDFUtils.serializeStoreToNTriplesPromise(constructResult).catch(error => {
                                 Logger.error("Error serializing the construct result to NTriples: ", error);
                                 return "";
@@ -511,9 +511,12 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                 return paginateQuery(object, pageSize, iteration + 1);
                             })
                         } else {
-                            return;
+                            let endTime = dayjs();
+                            Logger.log(endpointUrl, "Pagination n°", iteration, ": 0 triples for the query ", generatedQuery );
+                            return sendFailureReportUpdate(endpointUrl, generatedQuery, entryObject, startTime, endTime, "No triples returned by the query");
                         }
                     } else {
+                        Logger.log(endpointUrl, "Pagination n°", iteration, ": undefined triples for the query ", generatedQuery );
                         return paginateQuery(object, pageSize, iteration + 1);
                     }
                 }).catch(error => {
