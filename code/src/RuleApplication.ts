@@ -146,7 +146,110 @@ function applyTest(endpointUrl: string, testObject: RuleTree.Test, entryObject: 
     }
 }
 
-function applyAction(endpointUrl: string, actionObject: RuleTree.Action, entryObject: RuleTree.ManifestEntry): Promise<any> {
+function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[], inService: boolean = false): any[] {
+    let endpointUrl = endpointObject.endpoint;
+    let parser = new sparqljs.Parser();
+    let result = [];
+    patterns.forEach(pattern => {
+        // If the pattern is a SELECT or CONSTRUCT query, then we add the pagination to it if it is in a SERVICE clause
+        if ((pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0 || pattern.queryType.localeCompare("ASK") == 0 )|| (pattern.updateType !== undefined && pattern.updateType.localeCompare("insertdelete") == 0))) {
+            // The query is in a SERVICE clause
+            if (inService) {
+                let rewrittenPattern = pattern;
+                rewrittenPattern.where = [
+                    {
+                        "type": "graph",
+                        "patterns": pattern.where,
+                        "name": {
+                            "termType": "Variable",
+                            "value": "graph"
+                        }
+                    },
+                    {
+                        "type": "values",
+                        "values": endpointObject.graphs.map(graphName => {
+                            return {
+                                "?graph": {
+                                    "termType": "NamedNode",
+                                    "value": graphName
+                                }
+                            }
+                        })
+                    }
+                ];
+                result.push(rewrittenPattern);
+                // The query is not in a SERVICE clause, then we process its where clause
+            } else {
+                let rewrittenPattern = pattern;
+                rewrittenPattern.where = addGraphToInnerQueries(endpointObject, pattern.where, inService);
+                result.push(rewrittenPattern);
+            }
+            // We process any other query element that contains patterns
+        } else if (pattern.patterns !== undefined) {
+            // If the pattern is a SERVICE clause to the processed endpoint, then we process its patterns
+            if (pattern.type !== undefined && pattern.type.localeCompare("service") == 0 && pattern.name.value.localeCompare(endpointUrl) == 0) {
+                let thereAreSelects = searchForSelect(pattern.patterns);
+                // If there is a SELECT query in the SERVICE clause, then we add the graphs recursively
+                if (thereAreSelects) {
+                    let rewrittenPattern = pattern;
+                    rewrittenPattern.patterns = addGraphToInnerQueries(endpointObject, pattern.patterns, true);
+                    result.push(rewrittenPattern);
+                    // If there is no SELECT query in the SERVICE clause, then we add a SELECT query to it and the graphs with it
+                } else {
+                    let rewrittenPattern = pattern;
+                    let templateSelectQuery = parser.parse("SELECT * WHERE { ?s ?p ?o }");
+                    templateSelectQuery.where = [
+                        {
+                            "type": "graph",
+                            "patterns": pattern.patterns,
+                            "name": {
+                                "termType": "Variable",
+                                "value": "graph"
+                            }
+                        },
+                        {
+                            "type": "values",
+                            "values": endpointObject.graphs.map(graphName => {
+                                return {
+                                    "?graph": {
+                                        "termType": "NamedNode",
+                                        "value": graphName
+                                    }
+                                }
+                            })
+                        }
+                    ];
+                    rewrittenPattern.patterns = [templateSelectQuery];
+                    result.push(rewrittenPattern);
+                }
+                // Any other pattern is processed
+            } else {
+                let rewrittenPattern = pattern;
+                rewrittenPattern.patterns = addGraphToInnerQueries(endpointObject, pattern.patterns, inService);
+                result.push(rewrittenPattern);
+            }
+        } else {
+            result.push(pattern);
+        }
+    });
+    return result
+}
+
+function searchForSelect(patterns: any[]): boolean {
+    let result = false;
+    patterns.forEach(pattern => {
+        if (pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0)) {
+            result = true
+        } else {
+            if (pattern.patterns !== undefined) {
+                result = searchForSelect(pattern.patterns);
+            }
+        }
+    });
+    return result
+}
+
+function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Action, entryObject: RuleTree.ManifestEntry): Promise<any> {
     let generator = new sparqljs.Generator();
     let actionPool = [];
     const startTime = dayjs();
