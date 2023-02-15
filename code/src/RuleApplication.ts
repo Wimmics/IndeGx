@@ -246,10 +246,10 @@ function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[],
 function searchForSelect(patterns: any[]): boolean {
     let result = false;
     patterns.forEach(pattern => {
-        if (pattern.patterns !== undefined) {
-            if (pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0)) {
-                result = true
-            } else {
+        if (pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0)) {
+            result = true
+        } else {
+            if (pattern.patterns !== undefined) {
                 result = searchForSelect(pattern.patterns);
             }
         }
