@@ -20,6 +20,7 @@ let maxConccurentQueries = currentConfig.get("maxConccurentQueries");
 let delayMillisecondsTimeForConccurentQuery = currentConfig.get("delayMillisecondsTimeForConccurentQuery");
 let defaultQueryTimeout = currentConfig.get("defaultQueryTimeout");
 let logFile = currentConfig.get("logFile");
+let outputFile = currentConfig.get("outputFile");
 GlobalUtils.setNbFetchRetries(nbFetchRetries);
 GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
 GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
@@ -34,14 +35,14 @@ readRules(manifest).then(manifests => {
 
     Logger.info("Reading catalog", catalog)
     let endpointPool = [];
-    return readCatalog(catalog).then(endpointList => {
+    return readCatalog(catalog).then(endpointObjectList => {
         Logger.info("Catalog read")
-        endpointList.forEach(endpoint => {
-            Logger.info("START", endpoint)
+        endpointObjectList.forEach(endpointObject => {
+            Logger.info("START", endpointObject.endpoint)
             manifests.forEach(manifest => {
-                Logger.info("Treating endpoint", endpoint);
-                endpointPool.push(applyRuleTree(endpoint, manifest).then(() => {
-                    Logger.info("Endpoint", endpoint, "treated");
+                Logger.info("Treating endpoint", endpointObject.endpoint);
+                endpointPool.push(applyRuleTree(endpointObject, manifest).then(() => {
+                    Logger.info("Endpoint", endpointObject.endpoint, "treated");
                     return;
                 }).catch(error => {
                     Logger.error(error)
@@ -64,7 +65,7 @@ readRules(manifest).then(manifests => {
             Logger.info("Post treatment starts");
             let manifestPool = [];
             manifests.forEach(manifest => {
-                manifestPool.push(applyRuleTree(coreseServerUrl, manifest));
+                manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl}, manifest));
             })
             return Promise.allSettled(manifestPool).then(() => {
                 Logger.info("Post treatment ends");
@@ -75,5 +76,5 @@ readRules(manifest).then(manifests => {
         return;
     }
 }).finally(() => {
-    return writeIndex("index.trig")
+    return writeIndex(outputFile)
 }).catch(error => { Logger.error(JSON.stringify(error)) });
