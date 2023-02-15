@@ -7,27 +7,5 @@
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<> a kgi:TestQuery ;
-    dcterms:isReferencedBy <manifest.ttl> ;
-    dcterms:title "There are as many classes as expected."@en ;
-    kgi:timeout "PT120S"^^xsd:duration ;
-    kgi:query """
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-        PREFIX void: <http://rdfs.org/ns/void#>
-        PREFIX dcat: <http://www.w3.org/ns/dcat#>
-        ASK {
-                SERVICE $rawEndpointUrl { 
-                    ?res void:classes ?extractedValue .
-                    ?res ?p $rawEndpointUrl .
-                    { ?res a dcat:Dataset }
-                    UNION { ?res a void:Dataset }
-                    {
-                        SELECT (count( DISTINCT ?c) AS ?value)
-                        WHERE {
-                            ?s a ?c .
-                        }
-                    }
-                    FILTER(?extractedValue != ?value)
-                }
-        } """ .
+<> rdf:type kgi:DummyTest ;
+    dcterms:isReferencedBy <manifest.ttl> .

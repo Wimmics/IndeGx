@@ -19,6 +19,24 @@
 <languages.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            mf:action """PREFIX schema: <http://schema.org/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX schema: <http://schema.org/>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -28,11 +46,6 @@
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription schema:availableLanguage ?lang .
                         ?datasetDescription dcterms:language ?lang .
-                    }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 }
                 WHERE {
@@ -46,19 +59,16 @@
                         }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
-        
+
     ) .
 
 <datatypes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
     [
-        kgi:recommendedPagination 100 ;
         mf:action """PREFIX schema: <http://schema.org/>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -68,6 +78,20 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/languages.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/datatypes.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            }
+            WHERE {
+                FILTER( ?datatype != "" )
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+        """
+    ]
+    [
+        kgi:recommendedPagination 100 ;
+        mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription kgi:availableLiteralDatatypes ?datatype .
                 }
@@ -84,18 +108,15 @@
                 FILTER( ?datatype != "" )
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
         """
     ]
-    
+
 ) .
 
 <graphList.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 100 ;
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -108,6 +129,24 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/graphList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?graph))), "Graph")) AS ?graphResource)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 100 ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?endpointDescription sd:availableGraphs ?datasetDescription .
                     ?datasetDescription sd:namedGraph ?graphResource .
@@ -128,18 +167,15 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?graph))), "Graph")) AS ?graphResource)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
-        
+
     ) .
 
 <vocabularyList.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -150,7 +186,23 @@
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
-
+            }
+            WHERE {
+                BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+        """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:vocabulary ?ns .
                     }
@@ -167,7 +219,6 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
         """
         ]
@@ -180,11 +231,6 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:vocabulary ?ns .
                     }
@@ -201,12 +247,11 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
         <vocabularyListLOV.ttl>
-        
+
     ) ;
     kgi:onFailure (
         <vocabularyListLOV.ttl>
@@ -215,8 +260,6 @@
 <vocabularyListLOV.ttl> a mf:ManifestEntry ;
         kgi:onSuccess (
             [
-                kgi:timeout "PT120S"^^xsd:duration ;
-                kgi:recommendedPagination 100 ;
                 mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                     PREFIX prov: <http://www.w3.org/ns/prov#>
                     PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -230,6 +273,25 @@
                                 prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl> ;
                                 prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X>  .
                         }
+                    }
+                    WHERE {
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                    }
+                """
+            ]
+            [
+                kgi:timeout "PT120S"^^xsd:duration ;
+                kgi:recommendedPagination 100 ;
+                mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                    PREFIX prov: <http://www.w3.org/ns/prov#>
+                    PREFIX earl: <http://www.w3.org/ns/earl#>
+                    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                    PREFIX vann: <http://purl.org/vocab/vann/>
+                    PREFIX voaf: <http://purl.org/vocommons/voaf#>
+                    PREFIX dcterms: <http://purl.org/dc/terms/>
+                    INSERT {
                         GRAPH ?curatedDescriptionGraph {
                             ?datasetDescription void:vocabulary ?vocabURI .
                             ?vocabURI a voaf:Vocabulary ;
@@ -256,7 +318,6 @@
                         BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                         BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                         BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                     }
                 """
             ]
@@ -271,11 +332,6 @@
                     PREFIX vann: <http://purl.org/vocab/vann/>
                     PREFIX voaf: <http://purl.org/vocommons/voaf#>
                     INSERT {
-                        GRAPH ?metadataDescriptionGraph {
-                            ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl#activity> ;
-                                prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyListLOV.ttl> ;
-                                prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X>  .
-                        }
                         GRAPH ?curatedDescriptionGraph {
                             ?datasetDescription void:vocabulary ?vocabURI .
                             ?vocabURI a voaf:Vocabulary ;
@@ -302,12 +358,11 @@
                         BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                         BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                         BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                         BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
                     }
                 """
             ]
-            
+
         ) .
 
 <timezone.ttl> a mf:ManifestEntry ;
@@ -336,14 +391,12 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
                 }"""
         ]
-        
+
     ) .
 
 <resourceHostname.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -354,6 +407,22 @@
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/resourceNamespaces.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+            }
+        """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription kgi:resourceHostname ?ns .
                     }
@@ -370,7 +439,6 @@
                 }
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
         """
@@ -383,11 +451,6 @@
                 PREFIX earl: <http://www.w3.org/ns/earl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/resourceNamespaces.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/vocabularyList.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/computed/resourceNamespaces.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription kgi:resourceHostname ?ns .
                     }
@@ -405,12 +468,11 @@
                 }
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
         """
         ]
-        
+
     ) .
 
 <sameAs.ttl> a mf:ManifestEntry ;

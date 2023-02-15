@@ -197,7 +197,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 }"""
         ]
-        
+
     ) ;
     kgi:onFailure (
         <endpointDescResourceLocalhost.ttl>
@@ -359,7 +359,7 @@
                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 }"""
         ]
-        
+
     ) .
 
 <datasetDescResource.ttl> a mf:ManifestEntry ;
@@ -564,7 +564,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                  }"""
         ]
-        
+
         ) ;
         kgi:onFailure (
             <datasetDescResourceLocalhost.ttl>
@@ -703,7 +703,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
                  }"""
         ]
-        
+
     ) .
 
 <linksets.ttl> a mf:ManifestEntry ;

@@ -35,9 +35,8 @@
         ) .
 
 <classCount.ttl> a mf:ManifestEntry ;
-    kgi:onFailure (
+    kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -52,6 +51,24 @@
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classCount.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classCount.ttl> ;
                                 prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:classes ?count .
                     }
@@ -72,16 +89,14 @@
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
     ) .
 
 <propertyCount.ttl> a mf:ManifestEntry ;
-    kgi:onFailure (
+    kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -96,6 +111,24 @@
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/propertyCount.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/propertyCount.ttl> ;
                                 prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:properties ?count .
                     }
@@ -114,7 +147,6 @@
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -123,7 +155,6 @@
 <tripleCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -136,6 +167,33 @@
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/tripleCount.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/tripleCount.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (count(*) AS ?count) {
+                                SELECT DISTINCT ?s ?p ?o
+
+                                WHERE {
+                                   ?s ?p ?o .
+                                }
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:triples ?count .
                     }
@@ -154,7 +212,6 @@
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -162,6 +219,27 @@
 
 <literalCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/tripleCount.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/tripleCount.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/tripleCount.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
@@ -203,6 +281,25 @@
 <classPopulation.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classPopulation.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classPopulation.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classPopulation.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?class))), "ClassPartition")) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
@@ -214,11 +311,6 @@
                         ?datasetDescription void:classPartition ?classPartition .
                         ?classPartition void:class ?class ;
                                 void:entities ?count .
-                    }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classPopulation.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classPopulation.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/classPopulation.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 }
                 WHERE {
@@ -236,7 +328,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?class))), "ClassPartition")) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -245,14 +336,10 @@
 <sportalDistinctRDFNodes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription voidex:distinctRDFNodes ?x .
-                    }
                     GRAPH ?metadataDescriptionGraph {
                         ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctRDFNodes.ttl#activity> .
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctRDFNodes.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctRDFNodes.ttl> ;
@@ -269,8 +356,31 @@
                         }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription voidex:distinctRDFNodes ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?s ) AS ?x) {
+                                ?s ?p ?o
+                                FILTER(isIri(?s))
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                 }
             """
         ]
@@ -279,6 +389,23 @@
 <sportalDistinctUrisObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisObjects.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisObjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisObjects.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
             kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -286,11 +413,6 @@
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription voidex:distinctIRIReferenceObjects ?x .
-                    }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisObjects.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisObjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisObjects.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 }
                 WHERE {
@@ -304,7 +426,6 @@
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -313,6 +434,23 @@
 <sportalDistinctUrisSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisSubjects.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisSubjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisSubjects.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
             kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -320,11 +458,6 @@
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription voidex:distinctIRIReferenceSubjects ?x .
-                    }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisSubjects.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisSubjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctUrisSubjects.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 }
                 WHERE {
@@ -338,7 +471,6 @@
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -347,14 +479,10 @@
 <sportalDistinctBlankNodeSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription voidex:distinctBlankNodeSubjects ?x .
-                    }
                     GRAPH ?metadataDescriptionGraph {
                         ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeSubjects.ttl#activity> .
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeSubjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeSubjects.ttl> ;
@@ -362,24 +490,56 @@
                     }
                 }
                 WHERE {
-                    SERVICE $rawEndpointUrl {
-                        {
-                            SELECT (COUNT(DISTINCT ?s) AS ?x) {
-                                ?s ?p ?o
-                                FILTER(isBlank(?s))
-                            }
-                        }
-                    }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
+            [
+                kgi:timeout "PT120S"^^xsd:duration ;
+                mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                    PREFIX prov: <http://www.w3.org/ns/prov#>
+                    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                    INSERT {
+                        GRAPH ?curatedDescriptionGraph {
+                            ?datasetDescription voidex:distinctBlankNodeSubjects ?x .
+                        }
+                    }
+                    WHERE {
+                        SERVICE $rawEndpointUrl {
+                            {
+                                SELECT (COUNT(DISTINCT ?s) AS ?x) {
+                                    ?s ?p ?o
+                                    FILTER(isBlank(?s))
+                                }
+                            }
+                        }
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                    }
+                """
+            ]
     ) .
 
 <sportalDistinctBlankNodeObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeObjects.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeObjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeObjects.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
@@ -388,11 +548,6 @@
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription voidex:distinctBlankNodeSubjects ?x .
-                    }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeObjects.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeObjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodeObjects.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
                 }
                 WHERE {
@@ -406,7 +561,6 @@
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -415,18 +569,30 @@
 <sportalDistinctBlankNodes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                GRAPH ?curatedDescriptionGraph {
-                    ?datasetDescription voidex:distinctBlankNodes ?x .
-                }
                 GRAPH ?metadataDescriptionGraph {
                     ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodes.ttl#activity> .
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodes.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctBlankNodes.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription voidex:distinctBlankNodes ?x .
                 }
             }
             WHERE {
@@ -441,7 +607,6 @@
                 }
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
@@ -450,18 +615,30 @@
 <sportalDistinctIRIReferences.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                GRAPH ?curatedDescriptionGraph {
-                    ?datasetDescription voidex:distinctIRIReferences ?x .
-                }
                 GRAPH ?metadataDescriptionGraph {
                     ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctIRIReferences.ttl#activity> .
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctIRIReferences.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctIRIReferences.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription voidex:distinctIRIReferences ?x .
                 }
             }
             WHERE {
@@ -474,7 +651,6 @@
                 }
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
@@ -483,6 +659,23 @@
 <sportalDistinctLiterals.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctLiterals.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctLiterals.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctLiterals.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
             kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -490,11 +683,6 @@
             INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription voidex:distinctLiterals ?x .
-                }
-                GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctLiterals.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctLiterals.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalDistinctLiterals.ttl> ;
-                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             }
             WHERE {
@@ -508,7 +696,6 @@
                 }
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
@@ -516,6 +703,25 @@
 
 <sportalClassPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartition.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartition.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -529,11 +735,6 @@
                         ?datasetDescription void:classPartition ?classPartition .
                         ?classPartition void:class ?c .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartition.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartition.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -542,7 +743,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -551,6 +751,23 @@
 
 <sportalClassPartitionTriples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionTriples.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionTriples.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionTriples.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -563,11 +780,6 @@
                         ?classPartition void:class ?c ;
                             void:triples ?x .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionTriples.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionTriples.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionTriples.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -578,7 +790,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
   					BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))) , "ClassPartition" )) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -586,6 +797,24 @@
 
 <sportalClassPartitionClasses.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionClasses.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionClasses.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionClasses.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -599,11 +828,6 @@
                         ?classPartition void:class ?c ;
                                 void:classes ?x .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionClasses.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionClasses.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionClasses.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -614,7 +838,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -622,6 +845,24 @@
 
 <sportalClassPartitionProperties.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionProperties.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionProperties.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionProperties.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -635,11 +876,6 @@
                         ?classPartition void:class ?c ;
                             void:properties ?x .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionProperties.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionProperties.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionProperties.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -651,7 +887,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition" )) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -659,6 +894,24 @@
 
 <sportalClassPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctSubjects.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctSubjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctSubjects.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -672,11 +925,6 @@
                         ?classPartition void:class ?c ;
                             void:distinctSubjects ?x .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctSubjects.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctSubjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctSubjects.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -687,7 +935,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -695,6 +942,24 @@
 
 <sportalClassPartitionDistinctObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctObjects.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctObjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctObjects.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -708,11 +973,6 @@
                         ?classPartition void:class ?c ;
                             void:distinctObjects ?x .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctObjects.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctObjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionDistinctObjects.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -722,7 +982,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -730,12 +989,74 @@
 
 <sportalClassPartitionPropertyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:propertyPartition ?classPropertyPartition .
+                        ?classPropertyPartition void:property ?p .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        { ?s a ?c ; ?p ?o }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                }
+            """
+        ]
         <sportalClassPartitionPropertyPartitionTriples.ttl>
         <sportalClassPartitionPropertyPartitionDistinctSubjects.ttl>
     ) .
 
 <sportalClassPartitionPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionTriples.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionTriples.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionTriples.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -751,11 +1072,6 @@
                         ?classPropertyPartition void:property ?p ;
                             void:triples ?x .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionTriples.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionTriples.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionTriples.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -765,42 +1081,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
-                }
-            """
-        ]
-        
-    ) ;
-    kgi:onFailure (
-        [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
-            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX earl: <http://www.w3.org/ns/earl#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-                INSERT {
-                    GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:classPartition ?classPartition .
-                        ?classPartition void:class ?c ;
-                            void:propertyPartition ?classPropertyPartition .
-                        ?classPropertyPartition void:property ?p .
-                    }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
-                }
-                WHERE {
-                    SERVICE $rawEndpointUrl {
-                        { ?s a ?c ; ?p ?o }
-                    }
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -808,6 +1088,24 @@
 
 <sportalClassPartitionPropertyPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionDistinctSubjects.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionDistinctSubjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionDistinctSubjects.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -823,11 +1121,6 @@
                         ?classPropertyPartition void:property ?p ;
                             void:distinctSubjects ?x .
                     }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionDistinctSubjects.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionDistinctSubjects.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartitionDistinctSubjects.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
@@ -837,41 +1130,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
-                }
-            """
-        ]
-    ) ;
-    kgi:onFailure (
-        [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
-            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX earl: <http://www.w3.org/ns/earl#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-                INSERT {
-                    GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:classPartition ?classPartition .
-                        ?classPartition void:class ?c ;
-                            void:propertyPartition ?classPropertyPartition .
-                        ?classPropertyPartition void:property ?p .
-                    }
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalClassPartitionPropertyPartition.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
-                }
-                WHERE {
-                    SERVICE $rawEndpointUrl {
-                        { ?s a ?c ; ?p ?o . }
-                    }
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
             """
         ]
@@ -879,6 +1137,23 @@
 
 <sportalPropertyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?propertyPartition void:property ?p .
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartition.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartition.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }"""
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -889,12 +1164,6 @@
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription void:propertyPartition ?propertyPartition .
                 }
-                GRAPH ?metadataDescriptionGraph {
-                    ?propertyPartition void:property ?p .
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartition.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartition.ttl> ;
-                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                }
             }
             WHERE {
                 SERVICE $rawEndpointUrl {
@@ -903,7 +1172,6 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
         <sportalPropertyPartitionTriples.ttl>
@@ -913,6 +1181,22 @@
 
 <sportalPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }"""
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -925,11 +1209,6 @@
                     ?propertyPartition void:property ?p ;
                         void:triples ?x .
                 }
-                GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl> ;
-                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                }
             }
             WHERE {
                 SERVICE $rawEndpointUrl {
@@ -938,13 +1217,27 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
     ) .
 
 <sportalPropertyPartitionDistinctSubject.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }"""
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -957,11 +1250,6 @@
                     ?propertyPartition void:property ?p ;
                         void:distinctSubjects ?x .
                 }
-                GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl> ;
-                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                }
             } WHERE {
                 SERVICE $rawEndpointUrl {
                     { SELECT (COUNT(DISTINCT ?s) AS ?x) ?p WHERE { ?s ?p ?o } GROUP BY ?p }
@@ -969,13 +1257,27 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
     ) .
 
 <sportalPropertyPartitionDistinctObject.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }"""
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -988,11 +1290,6 @@
                     ?propertyPartition void:property ?p ;
                         void:distinctObjects ?x .
                 }
-                GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl> ;
-                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                }
             } WHERE {
                 SERVICE $rawEndpointUrl {
                     { SELECT (COUNT(DISTINCT ?o) AS ?x) ?p WHERE { ?s ?p ?o } GROUP BY ?p }
@@ -1000,13 +1297,32 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }"""
         ]
     ) .
 
 <vocabularyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
@@ -1020,11 +1336,6 @@
                     ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
                     ?vocabularyPartition void:vocabulary ?ns .
                     ?vocabularyPartition void:classes ?count .
-                }
-                GRAPH ?metadataDescriptionGraph {
-                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl#activity> .
-                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl> ;
-                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             }
             WHERE {
@@ -1045,7 +1356,6 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
@@ -1058,11 +1368,6 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
                         ?vocabularyPartition void:vocabulary ?ns .
@@ -1087,7 +1392,6 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
@@ -1096,8 +1400,6 @@
 <resourceHostnamePartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -1108,6 +1410,21 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+        """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription kgi:hostnamePartition ?hostnamePartition .
                     ?hostnamePartition kgi:resourceHostname ?ns .
@@ -1133,7 +1450,6 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))), "HostnamePartition" )) AS ?hostnamePartition)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
         """
         ]
@@ -1145,11 +1461,6 @@
                 PREFIX earl: <http://www.w3.org/ns/earl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription kgi:hostnamePartition ?hostnamePartition .
                         ?hostnamePartition kgi:resourceHostname ?ns .
@@ -1175,7 +1486,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))), "HostnamePartition" )) AS ?hostnamePartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
         """
         ]
@@ -1187,11 +1497,6 @@
                 PREFIX earl: <http://www.w3.org/ns/earl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                    }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription kgi:hostnamePartition ?hostnamePartition .
                         ?hostnamePartition kgi:resourceHostname ?ns .
@@ -1222,7 +1527,6 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))), "HostnamePartition" )) AS ?hostnamePartition)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
         """
         ]

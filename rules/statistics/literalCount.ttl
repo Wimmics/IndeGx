@@ -5,20 +5,5 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<> a kgi:TestQuery ;
-    dcterms:isReferencedBy <manifest.ttl> ;
-    kgi:timeout "PT120S"^^xsd:duration ;
-    kgi:query """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            ASK {
-                SERVICE $rawEndpointUrl { 
-                    {
-                        SELECT (count(?o) AS ?value) WHERE {
-                            ?s ?p ?o .
-                            FILTER(isLiteral(?o))
-                        }
-                    }
-                }
-            } """
-        .
+<> rdf:type kgi:DummyTest ;
+    dcterms:isReferencedBy <manifest.ttl> .
