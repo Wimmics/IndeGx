@@ -478,7 +478,6 @@
 <sameAs.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -489,23 +488,13 @@
                     ?datasetDescription kgi:linkset ?linkset .
                 }
             } WHERE {
-                SERVICE $rawEndpointUrl {
-                    {
-                        SELECT * {
-                            ?s owl:sameAs ?o .
-                        } LIMIT 1
-                    }
-                }
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
         [
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -527,13 +516,10 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
         [
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -555,13 +541,10 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(owl:sameAs))), "Linkset")) AS ?linkset)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
             }
             """
         ]
         [
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX owl: <http://www.w3.org/2002/07/owl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
