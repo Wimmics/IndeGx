@@ -1,6 +1,6 @@
 import { Manifest, ManifestEntry, Test, Action } from "./RuleTree.js"
-import { createStore, serializeStoreToNTriplesPromise, loadRemoteRDFFiles, EARL, RDF, MANIFEST, KGI, DCT, loadRemoteRDFFile } from "./RDFUtils.js";
-import { fetchGETPromise, readFile, urlToBaseURI, writeFile } from "./GlobalUtils.js";
+import { createStore, loadRemoteRDFFiles, RDF, MANIFEST, KGI, DCT, loadRemoteRDFFile } from "./RDFUtils.js";
+import { readFile, urlToBaseURI, writeFile } from "./GlobalUtils.js";
 import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 import duration from 'dayjs/plugin/duration.js';

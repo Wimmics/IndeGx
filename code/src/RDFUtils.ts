@@ -1,5 +1,5 @@
 import * as $rdf from "rdflib";
-import { fetchGETPromise, readFile, urlToBaseURI } from "./GlobalUtils.js";
+import { readFile, urlToBaseURI } from "./GlobalUtils.js";
 import * as Logger from "./LogUtils.js"
 
 export const VOID = $rdf.Namespace("http://rdfs.org/ns/void#");

@@ -4,10 +4,10 @@ import * as SPARQLUtils from "./SPARQLUtils.js";
 import * as Logger from "./LogUtils.js"
 import * as RDFUtils from "./RDFUtils.js"
 import dayjs from "dayjs";
-import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling } from "./ReportUtils.js";
+import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling, sendFailureReportUpdate } from "./ReportUtils.js";
 import { replacePlaceholders } from "./QueryRewrite.js";
-import sparqljs from "sparqljs";
 import { EndpointObject } from "./CatalogInput.js";
+import sparqljs from "sparqljs";
 
 export function applyRuleTree(endpointObject: EndpointObject, manifestObject: RuleTree.Manifest) {
     let subTreeApplicationPool = [];

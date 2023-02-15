@@ -2,7 +2,6 @@ import { isSparqlAsk, isSparqlConstruct, isSparqlSelect, isSparqlUpdate, sparqlQ
 import * as $rdf from "rdflib";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
-import * as Global from "./GlobalUtils.js";
 
 export const coreseServerUrl = "http://localhost:8080/sparql";
 export const coreseDefaultGraphURI = "http://ns.inria.fr/corese/kgram/default";

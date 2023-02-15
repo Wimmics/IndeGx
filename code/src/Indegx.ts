@@ -1,4 +1,4 @@
-import { coreseDefaultGraphURI, coreseServerUrl, sendAsk, sendConstruct, sendSelect } from "./CoreseInterface.js";
+import { coreseServerUrl } from "./CoreseInterface.js";
 import { writeFile } from "./GlobalUtils.js";
 import * as GlobalUtils from "./GlobalUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";

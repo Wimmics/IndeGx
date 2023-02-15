@@ -1,4 +1,4 @@
-import { createStore, DCAT, rdfTypeProperty, serializeStoreToTurtlePromise, VOID, SD } from "./RDFUtils.js";
+import { createStore, DCAT, rdfTypeProperty, VOID, SD } from "./RDFUtils.js";
 import * as $rdf from "rdflib";
 import * as fs from 'node:fs/promises';
 import * as Logger from "./LogUtils.js";

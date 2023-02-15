@@ -1,5 +1,5 @@
 import fetch, { FetchError } from 'node-fetch';
-import { RequestInit, HeadersInit } from 'node-fetch';
+import { RequestInit } from 'node-fetch';
 import * as fs from 'node:fs/promises';
 import { setTimeout } from 'node:timers/promises';
 import * as Logger from "./LogUtils.js"
