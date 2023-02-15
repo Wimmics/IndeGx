@@ -80,7 +80,7 @@
             PREFIX dekalog:     <http://prod-dekalog.inria.fr/>
 
             INSERT {
-                kgi:IndeGxDataset sd:namedGraph ?curatedDescriptionGraph , ?metadataDescriptionGraph , ?originalDescriptionGraph .
+                kgi:IndeGxDataset sd:namedGraph ?curatedDescriptionGraph , ?metadataDescriptionGraph , ?originalDescriptionGraph , ?summaryDescriptionGraph .
                 ?curatedDescriptionGraph sd:name ?curatedDescriptionGraph ;
                     prov:wasGeneratedBy ?indexationActivity ;
                     prov:wasDerivedFrom ?endpointDescription .
@@ -88,6 +88,9 @@
                     prov:wasGeneratedBy ?indexationActivity ;
                     prov:wasDerivedFrom ?endpointDescription .
                 ?metadataDescriptionGraph sd:name ?metadataDescriptionGraph ;
+                    prov:wasGeneratedBy ?indexationActivity ;
+                    prov:wasDerivedFrom ?endpointDescription .
+                ?summaryDescriptionGraph sd:name ?summaryDescriptionGraph ;
                     prov:wasGeneratedBy ?indexationActivity ;
                     prov:wasDerivedFrom ?endpointDescription .
 
@@ -100,6 +103,7 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Original")) AS ?originalDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Summary")) AS ?summaryDescriptionGraph)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
