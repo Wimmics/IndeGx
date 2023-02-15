@@ -29,7 +29,7 @@ function getSuccessPattern(): Promise<string> {
     }
 }
 
-function sendFailureReportUpdate(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error): Promise<any> {
+export function sendFailureReportUpdate(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error): Promise<any> {
     return getFailurePattern().then(template => {
         const query = replacePatternPlaceholders(template, endpointUrl, queryString, entryObject, startTime, endTime, error);
         return Corese.sendUpdate(endpointUrl, query);
