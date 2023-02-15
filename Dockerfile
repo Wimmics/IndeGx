@@ -17,7 +17,7 @@ COPY rules .
 COPY post .
 
 RUN mkdir corese
-COPY code/corese-server-4.3.0-jar-with-dependencies.jar /corese
+RUN wget "https://github.com/Wimmics/corese/releases/download/release-4.3.0/corese-server-4.3.0.jar" -O corese/corese-server-4.3.0.jar
 
 RUN mkdir indegx
 COPY code/kgindex.jar /indegx
