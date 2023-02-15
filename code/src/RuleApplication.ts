@@ -160,7 +160,7 @@ function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[],
     let result = [];
     patterns.forEach(pattern => {
         // If the pattern is a SELECT or CONSTRUCT query, then we add the pagination to it if it is in a SERVICE clause
-        if ((pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0 || pattern.queryType.localeCompare("ASK") == 0 )|| (pattern.updateType !== undefined && pattern.updateType.localeCompare("insertdelete") == 0))) {
+        if ((pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0 || pattern.queryType.localeCompare("ASK") == 0) || (pattern.updateType !== undefined && pattern.updateType.localeCompare("insertdelete") == 0))) {
             // The query is in a SERVICE clause
             if (inService) {
                 let rewrittenPattern = pattern;
@@ -274,7 +274,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
             if (SPARQLUtils.isSparqlSelect(queryString) || SPARQLUtils.isSparqlAsk(queryString) || SPARQLUtils.isSparqlConstruct(queryString)) {
                 if (parsedQuery.where !== undefined) {
                     parsedQuery.where = addGraphToInnerQueries(endpointObject, parsedQuery.where);
-                } 
+                }
             } else if (SPARQLUtils.isSparqlUpdate(queryString)) {
                 parsedQuery.updates = addGraphToInnerQueries(endpointObject, parsedQuery.updates);
             }
@@ -326,9 +326,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
      * @param pageSize number of triples to be retrieved by each paginated query
      */
     function paginateUpdateQueryPromise(endpointObject: EndpointObject, updateQueryString: string, pageSize: number): Promise<any> {
-        Logger.log("Paginating query with page size ", pageSize, updateQueryString)
         let endpointUrl = endpointObject.endpoint;
-        let parser = new sparqljs.Parser();
         const parsedQuery = parser.parse(updateQueryString);
         if (SPARQLUtils.isSparqlUpdate(updateQueryString)) {
 
@@ -393,7 +391,6 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
 
             // Find inner SELECT query to add the pagination to it
             function paginateQuery(object: abstractQueryObject, pageSize: number, iteration: number = 0): Promise<any> {
-                Logger.log("Pagination n°", iteration, updateQueryString)
                 let queryObject = null;
                 if (object.type.localeCompare("insert") == 0 || object.type.localeCompare("delete") == 0) {
                     queryObject = parser.parse("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
@@ -468,16 +465,12 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                 queryObject.where = changeServiceAndSelectPattern(queryObject.where, localReadFlag);
 
                 let generatedQuery = generator.stringify(queryObject);
-                Logger.log("Construct paginated query n°", iteration, ": ", generatedQuery);
-
 
                 // We send the paginated CONSTRUCT query
                 return sendConstructWithTraceHandling(endpointUrl, generatedQuery, entryObject, startTime).then(constructResult => {
-                    Logger.log("Obtained results for Construct paginated query n°", iteration, ": ", generatedQuery);
                     if (constructResult !== undefined) {
                         if (constructResult.length > 0) {
                             // Generate the INSERT DATA/DELETE DATA from the result of the construct query
-                            Logger.log(constructResult.length, "results for Construct paginated query n°", iteration, ": ", generatedQuery);
                             let graphName = undefined;
                             if (object.graph !== undefined) {
                                 if (object.graphNameIsVariable != undefined && object.graphNameIsVariable) {
@@ -502,14 +495,12 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                 return "";
                             }).then(constructResultNTString => {
                                 if (object.type.localeCompare("insert") == 0) {
-                                    Logger.log("Inserting data: ", constructResultNTString);
                                     let insertDataQuery = "INSERT DATA { " + constructResultNTString + " }";
                                     if (object.graph != undefined) {
                                         insertDataQuery = "INSERT DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
                                     }
                                     return sendUpdateWithTraceHandling(endpointUrl, insertDataQuery, entryObject, startTime);
                                 } else if (object.type.localeCompare("delete") == 0) {
-                                    Logger.log("Deleting data: ", constructResultNTString);
                                     let deleteDataQuery = "DELETE DATA { " + constructResultNTString + " }";
                                     if (object.graph != undefined) {
                                         deleteDataQuery = "DELETE DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
@@ -520,7 +511,6 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                 return paginateQuery(object, pageSize, iteration + 1);
                             })
                         } else {
-                            Logger.log("Empty results for Construct paginated query n°", iteration, ": ", generatedQuery);
                             return;
                         }
                     } else {
