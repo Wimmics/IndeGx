@@ -15,7 +15,7 @@ export function getCountConccurentQueries() {
 }
 
 export function setNbFetchRetries(nb: number) {
-    if(nb !== undefined && nb !== null && nb >= 0) {
+    if (nb !== undefined && nb !== null && nb >= 0) {
         nbFetchRetries = nb;
     } else {
         throw new Error("The number of retries must be a positive integer");
@@ -23,7 +23,7 @@ export function setNbFetchRetries(nb: number) {
 }
 
 export function setMillisecondsBetweenRetries(milliseconds: number) {
-    if(milliseconds !== undefined && milliseconds !== null && milliseconds >= 0) {
+    if (milliseconds !== undefined && milliseconds !== null && milliseconds >= 0) {
         millisecondsBetweenRetries = milliseconds;
     } else {
         throw new Error("The number of milliseconds between retries must be a positive integer");
@@ -31,7 +31,7 @@ export function setMillisecondsBetweenRetries(milliseconds: number) {
 }
 
 export function setMaxConccurentQueries(max: number) {
-    if(max !== undefined && max !== null && max >= 0) {
+    if (max !== undefined && max !== null && max >= 0) {
         maxConccurentQueries = max;
     } else {
         throw new Error("The number of maximum concurrent queries must be a positive integer");
@@ -39,7 +39,7 @@ export function setMaxConccurentQueries(max: number) {
 }
 
 export function setDelayMillisecondsTimeForConccurentQuery(milliseconds: number) {
-    if(milliseconds !== undefined && milliseconds !== null && milliseconds >= 0) {
+    if (milliseconds !== undefined && milliseconds !== null && milliseconds >= 0) {
         delayMillisecondsTimeForConccurentQuery = milliseconds;
     } else {
         throw new Error("The number of milliseconds between queries must be a positive integer");
@@ -165,4 +165,18 @@ export function fetchJSONPromise(url, otherHeaders = new Map()) {
 export function urlToBaseURI(url: string) {
     const baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
     return baseURI;
+}
+
+/**
+ * Taken from https://stackoverflow.com/questions/17267329/converting-unicode-character-to-string-format
+ * @param text 
+ * @returns a string with unicode codes replaced by characters
+ */
+export function unicodeToUrlendcode(text) {
+    return text.replace(/\\u[\dA-F]{4}/gi,
+        function (match) {
+            let unicodeMatch = String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+            let urlEncodedMatch = encodeURIComponent(unicodeMatch);
+            return urlEncodedMatch;
+        });
 }

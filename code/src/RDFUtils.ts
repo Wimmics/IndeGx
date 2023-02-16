@@ -1,5 +1,6 @@
 import * as $rdf from "rdflib";
 import { readFile, urlToBaseURI } from "./GlobalUtils.js";
+import * as Global from "./GlobalUtils.js";
 import * as Logger from "./LogUtils.js"
 
 export const VOID = $rdf.Namespace("http://rdfs.org/ns/void#");
@@ -98,7 +99,7 @@ export function serializeStoreToNTriplesPromise(store: $rdf.Store): Promise<stri
                 if (err != null) {
                     reject(err);
                 }
-                str = str.replaceAll('\\u', "u")
+                str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, { 
                 // flags: 'deinprstux', // r: Flag to escape /u unicode characters, t: flag to replace rdf:type by "a", d: flag to use the default namespace for unqualified terms with prefix ":"
