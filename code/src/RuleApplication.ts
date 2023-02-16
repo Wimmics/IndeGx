@@ -154,6 +154,13 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
     }
 }
 
+/**
+ * Utility function for pagination. It adds the list of configured graph to the SELECT query found in a SERVICE clause, or create a SELECT query around the content of the SERVICE clause if it doesn't contain one.
+ * @param endpointObject 
+ * @param patterns 
+ * @param inService 
+ * @returns 
+ */
 function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[], inService: boolean = false): any[] {
     let endpointUrl = endpointObject.endpoint;
     let parser = new sparqljs.Parser();
@@ -243,6 +250,11 @@ function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[],
     return result
 }
 
+/**
+ * Utility function for graph insertion and pagination. It detects if there is a SELECT query in the given patterns
+ * @param patterns 
+ * @returns 
+ */
 function searchForSelect(patterns: any[]): boolean {
     let result = false;
     patterns.forEach(pattern => {
@@ -391,6 +403,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
 
             // Find inner SELECT query to add the pagination to it
             function paginateQuery(object: abstractQueryObject, pageSize: number, iteration: number = 0): Promise<any> {
+                Logger.log(endpointObject.endpoint, ": Pagination n°",iteration ,"for", entryObject.test.uri, "action")
                 let queryObject = null;
                 if (object.type.localeCompare("insert") == 0 || object.type.localeCompare("delete") == 0) {
                     queryObject = parser.parse("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
