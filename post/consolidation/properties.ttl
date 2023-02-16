@@ -1,0 +1,27 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Are there property partitions and a summary ?" ;
+    dcterms:description "If an endpoint has both property partitions and a summary, then we can check if they are both covering as much properties" ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    ASK {
+        GRAPH ?curatedDescriptionGraph {
+            ?datasetDescription kgi:summary ?summaryDescriptionGraph .
+            ?datasetDescription void:propertyPartition ?propertyPartition .
+            ?propertyPartition void:property ?property .
+        }
+        GRAPH ?summaryDescriptionGraph {
+            ?s ?p ?o .
+        }
+        FILTER(! strstarts(str(?property), "http://www.w3.org/2001/XMLSchema#"))
+        FILTER(! strstarts(str(?property), "http://www.w3.org/2000/01/rdf-schema#"))
+        FILTER(! strstarts(str(?property), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+        FILTER(! strstarts(str(?property), "http://www.w3.org/2002/07/owl#"))
+    }"""  .
