@@ -1395,6 +1395,41 @@
             }
             """
         ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                        ?vocabularyPartition void:vocabulary ?ns .
+                    }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT ?ns {
+                            {
+                                SELECT DISTINCT ?elem {
+                                    ?s ?elem ?o .
+                                }
+                            }
+                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                        }
+                        GROUP BY ?ns
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }
+            """
+        ]
     ) .
 
 <resourceHostnamePartition.ttl> a mf:ManifestEntry ;
