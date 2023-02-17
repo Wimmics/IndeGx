@@ -11,3 +11,5 @@ Starting the Corese server:
 
 Developpement build:
 `npm run devbuild`
+
+## Known issues

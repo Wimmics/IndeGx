@@ -154,6 +154,13 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
     }
 }
 
+/**
+ * Utility function for pagination. It adds the list of configured graph to the SELECT query found in a SERVICE clause, or create a SELECT query around the content of the SERVICE clause if it doesn't contain one.
+ * @param endpointObject 
+ * @param patterns 
+ * @param inService 
+ * @returns 
+ */
 function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[], inService: boolean = false): any[] {
     let endpointUrl = endpointObject.endpoint;
     let parser = new sparqljs.Parser();
@@ -243,6 +250,11 @@ function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[],
     return result
 }
 
+/**
+ * Utility function for graph insertion and pagination. It detects if there is a SELECT query in the given patterns
+ * @param patterns 
+ * @returns 
+ */
 function searchForSelect(patterns: any[]): boolean {
     let result = false;
     patterns.forEach(pattern => {
@@ -390,142 +402,150 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
             });
 
             // Find inner SELECT query to add the pagination to it
-            function paginateQuery(object: abstractQueryObject, pageSize: number, iteration: number = 0): Promise<any> {
-                let queryObject = null;
-                if (object.type.localeCompare("insert") == 0 || object.type.localeCompare("delete") == 0) {
-                    queryObject = parser.parse("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
-                    queryObject.template = object.template;
-                    queryObject.where = object.where;
-                } else {
-                    Logger.error("Unsupported abstract query type: ", object)
-                    throw new Error("Unsupported abstract query type: " + object.type);
-                }
-
-                function changeServiceAndSelectPattern(patterns: any[], inService: boolean = false, localRead: boolean = false): any[] {
-                    let result = [];
-                    patterns.forEach(pattern => {
-                        // If the pattern is a SELECT or CONSTRUCT query, then we add the pagination to it if it is in a SERVICE clause
-                        if (pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0)) {
-                            // The query is in a SERVICE clause
-                            if (inService) {
-                                pattern.limit = pageSize;
-                                pattern.offset = iteration * pageSize;
-                                result.push(pattern);
-                                // The query is not in a SERVICE clause, then we process the its where clause
-                            } else {
-                                let rewrittenPattern = pattern;
-                                rewrittenPattern.where = changeServiceAndSelectPattern(pattern.where, inService, localRead);
-                                result.push(rewrittenPattern);
-                            }
-                            // We process any other query element that contains patterns
-                        } else if (pattern.patterns !== undefined) {
-                            // If the pattern is a SERVICE clause to the processed endpoint, then we process its patterns
-                            if (pattern.type !== undefined && pattern.type.localeCompare("service") == 0 && pattern.name.value.localeCompare(endpointUrl) == 0) {
-                                // If there is a local read, we use the Corese LOOP feature
-                                if (localRead) {
-                                    let rewrittenPattern = pattern;
-                                    if (rewrittenPattern.name.value.includes("?")) {
-                                        rewrittenPattern.name.value = rewrittenPattern.name.value + "&mode=loop&limit=" + pageSize;
-                                    } else {
-                                        rewrittenPattern.name.value = rewrittenPattern.name.value + "?mode=loop&limit=" + pageSize;
-                                    }
-                                    result.push(rewrittenPattern);
-                                } else {
-                                    let thereAreSelects = searchForSelect(pattern.patterns);
-                                    // If there is a SELECT query in the SERVICE clause, then we add the pagination to it
-                                    if (thereAreSelects) {
-                                        let rewrittenPattern = pattern;
-                                        rewrittenPattern.patterns = changeServiceAndSelectPattern(pattern.patterns, true, localRead);
-                                        result.push(rewrittenPattern);
-                                        // If there is no SELECT query in the SERVICE clause, then we add a SELECT query to it and the pagination with it
-                                    } else {
-                                        let rewrittenPattern = pattern;
-                                        let templateSelectQuery = parser.parse("SELECT * WHERE { ?s ?p ?o }");
-                                        templateSelectQuery.where = pattern.patterns;
-                                        templateSelectQuery.limit = pageSize;
-                                        templateSelectQuery.offset = iteration * pageSize;
-                                        rewrittenPattern.patterns = [templateSelectQuery];
-                                        result.push(rewrittenPattern);
-                                    }
-                                }
-                                // Any other pattern is processed
-                            } else {
-                                let rewrittenPattern = pattern;
-                                rewrittenPattern.patterns = changeServiceAndSelectPattern(pattern.patterns, inService, localRead);
-                                result.push(rewrittenPattern);
-                            }
-                        } else {
-                            result.push(pattern);
-                        }
-                    });
-                    return result
-                }
-
-                let localReadFlag = searchForLocalReadBGP(queryObject.where);
-                queryObject.where = changeServiceAndSelectPattern(queryObject.where, localReadFlag);
-
-                let generatedQuery = generator.stringify(queryObject);
-
-                // We send the paginated CONSTRUCT query
-                return sendConstructWithTraceHandling(endpointUrl, generatedQuery, entryObject, startTime).then(constructResult => {
-                    if (constructResult !== undefined) {
-                        if (constructResult.length > 0) {
-                            let graphName = undefined;
-                            if (object.graph !== undefined) {
-                                if (object.graphNameIsVariable != undefined && object.graphNameIsVariable) {
-                                    // The graph name is a variable, so we need to retrieve the bogus triples to find the actual graph name, and delete them afterwards
-                                    constructResult.match(constructResult.sym(bogusNamespaceString + object.graph), constructResult.sym(bogusGraphNameValuePropertyString), null).forEach(triple => {
-                                        graphName = triple.object.value;
-                                    })
-                                    if (graphName !== undefined) {
-                                        constructResult.removeMatches(constructResult.sym(bogusNamespaceString + object.graph), constructResult.sym(bogusGraphNameValuePropertyString), null);
-                                        object.graph = graphName;
-                                        object.graphNameIsVariable = false;
-                                    } else {
-                                        throw new Error("Could not find the graph name for the variable " + object.graph + " " + JSON.stringify(constructResult.match(null, constructResult.sym(bogusGraphNameValuePropertyString), null)));
-                                    }
-                                } else if (object.graphNameIsVariable != undefined && ! object.graphNameIsVariable) {
-                                    // The graph name is not a variable
-                                    constructResult.removeMatches(null, constructResult.sym(bogusGraphNameValuePropertyString), null);
-                                }
-                            }
-                            // Generate the INSERT DATA/DELETE DATA from the result of the construct query
-                            return RDFUtils.serializeStoreToNTriplesPromise(constructResult).catch(error => {
-                                Logger.error("Error serializing the construct result to NTriples: ", error);
-                                return "";
-                            }).then(constructResultNTString => {
-                                if (object.type.localeCompare("insert") == 0) {
-                                    let insertDataQuery = "INSERT DATA { " + constructResultNTString + " }";
-                                    if (object.graph != undefined) {
-                                        insertDataQuery = "INSERT DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
-                                    }
-                                    return sendUpdateWithTraceHandling(endpointUrl, insertDataQuery, entryObject, startTime);
-                                } else if (object.type.localeCompare("delete") == 0) {
-                                    let deleteDataQuery = "DELETE DATA { " + constructResultNTString + " }";
-                                    if (object.graph != undefined) {
-                                        deleteDataQuery = "DELETE DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
-                                    }
-                                    return sendUpdateWithTraceHandling(endpointUrl, deleteDataQuery, entryObject, startTime);
-                                }
-                            }).then(() => {
-                                return paginateQuery(object, pageSize, iteration + 1);
-                            })
-                        } else {
-                            let endTime = dayjs();
-                            Logger.log(endpointUrl, "Pagination n°", iteration, ": 0 triples for the query ", generatedQuery );
-                            return sendFailureReportUpdate(endpointUrl, generatedQuery, entryObject, startTime, endTime, "No triples returned by the query");
-                        }
+            function paginateQuery(object: abstractQueryObject, pageSize: number, iteration: number = 0, offsetMin: number = 0, offsetMax?: number): Promise<any> {
+                if (offsetMax == undefined || (offsetMax > offsetMin && offsetMin + pageSize * iteration < offsetMax && pageSize > 0)) {
+                    if(offsetMax == undefined) {
+                        Logger.log(endpointObject.endpoint, ": Pagination n°", iteration, "for", entryObject.test.uri, "action")
                     } else {
-                        Logger.log(endpointUrl, "Pagination n°", iteration, ": undefined triples for the query ", generatedQuery );
-                        return paginateQuery(object, pageSize, iteration + 1);
+                        Logger.log(endpointObject.endpoint, ": Dychotomic agination n°", iteration, "for", entryObject.test.uri, "action, offsetMin=", offsetMin, "offsetMax=", offsetMax)
                     }
-                }).catch(error => {
-                    Logger.error("Error while paginating the query: ", error);
-                    throw error;
-                });
+                    let queryObject = null;
+                    if (object.type.localeCompare("insert") == 0 || object.type.localeCompare("delete") == 0) {
+                        queryObject = parser.parse("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
+                        queryObject.template = object.template;
+                        queryObject.where = object.where;
+                    } else {
+                        Logger.error("Unsupported abstract query type: ", object)
+                        throw new Error("Unsupported abstract query type: " + object.type);
+                    }
+
+                    function changeServiceAndSelectPattern(patterns: any[], inService: boolean = false, localRead: boolean = false): any[] {
+                        let result = [];
+                        patterns.forEach(pattern => {
+                            // If the pattern is a SELECT or CONSTRUCT query, then we add the pagination to it if it is in a SERVICE clause
+                            if (pattern.queryType !== undefined && (pattern.queryType.localeCompare("SELECT") == 0 || pattern.queryType.localeCompare("CONSTRUCT") == 0)) {
+                                // The query is in a SERVICE clause
+                                if (inService) {
+                                    pattern.limit = pageSize;
+                                    pattern.offset = offsetMin + iteration * pageSize;
+                                    result.push(pattern);
+                                    // The query is not in a SERVICE clause, then we process the its where clause
+                                } else {
+                                    let rewrittenPattern = pattern;
+                                    rewrittenPattern.where = changeServiceAndSelectPattern(pattern.where, inService, localRead);
+                                    result.push(rewrittenPattern);
+                                }
+                                // We process any other query element that contains patterns
+                            } else if (pattern.patterns !== undefined) {
+                                // If the pattern is a SERVICE clause to the processed endpoint, then we process its patterns
+                                if (pattern.type !== undefined && pattern.type.localeCompare("service") == 0 && pattern.name.value.localeCompare(endpointUrl) == 0) {
+                                    // If there is a local read, we use the Corese LOOP feature
+                                    if (localRead) {
+                                        let rewrittenPattern = pattern;
+                                        if (rewrittenPattern.name.value.includes("?")) {
+                                            rewrittenPattern.name.value = rewrittenPattern.name.value + "&mode=loop&limit=" + pageSize;
+                                        } else {
+                                            rewrittenPattern.name.value = rewrittenPattern.name.value + "?mode=loop&limit=" + pageSize;
+                                        }
+                                        result.push(rewrittenPattern);
+                                    } else {
+                                        let thereAreSelects = searchForSelect(pattern.patterns);
+                                        // If there is a SELECT query in the SERVICE clause, then we add the pagination to it
+                                        if (thereAreSelects) {
+                                            let rewrittenPattern = pattern;
+                                            rewrittenPattern.patterns = changeServiceAndSelectPattern(pattern.patterns, true, localRead);
+                                            result.push(rewrittenPattern);
+                                            // If there is no SELECT query in the SERVICE clause, then we add a SELECT query to it and the pagination with it
+                                        } else {
+                                            let rewrittenPattern = pattern;
+                                            let templateSelectQuery = parser.parse("SELECT * WHERE { ?s ?p ?o }");
+                                            templateSelectQuery.where = pattern.patterns;
+                                            templateSelectQuery.limit = pageSize;
+                                            templateSelectQuery.offset = offsetMin + iteration * pageSize;
+                                            rewrittenPattern.patterns = [templateSelectQuery];
+                                            result.push(rewrittenPattern);
+                                        }
+                                    }
+                                    // Any other pattern is processed
+                                } else {
+                                    let rewrittenPattern = pattern;
+                                    rewrittenPattern.patterns = changeServiceAndSelectPattern(pattern.patterns, inService, localRead);
+                                    result.push(rewrittenPattern);
+                                }
+                            } else {
+                                result.push(pattern);
+                            }
+                        });
+                        return result
+                    }
+
+                    let localReadFlag = searchForLocalReadBGP(queryObject.where);
+                    queryObject.where = changeServiceAndSelectPattern(queryObject.where, localReadFlag);
+
+                    let generatedQuery = generator.stringify(queryObject);
+
+                    // We send the paginated CONSTRUCT query
+                    return sendConstructWithTraceHandling(endpointUrl, generatedQuery, entryObject, startTime).then(constructResult => {
+                        if (constructResult !== undefined) {
+                            if (constructResult.length > 0) {
+                                let graphName = undefined;
+                                if (object.graph !== undefined) {
+                                    if (object.graphNameIsVariable != undefined && object.graphNameIsVariable) {
+                                        // The graph name is a variable, so we need to retrieve the bogus triples to find the actual graph name, and delete them afterwards
+                                        constructResult.match(constructResult.sym(bogusNamespaceString + object.graph), constructResult.sym(bogusGraphNameValuePropertyString), null).forEach(triple => {
+                                            graphName = triple.object.value;
+                                        })
+                                        if (graphName !== undefined) {
+                                            constructResult.removeMatches(constructResult.sym(bogusNamespaceString + object.graph), constructResult.sym(bogusGraphNameValuePropertyString), null);
+                                            object.graph = graphName;
+                                            object.graphNameIsVariable = false;
+                                        } else {
+                                            throw new Error("Could not find the graph name for the variable " + object.graph + " " + JSON.stringify(constructResult.match(null, constructResult.sym(bogusGraphNameValuePropertyString), null)));
+                                        }
+                                    } else if (object.graphNameIsVariable != undefined && !object.graphNameIsVariable) {
+                                        // The graph name is not a variable
+                                        constructResult.removeMatches(null, constructResult.sym(bogusGraphNameValuePropertyString), null);
+                                    }
+                                }
+                                // Generate the INSERT DATA/DELETE DATA from the result of the construct query
+                                return RDFUtils.serializeStoreToNTriplesPromise(constructResult).catch(error => {
+                                    Logger.error("Error serializing the construct result to NTriples: ", error);
+                                    return "";
+                                }).then(constructResultNTString => {
+                                    if (object.type.localeCompare("insert") == 0) {
+                                        let insertDataQuery = "INSERT DATA { " + constructResultNTString + " }";
+                                        if (object.graph != undefined) {
+                                            insertDataQuery = "INSERT DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
+                                        }
+                                        return sendUpdateWithTraceHandling(endpointUrl, insertDataQuery, entryObject, startTime);
+                                    } else if (object.type.localeCompare("delete") == 0) {
+                                        let deleteDataQuery = "DELETE DATA { " + constructResultNTString + " }";
+                                        if (object.graph != undefined) {
+                                            deleteDataQuery = "DELETE DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
+                                        }
+                                        return sendUpdateWithTraceHandling(endpointUrl, deleteDataQuery, entryObject, startTime);
+                                    }
+                                }).then(() => {
+                                    return paginateQuery(object, pageSize, iteration + 1, offsetMin, offsetMax);
+                                })
+                            } else {
+                                let endTime = dayjs();
+                                Logger.log(endpointUrl, "Pagination n°", iteration, ": 0 triples for the query ", generatedQuery);
+                                return sendFailureReportUpdate(endpointUrl, generatedQuery, entryObject, startTime, endTime, "No triples returned by the query");
+                            }
+                        } else {
+                            Logger.log(endpointUrl, "Pagination n°", iteration, ": undefined triples for the query ", generatedQuery);
+                            return paginateQuery(object, pageSize, iteration + 1, offsetMin, offsetMax);
+                        }
+                    }).catch(error => {
+                        Logger.error("Error while paginating the query: ", error);
+                        return paginateQuery(object, pageSize/2, 0, pageSize*iteration, pageSize*(iteration + 1));
+                    });
+                } 
             }
 
             return Promise.allSettled(abstractQueryObjects.map(abstractQueryObject => paginateQuery(abstractQueryObject, pageSize)));
+
         } else {
             throw new Error("Expecting an update query");
         }
