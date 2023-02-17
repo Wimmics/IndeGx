@@ -10,6 +10,35 @@
             <inclusionByResourceHostname.ttl>
         ) .
 
+<inclusionByPatterns.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:commonPattern ?otherDatasetDescription .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:commonPattern ?datasetDescription .
+                    }
+                } WHERE {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:summary ?summaryGraph .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:summary ?otherSummaryGraph .
+                    }
+                    GRAPH ?summaryGraph {
+                        ?s ?p ?o
+                    }
+                    GRAPH ?otherSummaryGraph {
+                        ?s ?p ?o
+                    }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonPattern ?otherDatasetDescription . } } )
+                }"""
+
 <inclusionByVocabularies.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
@@ -74,11 +103,11 @@
                         ?otherDatasetDescription void:vocabulary ?vocab .
                     }
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
-                    FILTER( NOT EXISTS { 
-                        GRAPH ?curatedDescriptionGraph { 
-                            ?datasetDescription kgi:commonVocabularyDescription ?commonVocabularyResource . 
-                            ?commonVocabularyResource kgi:vocabulary ?vocab . 
-                        } 
+                    FILTER( NOT EXISTS {
+                        GRAPH ?curatedDescriptionGraph {
+                            ?datasetDescription kgi:commonVocabularyDescription ?commonVocabularyResource .
+                            ?commonVocabularyResource kgi:vocabulary ?vocab .
+                        }
                     } )
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonVocabularies")) AS ?commonVocabularyResource)
                 }
@@ -259,16 +288,16 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription kgi:commonClassDescription ?commonPropertyResource .
+                        ?datasetDescription kgi:commonPropertyDescription ?commonPropertyResource .
                         ?commonPropertyResource kgi:dataset ?datasetDescription ;
                             kgi:dataset ?otherDatasetDescription ;
-                            kgi:property ?datatype .
+                            kgi:property ?property .
                     }
                     GRAPH ?otherCuratedDescriptionGraph {
-                        ?otherDatasetDescription kgi:commonClassDescription ?commonPropertyResource .
+                        ?otherDatasetDescription kgi:commonPropertyDescription ?commonPropertyResource .
                         ?commonPropertyResource kgi:dataset ?datasetDescription ;
                             kgi:dataset ?otherDatasetDescription ;
-                            kgi:property ?datatype .
+                            kgi:property ?property .
                     }
                 }
                 WHERE {
@@ -284,6 +313,55 @@
                         ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
                         ?otherPropertyPartition void:property ?property .
                     }
+                    FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonProperties")) AS ?commonPropertyResource)
+                }
+            """
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:commonPropertyDescription ?commonPropertyResource .
+                        ?commonPropertyResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:property ?property .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:commonPropertyDescription ?commonPropertyResource .
+                        ?commonPropertyResource kgi:dataset ?datasetDescription ;
+                            kgi:dataset ?otherDatasetDescription ;
+                            kgi:property ?property .
+                    }
+                }
+                WHERE {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:summary ?summaryGraph .
+                        ?datasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?endpointUrl .
+                    }
+                    GRAPH ?otherCuratedDescriptionGraph {
+                        ?otherDatasetDescription kgi:summary ?otherSummaryGraph .
+                        ?otherDatasetDescription a void:Dataset ;
+                            void:sparqlEndpoint ?otherEndpointUrl .
+                    }
+                    GRAPH ?summaryGraph {
+                        ?s ?property ?o
+                    }
+                    GRAPH ?otherSummaryGraph {
+                        ?s ?property ?o
+                    }
+                    FILTER(NOT EXISTS ( GRAPH ?curatedDescriptionGraph {
+                            ?datasetDescription void:propertyPartition ?propertyPartition .
+                            ?propertyPartition void:property ?property .
+                        })
+                    )
+                    FILTER(NOT EXISTS ( GRAPH ?otherCuratedDescriptionGraph {
+                            ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
+                            ?otherPropertyPartition void:property ?property .
+                        })
+                    )
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonProperties")) AS ?commonPropertyResource)
                 }
