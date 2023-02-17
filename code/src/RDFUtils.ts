@@ -84,6 +84,7 @@ export function serializeStoreToTurtlePromise(store: $rdf.Store): Promise<string
                 if (err != null) {
                     reject(err);
                 }
+                str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, { namespaces: store.namespaces });
         } catch (error) {
@@ -118,6 +119,7 @@ export function serializeStoreToTriGPromise(store: $rdf.Store): Promise<string> 
                 if (err != null) {
                     reject(err);
                 }
+                str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, { namespaces: store.namespaces });
         } catch (error) {
@@ -133,6 +135,7 @@ export function serializeStoreToQuadsPromise(store: $rdf.Store): Promise<string>
                 if (err != null) {
                     reject(err);
                 }
+                str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, { namespaces: store.namespaces });
         } catch (error) {
@@ -144,6 +147,7 @@ export function serializeStoreToQuadsPromise(store: $rdf.Store): Promise<string>
 export function parseNTriplesToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
+            content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "application/n-triples", (err, kb) => {
                 if (err != null) {
                     reject(err);
@@ -159,6 +163,7 @@ export function parseNTriplesToStore(content: string, store: $rdf.Store): Promis
 export function parseN3ToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
+            content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "text/n3", (err, kb) => {
                 if (err != null) {
                     reject(err);
@@ -174,6 +179,7 @@ export function parseN3ToStore(content: string, store: $rdf.Store): Promise<$rdf
 export function parseTurtleToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
+            content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "text/turtle", (err, kb) => {
                 if (err != null) {
                     reject(err);
@@ -189,6 +195,7 @@ export function parseTurtleToStore(content: string, store: $rdf.Store): Promise<
 export function parseHTMLToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
+            content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "text/html", (err, kb) => {
                 if (err != null) {
                     reject(err);
@@ -204,6 +211,7 @@ export function parseHTMLToStore(content: string, store: $rdf.Store): Promise<$r
 export function parseJSONLDToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
+            content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "application/ld+json", (err, kb) => {
                 if (err != null) {
                     reject(err);
@@ -219,6 +227,7 @@ export function parseJSONLDToStore(content: string, store: $rdf.Store): Promise<
 export function parseNQuadsToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
+            content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "application/nquads", (err, kb) => {
                 if (err != null) {
                     reject(err);
@@ -234,6 +243,7 @@ export function parseNQuadsToStore(content: string, store: $rdf.Store): Promise<
 export function parseRDFXMLToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
+            content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "application/rdf+xml", (err, kb) => {
                 if (err != null) {
                     reject(err);
