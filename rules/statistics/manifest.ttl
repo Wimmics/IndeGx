@@ -1471,11 +1471,13 @@
                     {
                         SELECT DISTINCT ?ns (COUNT(DISTINCT ?elem) AS ?count) {
                             {
-                                SELECT DISTINCT (IRI(REPLACE(str(?elem), ?urlEnd, "", "q" ) ) AS ?ns) ?elem {
+                                SELECT DISTINCT ((IRI(SUBSTR(str(?elem), 1, ?elemLength - ?elemEndLength ))) AS ?ns) ?elem {
                                     ?elem ?p ?o .
                                     FILTER(! STRSTARTS(str(?p), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
                                     FILTER(isIri(?elem)).
                                     BIND( REPLACE(str(?elem), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?urlEnd)
+                  					BIND(STRLEN(str(?elem)) AS ?elemLength)
+                  					BIND(STRLEN(str(?urlEnd)) AS ?elemEndLength)
                                 }
                             }
                         }
@@ -1507,11 +1509,13 @@
                         {
                             SELECT DISTINCT ?ns (COUNT(DISTINCT ?elem) AS ?count) {
                                 {
-                                    SELECT DISTINCT (IRI(REPLACE(str(?elem), ?urlEnd, "", "q" ) ) AS ?ns) ?elem {
+                                    SELECT DISTINCT ((IRI(SUBSTR(str(?elem), 1, ?elemLength - ?elemEndLength ))) AS ?ns) ?elem {
                                         ?s ?p ?elem .
                                         FILTER(! STRSTARTS(str(?p), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
                                         FILTER(isIri(?elem)).
                                         BIND( REPLACE(str(?elem), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?urlEnd)
+                      					BIND(STRLEN(str(?elem)) AS ?elemLength)
+                      					BIND(STRLEN(str(?urlEnd)) AS ?elemEndLength)
                                     }
                                 }
                             }
@@ -1543,7 +1547,7 @@
                         {
                             SELECT DISTINCT ?ns (COUNT(DISTINCT ?elem) AS ?count) {
                                 {
-                                    SELECT DISTINCT (IRI(REPLACE(str(?elem), ?urlEnd, "", "q" ) ) AS ?ns) ?elem {
+                                    SELECT DISTINCT ((IRI(SUBSTR(str(?elem), 1, ?elemLength - ?elemEndLength ))) AS ?ns) ?elem {
                                         {
                                             ?s ?p ?elem .
                                         }
@@ -1553,6 +1557,8 @@
                                         FILTER(! STRSTARTS(str(?p), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
                                         FILTER(isIri(?elem)).
                                         BIND( REPLACE(str(?elem), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?urlEnd)
+                      					BIND(STRLEN(str(?elem)) AS ?elemLength)
+                      					BIND(STRLEN(str(?urlEnd)) AS ?elemEndLength)
                                     }
                                 }
                             }
