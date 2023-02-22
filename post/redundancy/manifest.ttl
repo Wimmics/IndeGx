@@ -26,10 +26,10 @@
                     GRAPH ?summaryDescriptionGraph {
                         ?s ?propertyOfSummary ?o .
                     }
-                    FILTER(NOT EXISTS( GRAPH ?curatedDescriptionGraph {
+                    FILTER(NOT EXISTS { GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:propertyPartition ?propertyPartition .
                         ?propertyPartition void:property ?propertyOfSummary .
-                    } ) )
+                    } } )
                     FILTER(! strstarts(str(?property), "http://www.w3.org/2001/XMLSchema#"))
                     FILTER(! strstarts(str(?property), "http://www.w3.org/2000/01/rdf-schema#"))
                     FILTER(! strstarts(str(?property), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
@@ -58,10 +58,10 @@
                     GRAPH ?summaryDescriptionGraph {
                         ?hostnameOfSummary ?p ?o .
                     }
-                    FILTER(NOT EXISTS( GRAPH ?curatedDescriptionGraph {
+                    FILTER(NOT EXISTS { GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:hostnamePartition ?hostnamePartition .
                         ?hostnamePartition kgi:resourceHostname ?hostnameOfSummary .
-                    } ) )
+                    } } )
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?ns))), "HostnamePartition" )) AS ?newHostnamePartition)
                 }
             """
@@ -83,10 +83,10 @@
                         ?s ?p ?hostnameOfSummary .
                     }
                     FILTER(isIRI(?hostnameOfSummary))
-                    FILTER(NOT EXISTS( GRAPH ?curatedDescriptionGraph {
+                    FILTER(NOT EXISTS { GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:hostnamePartition ?hostnamePartition .
                         ?hostnamePartition kgi:resourceHostname ?hostnameOfSummary .
-                    } ) )
+                    } } )
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?ns))), "HostnamePartition" )) AS ?newHostnamePartition)
                 }
             """
@@ -158,10 +158,10 @@
                         ?datasetDescription kgi:vocabulary ?ns ;
                             dcat:endpointURL ?endpointUrl .
                     }
-                    FILTER( NOT EXISTS ( GRAPH ?curatedDescriptionGraph {
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:vocabularyPartition ?vocabularyPartition .
                         ?vocabularyPartition void:vocabulary ?ns .
-                    }))
+                    } } )
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
                 }"""
         ]
@@ -178,9 +178,9 @@
                         ?datasetDescription void:vocabularyPartition ?vocabularyPartition .
                         ?vocabularyPartition void:vocabulary ?ns .
                     }
-                    FILTER( NOT EXISTS ( GRAPH ?curatedDescriptionGraph {
+                    FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:vocabulary ?ns .
-                    }))
+                    } } )
                 }"""
         ]
     ) .

@@ -38,6 +38,8 @@
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
                     FILTER( NOT EXISTS { GRAPH ?curatedDescriptionGraph { ?datasetDescription kgi:commonPattern ?otherDatasetDescription . } } )
                 }"""
+        ]
+    ) .
 
 <inclusionByVocabularies.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
@@ -352,15 +354,15 @@
                     GRAPH ?otherSummaryGraph {
                         ?s ?property ?o
                     }
-                    FILTER(NOT EXISTS ( GRAPH ?curatedDescriptionGraph {
+                    FILTER(NOT EXISTS { GRAPH ?curatedDescriptionGraph {
                             ?datasetDescription void:propertyPartition ?propertyPartition .
                             ?propertyPartition void:property ?property .
-                        })
+                        } }
                     )
-                    FILTER(NOT EXISTS ( GRAPH ?otherCuratedDescriptionGraph {
+                    FILTER(NOT EXISTS { GRAPH ?otherCuratedDescriptionGraph {
                             ?otherDatasetDescription void:propertyPartition ?otherPropertyPartition .
                             ?otherPropertyPartition void:property ?property .
-                        })
+                        } }
                     )
                     FILTER(str(?otherDatasetDescription) < str(?datasetDescription))
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?otherEndpointUrl))), "CommonProperties")) AS ?commonPropertyResource)

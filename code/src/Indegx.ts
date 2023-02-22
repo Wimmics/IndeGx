@@ -13,7 +13,7 @@ import config from "config";
 let currentConfig = config.get("dev");
 let manifest = currentConfig.get("manifest");
 let catalog = currentConfig.get("catalog");
-let post = currentConfig.get("catalog");
+let post = currentConfig.get("post");
 let nbFetchRetries = currentConfig.get("nbFetchRetries");
 let millisecondsBetweenRetries = currentConfig.get("millisecondsBetweenRetries");
 let maxConccurentQueries = currentConfig.get("maxConccurentQueries");
@@ -60,12 +60,13 @@ readRules(manifest).then(manifests => {
     })
 }).then(() => {
     if(post !== undefined && post !== "") {
-        return readRules(post).then(manifests => {
+        return readRules(post).then(postManifests => {
             Logger.info("Post manifest tree read.");
             Logger.info("Post treatment starts");
             let manifestPool = [];
-            manifests.forEach(manifest => {
+            postManifests.forEach(postManifest => {
                 manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl}, manifest));
+                manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl}, postManifest));
             })
             return Promise.allSettled(manifestPool).then(() => {
                 Logger.info("Post treatment ends");

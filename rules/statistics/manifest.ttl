@@ -724,7 +724,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
+            kgi:recommendedPagination 500 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -770,7 +770,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -817,7 +816,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -865,7 +863,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -914,7 +911,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -962,7 +958,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -1059,7 +1054,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -1108,7 +1102,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -1156,7 +1149,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
+            kgi:recommendedPagination 500 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -1199,7 +1192,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -1240,7 +1232,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -1280,7 +1271,6 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
