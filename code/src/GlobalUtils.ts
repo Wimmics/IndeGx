@@ -92,7 +92,7 @@ export function iterativePromises(args: Array<Array<any>>, promiseCreationFuncti
 }
 
 export function fetchPromise(url, header = new Map(), method = "GET", query = "", numTry = 0) {
-    let myHeaders = new Map();
+    let myHeaders = new Headers();
     myHeaders.set('pragma', 'no-cache');
     myHeaders.set('cache-control', 'no-cache');
     header.forEach((value, key) => {
