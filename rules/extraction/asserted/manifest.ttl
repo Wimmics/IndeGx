@@ -556,7 +556,7 @@
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
                  }"""
         ]
-
+        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/manifest.ttl>
         ) ;
         kgi:onFailure (
             <datasetDescResourceLocalhost.ttl>

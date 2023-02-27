@@ -8,6 +8,7 @@ dayjs.extend(duration)
 import * as Logger from "./LogUtils.js"
 
 const manifestType = MANIFEST("Manifest")
+const manifestEntryType = MANIFEST("ManifestEntry")
 const manifestIncludeProperty = MANIFEST("include")
 const manifestEntriesProperty = MANIFEST("entries")
 const manifestActionProperty = MANIFEST("action")
@@ -178,10 +179,19 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                     } else {
                         // Action is a node
                         promisePool.push(loadRemoteRDFFile(node.value, store).then(() => {
-                            return readGenerationAsset(node.value, store).then(generationAsset => {
-                                resultGenerationAsset.actionsSuccess.push(generationAsset);
-                                return;
-                            })
+                            if(store.holds(node, RDF("type"), manifestEntryType)) {
+                                return readGenerationAsset(node.value, store).then(generationAsset => {
+                                    resultGenerationAsset.actionsSuccess.push(generationAsset);
+                                    return;
+                                })
+                            } else if(store.holds(node, RDF("type"), manifestType)) {
+                                return readManifest(node.value, store).then(manifestArray => {
+                                    manifestArray.forEach(manifest => {
+                                        resultGenerationAsset.actionsSuccess.push(manifest);
+                                    })
+                                    return;
+                                })
+                            }
                         }))
                     }
                 })
@@ -205,10 +215,19 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                     } else {
                         // Action is a node
                         promisePool.push(loadRemoteRDFFile(node.value, store).then(() => {
-                            return readGenerationAsset(node.value, store).then(generationAsset => {
-                                resultGenerationAsset.actionsFailure.push(generationAsset);
-                                return;
-                            })
+                            if(store.holds(node, RDF("type"), manifestEntryType)) {
+                                return readGenerationAsset(node.value, store).then(generationAsset => {
+                                    resultGenerationAsset.actionsFailure.push(generationAsset);
+                                    return;
+                                })
+                            } else if(store.holds(node, RDF("type"), manifestType)) {
+                                return readManifest(node.value, store).then(manifestArray => {
+                                    manifestArray.forEach(manifest => {
+                                        resultGenerationAsset.actionsFailure.push(manifest);
+                                    })
+                                    return;
+                                })
+                            }
                         }))
                     }
                 })

@@ -50,6 +50,11 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
                         actionPool.push(applyAction(endpointObject, actionObject, entryObject).catch(error => {
                             Logger.error(error)
                         }));
+                    } else if (RuleTree.isManifest(action)) {
+                        const subManifest = action as RuleTree.Manifest;
+                        actionPool.push(applyRuleTree(endpointObject, subManifest).catch(error => {
+                            Logger.error(error)
+                        }));
                     } else {
                         throw new Error("Unexpected action type")
                     }

@@ -7,7 +7,7 @@ import { readRules } from "./Rules.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
 import { writeIndex } from "./IndexOutput.js";
-process.env["NODE_CONFIG_DIR"] = "/user/pmaillot/home/git/IndeGx/code/config/";
+process.env["NODE_CONFIG_DIR"] = "./config/";
 import config from "config";
 
 let currentConfig = config.get("dev");
@@ -65,7 +65,6 @@ readRules(manifest).then(manifests => {
             Logger.info("Post treatment starts");
             let manifestPool = [];
             postManifests.forEach(postManifest => {
-                manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl}, manifest));
                 manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl}, postManifest));
             })
             return Promise.allSettled(manifestPool).then(() => {

@@ -1,4 +1,4 @@
-import { createStore, DCAT, rdfTypeProperty, VOID, SD } from "./RDFUtils.js";
+import { createStore, DCAT, rdfTypeProperty, VOID, SD, KGI } from "./RDFUtils.js";
 import * as $rdf from "rdflib";
 import * as fs from 'node:fs/promises';
 import * as Logger from "./LogUtils.js";
@@ -16,7 +16,7 @@ export function readCatalog(filename: string)  : Promise<Array<EndpointObject>> 
     return fs.readFile(filename).then(buffer => {
         let result = [];
         let fileContent = buffer.toString();
-        $rdf.parse(fileContent, store, "http://ns.inria.fr/kg/index#");
+        $rdf.parse(fileContent, store, KGI("").value);
         const catalogList = store.statementsMatching(null, rdfTypeProperty, DCAT("Catalog")).map(statement => statement.subject) // List of catalog objects 
         catalogList.forEach(catalog => {
             store.statementsMatching(catalog, DCAT("dataset"), null).forEach(statement => {

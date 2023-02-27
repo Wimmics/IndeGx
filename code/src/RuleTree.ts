@@ -8,8 +8,8 @@ export interface Manifest {
 export interface ManifestEntry {
     uri: string;
     test: Test;
-    actionsSuccess: Array<ManifestEntry | Action>;
-    actionsFailure: Array<ManifestEntry | Action>;
+    actionsSuccess: Array<ManifestEntry | Action | Manifest>;
+    actionsFailure: Array<ManifestEntry | Action | Manifest>;
 }
 
 export interface Test {
