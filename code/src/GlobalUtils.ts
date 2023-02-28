@@ -107,7 +107,6 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
         myInit.body = query;
     }
     if (countConcurrentQueries >= maxConccurentQueries) {
-        Logger.log("Delaying", url, query)
         return setTimeout(delayMillisecondsTimeForConccurentQuery).then(() => fetchPromise(url, header, method, query, numTry))
     } else {
         countConcurrentQueries++;
@@ -125,10 +124,10 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
                     if (numTry < nbFetchRetries) {
                         return setTimeout(millisecondsBetweenRetries).then(fetchPromise(url, header, method, query, numTry + 1));
                     } else {
-                        throw error;
+                        Logger.error(error);
                     }
                 } else {
-                    throw error;
+                    Logger.error(error);
                 }
             }).finally(() => {
                 countConcurrentQueries--;
