@@ -368,17 +368,34 @@
                 PREFIX earl: <http://www.w3.org/ns/earl#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
+                    GRAPH ?metadataDescriptionGraph {
+                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> .
+                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                        ?metadataDescription a prov:Entity , earl:TestSubject .
+                    }
+                }
+                WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                 }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
                     GRAPH ?originalDescriptionGraph {
                         ?res a dcat:Dataset , void:Dataset , prov:Entity ;
                             ?pp ?o .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> ;
-                            prov:wasDerivedFrom ?res .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            kgi:original ?res .
+                        ?datasetDescription prov:wasDerivedFrom ?res .
+                        ?metadataDescription kgi:original ?res .
                     }
                 }
                 WHERE {
@@ -419,12 +436,8 @@
                             ?pp ?o .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> ;
-                            prov:wasDerivedFrom ?res .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResource.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            kgi:original ?res .
+                        ?datasetDescription prov:wasDerivedFrom ?res .
+                        ?metadataDescription kgi:original ?res .
                     }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription sd:namedGraph ?g .
@@ -470,8 +483,7 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            kgi:original ?res .
+                        ?metadataDescription kgi:original ?res .
                         ?datasetDescription prov:wasDerivedFrom ?res .
                     }
                     GRAPH ?originalDescriptionGraph {
@@ -513,8 +525,7 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?metadataDescriptionGraph {
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            kgi:original ?res .
+                        ?metadataDescription kgi:original ?res .
                         ?datasetDescription prov:wasDerivedFrom ?res .
                     }
                     GRAPH ?originalDescriptionGraph {
@@ -577,12 +588,8 @@
                             ?pp ?o .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription  prov:wasDerivedFrom ?res ;
-                            prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            kgi:original ?res .
+                        ?datasetDescription  prov:wasDerivedFrom ?res .
+                        ?metadataDescription kgi:original ?res .
                     }
                 }
                 WHERE {
@@ -618,12 +625,8 @@
                             ?pp ?o .
                     }
                     GRAPH ?metadataDescriptionGraph {
-                        ?datasetDescription  prov:wasDerivedFrom ?res ;
-                            prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> .
-                        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/extraction/asserted/datasetDescResourceLocalhost.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
-                        ?metadataDescription a prov:Entity , earl:TestSubject ;
-                            kgi:original ?res .
+                        ?datasetDescription  prov:wasDerivedFrom ?res .
+                        ?metadataDescription kgi:original ?res .
                     }
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription sd:namedGraph ?g .

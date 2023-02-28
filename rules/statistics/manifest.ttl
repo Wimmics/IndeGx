@@ -495,30 +495,30 @@
                 }
             """
         ]
-            [
-                kgi:timeout "PT120S"^^xsd:duration ;
-                mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
-                    PREFIX prov: <http://www.w3.org/ns/prov#>
-                    PREFIX kgi: <http://ns.inria.fr/kg/index#>
-                    INSERT {
-                        GRAPH ?curatedDescriptionGraph {
-                            ?datasetDescription voidex:distinctBlankNodeSubjects ?x .
-                        }
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription voidex:distinctBlankNodeSubjects ?x .
                     }
-                    WHERE {
-                        SERVICE $rawEndpointUrl {
-                            {
-                                SELECT (COUNT(DISTINCT ?s) AS ?x) {
-                                    ?s ?p ?o
-                                    FILTER(isBlank(?s))
-                                }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?s) AS ?x) {
+                                ?s ?p ?o
+                                FILTER(isBlank(?s))
                             }
                         }
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                     }
-                """
-            ]
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                }
+            """
+        ]
     ) .
 
 <sportalDistinctBlankNodeObjects.ttl> a mf:ManifestEntry ;
