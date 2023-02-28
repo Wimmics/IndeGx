@@ -65,19 +65,23 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res a schema:Dataset ,
-                    dcmitype:Dataset ,
-                    void:Dataset ,
-                    dcat:Dataset ,
-                    sd:Dataset ,
-                    prov:Entity ,
-                    skos:Concept .
+                GRAPH ?graph {
+                    ?res a schema:Dataset ,
+                        dcmitype:Dataset ,
+                        void:Dataset ,
+                        dcat:Dataset ,
+                        sd:Dataset ,
+                        prov:Entity ,
+                        skos:Concept .
+                }
             } WHERE {
-                { ?res a schema:Dataset }
-                UNION { ?res a dcmitype:Dataset }
-                UNION { ?res a void:Dataset }
-                UNION { ?res a dcat:Dataset }
-                UNION { ?res a sd:Dataset }
+                GRAPH ?graph {
+                    { ?res a schema:Dataset }
+                    UNION { ?res a dcmitype:Dataset }
+                    UNION { ?res a void:Dataset }
+                    UNION { ?res a dcat:Dataset }
+                    UNION { ?res a sd:Dataset }
+                }
             }
             """
         ]
@@ -110,13 +114,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:identifier ?id ;
-                    dct:identifier ?id ;
-                    adms:identifier ?id .
+                GRAPH ?graph {
+                    ?res schema:identifier ?id ;
+                        dct:identifier ?id ;
+                        adms:identifier ?id .
+                }
             } WHERE {
-                { ?res schema:identifier ?id }
-                UNION { ?res dct:identifier ?id }
-                UNION { ?res adms:identifier ?id }
+                GRAPH ?graph {
+                    { ?res schema:identifier ?id }
+                    UNION { ?res dct:identifier ?id }
+                    UNION { ?res adms:identifier ?id }
+                }
             }
             """
         ]
@@ -149,13 +157,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:name ?id ;
-                    dct:title ?id ;
-                    rdfs:label ?id .
+                GRAPH ?graph {
+                    ?res schema:name ?id ;
+                        dct:title ?id ;
+                        rdfs:label ?id .
+                }
             } WHERE {
-                { ?res schema:name ?id }
-                UNION { ?res dct:title ?id }
-                UNION { ?res rdfs:label ?id }
+                GRAPH ?graph {
+                    { ?res schema:name ?id }
+                    UNION { ?res dct:title ?id }
+                    UNION { ?res rdfs:label ?id }
+                }
             }
             """
         ]
@@ -188,13 +200,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:alternateName ?id ;
-                    dct:alternative ?id ;
-                    skos:altLabel ?id .
+                GRAPH ?graph {
+                    ?res schema:alternateName ?id ;
+                        dct:alternative ?id ;
+                        skos:altLabel ?id .
+                }
             } WHERE {
-                { ?res schema:alternateName ?id }
-                UNION { ?res dct:alternative ?id }
-                UNION { ?res skos:altLabel ?id }
+                GRAPH ?graph {
+                    { ?res schema:alternateName ?id }
+                    UNION { ?res dct:alternative ?id }
+                    UNION { ?res skos:altLabel ?id }
+                }
             }
             """
         ]
@@ -227,11 +243,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:termCode ?id ;
-                    <http://qudt.org/schema/qudt/acronym> ?id .
+                GRAPH ?graph {
+                    ?res schema:termCode ?id ;
+                        <http://qudt.org/schema/qudt/acronym> ?id .
+                }
             } WHERE {
-                { ?res schema:termCode ?id }
-                UNION { ?res <http://qudt.org/schema/qudt/acronym> ?id }
+                GRAPH ?graph {
+                    { ?res schema:termCode ?id }
+                    UNION { ?res <http://qudt.org/schema/qudt/acronym> ?id }
+                }
             }
             """
         ]
@@ -264,15 +284,19 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:description ?id ;
-                    dct:description ?id ;
-                    owl:comment ?id ;
-                    skos:note ?id .
+                GRAPH ?graph {
+                    ?res schema:description ?id ;
+                        dct:description ?id ;
+                        owl:comment ?id ;
+                        skos:note ?id .
+                }
             } WHERE {
-                { ?res schema:description ?id }
-                UNION { ?res dct:description ?id }
-                UNION { ?res owl:comment ?id }
-                UNION { ?res skos:note ?id }
+                GRAPH ?graph {
+                    { ?res schema:description ?id }
+                    UNION { ?res dct:description ?id }
+                    UNION { ?res owl:comment ?id }
+                    UNION { ?res skos:note ?id }
+                }
             }
             """
         ]
@@ -305,13 +329,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:url ?id ;
-                    dcat:landingPage ?id ;
-                    foaf:homepage ?id .
+                GRAPH ?graph {
+                    ?res schema:url ?id ;
+                        dcat:landingPage ?id ;
+                        foaf:homepage ?id .
+                }
             } WHERE {
-                { ?res schema:url ?id }
-                UNION { ?res dcat:landingPage ?id }
-                UNION { ?res foaf:homepage ?id }
+                GRAPH ?graph {
+                    { ?res schema:url ?id }
+                    UNION { ?res dcat:landingPage ?id }
+                    UNION { ?res foaf:homepage ?id }
+                }
             }
             """
         ]
@@ -344,11 +372,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:relatedLink ?id ;
-                    rdfs:seeAlso ?id .
+                GRAPH ?graph {
+                    ?res schema:relatedLink ?id ;
+                        rdfs:seeAlso ?id .
+                }
             } WHERE {
-                { ?res schema:relatedLink ?id }
-                UNION { ?res rdfs:seeAlso ?id }
+                GRAPH ?graph {
+                    { ?res schema:relatedLink ?id }
+                    UNION { ?res rdfs:seeAlso ?id }
+                }
             }
             """
         ]
@@ -381,17 +413,21 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:creator ?id ;
-                    dct:creator ?id ;
-                    prov:wasAttributedTo ?id ;
-                    pav:authoredBy ?id ;
-                    pav:createdBy ?id .
+                GRAPH ?graph {
+                    ?res schema:creator ?id ;
+                        dct:creator ?id ;
+                        prov:wasAttributedTo ?id ;
+                        pav:authoredBy ?id ;
+                        pav:createdBy ?id .
+                }
             } WHERE {
-                { ?res schema:creator ?id }
-                UNION { ?res dct:creator ?id }
-                UNION { ?res prov:wasAttributedTo ?id }
-                UNION { ?res pav:authoredBy ?id }
-                UNION { ?res pav:createdBy ?id }
+                GRAPH ?graph {
+                    { ?res schema:creator ?id }
+                    UNION { ?res dct:creator ?id }
+                    UNION { ?res prov:wasAttributedTo ?id }
+                    UNION { ?res pav:authoredBy ?id }
+                    UNION { ?res pav:createdBy ?id }
+                }
             }
             """
         ]
@@ -424,13 +460,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:editor ?id ;
-                    dct:contributor ?id ;
-                    pav:contributedBy ?id .
+                GRAPH ?graph {
+                    ?res schema:editor ?id ;
+                        dct:contributor ?id ;
+                        pav:contributedBy ?id .
+                }
             } WHERE {
-                { ?res schema:editor ?id }
-                UNION { ?res dct:contributor ?id }
-                UNION { ?res pav:contributedBy ?id }
+                GRAPH ?graph {
+                    { ?res schema:editor ?id }
+                    UNION { ?res dct:contributor ?id }
+                    UNION { ?res pav:contributedBy ?id }
+                }
             }
             """
         ]
@@ -463,13 +503,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:publisher ?id ;
-                    dct:publisher ?id ;
-                    pav:providedBy ?id .
+                GRAPH ?graph {
+                    ?res schema:publisher ?id ;
+                        dct:publisher ?id ;
+                        pav:providedBy ?id .
+                }
             } WHERE {
-                { ?res schema:publisher ?id }
-                UNION { ?res dct:publisher ?id }
-                UNION { ?res pav:providedBy ?id }
+                GRAPH ?graph {
+                    { ?res schema:publisher ?id }
+                    UNION { ?res dct:publisher ?id }
+                    UNION { ?res pav:providedBy ?id }
+                }
             }
             """
         ]
@@ -502,13 +546,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:dateCreated ?id ;
-                    dct:created ?id ;
-                    pav:createdOn ?id .
+                GRAPH ?graph {
+                    ?res schema:dateCreated ?id ;
+                        dct:created ?id ;
+                        pav:createdOn ?id .
+                }
             } WHERE {
-                { ?res schema:dateCreated ?id }
-                UNION { ?res dct:created ?id }
-                UNION { ?res pav:createdOn ?id }
+                GRAPH ?graph {
+                    { ?res schema:dateCreated ?id }
+                    UNION { ?res dct:created ?id }
+                    UNION { ?res pav:createdOn ?id }
+                }
             }
             """
         ]
@@ -541,13 +589,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:dateCreated ?id ;
-                    dct:created ?id ;
-                    pav:createdOn ?id .
+                GRAPH ?graph {
+                    ?res schema:dateCreated ?id ;
+                        dct:created ?id ;
+                        pav:createdOn ?id .
+                }
             } WHERE {
-                { ?res schema:dateModified ?id }
-                UNION { ?res dct:modified ?id }
-                UNION { ?res pav:lastUpdateOn ?id }
+                GRAPH ?graph {
+                    { ?res schema:dateModified ?id }
+                    UNION { ?res dct:modified ?id }
+                    UNION { ?res pav:lastUpdateOn ?id }
+                }
             }
             """
         ]
@@ -580,11 +632,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:datePublished ?id ;
-                    dct:issued ?id .
+                GRAPH ?graph {
+                    ?res schema:datePublished ?id ;
+                        dct:issued ?id .
+                }
             } WHERE {
-                { ?res schema:datePublished ?id }
-                UNION { ?res dct:issued ?id }
+                GRAPH ?graph {
+                    { ?res schema:datePublished ?id }
+                    UNION { ?res dct:issued ?id }
+                }
             }
             """
         ]
@@ -617,11 +673,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res dct:conformsTo ?id ;
-                    void:vocabulary ?id .
+                GRAPH ?graph {
+                    ?res dct:conformsTo ?id ;
+                        void:vocabulary ?id .
+                }
             } WHERE {
-                { ?res dct:conformsTo ?id }
-                UNION { ?res void:vocabulary ?id }
+                GRAPH ?graph {
+                    { ?res dct:conformsTo ?id }
+                    UNION { ?res void:vocabulary ?id }
+                }
             }
             """
         ]
@@ -654,13 +714,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:about ?id ;
-                    dcat:theme ?id ;
-                    foaf:primaryTopic ?id .
+                GRAPH ?graph {
+                    ?res schema:about ?id ;
+                        dcat:theme ?id ;
+                        foaf:primaryTopic ?id .
+                }
             } WHERE {
-                { ?res schema:about ?id }
-                UNION { ?res dcat:theme ?id }
-                UNION { ?res foaf:primaryTopic ?id }
+                GRAPH ?graph {
+                    { ?res schema:about ?id }
+                    UNION { ?res dcat:theme ?id }
+                    UNION { ?res foaf:primaryTopic ?id }
+                }
             }
             """
         ]
@@ -693,11 +757,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:image ?id ;
-                    foaf:depiction ?id .
+                GRAPH ?graph {
+                    ?res schema:image ?id ;
+                        foaf:depiction ?id .
+                }
             } WHERE {
-                { ?res schema:image ?id }
-                UNION { ?res foaf:depiction ?id }
+                GRAPH ?graph {
+                    { ?res schema:image ?id }
+                    UNION { ?res foaf:depiction ?id }
+                }
             }
             """
         ]
@@ -730,11 +798,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:distribution ?id ;
-                    dcat:distribution ?id .
+                GRAPH ?graph {
+                    ?res schema:distribution ?id ;
+                        dcat:distribution ?id .
+                }
             } WHERE {
-                { ?res schema:distribution ?id }
-                UNION { ?res dcat:distribution ?id }
+                GRAPH ?graph {
+                    { ?res schema:distribution ?id }
+                    UNION { ?res dcat:distribution ?id }
+                }
             }
             """
         ]
@@ -767,11 +839,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:mainEntityOfPage ?id ;
-                    fabio:ApplicationProgrammingInterface ?id .
+                GRAPH ?graph {
+                    ?res schema:mainEntityOfPage ?id ;
+                        fabio:ApplicationProgrammingInterface ?id .
+                }
             } WHERE {
-                { ?res schema:mainEntityOfPage ?id }
-                UNION { ?res fabio:ApplicationProgrammingInterface ?id }
+                GRAPH ?graph {
+                    { ?res schema:mainEntityOfPage ?id }
+                    UNION { ?res fabio:ApplicationProgrammingInterface ?id }
+                }
             }
             """
         ]
@@ -804,13 +880,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:contentURL ?id ;
-                    void:sparqlEndpoint ?id ;
-                    dcat:endpointURL ?id .
+                GRAPH ?graph {
+                    ?res schema:contentURL ?id ;
+                        void:sparqlEndpoint ?id ;
+                        dcat:endpointURL ?id .
+                }
             } WHERE {
-                { ?res schema:contentURL ?id }
-                UNION { ?res void:sparqlEndpoint ?id }
-                UNION { ?res dcat:endpointURL ?id }
+                GRAPH ?graph {
+                    { ?res schema:contentURL ?id }
+                    UNION { ?res void:sparqlEndpoint ?id }
+                    UNION { ?res dcat:endpointURL ?id }
+                }
             }
             """
         ]
@@ -843,17 +923,21 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:version ?id ;
-                    dct:hasVersion ?id ;
-                    pav:version ?id ;
-                    pav:hasCurrentVersion ?id ;
-                    dcat:version ?id .
+                GRAPH ?graph {
+                    ?res schema:version ?id ;
+                        dct:hasVersion ?id ;
+                        pav:version ?id ;
+                        pav:hasCurrentVersion ?id ;
+                        dcat:version ?id .
+                }
             } WHERE {
-                { ?res schema:version ?id }
-                UNION { ?res dct:hasVersion ?id }
-                UNION { ?res dcat:version ?id }
-                UNION { ?res pav:version ?id }
-                UNION { ?res pav:hasCurrentVersion ?id }
+                GRAPH ?graph {
+                    { ?res schema:version ?id }
+                    UNION { ?res dct:hasVersion ?id }
+                    UNION { ?res dcat:version ?id }
+                    UNION { ?res pav:version ?id }
+                    UNION { ?res pav:hasCurrentVersion ?id }
+                }
             }
             """
         ]
@@ -886,11 +970,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res adms:versionNotes ?id ;
-                    owl:versionInfo ?id .
+                GRAPH ?graph {
+                    ?res adms:versionNotes ?id ;
+                        owl:versionInfo ?id .
+                }
             } WHERE {
-                { ?res adms:versionNotes ?id }
-                UNION { ?res owl:versionInfo ?id }
+                GRAPH ?graph {
+                    { ?res adms:versionNotes ?id }
+                    UNION { ?res owl:versionInfo ?id }
+                }
             }
             """
         ]
@@ -923,23 +1011,27 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:license ?id ;
-                    dct:license ?id ;
-                    doap:license ?id ;
-                    dbpedia-owl:license ?id ;
-                    cc:license ?id ;
-                    xhv:license ?id ;
-                    sto:license ?id ;
-                    nie:license ?id .
+                GRAPH ?graph {
+                    ?res schema:license ?id ;
+                        dct:license ?id ;
+                        doap:license ?id ;
+                        dbpedia-owl:license ?id ;
+                        cc:license ?id ;
+                        xhv:license ?id ;
+                        sto:license ?id ;
+                        nie:license ?id .
+                }
             } WHERE {
-                { ?res schema:license ?id }
-                UNION { ?res dct:license ?id }
-                UNION { ?res doap:license ?id }
-                UNION { ?res dbpedia-owl:license ?id }
-                UNION { ?res cc:license ?id }
-                UNION { ?res xhv:license ?id }
-                UNION { ?res sto:license ?id }
-                UNION { ?res nie:license ?id }
+                GRAPH ?graph {
+                    { ?res schema:license ?id }
+                    UNION { ?res dct:license ?id }
+                    UNION { ?res doap:license ?id }
+                    UNION { ?res dbpedia-owl:license ?id }
+                    UNION { ?res cc:license ?id }
+                    UNION { ?res xhv:license ?id }
+                    UNION { ?res sto:license ?id }
+                    UNION { ?res nie:license ?id }
+                }
             }
             """
         ]
@@ -972,13 +1064,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:keywords ?id ;
-                    dct:subject ?id ;
-                    dcat:keyword ?id .
+                GRAPH ?graph {
+                    ?res schema:keywords ?id ;
+                        dct:subject ?id ;
+                        dcat:keyword ?id .
+                }
             } WHERE {
-                { ?res schema:keywords ?id }
-                UNION { ?res dct:subject ?id }
-                UNION { ?res dcat:keyword ?id }
+                GRAPH ?graph {
+                    { ?res schema:keywords ?id }
+                    UNION { ?res dct:subject ?id }
+                    UNION { ?res dcat:keyword ?id }
+                }
             }
             """
         ]
@@ -1007,13 +1103,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:keywords ?id ;
-                    dct:subject ?id ;
-                    dcat:theme ?id .
+                GRAPH ?graph {
+                    ?res schema:keywords ?id ;
+                        dct:subject ?id ;
+                        dcat:theme ?id .
+                }
             } WHERE {
-                { ?res schema:keywords ?id }
-                UNION { ?res dct:subject ?id }
-                UNION { ?res dcat:theme ?id }
+                GRAPH ?graph {
+                    { ?res schema:keywords ?id }
+                    UNION { ?res dct:subject ?id }
+                    UNION { ?res dcat:theme ?id }
+                }
             }
             """
         ]
@@ -1046,11 +1146,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:publication ?id ;
-                    dct:references ?id .
+                GRAPH ?graph {
+                    ?res schema:publication ?id ;
+                        dct:references ?id .
+                }
             } WHERE {
-                { ?res schema:publication ?id }
-                UNION { ?res dct:references ?id }
+                GRAPH ?graph {
+                    { ?res schema:publication ?id }
+                    UNION { ?res dct:references ?id }
+                }
             }
             """
         ]
@@ -1083,11 +1187,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:inLanguage ?id ;
-                    dct:language ?id .
+                GRAPH ?graph {
+                    ?res schema:inLanguage ?id ;
+                        dct:language ?id .
+                }
             } WHERE {
-                { ?res schema:inLanguage ?id }
-                UNION { ?res dct:language ?id }
+                GRAPH ?graph {
+                    { ?res schema:inLanguage ?id }
+                    UNION { ?res dct:language ?id }
+                }
             }
             """
         ]
@@ -1120,13 +1228,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res void:uriRegexPattern ?id ;
-                    void:uriSpace ?id ;
-                    hydra:template ?id .
+                GRAPH ?graph {
+                    ?res void:uriRegexPattern ?id ;
+                        void:uriSpace ?id ;
+                        hydra:template ?id .
+                }
             } WHERE {
-                { ?res void:uriRegexPattern ?id }
-                UNION { ?res void:uriSpace ?id }
-                UNION { ?res hydra:template ?id }
+                GRAPH ?graph {
+                    { ?res void:uriRegexPattern ?id }
+                    UNION { ?res void:uriSpace ?id }
+                    UNION { ?res hydra:template ?id }
+                }
             }
             """
         ]
@@ -1159,11 +1271,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res dct:relation ?id ;
-                    void:target ?id .
+                GRAPH ?graph {
+                    ?res dct:relation ?id ;
+                        void:target ?id .
+                }
             } WHERE {
-                { ?res dct:relation ?id }
-                UNION { ?res void:target ?id }
+                GRAPH ?graph {
+                    { ?res dct:relation ?id }
+                    UNION { ?res void:target ?id }
+                }
             }
             """
         ]
@@ -1196,11 +1312,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res void:exampleResource ?id ;
-                    skos:example ?id .
+                GRAPH ?graph {
+                    ?res void:exampleResource ?id ;
+                        skos:example ?id .
+                }
             } WHERE {
-                { ?res void:exampleResource ?id }
-                UNION { ?res skos:example ?id }
+                GRAPH ?graph {
+                    { ?res void:exampleResource ?id }
+                    UNION { ?res skos:example ?id }
+                }
             }
             """
         ]
@@ -1233,13 +1353,17 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res dct:isVersionOf ?id ;
-                    pav:previousVersion ?id ;
-                    owl:priorVersion ?id .
+                GRAPH ?graph {
+                    ?res dct:isVersionOf ?id ;
+                        pav:previousVersion ?id ;
+                        owl:priorVersion ?id .
+                }
             } WHERE {
-                { ?res dct:isVersionOf ?id }
-                UNION { ?res pav:previousVersion ?id }
-                UNION { ?res owl:priorVersion ?id }
+                GRAPH ?graph {
+                    { ?res dct:isVersionOf ?id }
+                    UNION { ?res pav:previousVersion ?id }
+                    UNION { ?res owl:priorVersion ?id }
+                }
             }
             """
         ]
@@ -1272,17 +1396,21 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:isBasedOn ?id ;
-                    dct:source ?id ;
-                    dct:provenance ?id ;
-                    prov:hadPrimarySource ?id ;
-                    pav:derivedFrom ?id .
+                GRAPH ?graph {
+                    ?res schema:isBasedOn ?id ;
+                        dct:source ?id ;
+                        dct:provenance ?id ;
+                        prov:hadPrimarySource ?id ;
+                        pav:derivedFrom ?id .
+                }
             } WHERE {
-                { ?res schema:isBasedOn ?id }
-                UNION { ?res dct:source ?id }
-                UNION { ?res dct:provenance ?id }
-                UNION { ?res prov:hadPrimarySource ?id }
-                UNION { ?res pav:derivedFrom ?id }
+                GRAPH ?graph {
+                    { ?res schema:isBasedOn ?id }
+                    UNION { ?res dct:source ?id }
+                    UNION { ?res dct:provenance ?id }
+                    UNION { ?res prov:hadPrimarySource ?id }
+                    UNION { ?res pav:derivedFrom ?id }
+                }
             }
             """
         ]
@@ -1315,11 +1443,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:spatialCoverage ?id ;
-                    dct:spatial ?id .
+                GRAPH ?graph {
+                    ?res schema:spatialCoverage ?id ;
+                        dct:spatial ?id .
+                }
             } WHERE {
-                { ?res schema:spatialCoverage ?id }
-                UNION { ?res dct:spatial ?id }
+                GRAPH ?graph {
+                    { ?res schema:spatialCoverage ?id }
+                    UNION { ?res dct:spatial ?id }
+                }
             }
             """
         ]
@@ -1352,11 +1484,15 @@
             PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
 
             INSERT {
-                ?res schema:temporalCoverage ?id ;
-                    dct:temporal ?id .
+                GRAPH ?graph {
+                    ?res schema:temporalCoverage ?id ;
+                        dct:temporal ?id .
+                }
             } WHERE {
-                { ?res schema:temporalCoverage ?id }
-                UNION { ?res dct:temporal ?id }
+                GRAPH ?graph {
+                    { ?res schema:temporalCoverage ?id }
+                    UNION { ?res dct:temporal ?id }
+                }
             }
             """
         ]
