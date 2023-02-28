@@ -30,23 +30,60 @@
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription kgi:summary ?summaryDescriptionGraph .
                 }
+                GRAPH ?metadataDescriptionGraph {
+                    ?summaryDescriptionGraph prov:wasDerivedFrom ?datasetDescription , ?endpointDescription ;
+                        prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/root.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/root.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/root.ttl.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
             } WHERE  {
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Summary")) AS ?summaryDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
             }
             """
         ]
     ) .
 
 <summary.ttl>  a mf:ManifestEntry ;
-    rdfs:comment "In this asset, we used to replace the end of the nodes by an empty string. However, some engines, ie virtuoso, do not support properly parenthesis in the regex. So we use the STRLEN function to get the length of the string and then we use the SUBSTR function to get the substring without the end of the url." ;
+    rdfs:comment "In this asset, we used to replace the end of the nodes by an empty string. However, some engines, i.e. Virtuoso, do not support properly parenthesis in the regex with the 'q' flag. So we use the STRLEN function to get the length of the string and then we use the SUBSTR function to get the substring without the end of the url." ;
     kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+            PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
+            PREFIX dcat:       <http://www.w3.org/ns/dcat#>
+            PREFIX foaf:       <http://xmlns.com/foaf/0.1/>
+            PREFIX prov:       <http://www.w3.org/ns/prov#>
+            PREFIX schema:		<http://schema.org/>
+            PREFIX void:       <http://rdfs.org/ns/void#>
+            PREFIX sd:     	<http://www.w3.org/ns/sparql-service-description#>
+            PREFIX dct:        <http://purl.org/dc/terms/>
+            PREFIX skos:       <http://www.w3.org/2004/02/skos/core#>
+            PREFIX kgi:        <http://ns.inria.fr/kg/index#>
+
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?summaryDescriptionGraph prov:wasDerivedFrom ?datasetDescription , ?endpointDescription ;
+                        prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/summary.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/summary.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/summary.ttl.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            } WHERE  {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Summary")) AS ?summaryDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
-            mf:action """
-            PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+            mf:action """PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX owl:        <http://www.w3.org/2002/07/owl#>
             PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
             PREFIX dcat:       <http://www.w3.org/ns/dcat#>
