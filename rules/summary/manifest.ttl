@@ -34,7 +34,7 @@
                     ?summaryDescriptionGraph prov:wasDerivedFrom ?datasetDescription , ?endpointDescription ;
                         prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/root.ttl#activity> .
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/root.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/root.ttl.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE  {
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
@@ -70,7 +70,7 @@
                     ?summaryDescriptionGraph prov:wasDerivedFrom ?datasetDescription , ?endpointDescription ;
                         prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/summary.ttl#activity> .
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/summary.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/summary/summary.ttl.ttl> ;
-                            prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
             } WHERE  {
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)

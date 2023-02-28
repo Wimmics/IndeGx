@@ -49,7 +49,7 @@ kgi:trace rdf:type rdf:Property ;
     rdfs:domain prov:Entity ;
     rdfs:range earl:Assertion .
 
-# Generation asssets structuration vocabulary
+# Generation assets structuration vocabulary
 
 kgi:endpoint rdf:type rdf:Property ;
     rdfs:label "Indicates the endpoint to send a test or action." ;
@@ -85,7 +85,7 @@ kgi:DummyTest rdf:type rdf:Class ;
     rdfs:comment "Some tests and actions are 'meta' rules that do not need interaction with remote endpoints. This class is for a test that always succeed for these rules." ;
     rdfs:subClassOf earl:TestCase .
 
-# properties to give parameter to the indexation
+# properties to set up the parameters of the indexation
 
 kgi:timeout rdf:type rdf:Property ;
     rdfs:label "Specify a timeout for a test or action." ;
@@ -94,7 +94,7 @@ kgi:timeout rdf:type rdf:Property ;
     rdfs:range xsd:duration .
 
 kgi:recommendedPagination rdf:type rdf:Property ;
-    rdfs:label "Recommended size for pagination during retrieval of the results of the actions" ;
+    rdfs:label "Recommended size for pagination during retrieval of the results of an action" ;
     rdfs:comment "This indicates the size of the page to use in the actions queries." ;
     rdfs:isDefinedBy kgi: ;
     rdfs:range xsd:integer .
@@ -142,6 +142,11 @@ kgi:resourceHostname rdf:type rdf:Property ;
     rdfs:domain void:Dataset ;
     rdfs:range rdf:Resource ;
     rdfs:isDefinedBy kgi: .
+
+kgi:summary rdf:type rdf:Property ;
+    rdf:label "Link between a dataset and a summary of its content." ;
+    rdfs:domain void:Dataset ;
+    rdfs:range sd:NamedGraph .
 
 # Description of the common elements between datasets
 
@@ -236,8 +241,3 @@ kgi:hostname rdf:type rdf:Property ;
     rdfs:comment "To not be confused with kgi:resourceHostname, which lists the resource hostnames appearing in a dataset." ;
     rdfs:domain kgi:ResourceHostnameCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
-
-kgi:summary rdf:type rdf:Property ;
-    rdf:label "Link between a dataset and a summary of its content." ;
-    rdfs:domain void:Dataset ;
-    rdfs:range sd:NamedGraph .
