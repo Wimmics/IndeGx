@@ -409,11 +409,6 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
             // Find inner SELECT query to add the pagination to it
             function paginateQuery(object: abstractQueryObject, pageSize: number, iteration: number = 0, offsetMin: number = 0, offsetMax?: number): Promise<any> {
                 if (offsetMax == undefined || (offsetMax > offsetMin && offsetMin + pageSize * iteration < offsetMax && pageSize > 0)) {
-                    if(offsetMax == undefined) {
-                        Logger.log(endpointObject.endpoint, ": Pagination n°", iteration, "for", entryObject.test.uri, "action")
-                    } else {
-                        Logger.log(endpointObject.endpoint, ": Dychotomic agination n°", iteration, "for", entryObject.test.uri, "action, offsetMin=", offsetMin, "offsetMax=", offsetMax)
-                    }
                     let queryObject = null;
                     if (object.type.localeCompare("insert") == 0 || object.type.localeCompare("delete") == 0) {
                         queryObject = parser.parse("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }");
@@ -535,11 +530,9 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                 })
                             } else {
                                 let endTime = dayjs();
-                                Logger.log(endpointUrl, "Pagination n°", iteration, ": 0 triples for the query ", generatedQuery);
                                 return sendFailureReportUpdate(endpointUrl, generatedQuery, entryObject, startTime, endTime, "No triples returned by the query");
                             }
                         } else {
-                            Logger.log(endpointUrl, "Pagination n°", iteration, ": undefined triples for the query ", generatedQuery);
                             return paginateQuery(object, pageSize, iteration + 1, offsetMin, offsetMax);
                         }
                     }).catch(error => {
