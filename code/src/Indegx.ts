@@ -21,6 +21,8 @@ let delayMillisecondsTimeForConccurentQuery = currentConfig.get("delayMillisecon
 let defaultQueryTimeout = currentConfig.get("defaultQueryTimeout");
 let logFile = currentConfig.get("logFile");
 let outputFile = currentConfig.get("outputFile");
+let manifestTreeFile = currentConfig.get("manifestJSON");
+let postManifestTreeFile = currentConfig.get("postManifestJSON");
 GlobalUtils.setNbFetchRetries(nbFetchRetries);
 GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
 GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
@@ -31,7 +33,10 @@ Logger.setLogFileName(logFile);
 Logger.info("Reading manifest tree ", manifest)
 readRules(manifest).then(manifests => {
     Logger.info("Manifest tree read")
-    writeFile("manifestTree.json", JSON.stringify(manifests))
+    if(manifestTreeFile !== undefined && manifestTreeFile !== "") {
+        Logger.info("Writing manifest tree to file", manifestTreeFile)
+        writeFile(manifestTreeFile, JSON.stringify(manifests))
+    }
 
     Logger.info("Reading catalog", catalog)
     let endpointPool = [];
@@ -62,6 +67,10 @@ readRules(manifest).then(manifests => {
     if(post !== undefined && post !== "") {
         return readRules(post).then(postManifests => {
             Logger.info("Post manifest tree read.");
+            if(postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
+                Logger.info("Writing post manifest tree to file", postManifestTreeFile)
+                writeFile(postManifestTreeFile, JSON.stringify(postManifests))
+            }
             Logger.info("Post treatment starts");
             let manifestPool = [];
             postManifests.forEach(postManifest => {
