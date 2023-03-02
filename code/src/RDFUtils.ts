@@ -176,11 +176,11 @@ export function parseN3ToStore(content: string, store: $rdf.Store): Promise<$rdf
     });
 }
 
-export function parseTurtleToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
+export function parseTurtleToStore(content: string, store: $rdf.Store, base = KGI("").value): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
             content = Global.unicodeToUrlendcode(content)
-            $rdf.parse(content, store, KGI("").value, "text/turtle", (err, kb) => {
+            $rdf.parse(content, store, base, "text/turtle", (err, kb) => {
                 if (err != null) {
                     reject(err);
                 }
@@ -250,6 +250,24 @@ export function parseRDFXMLToStore(content: string, store: $rdf.Store): Promise<
                 }
                 accept(kb);
             })
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+export function queryRDFLibStore(store: $rdf.Store, query: string) {
+    return new Promise((resolve, reject) => {
+        try {
+            let parsedQuery = $rdf.SPARQLToQuery(query, false, store);
+            if(parsedQuery as $rdf.Query) {
+                parsedQuery = parsedQuery as $rdf.Query;
+                store.query(parsedQuery, results => {
+                    resolve(results);
+                });
+            } else {
+                reject("Query is not a valid SPARQL query" + query);
+            }
         } catch (error) {
             reject(error);
         }
