@@ -1,0 +1,3056 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    dct:description "Extracted from https://tetherless-world.github.io/SQuARE" ;
+    mf:entries (
+            <allDifferentIndividuals.ttl>
+            <dataMinQualifiedCardinality.ttl>
+            <datatypePropertyInclusion.ttl>
+            <inverseFunctionalObjectProperty.ttl>
+            <objectHasSelf.ttl>
+            <objectPropertyAsymmetry.ttl>
+            <objectUnionOf.ttl>
+            <allDisjointClasses.ttl>
+            <dataOneOf.ttl>
+            <datatypeRestriction.ttl>
+            <keys.ttl>
+            <objectHasValue.ttl>
+            <objectPropertyChainInclusion.ttl>
+            <propertyDisjointness.ttl>
+            <allDisjointProperties.ttl>
+            <datatypeAllValuesFrom.ttl>
+            <datatypeSomeValuesFrom.ttl>
+            <objectIntersectionOf.ttl>
+            <objectPropertyComplementOf.ttl>
+            <propertyDomain.ttl>
+            <allDisjointTransitivity.ttl>
+            <datatypeComplementOf.ttl>
+            <datatypeUnionOf.ttl>
+            <negativeDatatypePropertyAssertion.ttl>
+            <objectMaxCardinality.ttl>
+            <objectPropertyInclusion.ttl>
+            <propertyEquivalence.ttl>
+            <classAssertion.ttl>
+            <datatypeExactQualifiedCardinality.ttl>
+            <differentIndividuals.ttl>
+            <negativeObjectPropertyAssertion.ttl>
+            <objectMaxQualifiedCardinality.ttl>  
+            <objectPropertyInversion.ttl>
+            <propertyInclusion.ttl>
+            <classDisjointness.ttl>
+            <datatypeMaxCardinality.ttl>
+            <disjointUnion.ttl>
+            <objectAllValuesFrom.ttl>
+            <objectMinCardinality.ttl>
+            <objectPropertyIrreflexivity.ttl>
+            <propertyRange.ttl>
+            <classEquivalence.ttl>
+            <datatypeMaxQualifiedCardinality.ttl>
+            <functionalDataProperty.ttl>
+            <objectComplementOf.ttl>
+            <objectMinQualifiedCardinality.ttl>
+            <objectPropertyReflexivity.ttl>
+            <sameIndividual.ttl>
+            <classInclusion.ttl>
+            <datatypeMinCardinality.ttl>
+            <functionalObjectProperty.ttl>
+            <objectExactCardinality.ttl>
+            <objectOneOfInconsistency.ttl>
+            <objectPropertySymmetry.ttl>
+            <dataExactCardinality.ttl>
+            <datatypePropertyComplementOf.ttl>
+            <individualInclusion.ttl>
+            <objectExactQualifiedCardinality.ttl>
+            <objectOneOfMembership.ttl>
+            <objectSomeValuesFrom.ttl>
+        ) .
+
+<classInclusion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                INSERT {
+                    ?resource rdfs:subClassOf ?superClass .
+                }
+                WHERE {
+                    ?resource rdfs:subClassOf ?class .
+                    ?class rdfs:subClassOf+ ?superClass .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource rdfs:subClassOf ?superClass .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdfs:subClassOf ?class .
+                        ?class rdfs:subClassOf+ ?superClass .
+                    }
+                }"""
+        ]
+    ) .
+
+<individualInclusion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                INSERT {
+                    ?resource rdf:type ?superClass .
+                }
+                WHERE {
+                    ?resource rdf:type ?class .
+                    ?class rdfs:subClassOf+ ?superClass .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?superClass .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class .
+                        ?class rdfs:subClassOf+ ?superClass .
+                    }
+                }"""
+        ]
+    ) .
+
+<propertyInclusion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?superProperty ?o . 
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    ?p rdf:type owl:Property ;
+                        rdfs:subPropertyOf+ ?superProperty .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource ?superProperty ?o .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o .
+                        ?p rdf:type owl:Property ;
+                            rdfs:subPropertyOf+ ?superProperty .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectPropertyInclusion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?superProperty ?o . 
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    ?p rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf+ ?superProperty .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource ?superProperty ?o .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o .
+                        ?p rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf+ ?superProperty .
+                    }
+                }"""
+        ]
+    ) .
+
+<datatypePropertyInclusion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?superProperty ?o . 
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    ?p rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf+ ?superProperty .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource ?superProperty ?o .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o .
+                        ?p rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf+ ?superProperty .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectPropertyChainInclusion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?objectProperty ?o .
+                }
+                WHERE {
+                    ?objectProperty rdf:type owl:ObjectProperty ;
+                        owl:propertyChainAxiom ?list .
+                    ?list rdf:first ?prop1 .
+                    ?list rdf:rest/rdf:first ?prop2 .
+                    ?resource ?prop1 [ ?prop2 ?o ] .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource ?objectProperty ?o .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?objectProperty rdf:type owl:ObjectProperty ;
+                            owl:propertyChainAxiom ?list .
+                        ?list rdf:first ?prop1 .
+                        ?list rdf:rest/rdf:first ?prop2 .
+                        ?resource ?prop1 [ ?prop2 ?o ] .
+                    }
+                }"""
+        ]
+    ) .
+
+<classEquivalence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?equivClass .
+                }
+                WHERE {
+                    ?resource rdf:type ?superClass.
+                    {?superClass owl:equivalentClass ?equivClass .}
+                        UNION
+                    {?equivClass owl:equivalentClass ?superClass .}
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?equivClass .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?superClass.
+                        {?superClass owl:equivalentClass ?equivClass .}
+                            UNION
+                        {?equivClass owl:equivalentClass ?superClass .}
+                    }
+                }"""
+        ]
+    ) .
+
+<propertyEquivalence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?equivClass .
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    {?p owl:equivalentProperty ?equivProperty .}
+                        UNION
+                    {?equivProperty owl:equivalentProperty ?p . }
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?equivClass .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o .
+                        {?p owl:equivalentProperty ?equivProperty .}
+                            UNION
+                        {?equivProperty owl:equivalentProperty ?p . }
+                    }
+                }"""
+        ]
+    ) .
+
+<classDisjointness.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class .
+                    ?resource rdf:type ?disjointClass .
+                    { ?class owl:disjointWith ?disjointClass . } 
+                        UNION
+                    { ?disjointClass owl:disjointWith ?class . }
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class .
+                        ?resource rdf:type ?disjointClass .
+                        { ?class owl:disjointWith ?disjointClass . } 
+                            UNION
+                        { ?disjointClass owl:disjointWith ?class . }
+                    }
+                }"""
+        ]
+    ) .
+
+<propertyDisjointness.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?p1 ?o1 ,
+                        ?o2 .
+                    ?resource ?p2 ?o2.
+                    {?p1 owl:propertyDisjointWith ?p2 .}
+                        UNION
+                    {?p2 owl:propertyDisjointWith ?p1 .}
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p1 ?o1 ,
+                            ?o2 .
+                        ?resource ?p2 ?o2.
+                        {?p1 owl:propertyDisjointWith ?p2 .}
+                            UNION
+                        {?p2 owl:propertyDisjointWith ?p1 .}
+                    }
+                }"""
+        ]
+    ) .
+
+<allDisjointClasses.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?member owl:disjointWith ?item .
+                }
+                WHERE {
+                    ?restriction rdf:type owl:AllDisjointClasses ;
+                        owl:members ?list .
+                    ?list rdf:rest*/rdf:first ?member .
+                    {
+                        SELECT DISTINCT ?item ?restrict WHERE
+                        {
+                        ?restrict rdf:type owl:AllDisjointClasses ;
+                            owl:members ?list .
+                        ?list rdf:rest*/rdf:first ?item .
+                        }
+                    }
+                    BIND(?restriction AS ?restrict)
+                    FILTER(?member != ?item)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {
+                        ?member owl:disjointWith ?item .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?restriction rdf:type owl:AllDisjointClasses ;
+                            owl:members ?list .
+                        ?list rdf:rest*/rdf:first ?member .
+                        {
+                            SELECT DISTINCT ?item ?restrict WHERE
+                            {
+                            ?restrict rdf:type owl:AllDisjointClasses ;
+                                owl:members ?list .
+                            ?list rdf:rest*/rdf:first ?item .
+                            }
+                        }
+                    }
+                    BIND(?restriction AS ?restrict)
+                    FILTER(?member != ?item)
+                }"""
+        ]
+    ) .
+
+<allDisjointProperties.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?member owl:propertyDisjointWith ?item .
+                }
+                WHERE {
+                    ?restriction rdf:type owl:AllDisjointProperties ;
+                        owl:members ?list .
+                    ?list rdf:rest*/rdf:first ?member .
+                    {
+                        SELECT DISTINCT ?item ?restrict WHERE
+                        {
+                        ?restrict rdf:type owl:AllDisjointProperties ;
+                            owl:members ?list .
+                        ?list rdf:rest*/rdf:first ?item .
+                        }
+                    }
+                    BIND(?restriction AS ?restrict)
+                    FILTER(?member != ?item)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?member owl:propertyDisjointWith ?item .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?restriction rdf:type owl:AllDisjointProperties ;
+                            owl:members ?list .
+                        ?list rdf:rest*/rdf:first ?member .
+                        {
+                            SELECT DISTINCT ?item ?restrict WHERE
+                            {
+                            ?restrict rdf:type owl:AllDisjointProperties ;
+                                owl:members ?list .
+                            ?list rdf:rest*/rdf:first ?item .
+                            }
+                        }
+                    }
+                    BIND(?restriction AS ?restrict)
+                    FILTER(?member != ?item)
+                }"""
+        ]
+    ) .
+
+<allDisjointTransitivity.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?transitiveProperty ?o2 .
+                }
+                WHERE {
+                    ?resource ?transitiveProperty ?o1 .
+                    ?o1 ?transitiveProperty ?o2 .
+                    ?transitiveProperty rdf:type owl:TransitiveProperty .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?transitiveProperty ?o2 .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?transitiveProperty ?o1 .
+                        ?o1 ?transitiveProperty ?o2 .
+                        ?transitiveProperty rdf:type owl:TransitiveProperty .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectPropertyReflexivity.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?reflexiveProperty ?resource .
+                }
+                WHERE {
+                    ?resource rdf:type ?type ;
+                        ?reflexiveProperty ?o .
+                    ?o rdf:type ?type.
+                    ?reflexiveProperty rdf:type owl:ReflexiveProperty .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?reflexiveProperty ?resource .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?type ;
+                            ?reflexiveProperty ?o .
+                        ?o rdf:type ?type.
+                        ?reflexiveProperty rdf:type owl:ReflexiveProperty .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectPropertyIrreflexivity.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?irreflexiveProperty rdf:type owl:IrreflexiveProperty .
+                    ?resource ?irreflexiveProperty ?resource .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?irreflexiveProperty rdf:type owl:IrreflexiveProperty .
+                        ?resource ?irreflexiveProperty ?resource .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectPropertySymmetry.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?o ?symmetricProperty ?resource .
+                }
+                WHERE {
+                    ?resource ?symmetricProperty ?o .
+                    ?symmetricProperty rdf:type owl:SymmetricProperty .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?o ?symmetricProperty ?resource .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?symmetricProperty ?o .
+                        ?symmetricProperty rdf:type owl:SymmetricProperty .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectPropertyAsymmetry.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?asymmetricProperty ?o .
+                    ?asymmetricProperty rdf:type owl:AsymmetricProperty .
+                    ?o ?asymmetricProperty ?resource .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?asymmetricProperty ?o .
+                        ?asymmetricProperty rdf:type owl:AsymmetricProperty .
+                        ?o ?asymmetricProperty ?resource .
+                    }
+                }"""
+        ]
+    ) .
+
+<functionalObjectProperty.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?functionalProperty ?o1 ,
+                        ?o2 .
+                    ?functionalProperty rdf:type owl:ObjectProperty , 
+                        owl:FunctionalProperty .
+                    FILTER (str(?o1) !=  str(?o2))
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?functionalProperty ?o1 ,
+                            ?o2 .
+                        ?functionalProperty rdf:type owl:ObjectProperty , 
+                            owl:FunctionalProperty .
+                    }
+                    FILTER (str(?o1) !=  str(?o2))
+                }"""
+        ]
+    ) .
+
+<functionalDataProperty.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?functionalProperty ?o1 , 
+                        ?o2 .
+                    ?functionalProperty rdf:type owl:DatatypeProperty , 
+                        owl:FunctionalProperty .
+                    FILTER (str(?o1) !=  str(?o2))
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?functionalProperty ?o1 , 
+                            ?o2 .
+                        ?functionalProperty rdf:type owl:DatatypeProperty , 
+                            owl:FunctionalProperty .
+                    }
+                    FILTER (str(?o1) !=  str(?o2))
+                }"""
+        ]
+    ) .
+
+<objectPropertyInversion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?o ?inverseProperty ?resource .
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    ?p rdf:type owl:ObjectProperty .
+                    {?p owl:inverseOf ?inverseProperty .}
+                        UNION
+                    {?inverseProperty owl:inverseOf ?p . }
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?o ?inverseProperty ?resource .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o .
+                        ?p rdf:type owl:ObjectProperty .
+                        {?p owl:inverseOf ?inverseProperty .}
+                            UNION
+                        {?inverseProperty owl:inverseOf ?p . }
+                    }
+                }"""
+        ]
+    ) .
+
+<inverseFunctionalObjectProperty.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource owl:sameAs ?individual .
+                }
+                WHERE {
+                    ?resource ?invFunctionalProperty ?o .
+                    ?individual ?invFunctionalProperty ?o .
+                    ?invFunctionalProperty rdf:type owl:ObjectProperty ,
+                        owl:InverseFunctionalProperty .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource owl:sameAs ?individual .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?invFunctionalProperty ?o .
+                        ?individual ?invFunctionalProperty ?o .
+                        ?invFunctionalProperty rdf:type owl:ObjectProperty ,
+                            owl:InverseFunctionalProperty .
+                    }
+                }"""
+        ]
+    ) .
+
+<propertyDomain.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?class .
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    ?p rdfs:domain ?class .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type ?class .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o .
+                        ?p rdfs:domain ?class .
+                    }
+                }"""
+        ]
+    ) .
+
+<propertyRange.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?o rdf:type ?class .
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    ?p rdfs:range ?class .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?o rdf:type ?class .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o .
+                        ?p rdfs:range ?class .
+                    }
+                }"""
+        ]
+    ) .
+
+<datatypeRestriction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?dataProperty ?value .
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                            owl:onProperty ?dataProperty ; 
+                            owl:someValuesFrom ?datatype ] .
+                    ?dataProperty rdf:type owl:DatatypeProperty .
+                    ?datatype rdf:type rdfs:Datatype ;
+                        owl:onDatatype ?restrictedDatatype ;
+                        owl:withRestrictions ?list .
+                    {
+                        ?list rdf:first ?min .
+                        ?list rdf:rest/rdf:first ?max .
+                        ?min xsd:minInclusive ?minValue .
+                        ?max xsd:maxInclusive ?maxValue .
+                    }
+                    UNION
+                    {
+                        ?list rdf:first ?max .
+                        ?list rdf:rest/rdf:first ?min .
+                        ?min xsd:minInclusive ?minValue .
+                        ?max xsd:maxInclusive ?maxValue .
+                    }
+                    FILTER(?value < ?minValue || ?value > ?maxValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?value .
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?dataProperty ; 
+                                owl:someValuesFrom ?datatype ] .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?datatype rdf:type rdfs:Datatype ;
+                            owl:onDatatype ?restrictedDatatype ;
+                            owl:withRestrictions ?list .
+                        {
+                            ?list rdf:first ?min .
+                            ?list rdf:rest/rdf:first ?max .
+                            ?min xsd:minInclusive ?minValue .
+                            ?max xsd:maxInclusive ?maxValue .
+                        }
+                        UNION
+                        {
+                            ?list rdf:first ?max .
+                            ?list rdf:rest/rdf:first ?min .
+                            ?min xsd:minInclusive ?minValue .
+                            ?max xsd:maxInclusive ?maxValue .
+                        }
+                    }
+                    FILTER(?value < ?minValue || ?value > ?maxValue)
+                }"""
+        ]
+    ) .
+
+<sameIndividual.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?individual ?p ?o .
+                }
+                WHERE {
+                    {
+                        ?resource owl:sameAs ?individual .
+                    }
+                    UNION
+                    {
+                        ?individual owl:sameAs ?resource .
+                    }
+                    ?resource ?p ?o .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?individual ?p ?o .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        {
+                            ?resource owl:sameAs ?individual .
+                        }
+                        UNION
+                        {
+                            ?individual owl:sameAs ?resource .
+                        }
+                        ?resource ?p ?o .
+                    }
+                }"""
+        ]
+    ) .
+
+<differentIndividuals.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    {
+                        ?resource owl:differentFrom ?individual .
+                    }
+                    UNION
+                    {
+                        ?individual owl:differentFrom ?resource .
+                    }
+                    ?resource owl:sameAs ?individual .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        {
+                            ?resource owl:differentFrom ?individual .
+                        }
+                        UNION
+                        {
+                            ?individual owl:differentFrom ?resource .
+                        }
+                        ?resource owl:sameAs ?individual .
+                    }
+                }"""
+        ]
+    ) .
+
+<allDifferentIndividuals.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?member owl:differentFrom ?item .
+                }
+                WHERE {
+                    ?restriction rdf:type owl:AllDifferent ;
+                        owl:distinctMembers ?list .
+                    ?list rdf:rest*/rdf:first ?member .
+                    {
+                        SELECT DISTINCT ?item ?restrict WHERE
+                        {
+                        ?restrict rdf:type owl:AllDifferent ;
+                            owl:distinctMembers ?list .
+                        ?list rdf:rest*/rdf:first ?item .
+                        }
+                    }
+                    BIND(?restriction AS ?restrict) 
+                    FILTER(?member != ?item)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?member owl:differentFrom ?item .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?restriction rdf:type owl:AllDifferent ;
+                            owl:distinctMembers ?list .
+                        ?list rdf:rest*/rdf:first ?member .
+                        {
+                            SELECT DISTINCT ?item ?restrict WHERE
+                            {
+                            ?restrict rdf:type owl:AllDifferent ;
+                                owl:distinctMembers ?list .
+                            ?list rdf:rest*/rdf:first ?item .
+                            }
+                        }
+                    }
+                    BIND(?restriction AS ?restrict) 
+                    FILTER(?member != ?item)
+                }"""
+        ]
+    ) .
+
+<classAssertion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?superClass .
+                }
+                WHERE {
+                    ?resource rdf:type ?class .
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf+ ?superClass .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type ?superClass .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class .
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf+ ?superClass .
+                    }
+                }"""
+        ]
+    ) .
+
+<negativeObjectPropertyAssertion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?p ?o.
+                    ?p rdf:type owl:ObjectProperty .
+                    ?x rdf:type owl:NegativePropertyAssertion ;
+                        owl:sourceIndividual ?resource ;
+                        owl:assertionProperty ?p ;
+                        owl:targetIndividual ?o .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o.
+                        ?p rdf:type owl:ObjectProperty .
+                        ?x rdf:type owl:NegativePropertyAssertion ;
+                            owl:sourceIndividual ?resource ;
+                            owl:assertionProperty ?p ;
+                            owl:targetIndividual ?o .
+                    }
+                }"""
+        ]
+    ) .
+
+<negativeDatatypePropertyAssertion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?p ?o.
+                    ?p rdf:type owl:DatatypeProperty .
+                    ?x rdf:type owl:NegativePropertyAssertion ;
+                        owl:sourceIndividual ?resource ;
+                        owl:assertionProperty ?p ;
+                        owl:targetValue ?o .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?p ?o.
+                        ?p rdf:type owl:DatatypeProperty .
+                        ?x rdf:type owl:NegativePropertyAssertion ;
+                            owl:sourceIndividual ?resource ;
+                            owl:assertionProperty ?p ;
+                            owl:targetValue ?o .
+                    }
+                }"""
+        ]
+    ) .
+
+<keys.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource owl:sameAs ?individual .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?keyProperty ?keyValue.
+                    ?class rdf:type owl:Class ;
+                        owl:hasKey ( ?keyProperty ) .
+                    ?individual rdf:type ?class ;
+                        ?keyProperty ?keyValue.
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource owl:sameAs ?individual .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?keyProperty ?keyValue.
+                        ?class rdf:type owl:Class ;
+                            owl:hasKey ( ?keyProperty ) .
+                        ?individual rdf:type ?class ;
+                            ?keyProperty ?keyValue.
+                    }
+                }"""
+        ]
+    ) .
+
+<objectSomeValuesFrom.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?class .
+                }
+                WHERE {
+                    ?resource ?objectProperty ?value .
+                        [ rdf:type ?valueclass ] .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction;
+                        owl:onProperty ?objectProperty;
+                        owl:someValuesFrom ?valueclass ] .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                    ?resource rdf:type ?class .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?objectProperty ?value .
+                            [ rdf:type ?valueclass ] .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction;
+                            owl:onProperty ?objectProperty;
+                            owl:someValuesFrom ?valueclass ] .
+                    }
+                }"""
+        ]
+    ) .
+
+<datatypeSomeValuesFrom.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?datatypeProperty ?val .
+                    ?datatypeProperty rdf:type owl:DatatypeProperty .
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:someValuesFrom ?value ] .
+                    FILTER(DATATYPE(?val) != ?value)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?datatypeProperty ?val .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?datatypeProperty ;
+                                owl:someValuesFrom ?value ] .
+                    }
+                    FILTER(DATATYPE(?val) != ?value)
+                }"""
+        ]
+    ) .
+
+<objectHasValue.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?objectProperty ?object .
+                }
+                WHERE {
+                    ?resource rdf:type ?class .
+                    ?objectProperty rdf:type owl:ObjectProperty.
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:hasValue ?object ] .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?objectProperty ?object .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class .
+                        ?objectProperty rdf:type owl:ObjectProperty.
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:hasValue ?object ] .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectAllValuesFrom.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?valueclass.
+                }
+                WHERE {
+                    ?individual rdf:type ?class ; 
+                        ?objectProperty ?resource .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction;
+                        owl:onProperty ?objectProperty;
+                        owl:allValuesFrom ?valueclass ] .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type ?valueclass.
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?individual rdf:type ?class ; 
+                            ?objectProperty ?resource .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction;
+                            owl:onProperty ?objectProperty;
+                            owl:allValuesFrom ?valueclass ] .
+                    }
+                }"""
+        ]
+    ) .
+
+<datatypeAllValuesFrom.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?datatypeProperty ?val .
+                    ?datatypeProperty rdf:type owl:DatatypeProperty .
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:allValuesFrom ?value ] .
+                    FILTER(DATATYPE(?val)!= ?value)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?datatypeProperty ?val .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?datatypeProperty ;
+                                owl:allValuesFrom ?value ] .
+                    }
+                    FILTER(DATATYPE(?val)!= ?value)
+                }"""
+        ]
+    ) .
+
+<objectHasSelf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?objectProperty ?resource .
+                }
+                WHERE {
+                    ?resource rdf:type ?class .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:hasSelf \"true\"^^xsd:boolean ] .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?objectProperty ?resource .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:hasSelf \"true\"^^xsd:boolean ] .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectOneOfMembership.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?member rdf:type ?resource .
+                }
+                WHERE {
+                    ?resource rdf:type owl:Class ;
+                        owl:oneOf ?list .
+                    ?list rdf:rest*/rdf:first ?member .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?member rdf:type ?resource .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type owl:Class ;
+                            owl:oneOf ?list .
+                        ?list rdf:rest*/rdf:first ?member .
+                    }
+                }"""
+        ]
+    ) .
+
+<objectOneOfInconsistency.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?class rdf:type owl:Class ;
+                        owl:oneOf ?list .
+                    ?list rdf:rest*/rdf:first ?member .
+                    ?resource rdf:type ?class .
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?concept) AS ?conceptCount)
+                        WHERE 
+                        {
+                        ?concept rdf:type owl:Class ;
+                            owl:oneOf ?list .
+                        ?individual rdf:type ?concept .
+                        ?list rdf:rest*/rdf:first ?member .
+                        FILTER(?individual = ?member)
+                        }
+                    }
+                    FILTER(?conceptCount=0)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?class rdf:type owl:Class ;
+                            owl:oneOf ?list .
+                        ?list rdf:rest*/rdf:first ?member .
+                        ?resource rdf:type ?class .
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?concept) AS ?conceptCount)
+                            WHERE 
+                            {
+                                ?concept rdf:type owl:Class ;
+                                    owl:oneOf ?list .
+                                ?individual rdf:type ?concept .
+                                ?list rdf:rest*/rdf:first ?member .
+                                FILTER(?individual = ?member)
+                            }
+                        }
+                    }
+                    FILTER(?conceptCount=0)
+                }"""
+        ]
+    ) .
+
+<dataOneOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                        rdfs:range [ rdf:type owl:DataRange ;
+                        owl:oneOf ?list ] .
+                    ?resource ?datatypeProperty ?value .
+                    ?list rdf:rest*/rdf:first ?member .
+                    {
+                        SELECT DISTINCT (COUNT( DISTINCT ?datatypeProperty) AS ?dataCount)
+                        WHERE 
+                        {
+                        ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                        rdfs:range [ rdf:type owl:DataRange ;
+                            owl:oneOf ?list ] .
+                        ?individual ?datatypeProperty ?value .
+                        ?list rdf:rest*/rdf:first ?member .
+                        FILTER(?value=?member)
+                        }
+                    }
+                    FILTER(?dataCount=0)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                            rdfs:range [ rdf:type owl:DataRange ;
+                            owl:oneOf ?list ] .
+                        ?resource ?datatypeProperty ?value .
+                        ?list rdf:rest*/rdf:first ?member .
+                        {
+                            SELECT DISTINCT (COUNT( DISTINCT ?datatypeProperty) AS ?dataCount)
+                            WHERE 
+                            {
+                            ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                            rdfs:range [ rdf:type owl:DataRange ;
+                                owl:oneOf ?list ] .
+                            ?individual ?datatypeProperty ?value .
+                            ?list rdf:rest*/rdf:first ?member .
+                            FILTER(?value=?member)
+                            }
+                        }
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                            rdfs:range [ rdf:type owl:DataRange ;
+                            owl:oneOf ?list ] .
+                        ?resource ?datatypeProperty ?value .
+                        ?list rdf:rest*/rdf:first ?member .
+                        {
+                            SELECT DISTINCT (COUNT( DISTINCT ?datatypeProperty) AS ?dataCount)
+                            WHERE 
+                            {
+                            ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                            rdfs:range [ rdf:type owl:DataRange ;
+                                owl:oneOf ?list ] .
+                            ?individual ?datatypeProperty ?value .
+                            ?list rdf:rest*/rdf:first ?member .
+                            FILTER(?value=?member)
+                            }
+                        }
+                    }
+                    FILTER(?dataCount=0)
+                }"""
+        ]
+    ) .
+
+<objectMaxCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?objectProperty ?object .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:maxCardinality ?cardinalityValue ].
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                        WHERE 
+                        {
+                        ?individual rdf:type ?concept ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?concept rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:maxCardinality ?cardinalityValue ].
+                        } GROUP BY ?individual ?concept
+                    }
+                    BIND(?resource AS ?individual)
+                    BIND(?class AS ?concept)
+                    FILTER(?objectCount > ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:maxCardinality ?cardinalityValue ].
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                            WHERE 
+                            {
+                            ?individual rdf:type ?concept ;
+                                ?objectProperty ?object .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?concept rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ;
+                                owl:maxCardinality ?cardinalityValue ].
+                            } GROUP BY ?individual ?concept
+                        }
+                    }
+                    BIND(?resource AS ?individual)
+                    BIND(?class AS ?concept)
+                    FILTER(?objectCount > ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<datatypeMaxCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?dataProperty ?data .
+                    ?dataProperty rdf:type owl:DatatypeProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?dataProperty ;
+                        owl:maxCardinality ?cardinalityValue ] .
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?data) AS ?dataCount)
+                        WHERE 
+                        {
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?data .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?dataProperty ;
+                            owl:maxCardinality ?cardinalityValue ].
+                        }
+                    }
+                    FILTER(?dataCount > ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?data .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?dataProperty ;
+                            owl:maxCardinality ?cardinalityValue ] .
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?data) AS ?dataCount)
+                            WHERE 
+                            {
+                            ?resource rdf:type ?class ;
+                                ?dataProperty ?data .
+                            ?dataProperty rdf:type owl:DatatypeProperty .
+                            ?class rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                owl:onProperty ?dataProperty ;
+                                owl:maxCardinality ?cardinalityValue ].
+                            }
+                        }
+                    }
+                    FILTER(?dataCount > ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<objectMaxQualifiedCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?objectProperty ?object .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?object rdf:type ?restrictedClass .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:onClass ?restrictedClass ;
+                        owl:maxQualifiedCardinality ?cardinalityValue ].
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                        WHERE 
+                        {
+                        ?individual rdf:type ?concept ;
+                            ?objectProperty ?object .
+                        ?object rdf:type ?restrictedClass .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?concept rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:onClass ?restrictedClass ;
+                            owl:maxQualifiedCardinality ?cardinalityValue ].
+                        } GROUP BY ?individual ?concept
+                    }
+                    BIND(?resource AS ?individual)
+                    BIND(?class AS ?concept)
+                    FILTER(?objectCount > ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?object rdf:type ?restrictedClass .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:onClass ?restrictedClass ;
+                            owl:maxQualifiedCardinality ?cardinalityValue ].
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                            WHERE 
+                            {
+                            ?individual rdf:type ?concept ;
+                                ?objectProperty ?object .
+                            ?object rdf:type ?restrictedClass .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?concept rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ;
+                                owl:onClass ?restrictedClass ;
+                                owl:maxQualifiedCardinality ?cardinalityValue ].
+                            } GROUP BY ?individual ?concept
+                        }
+                    }
+                    BIND(?resource AS ?individual)
+                    BIND(?class AS ?concept)
+                    FILTER(?objectCount > ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<datatypeMaxQualifiedCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?datatypeProperty ?value .
+                    ?datatypeProperty rdf:type owl:DatatypeProperty .
+                    ?restriction rdf:type owl:Restriction ;
+                        owl:onProperty ?datatypeProperty ;
+                        owl:maxQualifiedCardinality ?cardinalityValue ;
+                        owl:onDataRange ?datatype .
+                    {
+                        SELECT (COUNT(DISTINCT ?value) AS ?valueCount) ?individual WHERE
+                        {
+                        ?individual ?datatypeProperty ?value .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?restriction rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:maxQualifiedCardinality ?cardinalityValue ;
+                            owl:onDataRange ?datatype .
+                        } GROUP BY ?individual
+                    }
+                    BIND(?resource AS ?individual)
+                    FILTER(DATATYPE(?value) = ?datatype)
+                    FILTER(?valueCount > ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?datatypeProperty ?value .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?restriction rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:maxQualifiedCardinality ?cardinalityValue ;
+                            owl:onDataRange ?datatype .
+                        {
+                            SELECT (COUNT(DISTINCT ?value) AS ?valueCount) ?individual WHERE
+                            {
+                            ?individual ?datatypeProperty ?value .
+                            ?datatypeProperty rdf:type owl:DatatypeProperty .
+                            ?restriction rdf:type owl:Restriction ;
+                                owl:onProperty ?datatypeProperty ;
+                                owl:maxQualifiedCardinality ?cardinalityValue ;
+                                owl:onDataRange ?datatype .
+                            } GROUP BY ?individual
+                        }
+                    }
+                    BIND(?resource AS ?individual)
+                    FILTER(DATATYPE(?value) = ?datatype)
+                    FILTER(?valueCount > ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<objectMinCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?objectProperty 
+                        [ rdf:type owl:Individual ; 
+                        owl:differentFrom ?object ] .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?objectProperty ?object .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:minCardinality ?cardinalityValue ].
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount)
+                        WHERE 
+                        {
+                        ?resource rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:minCardinality ?cardinalityValue ].
+                        }
+                    }
+                    FILTER(?objectCount < ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?objectProperty 
+                            [ rdf:type owl:Individual ; 
+                            owl:differentFrom ?object ] .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:minCardinality ?cardinalityValue ].
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount)
+                            WHERE 
+                            {
+                            ?resource rdf:type ?class ;
+                                ?objectProperty ?object .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?class rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ;
+                                owl:minCardinality ?cardinalityValue ].
+                            }
+                        }
+                    }
+                    FILTER(?objectCount < ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<datatypeMinCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?dataProperty [ rdf:type rdfs:Datatype ] .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?dataProperty ?data .
+                    ?dataProperty rdf:type owl:DatatypeProperty .
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                            owl:onProperty ?dataProperty ;
+                            owl:minCardinality ?cardinalityValue ] .
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?data) AS ?dataCount)
+                        WHERE 
+                        {
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?data .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?dataProperty ;
+                                owl:minCardinality ?cardinalityValue ].
+                        }
+                    }
+                    FILTER(?dataCount < ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?dataProperty [ rdf:type rdfs:Datatype ] .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?data .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?dataProperty ;
+                                owl:minCardinality ?cardinalityValue ] .
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?data) AS ?dataCount)
+                            WHERE 
+                            {
+                            ?resource rdf:type ?class ;
+                                ?dataProperty ?data .
+                            ?dataProperty rdf:type owl:DatatypeProperty .
+                            ?class rdf:type owl:Class ;
+                                rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                    owl:onProperty ?dataProperty ;
+                                    owl:minCardinality ?cardinalityValue ].
+                            }
+                        }
+                    }
+                    FILTER(?dataCount < ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<objectMinQualifiedCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?objectProperty 
+                        [ rdf:type owl:Individual ; 
+                        owl:differentFrom ?object ] .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?objectProperty ?object .
+                    ?object rdf:type ?restrictedClass .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ; 
+                        owl:minQualifiedCardinality ?value ;
+                            owl:onClass ?restrictedClass ] .
+                    {
+                        SELECT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept WHERE 
+                        {          
+                        ?individual rdf:type ?concept ;
+                            ?objectProperty ?object .
+                        ?object rdf:type ?restrictedClass .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?concept rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ; 
+                            owl:minQualifiedCardinality ?value ;
+                            owl:onClass ?restrictedClass ] .
+                        } GROUP BY ?individual ?concept
+                    }
+                    BIND(?resource AS ?individual)
+                    BIND(?class AS ?concept)
+                    FILTER(?objectCount < ?value)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?objectProperty 
+                            [ rdf:type owl:Individual ; 
+                            owl:differentFrom ?object ] .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?object rdf:type ?restrictedClass .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ; 
+                            owl:minQualifiedCardinality ?value ;
+                                owl:onClass ?restrictedClass ] .
+                        {
+                            SELECT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept WHERE 
+                            {          
+                            ?individual rdf:type ?concept ;
+                                ?objectProperty ?object .
+                            ?object rdf:type ?restrictedClass .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?concept rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ; 
+                                owl:minQualifiedCardinality ?value ;
+                                owl:onClass ?restrictedClass ] .
+                            } GROUP BY ?individual ?concept
+                        }
+                    }
+                        BIND(?resource AS ?individual)
+                        BIND(?class AS ?concept)
+                        FILTER(?objectCount < ?value)
+                }"""
+        ]
+    ) .
+
+<dataMinQualifiedCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource ?datatypeProperty [ rdf:type rdfs:Datatype ] .
+                }
+                WHERE {
+                    ?resource ?datatypeProperty ?value .
+                    ?datatypeProperty rdf:type owl:DatatypeProperty .
+                    ?restriction rdf:type owl:Restriction ;
+                        owl:onProperty ?datatypeProperty ;
+                        owl:minQualifiedCardinality ?cardinalityValue ;
+                        owl:onDataRange ?datatype .
+                    {
+                        SELECT (COUNT(DISTINCT ?value) AS ?valueCount) ?individual WHERE
+                        {
+                        ?individual ?datatypeProperty ?value .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?restriction rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:minQualifiedCardinality ?cardinalityValue ;
+                            owl:onDataRange ?datatype .
+                        } GROUP BY ?individual
+                    }
+                    BIND(?resource AS ?individual)
+                    FILTER(DATATYPE(?value) = ?datatype)
+                    FILTER(?valueCount < ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource ?datatypeProperty [ rdf:type rdfs:Datatype ] .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?datatypeProperty ?value .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?restriction rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:minQualifiedCardinality ?cardinalityValue ;
+                            owl:onDataRange ?datatype .
+                        {
+                            SELECT (COUNT(DISTINCT ?value) AS ?valueCount) ?individual WHERE
+                            {
+                            ?individual ?datatypeProperty ?value .
+                            ?datatypeProperty rdf:type owl:DatatypeProperty .
+                            ?restriction rdf:type owl:Restriction ;
+                                owl:onProperty ?datatypeProperty ;
+                                owl:minQualifiedCardinality ?cardinalityValue ;
+                                owl:onDataRange ?datatype .
+                            } GROUP BY ?individual
+                        }
+                    }
+                    BIND(?resource AS ?individual)
+                    FILTER(DATATYPE(?value) = ?datatype)
+                    FILTER(?valueCount < ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<objectExactCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?objectProperty ?object .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:cardinality ?cardinalityValue ].
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount)
+                        WHERE 
+                        {
+                        ?individual rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:cardinality ?cardinalityValue ].
+                        } GROUP BY ?individual
+                    }
+                    FILTER(?objectCount > ?cardinalityValue)
+                    BIND(?resource AS ?individual)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:cardinality ?cardinalityValue ].
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount)
+                            WHERE 
+                            {
+                            ?individual rdf:type ?class ;
+                                ?objectProperty ?object .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?class rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ;
+                                owl:cardinality ?cardinalityValue ].
+                            } GROUP BY ?individual
+                        }
+                        FILTER(?objectCount > ?cardinalityValue)
+                        BIND(?resource AS ?individual)
+                    }
+                    FILTER(?objectCount > ?cardinalityValue)
+                    BIND(?resource AS ?individual)
+                }"""
+        ]
+    ) .
+
+<dataExactCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?dataProperty ?data .
+                    ?dataProperty rdf:type owl:DatatypeProperty .
+                    ?class rdf:type owl:Class ; 
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                            owl:onProperty ?dataProperty ;
+                            owl:cardinality ?cardinalityValue ] .
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?data) AS ?dataCount)
+                        WHERE 
+                        {
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?data .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?dataProperty ;
+                                owl:cardinality ?cardinalityValue ].
+                        }
+                    }
+                    FILTER(?dataCount > ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?data .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?class rdf:type owl:Class ; 
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?dataProperty ;
+                                owl:cardinality ?cardinalityValue ] .
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?data) AS ?dataCount)
+                            WHERE 
+                            {
+                            ?resource rdf:type ?class ;
+                                ?dataProperty ?data .
+                            ?dataProperty rdf:type owl:DatatypeProperty .
+                            ?class rdf:type owl:Class ;
+                                rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                    owl:onProperty ?dataProperty ;
+                                    owl:cardinality ?cardinalityValue ].
+                            }
+                        }
+                    }
+                    FILTER(?dataCount > ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<objectExactQualifiedCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ;
+                        ?objectProperty ?object .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?object rdf:type ?restrictedClass .
+                    ?class rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:onClass ?restrictedClass ;
+                        owl:qualifiedCardinality ?cardinalityValue ].
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                        WHERE 
+                        {
+                        ?individual rdf:type ?concept ;
+                            ?objectProperty ?object .
+                        ?object rdf:type ?restrictedClass .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?concept rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:onClass ?restrictedClass ;
+                            owl:qualifiedCardinality ?cardinalityValue ].
+                        } GROUP BY ?individual ?concept
+                    }
+                    BIND(?resource AS ?individual)
+                    BIND(?class AS ?concept)
+                    FILTER(?objectCount > ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ;
+                            ?objectProperty ?object .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?object rdf:type ?restrictedClass .
+                        ?class rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:onClass ?restrictedClass ;
+                            owl:qualifiedCardinality ?cardinalityValue ].
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                            WHERE 
+                            {
+                            ?individual rdf:type ?concept ;
+                                ?objectProperty ?object .
+                            ?object rdf:type ?restrictedClass .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?concept rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ;
+                                owl:onClass ?restrictedClass ;
+                                owl:qualifiedCardinality ?cardinalityValue ].
+                            } GROUP BY ?individual ?concept
+                        }
+                    }
+                    BIND(?resource AS ?individual)
+                    BIND(?class AS ?concept)
+                    FILTER(?objectCount > ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<datatypeExactQualifiedCardinality.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource ?datatypeProperty ?value .
+                    ?datatypeProperty rdf:type owl:DatatypeProperty .
+                    ?restriction rdf:type owl:Restriction ;
+                        owl:onProperty ?datatypeProperty ;
+                        owl:onDataRange ?datatype ;
+                        owl:qualifiedCardinality ?cardinalityValue .
+                    {
+                        SELECT DISTINCT (COUNT(DISTINCT ?value) AS ?valueCount) ?individual WHERE
+                        {
+                        ?individual ?datatypeProperty ?value .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?restriction rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:onDataRange ?datatype ;
+                            owl:qualifiedCardinality ?cardinalityValue .
+                        } GROUP BY ?individual
+                    }
+                    BIND(?resource AS ?individual)
+                    FILTER(DATATYPE(?value) = ?datatype)
+                    FILTER(?valueCount > ?cardinalityValue)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource ?datatypeProperty ?value .
+                        ?datatypeProperty rdf:type owl:DatatypeProperty .
+                        ?restriction rdf:type owl:Restriction ;
+                            owl:onProperty ?datatypeProperty ;
+                            owl:onDataRange ?datatype ;
+                            owl:qualifiedCardinality ?cardinalityValue .
+                        {
+                            SELECT DISTINCT (COUNT(DISTINCT ?value) AS ?valueCount) ?individual WHERE
+                            {
+                            ?individual ?datatypeProperty ?value .
+                            ?datatypeProperty rdf:type owl:DatatypeProperty .
+                            ?restriction rdf:type owl:Restriction ;
+                                owl:onProperty ?datatypeProperty ;
+                                owl:onDataRange ?datatype ;
+                                owl:qualifiedCardinality ?cardinalityValue .
+                            } GROUP BY ?individual
+                        }
+                    }
+                    BIND(?resource AS ?individual)
+                    FILTER(DATATYPE(?value) = ?datatype)
+                    FILTER(?valueCount > ?cardinalityValue)
+                }"""
+        ]
+    ) .
+
+<objectUnionOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?member rdfs:subClassOf ?resource .
+                }
+                WHERE {
+                    ?resource rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Class ;
+                            owl:unionOf ?list ] .
+                    ?list rdf:rest*/rdf:first ?member .
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?member rdfs:subClassOf ?resource .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Class ;
+                                owl:unionOf ?list ] .
+                        ?list rdf:rest*/rdf:first ?member .
+                    }
+                }"""
+        ]
+    ) .
+
+<datatypeUnionOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?class .
+                }
+                WHERE {
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Class ;
+                            owl:unionOf ?list ] .
+                    ?list rdf:rest*/rdf:first ?member .
+                    ?member rdf:type owl:Restriction ;
+                        owl:onProperty ?dataProperty ;
+                        owl:someValuesFrom ?datatype . 
+                    ?dataProperty rdf:type owl:DatatypeProperty .
+                    ?resource ?dataProperty ?data .
+                    FILTER(DATATYPE(?data)=?datatype)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type ?class .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Class ;
+                                owl:unionOf ?list ] .
+                        ?list rdf:rest*/rdf:first ?member .
+                        ?member rdf:type owl:Restriction ;
+                            owl:onProperty ?dataProperty ;
+                            owl:someValuesFrom ?datatype . 
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                        ?resource ?dataProperty ?data .
+                    }
+                    FILTER(DATATYPE(?data)=?datatype)
+                }"""
+        ]
+    ) .
+
+<disjointUnion.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?member rdfs:subClassOf ?resource ;
+                        owl:disjointWith ?item .
+                }
+                WHERE {
+                    ?resource rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Class ;
+                            owl:disjointUnionOf ?list ] .
+                    ?list rdf:rest*/rdf:first ?member .
+                    {
+                        SELECT DISTINCT ?item ?class WHERE 
+                        {
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Class ;
+                                owl:disjointUnionOf ?list ] .
+                        ?list rdf:rest*/rdf:first ?item .
+                        }
+                    }
+                    FILTER(?resource = ?class)
+                    FILTER(?member != ?item)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?member rdfs:subClassOf ?resource ;
+                            owl:disjointWith ?item .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Class ;
+                                owl:disjointUnionOf ?list ] .
+                        ?list rdf:rest*/rdf:first ?member .
+                        {
+                            SELECT DISTINCT ?item ?class WHERE 
+                            {
+                            ?class rdf:type owl:Class ;
+                                rdfs:subClassOf|owl:equivalentClass
+                                [ rdf:type owl:Class ;
+                                    owl:disjointUnionOf ?list ] .
+                            ?list rdf:rest*/rdf:first ?item .
+                            }
+                        }
+                    }
+                    FILTER(?resource = ?class)
+                    FILTER(?member != ?item)
+                }"""
+        ]
+    ) .
+
+<objectIntersectionOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type ?class.
+                }
+                WHERE {
+                    ?class rdf:type owl:Class ;
+                        owl:intersectionOf ?list .
+                    ?list rdf:rest*/rdf:first ?member .
+                    {
+                        ?member rdf:type owl:Class .
+                        ?resource rdf:type ?member .
+                    }
+                    UNION 
+                    {
+                        ?member rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:someValuesFrom ?restrictedClass .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        ?resource ?objectProperty [rdf:type  ?restrictedClass ] .
+                    }
+                    {
+                        SELECT DISTINCT * WHERE
+                        {
+                        ?concept rdf:type owl:Class ;
+                            owl:intersectionOf ?list .
+                        ?list rdf:rest*/rdf:first ?item .
+                        {
+                            ?item rdf:type owl:Class .
+                            ?individual rdf:type ?item .
+                        }
+                        UNION
+                        {
+                            ?item rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:someValuesFrom ?restrictedClass .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?individual ?objectProperty [rdf:type  ?restrictedClass ] .
+                        }
+                        }
+                    }
+                    BIND(?class AS ?concept) 
+                    BIND(?resource AS ?individual) 
+                    FILTER(?member != ?item)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type ?class.
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?class rdf:type owl:Class ;
+                            owl:intersectionOf ?list .
+                        ?list rdf:rest*/rdf:first ?member .
+                        {
+                            ?member rdf:type owl:Class .
+                            ?resource rdf:type ?member .
+                        }
+                        UNION 
+                        {
+                            ?member rdf:type owl:Restriction ;
+                            owl:onProperty ?objectProperty ;
+                            owl:someValuesFrom ?restrictedClass .
+                            ?objectProperty rdf:type owl:ObjectProperty .
+                            ?resource ?objectProperty [rdf:type  ?restrictedClass ] .
+                        }
+                        {
+                            SELECT DISTINCT * WHERE
+                            {
+                            ?concept rdf:type owl:Class ;
+                                owl:intersectionOf ?list .
+                            ?list rdf:rest*/rdf:first ?item .
+                            {
+                                ?item rdf:type owl:Class .
+                                ?individual rdf:type ?item .
+                            }
+                            UNION
+                            {
+                                ?item rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ;
+                                owl:someValuesFrom ?restrictedClass .
+                                ?objectProperty rdf:type owl:ObjectProperty .
+                                ?individual ?objectProperty [rdf:type  ?restrictedClass ] .
+                            }
+                            }
+                        }
+                    }
+                    BIND(?class AS ?concept) 
+                    BIND(?resource AS ?individual) 
+                    FILTER(?member != ?item)
+                }"""
+        ]
+    ) .
+
+<objectComplementOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?resource rdf:type ?class ,
+                        ?complementClass .
+                    ?class rdf:type owl:Class .
+                    ?complementClass rdf:type owl:Class .
+                    {?class owl:complementOf ?complementClass .} 
+                        UNION 
+                    {?complementClass owl:complementOf ?class .}
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?resource rdf:type ?class ,
+                            ?complementClass .
+                        ?class rdf:type owl:Class .
+                        ?complementClass rdf:type owl:Class .
+                        {?class owl:complementOf ?complementClass .} 
+                            UNION 
+                        {?complementClass owl:complementOf ?class .}
+                    }
+                }"""
+        ]
+    ) .
+
+<datatypeComplementOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?datatype rdf:type rdfs:Datatype ;
+                        owl:datatypeComplementOf ?complement .
+                    ?resource ?dataProperty ?value .
+                    ?dataProperty rdf:type owl:DatatypeProperty ;
+                        rdfs:range ?datatype .
+                    FILTER(DATATYPE(?value) = ?complement)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?datatype rdf:type rdfs:Datatype ;
+                            owl:datatypeComplementOf ?complement .
+                        ?resource ?dataProperty ?value .
+                        ?dataProperty rdf:type owl:DatatypeProperty ;
+                            rdfs:range ?datatype .
+                    }
+                    FILTER(DATATYPE(?value) = ?complement)
+                }"""
+        ]
+    ) .
+
+<objectPropertyComplementOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Class ;
+                            owl:complementOf 
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?objectProperty ;
+                                owl:someValuesFrom ?restrictedClass ] 
+                        ] .
+                    ?resource rdf:type ?class ;
+                        ?objectProperty [ rdf:type ?objectClass ] .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    {
+                        FILTER(?objectClass = ?restrictedClass)
+                    }
+                    UNION
+                    {
+                        ?objectClass rdfs:subClassOf*|owl:equivalentClass ?restrictedClass . 
+                    }
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Class ;
+                                owl:complementOf 
+                                [ rdf:type owl:Restriction ;
+                                    owl:onProperty ?objectProperty ;
+                                    owl:someValuesFrom ?restrictedClass ] 
+                            ] .
+                        ?resource rdf:type ?class ;
+                            ?objectProperty [ rdf:type ?objectClass ] .
+                        ?objectProperty rdf:type owl:ObjectProperty .
+                        {
+                            FILTER(?objectClass = ?restrictedClass)
+                        }
+                        UNION
+                        {
+                            ?objectClass rdfs:subClassOf*|owl:equivalentClass ?restrictedClass . 
+                        }
+                    }
+                }"""
+        ]
+    ) .
+
+<datatypePropertyComplementOf.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    ?resource rdf:type owl:Nothing .
+                }
+                WHERE {
+                    ?class rdf:type owl:Class ;
+                        rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Class ;
+                            owl:complementOf 
+                            [ rdf:type owl:Restriction ;
+                                owl:onProperty ?dataProperty ;
+                                owl:someValuesFrom ?datatype ] 
+                        ] .
+                    ?resource rdf:type ?class ;
+                        ?dataProperty ?value .
+                    ?dataProperty rdf:type owl:DatatypeProperty .
+                    FILTER(DATATYPE(?value)=?datatype)
+                }"""
+        ]
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?graph {  
+                        ?resource rdf:type owl:Nothing .
+                    }
+                }
+                WHERE {
+                    GRAPH ?graph {
+                        ?class rdf:type owl:Class ;
+                            rdfs:subClassOf|owl:equivalentClass
+                            [ rdf:type owl:Class ;
+                                owl:complementOf 
+                                [ rdf:type owl:Restriction ;
+                                    owl:onProperty ?dataProperty ;
+                                    owl:someValuesFrom ?datatype ] 
+                            ] .
+                        ?resource rdf:type ?class ;
+                            ?dataProperty ?value .
+                        ?dataProperty rdf:type owl:DatatypeProperty .
+                    }
+                    FILTER(DATATYPE(?value)=?datatype)
+                }"""
+        ]
+    ) .

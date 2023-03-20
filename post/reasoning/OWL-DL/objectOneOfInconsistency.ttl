@@ -1,0 +1,55 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Object One Of Inconsistency" ;
+    dcterms:description "Since class has a one of relationship with list, and resource is not in list, the assertion resource is a class leads to an inconsistency." ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    ASK {
+        {
+            ?class rdf:type owl:Class ;
+                owl:oneOf ?list .
+            ?list rdf:rest*/rdf:first ?member .
+            ?resource rdf:type ?class .
+            {
+                SELECT DISTINCT (COUNT(DISTINCT ?concept) AS ?conceptCount)
+                WHERE 
+                {
+                ?concept rdf:type owl:Class ;
+                    owl:oneOf ?list .
+                ?individual rdf:type ?concept .
+                ?list rdf:rest*/rdf:first ?member .
+                FILTER(?individual = ?member)
+                }
+            }
+        }
+        UNION {
+            GRAPH ?graph {
+                ?class rdf:type owl:Class ;
+                    owl:oneOf ?list .
+                ?list rdf:rest*/rdf:first ?member .
+                ?resource rdf:type ?class .
+                {
+                    SELECT DISTINCT (COUNT(DISTINCT ?concept) AS ?conceptCount)
+                    WHERE 
+                    {
+                    ?concept rdf:type owl:Class ;
+                        owl:oneOf ?list .
+                    ?individual rdf:type ?concept .
+                    ?list rdf:rest*/rdf:first ?member .
+                    FILTER(?individual = ?member)
+                    }
+                }
+            }
+        }
+        FILTER(?conceptCount=0)
+    }"""  .

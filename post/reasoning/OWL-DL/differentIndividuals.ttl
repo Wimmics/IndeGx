@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Different Individuals" ;
+    dcterms:description "Since resource is asserted as being different from individual, the assertion that resource is the same as individual leads to an inconsistency." ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    ASK {
+        {
+            {
+                ?resource owl:differentFrom ?individual .
+            }
+            UNION
+            {
+                ?individual owl:differentFrom ?resource .
+            }
+            ?resource owl:sameAs ?individual .
+        }
+        UNION {
+            GRAPH ?graph {
+                {
+                    ?resource owl:differentFrom ?individual .
+                }
+                UNION
+                {
+                    ?individual owl:differentFrom ?resource .
+                }
+                ?resource owl:sameAs ?individual .
+            }
+        }
+    }"""  .

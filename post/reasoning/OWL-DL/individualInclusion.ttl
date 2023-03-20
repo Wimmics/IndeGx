@@ -1,0 +1,27 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Individual Inclusion" ;
+    dcterms:description "Any instance of class is also an instance of superClass. Therefore, since resource is a class, it also is a superClass." ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    ASK {
+        {
+            ?resource rdf:type ?class .
+            ?class rdfs:subClassOf+ ?superClass .
+        }
+        UNION {
+            GRAPH ?graph {
+                ?resource rdf:type ?class .
+                ?class rdfs:subClassOf+ ?superClass .
+            }
+        }
+    }"""  .

@@ -1,0 +1,35 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Data Complement Of" ;
+    dcterms:description "Since datatype is the complement of complement, dataProperty has range datatype, and resource dataProperty value, but value is of type complement, an inconsistency occurs." ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    ASK {
+        {
+            ?datatype rdf:type rdfs:Datatype ;
+                owl:datatypeComplementOf ?complement .
+            ?resource ?dataProperty ?value .
+            ?dataProperty rdf:type owl:DatatypeProperty ;
+                rdfs:range ?datatype .
+        }
+        UNION {
+            GRAPH ?graph {
+                ?datatype rdf:type rdfs:Datatype ;
+                    owl:datatypeComplementOf ?complement .
+                ?resource ?dataProperty ?value .
+                ?dataProperty rdf:type owl:DatatypeProperty ;
+                    rdfs:range ?datatype .
+            }
+        }
+        FILTER(DATATYPE(?value) = ?complement)
+    }"""  .
