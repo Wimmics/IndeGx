@@ -124,10 +124,10 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
                     if (numTry < nbFetchRetries) {
                         return setTimeout(millisecondsBetweenRetries).then(fetchPromise(url, header, method, query, numTry + 1));
                     } else {
-                        Logger.error(error);
+                        Logger.error(JSON.stringify(error));
                     }
                 } else {
-                    Logger.error(error);
+                    Logger.error(JSON.stringify(error));
                 }
             }).finally(() => {
                 countConcurrentQueries--;
