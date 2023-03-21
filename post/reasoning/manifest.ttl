@@ -4,4 +4,74 @@
 <> a mf:Manifest ;
     mf:include (
         <OWL-DL/manifest.ttl>
-    ) .
+    ) . # ;
+    # mf:entries (
+    #     <loadVocabularies.ttl>
+    # ) .
+
+# <loadVocabularies.ttl>  a mf:ManifestEntry ;
+#     kgi:onSuccess (
+#         [
+#             mf:action "LOAD <file://../../vocabularies/adms_2015-07-22.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/cc_2008-03-03.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/dataid_2016-09-14.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/dcat_2020-02-04.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/dce_2012-06-14.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/dcterms_2012-06-14.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/doap_2012-01-04.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/dqv_2016-08-26.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/earl_2011-05-10.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/foaf_2014-01-14.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/nie_2012-10-03.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/owl_2009-11-15.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/pav_2014-08-28.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/prov_2015-01-11.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/rdfs_2014-02-25.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/schema_2020-03-10.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/sd_2013-03-21.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/skos_2009-08-18.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/sto_2017-01-25.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/void_2011-03-06.n3>"
+#         ]
+#         [
+#             mf:action "LOAD <file://../../vocabularies/xhv_2010-01-27.n3>"
+#         ]
+#     ) .

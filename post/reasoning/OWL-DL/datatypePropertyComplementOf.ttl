@@ -16,13 +16,13 @@
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     ASK {
         {
-                    ?class rdf:type owl:Class ;
-                        rdfs:subClassOf|owl:equivalentClass
-                        [ rdf:type owl:Class ;
-                            owl:complementOf 
-                            [ rdf:type owl:Restriction ;
-                                owl:onProperty ?dataProperty ;
-                                owl:someValuesFrom ?datatype ] 
+            ?class rdf:type owl:Class ;
+                rdfs:subClassOf|owl:equivalentClass
+                    [ rdf:type owl:Class ;
+                        owl:complementOf 
+                        [ rdf:type owl:Restriction ;
+                            owl:onProperty ?dataProperty ;
+                            owl:someValuesFrom ?datatype ] 
                         ] .
                     ?resource rdf:type ?class ;
                         ?dataProperty ?value .
@@ -44,5 +44,5 @@
                     ?dataProperty rdf:type owl:DatatypeProperty .
             }
         }
-                    FILTER(DATATYPE(?value)=?datatype)
+        FILTER(DATATYPE(?value)=?datatype)
     }"""  .

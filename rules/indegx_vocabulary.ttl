@@ -15,8 +15,8 @@
 kgi: dcterms:creator "Pierre Maillot" ;
     dcterms:creator <https://orcid.org/0000-0002-9814-439X> ;
     dcterms:publisher "INRIA, Team WIMMICS" ;
-    dcterms:title  "IndeGx vocabulary" ;
-    dcterms:description "Vocabulary to complete the manifest and EARL vocabularies for the declaration of the IndeGx framework" ;
+    dcterms:title  "IndeGx vocabulary"@en ;
+    dcterms:description "Vocabulary to complete the manifest and EARL vocabularies for the declaration of the IndeGx framework"@en ;
     dcterms:date "2021-10" ;
     dcterms:format "RDF" ;
     dcterms:identifier kgi: .
@@ -26,24 +26,24 @@ kgi: dcterms:creator "Pierre Maillot" ;
 kgi:IndeGxDataset rdf:type rdfs:Resource ;
     rdfs:label "Root of a catalog." ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:comment "Default resource used to represent the catalog at the root of the index." .
+    rdfs:comment "Default resource used to represent the catalog at the root of the index."@en .
 
 kgi:original rdf:type rdf:Property ;
-    rdfs:label "Original description resources." ;
+    rdfs:label "Original description resources."@en ;
     rdfs:comment "Description resources connected to the endpoint URL extracted from the KB"@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain prov:Entity ;
     rdfs:range prov:Entity .
 
 kgi:curated rdf:type rdf:Property ;
-    rdfs:label "Generated description resources." ;
+    rdfs:label "Generated description resources."@en ;
     rdfs:comment "Description resources generated from the interrogation of the endpoint URL and the curation of the available original resources descriptions."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain prov:Entity ;
     rdfs:range prov:Entity .
 
 kgi:trace rdf:type rdf:Property ;
-    rdfs:label "Trace report of the metadata generation." ;
+    rdfs:label "Trace report of the metadata generation."@en ;
     rdfs:comment "EARL report resulting in the execution of a query during the generation of the metadata."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain prov:Entity ;
@@ -52,77 +52,77 @@ kgi:trace rdf:type rdf:Property ;
 # Generation assets structuration vocabulary
 
 kgi:endpoint rdf:type rdf:Property ;
-    rdfs:label "Indicates the endpoint to send a test or action." ;
+    rdfs:label "Indicates the endpoint to send a test or action."@en ;
     rdfs:isDefinedBy kgi: .
 
 kgi:sentQuery rdf:type rdf:Property ;
-    rdfs:comment "String representation of the SPARQL query sent to the server after transformation to adapt it to the endpoint, if necessary." ;
-    rdfs:label "Query sent to the server" ;
+    rdfs:comment "String representation of the SPARQL query sent to the server after transformation to adapt it to the endpoint, if necessary."@en ;
+    rdfs:label "Query sent to the server"@en ;
     rdfs:domain earl:TestResult ;
     rdfs:range xsd:string .
 
 kgi:TestQuery rdf:type rdfs:Class ;
-    rdfs:label "Test of rdf:type SPARQL query execution" ;
-    rdfs:comment "Test the result of the execution of rdf:type query in the manner of rdf:type SHACL shape but allows declaration of constraints on the HTTP response and the result." ;
+    rdfs:label "Test of rdf:type SPARQL query execution"@en ;
+    rdfs:comment "Test the result of the execution of rdf:type query in the manner of rdf:type SHACL shape but allows declaration of constraints on the HTTP response and the result."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:subClassOf earl:TestCase .
 
 kgi:onSuccess rdf:type rdf:Property ;
-    rdfs:label "List of actions triggered by the success of the test present at the URI of the entry." ;
+    rdfs:label "List of actions triggered by the success of the test present at the URI of the entry."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain mf:ManifestEntry ;
     rdfs:range rdf:List .
 
 kgi:onFailure rdf:type rdf:Property ;
-    rdfs:label "List of actions triggered by the failure of the test present at the URI of the entry." ;
+    rdfs:label "List of actions triggered by the failure of the test present at the URI of the entry."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain mf:ManifestEntry ;
     rdfs:range rdf:List .
 
 kgi:DummyTest rdf:type rdf:Class ;
-    rdfs:label "Placeholder class for the test of a rule only affecting the index data." ;
+    rdfs:label "Placeholder class for the test of a rule only affecting the index data."@en ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:comment "Some tests and actions are 'meta' rules that do not need interaction with remote endpoints. This class is for a test that always succeed for these rules." ;
+    rdfs:comment "Some tests and actions are 'meta' rules that do not need interaction with remote endpoints. This class is for a test that always succeed for these rules."@en ;
     rdfs:subClassOf earl:TestCase .
 
 # properties to set up the parameters of the indexation
 
 kgi:timeout rdf:type rdf:Property ;
-    rdfs:label "Specify a timeout for a test or action." ;
+    rdfs:label "Specify a timeout for a test or action."@en ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:comment "Queries sent during test and actions may need a specific timeout, generally longer than normal. This property specify the timeout for a test or an action." ;
+    rdfs:comment "Queries sent during test and actions may need a specific timeout, generally longer than normal. This property specify the timeout for a test or an action."@en ;
     rdfs:range xsd:duration .
 
 kgi:recommendedPagination rdf:type rdf:Property ;
-    rdfs:label "Recommended size for pagination during retrieval of the results of an action" ;
-    rdfs:comment "This indicates the size of the page to use in the actions queries." ;
+    rdfs:label "Recommended size for pagination during retrieval of the results of an action"@en ;
+    rdfs:comment "This indicates the size of the page to use in the actions queries."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:range xsd:integer .
 
 # Pseudo-partitions and linksets
 
 kgi:linkset rdf:type rdf:Property ;
-    rdfs:label "Link a dataset description to the linkset that were retrieved during its indexation" ;
+    rdfs:label "Link a dataset description to the linkset that were retrieved during its indexation"@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain void:Dataset ;
     rdfs:range void:Linkset .
 
 kgi:resourceHostname rdf:type rdf:Property ;
-    rdfs:label "Hostname of the resources of the dataset" ;
-    rdfs:comment "Linked to URIs representing the hostnames of the resources of the dataset." ;
+    rdfs:label "Hostname of the resources of the dataset"@en ;
+    rdfs:comment "Linked to URIs representing the hostnames of the resources of the dataset."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain void:Dataset .
 
 kgi:hostnamePartition rdf:type rdf:Property ;
-    rdfs:label "Partition of the dataset according to the hostname used the URIs of instances" ;
-    rdfs:comment "This property is to be used on the same model as void:classPartition and void:propertyPartition." ;
+    rdfs:label "Partition of the dataset according to the hostname used the URIs of instances"@en ;
+    rdfs:comment "This property is to be used on the same model as void:classPartition and void:propertyPartition."@en ;
     rdfs:subPropertyOf void:subset ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain void:Dataset .
 
 kgi:vocabularyPartition rdf:type rdf:Property ;
-    rdfs:label "Partition of the dataset according to the vocabulary used in triples" ;
-    rdfs:comment "This property is to be used on the same model as void:classPartition and void:propertyPartition." ;
+    rdfs:label "Partition of the dataset according to the vocabulary used in triples"@en ;
+    rdfs:comment "This property is to be used on the same model as void:classPartition and void:propertyPartition."@en ;
     rdfs:subPropertyOf void:subset ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain void:Dataset .
@@ -144,100 +144,100 @@ kgi:resourceHostname rdf:type rdf:Property ;
     rdfs:isDefinedBy kgi: .
 
 kgi:summary rdf:type rdf:Property ;
-    rdf:label "Link between a dataset and a summary of its content." ;
+    rdf:label "Link between a dataset and a summary of its content."@en ;
     rdfs:domain void:Dataset ;
     rdfs:range sd:NamedGraph .
 
 # Description of the common elements between datasets
 
 kgi:CommonalityDescription rdf:type rdf:Class ;
-    rdf:label "Description of the common elements between datasets.";
-    rdfs:comment "This is designed to give the elements that are common between the descriptions of groups of datasets";
+    rdf:label "Description of the common elements between datasets."@en;
+    rdfs:comment "This is designed to give the elements that are common between the descriptions of groups of datasets"@en;
     rdfs:isDefinedBy kgi: .
 
 kgi:VocabularyCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
-    rdf:label "Description of the common vocabularies used in different datasets." ;
-    rdfs:comment "This shoud be used with kgi:vocabulary and kgi:dataset to list the vocabularies common to a group of datasets" ;
+    rdf:label "Description of the common vocabularies used in different datasets."@en ;
+    rdfs:comment "This shoud be used with kgi:vocabulary and kgi:dataset to list the vocabularies common to a group of datasets"@en ;
     rdfs:isDefinedBy kgi: .
 
 kgi:dataset rdf:type rdf:Property ;
-    rdf:label "Indicates the datasets whose commonalities are described by and instance of CommonalityDescription." ;
+    rdf:label "Indicates the datasets whose commonalities are described by and instance of CommonalityDescription."@en ;
     rdfs:domain kgi:CommonalityDescription ;
     rdfs:range void:Dataset ;
     rdfs:isDefinedBy kgi: .
 
 kgi:ClassCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
-    rdf:label "Description of the common classes used in different datasets." ;
-    rdfs:comment "This shoud be used with kgi:class and kgi:dataset to list the classes common to a group of datasets" ;
+    rdf:label "Description of the common classes used in different datasets."@en ;
+    rdfs:comment "This shoud be used with kgi:class and kgi:dataset to list the classes common to a group of datasets"@en ;
     rdfs:isDefinedBy kgi: .
 
 kgi:PropertyCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
-    rdf:label "Description of the common properties used in different datasets." ;
-    rdfs:comment "This shoud be used with kgi:property and kgi:dataset to list the properties common to a group of datasets" ;
+    rdf:label "Description of the common properties used in different datasets."@en ;
+    rdfs:comment "This shoud be used with kgi:property and kgi:dataset to list the properties common to a group of datasets"@en ;
     rdfs:isDefinedBy kgi: .
 
 kgi:DatatypeCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
-    rdf:label "Description of the common datatypes used in different datasets." ;
-    rdfs:comment "This shoud be used with kgi:datatype and kgi:dataset to list the datatypes common to a group of datasets" ;
+    rdf:label "Description of the common datatypes used in different datasets."@en ;
+    rdfs:comment "This shoud be used with kgi:datatype and kgi:dataset to list the datatypes common to a group of datasets"@en ;
     rdfs:isDefinedBy kgi: .
 
 kgi:ResourceHostnameCommonalityDescription rdf:subClassOf kgi:CommonalityDescription ;
-    rdf:label "Description of the common resources hostnames used in different datasets." ;
-    rdfs:comment "This shoud be used with kgi:hostname and kgi:dataset to list the resources hostnames common to a group of datasets" ;
+    rdf:label "Description of the common resources hostnames used in different datasets."@en ;
+    rdfs:comment "This shoud be used with kgi:hostname and kgi:dataset to list the resources hostnames common to a group of datasets"@en ;
     rdfs:isDefinedBy kgi: .
 
 kgi:commonVocabularyDescription rdf:type rdf:Property ;
-    rdf:label "Links a dataset to its vocabulary commonalities descriptions." ;
+    rdf:label "Links a dataset to its vocabulary commonalities descriptions."@en ;
     rdfs:domain void:Dataset ;
     rdfs:range kgi:VocabularyCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:vocabulary rdf:type rdf:Property ;
-    rdf:label "Indicates the vocabularies that are common to a group of datasets in an instance of CommonalityDescription." ;
+    rdf:label "Indicates the vocabularies that are common to a group of datasets in an instance of CommonalityDescription."@en ;
     rdfs:domain kgi:VocabularyCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:commonClassDescription rdf:type rdf:Property ;
-    rdf:label "Links a dataset to its class commonalities descriptions." ;
+    rdf:label "Links a dataset to its class commonalities descriptions."@en ;
     rdfs:domain void:Dataset ;
     rdfs:range kgi:ClassCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:class rdf:type rdf:Property ;
-    rdf:label "Indicates the classes that are common to a group of datasets in an instance of CommonalityDescription." ;
+    rdf:label "Indicates the classes that are common to a group of datasets in an instance of CommonalityDescription."@en ;
     rdfs:domain kgi:ClassCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:commonPropertyDescription rdf:type rdf:Property ;
-    rdf:label "Links a dataset to its property commonalities descriptions." ;
+    rdf:label "Links a dataset to its property commonalities descriptions."@en ;
     rdfs:domain void:Dataset ;
     rdfs:range kgi:PropertyCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:property rdf:type rdf:Property ;
-    rdf:label "Indicates the properties that are common to a group of datasets in an instance of CommonalityDescription." ;
+    rdf:label "Indicates the properties that are common to a group of datasets in an instance of CommonalityDescription."@en ;
     rdfs:domain kgi:PropertyCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:commonDatatypeDescription rdf:type rdf:Property ;
-    rdf:label "Links a dataset to its datatype commonalities descriptions." ;
+    rdf:label "Links a dataset to its datatype commonalities descriptions."@en ;
     rdfs:domain void:Dataset ;
     rdfs:range kgi:DatatypeCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:datatype rdf:type rdf:Property ;
-    rdf:label "Indicates the datatypes that are common to a group of datasets in an instance of CommonalityDescription." ;
+    rdf:label "Indicates the datatypes that are common to a group of datasets in an instance of CommonalityDescription."@en ;
     rdfs:domain kgi:DatatypeCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:commonHostnameDescription rdf:type rdf:Property ;
-    rdf:label "Links a dataset to its hostname commonalities descriptions." ;
+    rdf:label "Links a dataset to its hostname commonalities descriptions."@en ;
     rdfs:domain void:Dataset ;
     rdfs:range kgi:ResourceHostnameCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
 
 kgi:hostname rdf:type rdf:Property ;
-    rdf:label "Indicates the resource hostnames that are common to a group of datasets in an instance of CommonalityDescription." ;
-    rdfs:comment "To not be confused with kgi:resourceHostname, which lists the resource hostnames appearing in a dataset." ;
+    rdf:label "Indicates the resource hostnames that are common to a group of datasets in an instance of CommonalityDescription."@en ;
+    rdfs:comment "To not be confused with kgi:resourceHostname, which lists the resource hostnames appearing in a dataset."@en ;
     rdfs:domain kgi:ResourceHostnameCommonalityDescription ;
     rdfs:isDefinedBy kgi: .
