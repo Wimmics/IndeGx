@@ -152,11 +152,15 @@ export function fetchJSONPromise(url, otherHeaders = new Map()) {
         header.set(key, value)
     })
     return fetchPromise(url, header).then(response => {
-        try {
-            return JSON.parse(response);
-        } catch (error) {
-            Logger.error(url, error, response)
-            throw error
+        if(response == null || response == undefined || response == "") {
+            return {};
+        } else {
+            try {
+                return JSON.parse(response);
+            } catch (error) {
+                Logger.error(url, error, response)
+                throw error
+            }
         }
     });
 }

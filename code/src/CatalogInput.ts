@@ -20,19 +20,22 @@ export function readCatalog(filename: string)  : Promise<Array<EndpointObject>> 
         const catalogList = store.statementsMatching(null, rdfTypeProperty, DCAT("Catalog")).map(statement => statement.subject) // List of catalog objects 
         catalogList.forEach(catalog => {
             store.statementsMatching(catalog, DCAT("dataset"), null).forEach(statement => {
-                const datasetURI = $rdf.sym(statement.object.value);
-                store.statementsMatching(datasetURI, voidSparqlEndpointProperty, null).forEach(endpointStatement => {
-                    let endpointObject: EndpointObject = {
-                        endpoint: endpointStatement.object.value
-                    }
-                    store.statementsMatching(datasetURI, sdNamedGraphProperty, null).forEach(graphStatement => {
-                        if (!endpointObject.graphs) {
-                            endpointObject.graphs = [];
+                const datasetURI = statement.object;
+                if(! $rdf.isLiteral(datasetURI)) {
+                    const datasetURIReTyped = datasetURI as $rdf.NamedNode | $rdf.BlankNode | $rdf.Variable  ;
+                    store.statementsMatching(datasetURIReTyped, voidSparqlEndpointProperty, null).forEach(endpointStatement => {
+                        let endpointObject: EndpointObject = {
+                            endpoint: endpointStatement.object.value
                         }
-                        endpointObject.graphs.push(graphStatement.object.value);
+                        store.statementsMatching(datasetURIReTyped, sdNamedGraphProperty, null).forEach(graphStatement => {
+                            if (!endpointObject.graphs) {
+                                endpointObject.graphs = [];
+                            }
+                            endpointObject.graphs.push(graphStatement.object.value);
+                        });
+                        result.push(endpointObject);
                     });
-                    result.push(endpointObject);
-                });
+                }
             })
         })
         return result;
