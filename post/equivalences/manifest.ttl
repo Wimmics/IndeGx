@@ -71,8 +71,7 @@
                         void:Dataset ,
                         dcat:Dataset ,
                         sd:Dataset ,
-                        prov:Entity ,
-                        skos:Concept .
+                        prov:Entity .
                 }
             } WHERE {
                 GRAPH ?graph {
@@ -202,14 +201,12 @@
             INSERT {
                 GRAPH ?graph {
                     ?res schema:alternateName ?id ;
-                        dct:alternative ?id ;
-                        skos:altLabel ?id .
+                        dct:alternative ?id .
                 }
             } WHERE {
                 GRAPH ?graph {
                     { ?res schema:alternateName ?id }
                     UNION { ?res dct:alternative ?id }
-                    UNION { ?res skos:altLabel ?id }
                 }
             }
             """
@@ -287,15 +284,13 @@
                 GRAPH ?graph {
                     ?res schema:description ?id ;
                         dct:description ?id ;
-                        owl:comment ?id ;
-                        skos:note ?id .
+                        owl:comment ?id .
                 }
             } WHERE {
                 GRAPH ?graph {
                     { ?res schema:description ?id }
                     UNION { ?res dct:description ?id }
                     UNION { ?res owl:comment ?id }
-                    UNION { ?res skos:note ?id }
                 }
             }
             """
@@ -1225,19 +1220,16 @@
             PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
             PREFIX sto: <https://w3id.org/i40/sto#>
             PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
-            PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
-
+            
             INSERT {
                 GRAPH ?graph {
                     ?res void:uriRegexPattern ?id ;
-                        void:uriSpace ?id ;
-                        hydra:template ?id .
+                        void:uriSpace ?id .
                 }
             } WHERE {
                 GRAPH ?graph {
                     { ?res void:uriRegexPattern ?id }
                     UNION { ?res void:uriSpace ?id }
-                    UNION { ?res hydra:template ?id }
                 }
             }
             """

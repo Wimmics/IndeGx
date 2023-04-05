@@ -21,6 +21,7 @@
         "@types/rdflib": "^1.2.0",
         "config": "^3.3.9",
         "dayjs": "^1.11.6",
+        "graphy": "^4.3.6",
         "gulp-cli": "^2.3.0",
         "md5": "^2.3.0",
         "node-fetch": "^3.2.10",
@@ -44,7 +45,7 @@
         "util": "^0.12.5"
     },
     "scripts": {
-        "start": "java -Xmx15g -jar corese-server-4.3.0-jar-with-dependencies.jar -su > corese.log",
+        "start": "java -Xmx15g -jar corese-server-4.3.0-jar-with-dependencies.jar -e -su > corese.log",
         "build": "npx tsc",
         "devrun": "npx tsc && node src/Indegx.js",
         "run": "node src/Indegx.js"

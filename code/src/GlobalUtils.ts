@@ -47,14 +47,14 @@ export function setDelayMillisecondsTimeForConccurentQuery(milliseconds: number)
 }
 
 export function appendToFile(filename, content) {
-    fs.writeFile(filename, content, { flag: 'a+' }).catch(err => {
-        Logger.error(err);
+    fs.writeFile(filename, content, { flag: 'a+' }).catch(error => {
+        Logger.error("Error appending to file", error)
     });
 }
 
 export function writeFile(filename, content) {
-    fs.writeFile(filename, content).catch(err => {
-        Logger.error(err);
+    fs.writeFile(filename, content).catch(error => {
+        Logger.error("Error writing to file", error)
     });
 }
 
@@ -124,10 +124,10 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
                     if (numTry < nbFetchRetries) {
                         return setTimeout(millisecondsBetweenRetries).then(fetchPromise(url, header, method, query, numTry + 1));
                     } else {
-                        Logger.error(JSON.stringify(error));
+                        Logger.error("Too many retries", error);
                     }
                 } else {
-                    Logger.error(JSON.stringify(error));
+                    Logger.error("Too many retries", error);
                 }
             }).finally(() => {
                 countConcurrentQueries--;
