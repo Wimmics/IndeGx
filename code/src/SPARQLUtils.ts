@@ -42,7 +42,7 @@ export function sendUpdateQuery(endpoint, updateQuery) {
     return fetchPOSTPromise(endpoint, updateQuery, updateHeader).then(response => {
         return response;
     }).catch(error => {
-        Logger.error(error)
+        Logger.error("Error send update query",  error);
     })
 }
 

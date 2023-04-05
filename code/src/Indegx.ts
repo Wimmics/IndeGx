@@ -34,9 +34,11 @@ SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
 let vocabularyFileSendingPool = [];
-readdirSync(vocabularies).forEach(file => {
-    vocabularyFileSendingPool.push(sendFileToIndex("file://" + vocabularies + "/" + file, KGI("vocabularies").value));
-})
+if (vocabularies !== undefined && vocabularies !== "") {
+    readdirSync(vocabularies).forEach(file => {
+        vocabularyFileSendingPool.push(sendFileToIndex("file://" + vocabularies + "/" + file, KGI("vocabularies").value));
+    })
+}
 Promise.allSettled(vocabularyFileSendingPool).then(() => {
     Logger.info("Reading manifest tree ", manifest)
     return readRules(manifest).then(manifests => {
@@ -58,14 +60,14 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
                         Logger.info("Endpoint", endpointObject.endpoint, "treated");
                         return;
                     }).catch(error => {
-                        Logger.error(error)
+                        Logger.error("Error treating endpoint", endpointObject.endpoint, error)
                     }).finally(() => {
                         return;
                     }));
                 })
             })
         }).catch(error => {
-            Logger.error(error)
+            Logger.error("Error treating catalog", catalog, error)
         }).then(() => {
             return Promise.allSettled(endpointPool).then(() => {
                 Logger.info("All endpoints treated")
@@ -94,5 +96,7 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
         }
     }).finally(() => {
         return writeIndex(outputFile)
-    }).catch(error => { Logger.error(JSON.stringify(error)) });
+    }).catch(error => { 
+        Logger.error("During indexation", error);
+    });
 })

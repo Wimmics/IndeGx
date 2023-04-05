@@ -84,7 +84,7 @@ function sendQueryWithTraceHandling(queryFunction : (a: string, b: string, c?: n
         }
     }).catch(error => {
         const endTime = dayjs();
-        Logger.error(error);
+        Logger.error("Error sendQueryWithTraceHandling",  error)
         return sendFailureReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime, error);
     })
 }
