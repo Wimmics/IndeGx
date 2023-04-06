@@ -14,16 +14,17 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
     let entriesApplicationPool = [];
     try {
         manifestObject.includes.forEach(subManifest => {
-            subTreeApplicationPool.push(applyRuleTree(endpointObject, subManifest).catch(error => Logger.error(error)));
+            subTreeApplicationPool.push(applyRuleTree(endpointObject, subManifest).catch(error => 
+                Logger.error("Error applying rule tree",  error)));
         });
         manifestObject.entries.forEach(entry => {
             entriesApplicationPool.push([endpointObject, entry])
         })
     } catch (error) {
-        Logger.error(error)
+        Logger.error("Error applying rule tree",  error)
     }
     return Global.iterativePromises(entriesApplicationPool, applyGenerationAsset).then(() => Promise.allSettled(subTreeApplicationPool)).catch(error => {
-        Logger.error(error)
+        Logger.error("Error applying rule tree",  error)
     });
 }
 
@@ -43,17 +44,17 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
                     if (RuleTree.isManifestEntry(action)) {
                         const followUpEntry = action as RuleTree.ManifestEntry;
                         actionPool.push(applyGenerationAsset(endpointObject, followUpEntry).catch(error => {
-                            Logger.error(error)
+                            Logger.error("Error applying generation asset",  error);
                         }));
                     } else if (RuleTree.isAction(action)) {
                         const actionObject = action as RuleTree.Action;
                         actionPool.push(applyAction(endpointObject, actionObject, entryObject).catch(error => {
-                            Logger.error(error)
+                            Logger.error("Error applying generation asset",  error);
                         }));
                     } else if (RuleTree.isManifest(action)) {
                         const subManifest = action as RuleTree.Manifest;
                         actionPool.push(applyRuleTree(endpointObject, subManifest).catch(error => {
-                            Logger.error(error)
+                            Logger.error("Error applying generation asset",  error);
                         }));
                     } else {
                         throw new Error("Unexpected action type")
@@ -91,7 +92,7 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
         return Promise.allSettled(actionPool).then(() => {
             Logger.info(endpointObject.endpoint, "Finished actions for ", entryObject.uri)
         }).catch(error => {
-            Logger.error(error)
+            Logger.error("Error applying generation asset",  error);
         });
     })
 }

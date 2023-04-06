@@ -1,5 +1,5 @@
 import { Manifest, ManifestEntry, Test, Action } from "./RuleTree.js"
-import { createStore, loadRemoteRDFFiles, RDF, MANIFEST, KGI, DCT, loadRemoteRDFFile } from "./RDFUtils.js";
+import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray } from "./RDFUtils.js";
 import { readFile, urlToBaseURI, writeFile } from "./GlobalUtils.js";
 import * as $rdf from "rdflib";
 import dayjs from "dayjs";
@@ -39,9 +39,8 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         baseURI = "file://" + baseURI;
     }
 
-    return readFile(manifestFilename).then(manifestFileString => {
-        $rdf.parse(manifestFileString, store, baseURI);
-        const manifestResource = $rdf.sym(manifestURI);
+    return loadRDFFile(manifestFilename, store, baseURI).then(() => {
+        const manifestResource = $rdf.namedNode(manifestURI);
         let manifestObject: Manifest = {
             uri: manifestResource.toString(),
             entries: [],
@@ -53,9 +52,9 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
             return statement.object;
         });
         inclusionCollection.forEach(collection => {
-            if (collection as $rdf.Collection) {
-                let rdfCollection = collection as $rdf.Collection;
-                rdfCollection.elements.forEach(inclusionResource => {
+            if ($rdf.isNamedNode(collection)) {
+                let rdfCollection = collectionToArray(collection, store);
+                rdfCollection.forEach(inclusionResource => {
                     manifestReadingPool.push(readManifest(inclusionResource.value, store).then(inclusionManifests => {
                         if (manifestObject.includes == undefined) {
                             manifestObject.includes = inclusionManifests;
@@ -64,7 +63,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
                         }
                         return;
                     }).catch(error => {
-                        Logger.error(error)
+                        Logger.error("Error reading", manifestFilename, "error", error)
                     }))
                 })
             }
@@ -74,13 +73,16 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         let entriesCollection = store.statementsMatching(manifestResource, manifestEntriesProperty, null).map(statement => statement.object);
         let entriesURIArray = [];
         entriesCollection.forEach(collection => {
-            if (collection as $rdf.Collection) {
-                let rdfCollection = collection as $rdf.Collection;
-                entriesURIArray = entriesURIArray.concat(rdfCollection.elements.map(node => node.value))
+            if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
+                Logger.log("BEFORE", entriesURIArray);
+                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).map(node => node.value));
+                Logger.log("AFTER", entriesURIArray);
+            } else {
+                throw new Error("Unexpected node, collection expected: " + collection);
             }
         })
-        manifestReadingPool.push(loadRemoteRDFFiles(entriesURIArray, store).catch(error => {
-            Logger.error(error)
+        manifestReadingPool.push(loadRDFFiles(entriesURIArray, store).catch(error => {
+            Logger.error("Error applying entries", entriesURIArray, "from ", manifestFilename, ", error ", error);
         }))
 
         return Promise.allSettled(manifestReadingPool).then(() => {
@@ -90,13 +92,18 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
                         manifestObject.entries = [generationAsset];
                     }
                     manifestObject.entries.push(generationAsset);
-                })
+                }).catch(error => {
+                    Logger.error("Error reading", entryResource, "error", error);
+                });
             }))
-            
+
         }).then(() => {
             result.push(manifestObject);
             return result;
-        })
+        }).catch(error => {
+            Logger.error("Error reading", manifestFilename, "error", error);
+            throw error
+        });
     })
 }
 
@@ -148,24 +155,24 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                 const timeout = dayjs.duration(timeoutString);
                 actionObject.timeout = timeout.asSeconds();
             }
-            if(store.holds(actionNode, kgiPaginationProperty, null)) {
+            if (store.holds(actionNode, kgiPaginationProperty, null)) {
                 const paginationString = store.the(actionNode, kgiPaginationProperty, null).value;
                 const pagination = Number.parseInt(paginationString);
                 actionObject.pagination = pagination;
             }
-            if(store.holds(actionNode, dctTitle, null)) {
+            if (store.holds(actionNode, dctTitle, null)) {
                 const titles = store.statementsMatching(actionNode, dctTitle, null).map(statement => statement.object.value);
                 actionObject.title = titles;
             }
 
             return actionObject;
         }
+
         // Success
         let successActionsCollection = store.statementsMatching(generationAssetResource, kgiOnSuccessProperty, null).map(statement => statement.object);
         successActionsCollection.forEach(collection => {
-            if (collection as $rdf.Collection) {
-                let rdfCollection = collection as $rdf.Collection;
-                const successActionsNodeArray = rdfCollection.elements;
+            if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
+                const successActionsNodeArray = collectionToArray(collection, store);
                 successActionsNodeArray.forEach(node => {
                     if (store.holds(node, manifestActionProperty, null)) {
                         // Action is a leaf node
@@ -178,18 +185,20 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                         }
                     } else {
                         // Action is a node
-                        promisePool.push(loadRemoteRDFFile(node.value, store).then(() => {
-                            if(store.holds(node, RDF("type"), manifestEntryType)) {
+                        promisePool.push(loadRDFFile(node.value, store).then(() => {
+                            if (store.holds(node, RDF("type"), manifestEntryType)) {
                                 return readGenerationAsset(node.value, store).then(generationAsset => {
                                     resultGenerationAsset.actionsSuccess.push(generationAsset);
                                     return;
                                 })
-                            } else if(store.holds(node, RDF("type"), manifestType)) {
+                            } else if (store.holds(node, RDF("type"), manifestType)) {
                                 return readManifest(node.value, store).then(manifestArray => {
                                     manifestArray.forEach(manifest => {
                                         resultGenerationAsset.actionsSuccess.push(manifest);
                                     })
                                     return;
+                                }).catch(error => {
+                                    Logger.error("Error reading", node.value, "error", error);
                                 })
                             }
                         }))
@@ -201,9 +210,8 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
         // Failure
         let failureActionsCollection = store.statementsMatching(generationAssetResource, kgiOnFailureProperty, null).map(statement => statement.object);
         failureActionsCollection.forEach(collection => {
-            if (collection as $rdf.Collection) {
-                let rdfCollection = collection as $rdf.Collection;
-                const failureActionsNodeArray = rdfCollection.elements;
+            if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
+                const failureActionsNodeArray = collectionToArray(collection, store);
                 failureActionsNodeArray.forEach(node => {
                     if (store.holds(node, manifestActionProperty, null)) {
                         // Action is a leaf node
@@ -214,13 +222,13 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                         }
                     } else {
                         // Action is a node
-                        promisePool.push(loadRemoteRDFFile(node.value, store).then(() => {
-                            if(store.holds(node, RDF("type"), manifestEntryType)) {
+                        promisePool.push(loadRDFFile(node.value, store).then(() => {
+                            if (store.holds(node, RDF("type"), manifestEntryType)) {
                                 return readGenerationAsset(node.value, store).then(generationAsset => {
                                     resultGenerationAsset.actionsFailure.push(generationAsset);
                                     return;
                                 })
-                            } else if(store.holds(node, RDF("type"), manifestType)) {
+                            } else if (store.holds(node, RDF("type"), manifestType)) {
                                 return readManifest(node.value, store).then(manifestArray => {
                                     manifestArray.forEach(manifest => {
                                         resultGenerationAsset.actionsFailure.push(manifest);
@@ -228,13 +236,15 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
                                     return;
                                 })
                             }
+                        }).catch(error => {
+                            Logger.error("Error reading", node.value, "error", error);
                         }))
                     }
                 })
             }
         })
     } catch (error) {
-        Logger.error(error)
+        Logger.error("Error applying entries", error);
     }
     return Promise.allSettled(promisePool).then(() => resultGenerationAsset);
 }

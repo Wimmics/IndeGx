@@ -1,0 +1,75 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Object Exact Qualified Cardinality" ;
+    dcterms:description "Since class is constrained with a qualified cardinality restriction on property objectProperty to have value objects of type class restrictedClass, and resource is a class but has objectCount objects assigned to objectProperty, an inconsistency occurs." ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    ASK {
+        {
+            ?resource rdf:type ?class ;
+                ?objectProperty ?object .
+            ?objectProperty rdf:type owl:ObjectProperty .
+            ?object rdf:type ?restrictedClass .
+            ?class rdfs:subClassOf|owl:equivalentClass
+                [ rdf:type owl:Restriction ;
+                owl:onProperty ?objectProperty ;
+                owl:onClass ?restrictedClass ;
+                owl:qualifiedCardinality ?cardinalityValue ].
+            {
+                SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                WHERE 
+                {
+                ?individual rdf:type ?concept ;
+                    ?objectProperty ?object .
+                ?object rdf:type ?restrictedClass .
+                ?objectProperty rdf:type owl:ObjectProperty .
+                ?concept rdfs:subClassOf|owl:equivalentClass
+                    [ rdf:type owl:Restriction ;
+                    owl:onProperty ?objectProperty ;
+                    owl:onClass ?restrictedClass ;
+                    owl:qualifiedCardinality ?cardinalityValue ].
+                } GROUP BY ?individual ?concept
+            }
+        }
+        UNION {
+            GRAPH ?graph {
+                ?resource rdf:type ?class ;
+                    ?objectProperty ?object .
+                ?objectProperty rdf:type owl:ObjectProperty .
+                ?object rdf:type ?restrictedClass .
+                ?class rdfs:subClassOf|owl:equivalentClass
+                    [ rdf:type owl:Restriction ;
+                    owl:onProperty ?objectProperty ;
+                    owl:onClass ?restrictedClass ;
+                    owl:qualifiedCardinality ?cardinalityValue ].
+                {
+                    SELECT DISTINCT (COUNT(DISTINCT ?object) AS ?objectCount) ?individual ?concept
+                    WHERE 
+                    {
+                    ?individual rdf:type ?concept ;
+                        ?objectProperty ?object .
+                    ?object rdf:type ?restrictedClass .
+                    ?objectProperty rdf:type owl:ObjectProperty .
+                    ?concept rdfs:subClassOf|owl:equivalentClass
+                        [ rdf:type owl:Restriction ;
+                        owl:onProperty ?objectProperty ;
+                        owl:onClass ?restrictedClass ;
+                        owl:qualifiedCardinality ?cardinalityValue ].
+                    } GROUP BY ?individual ?concept
+                }
+            }
+        }
+        BIND(?resource AS ?individual)
+        BIND(?class AS ?concept)
+        FILTER(?objectCount > ?cardinalityValue)
+    }"""  .

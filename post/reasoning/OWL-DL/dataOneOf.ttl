@@ -1,0 +1,59 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Data One Of" ;
+    dcterms:description "Since datatypeProperty is restricted to have a value from list, and resource datatypeProperty value, but value is not in list, an inconsistency occurs." ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    ASK {
+        {
+            ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                rdfs:range [ rdf:type owl:DataRange ;
+                owl:oneOf ?list ] .
+            ?resource ?datatypeProperty ?value .
+            ?list rdf:rest*/rdf:first ?member .
+            {
+                SELECT DISTINCT (COUNT( DISTINCT ?datatypeProperty) AS ?dataCount)
+                WHERE 
+                {
+                    ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                    rdfs:range [ rdf:type owl:DataRange ;
+                        owl:oneOf ?list ] .
+                    ?individual ?datatypeProperty ?value .
+                    ?list rdf:rest*/rdf:first ?member .
+                    FILTER(?value=?member)
+                }
+            }
+        }
+        UNION {
+            GRAPH ?graph {
+                ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                    rdfs:range [ rdf:type owl:DataRange ;
+                    owl:oneOf ?list ] .
+                ?resource ?datatypeProperty ?value .
+                ?list rdf:rest*/rdf:first ?member .
+                {
+                    SELECT DISTINCT (COUNT( DISTINCT ?datatypeProperty) AS ?dataCount)
+                    WHERE 
+                    {
+                        ?datatypeProperty rdf:type owl:DatatypeProperty ;
+                        rdfs:range [ rdf:type owl:DataRange ;
+                            owl:oneOf ?list ] .
+                        ?individual ?datatypeProperty ?value .
+                        ?list rdf:rest*/rdf:first ?member .
+                        FILTER(?value=?member)
+                    }
+                }
+            }
+        }
+        FILTER(?dataCount=0)
+    }"""  .

@@ -1,0 +1,36 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Negative Object Property Assertion" ;
+    dcterms:description "Since a negative object property assertion was made with source resource, object property p, and target individual o, the existence of resource p o results in an inconsistency." ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    ASK {
+        {
+            ?resource ?p ?o.
+            ?p rdf:type owl:ObjectProperty .
+            ?x rdf:type owl:NegativePropertyAssertion ;
+                owl:sourceIndividual ?resource ;
+                owl:assertionProperty ?p ;
+                owl:targetIndividual ?o .
+        }
+        UNION {
+            GRAPH ?graph {
+                ?resource ?p ?o.
+                ?p rdf:type owl:ObjectProperty .
+                ?x rdf:type owl:NegativePropertyAssertion ;
+                    owl:sourceIndividual ?resource ;
+                    owl:assertionProperty ?p ;
+                    owl:targetIndividual ?o .
+            }
+        }
+    }"""  .

@@ -11,7 +11,7 @@ export function sendUpdate(endpoint: string, queryString: string, timeout: numbe
         return sparqlQueryPromise(coreseServerUrl, queryString, timeout).then(result => {
             return result;
         }).catch(error => {
-            Logger.error(error)
+            Logger.error("Error sending update", error)
             throw error;
         });
     } else {
@@ -30,7 +30,7 @@ export function sendConstruct(endpoint: string, queryString: string, timeout?: n
         return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
             return result;
         }).catch(error => {
-            Logger.error(error);
+            Logger.error("Error sending construct", error)
             throw error;
         });
     }
@@ -45,7 +45,7 @@ export function sendSelect(endpoint: string, queryString: string, timeout?: numb
         return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
             return result;
         }).catch(error => {
-            Logger.error(error)
+            Logger.error("Error sending select", error)
             throw error;
         });
     } else {

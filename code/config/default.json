@@ -1,15 +1,18 @@
 {
     "dev": {
-        "manifest": "/user/pmaillot/home/git/IndeGx/rules/manifest.ttl",
-        "post": "",
-        "catalog": "/user/pmaillot/home/git/IndeGx/code/testCatalog.ttl",
+        "manifest": "/user/pmaillot/home/git/KG_accountability/rules/manifest.ttl",
+        "post": "/user/pmaillot/home/git/KG_accountability/rules_post/manifest.ttl",
+        "catalog": "./testCatalog.ttl",
+        "vocabularies": "",
         "defaultQueryTimeout": 1200,
         "nbFetchRetries": 10,
         "millisecondsBetweenRetries": 5000,
-        "maxConccurentQueries": 300,
+        "maxConccurentQueries": 3000,
         "delayMillisecondsTimeForConccurentQuery": 1000,
-        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log",
-        "outputFile": "/user/pmaillot/home/git/IndeGx/code/index.trig"
+        "logFile": "./indegx.log",
+        "outputFile": "./indegx.trig",
+        "manifestJSON": "./manifests.json",
+        "postManifestJSON": "./postManifests.json"
     },
     "prod": {
         "manifest": "/user/pmaillot/home/git/IndeGx/rules/manifest.ttl",

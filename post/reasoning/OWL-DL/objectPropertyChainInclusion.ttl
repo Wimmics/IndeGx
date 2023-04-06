@@ -1,0 +1,33 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:title "Object Property Chain Inclusion" ;
+    kgi:query """PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    ASK {
+        {
+            ?objectProperty rdf:type owl:ObjectProperty ;
+                owl:propertyChainAxiom ?list .
+            ?list rdf:first ?prop1 .
+            ?list rdf:rest/rdf:first ?prop2 .
+            ?resource ?prop1 [ ?prop2 ?o ] .
+        }
+        UNION {
+            GRAPH ?graph {
+                ?objectProperty rdf:type owl:ObjectProperty ;
+                    owl:propertyChainAxiom ?list .
+                ?list rdf:first ?prop1 .
+                ?list rdf:rest/rdf:first ?prop2 .
+                ?resource ?prop1 [ ?prop2 ?o ] .
+            }
+        }
+    }"""  .
