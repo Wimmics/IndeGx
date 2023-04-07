@@ -1,5 +1,4 @@
-import fetch, { FetchError } from 'node-fetch';
-import { RequestInit } from 'node-fetch';
+import fetch, { FetchError, RequestInit } from 'node-fetch';
 import * as fs from 'node:fs/promises';
 import { setTimeout } from 'node:timers/promises';
 import * as Logger from "./LogUtils.js"
@@ -54,7 +53,7 @@ export function appendToFile(filename, content) {
 
 export function writeFile(filename, content) {
     fs.writeFile(filename, content).catch(error => {
-        Logger.error("Error writing to file", error)
+        Logger.error("Error writing to file", filename, error)
     });
 }
 
@@ -163,11 +162,6 @@ export function fetchJSONPromise(url, otherHeaders = new Map()) {
             }
         }
     });
-}
-
-export function urlToBaseURI(url: string) {
-    const baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
-    return baseURI;
 }
 
 /**

@@ -1,6 +1,5 @@
 import * as $rdf from "rdflib";
 import * as fs from "fs";
-import { urlToBaseURI } from "./GlobalUtils.js";
 import * as Global from "./GlobalUtils.js";
 import * as Logger from "./LogUtils.js"
 import ttl_read from "@graphy/content.ttl.read";
@@ -28,6 +27,12 @@ export const MANIFEST = $rdf.Namespace("http://www.w3.org/2001/sw/DataAccess/tes
 export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 
 export const rdfTypeProperty = RDF("type");
+
+export function urlToBaseURI(url: string) {
+    const baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
+    return baseURI;
+}
+
 
 export function createStore() {
     let store = $rdf.graph();
@@ -63,6 +68,63 @@ export function createStore() {
     return store;
 }
 
+function getGraphyReadingFunction(contentType: FileContentType) {
+    switch (contentType) {
+        case NQuadsContentType:
+            return nq_read;
+        case NTriplesContentType:
+            return nt_read;
+        case TrigContentType:
+            return trig_read;
+        default:
+        case TurtleContentType:
+            return ttl_read;
+    }
+}
+
+function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI("").value) {
+    let s = undefined;
+    if (y_quad.subject.termType === "NamedNode") { 
+        s = $rdf.sym(y_quad.subject.value) 
+    } else if (y_quad.subject.termType === "Literal" )  { 
+        if(y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
+            s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
+        } else if(y_quad.subject.datatype != null && y_quad.subject.datatype != undefined && y_quad.subject.datatype != "") {
+            s = $rdf.lit(y_quad.subject.value, undefined, $rdf.sym(y_quad.subject.datatype))
+        } else {
+            s = $rdf.lit(y_quad.subject.value)
+        }
+    } else { 
+        s = $rdf.blankNode(baseURI + "#" + y_quad.subject.value)
+    };
+    const p = $rdf.sym(y_quad.predicate.value);
+    let o = undefined;
+    if (y_quad.object.termType === "NamedNode") { 
+        o = $rdf.sym(y_quad.object.value) 
+    } else if (y_quad.object.termType === "Literal") { 
+        if(y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
+            o = $rdf.lit(y_quad.object.value, y_quad.object.language)
+        } else if(y_quad.object.datatype != null && y_quad.object.datatype != undefined && y_quad.object.datatype != "") {
+            o = $rdf.lit(y_quad.object.value, undefined, $rdf.sym(y_quad.object.datatype))
+        } else {
+            o = $rdf.lit(y_quad.object.value)
+        }
+    } else { 
+        o = $rdf.blankNode(baseURI + "#" + y_quad.object.value) 
+    };
+
+    if (!$rdf.isLiteral(s)) { // The application of RDF reasoning makes appear Literals as subjects, for some reason. We filter them out.
+        if (y_quad.graph.value === '') {
+            Logger.log(s.toNT(), p.toNT(), o.toNT());
+            store.add(s, p, o);
+        } else {
+            const g = $rdf.sym(y_quad.graph);
+            Logger.log(s.toNT(), p.toNT(), o.toNT(), g.toNT());
+            store.add(s, p, o, g);
+        }
+    }
+}
+
 export function loadRDFFile(file: string, store: $rdf.Store, baseURI?: string): Promise<any> {
     return loadRDFFiles([file], store, baseURI);
 }
@@ -77,21 +139,7 @@ export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBas
             const contentType = guessContentType(filename);
             let readingFunction = ttl_read;
             if (contentType != undefined) {
-                switch (contentType) {
-                    case NQuadsContentType:
-                        readingFunction = nq_read;
-                        break;
-                    case NTriplesContentType:
-                        readingFunction = nt_read;
-                        break;
-                    case TrigContentType:
-                        readingFunction = trig_read;
-                        break;
-                    default:
-                    case TurtleContentType:
-                        readingFunction = ttl_read;
-                        break;
-                }
+                readingFunction = getGraphyReadingFunction(contentType)
             } else {
                 throw new Error("Unsupported content type for " + filename + ", only .ttl, .nq and .nt supported.");
             }
@@ -106,35 +154,25 @@ export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBas
                     fs.createReadStream(filename)
                         .pipe(readingFunction({ baseURI: baseURI }))
                         .on('data', (y_quad) => {
-                            const s = y_quad.subject.termType === "NamedNode" ? $rdf.sym(y_quad.subject.value) : (y_quad.subject.termType === "Literal" ? $rdf.lit(y_quad.subject.value, y_quad.subject.language, y_quad.subject.datatype) : $rdf.sym(baseURI + "#" + y_quad.subject.value));
-                            const p = $rdf.sym(y_quad.predicate.value);
-                            const o = y_quad.object.termType === "NamedNode" ? $rdf.sym(y_quad.object.value) : (y_quad.object.termType === "Literal" ? $rdf.lit(y_quad.object.value, y_quad.object.language, y_quad.object.datatype) : $rdf.sym(baseURI + "#" + y_quad.object.value));
-
-                            if(! $rdf.isLiteral(s)) { // The application of RDF reasoning make appear Literals as subjects, for some reason. We filter them out.
-                                if (y_quad.graph.value === '') {
-                                    store.add(s, p, o);
-                                } else {
-                                    const g = $rdf.sym(y_quad.graph);
-                                    store.add(s, p, o, g);
-                                }
-                            }
+                            graphyQuadLoadingToStore(store, y_quad, baseURI)
                         })
                         .on('eof', prefixes => {
                             resolve();
                         })
                         .on('error', (error) => {
-                            Logger.error("Error while reading RDF files", files, "error", error);
+                            Logger.error("Error while reading RDF file", filename, "during stream", "error", error);
                             reject(error)
                         });
                 } catch (error) {
                     Logger.error("Error while loading RDF files", files, "error", error);
                     reject(error)
                 }
+            }).catch(error => {
+                Logger.error("Error while loading RDF files", files, "error", error);
+                return Promise.reject(error);
             })
         });
-        return Promise.allSettled(promiseArray).then(() => {
-            Logger.log(files, "read", store.length, "triples");
-        });
+        return Promise.allSettled(promiseArray)
     } catch (error) {
         Logger.error("Error while loading RDF files", files, "error", error);
         return Promise.reject(error);

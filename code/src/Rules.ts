@@ -1,11 +1,12 @@
 import { Manifest, ManifestEntry, Test, Action } from "./RuleTree.js"
-import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray } from "./RDFUtils.js";
-import { readFile, urlToBaseURI, writeFile } from "./GlobalUtils.js";
+import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI } from "./RDFUtils.js";
+import { readFile, writeFile } from "./GlobalUtils.js";
 import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 import duration from 'dayjs/plugin/duration.js';
 dayjs.extend(duration)
 import * as Logger from "./LogUtils.js"
+import { Quad_Subject } from "rdflib/lib/tf-types.js";
 
 const manifestType = MANIFEST("Manifest")
 const manifestEntryType = MANIFEST("ManifestEntry")
@@ -53,7 +54,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         });
         inclusionCollection.forEach(collection => {
             if ($rdf.isNamedNode(collection)) {
-                let rdfCollection = collectionToArray(collection, store);
+                let rdfCollection = collectionToArray(collection, store).filter(uri => uri != undefined && ! uri.value.includes(manifestResource.value));;
                 rdfCollection.forEach(inclusionResource => {
                     manifestReadingPool.push(readManifest(inclusionResource.value, store).then(inclusionManifests => {
                         if (manifestObject.includes == undefined) {
@@ -74,9 +75,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         let entriesURIArray = [];
         entriesCollection.forEach(collection => {
             if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
-                Logger.log("BEFORE", entriesURIArray);
-                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).map(node => node.value));
-                Logger.log("AFTER", entriesURIArray);
+                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).map(node => node.value)).filter(uri => uri != undefined && ! uri.includes(manifestResource.value));
             } else {
                 throw new Error("Unexpected node, collection expected: " + collection);
             }
@@ -173,6 +172,10 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
         successActionsCollection.forEach(collection => {
             if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
                 const successActionsNodeArray = collectionToArray(collection, store);
+                Logger.log(successActionsNodeArray.map(node => node.value));
+                successActionsNodeArray.forEach(actionNode => {
+                    Logger.log(actionNode, store.statementsMatching(actionNode as Quad_Subject, null, null).map(statement => statement.toString()));
+                })
                 successActionsNodeArray.forEach(node => {
                     if (store.holds(node, manifestActionProperty, null)) {
                         // Action is a leaf node
