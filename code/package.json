@@ -15,6 +15,9 @@
     "bugs": {
         "url": "https://github.com/Wimmics/IndeGx/issues"
     },
+    "source": "src/IndeGx.ts",
+    "main": "src/IndeGx.js",
+    "types": "src/IndeGx.d.ts",
     "type": "module",
     "dependencies": {
         "@types/node-fetch": "^2.6.2",
@@ -45,7 +48,7 @@
         "util": "^0.12.5"
     },
     "scripts": {
-        "start": "java -Xmx15g -jar corese-server-4.3.0-jar-with-dependencies.jar -e -su > corese.log",
+        "start": "java -Xmx15g -jar corese-server-4.3.0-jar-with-dependencies.jar -su > corese.log",
         "build": "npx tsc",
         "devrun": "npx tsc && node src/Indegx.js",
         "run": "node src/Indegx.js"

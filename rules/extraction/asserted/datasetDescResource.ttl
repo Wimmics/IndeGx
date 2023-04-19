@@ -21,7 +21,7 @@
                     UNION { ?res a void:Dataset }
                     UNION { GRAPH ?g { ?res a dcat:Dataset } }
                     UNION { GRAPH ?g { ?res a void:Dataset } }
-                    { ?res ?p $rawEndpointUrl }
+                    { ?res ?p ?endpointUrl }
                     UNION { GRAPH ?g { ?res ?p ?endpointUrl } } .
                 }
                 UNION {
@@ -30,7 +30,7 @@
                     UNION { ?res a void:Dataset }
                     UNION { GRAPH ?g { ?res a dcat:Dataset } }
                     UNION { GRAPH ?g { ?res a void:Dataset } }
-                    { ?res ?p $rawEndpointUrl }
+                    { ?res ?p ?endpointUrl }
                     UNION { GRAPH ?g { ?res ?p ?endpointUrl } } .
                 }
             }
