@@ -83,43 +83,49 @@ function getGraphyReadingFunction(contentType: FileContentType) {
 }
 
 function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI("").value) {
+    function createValidBlankNode(node, baseURI) {
+        if (node.termType === "BlankNode") {
+            return $rdf.sym(baseURI + "#" + node.value);
+        } else {
+            throw new Error("Invalid node" + node + " expecting blank node");
+        }
+    }
+
     let s = undefined;
-    if (y_quad.subject.termType === "NamedNode") { 
-        s = $rdf.sym(y_quad.subject.value) 
-    } else if (y_quad.subject.termType === "Literal" )  { 
-        if(y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
+    if (y_quad.subject.termType === "NamedNode") {
+        s = $rdf.sym(y_quad.subject.value)
+    } else if (y_quad.subject.termType === "Literal") {
+        if (y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
             s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
-        } else if(y_quad.subject.datatype != null && y_quad.subject.datatype != undefined && y_quad.subject.datatype != "") {
+        } else if (y_quad.subject.datatype != null && y_quad.subject.datatype != undefined && y_quad.subject.datatype != "") {
             s = $rdf.lit(y_quad.subject.value, undefined, $rdf.sym(y_quad.subject.datatype))
         } else {
             s = $rdf.lit(y_quad.subject.value)
         }
-    } else { 
-        s = $rdf.blankNode(baseURI + "#" + y_quad.subject.value)
+    } else {
+        s = createValidBlankNode(y_quad.subject, baseURI);
     };
     const p = $rdf.sym(y_quad.predicate.value);
     let o = undefined;
-    if (y_quad.object.termType === "NamedNode") { 
-        o = $rdf.sym(y_quad.object.value) 
-    } else if (y_quad.object.termType === "Literal") { 
-        if(y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
+    if (y_quad.object.termType === "NamedNode") {
+        o = $rdf.sym(y_quad.object.value)
+    } else if (y_quad.object.termType === "Literal") {
+        if (y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
             o = $rdf.lit(y_quad.object.value, y_quad.object.language)
-        } else if(y_quad.object.datatype != null && y_quad.object.datatype != undefined && y_quad.object.datatype != "") {
+        } else if (y_quad.object.datatype != null && y_quad.object.datatype != undefined && y_quad.object.datatype != "") {
             o = $rdf.lit(y_quad.object.value, undefined, $rdf.sym(y_quad.object.datatype))
         } else {
             o = $rdf.lit(y_quad.object.value)
         }
-    } else { 
-        o = $rdf.blankNode(baseURI + "#" + y_quad.object.value) 
+    } else {
+        o = createValidBlankNode(y_quad.object, baseURI);
     };
 
     if (!$rdf.isLiteral(s)) { // The application of RDF reasoning makes appear Literals as subjects, for some reason. We filter them out.
         if (y_quad.graph.value === '') {
-            Logger.log(s.toNT(), p.toNT(), o.toNT());
             store.add(s, p, o);
         } else {
             const g = $rdf.sym(y_quad.graph);
-            Logger.log(s.toNT(), p.toNT(), o.toNT(), g.toNT());
             store.add(s, p, o, g);
         }
     }
@@ -376,6 +382,12 @@ export function queryRDFLibStore(store: $rdf.Store, query: string) {
     });
 }
 
+/**
+    Converts an RDF collection represented by the given named node, blank node, or variable into an array of nodes.
+    @param {$rdf.NamedNode | $rdf.BlankNode | $rdf.Variable} collection - The node representing the collection to convert.
+    @param {$rdf.Store} store - The RDF store containing the collection.
+    @returns {$rdf.Node[]} An array of nodes representing the collection.
+    */
 export function collectionToArray(collection: $rdf.NamedNode | $rdf.BlankNode | $rdf.Variable, store: $rdf.Store): $rdf.Node[] {
     let result = [];
 
