@@ -32,13 +32,13 @@ const dctDescription = DCT("description");
     */
 export function readRules(rootManifest: string): Promise<Manifest[]> {
     let store = createStore();
-    return readManifest(rootManifest, store).then(manifests => { writeFile("manifests.json", JSON.stringify(manifests)); return manifests }).finally(() => { return [] });
+    return readManifest(rootManifest, store).then(manifests => { return manifests }).finally(() => { return [] });
 }
 
 /**
     Reads an RDF manifest file and returns an array of Manifest objects containing information about the entries and included manifests.
     @param {string} manifestFilename - The name of the RDF manifest file to read.
-    @param {S$rdf.tore} store - The RDF store in which to load the manifest.
+    @param {$rdf.tore} store - The RDF store in which to load the manifest.
     @returns {Promise<Array<Manifest>>} A Promise that resolves with an array of Manifest objects representing the information in the manifest file.
     */
 function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Array<Manifest>> {
