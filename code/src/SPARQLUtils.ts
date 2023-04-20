@@ -82,3 +82,39 @@ export function isSparqlUpdate(queryString: string): boolean {
     return checkSparqlType(queryString, "update");
 }
 
+export function queryContainsService(queryString: string): boolean {
+    let parser = new sparqljs.Parser();
+    try {
+        const parsedQuery = parser.parse(queryString);
+        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString)) {
+            return parsedQuery.where.some(triple => triple.type == "service");
+        } else {
+            throw new Error("Not an expected query type : " + JSON.stringify(queryString));
+        }
+    } catch (error) {
+        Logger.error(queryString, error)
+    }
+}
+
+export function addServiceClause(queryString: string, endpoint: string): string {
+    let parser = new sparqljs.Parser();
+    try {
+        const parsedQuery = parser.parse(queryString);
+        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) ) {
+            let serviceClause = {
+                type: "service",
+                name: {termType:"NamedNode",value: endpoint},
+                silent: false,
+                patterns: parsedQuery.where
+            }
+            parsedQuery.where = [serviceClause];
+            let generator = new sparqljs.Generator();
+            return generator.stringify(parsedQuery);
+        } else {
+            throw new Error("Not an expected query type : " + JSON.stringify(queryString));
+        }
+    } catch (error) {
+        Logger.error(queryString, error)
+    }
+}
+

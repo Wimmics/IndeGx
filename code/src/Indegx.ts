@@ -84,7 +84,7 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
                 Logger.info("Post treatment starts");
                 let manifestPool = [];
                 postManifests.forEach(postManifest => {
-                    manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl }, postManifest));
+                    manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true));
                 })
                 return Promise.allSettled(manifestPool).then(() => {
                     Logger.info("Post treatment ends");
