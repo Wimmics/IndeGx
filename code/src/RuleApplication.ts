@@ -3,6 +3,7 @@ import * as RuleTree from "./RuleTree.js";
 import * as SPARQLUtils from "./SPARQLUtils.js";
 import * as Logger from "./LogUtils.js"
 import * as RDFUtils from "./RDFUtils.js"
+import * as IndexUtils from "./IndexUtils.js"
 import dayjs from "dayjs";
 import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling, sendFailureReportUpdate } from "./ReportUtils.js";
 import { replacePlaceholders } from "./QueryRewrite.js";
@@ -331,12 +332,14 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
         }
     });
 
-    function updateWithTraceHandling(endpointUrl, queryString, actionTimeout) {
+    function updateWithTraceHandling(endpointUrl, queryString, actionTimeout): Promise<void> {
         return sendUpdateWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout);
     }
 
-    function constructWithTraceHandling(endpointUrl, queryString, actionTimeout) {
-        return sendConstructWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout);
+    function constructWithTraceHandling(endpointUrl, queryString, actionTimeout): Promise<void> {
+        return sendConstructWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout).then((result) => {
+            return IndexUtils.sendStoreContentToIndex(result);
+        });
     }
 
     function searchForLocalReadBGP(patterns: any[]): boolean {

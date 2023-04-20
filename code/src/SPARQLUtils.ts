@@ -2,6 +2,7 @@ import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise } from "./GlobalUti
 import * as RDFUtils from "./RDFUtils.js";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
+import { Query } from "rdflib";
 
 export let defaultQueryTimeout = 60000;
 
@@ -100,7 +101,7 @@ export function addServiceClause(queryString: string, endpoint: string): string 
     let parser = new sparqljs.Parser();
     try {
         const parsedQuery = parser.parse(queryString);
-        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) ) {
+        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString) ) {
             let serviceClause = {
                 type: "service",
                 name: {termType:"NamedNode",value: endpoint},
