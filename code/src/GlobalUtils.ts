@@ -70,7 +70,7 @@ export function readFile(filename: string): Promise<string> {
 }
 
 type promiseCreationFunction = {
-    (...args: any[]): Promise<any>;
+    (...args: any[]): Promise<void>;
 }
 
 /**
@@ -79,7 +79,7 @@ type promiseCreationFunction = {
  * @param promiseCreationFunction A function generating a promise from the elements in the args arrays.
  * @returns a promise resolved when all the promises created by the promiseCreationFunction are resolved.
  */
-export function iterativePromises(args: Array<Array<any>>, promiseCreationFunction: promiseCreationFunction): Promise<any> {
+export function iterativePromises(args: Array<Array<any>>, promiseCreationFunction: promiseCreationFunction): Promise<void> {
     let argsCopy = args.map(arg => arg);
     if (argsCopy.length > 0) {
         return promiseCreationFunction.apply(this, argsCopy[0]).then(() => {
@@ -90,7 +90,7 @@ export function iterativePromises(args: Array<Array<any>>, promiseCreationFuncti
     return new Promise<void>((resolve, reject) => resolve());
 }
 
-export function fetchPromise(url, header = new Map(), method = "GET", query = "", numTry = 0) {
+export function fetchPromise(url: string, header = new Map(), method = "GET", query = "", numTry = 0): Promise<any> {
     let myHeaders = new Headers();
     myHeaders.set('pragma', 'no-cache');
     myHeaders.set('cache-control', 'no-cache');
@@ -121,7 +121,7 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
                     Logger.error(error.type, error.message)
                     Logger.info("Try:", numTry, "Fetch ", method, url, query);
                     if (numTry < nbFetchRetries) {
-                        return setTimeout(millisecondsBetweenRetries).then(fetchPromise(url, header, method, query, numTry + 1));
+                        return setTimeout(millisecondsBetweenRetries).then(() => fetchPromise(url, header, method, query, numTry + 1));
                     } else {
                         Logger.error("Too many retries", error);
                     }
@@ -136,15 +136,15 @@ export function fetchPromise(url, header = new Map(), method = "GET", query = ""
     }
 }
 
-export function fetchGETPromise(url, header = new Map()) {
+export function fetchGETPromise(url, header = new Map()): Promise<any> {
     return fetchPromise(url, header);
 }
 
-export function fetchPOSTPromise(url, query = "", header = new Map()) {
+export function fetchPOSTPromise(url, query = "", header = new Map()): Promise<any> {
     return fetchPromise(url, header, "POST", query);
 }
 
-export function fetchJSONPromise(url, otherHeaders = new Map()) {
+export function fetchJSONPromise(url, otherHeaders = new Map()): Promise<any> {
     let header = new Map();
     header.set('Content-Type', 'application/json');
     otherHeaders.forEach((value, key) => {
@@ -169,7 +169,7 @@ export function fetchJSONPromise(url, otherHeaders = new Map()) {
  * @param text 
  * @returns a string with unicode codes replaced by characters
  */
-export function unicodeToUrlendcode(text) {
+export function unicodeToUrlendcode(text: string): string {
     return text.replace(/\\u[\dA-F]{4}/gi,
         function (match) {
             let unicodeMatch = String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
