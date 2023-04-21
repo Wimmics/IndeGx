@@ -1,31 +1,90 @@
 import { coreseServerUrl } from "./CoreseInterface.js";
-import { writeFile } from "./GlobalUtils.js";
 import * as GlobalUtils from "./GlobalUtils.js";
+import { KGI } from "./RDFUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";
 import { applyRuleTree } from "./RuleApplication.js";
 import { readRules } from "./Rules.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
 import { sendFileToIndex, writeIndex } from "./IndexUtils.js";
-process.env["NODE_CONFIG_DIR"] = "./config/";
-import config from "config";
+import {config} from 'node-config-ts';
+import commandLineArgs from 'command-line-args';
 import { readdirSync } from 'node:fs';
-import { KGI } from "./RDFUtils.js";
 
-let currentConfig = config.get("dev");
-let manifest = currentConfig.get("manifest");
-let catalog = currentConfig.get("catalog");
-let post = currentConfig.get("post");
-let nbFetchRetries = currentConfig.get("nbFetchRetries");
-let millisecondsBetweenRetries = currentConfig.get("millisecondsBetweenRetries");
-let maxConccurentQueries = currentConfig.get("maxConccurentQueries");
-let delayMillisecondsTimeForConccurentQuery = currentConfig.get("delayMillisecondsTimeForConccurentQuery");
-let defaultQueryTimeout = currentConfig.get("defaultQueryTimeout");
-let logFile = currentConfig.get("logFile");
-let outputFile = currentConfig.get("outputFile");
-let manifestTreeFile = currentConfig.get("manifestJSON");
-let postManifestTreeFile = currentConfig.get("postManifestJSON");
-let vocabularies = currentConfig.get("vocabularies");
+import commandLineUsage from 'command-line-usage'
+
+const optionDefinitions = [
+    { name: 'config', alias: 'c', type: String, defaultOption: true },
+    { name: 'help', alias: 'h', type: Boolean },
+  ]
+
+type Config = {
+    manifest: string,
+    catalog: string,
+    post: string,
+    nbFetchRetries: number,
+    millisecondsBetweenRetries: number,
+    maxConccurentQueries: number,
+    delayMillisecondsTimeForConccurentQuery: number,
+    defaultQueryTimeout: number,
+    logFile: string,
+    outputFile: string,
+    manifestJSON: string,
+    postManifestJSON: string,
+    vocabularies?: string
+}
+
+type Option = {
+    config: string
+    help?: boolean
+}
+
+const options: Option = commandLineArgs(optionDefinitions)
+if(options.help) {    
+    const sections = [
+      {
+        header: 'IndeGx',
+        content: 'Framework for Indexing RDF Knowledge Graphs with SPARQL-based Test Suits.'
+      },
+      {
+        header: 'Options',
+        optionList: [
+          {
+            name: 'config',
+            typeLabel: 'String',
+            description: 'The key of the config to execute in the config/default.json file.'
+          },
+          {
+            name: 'help',
+            description: 'Print this usage guide.'
+          }
+        ]
+      }
+    ]
+    const usage = commandLineUsage(sections)
+    console.log(usage)
+    process.exit()
+}
+
+let currentConfig: Config = config[options.config];
+if(currentConfig === undefined) {
+    throw new Error("No config found for " + options.config + " in " + config);
+}
+    
+
+Logger.info("Using config", options.config);
+let manifest: string = currentConfig.manifest;
+let catalog: string = currentConfig.catalog;
+let post: string = currentConfig.post;
+let nbFetchRetries: number = currentConfig.nbFetchRetries;
+let millisecondsBetweenRetries: number = currentConfig.millisecondsBetweenRetries;
+let maxConccurentQueries: number = currentConfig.maxConccurentQueries;
+let delayMillisecondsTimeForConccurentQuery: number = currentConfig.delayMillisecondsTimeForConccurentQuery;
+let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
+let logFile: string = currentConfig.logFile;
+let outputFile: string = currentConfig.outputFile;
+let manifestTreeFile: string = currentConfig.manifestJSON;
+let postManifestTreeFile: string = currentConfig.postManifestJSON;
 GlobalUtils.setNbFetchRetries(nbFetchRetries);
 GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
 GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
@@ -34,10 +93,13 @@ SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
 let vocabularyFileSendingPool = [];
-if (vocabularies !== undefined && vocabularies !== "") {
-    readdirSync(vocabularies).forEach(file => {
-        vocabularyFileSendingPool.push(sendFileToIndex("file://" + vocabularies + "/" + file, KGI("vocabularies").value));
-    })
+if(currentConfig.vocabularies !== undefined) {
+    let vocabularies = currentConfig.vocabularies;
+    if (vocabularies !== undefined && vocabularies !== "") {
+        readdirSync(vocabularies).forEach(file => {
+            vocabularyFileSendingPool.push(sendFileToIndex("file://" + vocabularies + "/" + file, KGI("vocabularies").value));
+        })
+    }
 }
 Promise.allSettled(vocabularyFileSendingPool).then(() => {
     Logger.info("Reading manifest tree ", manifest)
@@ -45,7 +107,7 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
         Logger.info("Manifest tree read")
         if (manifestTreeFile !== undefined && manifestTreeFile !== "") {
             Logger.info("Writing manifest tree to file", manifestTreeFile)
-            writeFile(manifestTreeFile, JSON.stringify(manifests))
+            GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifests))
         }
 
         Logger.info("Reading catalog", catalog)
@@ -79,12 +141,12 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
                 Logger.info("Post manifest tree read.");
                 if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
                     Logger.info("Writing post manifest tree to file", postManifestTreeFile)
-                    writeFile(postManifestTreeFile, JSON.stringify(postManifests))
+                    GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifests))
                 }
                 Logger.info("Post treatment starts");
                 let manifestPool = [];
                 postManifests.forEach(postManifest => {
-                    manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl }, postManifest));
+                    manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true));
                 })
                 return Promise.allSettled(manifestPool).then(() => {
                     Logger.info("Post treatment ends");

@@ -1,9 +1,8 @@
 {
     "dev": {
-        "manifest": "/user/pmaillot/home/git/KG_accountability/rules/manifest.ttl",
-        "post": "/user/pmaillot/home/git/KG_accountability/rules_post/manifest.ttl",
+        "manifest": "/user/pmaillot/home/git/KG_accountability/nonTrivialExtractionRules/_manifest.ttl",
+        "post": "/user/pmaillot/home/git/KG_accountability/rules/manifest.ttl",
         "catalog": "./testCatalog.ttl",
-        "vocabularies": "",
         "defaultQueryTimeout": 1200,
         "nbFetchRetries": 10,
         "millisecondsBetweenRetries": 5000,
@@ -25,5 +24,19 @@
         "delayMillisecondsTimeForConccurentQuery": 1000,
         "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log",
         "outputFile": "/user/pmaillot/home/git/IndeGx/code/index.trig"
+    },
+    "transparency": {
+        "manifest": "/user/pmaillot/home/git/KG_accountability/nonTrivialExtractionRules/_manifest.ttl",
+        "post": "/user/pmaillot/home/git/KG_accountability/rules/manifest.ttl",
+        "catalog": "./transparencyCatalog.ttl",
+        "defaultQueryTimeout": 1200,
+        "nbFetchRetries": 10,
+        "millisecondsBetweenRetries": 5000,
+        "maxConccurentQueries": 3000,
+        "delayMillisecondsTimeForConccurentQuery": 1000,
+        "logFile": "./indegx.transparency.log",
+        "outputFile": "./indegx.transparency.trig",
+        "manifestJSON": "./manifests.transparency.json",
+        "postManifestJSON": "./postManifests.transparency.json"
     }
 }

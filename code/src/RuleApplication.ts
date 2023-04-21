@@ -3,22 +3,23 @@ import * as RuleTree from "./RuleTree.js";
 import * as SPARQLUtils from "./SPARQLUtils.js";
 import * as Logger from "./LogUtils.js"
 import * as RDFUtils from "./RDFUtils.js"
+import * as IndexUtils from "./IndexUtils.js"
 import dayjs from "dayjs";
 import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling, sendFailureReportUpdate } from "./ReportUtils.js";
 import { replacePlaceholders } from "./QueryRewrite.js";
 import { EndpointObject } from "./CatalogInput.js";
 import sparqljs from "sparqljs";
 
-export function applyRuleTree(endpointObject: EndpointObject, manifestObject: RuleTree.Manifest) {
+export function applyRuleTree(endpointObject: EndpointObject, manifestObject: RuleTree.Manifest, postMode: boolean = false) {
     let subTreeApplicationPool = [];
     let entriesApplicationPool = [];
     try {
         manifestObject.includes.forEach(subManifest => {
-            subTreeApplicationPool.push(applyRuleTree(endpointObject, subManifest).catch(error => 
+            subTreeApplicationPool.push(applyRuleTree(endpointObject, subManifest, postMode).catch(error => 
                 Logger.error("Error applying rule tree",  error)));
         });
         manifestObject.entries.forEach(entry => {
-            entriesApplicationPool.push([endpointObject, entry])
+            entriesApplicationPool.push([endpointObject, entry, postMode])
         })
     } catch (error) {
         Logger.error("Error applying rule tree",  error)
@@ -28,8 +29,8 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
     });
 }
 
-function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleTree.ManifestEntry) {
-    return applyTest(endpointObject, entryObject.test, entryObject).then(success => {
+function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleTree.ManifestEntry, postMode: boolean) {
+    return applyTest(endpointObject, entryObject.test, entryObject, postMode).then(success => {
         if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
             Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "finished")
         }
@@ -43,12 +44,12 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
                 entryObject.actionsSuccess.forEach(action => {
                     if (RuleTree.isManifestEntry(action)) {
                         const followUpEntry = action as RuleTree.ManifestEntry;
-                        actionPool.push(applyGenerationAsset(endpointObject, followUpEntry).catch(error => {
+                        actionPool.push(applyGenerationAsset(endpointObject, followUpEntry, postMode).catch(error => {
                             Logger.error("Error applying generation asset",  error);
                         }));
                     } else if (RuleTree.isAction(action)) {
                         const actionObject = action as RuleTree.Action;
-                        actionPool.push(applyAction(endpointObject, actionObject, entryObject).catch(error => {
+                        actionPool.push(applyAction(endpointObject, actionObject, entryObject, postMode).catch(error => {
                             Logger.error("Error applying generation asset",  error);
                         }));
                     } else if (RuleTree.isManifest(action)) {
@@ -73,12 +74,12 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
                 entryObject.actionsFailure.forEach(action => {
                     if (RuleTree.isManifestEntry(action)) {
                         const followUpEntry = action as RuleTree.ManifestEntry;
-                        actionPool.push(applyGenerationAsset(endpointObject, followUpEntry).catch(error => {
+                        actionPool.push(applyGenerationAsset(endpointObject, followUpEntry, postMode).catch(error => {
                             Logger.error(error, followUpEntry)
                         }));
                     } else if (RuleTree.isAction(action)) {
                         const actionObject = action as RuleTree.Action;
-                        actionPool.push(applyAction(endpointObject, actionObject, entryObject).catch(error => {
+                        actionPool.push(applyAction(endpointObject, actionObject, entryObject, postMode).catch(error => {
                             Logger.error(error, actionObject)
                         }));
                     } else {
@@ -97,7 +98,7 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
     })
 }
 
-function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry): Promise<boolean> {
+function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry, postMode): Promise<boolean> {
     Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "starting")
     let parser = new sparqljs.Parser();
     let generator = new sparqljs.Generator();
@@ -107,6 +108,13 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
         let testsPool = [];
         testQueries.forEach(testQuery => {
             testQuery = replacePlaceholders(testQuery, { endpointUrlString: endpointObject.endpoint })
+            if(! postMode) {
+                // We check if there is a service clause in the query
+                if(! SPARQLUtils.queryContainsService(testQuery)) {
+                    // If not, we add the service clause
+                    testQuery = SPARQLUtils.addServiceClause(testQuery, endpointObject.endpoint)
+                }
+            }
             if (endpointObject.graphs !== undefined) {
                 const parsedQuery = parser.parse(testQuery);
                 parsedQuery.where = addGraphToInnerQueries(endpointObject, parsedQuery.where);
@@ -275,7 +283,7 @@ function searchForSelect(patterns: any[]): boolean {
     return result
 }
 
-function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Action, entryObject: RuleTree.ManifestEntry): Promise<any> {
+function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Action, entryObject: RuleTree.ManifestEntry, postMode): Promise<any> {
     let generator = new sparqljs.Generator();
     let parser = new sparqljs.Parser();
     let actionPool = [];
@@ -287,6 +295,13 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
     let actionConstructPromiseArgumentsPool = [];
     actionObject.action.forEach(queryString => {
         queryString = replacePlaceholders(queryString, { endpointUrlString: endpointObject.endpoint })
+        if(! postMode) {
+            // We check if there is a service clause in the query
+            if(! SPARQLUtils.isSparqlUpdate(queryString) && ! SPARQLUtils.queryContainsService(queryString)) {
+                // If not, we add the service clause
+                queryString = SPARQLUtils.addServiceClause(queryString, endpointObject.endpoint)
+            }
+        }
         if (endpointObject.graphs !== undefined) {
             const parsedQuery = parser.parse(queryString);
             if (SPARQLUtils.isSparqlSelect(queryString) || SPARQLUtils.isSparqlAsk(queryString) || SPARQLUtils.isSparqlConstruct(queryString)) {
@@ -317,12 +332,14 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
         }
     });
 
-    function updateWithTraceHandling(endpointUrl, queryString, actionTimeout) {
+    function updateWithTraceHandling(endpointUrl, queryString, actionTimeout): Promise<void> {
         return sendUpdateWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout);
     }
 
-    function constructWithTraceHandling(endpointUrl, queryString, actionTimeout) {
-        return sendConstructWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout);
+    function constructWithTraceHandling(endpointUrl, queryString, actionTimeout): Promise<void> {
+        return sendConstructWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout).then((result) => {
+            return IndexUtils.sendStoreContentToIndex(result);
+        });
     }
 
     function searchForLocalReadBGP(patterns: any[]): boolean {

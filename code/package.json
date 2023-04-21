@@ -20,13 +20,16 @@
     "types": "src/IndeGx.d.ts",
     "type": "module",
     "dependencies": {
+        "@types/config": "^3.3.0",
         "@types/node-fetch": "^2.6.2",
         "@types/rdflib": "^1.2.0",
-        "config": "^3.3.9",
+        "command-line-args": "^5.2.1",
+        "command-line-usage": "^7.0.1",
         "dayjs": "^1.11.6",
         "graphy": "^4.3.6",
         "gulp-cli": "^2.3.0",
         "md5": "^2.3.0",
+        "node-config-ts": "^3.3.1",
         "node-fetch": "^3.2.10",
         "rdflib": "^2.2.20",
         "sparqljs": "^3.6.1"
@@ -50,7 +53,8 @@
     "scripts": {
         "start": "java -Xmx15g -jar corese-server-4.3.0-jar-with-dependencies.jar -su > corese.log",
         "build": "npx tsc",
-        "devrun": "npx tsc && node src/Indegx.js",
-        "run": "node src/Indegx.js"
+        "devrun": "npx tsc && node src/Indegx.js -c dev",
+        "run": "node src/Indegx.js -c prod",
+        "accountability": "rm indegx.transparency.log&& node src/Indegx.js -c transparency"
     }
 }

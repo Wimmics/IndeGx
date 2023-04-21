@@ -1,6 +1,11 @@
 import { coreseServerUrl } from "./CoreseInterface.js";
 import * as Logger from "./LogUtils.js"
-import { fetchGETPromise, fetchPOSTPromise, writeFile, readFile } from "./GlobalUtils.js";
+import * as Global from "./GlobalUtils.js";
+import * as RDFUtils from "./RDFUtils.js";
+import { writeFile } from "fs/promises";
+import * as $rdf from "rdflib";
+import * as SPARQLUtils from "./SPARQLUtils.js";
+
 
 /**
     Queries a Corese server to construct an index graph and writes it to a file with the given filename.
@@ -8,9 +13,9 @@ import { fetchGETPromise, fetchPOSTPromise, writeFile, readFile } from "./Global
     @returns {Promise<void>} A Promise that resolves to void when the index graph is successfully written or rejects with an error if there is a problem.
     */
 export function writeIndex(filename: string): Promise<void> {
-    return fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g {?s ?p ?o} } WHERE { GRAPH ?g {?s ?p ?o} }") + "&format=trig")
+    return Global.fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g {?s ?p ?o} } WHERE { GRAPH ?g {?s ?p ?o} }") + "&format=trig")
         .then(trig => {
-            writeFile(filename, trig)
+            Global.writeFile(filename, trig)
             Logger.info("IndeGx treatment done")
             return;
         }).catch(error => {
@@ -29,8 +34,18 @@ export function sendFileToIndex(filename: string, graph?: string): Promise<void>
     if (graph !== undefined) {
         query = encodeURIComponent("LOAD <" + filename + "> INTO GRAPH <" + graph + ">");
     }
-    return fetchPOSTPromise(coreseServerUrl + "?query=" + query)
+    return Global.fetchPOSTPromise(coreseServerUrl + "?query=" + query)
         .catch(error => {
             Logger.error("Loading file", filename, error);
         });
+}
+
+export function sendStoreContentToIndex(store: $rdf.Store, graph?: string): Promise<void> {
+    return RDFUtils.serializeStoreToNTriplesPromise(store).then(trig => {
+        if(graph === undefined) {
+            return SPARQLUtils.sendUpdateQuery(coreseServerUrl, `INSERT DATA { ${trig} }`)
+        } else {
+            return SPARQLUtils.sendUpdateQuery(coreseServerUrl, `INSERT DATA { GRAPH <${graph}> { ${trig} } }`)
+        }
+    })
 }

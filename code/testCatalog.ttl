@@ -10,7 +10,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 kgi:catalogTest a dcat:Catalog ;
-    dcat:dataset kgi:lang , kgi:license .
+    dcat:dataset kgi:wasabi , kgi:dbpediafr , kgi:dekalog , kgi:taxref , kgi:covid .
 
 kgi:BNBDataset void:sparqlEndpoint <https://bnb.data.bl.uk/sparql> ;
     rdfs:label "BNB".
@@ -35,6 +35,9 @@ kgi:dekalog void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql> ;
 
 kgi:dbpedia void:sparqlEndpoint <http://dbpedia.org/sparql> ;
     rdfs:label "DBpedia" .
+
+kgi:dbpediafr void:sparqlEndpoint <http://fr.dbpedia.org/sparql> ;
+    rdfs:label "DBpedia FR" .
 
 kgi:wasabi void:sparqlEndpoint <http://wasabi.inria.fr/sparql> ;
     rdfs:label "WASABI" .
@@ -64,3 +67,7 @@ kgi:Joconde void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/
 kgi:calmip void:sparqlEndpoint <https://allegro.callisto.calmip.univ-toulouse.fr/#/repositories/sms> .
 
 kgi:dataportalwatch void:sparqlEndpoint <https://data.wu.ac.at/sparql/> .
+
+kgi:taxref void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> .
+
+kgi:covid void:sparqlEndpoint <https://covidontheweb.inria.fr/sparql> .
