@@ -38,4 +38,4 @@ WORKDIR /indegx/code
 RUN npm install
 RUN npm run build
 
-ENTRYPOINT nohup npm run start & node /indegx/code/index.js
+CMD nohup npm run start & node /indegx/code/index.js -c prod
