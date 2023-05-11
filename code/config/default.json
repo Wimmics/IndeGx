@@ -1,7 +1,7 @@
 {
     "dev": {
-        "manifest": "/user/pmaillot/home/git/KG_accountability/nonTrivialExtractionRules/_manifest.ttl",
-        "post": "/user/pmaillot/home/git/KG_accountability/rules/manifest.ttl",
+        "manifest": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/manifest.ttl",
+        "post": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/post/manifest.ttl",
         "catalog": "./testCatalog.ttl",
         "defaultQueryTimeout": 1200,
         "nbFetchRetries": 10,
@@ -14,29 +14,15 @@
         "postManifestJSON": "./postManifests.json"
     },
     "prod": {
-        "manifest": "/user/pmaillot/home/git/IndeGx/rules/manifest.ttl",
-        "post": "/user/pmaillot/home/git/IndeGx/post/manifest.ttl",
-        "catalog": "/user/pmaillot/home/git/IndeGx/rules/catalog.ttl",
+        "manifest": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/manifest.ttl",
+        "post": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/post/manifest.ttl",
+        "catalog": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/DBpedia_catalog.ttl",
         "defaultQueryTimeout": 300,
         "nbFetchRetries": 10,
         "millisecondsBetweenRetries": 5000,
         "maxConccurentQueries": 300,
         "delayMillisecondsTimeForConccurentQuery": 1000,
-        "logFile": "/user/pmaillot/home/git/IndeGx/code/indegx.log",
-        "outputFile": "/user/pmaillot/home/git/IndeGx/code/index.trig"
-    },
-    "transparency": {
-        "manifest": "/user/pmaillot/home/git/KG_accountability/nonTrivialExtractionRules/_manifest.ttl",
-        "post": "/user/pmaillot/home/git/KG_accountability/rules/manifest.ttl",
-        "catalog": "./transparencyCatalog.ttl",
-        "defaultQueryTimeout": 1200,
-        "nbFetchRetries": 10,
-        "millisecondsBetweenRetries": 5000,
-        "maxConccurentQueries": 3000,
-        "delayMillisecondsTimeForConccurentQuery": 1000,
-        "logFile": "./indegx.transparency.log",
-        "outputFile": "./indegx.transparency.trig",
-        "manifestJSON": "./manifests.transparency.json",
-        "postManifestJSON": "./postManifests.transparency.json"
+        "logFile": "./output/indegx.log",
+        "outputFile": "./output/index.trig"
     }
 }
