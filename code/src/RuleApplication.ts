@@ -11,21 +11,24 @@ import { EndpointObject } from "./CatalogInput.js";
 import sparqljs from "sparqljs";
 
 export function applyRuleTree(endpointObject: EndpointObject, manifestObject: RuleTree.Manifest, postMode: boolean = false) {
-    let subTreeApplicationPool = [];
     let entriesApplicationPool = [];
     try {
-        manifestObject.includes.forEach(subManifest => {
-            subTreeApplicationPool.push(applyRuleTree(endpointObject, subManifest, postMode).catch(error => 
-                Logger.error("Error applying rule tree",  error)));
-        });
         manifestObject.entries.forEach(entry => {
             entriesApplicationPool.push([endpointObject, entry, postMode])
         })
     } catch (error) {
-        Logger.error("Error applying rule tree",  error)
+        Logger.error("Error applying rule tree", error)
     }
-    return Global.iterativePromises(entriesApplicationPool, applyGenerationAsset).then(() => Promise.allSettled(subTreeApplicationPool)).catch(error => {
-        Logger.error("Error applying rule tree",  error)
+    
+    return Global.iterativePromises(entriesApplicationPool, applyGenerationAsset).then(() => {
+        let subTreeApplicationPool = [];
+        manifestObject.includes.forEach(subManifest => {
+            subTreeApplicationPool.push(applyRuleTree(endpointObject, subManifest, postMode).catch(error =>
+                Logger.error("Error applying rule tree", error)));
+        });
+        return Promise.allSettled(subTreeApplicationPool)
+    }).catch(error => {
+        Logger.error("Error applying rule tree", error)
     });
 }
 
@@ -45,17 +48,17 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
                     if (RuleTree.isManifestEntry(action)) {
                         const followUpEntry = action as RuleTree.ManifestEntry;
                         actionPool.push(applyGenerationAsset(endpointObject, followUpEntry, postMode).catch(error => {
-                            Logger.error("Error applying generation asset",  error);
+                            Logger.error("Error applying generation asset", error);
                         }));
                     } else if (RuleTree.isAction(action)) {
                         const actionObject = action as RuleTree.Action;
                         actionPool.push(applyAction(endpointObject, actionObject, entryObject, postMode).catch(error => {
-                            Logger.error("Error applying generation asset",  error);
+                            Logger.error("Error applying generation asset", error);
                         }));
                     } else if (RuleTree.isManifest(action)) {
                         const subManifest = action as RuleTree.Manifest;
                         actionPool.push(applyRuleTree(endpointObject, subManifest).catch(error => {
-                            Logger.error("Error applying generation asset",  error);
+                            Logger.error("Error applying generation asset", error);
                         }));
                     } else {
                         throw new Error("Unexpected action type")
@@ -93,7 +96,7 @@ function applyGenerationAsset(endpointObject: EndpointObject, entryObject: RuleT
         return Promise.allSettled(actionPool).then(() => {
             Logger.info(endpointObject.endpoint, "Finished actions for ", entryObject.uri)
         }).catch(error => {
-            Logger.error("Error applying generation asset",  error);
+            Logger.error("Error applying generation asset", error);
         });
     })
 }
@@ -108,9 +111,9 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
         let testsPool = [];
         testQueries.forEach(testQuery => {
             testQuery = replacePlaceholders(testQuery, { endpointUrlString: endpointObject.endpoint })
-            if(! postMode) {
+            if (!postMode) {
                 // We check if there is a service clause in the query
-                if(! SPARQLUtils.queryContainsService(testQuery)) {
+                if (!SPARQLUtils.queryContainsService(testQuery)) {
                     // If not, we add the service clause
                     testQuery = SPARQLUtils.addServiceClause(testQuery, endpointObject.endpoint)
                 }
@@ -295,9 +298,9 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
     let actionConstructPromiseArgumentsPool = [];
     actionObject.action.forEach(queryString => {
         queryString = replacePlaceholders(queryString, { endpointUrlString: endpointObject.endpoint })
-        if(! postMode) {
+        if (!postMode) {
             // We check if there is a service clause in the query
-            if(! SPARQLUtils.isSparqlUpdate(queryString) && ! SPARQLUtils.queryContainsService(queryString)) {
+            if (!SPARQLUtils.isSparqlUpdate(queryString) && !SPARQLUtils.queryContainsService(queryString)) {
                 // If not, we add the service clause
                 queryString = SPARQLUtils.addServiceClause(queryString, endpointObject.endpoint)
             }
@@ -555,9 +558,9 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                         }
                     }).catch(error => {
                         Logger.error("Error while paginating the query: ", error);
-                        return paginateQuery(object, pageSize/2, 0, pageSize*iteration, pageSize*(iteration + 1));
+                        return paginateQuery(object, pageSize / 2, 0, pageSize * iteration, pageSize * (iteration + 1));
                     });
-                } 
+                }
             }
 
             return Promise.allSettled(abstractQueryObjects.map(abstractQueryObject => paginateQuery(abstractQueryObject, pageSize)));
