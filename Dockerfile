@@ -42,4 +42,5 @@ RUN npm run build
 
 
 WORKDIR /indegx
+RUN chmod +x dockerStart.sh
 CMD ./dockerStart.sh
