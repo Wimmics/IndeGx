@@ -51,10 +51,9 @@
         "util": "^0.12.5"
     },
     "scripts": {
-        "start": "java -Xmx15g -jar corese-server-4.3.0-jar-with-dependencies.jar -su > corese.log",
+        "start": "java -Xmx15g -jar /corese/corese-server-4.3.0.jar -su > corese.log",
         "build": "npx tsc",
         "devrun": "npx tsc && node src/Indegx.js -c dev",
-        "run": "node src/Indegx.js -c prod",
-        "accountability": "rm indegx.transparency.log&& node src/Indegx.js -c transparency"
+        "run": "node src/Indegx.js -c prod"
     }
 }
