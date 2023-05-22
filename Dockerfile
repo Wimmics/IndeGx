@@ -26,7 +26,7 @@ RUN echo "LOAD_IN_DEFAULT_GRAPH = true" >> corese-server.properties
 
 
 WORKDIR /indegx
-RUN git clone https://github.com/Wimmics/IndeGx.git .
+RUN git clone https://github.com/Wimmics/IndeGx.git . --branch DockerApp
 
 
 # Volume containing the catalogs
