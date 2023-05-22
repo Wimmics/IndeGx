@@ -68,7 +68,8 @@ if(options.help) {
 
 let currentConfig: Config = config[options.config];
 if(currentConfig === undefined) {
-    throw new Error("No config found for " + options.config + " in " + config);
+    Logger.error("No config found for " + options.config + " in " + config);
+    throw new Error("No config found for " + currentConfig + " in " + config);
 }
     
 
