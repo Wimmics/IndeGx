@@ -1,4 +1,4 @@
-# This image should contain a Corese server un sudo mode and the IndeGx application
+# This image should contain a Corese server in sudo mode and the IndeGx application
 # The default.json and the RDF files in the "input folder" should be used as catalogs by IndeGx and the resulting indexes should be saved in the "output" catalog
 FROM ubuntu
 
@@ -20,7 +20,9 @@ RUN npm install npm@latest -g && \
 WORKDIR /
 
 WORKDIR /corese
-RUN wget "https://github.com/Wimmics/corese/releases/download/release-4.3.0/corese-server-4.3.0.jar" -O /corese/corese-server-4.3.0.jar
+RUN wget "https://github.com/Wimmics/corese/releases/download/release-4.4.0/corese-server-4.4.0.jar" -O /corese/corese-server-4.4.0.jar
+RUN echo "DISABLE_OWL_AUTO_IMPORT = true" > corese-server.properties
+RUN echo "LOAD_IN_DEFAULT_GRAPH = true" >> corese-server.properties
 
 
 WORKDIR /indegx
@@ -38,4 +40,6 @@ WORKDIR /indegx/code
 RUN npm install
 RUN npm run build
 
-CMD nohup npm run start & node /indegx/code/index.js -c prod
+
+WORKDIR /indegx
+CMD ./dockerStart.sh
