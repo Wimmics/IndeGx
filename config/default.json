@@ -1,0 +1,12 @@
+{
+    "manifest": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/manifest.ttl",
+    "post": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/post/manifest.ttl",
+    "catalog": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/DBpedia_catalog.ttl",
+    "defaultQueryTimeout": 300,
+    "nbFetchRetries": 10,
+    "millisecondsBetweenRetries": 5000,
+    "maxConccurentQueries": 300,
+    "delayMillisecondsTimeForConccurentQuery": 1000,
+    "logFile": "./output/indegx.log",
+    "outputFile": "./output/index.trig"
+}
