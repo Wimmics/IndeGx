@@ -33,6 +33,11 @@ export function urlToBaseURI(url: string) {
     return baseURI;
 }
 
+export function urlIsAbsolute(url: string) {
+    var regex = new RegExp('^(?:[a-z+]+:)?//', 'i');
+    return regex.test(url);
+}
+
 
 export function createStore() {
     let store = $rdf.graph();
@@ -91,43 +96,55 @@ function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI(
         }
     }
 
-    let s = undefined;
-    if (y_quad.subject.termType === "NamedNode") {
-        s = $rdf.sym(y_quad.subject.value)
-    } else if (y_quad.subject.termType === "Literal") {
-        if (y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
-            s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
-        } else if (y_quad.subject.datatype != null && y_quad.subject.datatype != undefined && y_quad.subject.datatype != "") {
-            s = $rdf.lit(y_quad.subject.value, undefined, $rdf.sym(y_quad.subject.datatype))
+    try {
+        let s = undefined;
+        if (y_quad.subject.termType === "NamedNode") {
+            if(! urlIsAbsolute(y_quad.subject.value)) {
+                s = $rdf.sym(baseURI + y_quad.subject.value);
+            } else {
+                s = $rdf.sym(y_quad.subject.value)
+            }
+        } else if (y_quad.subject.termType === "Literal") {
+            if (y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
+                s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
+            } else if (y_quad.subject.datatype != null && y_quad.subject.datatype != undefined && y_quad.subject.datatype != "") {
+                s = $rdf.lit(y_quad.subject.value, undefined, $rdf.sym(y_quad.subject.datatype))
+            } else {
+                s = $rdf.lit(y_quad.subject.value)
+            }
         } else {
-            s = $rdf.lit(y_quad.subject.value)
-        }
-    } else {
-        s = createValidBlankNode(y_quad.subject, baseURI);
-    };
-    const p = $rdf.sym(y_quad.predicate.value);
-    let o = undefined;
-    if (y_quad.object.termType === "NamedNode") {
-        o = $rdf.sym(y_quad.object.value)
-    } else if (y_quad.object.termType === "Literal") {
-        if (y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
-            o = $rdf.lit(y_quad.object.value, y_quad.object.language)
-        } else if (y_quad.object.datatype != null && y_quad.object.datatype != undefined && y_quad.object.datatype != "") {
-            o = $rdf.lit(y_quad.object.value, undefined, $rdf.sym(y_quad.object.datatype))
+            s = createValidBlankNode(y_quad.subject, baseURI);
+        };
+        const p = $rdf.sym(y_quad.predicate.value);
+        let o = undefined;
+        if (y_quad.object.termType === "NamedNode") {
+            if(! urlIsAbsolute(y_quad.object.value)) {
+                o = $rdf.sym(baseURI + y_quad.object.value);
+            } else {
+                o = $rdf.sym(y_quad.object.value);
+            }
+        } else if (y_quad.object.termType === "Literal") {
+            if (y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
+                o = $rdf.lit(y_quad.object.value, y_quad.object.language)
+            } else if (y_quad.object.datatype != null && y_quad.object.datatype != undefined && y_quad.object.datatype != "") {
+                o = $rdf.lit(y_quad.object.value, undefined, $rdf.sym(y_quad.object.datatype))
+            } else {
+                o = $rdf.lit(y_quad.object.value)
+            }
         } else {
-            o = $rdf.lit(y_quad.object.value)
-        }
-    } else {
-        o = createValidBlankNode(y_quad.object, baseURI);
-    };
+            o = createValidBlankNode(y_quad.object, baseURI);
+        };
 
-    if (!$rdf.isLiteral(s)) { // The application of RDF reasoning makes appear Literals as subjects, for some reason. We filter them out.
-        if (y_quad.graph.value === '') {
-            store.add(s, p, o);
-        } else {
-            const g = $rdf.sym(y_quad.graph);
-            store.add(s, p, o, g);
+        if (!$rdf.isLiteral(s)) { // The application of RDF reasoning makes appear Literals as subjects, for some reason. We filter them out.
+            if (y_quad.graph.value === '') {
+                store.add(s, p, o);
+            } else {
+                const g = $rdf.sym(y_quad.graph);
+                store.add(s, p, o, g);
+            }
         }
+    } catch (error) {
+        Logger.error("Error while loading quad", y_quad, "error", error);
     }
 }
 
@@ -157,18 +174,24 @@ export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBas
                     } else if (filename.startsWith("file")) {
                         filename = filename.replace("file://", "");
                     }
-                    fs.createReadStream(filename)
-                        .pipe(readingFunction({ baseURI: baseURI }))
-                        .on('data', (y_quad) => {
-                            graphyQuadLoadingToStore(store, y_quad, baseURI)
-                        })
-                        .on('eof', prefixes => {
-                            resolve();
-                        })
-                        .on('error', (error) => {
-                            Logger.error("Error while reading RDF file", filename, "during stream", "error", error);
-                            reject(error)
+                    Global.readFile(filename).then(content => {
+                        readingFunction(content, {
+                            data(y_quad) {
+                                graphyQuadLoadingToStore(store, y_quad, baseURI)
+                            },
+
+                            eof(h_prefixes) {
+                                resolve();
+                            },
+                            error(error) {
+                                Logger.error("Error while reading RDF file", filename, " using graphy reading function, error", error);
+                                reject(error)
+                            }
                         });
+                    }).catch(error => {
+                        Logger.error("Error while reading RDF file", filename, "error", error);
+                        reject(error)
+                    })
                 } catch (error) {
                     Logger.error("Error while loading RDF files", files, "error", error);
                     reject(error)

@@ -68,11 +68,8 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
                 inclusionCollection = inclusionCollection.concat(collectionToArray(collection, store));
             }
         });
-        // Logger.log("Inclusion statements", "from", manifestResource.toNT(), store.statementsMatching(manifestResource, manifestIncludeProperty, null).map(statement => statement.toNT()))
-        // Logger.log("Inclusion from", manifestResource.toNT(), inclusionCollection.map(node => node.toNT()));
         let rdfCollection = inclusionCollection.filter(node => node != undefined && !node.value.includes(manifestResource.value) && !$rdf.isBlankNode(node)).map(node => node.value);
         rdfCollection = [...new Set(rdfCollection)]
-        // Logger.log("Including in", manifestFilename, rdfCollection, " from", manifestResource.toNT());
         rdfCollection.forEach(inclusionResourceURI => {
             manifestInclusionReadingPool.push(readManifest(inclusionResourceURI, store).then(inclusionManifests => {
                 if (manifestObject.includes == undefined) {
