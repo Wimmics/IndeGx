@@ -1,3 +1,3 @@
-#! /bin/sh
+#!/bin/bash
 
-docker run indegx --mount type=bind,source=/input,target=/input --mount type=volume,source=/output,target=/output
+docker run --mount type=bind,source=$(pwd)/input,target=/input --mount type=bind,source=$(pwd)/output,target=/output indegx

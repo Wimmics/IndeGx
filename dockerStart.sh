@@ -4,4 +4,4 @@
 nohup java -jar /corese/corese-server-4.4.0.jar -init /corese/corese-server.properties -su &
 
 # Start the IndeGx app
-node /indegx/code/src/Indegx.js -c prod
+node /indegx/code/src/Indegx.js

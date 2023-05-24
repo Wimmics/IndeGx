@@ -29,7 +29,6 @@ WORKDIR /indegx
 RUN echo ""
 RUN git clone https://github.com/Wimmics/IndeGx.git . --branch DockerApp
 
-
 # Volume containing the catalogs
 WORKDIR /input
 VOLUME ["/input"]
@@ -43,6 +42,6 @@ RUN npm run build
 
 WORKDIR /indegx
 
-COPY /indegx/code/config/default.json /input/default.json
+RUN ln -s /indegx/code/config/default.json /input/default.json
 RUN chmod +x dockerStart.sh
 CMD ./dockerStart.sh
