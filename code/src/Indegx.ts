@@ -7,18 +7,43 @@ import { readRules } from "./Rules.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
 import { sendFileToIndex, writeIndex } from "./IndexUtils.js";
-import {config} from 'node-config-ts';
+import { config } from 'node-config-ts';
 import commandLineArgs from 'command-line-args';
 import { readdirSync } from 'node:fs';
 
 import commandLineUsage from 'command-line-usage'
 
 const optionDefinitions = [
-    { name: 'config', alias: 'c', type: String, defaultOption: true },
     { name: 'help', alias: 'h', type: Boolean },
   ]
 
-type Config = {
+type Option = {
+    help?: boolean
+}
+
+const options: Option = commandLineArgs(optionDefinitions)
+if(options.help) {    
+    const sections = [
+      {
+        header: 'IndeGx',
+        content: 'Framework for Indexing RDF Knowledge Graphs with SPARQL-based Test Suits.'
+      },
+      {
+        header: 'Options',
+        optionList: [
+          {
+            name: 'help',
+            description: 'Print this usage guide.'
+          }
+        ]
+      }
+    ]
+    const usage = commandLineUsage(sections)
+    console.info(usage)
+    process.exit()
+}
+
+type ConfigType = {
     manifest: string,
     catalog: string,
     post: string,
@@ -34,46 +59,14 @@ type Config = {
     vocabularies?: string
 }
 
-type Option = {
-    config: string
-    help?: boolean
-}
-
-const options: Option = commandLineArgs(optionDefinitions)
-if(options.help) {    
-    const sections = [
-      {
-        header: 'IndeGx',
-        content: 'Framework for Indexing RDF Knowledge Graphs with SPARQL-based Test Suits.'
-      },
-      {
-        header: 'Options',
-        optionList: [
-          {
-            name: 'config',
-            typeLabel: 'String',
-            description: 'The key of the config to execute in the config/default.json file.'
-          },
-          {
-            name: 'help',
-            description: 'Print this usage guide.'
-          }
-        ]
-      }
-    ]
-    const usage = commandLineUsage(sections)
-    console.log(usage)
-    process.exit()
-}
-
-let currentConfig: Config = config[options.config];
+let currentConfig: ConfigType = config; //[options.config];
 if(currentConfig === undefined) {
-    Logger.error("No config found for " + options.config + " in " + config);
-    throw new Error("No config found for " + currentConfig + " in " + config);
+    Logger.error("No config found in " + config);
+    throw new Error("No config found in " + config);
 }
     
 
-Logger.info("Using config", options.config);
+Logger.info("Using config", currentConfig);
 let manifest: string = currentConfig.manifest;
 let catalog: string = currentConfig.catalog;
 let post: string = currentConfig.post;

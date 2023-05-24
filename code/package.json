@@ -51,9 +51,10 @@
         "util": "^0.12.5"
     },
     "scripts": {
+        "postinstall": "node-config-ts",
         "start": "java -Xmx15g -jar /corese/corese-server-4.3.0.jar -su > corese.log",
         "build": "npx tsc",
-        "devrun": "npx tsc && node src/Indegx.js -c dev",
-        "run": "node src/Indegx.js -c prod"
+        "devrun": "npx tsc && node src/Indegx.js",
+        "run": "node src/Indegx.js"
     }
 }
