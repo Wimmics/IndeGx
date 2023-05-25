@@ -52,7 +52,7 @@
     },
     "scripts": {
         "postinstall": "node-config-ts",
-        "start": "java -Xmx15g -jar /corese/corese-server-4.3.0.jar -su > corese.log",
+        "start": "java -Xmx15g -jar /corese/corese-server-4.4.0.jar -init /corese/corese-server.properties -su > /output/corese.log",
         "build": "npx tsc",
         "devrun": "npx tsc && node src/Indegx.js",
         "run": "node src/Indegx.js"

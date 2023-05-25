@@ -33,6 +33,7 @@ VOLUME ["/input"]
 #Volume containing the resulting indexes
 WORKDIR /output
 VOLUME ["/output"]
+RUN echo "" > /output/indegx.log
 # Colume containing the configuration file
 WORKDIR /config 
 VOLUME ["/config"]
