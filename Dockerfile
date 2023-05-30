@@ -24,10 +24,8 @@ RUN wget "https://github.com/Wimmics/corese/releases/download/release-4.4.0/core
 RUN echo "DISABLE_OWL_AUTO_IMPORT = true" > corese-server.properties
 RUN echo "LOAD_IN_DEFAULT_GRAPH = true" >> corese-server.properties
 
-
-WORKDIR /indegx
-RUN git clone https://github.com/Wimmics/IndeGx.git .
-
+WORKDIR /
+COPY . /
 
 # Volume containing the catalogs
 WORKDIR /input
@@ -35,12 +33,13 @@ VOLUME ["/input"]
 #Volume containing the resulting indexes
 WORKDIR /output
 VOLUME ["/output"]
+# Colume containing the configuration file
+VOLUME ["/indegx/config"]
 
-WORKDIR /indegx/code
+WORKDIR /indegx
 RUN npm install
 RUN npm run build
 
-
-WORKDIR /indegx
+WORKDIR /
 RUN chmod +x dockerStart.sh
 CMD ./dockerStart.sh
