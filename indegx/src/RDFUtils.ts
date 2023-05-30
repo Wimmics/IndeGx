@@ -29,7 +29,8 @@ export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 export const rdfTypeProperty = RDF("type");
 
 export function urlToBaseURI(url: string) {
-    const baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
+    let baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
+    baseURI = baseURI.substring(0, baseURI.lastIndexOf("/")+1);
     return baseURI;
 }
 
@@ -412,6 +413,7 @@ export function queryRDFLibStore(store: $rdf.Store, query: string) {
     @returns {$rdf.Node[]} An array of nodes representing the collection.
     */
 export function collectionToArray(collection: $rdf.NamedNode | $rdf.BlankNode | $rdf.Variable, store: $rdf.Store): $rdf.Node[] {
+    // Logger.log("collectionToArray", collection.toNT());
     let result = [];
 
     store.statementsMatching(collection, RDF("first")).forEach(statement => {
@@ -430,6 +432,7 @@ export function collectionToArray(collection: $rdf.NamedNode | $rdf.BlankNode | 
         }
     });
 
+    // Logger.log("collectionToArray result", result.map(node => node.toNT()));
     return [...new Set(result)];
 }
 

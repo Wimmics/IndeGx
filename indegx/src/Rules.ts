@@ -1,12 +1,10 @@
 import { Manifest, ManifestEntry, Test, Action } from "./RuleTree.js"
 import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI } from "./RDFUtils.js";
-import { readFile, writeFile } from "./GlobalUtils.js";
 import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 import duration from 'dayjs/plugin/duration.js';
 dayjs.extend(duration)
 import * as Logger from "./LogUtils.js"
-import { Quad_Subject } from "rdflib/lib/tf-types.js";
 
 const manifestType = MANIFEST("Manifest")
 const manifestEntryType = MANIFEST("ManifestEntry")
@@ -51,7 +49,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
     }
 
     return loadRDFFile(manifestFilename, store, baseURI).then(() => {
-        const manifestResource = $rdf.namedNode(manifestURI);
+        const manifestResource = $rdf.namedNode(baseURI);
         let manifestObject: Manifest = {
             uri: manifestResource.toString(),
             entries: [],
@@ -68,7 +66,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
                 inclusionCollection = inclusionCollection.concat(collectionToArray(collection, store));
             }
         });
-        let rdfCollection = inclusionCollection.filter(node => node != undefined && !node.value.includes(manifestResource.value) && !$rdf.isBlankNode(node)).map(node => node.value);
+        let rdfCollection = inclusionCollection.filter(node => node != undefined && !node.value.includes(manifestResource.value + "#") && !$rdf.isBlankNode(node)).map(node => node.value);
         rdfCollection = [...new Set(rdfCollection)]
         rdfCollection.forEach(inclusionResourceURI => {
             manifestInclusionReadingPool.push(readManifest(inclusionResourceURI, store).then(inclusionManifests => {
@@ -87,11 +85,10 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         // Entries
         let manifestEntriesReadingPool = [];
         let entriesCollection = store.statementsMatching(manifestResource, manifestEntriesProperty, null).map(statement => statement.object);
-        // Logger.log("Entries", entriesCollection.map(node => node.toNT()), "from", manifestResource.toNT())
         let entriesURIArray: string[] = [];
         entriesCollection.forEach(collection => {
             if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
-                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).filter(node => !$rdf.isBlankNode(node)).map(node => node.value)).filter(uri => uri != undefined && !uri.includes(manifestResource.value));
+                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).filter(node => !$rdf.isBlankNode(node)).map(node => node.value)).filter(uri => uri != undefined && !uri.includes(manifestResource.value+"#"));
                 entriesURIArray = [...new Set(entriesURIArray)]
             } else {
                 throw new Error("Unexpected node, collection expected: " + collection);
