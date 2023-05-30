@@ -45,27 +45,22 @@ export class RuleTracker {
     }
 
     public isFinished(endpointUrl: string, asset: string): boolean {
-        if(!this.assetStateMap.has(endpointUrl)) {
-            this.assetStateMap.set(endpointUrl, new Map<string, AssetState>());
-        }
-        return this.assetStateMap.get(endpointUrl).has(asset) && this.getAssetState(endpointUrl, asset) !== AssetState.ONGOING;
+        return this.assetExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) !== AssetState.ONGOING;
     }
 
     public isFailed(endpointUrl: string, asset: string): boolean {
-        if(!this.assetStateMap.has(endpointUrl)) {
-            this.assetStateMap.set(endpointUrl, new Map<string, AssetState>());
-        }
-        return this.assetStateMap.get(endpointUrl).has(asset) && this.getAssetState(endpointUrl, asset) === AssetState.FAILED;
+        return this.assetExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) === AssetState.FAILED;
     }
 
     public isSuccessful(endpointUrl: string, asset: string): boolean {
-        if(!this.assetStateMap.has(endpointUrl)) {
-            this.assetStateMap.set(endpointUrl, new Map<string, AssetState>());
-        }
-        return this.assetStateMap.get(endpointUrl).has(asset) && this.getAssetState(endpointUrl, asset) === AssetState.SUCCESS;
+        return this.assetExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) === AssetState.SUCCESS;
     }
 
     public isStarted(endpointUrl: string, asset: string): boolean {
+        return this.assetExists(endpointUrl, asset);
+    }
+
+    private assetExists(endpointUrl: string, asset: string): boolean {
         if(!this.assetStateMap.has(endpointUrl)) {
             this.assetStateMap.set(endpointUrl, new Map<string, AssetState>());
         }

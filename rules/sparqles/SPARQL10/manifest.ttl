@@ -27,6 +27,7 @@
         <SPARQLES_SELGRAPHUNION.ttl>
         <SPARQLES_SEL-REDUCED.ttl>
         <SPARQLES_SELUNION.ttl>
+        <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_ASK.ttl> a mf:ManifestEntry ;
@@ -56,7 +57,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL10.ttl>
     ) .
 
 <SPARQLES_CON.ttl> a mf:ManifestEntry ;
@@ -86,7 +86,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_CONOPT.ttl> a mf:ManifestEntry ;
@@ -116,7 +115,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_CONJOIN.ttl> a mf:ManifestEntry ;
@@ -146,7 +144,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SEL-DISTINCT.ttl> a mf:ManifestEntry ;
@@ -176,7 +173,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SEL-REDUCED.ttl> a mf:ManifestEntry ;
@@ -206,7 +202,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SEL.ttl> a mf:ManifestEntry ;
@@ -236,7 +231,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELBNODE.ttl> a mf:ManifestEntry ;
@@ -266,7 +260,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELEMPTY.ttl> a mf:ManifestEntry ;
@@ -296,7 +289,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILNOTBOUND.ttl> a mf:ManifestEntry ;
@@ -326,7 +318,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILBLANK.ttl> a mf:ManifestEntry ;
@@ -356,7 +347,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILBOOL.ttl> a mf:ManifestEntry ;
@@ -386,7 +376,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILIRI.ttl> a mf:ManifestEntry ;
@@ -416,7 +405,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILNUM.ttl> a mf:ManifestEntry ;
@@ -446,7 +434,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILREGEX-i.ttl> a mf:ManifestEntry ;
@@ -476,7 +463,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILREGEX.ttl> a mf:ManifestEntry ;
@@ -506,7 +492,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFILSTR.ttl> a mf:ManifestEntry ;
@@ -536,7 +521,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELFROM.ttl> a mf:ManifestEntry ;
@@ -566,7 +550,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELGRAPHJOIN.ttl> a mf:ManifestEntry ;
@@ -596,7 +579,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELGRAPHUNION.ttl> a mf:ManifestEntry ;
@@ -626,7 +608,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELGRAPH.ttl> a mf:ManifestEntry ;
@@ -656,7 +637,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELJOIN.ttl> a mf:ManifestEntry ;
@@ -686,7 +666,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELOPT.ttl> a mf:ManifestEntry ;
@@ -716,7 +695,6 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SELUNION.ttl> a mf:ManifestEntry ;
@@ -746,10 +724,35 @@
                 }
                 """
             ]
-            <SPARQLES_SPARQL10.ttl>
         ) .
 
 <SPARQLES_SPARQL10.ttl> a mf:ManifestEntry ;
+    kgi:requiredSuccesses (
+        <SPARQLES_ASK.ttl>
+        <SPARQLES_CON.ttl>
+        <SPARQLES_CONOPT.ttl>
+        <SPARQLES_CONJOIN.ttl>
+        <SPARQLES_SEL.ttl>
+        <SPARQLES_SELEMPTY.ttl>
+        <SPARQLES_SELJOIN.ttl>
+        <SPARQLES_SELOPT.ttl>
+        <SPARQLES_SELFROM.ttl>
+        <SPARQLES_SELGRAPHJOIN.ttl>
+        <SPARQLES_SELBNODE.ttl>
+        <SPARQLES_SELGRAPH.ttl>
+        <SPARQLES_SELFILIRI.ttl>
+        <SPARQLES_SELFILBLANK.ttl>
+        <SPARQLES_SELFILBOOL.ttl>
+        <SPARQLES_SELFILNUM.ttl>
+        <SPARQLES_SELFILSTR.ttl>
+        <SPARQLES_SELFILREGEX-i.ttl>
+        <SPARQLES_SELFILREGEX.ttl>
+        <SPARQLES_SELFILNOTBOUND.ttl>
+        <SPARQLES_SEL-DISTINCT.ttl>
+        <SPARQLES_SELGRAPHUNION.ttl>
+        <SPARQLES_SEL-REDUCED.ttl>
+        <SPARQLES_SELUNION.ttl>
+    ) ;
     kgi:onSuccess (
             [
                 mf:action """
