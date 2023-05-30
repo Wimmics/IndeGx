@@ -1,3 +1,3 @@
 #! /bin/sh
 
-docker build . -t indegx
+docker build --rm . -t indegx
