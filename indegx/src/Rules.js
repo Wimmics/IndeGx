@@ -45,7 +45,7 @@ function readManifest(manifestFilename, store) {
         baseURI = "file://" + baseURI;
     }
     return loadRDFFile(manifestFilename, store, baseURI).then(() => {
-        const manifestResource = $rdf.namedNode(manifestURI);
+        const manifestResource = $rdf.namedNode(baseURI);
         let manifestObject = {
             uri: manifestResource.toString(),
             entries: [],
@@ -61,7 +61,7 @@ function readManifest(manifestFilename, store) {
                 inclusionCollection = inclusionCollection.concat(collectionToArray(collection, store));
             }
         });
-        let rdfCollection = inclusionCollection.filter(node => node != undefined && !node.value.includes(manifestResource.value) && !$rdf.isBlankNode(node)).map(node => node.value);
+        let rdfCollection = inclusionCollection.filter(node => node != undefined && !node.value.includes(manifestResource.value + "#") && !$rdf.isBlankNode(node)).map(node => node.value);
         rdfCollection = [...new Set(rdfCollection)];
         rdfCollection.forEach(inclusionResourceURI => {
             manifestInclusionReadingPool.push(readManifest(inclusionResourceURI, store).then(inclusionManifests => {
@@ -83,7 +83,7 @@ function readManifest(manifestFilename, store) {
         let entriesURIArray = [];
         entriesCollection.forEach(collection => {
             if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
-                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).filter(node => !$rdf.isBlankNode(node)).map(node => node.value)).filter(uri => uri != undefined && !uri.includes(manifestResource.value));
+                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).filter(node => !$rdf.isBlankNode(node)).map(node => node.value)).filter(uri => uri != undefined && !uri.includes(manifestResource.value + "#"));
                 entriesURIArray = [...new Set(entriesURIArray)];
             }
             else {

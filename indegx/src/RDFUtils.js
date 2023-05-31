@@ -25,7 +25,8 @@ export const MANIFEST = $rdf.Namespace("http://www.w3.org/2001/sw/DataAccess/tes
 export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 export const rdfTypeProperty = RDF("type");
 export function urlToBaseURI(url) {
-    const baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
+    let baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
+    baseURI = baseURI.substring(0, baseURI.lastIndexOf("/") + 1);
     return baseURI;
 }
 export function urlIsAbsolute(url) {
