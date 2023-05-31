@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { sendConstructWithTraceHandling, sendUpdateWithTraceHandling, sendAskWithTraceHandling, sendSelectWithTraceHandling, sendFailureReportUpdate } from "./ReportUtils.js";
 import { replacePlaceholders } from "./QueryRewrite.js";
 import sparqljs from "sparqljs";
-import { RuleTracker } from "./RuleTracker.js";
+import { AssetTracker } from "./AssetTracker.js";
 export function applyRuleTree(endpointObject, manifestObject, postMode = false) {
     let entriesApplicationPool = [];
     try {
@@ -19,100 +19,132 @@ export function applyRuleTree(endpointObject, manifestObject, postMode = false) 
     catch (error) {
         Logger.error("Error applying rule tree", error);
     }
-    return Global.iterativePromises(entriesApplicationPool, applyGenerationAsset).then(() => {
+    AssetTracker.getInstance().setAssetStateToOngoing(manifestObject.uri, endpointObject.endpoint);
+    let result = Global.iterativePromises(entriesApplicationPool, applyManifestEntry).then(() => {
         let subTreeApplicationPool = [];
         manifestObject.includes.forEach(subManifest => {
             subTreeApplicationPool.push(applyRuleTree(endpointObject, subManifest, postMode).catch(error => Logger.error("Error applying rule tree", error)));
         });
-        return Promise.allSettled(subTreeApplicationPool);
+        return Promise.allSettled(subTreeApplicationPool).then(() => {
+            AssetTracker.getInstance().setAssetStateToSuccess(manifestObject.uri, endpointObject.endpoint);
+            return;
+        });
     }).catch(error => {
         Logger.error("Error applying rule tree", error);
     });
+    AssetTracker.getInstance().setApplicationPromise(manifestObject.uri, endpointObject.endpoint, result);
+    return result;
 }
-function applyGenerationAsset(endpointObject, entryObject, postMode) {
-    if (!RuleTracker.getInstance().isStarted(endpointObject.endpoint, entryObject.uri)) {
-        RuleTracker.getInstance().setAssetStateToOngoing(entryObject.uri, endpointObject.endpoint);
-        return applyTest(endpointObject, entryObject.test, entryObject, postMode).then(success => {
-            if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
-                Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "finished");
-            }
-            let actionPool = [];
-            if (success) {
-                RuleTracker.getInstance().setAssetStateToSuccess(entryObject.uri, endpointObject.endpoint);
-                if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
-                    Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "succeeded");
-                }
-                if (entryObject.actionsSuccess.length > 0) {
-                    Logger.info(endpointObject.endpoint, "Starting", entryObject.actionsSuccess.length, "success actions for ", entryObject.uri);
-                    entryObject.actionsSuccess.forEach(action => {
-                        if (RuleTree.isManifestEntry(action)) {
-                            const followUpEntry = action;
-                            actionPool.push(applyGenerationAsset(endpointObject, followUpEntry, postMode).catch(error => {
-                                Logger.error("Error applying generation asset", error);
-                            }));
-                        }
-                        else if (RuleTree.isAction(action)) {
-                            const actionObject = action;
-                            actionPool.push(applyAction(endpointObject, actionObject, entryObject, postMode).catch(error => {
-                                Logger.error("Error applying generation asset", error);
-                            }));
-                        }
-                        else if (RuleTree.isManifest(action)) {
-                            const subManifest = action;
-                            actionPool.push(applyRuleTree(endpointObject, subManifest).catch(error => {
-                                Logger.error("Error applying generation asset", error);
-                            }));
-                        }
-                        else {
-                            throw new Error("Unexpected action type");
-                        }
-                    });
-                }
-                else {
-                    Logger.info(endpointObject.endpoint, "No success actions for ", entryObject.uri);
-                }
+function applyManifestEntry(endpointObject, entryObject, postMode) {
+    let requiredAssets = entryObject.requiredAssets;
+    let requiredPromises = [];
+    if (requiredAssets !== undefined) {
+        requiredAssets.forEach(requiredAsset => {
+            if (AssetTracker.getInstance().hasApplicationPromise(requiredAsset.uri, endpointObject.endpoint)) {
+                requiredPromises.push(AssetTracker.getInstance().getApplicationPromise(requiredAsset.uri, endpointObject.endpoint));
             }
             else {
-                RuleTracker.getInstance().setAssetStateToFailed(entryObject.uri, endpointObject.endpoint);
-                if (entryObject.test != undefined) {
-                    Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "failed");
+                let asset = AssetTracker.getInstance().getAsset(requiredAsset.uri);
+                if (RuleTree.isManifestEntry(asset)) {
+                    requiredPromises.push(applyManifestEntry(endpointObject, asset, postMode));
                 }
-                let actionPool = [];
-                if (entryObject.actionsFailure.length > 0) {
-                    Logger.info(endpointObject.endpoint, "Starting", entryObject.actionsFailure.length, "failure actions for ", entryObject.uri);
-                    entryObject.actionsFailure.forEach(action => {
-                        if (RuleTree.isManifestEntry(action)) {
-                            const followUpEntry = action;
-                            actionPool.push(applyGenerationAsset(endpointObject, followUpEntry, postMode).catch(error => {
-                                Logger.error(error, followUpEntry);
-                            }));
-                        }
-                        else if (RuleTree.isAction(action)) {
-                            const actionObject = action;
-                            actionPool.push(applyAction(endpointObject, actionObject, entryObject, postMode).catch(error => {
-                                Logger.error(error, actionObject);
-                            }));
-                        }
-                        else {
-                            throw new Error("Unexpected action type " + typeof action);
-                        }
-                    });
+                else if (RuleTree.isAction(asset)) {
+                    requiredPromises.push(applyAction(endpointObject, asset, entryObject, postMode));
                 }
-                else {
-                    Logger.info(endpointObject.endpoint, "No failure actions for ", entryObject.uri);
+                else if (RuleTree.isManifest(asset)) {
+                    requiredPromises.push(applyRuleTree(endpointObject, asset, postMode));
                 }
             }
-            return Promise.allSettled(actionPool).then(() => {
-                Logger.info(endpointObject.endpoint, "Finished actions for ", entryObject.uri);
-            }).catch(error => {
-                Logger.error("Error applying generation asset", error);
-            });
         });
     }
-    else {
-        Logger.info("Skipping asset", entryObject.uri, "for endpoint", endpointObject.endpoint, "because it is already being processed");
-        return Promise.resolve();
-    }
+    return Promise.allSettled(requiredPromises).then(() => {
+        if (!AssetTracker.getInstance().isStarted(endpointObject.endpoint, entryObject.uri)) {
+            AssetTracker.getInstance().setAssetStateToOngoing(entryObject.uri, endpointObject.endpoint);
+            let result = applyTest(endpointObject, entryObject.test, entryObject, postMode).then(success => {
+                if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
+                    Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "finished");
+                }
+                let actionPool = [];
+                if (success) {
+                    AssetTracker.getInstance().setAssetStateToSuccess(entryObject.uri, endpointObject.endpoint);
+                    if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
+                        Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "succeeded");
+                    }
+                    if (entryObject.actionsSuccess.length > 0) {
+                        Logger.info(endpointObject.endpoint, "Starting", entryObject.actionsSuccess.length, "success actions for ", entryObject.uri);
+                        entryObject.actionsSuccess.forEach(action => {
+                            if (RuleTree.isManifestEntry(action)) {
+                                const followUpEntry = action;
+                                actionPool.push(applyManifestEntry(endpointObject, followUpEntry, postMode).catch(error => {
+                                    Logger.error("Error applying generation asset", error);
+                                }));
+                            }
+                            else if (RuleTree.isAction(action)) {
+                                const actionObject = action;
+                                actionPool.push(applyAction(endpointObject, actionObject, entryObject, postMode).catch(error => {
+                                    Logger.error("Error applying generation asset", error);
+                                }));
+                            }
+                            else if (RuleTree.isManifest(action)) {
+                                const subManifest = action;
+                                actionPool.push(applyRuleTree(endpointObject, subManifest).catch(error => {
+                                    Logger.error("Error applying generation asset", error);
+                                }));
+                            }
+                            else {
+                                Logger.error("Unexpected action type", action);
+                                throw new Error("Unexpected action type");
+                            }
+                        });
+                    }
+                    else {
+                        Logger.info(endpointObject.endpoint, "No success actions for ", entryObject.uri);
+                    }
+                }
+                else {
+                    AssetTracker.getInstance().setAssetStateToFailed(entryObject.uri, endpointObject.endpoint);
+                    if (entryObject.test != undefined) {
+                        Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "failed");
+                    }
+                    let actionPool = [];
+                    if (entryObject.actionsFailure.length > 0) {
+                        Logger.info(endpointObject.endpoint, "Starting", entryObject.actionsFailure.length, "failure actions for ", entryObject.uri);
+                        entryObject.actionsFailure.forEach(action => {
+                            if (RuleTree.isManifestEntry(action)) {
+                                const followUpEntry = action;
+                                actionPool.push(applyManifestEntry(endpointObject, followUpEntry, postMode).catch(error => {
+                                    Logger.error(error, followUpEntry);
+                                }));
+                            }
+                            else if (RuleTree.isAction(action)) {
+                                const actionObject = action;
+                                actionPool.push(applyAction(endpointObject, actionObject, entryObject, postMode).catch(error => {
+                                    Logger.error(error, actionObject);
+                                }));
+                            }
+                            else {
+                                throw new Error("Unexpected action type " + typeof action);
+                            }
+                        });
+                    }
+                    else {
+                        Logger.info(endpointObject.endpoint, "No failure actions for ", entryObject.uri);
+                    }
+                }
+                return Promise.allSettled(actionPool).then(() => {
+                    Logger.info(endpointObject.endpoint, "Finished actions for ", entryObject.uri);
+                }).catch(error => {
+                    Logger.error("Error applying generation asset", error);
+                });
+            });
+            AssetTracker.getInstance().setApplicationPromise(entryObject.uri, endpointObject.endpoint, result);
+            return result;
+        }
+        else {
+            Logger.info("Skipping asset", entryObject.uri, "for endpoint", endpointObject.endpoint, "because it is already being processed");
+            return Promise.resolve();
+        }
+    });
 }
 function applyTest(endpointObject, testObject, entryObject, postMode) {
     Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "starting");
@@ -312,6 +344,7 @@ function searchForSelect(patterns) {
     return result;
 }
 function applyAction(endpointObject, actionObject, entryObject, postMode) {
+    AssetTracker.getInstance().setAssetStateToOngoing(actionObject.uri, endpointObject.endpoint);
     let generator = new sparqljs.Generator();
     let parser = new sparqljs.Parser();
     let actionPool = [];
@@ -597,5 +630,11 @@ function applyAction(endpointObject, actionObject, entryObject, postMode) {
     }
     actionPool.push(Global.iterativePromises(actionUpdatePromiseArgumentsPool, updateWithTraceHandling));
     actionPool.push(Global.iterativePromises(actionConstructPromiseArgumentsPool, constructWithTraceHandling));
-    return Promise.allSettled(actionPool);
+    let result = Promise.allSettled(actionPool).then(() => {
+        AssetTracker.getInstance().setAssetStateToSuccess(actionObject.uri, endpointObject.endpoint);
+    }).catch(error => {
+        Logger.error("Error applying action", error);
+    });
+    AssetTracker.getInstance().setApplicationPromise(actionObject.uri, endpointObject.endpoint, result);
+    return result;
 }

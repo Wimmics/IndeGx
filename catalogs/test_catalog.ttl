@@ -11,6 +11,8 @@
 
 
 kgi:catalog a dcat:Catalog ;
-    dcat:dataset kgi:indegx .
+    dcat:dataset kgi:taxref .
 
 kgi:indegx void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql> .
+
+kgi:taxref void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> .

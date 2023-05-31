@@ -5,7 +5,7 @@
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is a ManifestEntry
     */
-export function isManifestEntry(object) { return (object.uri !== undefined && object.test !== undefined && object.actionsSuccess !== undefined && object.actionsFailure !== undefined); }
+export function isManifestEntry(object) { return object.test !== undefined && object.actionsSuccess !== undefined && object.actionsFailure !== undefined; }
 /**
 
     Determines if an object is a Manifest
@@ -13,7 +13,7 @@ export function isManifestEntry(object) { return (object.uri !== undefined && ob
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is a Manifest
     */
-export function isManifest(object) { return (object.uri !== undefined && object.entries !== undefined && object.includes !== undefined); }
+export function isManifest(object) { return object.entries !== undefined && object.includes !== undefined; }
 /**
 
     Determines if an object is a Test
@@ -21,7 +21,7 @@ export function isManifest(object) { return (object.uri !== undefined && object.
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is a Test
     */
-export function isTest(object) { return (object.uri !== undefined) && !isManifest(object) && !isManifestEntry(object); }
+export function isTest(object) { return !isManifest(object) && !isManifestEntry(object) && !isAction(object); }
 /**
 
     Determines if an object is a dummy Test
@@ -37,4 +37,4 @@ export function isDummyTest(object) { return isTest(object) && object.query === 
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is an Action
     */
-export function isAction(object) { return (object.action !== undefined); }
+export function isAction(object) { return (object.uri === undefined) && (object.action !== undefined); }

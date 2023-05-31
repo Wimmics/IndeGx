@@ -44,7 +44,8 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
 function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTree.ManifestEntry, postMode: boolean): Promise<void> {
     let requiredAssets = entryObject.requiredAssets;
     let requiredPromises = [];
-    if (requiredAssets !== undefined) {
+    if (requiredAssets !== undefined && requiredAssets.length > 0) {
+        Logger.log("Required assets for", entryObject.uri, ":", requiredAssets.map(asset => asset.uri));
         requiredAssets.forEach(requiredAsset => {
             if (AssetTracker.getInstance().hasApplicationPromise(requiredAsset.uri, endpointObject.endpoint)) {
                 requiredPromises.push(AssetTracker.getInstance().getApplicationPromise(requiredAsset.uri, endpointObject.endpoint))
@@ -61,10 +62,13 @@ function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTre
         })
     }
 
-    return Promise.allSettled(requiredPromises).then(() => {
+    let result = Promise.allSettled(requiredPromises).then(() => {
+        if(requiredPromises.length > 0) {
+            Logger.log("Finished required assets for", entryObject.uri);
+        }
         if (!AssetTracker.getInstance().isStarted(endpointObject.endpoint, entryObject.uri)) {
             AssetTracker.getInstance().setAssetStateToOngoing(entryObject.uri, endpointObject.endpoint);
-            let result = applyTest(endpointObject, entryObject.test, entryObject, postMode).then(success => {
+            return applyTest(endpointObject, entryObject.test, entryObject, postMode).then(success => {
                 if (entryObject.test != undefined && !RuleTree.isDummyTest(entryObject.test)) {
                     Logger.info(endpointObject.endpoint, "Test ", entryObject.test.uri, "finished")
                 }
@@ -93,6 +97,7 @@ function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTre
                                     Logger.error("Error applying generation asset", error);
                                 }));
                             } else {
+                                Logger.error("Unexpected action type", action);
                                 throw new Error("Unexpected action type")
                             }
                         })
@@ -119,6 +124,7 @@ function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTre
                                     Logger.error(error, actionObject)
                                 }));
                             } else {
+                                Logger.error("Unexpected action type", action);
                                 throw new Error("Unexpected action type " + typeof action)
                             }
                         })
@@ -132,14 +138,14 @@ function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTre
                     Logger.error("Error applying generation asset", error);
                 });
             })
-            AssetTracker.getInstance().setApplicationPromise(entryObject.uri, endpointObject.endpoint, result);
-
-            return result;
         } else {
             Logger.info("Skipping asset", entryObject.uri, "for endpoint", endpointObject.endpoint, "because it is already being processed");
             return Promise.resolve();
         }
     })
+    AssetTracker.getInstance().setApplicationPromise(entryObject.uri, endpointObject.endpoint, result);
+
+    return result;
 }
 
 function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry, postMode): Promise<boolean> {

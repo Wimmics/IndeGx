@@ -106,15 +106,15 @@ kgi:requiredAssets rdf:type rdf:Property ;
             ) 
         ] .
 
-kgi:requiredSuccesses rdf:type rdf:Property ;
-    rdfs:subPropertyOf kgi:requiredAssets ;
-    rdfs:label "Generation assets that must be successful for this generation asset to be applied."@en ;
-    rdfs:isDefinedBy kgi: .
+# kgi:requiredSuccesses rdf:type rdf:Property ;
+#     rdfs:subPropertyOf kgi:requiredAssets ;
+#     rdfs:label "Generation assets that must be successful for this generation asset to be applied."@en ;
+#     rdfs:isDefinedBy kgi: .
 
-kgi:requiredFailures rdf:type rdf:Property ;
-    rdfs:subPropertyOf kgi:requiredAssets ;
-    rdfs:label "Generation assets that must fail for this generation asset to be applied."@en ;
-    rdfs:isDefinedBy kgi: .
+# kgi:requiredFailures rdf:type rdf:Property ;
+#     rdfs:subPropertyOf kgi:requiredAssets ;
+#     rdfs:label "Generation assets that must fail for this generation asset to be applied."@en ;
+#     rdfs:isDefinedBy kgi: .
 
 # properties to set up the parameters of the indexation
 

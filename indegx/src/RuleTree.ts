@@ -110,4 +110,4 @@ export function isDummyTest(object: any): boolean { return isTest(object) && obj
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is an Action
     */
-export function isAction(object: any): boolean { return (object.uri === undefined) && (object.action !== undefined) }
+export function isAction(object: any): boolean { return (object.action !== undefined) }
