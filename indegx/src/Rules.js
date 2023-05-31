@@ -79,7 +79,6 @@ function readManifest(manifestFilename, store) {
         // Entries
         let manifestEntriesReadingPool = [];
         let entriesCollection = store.statementsMatching(manifestResource, manifestEntriesProperty, null).map(statement => statement.object);
-        // Logger.log("Entries", entriesCollection.map(node => node.toNT()), "from", manifestResource.toNT())
         let entriesURIArray = [];
         entriesCollection.forEach(collection => {
             if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {

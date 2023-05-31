@@ -417,6 +417,7 @@ export function queryRDFLibStore(store, query) {
     @returns {$rdf.Node[]} An array of nodes representing the collection.
     */
 export function collectionToArray(collection, store) {
+    // Logger.log("collectionToArray", collection.toNT());
     let result = [];
     store.statementsMatching(collection, RDF("first")).forEach(statement => {
         if (!statement.object.equals(RDF("nil"))) {
@@ -433,6 +434,7 @@ export function collectionToArray(collection, store) {
             }
         }
     });
+    // Logger.log("collectionToArray result", result.map(node => node.toNT()));
     return [...new Set(result)];
 }
 export const NTriplesContentType = "application/n-triples";
