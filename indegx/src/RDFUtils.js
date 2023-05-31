@@ -25,7 +25,8 @@ export const MANIFEST = $rdf.Namespace("http://www.w3.org/2001/sw/DataAccess/tes
 export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 export const rdfTypeProperty = RDF("type");
 export function urlToBaseURI(url) {
-    const baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
+    let baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
+    baseURI = baseURI.substring(0, baseURI.lastIndexOf("/") + 1);
     return baseURI;
 }
 export function urlIsAbsolute(url) {
@@ -416,6 +417,7 @@ export function queryRDFLibStore(store, query) {
     @returns {$rdf.Node[]} An array of nodes representing the collection.
     */
 export function collectionToArray(collection, store) {
+    // Logger.log("collectionToArray", collection.toNT());
     let result = [];
     store.statementsMatching(collection, RDF("first")).forEach(statement => {
         if (!statement.object.equals(RDF("nil"))) {
@@ -432,6 +434,7 @@ export function collectionToArray(collection, store) {
             }
         }
     });
+    // Logger.log("collectionToArray result", result.map(node => node.toNT()));
     return [...new Set(result)];
 }
 export const NTriplesContentType = "application/n-triples";
