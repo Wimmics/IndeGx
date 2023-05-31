@@ -99,21 +99,22 @@ kgi:requiredAssets rdf:type rdf:Property ;
     rdfs:label "Generation assets that must be applied for this generation asset to be applied."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:domain mf:ManifestEntry ;
-    rdfs:range mf:ManifestEntry .
+    rdfs:range [ 
+        owl:unionOf ( 
+            mf:ManifestEntry 
+            mf:Manifest 
+            ) 
+        ] .
 
 kgi:requiredSuccesses rdf:type rdf:Property ;
     rdfs:subPropertyOf kgi:requiredAssets ;
     rdfs:label "Generation assets that must be successful for this generation asset to be applied."@en ;
-    rdfs:isDefinedBy kgi: ;
-    rdfs:domain mf:ManifestEntry ;
-    rdfs:range mf:ManifestEntry .
+    rdfs:isDefinedBy kgi: .
 
 kgi:requiredFailures rdf:type rdf:Property ;
     rdfs:subPropertyOf kgi:requiredAssets ;
     rdfs:label "Generation assets that must fail for this generation asset to be applied."@en ;
-    rdfs:isDefinedBy kgi: ;
-    rdfs:domain mf:ManifestEntry ;
-    rdfs:range mf:ManifestEntry .
+    rdfs:isDefinedBy kgi: .
 
 # properties to set up the parameters of the indexation
 

@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import duration from 'dayjs/plugin/duration.js';
 dayjs.extend(duration)
 import * as Logger from "./LogUtils.js"
+import { AssetTracker } from "./AssetTracker.js";
 
 const manifestType = MANIFEST("Manifest")
 const manifestEntryType = MANIFEST("ManifestEntry")
@@ -14,6 +15,9 @@ const manifestActionProperty = MANIFEST("action")
 const rdfTypeProperty = RDF("type");
 const kgiOnSuccessProperty = KGI("onSuccess");
 const kgiOnFailureProperty = KGI("onFailure");
+const kgiRequiredAssetsProperty = KGI("requiredAssets");
+const kgiRequiredSuccessesProperty = KGI("requiredSuccesses");
+const kgiRequiredFailuresProperty = KGI("requiredFailures");
 const kgiQueryProperty = KGI("query");
 const kgiEndpointProperty = KGI("endpoint");
 const kgiTimeoutProperty = KGI("timeout");
@@ -31,6 +35,52 @@ const dctDescription = DCT("description");
 export function readRules(rootManifest: string): Promise<Manifest[]> {
     let store = createStore();
     return readManifest(rootManifest, store).then(manifests => { return manifests }).finally(() => { return [] });
+}
+
+/**
+ * Checks if a resource is a manifest
+ * @param {$rdf.Node} resource URI of the resource
+ * @param {$rdf.Store} store 
+ * @returns 
+ */
+export function resourceIsManifest(resource: $rdf.Node, store: $rdf.Store): boolean {
+    return store.holds(resource, rdfTypeProperty, manifestType) ||
+        store.holds(resource, manifestIncludeProperty, null) ||
+        store.holds(resource, manifestEntriesProperty, null);
+}
+
+/**
+ *  Checks if a resource is a manifest entry
+ * @param {$rdf.Node} resource
+ * @param {$rdf.Store} store 
+ * @returns 
+ */
+export function resourceIsManifestEntry(resource: $rdf.Node, store: $rdf.Store): boolean {
+    return store.holds(resource, rdfTypeProperty, manifestEntryType) ||
+        store.holds(resource, rdfTypeProperty, kgiTestQueryType) ||
+        store.holds(resource, rdfTypeProperty, kgiDummyTestType) ||
+        store.holds(resource, kgiOnSuccessProperty, null) ||
+        store.holds(resource, kgiOnFailureProperty, null);
+}
+
+/**
+ * Checks if a resource is a blank node as rewritten by indeGx
+ * @param {$rdf.Node} resource
+ * @param {string} baseURI
+ * @returns
+ */
+export function nodeIsIndeGxBlankNode(resource: $rdf.Node, baseURI: string) {
+    return $rdf.isBlankNode(resource) || ($rdf.isNamedNode(resource) && resource.value.startsWith(baseURI + "#"));
+}
+
+/**
+ * Checks if a resource is an action
+ * @param {$rdf.Node} resource 
+ * @param {$rdf.Store} store
+ * @returns
+ */
+export function resourceIsAction(resource: $rdf.Node, store: $rdf.Store): boolean {
+    return store.holds(resource, manifestActionProperty, null);
 }
 
 /**
@@ -66,7 +116,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
                 inclusionCollection = inclusionCollection.concat(collectionToArray(collection, store));
             }
         });
-        let rdfCollection = inclusionCollection.filter(node => node != undefined && !node.value.includes(manifestResource.value + "#") && !$rdf.isBlankNode(node)).map(node => node.value);
+        let rdfCollection = inclusionCollection.filter(node => node != undefined && !nodeIsIndeGxBlankNode(node, baseURI)).map(node => node.value);
         rdfCollection = [...new Set(rdfCollection)]
         rdfCollection.forEach(inclusionResourceURI => {
             manifestInclusionReadingPool.push(readManifest(inclusionResourceURI, store).then(inclusionManifests => {
@@ -88,7 +138,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         let entriesURIArray: string[] = [];
         entriesCollection.forEach(collection => {
             if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
-                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).filter(node => !$rdf.isBlankNode(node)).map(node => node.value)).filter(uri => uri != undefined && !uri.includes(manifestResource.value+"#"));
+                entriesURIArray = entriesURIArray.concat(collectionToArray(collection, store).filter(node => !nodeIsIndeGxBlankNode(node, baseURI)).map(node => node.value)).filter(uri => uri != undefined);
                 entriesURIArray = [...new Set(entriesURIArray)]
             } else {
                 throw new Error("Unexpected node, collection expected: " + collection);
@@ -96,7 +146,7 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
         })
         manifestEntriesReadingPool.push(loadRDFFiles(entriesURIArray, store).then(() => {
             return Promise.allSettled(entriesURIArray.map(entryURI => {
-                return readGenerationAsset(entryURI, store).then(generationAsset => {
+                return readManifestEntry(entryURI, store).then(generationAsset => {
                     if (manifestObject.entries == undefined) {
                         manifestObject.entries = [generationAsset];
                     }
@@ -110,9 +160,12 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
             Logger.error("Error applying entries", entriesURIArray, "from ", manifestFilename, ", error ", error);
         }))
 
-        return Promise.all(manifestInclusionReadingPool).then(() => {
+        return Promise.allSettled(manifestInclusionReadingPool).then(() => {
             return Promise.allSettled(manifestEntriesReadingPool).then(() => {
                 result.push(manifestObject);
+                result.forEach(manifest => {
+                    AssetTracker.getInstance().addAsset(manifest);
+                })
                 return result;
             }).catch(error => {
                 Logger.error("Error reading", manifestFilename, "error", error);
@@ -123,24 +176,131 @@ function readManifest(manifestFilename: string, store: $rdf.Store): Promise<Arra
 }
 
 /**
-    Reads a generation asset from the given URI using the provided RDF store.
+    Reads a manifest entry from the given URI using the provided RDF store.
     @param {string} uri - The URI of the generation asset to be read.
     @param {$rdf.Store} store - The RDF store object used to read the generation asset.
     @returns {Promise<ManifestEntry> } - A promise that resolves with a ManifestEntry object representing the generation asset.
     @throws {Error} - Throws an error if there was an error applying the entries.
     */
-function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEntry> {
+function readManifestEntry(uri: string, store: $rdf.Store): Promise<ManifestEntry> {
     const generationAssetResource = $rdf.sym(uri);
+    const baseUri = urlToBaseURI(uri);
 
     let resultGenerationAsset: ManifestEntry = {
         uri: uri,
         test: { uri: uri },
         actionsSuccess: [],
-        actionsFailure: []
+        actionsFailure: [],
+        requiredAssets: [],
+        requiredSuccesses: [],
+        requiredFailures: []
     }
+
 
     let promisePool = [];
     try {
+
+        // Requirements
+
+        // Required assets
+        let requiredAssetsCollection = store.statementsMatching(generationAssetResource, kgiRequiredAssetsProperty, null).map(statement => statement.object);
+        requiredAssetsCollection.forEach(collection => {
+            if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
+                collectionToArray(collection, store).forEach(node => {
+                    if ($rdf.isBlankNode(node) || $rdf.isNamedNode(node)) {
+                        let requiredAsset = node as $rdf.BlankNode | $rdf.NamedNode;
+                        if (resourceIsManifestEntry(requiredAsset, store)) {
+                            promisePool.push(readManifestEntry(requiredAsset.value, store).then(generationAsset => {
+                                resultGenerationAsset.requiredAssets.push(generationAsset);
+                            }).catch(error => {
+                                Logger.error("Error reading", requiredAsset.value, "error", error);
+                            }))
+                        } else if (resourceIsAction(requiredAsset, store)) {
+                            promisePool.push(actionFromCollection(requiredAsset, store).then(actions => {
+                                resultGenerationAsset.requiredAssets = resultGenerationAsset.requiredAssets.concat(actions);
+                            }).catch(error => {
+                                Logger.error("Error reading", requiredAsset.value, "error", error);
+                            }))
+                        } else {
+                            if (!nodeIsIndeGxBlankNode(requiredAsset, baseUri) && $rdf.isNamedNode(requiredAsset)) {
+                                promisePool.push(readManifest(requiredAsset.value, store).then(manifests => {
+                                    resultGenerationAsset.requiredAssets = resultGenerationAsset.requiredAssets.concat(manifests);
+                                }).catch(error => {
+                                    Logger.error("Error reading", requiredAsset.value, "error", error);
+                                }))
+                            }
+                        }
+                    }
+                })
+            }
+        });
+
+        // Required successes
+        let requiredSuccessesCollection = store.statementsMatching(generationAssetResource, kgiRequiredSuccessesProperty, null).map(statement => statement.object);
+        requiredSuccessesCollection.forEach(collection => {
+            if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
+                collectionToArray(collection, store).forEach(node => {
+                    if ($rdf.isBlankNode(node) || $rdf.isNamedNode(node)) {
+                        let requiredAsset = node as $rdf.BlankNode | $rdf.NamedNode;
+                        if (resourceIsManifestEntry(requiredAsset, store)) {
+                            promisePool.push(readManifestEntry(requiredAsset.value, store).then(generationAsset => {
+                                resultGenerationAsset.requiredSuccesses.push(generationAsset);
+                            }).catch(error => {
+                                Logger.error("Error reading", requiredAsset.value, "error", error);
+                            }))
+                        } else if (resourceIsAction(requiredAsset, store)) {
+                            promisePool.push(actionFromCollection(requiredAsset, store).then(actions => {
+                                resultGenerationAsset.requiredSuccesses = resultGenerationAsset.requiredSuccesses.concat(actions);
+                            }).catch(error => {
+                                Logger.error("Error reading", requiredAsset.value, "error", error);
+                            }))
+                        } else {
+                            if (!nodeIsIndeGxBlankNode(requiredAsset, baseUri) && $rdf.isNamedNode(requiredAsset)) {
+                                promisePool.push(readManifest(requiredAsset.value, store).then(manifests => {
+                                    resultGenerationAsset.requiredSuccesses = resultGenerationAsset.requiredSuccesses.concat(manifests);
+                                }).catch(error => {
+                                    Logger.error("Error reading", requiredAsset.value, "error", error);
+                                }))
+                            }
+                        }
+                    }
+                })
+            }
+        });
+
+        // Required failures
+        let requiredFailuresCollection = store.statementsMatching(generationAssetResource, kgiRequiredFailuresProperty, null).map(statement => statement.object);
+        requiredFailuresCollection.forEach(collection => {
+            if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
+                collectionToArray(collection, store).forEach(node => {
+                    if ($rdf.isBlankNode(node) || $rdf.isNamedNode(node)) {
+                        let requiredAsset = node as $rdf.BlankNode | $rdf.NamedNode;
+                        if (resourceIsManifestEntry(requiredAsset, store)) {
+                            promisePool.push(readManifestEntry(requiredAsset.value, store).then(generationAsset => {
+                                resultGenerationAsset.requiredFailures.push(generationAsset);
+                            }).catch(error => {
+                                Logger.error("Error reading", requiredAsset.value, "error", error);
+                            }))
+                        } else if (resourceIsAction(requiredAsset, store)) {
+                            promisePool.push(actionFromCollection(requiredAsset, store).then(actions => {
+                                resultGenerationAsset.requiredFailures = resultGenerationAsset.requiredFailures.concat(actions);
+                            }).catch(error => {
+                                Logger.error("Error reading", requiredAsset.value, "error", error);
+                            }))
+                        } else {
+                            if (!nodeIsIndeGxBlankNode(requiredAsset, baseUri) && $rdf.isNamedNode(requiredAsset)) {
+                                promisePool.push(readManifest(requiredAsset.value, store).then(manifests => {
+                                    resultGenerationAsset.requiredFailures = resultGenerationAsset.requiredFailures.concat(manifests);
+                                }).catch(error => {
+                                    Logger.error("Error reading", requiredAsset.value, "error", error);
+                                }))
+                            }
+                        }
+                    }
+                })
+            }
+        });
+
         // Test
         if (store.holds(generationAssetResource, rdfTypeProperty, kgiTestQueryType)) {
             const sparqlQueries = store.statementsMatching(generationAssetResource, kgiQueryProperty, null).map(statement => statement.object.value);
@@ -191,7 +351,10 @@ function readGenerationAsset(uri: string, store: $rdf.Store): Promise<ManifestEn
     } catch (error) {
         Logger.error("Error applying entries", error);
     }
-    return Promise.allSettled(promisePool).then(() => resultGenerationAsset);
+    return Promise.allSettled(promisePool).then(() => {
+        AssetTracker.getInstance().addAsset(resultGenerationAsset);
+        return resultGenerationAsset;
+    });
 }
 
 /**
@@ -209,7 +372,7 @@ function actionFromCollection(collection: $rdf.BlankNode | $rdf.NamedNode, store
             if (store.holds(node, manifestActionProperty, null)) {
                 // Action is a leaf node
                 if ($rdf.isBlankNode(node) || $rdf.isNamedNode(node)) {
-                    let actionNode = node;
+                    let actionNode = node as $rdf.BlankNode | $rdf.NamedNode;
                     const actionObject = getActionLeafNode(actionNode, store);
                     result.push(actionObject);
                 }
@@ -217,7 +380,7 @@ function actionFromCollection(collection: $rdf.BlankNode | $rdf.NamedNode, store
                 // Action is a node
                 promisePool.push(loadRDFFile(node.value, store).then(() => {
                     if (store.holds(node, RDF("type"), manifestEntryType)) {
-                        return readGenerationAsset(node.value, store).then(generationAsset => {
+                        return readManifestEntry(node.value, store).then(generationAsset => {
                             result.push(generationAsset);
                             return;
                         })
@@ -250,8 +413,9 @@ function actionFromCollection(collection: $rdf.BlankNode | $rdf.NamedNode, store
         pagination (optional): The number of results to be returned per page of results
         title (optional): The title of the action, as specified in the RDF store
 */
-function getActionLeafNode(actionNode, store) {
+function getActionLeafNode(actionNode: $rdf.BlankNode | $rdf.NamedNode, store: $rdf.Store): Action {
     let actionObject: Action = {
+        uri: actionNode.value,
         action: []
     };
     const sparqlTestQueries = store.statementsMatching(actionNode, manifestActionProperty, null).map(statement => statement.object.value);
@@ -275,5 +439,6 @@ function getActionLeafNode(actionNode, store) {
         actionObject.title = titles;
     }
 
+    AssetTracker.getInstance().addAsset(actionObject);
     return actionObject;
 }
