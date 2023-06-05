@@ -1,10 +1,10 @@
 import { Asset } from "./RuleTree";
+import * as Logger from "./LogUtils.js"
 
 
 export enum AssetState {
-    ONGOING,
-    SUCCESS,
-    FAILED
+    ONGOING = "ONGOING",
+    FINISHED = "FINISHED",
 }
 
 export class AssetTracker {
@@ -17,30 +17,34 @@ export class AssetTracker {
         return AssetTracker.instance;
     }
 
-    private assetStateMap: Map<string, Map<string, AssetState>> = new Map<string, Map<string, AssetState>>();
-    private assetIndexMap: Map<string, Asset> = new Map<string, Asset>();
+    private assetApplicationStateMap: Map<string, Map<string, AssetState>> = new Map<string, Map<string, AssetState>>();
     private assetApplicationMap: Map<string, Map<string, Promise<void>>> = new Map<string, Map<string, Promise<void>>>();
+    private assetMap: Map<string, Asset> = new Map<string, Asset>();
 
     public setAssetState(asset: string, endpointUrl: string, state: AssetState) {
-        if(!this.assetStateMap.has(endpointUrl)) {
-            this.assetStateMap.set(endpointUrl, new Map<string, AssetState>());
+        if(asset === undefined || endpointUrl === undefined || state === undefined) {
+            Logger.error("AssetTracker.setAssetState: asset, endpointUrl or state is undefined");
+            throw new Error("AssetTracker.setAssetState: asset, endpointUrl or state is undefined");
         }
-        this.assetStateMap.get(endpointUrl).set(asset, state);
+        if (!this.assetApplicationStateMap.has(endpointUrl)) {
+            this.assetApplicationStateMap.set(endpointUrl, new Map<string, AssetState>());
+        }
+        this.assetApplicationStateMap.get(endpointUrl).set(asset, state);
     }
 
     public getAssetState(asset: string, endpointUrl: string): AssetState {
-        if(!this.assetStateMap.has(endpointUrl)) {
-            this.assetStateMap.set(endpointUrl, new Map<string, AssetState>());
+        if(asset === undefined || endpointUrl === undefined) {
+            Logger.error("AssetTracker.getAssetState: asset or endpointUrl is undefined");
+            throw new Error("AssetTracker.getAssetState: asset or endpointUrl is undefined");
         }
-        return this.assetStateMap.get(endpointUrl).get(asset);
+        if (!this.assetApplicationStateMap.has(endpointUrl)) {
+            this.assetApplicationStateMap.set(endpointUrl, new Map<string, AssetState>());
+        }
+        return this.assetApplicationStateMap.get(endpointUrl).get(asset);
     }
 
-    public setAssetStateToFailed(asset: string, endpointUrl: string) {
-        this.setAssetState(asset, endpointUrl, AssetState.FAILED);
-    }
-
-    public setAssetStateToSuccess(asset: string, endpointUrl: string) {
-        this.setAssetState(asset, endpointUrl, AssetState.SUCCESS);
+    public setAssetStateToFinished(asset: string, endpointUrl: string) {
+        this.setAssetState(asset, endpointUrl, AssetState.FINISHED);
     }
 
     public setAssetStateToOngoing(asset: string, endpointUrl: string) {
@@ -48,62 +52,74 @@ export class AssetTracker {
     }
 
     public isFinished(asset: string, endpointUrl: string): boolean {
-        return this.assetStateExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) !== AssetState.ONGOING;
+        return this.assetStateExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) === AssetState.FINISHED;
     }
 
-    public isFailed(asset: string, endpointUrl: string): boolean {
-        return this.assetStateExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) === AssetState.FAILED;
-    }
-
-    public isSuccessful(asset: string, endpointUrl: string): boolean {
-        return this.assetStateExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) === AssetState.SUCCESS;
-    }
-
-    public isStarted(asset: string, endpointUrl: string): boolean {
-        return this.assetStateExists(endpointUrl, asset);
+    public isOngoing(asset: string, endpointUrl: string): boolean {
+        return this.assetStateExists(endpointUrl, asset) && this.getAssetState(endpointUrl, asset) === AssetState.ONGOING;;
     }
 
     private assetStateExists(asset: string, endpointUrl: string): boolean {
-        if(!this.assetStateMap.has(endpointUrl)) {
-            this.assetStateMap.set(endpointUrl, new Map<string, AssetState>());
+        if (!this.assetApplicationStateMap.has(endpointUrl)) {
+            this.assetApplicationStateMap.set(endpointUrl, new Map<string, AssetState>());
         }
-        return this.assetStateMap.get(endpointUrl).has(asset);
+        return this.assetApplicationStateMap.get(endpointUrl).has(asset);
     }
 
-    public addAsset(asset: Asset) {
-        this.assetIndexMap.set(asset.uri, asset);
-    }
-
-    public getAsset(uri: string): Asset {
-        return this.assetIndexMap.get(uri);
-    }
-
-    public removeAsset(uri: string) {
-        this.assetIndexMap.delete(uri);
-    }
-
-    public hasAsset(uri: string): boolean {
-        return this.assetIndexMap.has(uri);
-    }
-        
     public setApplicationPromise(asset: string, endpointUrl: string, promise: Promise<void>) {
-        if(!this.assetApplicationMap.has(endpointUrl)) {
+        if(asset === undefined || endpointUrl === undefined || promise === undefined) {
+            Logger.error("AssetTracker.setApplicationPromise: asset, endpointUrl or promise is undefined");
+            throw new Error("AssetTracker.setApplicationPromise: asset, endpointUrl or promise is undefined");
+        }
+        if (!this.assetApplicationMap.has(endpointUrl)) {
             this.assetApplicationMap.set(endpointUrl, new Map<string, Promise<void>>());
         }
         this.assetApplicationMap.get(endpointUrl).set(asset, promise);
     }
 
     public getApplicationPromise(asset: string, endpointUrl: string): Promise<void> {
-        if(!this.assetApplicationMap.has(endpointUrl)) {
+        if(asset === undefined || endpointUrl === undefined) {
+            Logger.error("AssetTracker.getApplicationPromise: asset or endpointUrl is undefined");
+            throw new Error("AssetTracker.getApplicationPromise: asset or endpointUrl is undefined");
+        }
+        if (!this.assetApplicationMap.has(endpointUrl)) {
             this.assetApplicationMap.set(endpointUrl, new Map<string, Promise<void>>());
         }
         return this.assetApplicationMap.get(endpointUrl).get(asset);
     }
 
     public hasApplicationPromise(asset: string, endpointUrl: string): boolean {
-        if(!this.assetApplicationMap.has(endpointUrl)) {
+        if(asset === undefined || endpointUrl === undefined) {
+            Logger.error("AssetTracker.hasApplicationPromise: asset or endpointUrl is undefined");
+            throw new Error("AssetTracker.hasApplicationPromise: asset or endpointUrl is undefined");
+        }
+        if (!this.assetApplicationMap.has(endpointUrl)) {
             this.assetApplicationMap.set(endpointUrl, new Map<string, Promise<void>>());
         }
         return this.assetApplicationMap.get(endpointUrl).has(asset);
+    }
+
+    public addAsset(asset: Asset): void {
+        if(asset === undefined) {
+            Logger.error("AssetTracker.addAsset: asset is undefined");
+            throw new Error("AssetTracker.addAsset: asset is undefined");
+        }
+        this.assetMap.set(asset.uri, asset);
+    }
+
+    public getAsset(asset: string): Asset {
+        if(asset === undefined || asset === null || asset === "") {
+            Logger.error("AssetTracker.getAsset: asset '", asset,"' is invalid");
+            throw new Error("AssetTracker.getAsset: asset '"+ asset +"' is invalid");
+        }
+        return this.assetMap.get(asset);
+    }
+
+    public hasAsset(asset: string): boolean {
+        if(asset === undefined || asset === null || asset === "") {
+            Logger.error("AssetTracker.hasAsset: asset '", asset,"' is invalid");
+            throw new Error("AssetTracker.hasAsset: asset '"+ asset +"' is invalid");
+        }
+        return this.assetMap.has(asset);
     }
 }

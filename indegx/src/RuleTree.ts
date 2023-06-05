@@ -9,11 +9,12 @@ export interface Asset {
  @interface Manifest
  @property {string} uri - URI of the manifest
  @property {Array<ManifestEntry>} entries - Array of test entries
- @property {Array<Manifest>} includes - Array of other manifests that are included in this one
+ @property {Array<string>} includes - Array of other manifests URIs that are included in this one
  */
 export interface Manifest extends Asset {
     entries: Array<ManifestEntry>,
-    includes: Array<Manifest>;
+    includes: Array<Asset>;
+    requiredAssets?: Array<string>;
 }
 
 /**
@@ -24,14 +25,15 @@ export interface Manifest extends Asset {
     @property {Test} test - The test object for this entry
     @property {Array<Asset>} actionsSuccess - Actions to perform if the test is successful
     @property {Array<Asset>} actionsFailure - Actions to perform if the test fails
+    @property {Array<string>} requiredAssets - Array of URIs of assets that are required to have been applied before this test
     */
 export interface ManifestEntry extends Asset {
     test: Test;
     actionsSuccess: Array<Asset>;
     actionsFailure: Array<Asset>;
-    requiredAssets?: Array<Asset>;
-    requiredSuccesses?: Array<Asset>;
-    requiredFailures?: Array<Asset>;
+    requiredAssets?: Array<string>;
+    // requiredSuccesses?: Array<Asset>;
+    // requiredFailures?: Array<Asset>;
 }
 
 /**

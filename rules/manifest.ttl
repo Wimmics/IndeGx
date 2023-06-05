@@ -114,6 +114,6 @@
         ]
         [
             mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            LOAD <file:///user/pmaillot/home/git/IndeGx/rules/indegx_vocabulary.ttl> INTO GRAPH kgi:"""
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/indegx_vocabulary.ttl> INTO GRAPH kgi:"""
         ]
     ) .
