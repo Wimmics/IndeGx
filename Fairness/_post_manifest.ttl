@@ -1,0 +1,8 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        <FAIR-Checker/_manifest.ttl>
+        <OFaire_rules/_manifest.ttl>
+    ) .
