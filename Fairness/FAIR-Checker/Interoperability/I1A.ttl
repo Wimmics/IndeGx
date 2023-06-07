@@ -6,4 +6,5 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <_manifest.ttl> .
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "For the strong assessment, FAIR-Checker verifies that at least one RDF triple can be found in metadata." .

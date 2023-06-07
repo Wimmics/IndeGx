@@ -3,4 +3,359 @@
 
 <> a mf:Manifest ;
     mf:entries (
+        <I1.ttl>
+        <I1A.ttl>
+        <I1B.ttl>
+        <I2A.ttl>
+    ) .
+
+<I1.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description "There is no dataset description" ;
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Unique IDs"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
+                        dqv:value 0
+                    ] .
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o .
+                    }
+                    FILTER(NOT EXISTS {
+                        GRAPH ?kgGraph {
+                            ?kg a dcat:Dataset .
+                        }
+                    })
+                }
+                """
+        ]
+        [
+            dcterms:description "There is a dataset description. " ;
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Unique IDs"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
+                        dqv:value 2
+                    ] .
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o .
+                    }
+                }
+                """
+        ]
+    ) .
+
+<I1A.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Any structured information"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1A> ;
+                        dqv:value 2
+                    ] .
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o .
+                    }
+                }
+                """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Any structured information"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1A> ;
+                        dqv:value 0
+                    ] .
+                } WHERE {
+                    FILTER(NOT EXISTS {
+                        GRAPH ?kgGraph {
+                            ?s ?p ?o .
+                        }
+                    })
+                }
+                """
+        ]
+    ) .
+
+<I1B.ttl> a mf:Manifest ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Structured metadata"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1B> ;
+                        dqv:value 0
+                    ] .
+                } WHERE {
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                { ?s a ?elem . }
+                                UNION { ?s ?elem ?oGraph . }
+                            }
+                            SERVICE <https://lov.linkeddata.es/dataset/lov> {
+                                ?elem ?p ?o .
+                            }
+                        }
+                    )
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Structured metadata"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1B> ;
+                        dqv:value 1
+                    ] .
+                } WHERE {
+                    {
+                        SELECT ?elem {
+                            GRAPH ?kgGraph {
+                                { ?s a ?elem . }
+                                UNION { ?s ?elem ?oGraph . }
+                            }
+                            SERVICE <https://lov.linkeddata.es/dataset/lov> {
+                                ?elem ?p ?o .
+                            }
+                        } LIMIT 1
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Structured metadata"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1B> ;
+                        dqv:value 2
+                    ] .
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?s a ?elem . }
+                        UNION { ?s ?elem ?oGraph . }
+                    }
+                    FILTER (
+                        EXISTS {
+                            SERVICE <https://lov.linkeddata.es/dataset/lov> {
+                                ?elem ?p ?o .
+                            }
+                        }
+                    )
+                }
+            """
+        ]
+    ) .
+
+
+<I2A.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description "None of the discoverability properties were found in metadata !" ;
+            mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Structured metadata"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2A> ;
+                        dqv:value 0
+                    ] .
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                    }
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                ?kg ?p ?o . 
+                            }
+                            VALUES ?p { 
+                                dcterms:title
+                                dcterms:abstract
+                                dcterms:creator
+                                dcterms:license
+                                dcterms:language
+                                rdfs:label
+                                rdfs:comment
+                                rdfs:seeAlso
+                                skos:prefLabel
+                                skos:altLabel
+                                skos:definition
+                                skos:example
+                                skos:related
+                                skos:broader
+                                skos:narrower
+                                skos:note
+                            }
+                        }
+                    )
+                }
+                """
+        ]
+        [
+            dcterms:description "At least one of the discoverability properties was found in metadata" ;
+            mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    ?kgGraph dqv:hasQualityMeasurement [
+                        a dqv:QualityMeasurement ;
+                        rdfs:label "Structured metadata"@en ;
+                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2A> ;
+                        dqv:value 2
+                    ] .
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg ?p ?o . 
+                    }
+                    VALUES ?p { 
+                        dcterms:title
+                        dcterms:abstract
+                        dcterms:creator
+                        dcterms:license
+                        dcterms:language
+                        rdfs:label
+                        rdfs:comment
+                        rdfs:seeAlso
+                        skos:prefLabel
+                        skos:altLabel
+                        skos:definition
+                        skos:example
+                        skos:related
+                        skos:broader
+                        skos:narrower
+                        skos:note
+                    }
+                }
+                """
+        ]
     ) .
