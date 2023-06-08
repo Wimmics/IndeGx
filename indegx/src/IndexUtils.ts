@@ -2,7 +2,6 @@ import { coreseServerUrl } from "./CoreseInterface.js";
 import * as Logger from "./LogUtils.js"
 import * as Global from "./GlobalUtils.js";
 import * as RDFUtils from "./RDFUtils.js";
-import { writeFile } from "fs/promises";
 import * as $rdf from "rdflib";
 import * as SPARQLUtils from "./SPARQLUtils.js";
 

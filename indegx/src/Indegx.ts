@@ -3,7 +3,7 @@ import * as GlobalUtils from "./GlobalUtils.js";
 import { KGI } from "./RDFUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";
 import { applyRuleTree } from "./RuleApplication.js";
-import { readRules } from "./Rules.js";
+import { readRules } from "./RuleCreation.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
 import { sendFileToIndex, writeIndex } from "./IndexUtils.js";
@@ -15,28 +15,28 @@ import commandLineUsage from 'command-line-usage'
 
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
-  ]
+]
 
 type Option = {
     help?: boolean
 }
 
 const options: Option = commandLineArgs(optionDefinitions)
-if(options.help) {    
+if (options.help) {
     const sections = [
-      {
-        header: 'IndeGx',
-        content: 'Framework for Indexing RDF Knowledge Graphs with SPARQL-based Test Suits.'
-      },
-      {
-        header: 'Options',
-        optionList: [
-          {
-            name: 'help',
-            description: 'Print this usage guide.'
-          }
-        ]
-      }
+        {
+            header: 'IndeGx',
+            content: 'Framework for Indexing RDF Knowledge Graphs with SPARQL-based Test Suits.'
+        },
+        {
+            header: 'Options',
+            optionList: [
+                {
+                    name: 'help',
+                    description: 'Print this usage guide.'
+                }
+            ]
+        }
     ]
     const usage = commandLineUsage(sections)
     console.info(usage)
@@ -60,14 +60,14 @@ type ConfigType = {
 }
 
 let currentConfig: ConfigType = config; //[options.config];
-if(currentConfig === undefined) {
+if (currentConfig === undefined) {
     Logger.error("No config found in " + config);
     throw new Error("No config found in " + config);
 }
-    
+
 
 Logger.info("Using config", currentConfig);
-let manifest: string = currentConfig.manifest;
+let rootManifestFilename: string = currentConfig.manifest;
 let catalog: string = currentConfig.catalog;
 let post: string = currentConfig.post;
 let nbFetchRetries: number = currentConfig.nbFetchRetries;
@@ -87,7 +87,7 @@ SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
 let vocabularyFileSendingPool = [];
-if(currentConfig.vocabularies !== undefined) {
+if (currentConfig.vocabularies !== undefined) {
     let vocabularies = currentConfig.vocabularies;
     if (vocabularies !== undefined && vocabularies !== "") {
         readdirSync(vocabularies).forEach(file => {
@@ -96,12 +96,12 @@ if(currentConfig.vocabularies !== undefined) {
     }
 }
 Promise.allSettled(vocabularyFileSendingPool).then(() => {
-    Logger.info("Reading manifest tree ", manifest)
-    return readRules(manifest).then(manifests => {
+    Logger.info("Reading manifest tree ", rootManifestFilename)
+    return readRules(rootManifestFilename).then(manifest => {
         Logger.info("Manifest tree read")
         if (manifestTreeFile !== undefined && manifestTreeFile !== "") {
             Logger.info("Writing manifest tree to file", manifestTreeFile)
-            GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifests))
+            GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifest))
         }
 
         Logger.info("Reading catalog", catalog)
@@ -109,18 +109,15 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
         return readCatalog(catalog).then(endpointObjectList => {
             Logger.info("Catalog read")
             endpointObjectList.forEach(endpointObject => {
-                Logger.info("START", endpointObject.endpoint)
-                manifests.forEach(manifest => {
-                    Logger.info("Treating endpoint", endpointObject.endpoint);
-                    endpointPool.push(applyRuleTree(endpointObject, manifest).then(() => {
-                        Logger.info("Endpoint", endpointObject.endpoint, "treated");
-                        return;
-                    }).catch(error => {
-                        Logger.error("Error treating endpoint", endpointObject.endpoint, error)
-                    }).finally(() => {
-                        return;
-                    }));
-                })
+                Logger.info("Treating endpoint", endpointObject.endpoint);
+                endpointPool.push(applyRuleTree(endpointObject, manifest).then(() => {
+                    Logger.info("Endpoint", endpointObject.endpoint, "treated");
+                    return;
+                }).catch(error => {
+                    Logger.error("Error treating endpoint", endpointObject.endpoint, error)
+                }).finally(() => {
+                    return;
+                }));
             })
         }).catch(error => {
             Logger.error("Error treating catalog", catalog, error)
@@ -131,18 +128,14 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
         })
     }).then(() => {
         if (post !== undefined && post !== "") {
-            return readRules(post).then(postManifests => {
+            return readRules(post).then(postManifest => {
                 Logger.info("Post manifest tree read.");
                 if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
                     Logger.info("Writing post manifest tree to file", postManifestTreeFile)
-                    GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifests))
+                    GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
                 }
                 Logger.info("Post treatment starts");
-                let manifestPool = [];
-                postManifests.forEach(postManifest => {
-                    manifestPool.push(applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true));
-                })
-                return Promise.allSettled(manifestPool).then(() => {
+                return applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
                     Logger.info("Post treatment ends");
                 })
             })
@@ -152,7 +145,7 @@ Promise.allSettled(vocabularyFileSendingPool).then(() => {
         }
     }).finally(() => {
         return writeIndex(outputFile)
-    }).catch(error => { 
+    }).catch(error => {
         Logger.error("During indexation", error);
     });
 })

@@ -1,16 +1,20 @@
 
+export interface Asset {
+    uri: string;
+}
+
 /**
 
  Interface describing a test manifest
  @interface Manifest
  @property {string} uri - URI of the manifest
  @property {Array<ManifestEntry>} entries - Array of test entries
- @property {Array<Manifest>} includes - Array of other manifests that are included in this one
+ @property {Array<string>} includes - Array of other manifests URIs that are included in this one
  */
-export interface Manifest {
-    uri: string;
+export interface Manifest extends Asset {
     entries: Array<ManifestEntry>,
-    includes: Array<Manifest>;
+    includes: Array<Asset>;
+    requiredAssets?: Array<string>;
 }
 
 /**
@@ -19,14 +23,17 @@ export interface Manifest {
     @interface ManifestEntry
     @property {string} uri - URI of the test entry
     @property {Test} test - The test object for this entry
-    @property {Array<ManifestEntry | Action | Manifest>} actionsSuccess - Actions to perform if the test is successful
-    @property {Array<ManifestEntry | Action | Manifest>} actionsFailure - Actions to perform if the test fails
+    @property {Array<Asset>} actionsSuccess - Actions to perform if the test is successful
+    @property {Array<Asset>} actionsFailure - Actions to perform if the test fails
+    @property {Array<string>} requiredAssets - Array of URIs of assets that are required to have been applied before this test
     */
-export interface ManifestEntry {
-    uri: string;
+export interface ManifestEntry extends Asset {
     test: Test;
-    actionsSuccess: Array<ManifestEntry | Action | Manifest>;
-    actionsFailure: Array<ManifestEntry | Action | Manifest>;
+    actionsSuccess: Array<Asset>;
+    actionsFailure: Array<Asset>;
+    requiredAssets?: Array<string>;
+    // requiredSuccesses?: Array<Asset>;
+    // requiredFailures?: Array<Asset>;
 }
 
 /**
@@ -38,8 +45,7 @@ export interface ManifestEntry {
     @property {Array<string>} description - Descriptions of the test
     @property {Array<string>} title - Titles of the test
     */
-export interface Test {
-    uri: string;
+export interface Test extends Asset {
     query?: Array<string>;
     description?: Array<string>;
     title?: Array<string>;
@@ -55,7 +61,7 @@ export interface Test {
     @property {Array<string>} title - Titles of the action
     @property {Array<string>} action - Array of strings defining the action to take
     */
-export interface Action {
+export interface Action extends Asset {
     endpoint?: string;
     timeout?: number;
     pagination?: number;
@@ -70,7 +76,7 @@ export interface Action {
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is a ManifestEntry
     */
-export function isManifestEntry(object: any): boolean { return (object.uri !== undefined && object.test !== undefined && object.actionsSuccess !== undefined && object.actionsFailure !== undefined) }
+export function isManifestEntry(object: any): boolean { return object.test !== undefined && object.actionsSuccess !== undefined && object.actionsFailure !== undefined }
 
 /**
 
@@ -79,7 +85,7 @@ export function isManifestEntry(object: any): boolean { return (object.uri !== u
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is a Manifest
     */
-export function isManifest(object: any): boolean { return (object.uri !== undefined && object.entries !== undefined && object.includes !== undefined) }
+export function isManifest(object: any): boolean { return object.entries !== undefined && object.includes !== undefined }
 
 /**
 
@@ -88,7 +94,7 @@ export function isManifest(object: any): boolean { return (object.uri !== undefi
     @param {any} object - The object to test
     @returns {boolean} Whether or not the object is a Test
     */
-export function isTest(object: any): boolean { return (object.uri !== undefined) && !isManifest(object) && !isManifestEntry(object) }
+export function isTest(object: any): boolean { return !isManifest(object) && !isManifestEntry(object) && !isAction(object) }
 
 /**
 

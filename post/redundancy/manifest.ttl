@@ -96,8 +96,19 @@
 <vocabularies.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            mf:action """
+                PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+                PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcat:       <http://www.w3.org/ns/dcat#>
+                PREFIX foaf:       <http://xmlns.com/foaf/0.1/>
+                PREFIX prov:       <http://www.w3.org/ns/prov#>
+                PREFIX schema:		<http://schema.org/>
+                PREFIX void:       <http://rdfs.org/ns/void#>
+                PREFIX sd:     	<http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dct:        <http://purl.org/dc/terms/>
+                PREFIX skos:       <http://www.w3.org/2004/02/skos/core#>
+                PREFIX kgi:        <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription kgi:summary ?summaryDescriptionGraph .
@@ -145,8 +156,19 @@
                 }"""
         ]
         [
-            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            mf:action """
+                PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+                PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcat:       <http://www.w3.org/ns/dcat#>
+                PREFIX foaf:       <http://xmlns.com/foaf/0.1/>
+                PREFIX prov:       <http://www.w3.org/ns/prov#>
+                PREFIX schema:		<http://schema.org/>
+                PREFIX void:       <http://rdfs.org/ns/void#>
+                PREFIX sd:     	<http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dct:        <http://purl.org/dc/terms/>
+                PREFIX skos:       <http://www.w3.org/2004/02/skos/core#>
+                PREFIX kgi:        <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription void:vocabularyPartition ?vocabularyPartition .

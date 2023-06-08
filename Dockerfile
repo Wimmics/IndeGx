@@ -24,6 +24,10 @@ RUN wget "https://github.com/Wimmics/corese/releases/download/release-4.4.0/core
 RUN echo "DISABLE_OWL_AUTO_IMPORT = true" > corese-server.properties
 RUN echo "LOAD_IN_DEFAULT_GRAPH = true" >> corese-server.properties
 
+WORKDIR /indegx
+COPY indegx/package.json package.json
+RUN npm install
+
 WORKDIR /
 COPY . /
 

@@ -49,6 +49,9 @@
 
 <summary.ttl>  a mf:ManifestEntry ;
     rdfs:comment "In this asset, we used to replace the end of the nodes by an empty string. However, some engines, i.e. Virtuoso, do not support properly parenthesis in the regex with the 'q' flag. So we use the STRLEN function to get the length of the string and then we use the SUBSTR function to get the substring without the end of the url." ;
+    kgi:requiredAssets (
+        <root.ttl>
+    ) ;
     kgi:onSuccess (
         [
             mf:action """

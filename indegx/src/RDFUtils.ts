@@ -6,6 +6,7 @@ import ttl_read from "@graphy/content.ttl.read";
 import nt_read from "@graphy/content.nt.read";
 import nq_read from "@graphy/content.nq.read";
 import trig_read from "@graphy/content.trig.read";
+import {resolve } from "url";
 
 export const VOID = $rdf.Namespace("http://rdfs.org/ns/void#");
 export const XSD = $rdf.Namespace("http://www.w3.org/2001/XMLSchema#");
@@ -37,6 +38,25 @@ export function urlToBaseURI(url: string) {
 export function urlIsAbsolute(url: string) {
     var regex = new RegExp('^(?:[a-z+]+:)?//', 'i');
     return regex.test(url);
+}
+
+export function sanitizeUrl(url: string, baseURI: string, filename?: string): string {
+    let result = url;
+    if(url.localeCompare("") == 0) {
+        result = filename;
+    }
+    if(! urlIsAbsolute(result)) { 
+        if(filename != null && filename != undefined && filename != "") {
+            result = resolve(filename, result);
+        } else {
+            result = resolve(baseURI, result);
+        }
+    }
+    if (!(result.startsWith("http://") || result.startsWith("https://") || result.startsWith("file://"))) {
+        result = "file://" + result;
+    }
+
+    return result;
 }
 
 
@@ -88,7 +108,7 @@ function getGraphyReadingFunction(contentType: FileContentType) {
     }
 }
 
-function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI("").value) {
+function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI("").value, filename = KGI("").value) {
     function createValidBlankNode(node, baseURI) {
         if (node.termType === "BlankNode") {
             return $rdf.sym(baseURI + "#" + node.value);
@@ -100,11 +120,7 @@ function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI(
     try {
         let s = undefined;
         if (y_quad.subject.termType === "NamedNode") {
-            if(! urlIsAbsolute(y_quad.subject.value)) {
-                s = $rdf.sym(baseURI + y_quad.subject.value);
-            } else {
-                s = $rdf.sym(y_quad.subject.value)
-            }
+                s = $rdf.sym(sanitizeUrl(y_quad.subject.value, baseURI, filename));
         } else if (y_quad.subject.termType === "Literal") {
             if (y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
                 s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
@@ -119,11 +135,7 @@ function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI(
         const p = $rdf.sym(y_quad.predicate.value);
         let o = undefined;
         if (y_quad.object.termType === "NamedNode") {
-            if(! urlIsAbsolute(y_quad.object.value)) {
-                o = $rdf.sym(baseURI + y_quad.object.value);
-            } else {
-                o = $rdf.sym(y_quad.object.value);
-            }
+            o = $rdf.sym(sanitizeUrl(y_quad.object.value, baseURI, filename));
         } else if (y_quad.object.termType === "Literal") {
             if (y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
                 o = $rdf.lit(y_quad.object.value, y_quad.object.language)
@@ -149,11 +161,11 @@ function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI(
     }
 }
 
-export function loadRDFFile(file: string, store: $rdf.Store, baseURI?: string): Promise<any> {
+export function loadRDFFile(file: string, store: $rdf.Store, baseURI?: string): Promise<void> {
     return loadRDFFiles([file], store, baseURI);
 }
 
-export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBaseUri?: string): Promise<any> {
+export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBaseUri?: string): Promise<void> {
     try {
         const promiseArray = files.map(filename => {
             let baseURI = urlToBaseURI(filename);
@@ -178,7 +190,7 @@ export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBas
                     Global.readFile(filename).then(content => {
                         readingFunction(content, {
                             data(y_quad) {
-                                graphyQuadLoadingToStore(store, y_quad, baseURI)
+                                graphyQuadLoadingToStore(store, y_quad, baseURI, filename)
                             },
 
                             eof(h_prefixes) {
@@ -202,7 +214,7 @@ export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBas
                 return Promise.reject(error);
             })
         });
-        return Promise.allSettled(promiseArray)
+        return Promise.allSettled(promiseArray).then(results => Promise.resolve());
     } catch (error) {
         Logger.error("Error while loading RDF files", files, "error", error);
         return Promise.reject(error);

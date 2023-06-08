@@ -21,6 +21,7 @@
         <SPARQLES_SELSUBQGRAPH.ttl>
         <SPARQLES_SELSUM.ttl>
         <SPARQLES_SELVALUES.ttl>
+        <SPARQLES_SPARQL11.ttl>
         ) .
 
 <SPARQLES_ASKFILNOTIN.ttl> a mf:ManifestEntry ;
@@ -50,7 +51,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_CON-.ttl> a mf:ManifestEntry ;
@@ -80,7 +80,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELAVG.ttl> a mf:ManifestEntry ;
@@ -110,7 +109,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELBIND.ttl> a mf:ManifestEntry ;
@@ -140,7 +138,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELFILEXISTS.ttl> a mf:ManifestEntry ;
@@ -170,7 +167,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELFILABS.ttl> a mf:ManifestEntry ;
@@ -200,7 +196,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELFILCONTAINS.ttl>  a mf:ManifestEntry ;
@@ -230,7 +225,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELFILNOTEXISTS.ttl> a mf:ManifestEntry ;
@@ -260,7 +254,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELFILSTART.ttl> a mf:ManifestEntry ;
@@ -290,7 +283,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELMAX.ttl> a mf:ManifestEntry ;
@@ -320,7 +312,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELMIN.ttl> a mf:ManifestEntry ;
@@ -350,7 +341,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELMINUS.ttl> a mf:ManifestEntry ;
@@ -380,7 +370,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELPATHS.ttl> a mf:ManifestEntry ;
@@ -410,7 +399,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELSERVICE.ttl> a mf:ManifestEntry ;
@@ -440,7 +428,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELSUBQGRAPH.ttl> a mf:ManifestEntry ;
@@ -470,7 +457,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELSUBQ.ttl> a mf:ManifestEntry ;
@@ -500,7 +486,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELSUM.ttl> a mf:ManifestEntry ;
@@ -530,7 +515,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELVALUES.ttl> a mf:ManifestEntry ;
@@ -560,7 +544,6 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SELCOUNT.ttl> a mf:ManifestEntry ;
@@ -590,10 +573,29 @@
             }
             """
         ]
-        <SPARQLES_SPARQL11.ttl>
     ) .
 
 <SPARQLES_SPARQL11.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <SPARQLES_ASKFILNOTIN.ttl>
+        # <SPARQLES_CON-.ttl> # No way to test the syntax using a federated query
+        <SPARQLES_SELAVG.ttl>
+        <SPARQLES_SELBIND.ttl>
+        <SPARQLES_SELFILNOTEXISTS.ttl>
+        <SPARQLES_SELFILABS.ttl>
+        <SPARQLES_SELFILCONTAINS.ttl>
+        <SPARQLES_SELFILNOTEXISTS.ttl>
+        <SPARQLES_SELFILSTART.ttl>
+        <SPARQLES_SELMAX.ttl>
+        <SPARQLES_SELMIN.ttl>
+        <SPARQLES_SELMINUS.ttl>
+        <SPARQLES_SELPATHS.ttl>
+        <SPARQLES_SELSERVICE.ttl>
+        <SPARQLES_SELSUBQ.ttl>
+        <SPARQLES_SELSUBQGRAPH.ttl>
+        <SPARQLES_SELSUM.ttl>
+        <SPARQLES_SELVALUES.ttl>
+    ) ;
     kgi:onSuccess (
             [
                 mf:action """
