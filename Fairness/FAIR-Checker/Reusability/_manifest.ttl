@@ -37,7 +37,7 @@
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
+                        ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Metadata includes license"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/R1#R11> ;
                             dqv:value ?value .

@@ -29,11 +29,13 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
-                        rdfs:label "Unique IDs"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
-                        dqv:value 0 .
+                    GRAPH ?kgGraph {
+                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Unique IDs"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
+                            dqv:value 0 .
+                    }
                 } WHERE {
                     GRAPH ?kgGraph {
                         ?s ?p ?o .
@@ -69,11 +71,13 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
-                        rdfs:label "Unique IDs"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
-                        dqv:value 2 .
+                    GRAPH ?kgGraph {
+                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Unique IDs"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
+                            dqv:value 2 .
+                    }
                 } WHERE {
                     FILTER(NOT EXISTS {
                         GRAPH ?kgGraph {
@@ -108,11 +112,13 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
-                        rdfs:label "Unique IDs"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
-                        dqv:value 1 .
+                    GRAPH ?kgGraph {
+                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Unique IDs"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
+                            dqv:value 1 .
+                    }
                 } WHERE {
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
@@ -150,11 +156,13 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
-                        rdfs:label "Persistent IDs"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1B> ;
-                        dqv:value ?value .
+                    GRAPH ?kgGraph {
+                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Persistent IDs"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1B> ;
+                            dqv:value ?value .
+                    }
                 } WHERE {
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
@@ -195,11 +203,13 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
-                        rdfs:label "Structured metadata"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2A> ;
-                        dqv:value ?value .
+                    GRAPH ?kgGraph {
+                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Structured metadata"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2A> ;
+                            dqv:value ?value .
+                    }
                 } WHERE {
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
@@ -243,11 +253,13 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
-                        rdfs:label "Structured metadata"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
-                        dqv:value ?value .
+                    GRAPH ?kgGraph {
+                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Structured metadata"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                            dqv:value ?value .
+                    }
                 } WHERE {
                     OPTIONAL {
                         GRAPH ?kgGraph {

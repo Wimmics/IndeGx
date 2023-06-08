@@ -68,11 +68,13 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                    ?measurement a dqv:QualityMeasurement ;
-                        rdfs:label "Structured metadata"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/A1#A12> ;
-                        dqv:value ?value .
+                    GRAPH ?kgGraph {
+                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Structured metadata"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/A1#A12> ;
+                            dqv:value ?value .
+                    }
                 } WHERE {
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {

@@ -66,13 +66,6 @@
             PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
             INSERT {
                 GRAPH ?kgGraph {
-                    ?kg a dcat:Dataset .
-                    ?kg a void:Dataset .
-                    ?kg a dcmitype:Dataset .
-                    ?kg a schema:Dataset .
-                    ?kg a sd:Dataset .
-                    ?kg a dataid:Dataset .
-                    ?kg void:sparqlEndpoint $rawEndpointUrl .
                     ?s ?p ?kg .
                 }
             } WHERE {
