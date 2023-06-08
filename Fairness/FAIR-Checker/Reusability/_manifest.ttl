@@ -5,6 +5,7 @@
 <> a mf:Manifest ;
     mf:entries (
         <R11.ttl>
+        <R12.ttl>
     ) .
 
 <R11.ttl> a mf:ManifestEntry ;
@@ -43,6 +44,9 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o
+                    }
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             ?kg ?p ?o . 
@@ -94,6 +98,9 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o
+                    }
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             ?kg ?p ?o . 

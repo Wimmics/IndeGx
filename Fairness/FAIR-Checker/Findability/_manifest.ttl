@@ -164,6 +164,9 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o
+                    }
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             { ?kg a dcat:Dataset }
@@ -211,6 +214,9 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o
+                    }
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             { ?kg a dcat:Dataset }
@@ -261,6 +267,9 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    GRAPH ?kgGraph {
+                        ?s ?p ?o
+                    }
                     OPTIONAL {
                         GRAPH ?kgGraph {
                             { ?s a ?elem . }
