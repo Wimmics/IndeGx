@@ -16,6 +16,7 @@
         [
             dcterms:description "There is a dataset description. " ;
             mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -53,6 +54,7 @@
     kgi:onSuccess (
         [
             mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -81,6 +83,7 @@
         ]
         [
             mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -120,6 +123,7 @@
     kgi:onSuccess (
         [
             mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -218,6 +222,7 @@
     kgi:onSuccess (
         [
             mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -258,6 +263,7 @@
     kgi:onSuccess (
         [
             mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
