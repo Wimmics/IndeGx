@@ -28,21 +28,26 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
+                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                    ?measurement a dqv:QualityMeasurement ;
                         rdfs:label "Unique IDs"@en ;
                         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
-                        dqv:value 0
-                    ] .
+                        dqv:value 0 .
                 } WHERE {
                     GRAPH ?kgGraph {
                         ?s ?p ?o .
                     }
                     FILTER(NOT EXISTS {
                         GRAPH ?kgGraph {
-                            ?kg a dcat:Dataset .
+                            { ?kg a dcat:Dataset }
+                            UNION { ?kg a void:Dataset }
+                            UNION { ?kg a dcmitype:Dataset }
+                            UNION { ?kg a schema:Dataset }
+                            UNION { ?kg a sd:Dataset }
+                            UNION { ?kg a dataid:Dataset }
                         }
                     })
+                    BIND(Iri(CONCAT(STR(?kgGraph), "#F1A")) AS ?measurement)
                 }
                 """
         ]
@@ -62,20 +67,25 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
+                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                    ?measurement a dqv:QualityMeasurement ;
                         rdfs:label "Unique IDs"@en ;
                         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
-                        dqv:value 2
-                    ] .
+                        dqv:value 2 .
                 } WHERE {
                     FILTER(NOT EXISTS {
                         GRAPH ?kgGraph {
-                            ?kg a dcat:Dataset .
+                            { ?kg a dcat:Dataset }
+                            UNION { ?kg a void:Dataset }
+                            UNION { ?kg a dcmitype:Dataset }
+                            UNION { ?kg a schema:Dataset }
+                            UNION { ?kg a sd:Dataset }
+                            UNION { ?kg a dataid:Dataset }
                             ?s ?p ?o .
                         }
                         FILTER(isBlank(?s) || isBlank(?p) || isBlank(?o))
                     })
+                    BIND(Iri(CONCAT(STR(?kgGraph), "#F1A")) AS ?measurement)
                 }
                 """
         ]
@@ -95,18 +105,23 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
+                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                    ?measurement a dqv:QualityMeasurement ;
                         rdfs:label "Unique IDs"@en ;
                         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
-                        dqv:value 1
-                    ] .
+                        dqv:value 1 .
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kg a dcat:Dataset .
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
                         ?s ?p ?o .
                     }
                     FILTER(isBlank(?s) || isBlank(?p) || isBlank(?o))
+                    BIND(Iri(CONCAT(STR(?kgGraph), "#F1A")) AS ?measurement)
                 }
                 """
         ]
@@ -115,43 +130,6 @@
 <F1B.ttl> a mf:ManifestEntry ;
     dcterms:description "Weak evaluation should check the dataset identifier namespace in identifiers.org. However, has identifier?org has no SPARQL endpoint, we cannot check this." ;
     kgi:onSuccess (
-        [
-            dcterms:description "There is no dataset identifier." ;
-            mf:action """
-                PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-                PREFIX schema: <http://schema.org/>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX pav: <http://purl.org/pav/>
-                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                PREFIX dqv: <http://www.w3.org/ns/dqv#>
-                PREFIX dce: <http://purl.org/dc/elements/1.1/>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-                INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
-                        rdfs:label "Persistent IDs"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1B> ;
-                        dqv:value 0
-                    ] .
-                } WHERE {
-                    GRAPH ?kgGraph {
-                        ?kg a dcat:Dataset .
-                        FILTER( NOT EXISTS {
-                            {
-                                ?kg schema:identifier ?id .
-                            }
-                            UNION {
-                                ?kg dcterms:identifier ?id .
-                            }
-                        })
-                    }
-                }
-                """
-        ]
         [
             dcterms:description "There is a schema of dcterms identifier." ;
             mf:action """
@@ -168,22 +146,29 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
+                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                    ?measurement a dqv:QualityMeasurement ;
                         rdfs:label "Persistent IDs"@en ;
                         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1B> ;
-                        dqv:value 2
-                    ] .
+                        dqv:value ?value .
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?kg a dcat:Dataset .
-                        {
-                            ?kg schema:identifier ?id .
+                    BIND( IF (EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?kg a dcat:Dataset }
+                            UNION { ?kg a void:Dataset }
+                            UNION { ?kg a dcmitype:Dataset }
+                            UNION { ?kg a schema:Dataset }
+                            UNION { ?kg a sd:Dataset }
+                            UNION { ?kg a dataid:Dataset }
+                            {
+                                ?kg schema:identifier ?id .
+                            }
+                            UNION {
+                                ?kg dcterms:identifier ?id .
+                            }
                         }
-                        UNION {
-                            ?kg dcterms:identifier ?id .
-                        }
-                    }
+                    }, 2, 0) AS ?value)
+                    BIND(Iri(CONCAT(STR(?kgGraph), "#F1B")) AS ?measurement)
                 }
                 """
         ]
@@ -192,8 +177,7 @@
 <F2A.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            dcterms:description "None of the discoverability properties were found in metadata !" ;
-            mf:action """
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -207,69 +191,32 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
+                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                    ?measurement a dqv:QualityMeasurement ;
                         rdfs:label "Structured metadata"@en ;
                         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2A> ;
-                        dqv:value 0
-                    ] .
+                        dqv:value ?value .
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?kg a dcat:Dataset .
-                    }
-                    FILTER (
-                        NOT EXISTS {
-                            GRAPH ?kgGraph {
-                                ?kg ?p ?o . 
-                            }
-                            VALUES ?p { 
-                                dcterms:title
-                                dcterms:description
-                                dcat:accessURL
-                                dcat:downloadURL
-                                dcat:endpointDescription
-                                dcat:endpointURL 
-                            }
+                    BIND( IF (EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?kg a dcat:Dataset }
+                            UNION { ?kg a void:Dataset }
+                            UNION { ?kg a dcmitype:Dataset }
+                            UNION { ?kg a schema:Dataset }
+                            UNION { ?kg a sd:Dataset }
+                            UNION { ?kg a dataid:Dataset }
+                            ?kg ?p ?o . 
                         }
-                    )
-                }
-                """
-        ]
-        [
-            dcterms:description "At least one of the discoverability properties was found in metadata" ;
-            mf:action """
-                PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-                PREFIX schema: <http://schema.org/>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX pav: <http://purl.org/pav/>
-                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                PREFIX dqv: <http://www.w3.org/ns/dqv#>
-                PREFIX dce: <http://purl.org/dc/elements/1.1/>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-                INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
-                        rdfs:label "Structured metadata"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2A> ;
-                        dqv:value 2
-                    ] .
-                } WHERE {
-                    GRAPH ?kgGraph {
-                        ?kg a dcat:Dataset .
-                        ?kg ?p ?o . 
-                    }
-                    VALUES ?p { 
-                        dcterms:title
-                        dcterms:description
-                        dcat:accessURL
-                        dcat:downloadURL
-                        dcat:endpointDescription
-                        dcat:endpointURL 
-                    }
+                        VALUES ?p { 
+                            dcterms:title
+                            dcterms:description
+                            dcat:accessURL
+                            dcat:downloadURL
+                            dcat:endpointDescription
+                            dcat:endpointURL 
+                        }
+                    }, 2, 0) AS ?value)
+                    BIND(Iri(CONCAT(STR(?kgGraph), "#F2A")) AS ?measurement)
                 }
                 """
         ]
@@ -278,7 +225,7 @@
 <F2B.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            mf:action """
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -292,96 +239,25 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
+                    ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                    ?measurement a dqv:QualityMeasurement ;
                         rdfs:label "Structured metadata"@en ;
                         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
-                        dqv:value 0
-                    ] .
+                        dqv:value ?value .
                 } WHERE {
-                    FILTER (
-                        NOT EXISTS {
-                            GRAPH ?kgGraph {
-                                { ?s a ?elem . }
-                                UNION { ?s ?elem ?oGraph . }
-                            }
-                            SERVICE <https://lov.linkeddata.es/dataset/lov> {
-                                ?elem ?p ?o .
-                            }
+                    OPTIONAL {
+                        GRAPH ?kgGraph {
+                            { ?s a ?elem . }
+                            UNION { ?s ?elem ?oGraph . }
                         }
-                    )
-                }
-            """
-        ]
-        [
-            mf:action """
-                PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-                PREFIX schema: <http://schema.org/>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX pav: <http://purl.org/pav/>
-                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                PREFIX dqv: <http://www.w3.org/ns/dqv#>
-                PREFIX dce: <http://purl.org/dc/elements/1.1/>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-                INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
-                        rdfs:label "Structured metadata"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
-                        dqv:value 1
-                    ] .
-                } WHERE {
-                    {
-                        SELECT ?elem {
-                            GRAPH ?kgGraph {
-                                { ?s a ?elem . }
-                                UNION { ?s ?elem ?oGraph . }
-                            }
-                            SERVICE <https://lov.linkeddata.es/dataset/lov> {
-                                ?elem ?p ?o .
-                            }
-                        } LIMIT 1
-                    }
-                }
-            """
-        ]
-        [
-            mf:action """
-                PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-                PREFIX schema: <http://schema.org/>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX pav: <http://purl.org/pav/>
-                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                PREFIX dqv: <http://www.w3.org/ns/dqv#>
-                PREFIX dce: <http://purl.org/dc/elements/1.1/>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-                INSERT {
-                    ?kgGraph dqv:hasQualityMeasurement [
-                        a dqv:QualityMeasurement ;
-                        rdfs:label "Structured metadata"@en ;
-                        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
-                        dqv:value 2
-                    ] .
-                } WHERE {
-                    GRAPH ?kgGraph {
-                        { ?s a ?elem . }
-                        UNION { ?s ?elem ?oGraph . }
-                    }
-                    FILTER (
-                        EXISTS {
-                            SERVICE <https://lov.linkeddata.es/dataset/lov> {
-                                ?elem ?p ?o .
-                            }
+                        SERVICE <https://lov.linkeddata.es/dataset/lov> {
+                            ?elem ?p ?o .
                         }
-                    )
+                    }
+                    BIND (BOUND(?elem) AS ?hasLOV)
+                    BIND (! BOUND(?o) AS ?hasNotAllLOV)
+                    BIND ( IF(?hasLOV, IF(?hasNotAllLOV, 1, 2) , 0) AS ?value)
+                    BIND(Iri(CONCAT(STR(?kgGraph), "#F2A")) AS ?measurement)
                 }
             """
         ]
