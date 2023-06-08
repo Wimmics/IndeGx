@@ -9,21 +9,4 @@
         <Findability/_manifest.ttl>
         <Interoperability/_manifest.ttl>
         <Reusability/_manifest.ttl>
-    # ) ;
-    # mf:entries (
-    #     <final_score.ttl>
     ) .
-
-# <final_score.ttl> a mf:ManifestEntry ;
-#     kgi:requiredAssets (
-#         <Accessibility/_manifest.ttl>
-#         <Findability/_manifest.ttl>
-#         <Interoperability/_manifest.ttl>
-#         <Reusability/_manifest.ttl>
-#     ) ;
-#     kgi:onSuccess (
-#         [
-#             mf:action """
-#             """
-#         ]
-#     ) .
