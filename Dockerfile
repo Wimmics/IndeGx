@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 RUN set -eux; \
     apt-get update; \
     apt-get install -f -y --no-install-recommends \
-       bash sudo curl software-properties-common ca-certificates findutils coreutils gettext pwgen procps tini git default-jre wget \
+       bash sudo curl software-properties-common ca-certificates findutils coreutils gettext pwgen procps tini wget \
     ;
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
@@ -16,13 +16,6 @@ RUN aptitude install -y npm
 RUN npm install npm@latest -g && \
     npm install n -g && \
     n latest
-
-WORKDIR /
-
-WORKDIR /corese
-RUN wget "https://github.com/Wimmics/corese/releases/download/release-4.4.0/corese-server-4.4.0.jar" -O /corese/corese-server-4.4.0.jar
-RUN echo "DISABLE_OWL_AUTO_IMPORT = true" > corese-server.properties
-RUN echo "LOAD_IN_DEFAULT_GRAPH = true" >> corese-server.properties
 
 WORKDIR /indegx
 COPY indegx/package.json package.json

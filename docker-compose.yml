@@ -1,0 +1,20 @@
+version: '3'
+services:
+  corese:
+    image: wimmics/corese:latest
+    hostname: corese
+    environment:
+      OPTIONS: "-su"
+    expose: 
+      - "8080"
+    volumes:
+      - ./output:/usr/local/corese/log
+      - ./config:/usr/local/corese/config
+  indegx:
+    build: .
+    depends_on:
+      - corese
+    volumes:
+      - ./input:/input
+      - ./output:/output
+      - ./config:/indegx/config
