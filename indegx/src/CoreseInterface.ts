@@ -3,7 +3,7 @@ import * as $rdf from "rdflib";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
 
-export const coreseServerUrl = "http://localhost:8080/sparql";
+export const coreseServerUrl = "http://corese:8080/sparql";
 export const coreseDefaultGraphURI = "http://ns.inria.fr/corese/kgram/default";
 
 export function sendUpdate(endpoint: string, queryString: string, timeout: number = defaultQueryTimeout): Promise<any> {
