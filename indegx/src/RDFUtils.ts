@@ -59,6 +59,14 @@ export function sanitizeUrl(url: string, baseURI: string, filename?: string): st
     return result;
 }
 
+export function fixCommonTurtleStringErrors(ttlString: string): string {
+    let result = ttlString;
+    result = result.replaceAll("nodeID://", "_:"); // Dirty hack to fix nodeID:// from Virtuoso servers for turtle
+    result = result.replaceAll("genid-", "_:"); // Dirty hack to fix blank nodes with genid- prefix
+    result = result.replace(/([ \n])(b[0-9]+) /g, "$1_:$2 "); // Dirty hack to fix blank nodes with b prefix
+    result = result.replace(/([ \n])(node[0-9]+) /g, "$1_:$2 "); // Dirty hack to fix blank nodes with node prefix
+    return result;
+}
 
 export function createStore() {
     let store = $rdf.graph();
