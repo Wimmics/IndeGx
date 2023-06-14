@@ -34,9 +34,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             { ?kg a dcat:Dataset }
@@ -74,14 +72,12 @@
                     GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
-                            rdfs:label "Structured metadata"@en ;
+                            rdfs:label "Authorisation procedure or access rights"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/A1#A12> ;
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             { ?kg a dcat:Dataset }

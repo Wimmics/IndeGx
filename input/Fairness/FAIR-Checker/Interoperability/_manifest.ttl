@@ -38,9 +38,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND(IF (EXISTS { 
                             GRAPH ?kgGraph { 
                                 ?s a dcat:Dataset .
@@ -111,9 +109,7 @@
                             dqv:value 0 .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     FILTER(NOT EXISTS {
                         GRAPH ?kgGraph {
                             ?s ?p ?o .
@@ -155,9 +151,6 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
-                    GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
@@ -193,14 +186,12 @@
                     GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
-                            rdfs:label "Structured metadata"@en ;
+                            rdfs:label "Human-readable vocabularies"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2A> ;
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             ?kg ?p ?o . 
@@ -337,9 +328,6 @@
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
                     {
                         SELECT (count(?ns) AS ?countVocab) ?kgGraph {
                             SELECT ?ns ?kgGraph {

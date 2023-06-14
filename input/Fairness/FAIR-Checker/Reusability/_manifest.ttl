@@ -44,9 +44,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             ?kg ?p ?o . 
@@ -93,14 +91,12 @@
                     GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
-                            rdfs:label "Metadata includes license"@en ;
+                            rdfs:label "Metadata includes provenance"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/R1#R12> ;
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             ?kg ?p ?o . 
@@ -114,11 +110,11 @@
                             prov:wasAssociatedWith
                             prov:startedAtTime 
                             prov:endedAtTime
-                            dct:hasVersion
-                            dct:isVersionOf 
-                            dct:creator 
-                            dct:contributor 
-                            dct:publisher
+                            dcterms:hasVersion
+                            dcterms:isVersionOf 
+                            dcterms:creator 
+                            dcterms:contributor 
+                            dcterms:publisher
                             pav:hasVersion
                             pav:version 
                             pav:hasCurrentVersion 
@@ -168,7 +164,7 @@
                     GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
-                            rdfs:label "Machine-readable vocabularies"@en ;
+                            rdfs:label "Community standards"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/R1#R13> ;
                             dqv:value ?value .
                     }

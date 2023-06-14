@@ -47,7 +47,7 @@
                            ?service sd:endpoint $rawEndpointUrl . }
                     ?kg ?p ?o .
                 }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Graph")) AS ?kgGraph)
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
             }
             """
         ]

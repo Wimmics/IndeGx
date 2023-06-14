@@ -37,9 +37,6 @@
                             dqv:value 0 .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o .
-                    }
                     FILTER(NOT EXISTS {
                         GRAPH ?kgGraph {
                             { ?kg a dcat:Dataset }
@@ -164,9 +161,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             { ?kg a dcat:Dataset }
@@ -214,9 +209,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {
-                        ?s ?p ?o
-                    }
+                    GRAPH ?kgGraph {}
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             { ?kg a dcat:Dataset }
@@ -262,13 +255,12 @@
                     GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
-                            rdfs:label "Structured metadata"@en ;
+                            rdfs:label "Shared vocabularies for metadata"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
                             dqv:value ?value .
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?s ?p ?o
                     }
                     OPTIONAL {
                         GRAPH ?kgGraph {
@@ -282,7 +274,7 @@
                     BIND (BOUND(?elem) AS ?hasLOV)
                     BIND (! BOUND(?o) AS ?hasNotAllLOV)
                     BIND ( IF(?hasLOV, IF(?hasNotAllLOV, 1, 2) , 0) AS ?value)
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#F2A")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kgGraph), "#F2B")) AS ?measurement)
                 }
             """
         ]
