@@ -6,6 +6,7 @@
     mf:entries (
         <R11.ttl>
         <R12.ttl>
+        <R13.ttl>
     ) .
 
 <R11.ttl> a mf:ManifestEntry ;
@@ -160,6 +161,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kgGraph dqv:hasQualityMeasurement ?measurement .
@@ -170,8 +172,8 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                        ?measurement a dqv:QualityMeasurement ;
+                        ?kgGraph dqv:hasQualityMeasurement ?F2Bmeasurement .
+                        ?F2Bmeasurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
                             dqv:value ?value .
                     }

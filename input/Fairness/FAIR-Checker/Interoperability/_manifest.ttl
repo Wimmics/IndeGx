@@ -151,8 +151,8 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                        ?measurement a dqv:QualityMeasurement ;
+                        ?kgGraph dqv:hasQualityMeasurement ?F2Bmeasurement .
+                        ?F2Bmeasurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
                             dqv:value ?value .
                     }
@@ -251,8 +251,8 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                        ?measurement a dqv:QualityMeasurement ;
+                        ?kgGraph dqv:hasQualityMeasurement ?F2Ameasurement .
+                        ?F2Ameasurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2A> ;
                             dqv:value ?value .
                     }
@@ -292,8 +292,8 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
-                        ?measurement a dqv:QualityMeasurement ;
+                        ?kgGraph dqv:hasQualityMeasurement ?F2Bmeasurement .
+                        ?F2Bmeasurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
                             dqv:value ?value .
                     }
