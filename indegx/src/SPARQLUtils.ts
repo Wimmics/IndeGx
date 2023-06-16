@@ -2,7 +2,6 @@ import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise } from "./GlobalUti
 import * as RDFUtils from "./RDFUtils.js";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
-import { Query } from "rdflib";
 
 export let defaultQueryTimeout = 60000;
 
@@ -24,7 +23,7 @@ export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQue
     } else if (isSparqlConstruct(query)) {
         return fetchGETPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=turtle&timeout=' + timeout).then(result => {
             let resultStore = RDFUtils.createStore();
-            result = result.replaceAll("nodeID://", "_:") // Dirty hack to fix nodeID:// from Virtuoso servers for turtle
+            result = RDFUtils.fixCommonTurtleStringErrors(result)
             return RDFUtils.parseTurtleToStore(result, resultStore).catch(error => {
                 Logger.error(endpoint, query, error, result);
                 return;

@@ -1,5 +1,4 @@
 import * as $rdf from "rdflib";
-import * as fs from "fs";
 import * as Global from "./GlobalUtils.js";
 import * as Logger from "./LogUtils.js"
 import ttl_read from "@graphy/content.ttl.read";
@@ -60,11 +59,13 @@ export function sanitizeUrl(url: string, baseURI: string, filename?: string): st
 }
 
 export function fixCommonTurtleStringErrors(ttlString: string): string {
+    const regexBnB = /([ \n])(b[0-9]+) /g;
+    const regexNodeB = /([ \n])(node[0-9]+) /g;
     let result = ttlString;
     result = result.replaceAll("nodeID://", "_:"); // Dirty hack to fix nodeID:// from Virtuoso servers for turtle
     result = result.replaceAll("genid-", "_:"); // Dirty hack to fix blank nodes with genid- prefix
-    result = result.replace(/([ \n])(b[0-9]+) /g, "$1_:$2 "); // Dirty hack to fix blank nodes with b prefix
-    result = result.replace(/([ \n])(node[0-9]+) /g, "$1_:$2 "); // Dirty hack to fix blank nodes with node prefix
+    result = result.replaceAll(regexBnB, "$1_:$2 "); // Dirty hack to fix blank nodes with b prefix
+    result = result.replaceAll(regexNodeB, "$1_:$2 "); // Dirty hack to fix blank nodes with node prefix
     return result;
 }
 
@@ -332,6 +333,7 @@ export function parseTurtleToStore(content: string, store: $rdf.Store, base = KG
     return new Promise((accept, reject) => {
         try {
             content = Global.unicodeToUrlendcode(content)
+            content = fixCommonTurtleStringErrors(content)
             $rdf.parse(content, store, base, "text/turtle", (err, kb) => {
                 if (err != null) {
                     reject(err);
