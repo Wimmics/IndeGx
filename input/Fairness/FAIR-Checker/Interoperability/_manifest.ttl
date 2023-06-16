@@ -7,8 +7,10 @@
         <I1.ttl>
         <I1A.ttl>
         <I1B.ttl>
+        <I2.ttl>
         <I2A.ttl>
         <I2B.ttl>
+        <I3.ttl>
     ) .
 
 <I1.ttl> a mf:ManifestEntry ;
@@ -31,21 +33,28 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Machine readable format"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1> ;
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {}
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
+                    }
                     BIND(IF (EXISTS { 
                             GRAPH ?kgGraph { 
                                 ?s a dcat:Dataset .
                                 ?s ?p ?o . 
                             } 
                         }, 2, 0) AS ?value)
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#I1")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kg), "#I1")) AS ?measurement)
                 }
                 """
         ]
@@ -70,7 +79,7 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Any structured information"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1A> ;
@@ -78,10 +87,16 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
                         ?s ?p ?o
                     }
                     BIND(IF (EXISTS { GRAPH ?kgGraph { ?s ?p ?o . } }, 2, 0) AS ?value)
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#I1A")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kg), "#I1A")) AS ?measurement)
                 }
                 """
         ]
@@ -102,20 +117,27 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Any structured information"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1A> ;
                             dqv:value 0 .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {}
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
+                    }
                     FILTER(NOT EXISTS {
                         GRAPH ?kgGraph {
                             ?s ?p ?o .
                         }
                     })
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#I1A")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kg), "#I1A")) AS ?measurement)
                 }
                 """
         ]
@@ -143,7 +165,7 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Ontological and machine-resolvable formats"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1B> ;
@@ -151,17 +173,16 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?F2Bmeasurement .
+                        ?kg dqv:hasQualityMeasurement ?F2Bmeasurement .
                         ?F2Bmeasurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
                             dqv:value ?value .
                     }
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#I1B")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kg), "#I1B")) AS ?measurement)
                 }
             """
         ]
     ) .
-
 
 <I2A.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
@@ -184,14 +205,21 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Human-readable vocabularies"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2A> ;
                             dqv:value ?value .
                     }
                 } WHERE {
-                    GRAPH ?kgGraph {}
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
+                    }
                     BIND( IF (EXISTS {
                         GRAPH ?kgGraph {
                             ?kg ?p ?o . 
@@ -215,7 +243,7 @@
                             skos:note
                         }
                     }, 2, 0) AS ?value )
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#I2A")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kg), "#I2A")) AS ?measurement)
                 }
                 """
         ]
@@ -243,7 +271,7 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Machine-readable vocabularies"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2B> ;
@@ -251,7 +279,7 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?F2Ameasurement .
+                        ?kg dqv:hasQualityMeasurement ?F2Ameasurement .
                         ?F2Ameasurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2A> ;
                             dqv:value ?value .
@@ -284,7 +312,7 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Machine-readable vocabularies"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2> ;
@@ -292,7 +320,7 @@
                     }
                 } WHERE {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?F2Bmeasurement .
+                        ?kg dqv:hasQualityMeasurement ?F2Bmeasurement .
                         ?F2Bmeasurement a dqv:QualityMeasurement ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
                             dqv:value ?value .
@@ -321,7 +349,7 @@
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 INSERT {
                     GRAPH ?kgGraph {
-                        ?kgGraph dqv:hasQualityMeasurement ?measurement .
+                        ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "External links"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I3> ;
@@ -329,23 +357,29 @@
                     }
                 } WHERE {
                     {
-                        SELECT (count(?ns) AS ?countVocab) ?kgGraph {
-                            SELECT ?ns ?kgGraph {
+                        SELECT (count(?ns) AS ?countVocab) ?kg ?kgGraph {
+                            SELECT ?ns ?kg ?kgGraph {
                                 {
-                                    SELECT DISTINCT ?elem {
+                                    SELECT DISTINCT ?elem ?kg ?kgGraph {
                                         GRAPH ?kgGraph {
                                             { ?s ?elem ?o . }
                                             UNION { ?s a ?elem . }
+                                            { ?kg a dcat:Dataset }
+                                            UNION { ?kg a void:Dataset }
+                                            UNION { ?kg a dcmitype:Dataset }
+                                            UNION { ?kg a schema:Dataset }
+                                            UNION { ?kg a sd:Dataset }
+                                            UNION { ?kg a dataid:Dataset }
                                         }
                                     }
                                 }
                                 BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
                             }
-                            GROUP BY ?ns
-                        }
+                            GROUP BY ?kg ?ns ?kgGraph
+                        } GROUP BY ?kg ?kgGraph
                     }
                     BIND(IF(?countVocab > 2, 2, 0) AS ?value)
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#I3")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kg), "#I3")) AS ?measurement)
                 }
             """
         ]

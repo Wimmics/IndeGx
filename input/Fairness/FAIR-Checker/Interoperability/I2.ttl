@@ -7,6 +7,4 @@
 
 <> rdf:type kgi:DummyTest ;
     dcterms:isReferencedBy <_manifest.ttl> ;
-    dcterms:description """Weak: FAIR-Checker verifies that at least one used ontology class or property are known in major ontology registries (OLS, BioPortal, LOV)
-    
-            Strong: FAIR-Checker verifies that all used ontology classes or properties are known in major ontology registries (OLS, BioPortal, LOV)""" .
+    dcterms:description "FAIR-Checker verifies that at least one RDF triple can be found in metadata" .
