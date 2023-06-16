@@ -1,5 +1,7 @@
 # FAIR-Checker evaluation reimplementation
 
+Extract the list of kgs and the measures they have been evaluated with.
+
 ```sparql
 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
@@ -10,7 +12,7 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dqv: <http://www.w3.org/ns/dqv#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-SELECT DISTINCT ?kg ?measure ?value WHERE {
+SELECT DISTINCT ?endpointUrl ?kg ?measure ?value WHERE {
   GRAPH ?kgGraph {
     ?kg dqv:hasQualityMeasurement ?measurement .
     
@@ -45,6 +47,8 @@ SELECT DISTINCT ?kg ?measure ?value WHERE {
 }
 ```
 
+Extract the list of the values of the evaluation for each KG.
+
 ```sparql
 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
@@ -55,7 +59,7 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dqv: <http://www.w3.org/ns/dqv#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-SELECT DISTINCT ?kg ?endpointUrl ?measureF1A ?measureF1B ?measureF2A ?measureF2B ?measureA11 ?measureA12 ?measureI1 ?measureI1A ?measureI1B ?measureI2 ?measureI2A ?measureI2B ?measureI3 ?measureR11 ?measureR12 ?measureR13 WHERE {
+SELECT DISTINCT ?endpointUrl ?kg  ?measureF1A ?measureF1B ?measureF2A ?measureF2B ?measureA11 ?measureA12 ?measureI1 ?measureI1A ?measureI1B ?measureI2 ?measureI2A ?measureI2B ?measureI3 ?measureR11 ?measureR12 ?measureR13 WHERE {
   GRAPH ?kgGraph {
     ?kg dqv:hasQualityMeasurement ?measurementF1A, ?measurementF1B, ?measurementF2A, ?measurementF2B, ?measurementA11, ?measurementA12, ?measurementI1, ?measurementI1A, ?measurementI1B, ?measurementI2, ?measurementI2A, ?measurementI2B, ?measurementI3, ?measurementR11, ?measurementR12, ?measurementR13 .
     
