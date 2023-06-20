@@ -8,6 +8,7 @@ export let millisecondsBetweenRetries = 5000;
 let countConcurrentQueries = 0;
 export let maxConccurentQueries = 300;
 export let delayMillisecondsTimeForConccurentQuery = 1000
+export let delayMillisecondsBetweenIterativePromises = 0
 
 export function getCountConccurentQueries() {
     return countConcurrentQueries;
@@ -79,12 +80,12 @@ type promiseCreationFunction = {
  * @param promiseCreationFunction A function generating a promise from the elements in the args arrays.
  * @returns a promise resolved when all the promises created by the promiseCreationFunction are resolved.
  */
-export function iterativePromises(args: Array<Array<any>>, promiseCreationFunction: promiseCreationFunction): Promise<void> {
+export function iterativePromises(args: Array<Array<any>>, promiseCreationFunction: promiseCreationFunction, delayMilliseconds: number): Promise<void> {
     let argsCopy = args.map(arg => arg);
     if (argsCopy.length > 0) {
         return promiseCreationFunction.apply(this, argsCopy[0]).then(() => {
             argsCopy.shift();
-            return iterativePromises(argsCopy, promiseCreationFunction);
+            return setTimeout(delayMillisecondsBetweenIterativePromises).then(() => iterativePromises(argsCopy, promiseCreationFunction, delayMilliseconds));
         })
     }
     return new Promise<void>((resolve, reject) => resolve());
