@@ -70,6 +70,8 @@ Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((resultsObject) 
     let promisesArray: Promise<any>[] = [];
     resultsObjectArray.forEach((resultObject) => {
         promisesArray.push(Global.fetchJSONPromise("https://fair-checker.france-bioinformatique.fr/api/check/metrics_all?url=" + Global.unicodeToUrlendcode(resultObject.kg)).then((results) => {
+        const APIQuery = "https://fair-checker.france-bioinformatique.fr/api/check/metrics_all?url=" + Global.unicodeToUrlendcode(resultObject.kg);
+        promisesArray.push(Global.fetchJSONPromise(APIQuery).then((results) => {
             resultsObjectArray[resultsObjectArray.findIndex(tmpResult => tmpResult.kg === resultObject.kg && tmpResult.endpointUrl === resultObject.endpointUrl)].apiScore.push(results);
             return results;
         }))
@@ -206,6 +208,15 @@ Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((resultsObject) 
                 let measureR11 = binding.measureR11.value
                 let measureR12 = binding.measureR12.value
                 let measureR13 = binding.measureR13.value
+
+                if (!resultsObjectArray.find(tmpResult => tmpResult.kg === kg && tmpResult.endpointUrl === endpointUrl)) {
+                    resultsObjectArray.push({
+                        endpointUrl: endpointUrl,
+                        kg: kg,
+                        indegxScore: [],
+                        apiScore: []
+                    })
+                }
 
                 resultsObjectArray[resultsObjectArray.findIndex(tmpResult => tmpResult.kg === kg && tmpResult.endpointUrl === endpointUrl)].indegxScore.push({
                     endpointUrl: endpointUrl,

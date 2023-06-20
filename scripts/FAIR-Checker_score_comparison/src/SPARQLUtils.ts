@@ -14,8 +14,8 @@ export function setDefaultQueryTimeout(timeout: number) {
 }
 
 export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQueryTimeout): Promise<any> {
-    let jsonHeaders = new Map();
-    jsonHeaders.set("Accept", "application/sparql-results+json")
+    let jsonHeaders = {};
+    jsonHeaders["Accept"] = "application/sparql-results+json";
     if (isSparqlSelect(query)) {
         return fetchJSONPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout, jsonHeaders).catch(error => { Logger.error(endpoint, query, error); throw error })
     } else if (isSparqlAsk(query)) {
@@ -37,8 +37,8 @@ export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQue
 }
 
 export function sendUpdateQuery(endpoint, updateQuery) {
-    let updateHeader = new Map();
-    updateHeader.set('Content-Type', 'application/sparql-update');
+    let updateHeader = {};
+    updateHeader['Content-Type'] = 'application/sparql-update';
     return fetchPOSTPromise(endpoint, updateQuery, updateHeader).then(response => {
         return response;
     }).catch(error => {

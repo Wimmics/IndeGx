@@ -90,12 +90,12 @@ export function iterativePromises(args: Array<Array<any>>, promiseCreationFuncti
     return new Promise<void>((resolve, reject) => resolve());
 }
 
-export function fetchPromise(url: string, header = new Map(), method = "GET", query = "", numTry = 0): Promise<any> {
-    let myHeaders = new Headers();
-    myHeaders.set('pragma', 'no-cache');
-    myHeaders.set('cache-control', 'no-cache');
-    header.forEach((value, key) => {
-        myHeaders.set(key, value);
+export function fetchPromise(url: string, header: Record<string, string> = {}, method = "GET", query = "", numTry = 0): Promise<any> {
+    let myHeaders = {};
+    myHeaders["pragma"] = "no-cache";
+    myHeaders["cache-control"] = "no-cache";
+    Object.keys(header).forEach(key => {
+        myHeaders[key] = header[key];
     });
     let myInit: RequestInit = {
         method: method,
@@ -136,22 +136,21 @@ export function fetchPromise(url: string, header = new Map(), method = "GET", qu
     }
 }
 
-export function fetchGETPromise(url, header = new Map()): Promise<any> {
+export function fetchGETPromise(url, header: Record<string, string> = {}): Promise<any> {
     return fetchPromise(url, header);
 }
 
-export function fetchPOSTPromise(url, query = "", header = new Map()): Promise<any> {
+export function fetchPOSTPromise(url, query = "", header: Record<string, string> = {}): Promise<any> {
     return fetchPromise(url, header, "POST", query);
 }
 
-export function fetchJSONPromise(url, otherHeaders = new Map()): Promise<any> {
-    let header = new Map();
-    header.set('accept', 'application/json');
-    otherHeaders.forEach((value, key) => {
-        header.set(key, value)
-    })
-    return fetchPromise(url, header).then(response => {
-        Logger.log("fetchJSONPromise", url, header, response)
+export function fetchJSONPromise(url, otherHeaders: Record<string, string> = {}): Promise<any> {
+    let header = {};
+    header['accept'] = 'application/json';
+    Object.keys(otherHeaders).forEach(key => {
+        header[key] = otherHeaders[key];
+    });
+    return fetchGETPromise(url, header).then(response => {
         if(response == null || response == undefined || response == "") {
             return {};
         } else {
