@@ -80,7 +80,7 @@ type promiseCreationFunction = {
  * @param promiseCreationFunction A function generating a promise from the elements in the args arrays.
  * @returns a promise resolved when all the promises created by the promiseCreationFunction are resolved.
  */
-export function iterativePromises(args: Array<Array<any>>, promiseCreationFunction: promiseCreationFunction, delayMilliseconds: number): Promise<void> {
+export function iterativePromises(args: Array<Array<any>>, promiseCreationFunction: promiseCreationFunction, delayMilliseconds: number = delayMillisecondsBetweenIterativePromises): Promise<void> {
     let argsCopy = args.map(arg => arg);
     if (argsCopy.length > 0) {
         return promiseCreationFunction.apply(this, argsCopy[0]).then(() => {
@@ -127,7 +127,7 @@ export function fetchPromise(url: string, header: Record<string, string> = {}, m
                         Logger.error("Too many retries", error);
                     }
                 } else {
-                    Logger.error("Too many retries", error);
+                    Logger.error("Error during fetch", error);
                 }
             }).finally(() => {
                 countConcurrentQueries--;

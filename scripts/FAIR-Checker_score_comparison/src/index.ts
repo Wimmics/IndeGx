@@ -1,10 +1,13 @@
 import * as Sparql from "./SPARQLUtils.js"
 import * as Log from "./LogUtils.js"
 import * as Global from "./GlobalUtils.js"
+import * as fsPromises from 'node:fs/promises';
+import * as fs from 'node:fs';
 
 const localEndpointUrl = "http://localhost:3030/FAIR-Checker/sparql"
+const resultFilename = "results.json";
 
-type resultObject = {
+type ResultObject = {
     kg: string,
     endpointUrl: string,
     apiScore: any[],
@@ -57,34 +60,50 @@ SELECT DISTINCT ?kg ?endpointUrl WHERE {
 }
 `;
 
-Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((resultsObject) => {
-    let resultsObjectArray: resultObject[] = []
-    resultsObject.results.bindings.forEach((binding) => {
-        Log.log(binding.kg.value)
-        resultsObjectArray.push({ kg: binding.kg.value, endpointUrl: binding.endpointUrl.value, apiScore: [], indegxScore: [] })
-    })
-    return resultsObjectArray;
-}).then(resultsObjectArray => {
+function dataTreatment() {
+    if (!fs.existsSync("results.json")) {
+        return Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((resultsObject) => {
+            let resultsObjectArray: ResultObject[] = []
+            resultsObject.results.bindings.forEach((binding) => {
+                resultsObjectArray.push({ kg: binding.kg.value, endpointUrl: binding.endpointUrl.value, apiScore: [], indegxScore: [] })
+            })
+            return resultsObjectArray;
+        }).then(resultsObjectArray => {
 
-    // For each KG, retrieve their score through the FAIR Checker API
-    let promisesArray: Promise<any>[] = [];
-    resultsObjectArray.forEach((resultObject) => {
-        promisesArray.push(Global.fetchJSONPromise("https://fair-checker.france-bioinformatique.fr/api/check/metrics_all?url=" + Global.unicodeToUrlendcode(resultObject.kg)).then((results) => {
-        const APIQuery = "https://fair-checker.france-bioinformatique.fr/api/check/metrics_all?url=" + Global.unicodeToUrlendcode(resultObject.kg);
-        promisesArray.push(Global.fetchJSONPromise(APIQuery).then((results) => {
-            resultsObjectArray[resultsObjectArray.findIndex(tmpResult => tmpResult.kg === resultObject.kg && tmpResult.endpointUrl === resultObject.endpointUrl)].apiScore.push(results);
-            return results;
-        }))
-    })
+            // For each KG, retrieve their score through the FAIR Checker API
+            let promisesArgsArray: any[][] = [];
+            resultsObjectArray.forEach((resultObject) => {
+                const APIQuery = "https://fair-checker.france-bioinformatique.fr/api/check/metrics_all?url=" + Global.unicodeToUrlendcode(resultObject.kg);
+                promisesArgsArray.push([resultObject, APIQuery]);
+            })
+            function promiseFunction(resultObject: ResultObject, query: string) {
+                return Global.fetchJSONPromise(query).then((APIResultObject: any[] | { message }) => {
+                    let resultsIndex = resultsObjectArray.findIndex(tmpResult => tmpResult.kg === resultObject.kg && tmpResult.endpointUrl === resultObject.endpointUrl);
+                    if (resultsIndex === -1) {
+                        Log.error("Error: could not find the result object for", query);
+                        return;
+                    }
+                    if (!Array.isArray(APIResultObject) && APIResultObject.message !== undefined) {
+                        Log.error("Error: could not find the API result object for", query, "because of", APIResultObject.message);
+                        return;
+                    }
+                    if (APIResultObject === undefined || !Array.isArray(APIResultObject) || APIResultObject.length === 0) {
+                        Log.error("Error: could not find the API result object for", query);
+                        return;
+                    }
+                    resultsObjectArray[resultsIndex].apiScore.push(APIResultObject);
+                    return;
+                })
+            }
 
-    return Promise.allSettled(promisesArray).then(() => {
-        return resultsObjectArray;
-    })
+            return Global.iterativePromises(promisesArgsArray, promiseFunction, 1000).then(() => {
+                return resultsObjectArray;
+            })
 
-}).then((resultsObjectArray) => {
-    
-        // Compare the scores to the ones available in the Indegx endpoint
-        const measureQuery = `
+        }).then((resultsObjectArray) => {
+
+            // Compare the scores to the ones available in the Indegx endpoint
+            const measureQuery = `
         PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
         PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
         PREFIX schema: <http://schema.org/>
@@ -188,69 +207,133 @@ Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((resultsObject) 
          }
         }`
 
-    return Sparql.sparqlQueryPromise(localEndpointUrl, measureQuery).then((results) => {
-            results.results.bindings.forEach((binding) => {
-                let endpointUrl = binding.endpointUrl.value
-                let kg = binding.kg.value
-                let measureF1A = binding.measureF1A.value
-                let measureF1B = binding.measureF1B.value
-                let measureF2A = binding.measureF2A.value
-                let measureF2B = binding.measureF2B.value
-                let measureA11 = binding.measureA11.value
-                let measureA12 = binding.measureA12.value
-                let measureI1 = binding.measureI1.value
-                let measureI1A = binding.measureI1A.value
-                let measureI1B = binding.measureI1B.value
-                let measureI2 = binding.measureI2.value
-                let measureI2A = binding.measureI2A.value
-                let measureI2B = binding.measureI2B.value
-                let measureI3 = binding.measureI3.value
-                let measureR11 = binding.measureR11.value
-                let measureR12 = binding.measureR12.value
-                let measureR13 = binding.measureR13.value
+            return Sparql.sparqlQueryPromise(localEndpointUrl, measureQuery).then((results) => {
+                results.results.bindings.forEach((binding) => {
+                    let endpointUrl = binding.endpointUrl.value
+                    let kg = binding.kg.value
+                    let measureF1A = binding.measureF1A.value
+                    let measureF1B = binding.measureF1B.value
+                    let measureF2A = binding.measureF2A.value
+                    let measureF2B = binding.measureF2B.value
+                    let measureA11 = binding.measureA11.value
+                    let measureA12 = binding.measureA12.value
+                    let measureI1 = binding.measureI1.value
+                    let measureI1A = binding.measureI1A.value
+                    let measureI1B = binding.measureI1B.value
+                    let measureI2 = binding.measureI2.value
+                    let measureI2A = binding.measureI2A.value
+                    let measureI2B = binding.measureI2B.value
+                    let measureI3 = binding.measureI3.value
+                    let measureR11 = binding.measureR11.value
+                    let measureR12 = binding.measureR12.value
+                    let measureR13 = binding.measureR13.value
 
-                if (!resultsObjectArray.find(tmpResult => tmpResult.kg === kg && tmpResult.endpointUrl === endpointUrl)) {
-                    resultsObjectArray.push({
-                        endpointUrl: endpointUrl,
-                        kg: kg,
-                        indegxScore: [],
-                        apiScore: []
+                    if (!resultsObjectArray.find(tmpResult => tmpResult.kg === kg && tmpResult.endpointUrl === endpointUrl)) {
+                        resultsObjectArray.push({
+                            endpointUrl: endpointUrl,
+                            kg: kg,
+                            indegxScore: [],
+                            apiScore: []
+                        })
+                    }
+
+                    resultsObjectArray[resultsObjectArray.findIndex(tmpResult => tmpResult.kg === kg && tmpResult.endpointUrl === endpointUrl)].indegxScore.push({
+                        "endpointUrl": endpointUrl,
+                        "kg": kg,
+                        "F1A": measureF1A,
+                        "F1B": measureF1B,
+                        "F2A": measureF2A,
+                        "F2B": measureF2B,
+                        "A1.1": measureA11,
+                        "A1.2": measureA12,
+                        "I1": measureI1,
+                        "I1A": measureI1A,
+                        "I1B": measureI1B,
+                        "I2": measureI2,
+                        "I2A": measureI2A,
+                        "I2B": measureI2B,
+                        "I3": measureI3,
+                        "R1.1": measureR11,
+                        "R1.2": measureR12,
+                        "R1.3": measureR13
                     })
-                }
-
-                resultsObjectArray[resultsObjectArray.findIndex(tmpResult => tmpResult.kg === kg && tmpResult.endpointUrl === endpointUrl)].indegxScore.push({
-                    endpointUrl: endpointUrl,
-                    kg: kg,
-                    F1A: measureF1A,
-                    F1B: measureF1B,
-                    F2A: measureF2A,
-                    F2B: measureF2B,
-                    A11: measureA11,
-                    A12: measureA12,
-                    I1: measureI1,
-                    I1A: measureI1A,
-                    I1B: measureI1B,
-                    I2: measureI2,
-                    I2A: measureI2A,
-                    I2B: measureI2B,
-                    I3: measureI3,
-                    R11: measureR11,
-                    R12: measureR12,
-                    R13: measureR13
                 })
-            })
-        }).then(() => {
-        return resultsObjectArray
-    });
+            }).then(() => {
+                return resultsObjectArray
+            });
 
-}).then(resultsObjectArray => {
+        }).then((resultsObjectArray) => {
 
-    Global.writeFile("result.json", JSON.stringify(resultsObjectArray))
+            // Write the results to a file
 
-}).catch((error) => {
+            Global.writeFile(resultFilename, JSON.stringify(resultsObjectArray).replaceAll('"metric": null', '"metric": "I1"'))
+            return resultsObjectArray;
+        })
+    } else {
+        return fsPromises.readFile(resultFilename, 'utf8').then(fileContent => (JSON.parse(fileContent) as ResultObject[]))
+    }
+}
+
+dataTreatment()
+.then((resultsObjectArray) => {
+
+    // Write the comparison results to a file
+    let csvHeaders = [
+        "Endpoint",
+        "KG"
+    ];
+    const fairKeys = [
+        "F1A",
+        "F1B",
+        "F2A",
+        "F2B",
+        "A1.1",
+        "A1.2",
+        "I1",
+        "I1A",
+        "I1B",
+        "I2",
+        "I2A",
+        "I2B",
+        "I3",
+        "R1.1",
+        "R1.2",
+        "R1.3"
+    ];
+    csvHeaders = csvHeaders.concat(fairKeys);
+    let csvComparison = csvHeaders.join(",") + "\n"
+    let csvScores = csvHeaders.join(",") + "\n"
+    resultsObjectArray.forEach((resultObject) => {
+        let csvComparisonLine = [resultObject.endpointUrl, resultObject.kg];
+        let csvScoresLine = [resultObject.endpointUrl, resultObject.kg];
+        let indegxScore = resultObject.indegxScore.at(0)
+        fairKeys.forEach((fairKey) => {
+            let fairKeyIndegxScore = indegxScore[fairKey];
+            let apiScore = "NA";
+            if(resultObject.apiScore.at(0) !== undefined) {
+                let correspondingApiScoreObject = resultObject.apiScore.at(0).find(apiScoreObject => apiScoreObject.metric !== undefined && apiScoreObject.metric.localeCompare(fairKey) === 0);
+                if (correspondingApiScoreObject !== undefined) {
+                    apiScore = correspondingApiScoreObject.score;
+                }
+            }
+            csvScoresLine.push(apiScore + " (" + fairKeyIndegxScore + ")");
+            if (isNaN(Number(apiScore))) {
+                csvComparisonLine.push(apiScore);
+            } else {
+                Log.log(resultObject.kg, fairKey, ": IndeGx=", fairKeyIndegxScore, " FAIR Checker=", apiScore)
+                csvComparisonLine.push((fairKeyIndegxScore.localeCompare(apiScore) === 0).toString());
+            }
+        })
+        csvComparison += csvComparisonLine.join(",") + "\n"
+        csvScores += csvScoresLine.join(",") + "\n"
+    })
+
+    Global.writeFile("results_comparison.csv", csvComparison)
+    Global.writeFile("results_scores.csv", csvScores)
+    return ;
+})
+.catch((error) => {
     Log.error(error)
 })
 
-
-// Write the results to a file
 
