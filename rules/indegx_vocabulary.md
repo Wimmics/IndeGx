@@ -1,3 +1,5 @@
+Markdown documentation created by [pyLODE](http://github.com/rdflib/pyLODE) 2.13.2
+
 # IndeGx vocabulary
 
 ## Metadata
@@ -5,10 +7,11 @@
 * **URI**
   * `http://ns.inria.fr/kg/index#`
 * **Publisher(s)**
-  * INRIA, Team WIMMICS
-  * [wimmics](https://www.inria.fr/fr/wimmics)
+  * [INRIA](https://www.inria.fr), [Team WIMMICS](https://www.inria.fr/fr/wimmics)
 * **Creators(s)**
   * [Pierre Maillot](https://orcid.org/0000-0002-9814-439X)
+* **Ontology RDF**
+  * RDF ([indegx_vocabulary.ttl](turtle))
 
 ### Description
 
@@ -17,20 +20,27 @@ Vocabulary extending the manifest and EARL vocabularies for the declaration of t
 ## Table of Contents
 
 1. [Classes](#classes)
-1. [Properties](#properties)
+1. [Object Properties](#objectproperties)
+1. [Datatype Properties](#datatypeproperties)
 1. [Namespaces](#namespaces)
 1. [Legend](#legend)
 
-## Overview
-
-**Figure 1:** Ontology overview
-
 ## Classes
 
+* [Action](#action)
 * [Commonality description](#Commonalitydescription)
 * [Placeholder test](#Placeholdertest)
 * [Generation asset.](#Generationasset.)
 * [Query test](#Querytest)
+
+### Action
+
+Property | Value
+--- | ---
+URI | `http://ns.inria.fr/kg/index#Action`
+Description | Action object. Must be linked with the property kgi:action to a SPARQL query
+Super-classes |[Generation asset.](#Generationasset.) (c)<br />
+In domain of |[recommended pagination](#recommendedpagination) (dp)<br />[timeout](#timeout) (dp)<br />[mf:action](http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#action)<br />
 
 ### Commonality description
 
@@ -39,7 +49,7 @@ Property | Value
 URI | `http://ns.inria.fr/kg/index#CommonalityDescription`
 Is Defined By | <http://ns.inria.fr/kg/index#>
 Description | Description of the common elements between datasets. This is designed to give the elements that are common between the descriptions of groups of datasets
-In domain of |[dataset](#dataset)<br />
+In domain of |[dataset](#dataset) (op)<br />
 
 ### Placeholder test
 
@@ -57,8 +67,8 @@ Property | Value
 URI | `http://ns.inria.fr/kg/index#GenerationAsset`
 Is Defined By | <http://ns.inria.fr/kg/index#>
 Description | A generation asset is a test or an action that can be applied by IndeGx to a dataset to generate its description.
-Sub-classes |[mf:ManifestEntry](http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry) (c)<br />[mf:Manifest](http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#Manifest) (c)<br />[earl:TestCase](http://www.w3.org/ns/earl#TestCase) (c)<br />
-In range of |[required assets](#requiredassets)<br />
+Sub-classes |[earl:TestCase](http://www.w3.org/ns/earl#TestCase) (c)<br />[Action](#action) (c)<br />[mf:Manifest](http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#Manifest) (c)<br />[mf:ManifestEntry](http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry) (c)<br />
+In domain of |[required assets](#requiredassets) (op)<br />
 
 ### Query test
 
@@ -69,7 +79,7 @@ Is Defined By | <http://ns.inria.fr/kg/index#>
 Description | Test based on a SPARQL query execution. Test the result of the execution of rdf:type query in the manner of rdf:type SHACL shape but allows declaration of constraints on the HTTP response and the result.
 Super-classes |[earl:TestCase](http://www.w3.org/ns/earl#TestCase) (c)<br />
 
-## Properties
+## Object Properties
 
 [available literal datatypes](#availableliteraldatatypes),
 [class](#class),
@@ -91,12 +101,9 @@ Super-classes |[earl:TestCase](http://www.w3.org/ns/earl#TestCase) (c)<br />
 [original](#original),
 [original resource](#originalresource),
 [property](#property),
-[recommended pagination](#recommendedpagination),
 [required assets](#requiredassets),
 [resource hostname](#resourceHostname),
-[query sent](#querysent),
 [summary](#summary),
-[timeout](#timeout),
 [trace](#trace),
 [vocabulary](#vocabulary),
 [vocabulary partition](#vocabularypartition),
@@ -227,6 +234,7 @@ Property | Value
 URI | `http://ns.inria.fr/kg/index#endpoint`
 Is Defined By | <http://ns.inria.fr/kg/index#>
 Description | Indicates the endpoint to send a test or action.
+Domain(s) |([Query test](#Querytest) (c) or [Action](#action) (c))<br />
 [](resourcehostname)
 
 ### resource hostname
@@ -235,7 +243,7 @@ Property | Value
 --- | ---
 URI | `http://ns.inria.fr/kg/index#hostname`
 Is Defined By | <http://ns.inria.fr/kg/index#>
-Description | Indicates the resource hostnames that are common to a group of datasets in an instance of CommonalityDescription.
+Description | To not be confused with kgi:resourceHostname, which lists the resource hostnames appearing in a dataset.
 Domain(s) |[kgi:ResourceHostnameCommonalityDescription](http://ns.inria.fr/kg/index#ResourceHostnameCommonalityDescription) (c)<br />
 [](hostnamepartition)
 
@@ -313,16 +321,6 @@ URI | `http://ns.inria.fr/kg/index#property`
 Is Defined By | <http://ns.inria.fr/kg/index#>
 Description | Indicates the properties that are common to a group of datasets in an instance of CommonalityDescription.
 Domain(s) |[kgi:PropertyCommonalityDescription](http://ns.inria.fr/kg/index#PropertyCommonalityDescription) (c)<br />
-[](recommendedpagination)
-
-### recommended pagination
-
-Property | Value
---- | ---
-URI | `http://ns.inria.fr/kg/index#recommendedPagination`
-Is Defined By | <http://ns.inria.fr/kg/index#>
-Description | Recommended size for pagination during retrieval of the results of an action. This indicates the size of the page to use in the actions queries.
-Range(s) |[xsd:integer](http://www.w3.org/2001/XMLSchema#integer) (c)<br />
 [](requiredassets)
 
 ### required assets
@@ -332,8 +330,8 @@ Property | Value
 URI | `http://ns.inria.fr/kg/index#requiredAssets`
 Is Defined By | <http://ns.inria.fr/kg/index#>
 Description | Generation assets that must be applied for this generation asset to be applied.
-Domain(s) |[mf:ManifestEntry](http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#ManifestEntry) (c)<br />
-Range(s) |[kgi:GenerationAsset](http://ns.inria.fr/kg/index#GenerationAsset) (c)<br />
+Domain(s) |[Generation asset.](#Generationasset.) (c)<br />
+Range(s) |[rdf:List](http://www.w3.org/1999/02/22-rdf-syntax-ns#List) (c)<br />
 [](resourceHostname)
 
 ### resource hostname
@@ -342,19 +340,8 @@ Property | Value
 --- | ---
 URI | `http://ns.inria.fr/kg/index#resourceHostname`
 Is Defined By | <http://ns.inria.fr/kg/index#>
-Description | Used to describe the hostname of the resources of the dataset.
+Description | Hostname of the resources of the dataset. Linked to URIs representing the hostnames of the resources of the dataset.
 Domain(s) |[void:Dataset](http://rdfs.org/ns/void#Dataset) (c)<br />
-Range(s) |[rdf:Resource](http://www.w3.org/1999/02/22-rdf-syntax-ns#Resource) (c)<br />
-[](querysent)
-
-### query sent
-
-Property | Value
---- | ---
-URI | `http://ns.inria.fr/kg/index#sentQuery`
-Description | Query sent to the server. String representation of the SPARQL query sent to the server after transformation to adapt it to the endpoint, if necessary.
-Domain(s) |[earl:TestResult](http://www.w3.org/ns/earl#TestResult) (c)<br />
-Range(s) |[xsd:string](http://www.w3.org/2001/XMLSchema#string) (c)<br />
 [](summary)
 
 ### summary
@@ -365,16 +352,6 @@ URI | `http://ns.inria.fr/kg/index#summary`
 Description | Link between a dataset and a summary of its content.
 Domain(s) |[void:Dataset](http://rdfs.org/ns/void#Dataset) (c)<br />
 Range(s) |[sd:NamedGraph](http://www.w3.org/ns/sparql-service-description#NamedGraph) (c)<br />
-[](timeout)
-
-### timeout
-
-Property | Value
---- | ---
-URI | `http://ns.inria.fr/kg/index#timeout`
-Is Defined By | <http://ns.inria.fr/kg/index#>
-Description | Specify a timeout for a test or action. Queries sent during test and actions may need a specific timeout, generally longer than normal. This property specify the timeout for a test or an action.
-Range(s) |[xsd:duration](http://www.w3.org/2001/XMLSchema#duration) (c)<br />
 [](trace)
 
 ### trace
@@ -408,6 +385,44 @@ Description | Partition of the dataset according to the vocabulary used in tripl
 Super-properties |[void:subset](http://rdfs.org/ns/void#subset)<br />
 Domain(s) |[void:Dataset](http://rdfs.org/ns/void#Dataset) (c)<br />
 
+## Datatype Properties
+
+[recommended pagination](#recommendedpagination),
+[query sent](#querysent),
+[timeout](#timeout),
+[](recommendedpagination)
+
+### recommended pagination
+
+Property | Value
+--- | ---
+URI | `http://ns.inria.fr/kg/index#recommendedPagination`
+Is Defined By | <http://ns.inria.fr/kg/index#>
+Description | Recommended size for pagination during retrieval of the results of an action. This indicates the size of the page to use in the actions queries.
+Domain(s) |[Action](#action) (c)<br />
+Range(s) |[xsd:integer](http://www.w3.org/2001/XMLSchema#integer) (c)<br />
+[](querysent)
+
+### query sent
+
+Property | Value
+--- | ---
+URI | `http://ns.inria.fr/kg/index#sentQuery`
+Description | Query sent to the server. String representation of the SPARQL query sent to the server after transformation to adapt it to the endpoint, if necessary.
+Domain(s) |[earl:TestResult](http://www.w3.org/ns/earl#TestResult) (c)<br />
+Range(s) |[xsd:string](http://www.w3.org/2001/XMLSchema#string) (c)<br />
+[](timeout)
+
+### timeout
+
+Property | Value
+--- | ---
+URI | `http://ns.inria.fr/kg/index#timeout`
+Is Defined By | <http://ns.inria.fr/kg/index#>
+Description | Specify a timeout for a test or action. Queries sent during test and actions may need a specific timeout, generally longer than normal. This property specify the timeout for a test or an action.
+Domain(s) |[Action](#action) (c)<br />
+Range(s) |[xsd:duration](http://www.w3.org/2001/XMLSchema#duration) (c)<br />
+
 ## Named Individuals
 
 ## Namespaces
@@ -416,6 +431,10 @@ Domain(s) |[void:Dataset](http://rdfs.org/ns/void#Dataset) (c)<br />
   * `http://ns.inria.fr/kg/index#`
 * **adms**
   * `http://www.w3.org/ns/adms#`
+* **brick**
+  * `https://brickschema.org/schema/Brick#`
+* **csvw**
+  * `http://www.w3.org/ns/csvw#`
 * **dataid**
   * `http://dataid.dbpedia.org/ns/core#`
 * **dcam**
@@ -458,6 +477,8 @@ Domain(s) |[void:Dataset](http://rdfs.org/ns/void#Dataset) (c)<br />
   * `http://www.w3.org/1999/02/22-rdf-syntax-ns#`
 * **rdfs**
   * `http://www.w3.org/2000/01/rdf-schema#`
+* **schema1**
+  * `http://schema.org/`
 * **sd**
   * `http://www.w3.org/ns/sparql-service-description#`
 * **sdo**
@@ -494,5 +515,3 @@ Domain(s) |[void:Dataset](http://rdfs.org/ns/void#Dataset) (c)<br />
 * Annotation Properties: ap
 * Properties: p
 * Named Individuals: ni
-
-Markdown documentation created by [pyLODE](http://github.com/rdflib/pyLODE) 2.13.2

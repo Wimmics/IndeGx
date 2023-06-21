@@ -5,7 +5,11 @@
 TODO: extends Manifest, VoID
 TODO: Schema image
 
+The detail of the vocabulary are presented it a [dedicated page](./indegx_vocabulary.md).
+
 ## Rule structure
+
+![Schema of the ontology elements used in rules](indegx_vocabulary.png)
 
 ### Manifest: the central file
 
