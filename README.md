@@ -20,14 +20,14 @@ Ths new version of IndeGx has advantages compared to the previous one in the DeK
 - The usage of Corese as an interface with SPARQL endpoints to reduce missing data due to errors coming from incorrect standard compliance in distant SPARQL endpoints.
   - Rules are now expected to make heavy use of federated querying, with the `SERVICE` clause.
 - Possibility to define the application of several rules as a pre-requisite to the application of another.
+- End of the difference between `CONSTRUCT` and `UPDATE` rules to differentiate between the application of local and distant queries. Only test queries are supposed to be `SELECT`, `ASK` or `CONSTRUCT`. All action queries are expected to be `UPDATE` queries.
+- Possibility to define a set rules as post-treatment on the extracted data. In this case the endpoint URL becomes the url of the local corese server (not accessible from the outside of the docker)
 - Integration of [LDscript](http://ns.inria.fr/sparql-extension/) in rules possible.
 
 The index extraction rules have been modified as follows:
 
 - The asserted and computed elements of a knowledge base description are now separated into different graphs. Each description now consists in 3 graphs for one KB. More details in [the rule folder](./rules/README.md).
-- End of the difference between `CONSTRUCT` and `UPDATE` rules to differentiate between the application of local and distant queries. Only test queries are supposed to be `SELECT`, `ASK` or `CONSTRUCT`. All action queries are expected to be `UPDATE` queries.
-- Possibility to define a set rules as post-treatment on the extracted data. In this case the endpoint URL becomes the url of the local corese server (not accessible from the outside of the docker)
-- The extraction of a summary of datasets using the HiBisCus format: (\<hostname of subject\> \<propery\> \<hostname of object, literal datatype\>)
+- The extraction of a summary of datasets using the HiBisCus format: (\<hostname of subject\> \<property\> \<hostname of object, placeholder literal\>)
 - The computation of statistics of the usage of vocabularies and on the usage of the hostnames of resources in the dataset.
 
 ## Execution
