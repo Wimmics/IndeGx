@@ -124,6 +124,78 @@
             }
             """
         ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            prefix xt: <http://ns.inria.fr/sparql-extension/>
+            prefix us: <http://ns.inria.fr/sparql-extension/user/>
+            prefix rq: <http://ns.inria.fr/sparql-function/>
+            prefix dt: <http://ns.inria.fr/sparql-datatype/>
+            INSERT {
+                GRAPH ?kgGraph {
+                    ?s ?p ?o .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    # Find the KG : is a Dataset
+                    { ?kg a dcat:Dataset }
+                    UNION { ?kg a void:Dataset }
+                    UNION { ?kg a dcmitype:Dataset }
+                    UNION { ?kg a schema:Dataset }
+                    UNION { ?kg a sd:Dataset }
+                    UNION { ?kg a dataid:Dataset }
+
+                    # is linked directly or not to the endpoint
+                    { ?kg ?endpointLink $rawEndpointUrl . }
+                    UNION {?kg dcat:accessService ?service .
+                           ?service dcat:endpointURL $rawEndpointUrl .  }
+                    UNION {?kg dcat:accessService ?service .
+                           ?service sd:endpoint $rawEndpointUrl . }
+                    UNION {?service dcat:servesDataset ?kg .
+                           ?service dcat:endpointURL $rawEndpointUrl . }
+                    UNION {?service dcat:servesDataset ?kg .
+                           ?service sd:endpoint $rawEndpointUrl . }
+                }
+                bind (xt:load(?kg) as ?g)
+                GRAPH ?g { 
+                    ?s ?p ?o .
+                }
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+            };
+            DELETE {
+                GRAPH ?kg {
+                    ?s ?p ?o .
+                }
+            } WHERE {
+                GRAPH ?kg {
+                    # Find the KG : is a Dataset
+                    { ?kg a dcat:Dataset }
+                    UNION { ?kg a void:Dataset }
+                    UNION { ?kg a dcmitype:Dataset }
+                    UNION { ?kg a schema:Dataset }
+                    UNION { ?kg a sd:Dataset }
+                    UNION { ?kg a dataid:Dataset }
+
+                    # is linked directly or not to the endpoint
+                    { ?kg ?endpointLink $rawEndpointUrl . }
+                    UNION {?kg dcat:accessService ?service .
+                           ?service dcat:endpointURL $rawEndpointUrl .  }
+                    UNION {?kg dcat:accessService ?service .
+                           ?service sd:endpoint $rawEndpointUrl . }
+                    UNION {?service dcat:servesDataset ?kg .
+                           ?service dcat:endpointURL $rawEndpointUrl . }
+                    UNION {?service dcat:servesDataset ?kg .
+                           ?service sd:endpoint $rawEndpointUrl . }
+                }
+            }
+            """
+        ]
     ) ;
     kgi:onFailure (
         [
