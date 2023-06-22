@@ -99,7 +99,16 @@ kgi:catalog a dcat:Catalog ;
         ] ,
         [
             void:sparqlEndpoint <https://virtuoso.plateforme.dipso.inrae.fr/sparql/>
-        ] .
+        ] ,
+        [
+            void:sparqlEndpoint <https://smt.esante.gouv.fr/sparql/>
+        ] ,
+        [
+            void:sparqlEndpoint <http://rdf.muninn-project.org/sparql>
+        ] ,
+        [
+            void:sparqlEndpoint <http://www.lotico.com:3030/lotico/sparql>
+        ]  .
 
 kgi:Joconde void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> .
 
