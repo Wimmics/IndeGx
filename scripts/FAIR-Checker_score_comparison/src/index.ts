@@ -113,9 +113,9 @@ function dataTreatment() {
         PREFIX dqv: <http://www.w3.org/ns/dqv#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT DISTINCT ?endpointUrl ?kg  ?measureF1A ?measureF1B ?measureF2A ?measureF2B ?measureA11 ?measureA12 ?measureI1 ?measureI1A ?measureI1B ?measureI2 ?measureI2A ?measureI2B ?measureI3 ?measureR11 ?measureR12 ?measureR13 WHERE {
+        SELECT DISTINCT ?endpointUrl ?kg  ?measureF1A ?measureF1B ?measureF2A ?measureF2B ?measureA11 ?measureA12 ?measureI1 ?measureI2 ?measureI3 ?measureR11 ?measureR12 ?measureR13 WHERE {
           GRAPH ?kgGraph {
-            ?kg dqv:hasQualityMeasurement ?measurementF1A, ?measurementF1B, ?measurementF2A, ?measurementF2B, ?measurementA11, ?measurementA12, ?measurementI1, ?measurementI1A, ?measurementI1B, ?measurementI2, ?measurementI2A, ?measurementI2B, ?measurementI3, ?measurementR11, ?measurementR12, ?measurementR13 .
+            ?kg dqv:hasQualityMeasurement ?measurementF1A, ?measurementF1B, ?measurementF2A, ?measurementF2B, ?measurementA11, ?measurementA12, ?measurementI1, ?measurementI2, ?measurementI3, ?measurementR11, ?measurementR12, ?measurementR13 .
             
             ?measurementF1A a dqv:QualityMeasurement ;
                 dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
@@ -145,25 +145,9 @@ function dataTreatment() {
                 dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1> ;
                 dqv:value ?measureI1 .
                 
-            ?measurementI1A a dqv:QualityMeasurement ;
-                dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1A> ;
-                dqv:value ?measureI1A .
-                
-            ?measurementI1B a dqv:QualityMeasurement ;
-                dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1B> ;
-                dqv:value ?measureI1B .
-                
             ?measurementI2 a dqv:QualityMeasurement ;
                 dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2> ;
                 dqv:value ?measureI2 .
-                
-            ?measurementI2A a dqv:QualityMeasurement ;
-                dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2A> ;
-                dqv:value ?measureI2A .
-                
-            ?measurementI2B a dqv:QualityMeasurement ;
-                dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2B> ;
-                dqv:value ?measureI2B .
                 
             ?measurementI3 a dqv:QualityMeasurement ;
                 dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I3> ;
@@ -218,11 +202,7 @@ function dataTreatment() {
                     let measureA11 = binding.measureA11.value
                     let measureA12 = binding.measureA12.value
                     let measureI1 = binding.measureI1.value
-                    let measureI1A = binding.measureI1A.value
-                    let measureI1B = binding.measureI1B.value
                     let measureI2 = binding.measureI2.value
-                    let measureI2A = binding.measureI2A.value
-                    let measureI2B = binding.measureI2B.value
                     let measureI3 = binding.measureI3.value
                     let measureR11 = binding.measureR11.value
                     let measureR12 = binding.measureR12.value
@@ -247,11 +227,7 @@ function dataTreatment() {
                         "A1.1": measureA11,
                         "A1.2": measureA12,
                         "I1": measureI1,
-                        "I1A": measureI1A,
-                        "I1B": measureI1B,
                         "I2": measureI2,
-                        "I2A": measureI2A,
-                        "I2B": measureI2B,
                         "I3": measureI3,
                         "R1.1": measureR11,
                         "R1.2": measureR12,
@@ -290,11 +266,7 @@ dataTreatment()
         "A1.1",
         "A1.2",
         "I1",
-        "I1A",
-        "I1B",
         "I2",
-        "I2A",
-        "I2B",
         "I3",
         "R1.1",
         "R1.2",
@@ -308,7 +280,7 @@ dataTreatment()
         let csvScoresLine = [resultObject.endpointUrl, resultObject.kg];
         let indegxScore = resultObject.indegxScore.at(0)
         fairKeys.forEach((fairKey) => {
-            let fairKeyIndegxScore = indegxScore[fairKey];
+            let fairKeyIndegxScore = "Error";
             let apiScore = "NA";
             if(resultObject.apiScore.at(0) !== undefined) {
                 let correspondingApiScoreObject = resultObject.apiScore.at(0).find(apiScoreObject => apiScoreObject.metric !== undefined && apiScoreObject.metric.localeCompare(fairKey) === 0);
@@ -316,11 +288,16 @@ dataTreatment()
                     apiScore = correspondingApiScoreObject.score;
                 }
             }
-            csvScoresLine.push(apiScore + " (" + fairKeyIndegxScore + ")");
-            if (isNaN(Number(apiScore))) {
+            if(indegxScore !== undefined) {
+                fairKeyIndegxScore = indegxScore[fairKey]
+            }
+            if (isNaN(Number(apiScore)) || isNaN(Number(fairKeyIndegxScore))) {
+                Log.log(resultObject.kg, fairKey, "Anavailable value: IndeGx=", fairKeyIndegxScore, " FAIR Checker=", apiScore)
+                csvScoresLine.push(apiScore + " (" + fairKeyIndegxScore + ")");
                 csvComparisonLine.push(apiScore);
             } else {
                 Log.log(resultObject.kg, fairKey, ": IndeGx=", fairKeyIndegxScore, " FAIR Checker=", apiScore)
+                csvScoresLine.push((Number.parseInt(apiScore) - Number.parseInt(fairKeyIndegxScore)).toString());
                 csvComparisonLine.push((fairKeyIndegxScore.localeCompare(apiScore) === 0).toString());
             }
         })
