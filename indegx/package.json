@@ -50,9 +50,10 @@
         "util": "^0.12.5"
     },
     "scripts": {
-        "start": "java -Xmx15g -jar /corese/corese-server-4.4.0.jar -init /corese/corese-server.properties -su > /output/corese.log",
         "build": "npx tsc",
-        "devrun": "npx tsc && node src/Indegx.js",
-        "run": "node src/Indegx.js"
+        "run": "node src/Indegx.js",
+        "devrun": "npm run build && npm run run",
+        "clean": "rm -rf src/*.js src/*.js.map src/*.d.ts",
+        "deepclean": "npm run clean && rm -rf node_modules package-lock.json"
     }
 }
