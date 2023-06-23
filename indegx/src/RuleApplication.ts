@@ -12,9 +12,7 @@ import sparqljs from "sparqljs";
 import { AssetTracker } from "./AssetTracker.js";
 
 export function applyRuleTree(endpointObject: EndpointObject, manifestObject: RuleTree.Manifest, postMode: boolean = false): Promise<void> {
-    Logger.log("Applying rule tree", manifestObject.uri, manifestObject.requiredAssets, "required assets", manifestObject.entries.map(asset => asset.uri), "entries", manifestObject.includes.map(asset => asset.uri), "includes for endpoint", endpointObject.endpoint)
     if (AssetTracker.getInstance().hasApplicationPromise(manifestObject.uri, endpointObject.endpoint)) {
-        Logger.log("AssetTracker has ongoing application promise for", manifestObject.uri, "for endpoint", endpointObject.endpoint);
         return AssetTracker.getInstance().getApplicationPromise(manifestObject.uri, endpointObject.endpoint);
     } else {
         AssetTracker.getInstance().setAssetStateToOngoing(manifestObject.uri, endpointObject.endpoint);
@@ -28,7 +26,7 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
                     throw new Error("AssetTracker has no asset " + requiredAssetURI);
                 } else {
                     let requiredAsset = AssetTracker.getInstance().getAsset(requiredAssetURI);
-                    Logger.log("Applying required asset", requiredAsset.uri, "of", manifestObject.uri, "for endpoint", endpointObject.endpoint)
+                    // Logger.log("Applying required asset", requiredAsset.uri, "of", manifestObject.uri, "for endpoint", endpointObject.endpoint)
                     if (RuleTree.isManifestEntry(requiredAsset)) {
                         requiredAssetsPool.push(applyManifestEntry(endpointObject, requiredAsset as RuleTree.ManifestEntry, postMode))
                     } else if (RuleTree.isAction(requiredAsset)) {
@@ -50,15 +48,7 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
         }
 
         let result = Promise.allSettled(requiredAssetsPool)
-            .then(() => {
-                Logger.log("Required assets finished for", manifestObject.uri);
-                Logger.log("Applying entries for", manifestObject.uri, ":", entriesApplicationPool.map(entry => entry[1].uri));
-            })
             .then(() => Global.iterativePromises(entriesApplicationPool, applyManifestEntry))
-            .then(() => {
-                Logger.log("Entries finished for", manifestObject.uri);
-                Logger.log("Applying includes for", manifestObject.uri, ":", manifestObject.includes.map(entry => entry.uri));
-            })
             .then(() => {
                 let subTreeApplicationPool = [];
                 manifestObject.includes.forEach(subManifest => {
@@ -73,9 +63,6 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
                         return;
                     })
             })
-            .then(() => {
-                Logger.log("Inclusion finished for", manifestObject.uri);
-            })
             .catch(error => {
                 Logger.error("Error applying rule tree", error)
             });
@@ -89,7 +76,6 @@ function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTre
     let requiredAssets = entryObject.requiredAssets;
     let requiredPromises = [];
     if (requiredAssets !== undefined && requiredAssets.length > 0) {
-        Logger.log("Required assets for", entryObject.uri, ":", requiredAssets);
         requiredAssets.forEach(requiredAssetURI => {
             if (AssetTracker.getInstance().hasApplicationPromise(requiredAssetURI, endpointObject.endpoint)) {
                 requiredPromises.push(AssetTracker.getInstance().getApplicationPromise(requiredAssetURI, endpointObject.endpoint))
@@ -106,13 +92,7 @@ function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTre
         })
     }
 
-    if (requiredPromises.length > 0) {
-        Logger.log("Waiting for", requiredPromises.length, "required assets for", entryObject.uri)
-    }
     let result = Promise.allSettled(requiredPromises).then(() => {
-        if (requiredPromises.length > 0) {
-            Logger.log("Required assets finished for", entryObject.uri);
-        }
         if (!AssetTracker.getInstance().isOngoing(endpointObject.endpoint, entryObject.uri)) {
             AssetTracker.getInstance().setAssetStateToOngoing(entryObject.uri, endpointObject.endpoint);
             return applyTest(endpointObject, entryObject.test, entryObject, postMode).then(success => {
