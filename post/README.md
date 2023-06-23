@@ -2,7 +2,7 @@
 
 Post-treatment rules are rules that are applied of the KG resulting of the extraction by IndeGx from each endpoint. Their goal is to allow comparisons between KG descriptions and the enrichment of KG descriptions according to what was extracted.
 
-The usage of `$rawEndpointUrl` is discouraged in those rules as its value is the inner docker adress for the corese server. Other that this consideration, post-treament rules are defined as any other extraction rule for IndeGx.
+The usage of `$rawEndpointUrl` is discouraged in those rules as its value is the inner docker adress for the corese server. Other that this consideration, post-treament rules are defined as any other extraction rule for IndeGx, as presented in the [`rules` folder](../rules/README.md).
 
 ## Equivalences rules
 

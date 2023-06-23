@@ -30,7 +30,9 @@ kgi: rdf:type owl:Ontology, voaf:Vocabulary ;
     dcterms:date "2021-10" ;
     pav:lastUpdateOn "2023-06-20" ;
     dcterms:format "RDF" ;
-    dcterms:identifier kgi: .
+    dcterms:identifier kgi: ;
+    voaf:extends void: , mf: , earl: ;
+    voaf:generalizes mf: , earl: .
 
 # Index structuration vocabulary
 

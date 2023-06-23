@@ -42,17 +42,8 @@
                         UNION { ?kg a sd:Dataset }
                         UNION { ?kg a dataid:Dataset }
                     }
-                    BIND( IF (EXISTS {
-                        GRAPH ?kgGraph {
-                            { ?kg a dcat:Dataset }
-                            UNION { ?kg a void:Dataset }
-                            UNION { ?kg a dcmitype:Dataset }
-                            UNION { ?kg a schema:Dataset }
-                            UNION { ?kg a sd:Dataset }
-                            UNION { ?kg a dataid:Dataset }
-                        }
-                    }, 2, 0) AS ?value) 
-                    BIND(Iri(CONCAT(STR(?kg), "#A11")) AS ?measurement)
+                    BIND( STRSTARTS( STR(?kg), "http") AS ?value) 
+                    BIND( Iri( CONCAT( STR(?kg), "#A11")) AS ?measurement)
                 }
             """
         ]

@@ -29,10 +29,8 @@
             INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription a void:Dataset , dcat:Dataset , prov:Entity , earl:TestSubject ;
-                        prov:wasGeneratedAtTime ?time ;
                         dcat:service ?endpointDescription ;
                         dcat:distribution ?datasetDistribution ;
-                        dcat:endpointURL $rawEndpointUrl ;
                         void:sparqlEndpoint $rawEndpointUrl .
                     ?datasetDistribution a dcat:Distribution ;
                         dcat:accessUrl $rawEndpointUrl ;
@@ -46,10 +44,8 @@
                     ?metadataDescription a prov:Entity , earl:TestSubject ;
                         prov:wasGeneratedAtTime ?time ;
                         prov:wasDerivedFrom $rawEndpointUrl ;
-                        kgi:curated ?datasetDescription , ?endpointDescription .
+                        kgi:curatedResource ?datasetDescription , ?endpointDescription .
                 }
-                kgi:IndeGxDataset a dcat:Catalog ;
-                    dcat:service ?endpointDescription .
             } WHERE {
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
@@ -98,6 +94,11 @@
                     prov:used <https://github.com/Wimmics/IndeGx> ;
                     prov:generatedAtTime  ?time ;
                     prov:used ?endpointDescription .
+
+                GRAPH ?metatadataDescriptionGraph {
+                    ?metadataDescription kgi:curated ?curatedDescriptionGraph, ?summaryDescriptionGraph ;
+                        kgi:original ?originalDescriptionGraph .
+                }
 
             } WHERE {
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
