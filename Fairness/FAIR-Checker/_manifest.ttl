@@ -1,0 +1,12 @@
+@prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    dcterms:description "Rules built from the code available at https://github.com/IFB-ElixirFr/FAIR-checker/tree/master/metrics" ;
+    mf:include (
+        <Accessibility/_manifest.ttl>
+        <Findability/_manifest.ttl>
+        <Interoperability/_manifest.ttl>
+        <Reusability/_manifest.ttl>
+    ) .

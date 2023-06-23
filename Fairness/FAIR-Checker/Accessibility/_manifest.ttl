@@ -1,0 +1,102 @@
+@prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <A11.ttl>
+        <A12.ttl>
+    ) .
+
+<A11.ttl> a mf:ManifestEntry ;
+    dcterms:comment """This test should test wether the evaluated resource uses the HTTP protocol. Due to our speialization toward endpoints, ths test is automatically passed if any description was found.""" ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Open resolution protocol"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/A1#A11> ;
+                            dqv:value ?value .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
+                    }
+                    BIND( STRSTARTS( STR(?kg), "http") AS ?value) 
+                    BIND( Iri( CONCAT( STR(?kg), "#A11")) AS ?measurement)
+                }
+            """
+        ]
+    ) .
+
+<A12.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Authorisation procedure or access rights"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/A1#A12> ;
+                            dqv:value ?value .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
+                    }
+                    BIND( IF (EXISTS {
+                        GRAPH ?kgGraph {
+                            ?kg ?p ?o . 
+                        }
+                        VALUES ?p { 
+                            odrl:hasPolicy
+                            dcterms:rights
+                            dcterms:accessRights
+                            dcterms:license
+                            schema:license
+                        }
+                    }, 2, 0) AS ?value)
+                    BIND(Iri(CONCAT(STR(?kg), "#A12")) AS ?measurement)
+                }
+                """
+        ]
+    ) .

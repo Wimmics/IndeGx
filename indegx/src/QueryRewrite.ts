@@ -37,31 +37,31 @@ export interface PlaceholderReplacementObject {
     Placeholder for a query string in a given input string.
     */
 const queryPlaceholder = "$query"
-const queryPlaceholderRegex = /$query/g
+const queryPlaceholderRegex = /\$query/g
 
 /**
     Placeholder for a test string in a given input string.
     */
 const testPlaceholder = "$test"
-const testPlaceholderRegex = /$test/g
+const testPlaceholderRegex = /\$test/g
 
 /**
     Placeholder for a start time in a given input string.
     */
 const startTimePlaceholder = "$startTime"
-const startTimePlaceholderRegex = /$startTime/g
+const startTimePlaceholderRegex = /\$startTime/g
 
 /**
     Placeholder for an end time in a given input string.
     */
 const endTimePlaceholder = "$endTime"
-const endTimePlaceholderRegex = /$endTime/g
+const endTimePlaceholderRegex = /\$endTime/g
 
 /**
     Placeholder for a reason string in a given input string.
     */
 const reasonPlaceholder = "$reason"
-const reasonPlaceholderRegex = /$reason/g
+const reasonPlaceholderRegex = /\$reason/g
 
 /**
 Replaces all placeholders in a given input string with their corresponding values in the provided replacement object.

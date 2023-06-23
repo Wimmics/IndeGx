@@ -169,17 +169,6 @@
                     }
                 }
                 WHERE {
-                    SERVICE $rawEndpointUrl {
-                        {
-                            SELECT (count(*) AS ?count) {
-                                SELECT DISTINCT ?s ?p ?o
-
-                                WHERE {
-                                   ?s ?p ?o .
-                                }
-                            }
-                        }
-                    }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
@@ -347,14 +336,6 @@
                     }
                 }
                 WHERE {
-                    SERVICE $rawEndpointUrl {
-                        {
-                            SELECT (COUNT(DISTINCT ?s ) AS ?x) {
-                                ?s ?p ?o
-                                FILTER(isIri(?s))
-                            }
-                        }
-                    }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
                 }
@@ -547,13 +528,13 @@
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription voidex:distinctBlankNodeSubjects ?x .
+                        ?datasetDescription voidex:distinctBlankNodeObjects ?x .
                     }
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
                         {
-                            SELECT (COUNT(DISTINCT ?s) AS ?x) {
+                            SELECT (COUNT(DISTINCT ?o) AS ?x) {
                                 ?s ?p ?o
                                 FILTER(isBlank(?o))
                             }

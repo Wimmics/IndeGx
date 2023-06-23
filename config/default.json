@@ -1,7 +1,7 @@
 {
-    "manifest": "https://raw.githubusercontent.com/Jendersen/KG_accountability/towardsIndeGx/_rootManifest.ttl",
-    "post": "https://raw.githubusercontent.com/Jendersen/KG_accountability/towardsIndeGx/_postRootManifest.ttl",
-    "catalog": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/Experiment_catalog.ttl",
+    "manifest": "file:///input/Fairness/_manifest.ttl",
+    "post": "file:///input/Fairness/_post_manifest.ttl",
+    "catalog": "file:///input/web_semantics_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,

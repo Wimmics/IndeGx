@@ -1,0 +1,24 @@
+{
+  "name": "fair-checker_score_comparison",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Compare the results of Indegx evaluation with the evaluation of the FAIR Checker API",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "devrun": "npx tsc && node src/index.js",
+    "run": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.3.1",
+    "@types/node-fetch": "^2.6.4",
+    "dayjs": "^1.11.8",
+    "graphy": "^4.3.6",
+    "node-fetch": "^3.3.1",
+    "rdflib": "^2.2.32",
+    "sparqljs": "^3.7.0",
+    "typescript": "^5.1.3"
+  }
+}
