@@ -214,11 +214,9 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
                 }).finally(() => false));
             } else if (SPARQLUtils.isSparqlConstruct(testQuery)) {
                 testsPool.push(sendConstructWithTraceHandling(endpointObject.endpoint, testQuery, entryObject, startTime).then(constructResult => {
-                    if (constructResult !== undefined) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    const result = constructResult !== undefined;
+                    constructResult.close();
+                    return result;
                 }).finally(() => false));
             } else if (SPARQLUtils.isSparqlUpdate(testQuery)) {
                 testsPool.push(sendUpdateWithTraceHandling(endpointObject.endpoint, testQuery, entryObject, startTime).then(updateResponse => {
@@ -341,7 +339,7 @@ function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[],
 }
 
 /**
- * Utility function for graph insertion and pagination. It detects if there is a SELECT query in the given patterns
+ * Utility function for graph insertion and pagination. It detects if there is an inner SELECT query in the given patterns
  * @param patterns 
  * @returns {boolean}
  */
@@ -377,8 +375,8 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
         actionObject.action.forEach(queryString => {
             queryString = replacePlaceholders(queryString, { endpointUrlString: endpointObject.endpoint })
             if (!postMode) {
-                // We check if there is a service clause in the query
-                if (!SPARQLUtils.isSparqlUpdate(queryString) && !SPARQLUtils.queryContainsService(queryString)) {
+                // We check if there is a service clause in the query and no endpoint is specified
+                if (!SPARQLUtils.isSparqlUpdate(queryString) && !SPARQLUtils.queryContainsService(queryString) && actionObject.endpoint === undefined) {
                     // If not, we add the service clause
                     queryString = SPARQLUtils.addServiceClause(queryString, endpointObject.endpoint)
                 }
@@ -611,6 +609,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                         Logger.error("Error serializing the construct result to NTriples: ", error);
                                         return "";
                                     }).then(constructResultNTString => {
+                                        constructResult.close();
                                         if (object.type.localeCompare("insert") == 0) {
                                             let insertDataQuery = "INSERT DATA { " + constructResultNTString + " }";
                                             if (object.graph != undefined) {
@@ -629,6 +628,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                     })
                                 } else {
                                     let endTime = dayjs();
+                                    constructResult.close();
                                     return sendFailureReportUpdate(endpointUrl, generatedQuery, entryObject, startTime, endTime, "No triples returned by the query");
                                 }
                             } else {

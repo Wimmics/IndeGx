@@ -23,8 +23,8 @@ export type EndpointObject = {
     @returns {Promise<EndpointObject[]>} A Promise that resolves to an array of EndpointObject, representing the extracted information.
     */
 export function readCatalog(filename: string): Promise<Array<EndpointObject>> {
-    let store = createStore()
     return Global.readFile(filename).then(fileContent => {
+        let store = createStore()
         let result = [];
         $rdf.parse(fileContent, store, KGI("").value);
         const catalogList = store.statementsMatching(null, rdfTypeProperty, DCAT("Catalog")).map(statement => statement.subject) // List of catalog objects 
@@ -48,6 +48,7 @@ export function readCatalog(filename: string): Promise<Array<EndpointObject>> {
                 }
             })
         })
+        store.close();
         return result;
     });
 }

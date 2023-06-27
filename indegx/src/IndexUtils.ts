@@ -41,6 +41,7 @@ export function sendFileToIndex(filename: string, graph?: string): Promise<void>
 
 export function sendStoreContentToIndex(store: $rdf.Store, graph?: string): Promise<void> {
     return RDFUtils.serializeStoreToNTriplesPromise(store).then(trig => {
+        store.close();
         if(graph === undefined) {
             return SPARQLUtils.sendUpdateQuery(coreseServerUrl, `INSERT DATA { ${trig} }`)
         } else {
