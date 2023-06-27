@@ -35,6 +35,7 @@ export function readRules(rootManifest: string): Promise<Manifest> {
     let postPromiseCreationPool: Promise<void>[] = [];
     return readManifest(rootManifest, store, postPromiseCreationPool).then(manifest => {
         return Promise.allSettled(postPromiseCreationPool).then(() => {
+            store.close();
             return manifest;
         })
     });
