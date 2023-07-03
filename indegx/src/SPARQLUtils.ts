@@ -1,6 +1,6 @@
 import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise } from "./GlobalUtils.js";
 import * as RDFUtils from "./RDFUtils.js";
-import sparqljs from "sparqljs";
+import sparqljs, { AskQuery, ConstructQuery, DescribeQuery, Query, SelectQuery, SparqlQuery, Update } from "sparqljs";
 import * as Logger from "./LogUtils.js"
 
 export let defaultQueryTimeout = 60000;
@@ -82,11 +82,31 @@ export function isSparqlUpdate(queryString: string): boolean {
     return checkSparqlType(queryString, "update");
 }
 
+export function isSelect(query: SparqlQuery): query is SelectQuery {
+    return (query as SelectQuery).queryType !== undefined && (query as SelectQuery).queryType === 'SELECT';
+}
+
+export function isAsk(query: SparqlQuery): query is AskQuery {
+    return (query as AskQuery).queryType !== undefined && (query as AskQuery).queryType === 'ASK';
+}
+
+export function isConstruct(query: SparqlQuery): query is ConstructQuery {
+    return (query as ConstructQuery).queryType !== undefined && (query as ConstructQuery).queryType === 'CONSTRUCT';
+}
+
+export function isDescribe(query: SparqlQuery): query is DescribeQuery {
+    return (query as DescribeQuery).queryType !== undefined && (query as DescribeQuery).queryType === 'DESCRIBE';
+}
+
+export function isUpdate(query: SparqlQuery): query is Update {
+    return (query as Update).type !== undefined && (query as Update).type === 'update';
+}
+
 export function queryContainsService(queryString: string): boolean {
     let parser = new sparqljs.Parser();
     try {
         const parsedQuery = parser.parse(queryString);
-        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString)) {
+        if (isConstruct(parsedQuery) || isSelect(parsedQuery) || isAsk(parsedQuery) || isDescribe(parsedQuery)) {
             return parsedQuery.where.some(triple => triple.type == "service");
         } else {
             throw new Error("Not an expected query type : " + JSON.stringify(queryString));
