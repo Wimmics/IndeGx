@@ -332,7 +332,6 @@ export function parseN3ToStore(content: string, store: $rdf.Store): Promise<$rdf
 export function parseTurtleToStore(content: string, store: $rdf.Store, base = KGI("").value): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
-            // content = Global.unicodeToUrlendcode(content)
             content = fixCommonTurtleStringErrors(content)
             ttl_read(content, {
                 baseIRI: base,
@@ -348,12 +347,6 @@ export function parseTurtleToStore(content: string, store: $rdf.Store, base = KG
                     reject(error)
                 }
             });
-            // $rdf.parse(content, store, base, "text/turtle", (err, kb) => {
-            //     if (err != null) {
-            //         reject(err);
-            //     }
-            //     accept(kb);
-            // })
         } catch (error) {
             Logger.error("Error while parsing turtle content", content, "error", error);
             reject(error);
@@ -364,7 +357,6 @@ export function parseTurtleToStore(content: string, store: $rdf.Store, base = KG
 export function parseHTMLToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
-            // content = Global.unicodeToUrlendcode(content)
             $rdf.parse(content, store, KGI("").value, "text/html", (err, kb) => {
                 if (err != null) {
                     reject(err);
