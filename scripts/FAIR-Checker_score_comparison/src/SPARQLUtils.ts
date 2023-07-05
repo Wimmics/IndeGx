@@ -1,7 +1,35 @@
 import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise } from "./GlobalUtils.js";
+import * as $rdf from "rdflib";
 import * as RDFUtils from "./RDFUtils.js";
 import sparqljs from "sparqljs";
 import * as Logger from "./LogUtils.js"
+
+export type JSONValue =
+    | string
+    | number
+    | boolean
+    | JSONObject
+    | JSONArray;
+
+interface JSONObject {
+    [x: string]: JSONValue;
+}
+
+interface JSONArray extends Array<JSONValue> { }
+
+export type SPARQLJSONResult = {
+    head: {
+        vars: string[]
+    },
+    results: {
+        bindings: {
+            [x: string]: {
+                type: string,
+                value: string
+            }
+        }[]
+    }
+}
 
 export let defaultQueryTimeout = 60000;
 
@@ -13,7 +41,7 @@ export function setDefaultQueryTimeout(timeout: number) {
     }
 }
 
-export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQueryTimeout): Promise<any> {
+export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQueryTimeout): Promise<void | $rdf.Formula | JSONValue> {
     let jsonHeaders = {};
     jsonHeaders["Accept"] = "application/sparql-results+json";
     if (isSparqlSelect(query)) {

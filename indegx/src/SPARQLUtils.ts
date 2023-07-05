@@ -1,7 +1,55 @@
 import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise } from "./GlobalUtils.js";
 import * as RDFUtils from "./RDFUtils.js";
-import sparqljs, { AskQuery, ConstructQuery, DescribeQuery, Query, SelectQuery, SparqlQuery, Update } from "sparqljs";
 import * as Logger from "./LogUtils.js"
+import sparqljs, { AskQuery, ConstructQuery, DescribeQuery, Query, SelectQuery, SparqlQuery, Update } from "sparqljs";
+import * as $rdf from "rdflib";
+
+export type JSONValue =
+    | string
+    | number
+    | boolean
+    | JSONObject
+    | JSONArray;
+
+interface JSONObject {
+    [x: string]: JSONValue;
+}
+
+interface JSONArray extends Array<JSONValue> { }
+
+export interface SPARQLJSONResult extends JSONObject {
+    head: {
+        vars?: string[]
+    },
+    results?: {
+        bindings: {
+            [x: string]: {
+                type: string,
+                value: string
+            }
+        }[]
+    }
+    boolean?: boolean
+}
+
+export interface SELECTJSONResult extends SPARQLJSONResult {
+    head: {
+        vars: string[]
+    },
+    results: {
+        bindings: {
+            [x: string]: {
+                type: string,
+                value: string
+            }
+        }[]
+    }
+}
+
+export interface ASKJSONResult extends SPARQLJSONResult {
+    boolean: boolean
+}
+
 
 export let defaultQueryTimeout = 60000;
 
@@ -13,20 +61,28 @@ export function setDefaultQueryTimeout(timeout: number) {
     }
 }
 
-export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQueryTimeout): Promise<any> {
+export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQueryTimeout): Promise<void | $rdf.Store | SPARQLJSONResult> {
     let jsonHeaders = {};
-    jsonHeaders["Accept"] = "application/sparql-results+json";
     if (isSparqlSelect(query)) {
-        return fetchJSONPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout, jsonHeaders).catch(error => { Logger.error(endpoint, query, error); throw error })
+        jsonHeaders["accept"] = "application/sparql-results+json";
+        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
+        Logger.log(queryUrl)
+        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => (result as SELECTJSONResult)).catch(error => { Logger.error(endpoint, query, error); throw error })
     } else if (isSparqlAsk(query)) {
-        return fetchJSONPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout, jsonHeaders).catch(() => { return { boolean: false } })
+        jsonHeaders["accept"] = "application/sparql-results+json";
+        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
+        Logger.log(queryUrl)
+        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => (result as ASKJSONResult)).catch(() => { return { head: {}, boolean: false } as ASKJSONResult})
     } else if (isSparqlConstruct(query)) {
-        return fetchGETPromise(endpoint + '?query=' + encodeURIComponent(query) + '&format=turtle&timeout=' + timeout).then(result => {
+        jsonHeaders["accept"] = "text/turtle";
+        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=turtle&timeout=' + timeout;
+        Logger.log(queryUrl)
+        return fetchGETPromise(queryUrl).then(result => {
             let resultStore = RDFUtils.createStore();
             result = RDFUtils.fixCommonTurtleStringErrors(result)
             return RDFUtils.parseTurtleToStore(result, resultStore).catch(error => {
                 Logger.error(endpoint, query, error, result);
-                return;
+                return resultStore;
             });
         }).catch(error => { Logger.error(endpoint, query, error); throw error })
     } else if (isSparqlUpdate(query)) {
@@ -49,7 +105,16 @@ export function sendUpdateQuery(endpoint, updateQuery) {
 function checkSparqlType(queryString: string, queryType: "CONSTRUCT" | "SELECT" | "ASK" | "DESCRIBE" | "update") {
     let parser = new sparqljs.Parser();
     try {
-        const parsedQuery = parser.parse(queryString);
+        let parsedQuery;
+        try {
+            parsedQuery = parser.parse(queryString);
+        } catch(parsingError) {
+            // This is a strange parsing error on INSERT DATA generated from pagination
+            if((parsingError as Error).message.includes("Parse error on line 1") && queryString.startsWith("INSERT DATA")) {
+                return true;
+            }
+            Logger.error("Query parsing error", queryString, parsingError)
+        }
         if (parsedQuery.queryType != undefined) {
             return (parsedQuery.queryType.localeCompare(queryType) == 0);
         } else if (parsedQuery.type != undefined) {

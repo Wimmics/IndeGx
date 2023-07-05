@@ -329,7 +329,7 @@ export function parseN3ToStore(content: string, store: $rdf.Store): Promise<$rdf
     });
 }
 
-export function parseTurtleToStore(content: string, store: $rdf.Store, base = KGI("").value): Promise<$rdf.Formula> {
+export function parseTurtleToStore(content: string, store: $rdf.Store, base = KGI("").value): Promise<$rdf.Store> {
     return new Promise((accept, reject) => {
         try {
             content = fixCommonTurtleStringErrors(content)

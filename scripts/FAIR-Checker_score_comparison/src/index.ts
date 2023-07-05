@@ -5,7 +5,9 @@ import * as fsPromises from 'node:fs/promises';
 import * as fs from 'node:fs';
 
 const localEndpointUrl = "http://localhost:3030/FAIR-Checker/sparql"
-const resultFilename = "results.json";
+const result_FAIRChecker = "results_FAIRC.json"
+const result_Indegx = "results_Indegx.json"
+const resultFilename = "results_combined.json";
 
 type ResultObject = {
     kg: string,
@@ -61,44 +63,74 @@ SELECT DISTINCT ?kg ?endpointUrl WHERE {
 `;
 
 function dataTreatment() {
-    if (!fs.existsSync("results.json")) {
-        return Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((resultsObject) => {
-            let resultsObjectArray: ResultObject[] = []
-            resultsObject.results.bindings.forEach((binding) => {
+    if (!fs.existsSync(resultFilename)) {
+        let SPARQLqueryResultPromise: Promise<Sparql.SPARQLJSONResult>; ;
+        if(!fs.existsSync(result_Indegx)) {
+            SPARQLqueryResultPromise = Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((sparqlResults) => {
+                Global.writeFile(result_Indegx, JSON.stringify(sparqlResults));
+                return sparqlResults;
+            })
+        } else {
+            SPARQLqueryResultPromise = fsPromises.readFile(result_Indegx).then((data) => {
+                return JSON.parse(data.toString());
+            })
+        }
+        return SPARQLqueryResultPromise.then((resultsObject) => {
+            let resultsObjectArray: ResultObject[] = [];
+            (resultsObject as Sparql.SPARQLJSONResult).results.bindings.forEach((binding) => {
                 resultsObjectArray.push({ kg: binding.kg.value, endpointUrl: binding.endpointUrl.value, apiScore: [], indegxScore: [] })
             })
             return resultsObjectArray;
         }).then(resultsObjectArray => {
+            let fairChecherResultsPromise: Promise<ResultObject[]>;
+            if(!fs.existsSync(result_FAIRChecker)) {
+                // For each KG, retrieve their score through the FAIR Checker API
+                let fairCheckerResults = [];
+                let promisesArgsArray: any[][] = [];
+                resultsObjectArray.forEach((resultObject) => {
+                    const APIQuery = "https://fair-checker.france-bioinformatique.fr/api/check/metrics_all?url=" + Global.unicodeToUrlendcode(resultObject.kg);
+                    promisesArgsArray.push([resultObject, APIQuery]);
+                })
+                function promiseFunction(resultObject: ResultObject, query: string) {
+                    return Global.fetchJSONPromise(query).then((APIResultObject: any[] | { message }) => {
+                        let resultsIndex = resultsObjectArray.findIndex(tmpResult => tmpResult.kg === resultObject.kg && tmpResult.endpointUrl === resultObject.endpointUrl);
+                        if (resultsIndex === -1) {
+                            Log.error("Error: could not find the result object for", query);
+                            return;
+                        }
+                        if (!Array.isArray(APIResultObject) && APIResultObject.message !== undefined) {
+                            Log.error("Error: could not find the API result object for", query, "because of", APIResultObject.message);
+                            return;
+                        }
+                        if (APIResultObject === undefined || !Array.isArray(APIResultObject) || APIResultObject.length === 0) {
+                            Log.error("Error: could not find the API result object for", query);
+                            return;
+                        }
+                        fairCheckerResults.push({ kg: resultObject.kg, endpointUrl: resultObject.endpointUrl, apiScore: [APIResultObject] });
+                        return ;
+                    })
+                }
 
-            // For each KG, retrieve their score through the FAIR Checker API
-            let promisesArgsArray: any[][] = [];
-            resultsObjectArray.forEach((resultObject) => {
-                const APIQuery = "https://fair-checker.france-bioinformatique.fr/api/check/metrics_all?url=" + Global.unicodeToUrlendcode(resultObject.kg);
-                promisesArgsArray.push([resultObject, APIQuery]);
-            })
-            function promiseFunction(resultObject: ResultObject, query: string) {
-                return Global.fetchJSONPromise(query).then((APIResultObject: any[] | { message }) => {
-                    let resultsIndex = resultsObjectArray.findIndex(tmpResult => tmpResult.kg === resultObject.kg && tmpResult.endpointUrl === resultObject.endpointUrl);
-                    if (resultsIndex === -1) {
-                        Log.error("Error: could not find the result object for", query);
-                        return;
-                    }
-                    if (!Array.isArray(APIResultObject) && APIResultObject.message !== undefined) {
-                        Log.error("Error: could not find the API result object for", query, "because of", APIResultObject.message);
-                        return;
-                    }
-                    if (APIResultObject === undefined || !Array.isArray(APIResultObject) || APIResultObject.length === 0) {
-                        Log.error("Error: could not find the API result object for", query);
-                        return;
-                    }
-                    resultsObjectArray[resultsIndex].apiScore.push(APIResultObject);
-                    return;
+                fairChecherResultsPromise = Global.iterativePromises(promisesArgsArray, promiseFunction, 1000).then(() => {
+                    Global.writeFile(result_FAIRChecker, JSON.stringify(fairCheckerResults));
+                    return fairCheckerResults;
+                })
+            } else {
+                fairChecherResultsPromise = fsPromises.readFile(result_FAIRChecker).then((data) => {
+                    return JSON.parse(data.toString());
                 })
             }
-
-            return Global.iterativePromises(promisesArgsArray, promiseFunction, 1000).then(() => {
+            return fairChecherResultsPromise.then((fairCheckerResults) => {
+                fairCheckerResults.forEach((fairCheckerResult) => {
+                    let resultsIndex = resultsObjectArray.findIndex(tmpResult => tmpResult.kg === fairCheckerResult.kg && tmpResult.endpointUrl === fairCheckerResult.endpointUrl);
+                    if (resultsIndex === -1) {
+                        Log.error("Error: could not find the result object for", fairCheckerResult);
+                        return;
+                    }
+                    resultsObjectArray[resultsIndex].apiScore = fairCheckerResult.apiScore;
+                })
                 return resultsObjectArray;
-            })
+            });
 
         }).then((resultsObjectArray) => {
 
@@ -272,9 +304,19 @@ dataTreatment()
         "R1.2",
         "R1.3"
     ];
-    csvHeaders = csvHeaders.concat(fairKeys);
-    let csvComparison = csvHeaders.join(",") + "\n"
-    let csvScores = csvHeaders.join(",") + "\n"
+    let csvComparison = csvHeaders.concat(fairKeys).join(",") + "\n";
+    let csvDiffAverage = csvHeaders.concat(fairKeys).join(",") + "\n";
+    let csvStats = csvHeaders.concat(fairKeys).join(",") + "\n";
+    let csvScoreFairHeaders = [];
+    fairKeys.forEach((fairKey) => {
+        csvScoreFairHeaders.push(fairKey + " IndeGx")
+        csvScoreFairHeaders.push(fairKey + " FAIRChecker")
+    })
+    let csvScores = csvHeaders.concat(csvScoreFairHeaders).join(",") + "\n"
+
+    let averageSum = new Map<string, number>();
+    let equalityCount = new Map<string, number>();
+    let totalCount = new Map<string, number>();
     resultsObjectArray.forEach((resultObject) => {
         let csvComparisonLine = [resultObject.endpointUrl, resultObject.kg];
         let csvScoresLine = [resultObject.endpointUrl, resultObject.kg];
@@ -282,6 +324,14 @@ dataTreatment()
         fairKeys.forEach((fairKey) => {
             let fairKeyIndegxScore = "Error";
             let apiScore = "NA";
+
+            // Fixing null values
+            resultObject.apiScore.at(0).forEach(apiScoreObject => {
+                if(apiScoreObject.metric === null) {
+                    apiScoreObject.metric = "I1";
+                }
+            })
+
             if(resultObject.apiScore.at(0) !== undefined) {
                 let correspondingApiScoreObject = resultObject.apiScore.at(0).find(apiScoreObject => apiScoreObject.metric !== undefined && apiScoreObject.metric.localeCompare(fairKey) === 0);
                 if (correspondingApiScoreObject !== undefined) {
@@ -291,22 +341,57 @@ dataTreatment()
             if(indegxScore !== undefined) {
                 fairKeyIndegxScore = indegxScore[fairKey]
             }
+            csvScoresLine.push(fairKeyIndegxScore);
+            csvScoresLine.push(apiScore);
             if (isNaN(Number(apiScore)) || isNaN(Number(fairKeyIndegxScore))) {
-                Log.log(resultObject.kg, fairKey, "Anavailable value: IndeGx=", fairKeyIndegxScore, " FAIR Checker=", apiScore)
-                csvScoresLine.push(apiScore + " (" + fairKeyIndegxScore + ")");
+                Log.log(resultObject.kg, fairKey, "Unavailable value: IndeGx=", fairKeyIndegxScore, " FAIR Checker=", apiScore)
                 csvComparisonLine.push(apiScore);
             } else {
                 Log.log(resultObject.kg, fairKey, ": IndeGx=", fairKeyIndegxScore, " FAIR Checker=", apiScore)
-                csvScoresLine.push((Number.parseInt(apiScore) - Number.parseInt(fairKeyIndegxScore)).toString());
+                if (!averageSum.has(fairKey)) {
+                    averageSum.set(fairKey, 0);
+                    totalCount.set(fairKey, 0);
+                }
+                if (!equalityCount.has(fairKey)) {
+                    equalityCount.set(fairKey, 0);
+                }
+                averageSum.set(fairKey, averageSum.get(fairKey) + Math.abs(Number(fairKeyIndegxScore) - Number(apiScore)));
+                equalityCount.set(fairKey, equalityCount.get(fairKey) + (fairKeyIndegxScore.localeCompare(apiScore) === 0 ? 1 : 0));
+                totalCount.set(fairKey, totalCount.get(fairKey) + 1);
                 csvComparisonLine.push((fairKeyIndegxScore.localeCompare(apiScore) === 0).toString());
             }
         })
+
         csvComparison += csvComparisonLine.join(",") + "\n"
         csvScores += csvScoresLine.join(",") + "\n"
     })
+        
+    let csvAverageLine = ["Average", " "];
+    // Compute the average difference
+    fairKeys.forEach((fairKey) => {
+        if (averageSum.has(fairKey)) {
+            csvAverageLine.push((averageSum.get(fairKey) / totalCount.get(fairKey)).toString());
+        } else {
+            csvAverageLine.push("NA");
+        }
+    })
+    csvDiffAverage += csvAverageLine.join(",") + "\n";
+
+    // Compute the proportion of equality
+    let csvEqualityLine = ["Equality", " "];
+    fairKeys.forEach((fairKey) => {
+        if (equalityCount.has(fairKey)) {
+            csvEqualityLine.push(((equalityCount.get(fairKey) / totalCount.get(fairKey)) * 100).toString());
+        } else {
+            csvEqualityLine.push("NA");
+        }
+    })
+    csvStats += csvEqualityLine.join(",") + "\n";
 
     Global.writeFile("results_comparison.csv", csvComparison)
     Global.writeFile("results_scores.csv", csvScores)
+    Global.writeFile("results_average.csv", csvDiffAverage)
+    Global.writeFile("results_equality.csv", csvStats)
     return ;
 })
 .catch((error) => {
