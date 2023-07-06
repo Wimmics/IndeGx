@@ -66,17 +66,14 @@ export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQue
     if (isSparqlSelect(query)) {
         jsonHeaders["accept"] = "application/sparql-results+json";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
-        Logger.log(queryUrl)
         return fetchJSONPromise(queryUrl, jsonHeaders).then(result => (result as SELECTJSONResult)).catch(error => { Logger.error(endpoint, query, error); throw error })
     } else if (isSparqlAsk(query)) {
         jsonHeaders["accept"] = "application/sparql-results+json";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
-        Logger.log(queryUrl)
         return fetchJSONPromise(queryUrl, jsonHeaders).then(result => (result as ASKJSONResult)).catch(() => { return { head: {}, boolean: false } as ASKJSONResult})
     } else if (isSparqlConstruct(query)) {
         jsonHeaders["accept"] = "text/turtle";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=turtle&timeout=' + timeout;
-        Logger.log(queryUrl)
         return fetchGETPromise(queryUrl).then(result => {
             let resultStore = RDFUtils.createStore();
             result = RDFUtils.fixCommonTurtleStringErrors(result)
