@@ -11,7 +11,7 @@
 
 
 kgi:catalog a dcat:Catalog ;
-    dcat:dataset kgi:heapSpaceError .
+    dcat:dataset kgi:testVocabularies .
 
 kgi:indegx void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql> .
 
@@ -20,3 +20,7 @@ kgi:taxref void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> .
 kgi:incorrectTurtle void:sparqlEndpoint <http://ontology.inrae.fr/ppdo/sparql/> .
 
 kgi:heapSpaceError void:sparqlEndpoint <http://montana.eagle-i.net/sparqler/sparql> .
+
+kgi:testF2A void:sparqlEndpoint <http://id.nlm.nih.gov/mesh/sparql> .
+
+kgi:testVocabularies void:sparqlEndpoint <https://api.parliament.uk/sparql> .
