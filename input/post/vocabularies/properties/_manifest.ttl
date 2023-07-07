@@ -1,0 +1,112 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+        <../loadVocabularies.ttl>
+    ) ;
+    mf:entries (
+        <propertyUsage.ttl>
+    ) .
+
+<propertyUsage.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            # Creating the occurences object of each property in each dataset
+            mf:action """
+            prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+            INSERT {
+
+                ?elem voaf:inDataset ?elemDatasetOccurence ;
+                    voaf:reusedByDatasets ?nbUsedByDatasets .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset ?kg .
+            }
+            WHERE {
+                GRAPH ?vocabGraph {
+                    {
+                        ?elem a ?type .
+                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
+                    } UNION {
+                        ?elem ?prop ?type .
+                        FILTER( ?prop IN ( owl:domain, owl:range ) )
+                    }
+                }
+                GRAPH ?kgGraph {
+                    ?kg void:propertyPartition ?pp .
+                    ?pp void:property ?elem .
+                }
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?kg) ) ) ) ) AS ?elemDatasetOccurence )
+                BIND( IF( EXISTS {
+                    GRAPH ?vocabGraph {
+                        ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
+                    }
+                }, ?occurences + 1, 1) AS ?nbUsedByDatasets )
+            }
+            """
+        ]
+        [
+            # Counting the number of appearances of each property in each dataset
+            mf:action """
+            prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+            INSERT {
+
+                ?elem voaf:inDataset ?elemDatasetOccurence ;
+                    voaf:occurrencesInDatasets ?nbDatasetOccurences .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:occurrences ?nbTriples .
+            }
+            WHERE {
+                GRAPH ?vocabGraph {
+                    {
+                        ?elem a ?type .
+                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
+                    } UNION {
+                        ?elem ?prop ?type .
+                        FILTER( ?prop IN ( owl:domain, owl:range ) )
+                    }
+                }
+                GRAPH ?kgGraph {
+                    ?kg void:propertyPartition ?pp .
+                    ?pp void:property ?elem ;
+                        void:triples ?nbTriples .
+                }
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?kg) ) ) ) ) AS ?elemDatasetOccurence )
+                BIND( IF( EXISTS {
+                    GRAPH ?vocabGraph {
+                        ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
+                    }
+                }, ?datasetOccurences + ?nbTriples, ?nbTriples) AS ?nbDatasetOccurences )
+            }
+            """
+        ]
+    ) .
+
+
+                # ?elem voaf:inDataset ?elemDatasetOccurence ;
+                #     voaf:reusedByDatasets 10 ;
+                #     voaf:occurrencesInDatasets 200 .
+                # ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                #     voaf:inDataset ?kg ;
+                #     voaf:occurrences 20 .
