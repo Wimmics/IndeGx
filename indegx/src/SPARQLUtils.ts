@@ -144,20 +144,24 @@ export function isSparqlUpdate(queryString: string): boolean {
     return checkSparqlType(queryString, "update");
 }
 
+export function isQuery(query: SparqlQuery): query is Query {
+    return (query as Query).queryType !== undefined;
+}
+
 export function isSelect(query: SparqlQuery): query is SelectQuery {
-    return (query as SelectQuery).queryType !== undefined && (query as SelectQuery).queryType === 'SELECT';
+    return isQuery(query) && (query as SelectQuery).queryType === 'SELECT';
 }
 
 export function isAsk(query: SparqlQuery): query is AskQuery {
-    return (query as AskQuery).queryType !== undefined && (query as AskQuery).queryType === 'ASK';
+    return isQuery(query) && (query as AskQuery).queryType === 'ASK';
 }
 
 export function isConstruct(query: SparqlQuery): query is ConstructQuery {
-    return (query as ConstructQuery).queryType !== undefined && (query as ConstructQuery).queryType === 'CONSTRUCT';
+    return isQuery(query) && (query as ConstructQuery).queryType === 'CONSTRUCT';
 }
 
 export function isDescribe(query: SparqlQuery): query is DescribeQuery {
-    return (query as DescribeQuery).queryType !== undefined && (query as DescribeQuery).queryType === 'DESCRIBE';
+    return isQuery(query) && (query as DescribeQuery).queryType === 'DESCRIBE';
 }
 
 export function isUpdate(query: SparqlQuery): query is Update {
