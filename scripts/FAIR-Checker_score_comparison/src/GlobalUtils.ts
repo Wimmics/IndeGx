@@ -102,6 +102,7 @@ export function fetchPromise(url: string, header: Record<string, string> = {}, m
         method: method,
         headers: myHeaders,
         redirect: 'follow',
+        
     };
     if (method.localeCompare("POST") == 0) {
         myInit.body = query;
@@ -123,12 +124,9 @@ export function fetchPromise(url: string, header: Record<string, string> = {}, m
                     Logger.info("Try:", numTry, "Fetch ", method, url, query);
                     if (numTry < nbFetchRetries) {
                         return setTimeout(millisecondsBetweenRetries).then(() => fetchPromise(url, header, method, query, numTry + 1));
-                    } else {
-                        Logger.error("Too many retries", error);
                     }
-                } else {
-                    Logger.error("Too many retries", error);
                 }
+                throw error;
             }).finally(() => {
                 countConcurrentQueries--;
                 return;
