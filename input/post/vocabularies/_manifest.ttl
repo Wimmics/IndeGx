@@ -19,6 +19,10 @@
         [
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
+            prefix xt: <http://ns.inria.fr/sparql-extension/>
+            prefix us: <http://ns.inria.fr/sparql-extension/user/>
+            prefix rq: <http://ns.inria.fr/sparql-function/>
+            prefix dt: <http://ns.inria.fr/sparql-datatype/>
             INSERT {
                 GRAPH ?g { 
                     ?s ?p ?o .
@@ -36,17 +40,3 @@
             """
         ]
     ) .
-
-
-    # Add number of triples with the resource among KGs
-    # Count number of Kgs with the resource
-    # Link the resource with some "usedIn"  property
-    # ?elem voaf:inDataset ?elemDatasetOccurence
-    #     a voaf:DatasetOccurences ;
-    #     voaf:inDataset ?kg ;
-    #     voaf:occurrences 20 ;
-    #     ]
-    # ] ;
-    # voaf:reusedByDatasets 10 ;
-    # voaf:occurrencesInDatasets 200 .
-    # BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?kg) ) ) ) ) as ?elemDatasetOccurence )
