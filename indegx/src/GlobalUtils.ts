@@ -2,6 +2,7 @@ import fetch, { FetchError, RequestInit } from 'node-fetch';
 import * as fs from 'node:fs/promises';
 import { setTimeout } from 'node:timers/promises';
 import * as Logger from "./LogUtils.js"
+import { JSONValue } from './SPARQLUtils.js';
 
 export let nbFetchRetries = 10;
 export let millisecondsBetweenRetries = 5000;
@@ -145,7 +146,7 @@ export function fetchPOSTPromise(url, query = "", header: Record<string, string>
     return fetchPromise(url, header, "POST", query);
 }
 
-export function fetchJSONPromise(url, otherHeaders: Record<string, string> = {}): Promise<any> {
+export function fetchJSONPromise(url, otherHeaders: Record<string, string> = {}): Promise<JSONValue> {
     let header = {};
     header['accept'] = 'application/json';
     Object.keys(otherHeaders).forEach(key => {

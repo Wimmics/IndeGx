@@ -584,9 +584,9 @@
 
             INSERT {
                 GRAPH ?graph {
-                    ?res schema:dateCreated ?id ;
-                        dct:created ?id ;
-                        pav:createdOn ?id .
+                    ?res schema:dateModified ?id ;
+                        dct:modified ?id ;
+                        pav:lastUpdateOn ?id .
                 }
             } WHERE {
                 GRAPH ?graph {

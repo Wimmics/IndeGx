@@ -50,7 +50,6 @@
                     }
                     BIND(IF (EXISTS { 
                             GRAPH ?kgGraph { 
-                                ?s a dcat:Dataset .
                                 ?s ?p ?o . 
                             } 
                         }, 2, 0) AS ?value)
@@ -325,7 +324,7 @@
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
                             dqv:value ?value .
                     }
-                    BIND(Iri(CONCAT(STR(?kgGraph), "#I2")) AS ?measurement)
+                    BIND(Iri(CONCAT(STR(?kg), "#I2")) AS ?measurement)
                 }
             """
         ]
