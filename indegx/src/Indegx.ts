@@ -6,6 +6,7 @@ import { readRules } from "./RuleCreation.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
 import { writeIndex } from "./IndexUtils.js";
+import * as ReportUtils from "./ReportUtils.js";
 import { config } from 'node-config-ts';
 import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
@@ -53,6 +54,7 @@ type ConfigType = {
     outputFile: string,
     manifestJSON: string,
     postManifestJSON: string,
+    queryLog?: boolean,
     data?: string
 }
 
@@ -72,6 +74,10 @@ let maxConccurentQueries: number = currentConfig.maxConccurentQueries;
 let delayMillisecondsTimeForConccurentQuery: number = currentConfig.delayMillisecondsTimeForConccurentQuery;
 let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
 let logFile: string = currentConfig.logFile;
+let queryLog: boolean = currentConfig.queryLog;
+if(queryLog !== undefined && ! queryLog) {
+    ReportUtils.setLogMode(false);
+}
 let outputFile: string = currentConfig.outputFile;
 let manifestTreeFile: string = currentConfig.manifestJSON;
 let postManifestTreeFile: string = currentConfig.postManifestJSON;
