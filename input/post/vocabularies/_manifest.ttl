@@ -33,7 +33,7 @@
                     ?kg void:vocabulary ?vocab .
                 }
                 bind (xt:load(?vocab) as ?g)
-                GRAPH ?g { 
+                GRAPH ?vocab { 
                     ?s ?p ?o .
                 }
             }

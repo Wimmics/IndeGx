@@ -11,10 +11,10 @@
         <../loadVocabularies.ttl>
     ) ;
     mf:entries (
-        <propertyUsage.ttl>
+        <classUsage.ttl>
     ) .
 
-<propertyUsage.ttl> a mf:ManifestEntry ;
+<classUsage.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             # Creating the occurences object of each property in each dataset
@@ -27,6 +27,7 @@
             prefix void: <http://rdfs.org/ns/void#>
             prefix owl: <http://www.w3.org/2002/07/owl#>
             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
             INSERT {
 
@@ -39,15 +40,21 @@
                 GRAPH ?vocabGraph {
                     {
                         ?elem a ?type .
-                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
+                        FILTER( ?type IN ( owl:Class, rdfs:Class ) )
                     } UNION {
                         ?elem ?prop ?type .
-                        FILTER( ?prop IN ( owl:domain, owl:range ) )
+                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
+                    } UNION {
+                        ?type ?prop ?elem .
+                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
+                    } UNION {
+                        ?thing ?prop ?elem .
+                        FILTER( ?prop IN ( rdf:type, rdfs:range , rdfs:domain ) )
                     }
                 }
                 GRAPH ?kgGraph {
-                    ?kg void:propertyPartition ?pp .
-                    ?pp void:property ?elem .
+                    ?kg void:classPartition ?pp .
+                    ?pp void:class ?elem .
                 }
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?kg) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
@@ -69,35 +76,42 @@
             prefix void: <http://rdfs.org/ns/void#>
             prefix owl: <http://www.w3.org/2002/07/owl#>
             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
             INSERT {
 
                 ?elem voaf:inDataset ?elemDatasetOccurence ;
                     voaf:occurrencesInDatasets ?nbDatasetOccurences .
                 ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                    voaf:occurrences ?nbTriples .
+                    voaf:occurrences ?nbEntities .
             }
             WHERE {
                 GRAPH ?vocabGraph {
                     {
                         ?elem a ?type .
-                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
+                        FILTER( ?type IN ( owl:Class, rdfs:Class ) )
                     } UNION {
                         ?elem ?prop ?type .
-                        FILTER( ?prop IN ( owl:domain, owl:range ) )
+                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
+                    } UNION {
+                        ?type ?prop ?elem .
+                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
+                    } UNION {
+                        ?thing ?prop ?elem .
+                        FILTER( ?prop IN ( rdf:type, rdfs:range , rdfs:domain ) )
                     }
                 }
                 GRAPH ?kgGraph {
-                    ?kg void:propertyPartition ?pp .
-                    ?pp void:property ?elem ;
-                        void:triples ?nbTriples .
+                    ?kg void:classPartition ?pp .
+                    ?pp void:class ?elem ;
+                        void:entities ?nbEntities .
                 }
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?kg) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
                     GRAPH ?vocabGraph {
                         ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
                     }
-                }, ?datasetOccurences + ?nbTriples, ?nbTriples) AS ?nbDatasetOccurences )
+                }, ?datasetOccurences + ?nbEntities, ?nbEntities) AS ?nbDatasetOccurences )
             }
             """
         ]
