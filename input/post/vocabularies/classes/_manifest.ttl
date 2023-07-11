@@ -30,11 +30,12 @@
             prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
             INSERT {
-
-                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
-                    voaf:reusedByDatasets ?nbUsedByDatasets .
-                ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                    voaf:inDataset ?kg .
+                GRAPH ?vocabGraph {
+                    ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                        voaf:reusedByDatasets ?nbUsedByDatasets .
+                    ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                        voaf:inDataset ?kg .
+                }
             }
             WHERE {
                 GRAPH ?vocabGraph {
@@ -79,11 +80,12 @@
             prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
             INSERT {
-
-                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
-                    voaf:occurrencesInDatasets ?nbDatasetOccurences .
-                ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                    voaf:occurrences ?nbEntities .
+                GRAPH ?vocabGraph {
+                    ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                        voaf:occurrencesInDatasets ?nbDatasetOccurences .
+                    ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                        voaf:occurrences ?nbEntities .
+                }
             }
             WHERE {
                 GRAPH ?vocabGraph {
