@@ -172,10 +172,14 @@ export function fetchJSONPromise(url, otherHeaders: Record<string, string> = {})
  * @returns a string with unicode codes replaced by characters
  */
 export function unicodeToUrlendcode(text: string): string {
-    return encodeURIComponent(text.replace(/\\u[\dA-F]{4}/gi,
-        function (match) {
-            let unicodeMatch = String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-            let urlEncodedMatch = encodeURIComponent(unicodeMatch);
-            return urlEncodedMatch;
-        }));
+    return encodeURIComponent(replaceUnicode(text));
+}
+
+export function replaceUnicode(text: string): string {
+    return text.replace(/\\u[\dA-F]{4}/gi,
+    function (match) {
+        let unicodeMatch = String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+        let urlEncodedMatch = encodeURIComponent(unicodeMatch);
+        return urlEncodedMatch;
+    });
 }
