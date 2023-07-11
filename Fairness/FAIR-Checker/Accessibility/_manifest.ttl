@@ -42,7 +42,7 @@
                         UNION { ?kg a sd:Dataset }
                         UNION { ?kg a dataid:Dataset }
                     }
-                    BIND( STRSTARTS( STR(?kg), "http") AS ?value) 
+                    BIND( IF( STRSTARTS( STR(?kg), "http"), 2, 0)  AS ?value)
                     BIND( Iri( CONCAT( STR(?kg), "#A11")) AS ?measurement)
                 }
             """
