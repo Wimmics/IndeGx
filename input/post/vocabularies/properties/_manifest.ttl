@@ -17,6 +17,41 @@
 <propertyUsage.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            # Creating the ontology element description of each property
+            mf:action """
+            prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+            INSERT {
+                GRAPH ?vocabGraph {
+                    ?elem voaf:reusedByDatasets ?nbUsedByDatasets .
+                }
+            }
+            WHERE {
+                GRAPH ?vocabGraph {
+                    {
+                        ?elem a ?type .
+                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
+                    } UNION {
+                        ?elem ?prop ?type .
+                        FILTER( ?prop IN ( owl:domain, owl:range ) )
+                    }
+                }
+                BIND( IF( EXISTS {
+                    GRAPH ?vocabGraph {
+                        ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
+                    }
+                }, ?occurences, 0) AS ?nbUsedByDatasets )
+            }
+            """
+        ]
+        [
             # Creating the occurences object of each property in each dataset
             mf:action """
             prefix voaf: <http://purl.org/vocommons/voaf#>
