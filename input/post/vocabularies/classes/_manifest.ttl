@@ -31,7 +31,7 @@
 
             INSERT {
 
-                ?elem voaf:inDataset ?elemDatasetOccurence ;
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
                     voaf:reusedByDatasets ?nbUsedByDatasets .
                 ?elemDatasetOccurence a voaf:DatasetOccurences ;
                     voaf:inDataset ?kg .
@@ -80,7 +80,7 @@
 
             INSERT {
 
-                ?elem voaf:inDataset ?elemDatasetOccurence ;
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
                     voaf:occurrencesInDatasets ?nbDatasetOccurences .
                 ?elemDatasetOccurence a voaf:DatasetOccurences ;
                     voaf:occurrences ?nbEntities .

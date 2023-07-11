@@ -24,7 +24,7 @@
             prefix rq: <http://ns.inria.fr/sparql-function/>
             prefix dt: <http://ns.inria.fr/sparql-datatype/>
             INSERT {
-                GRAPH ?g { 
+                GRAPH ?vocab { 
                     ?s ?p ?o .
                 }
             }
@@ -33,7 +33,7 @@
                     ?kg void:vocabulary ?vocab .
                 }
                 bind (xt:load(?vocab) as ?g)
-                GRAPH ?vocab { 
+                GRAPH ?g { 
                     ?s ?p ?o .
                 }
             }
