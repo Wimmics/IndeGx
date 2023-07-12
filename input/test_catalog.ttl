@@ -11,7 +11,7 @@
 
 
 kgi:catalog a dcat:Catalog ;
-    dcat:dataset kgi:testVocabularies .
+    dcat:dataset kgi:duplicateMeasure1, kgi:duplicateMeasure2, kgi:duplicateMeasure3, kgi:duplicateMeasure4 .
 
 kgi:indegx void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql> .
 
@@ -19,8 +19,7 @@ kgi:taxref void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> .
 
 kgi:incorrectTurtle void:sparqlEndpoint <http://ontology.inrae.fr/ppdo/sparql/> .
 
-kgi:heapSpaceError void:sparqlEndpoint <http://montana.eagle-i.net/sparqler/sparql> .
-
-kgi:testF2A void:sparqlEndpoint <http://id.nlm.nih.gov/mesh/sparql> .
-
-kgi:testVocabularies void:sparqlEndpoint <http://agrovoc.fao.org/sparql> .
+kgi:duplicateMeasure1 void:sparqlEndpoint <http://rdf.muninn-project.org/sparql> .
+kgi:duplicateMeasure2 void:sparqlEndpoint <http://weakg.i3s.unice.fr/sparql> .
+kgi:duplicateMeasure3 void:sparqlEndpoint <https://clara.univ-nantes.fr/sparql> .
+kgi:duplicateMeasure4 void:sparqlEndpoint <http://wasabi.inria.fr/sparql> .
