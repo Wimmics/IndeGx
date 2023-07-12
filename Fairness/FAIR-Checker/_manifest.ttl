@@ -5,8 +5,8 @@
 <> a mf:Manifest ;
     dcterms:description "Rules built from the code available at https://github.com/IFB-ElixirFr/FAIR-checker/tree/master/metrics" ;
     mf:include (
-        <Accessibility/_manifest.ttl>
         <Findability/_manifest.ttl>
+        <Accessibility/_manifest.ttl>
         <Interoperability/_manifest.ttl>
         <Reusability/_manifest.ttl>
     ) .
