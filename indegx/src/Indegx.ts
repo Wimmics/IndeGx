@@ -1,17 +1,15 @@
-import { coreseServerUrl } from "./CoreseInterface.js";
+import { coreseServerUrl, sendUpdate } from "./CoreseInterface.js";
 import * as GlobalUtils from "./GlobalUtils.js";
-import { KGI } from "./RDFUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";
 import { applyRuleTree } from "./RuleApplication.js";
 import { readRules } from "./RuleCreation.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
-import { sendFileToIndex, writeIndex } from "./IndexUtils.js";
+import { writeIndex } from "./IndexUtils.js";
+import * as ReportUtils from "./ReportUtils.js";
 import { config } from 'node-config-ts';
 import commandLineArgs from 'command-line-args';
-import { readdirSync } from 'node:fs';
-
-import commandLineUsage from 'command-line-usage'
+import commandLineUsage from 'command-line-usage';
 
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
@@ -56,7 +54,8 @@ type ConfigType = {
     outputFile: string,
     manifestJSON: string,
     postManifestJSON: string,
-    vocabularies?: string
+    queryLog?: boolean,
+    data?: string
 }
 
 let currentConfig: ConfigType = config; //[options.config];
@@ -64,7 +63,6 @@ if (currentConfig === undefined) {
     Logger.error("No config found in " + config);
     throw new Error("No config found in " + config);
 }
-
 
 Logger.info("Using config", currentConfig);
 let rootManifestFilename: string = currentConfig.manifest;
@@ -76,6 +74,10 @@ let maxConccurentQueries: number = currentConfig.maxConccurentQueries;
 let delayMillisecondsTimeForConccurentQuery: number = currentConfig.delayMillisecondsTimeForConccurentQuery;
 let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
 let logFile: string = currentConfig.logFile;
+let queryLog: boolean = currentConfig.queryLog;
+if(queryLog !== undefined && ! queryLog) {
+    ReportUtils.setLogMode(false);
+}
 let outputFile: string = currentConfig.outputFile;
 let manifestTreeFile: string = currentConfig.manifestJSON;
 let postManifestTreeFile: string = currentConfig.postManifestJSON;
@@ -86,66 +88,67 @@ GlobalUtils.setDelayMillisecondsTimeForConccurentQuery(delayMillisecondsTimeForC
 SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
-let vocabularyFileSendingPool = [];
-if (currentConfig.vocabularies !== undefined) {
-    let vocabularies = currentConfig.vocabularies;
-    if (vocabularies !== undefined && vocabularies !== "") {
-        readdirSync(vocabularies).forEach(file => {
-            vocabularyFileSendingPool.push(sendFileToIndex("file://" + vocabularies + "/" + file, KGI("vocabularies").value));
-        })
-    }
-}
-Promise.allSettled(vocabularyFileSendingPool).then(() => {
-    Logger.info("Reading manifest tree ", rootManifestFilename)
-    return readRules(rootManifestFilename).then(manifest => {
-        Logger.info("Manifest tree read")
-        if (manifestTreeFile !== undefined && manifestTreeFile !== "") {
-            Logger.info("Writing manifest tree to file", manifestTreeFile)
-            GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifest))
-        }
-
-        Logger.info("Reading catalog", catalog)
-        let endpointPool = [];
-        return readCatalog(catalog).then(endpointObjectList => {
-            Logger.info("Catalog read")
-            endpointObjectList.forEach(endpointObject => {
-                Logger.info("Treating endpoint", endpointObject.endpoint);
-                endpointPool.push(applyRuleTree(endpointObject, manifest).then(() => {
-                    Logger.info("Endpoint", endpointObject.endpoint, "treated");
-                    return;
-                }).catch(error => {
-                    Logger.error("Error treating endpoint", endpointObject.endpoint, error)
-                }).finally(() => {
-                    return;
-                }));
-            })
-        }).catch(error => {
-            Logger.error("Error treating catalog", catalog, error)
-        }).then(() => {
-            return Promise.allSettled(endpointPool).then(() => {
-                Logger.info("All endpoints treated")
-            });
-        })
-    }).then(() => {
-        if (post !== undefined && post !== "") {
-            return readRules(post).then(postManifest => {
-                Logger.info("Post manifest tree read.");
-                if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
-                    Logger.info("Writing post manifest tree to file", postManifestTreeFile)
-                    GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
-                }
-                Logger.info("Post treatment starts");
-                return applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
-                    Logger.info("Post treatment ends");
-                })
-            })
-        } else {
-            Logger.info("No post treatment specified");
-            return;
-        }
-    }).finally(() => {
-        return writeIndex(outputFile)
+let initPromise = Promise.resolve();
+if (currentConfig.data !== undefined) {
+    let data = currentConfig.data;
+    let loadDataQueryString = "LOAD <" + data + ">";
+    Logger.info("Loading data", data);
+    initPromise = sendUpdate(coreseServerUrl, loadDataQueryString).then(() => {
+        Logger.info("Data loaded");
     }).catch(error => {
-        Logger.error("During indexation", error);
-    });
-})
+        Logger.error("Error loading data", error);
+    })
+}
+
+Logger.info("Reading manifest tree ", rootManifestFilename)
+initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
+    Logger.info("Manifest tree read")
+    if (manifestTreeFile !== undefined && manifestTreeFile !== "") {
+        Logger.info("Writing manifest tree to file", manifestTreeFile)
+        GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifest))
+    }
+
+    Logger.info("Reading catalog", catalog)
+    let endpointPool = [];
+    return readCatalog(catalog).then(endpointObjectList => {
+        Logger.info("Catalog read")
+        endpointObjectList.forEach(endpointObject => {
+            Logger.info("Treating endpoint", endpointObject.endpoint);
+            endpointPool.push(applyRuleTree(endpointObject, manifest).then(() => {
+                Logger.info("Endpoint", endpointObject.endpoint, "treated");
+                return;
+            }).catch(error => {
+                Logger.error("Error treating endpoint", endpointObject.endpoint, error)
+            }).finally(() => {
+                return;
+            }));
+        })
+    }).catch(error => {
+        Logger.error("Error treating catalog", catalog, error)
+    }).then(() => {
+        return Promise.allSettled(endpointPool).then(() => {
+            Logger.info("All endpoints treated")
+        });
+    })
+}).then(() => {
+    if (post !== undefined && post !== "") {
+        return readRules(post).then(postManifest => {
+            Logger.info("Post manifest tree read.");
+            if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
+                Logger.info("Writing post manifest tree to file", postManifestTreeFile)
+                GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
+            }
+            Logger.info("Post treatment starts");
+            return applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
+                Logger.info("Post treatment ends");
+            })
+        })
+    } else {
+        Logger.info("No post treatment specified");
+        return;
+    }
+}).finally(() => {
+    return writeIndex(outputFile)
+}).catch(error => {
+    Logger.error("During indexation", error);
+}));
