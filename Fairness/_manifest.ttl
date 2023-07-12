@@ -307,11 +307,7 @@
                 }
             } WHERE {
                 FILTER(REGEX(STR($rawEndpointUrl), "sparql/?$", "i"))
-                BIND(
-                    IRI(
-                    REPLACE(STR(?endpoint), "sparql/?$", ".well-known/void"))
-                        AS ?wellknown)
-                }
+                BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
             }
             """
         ]
