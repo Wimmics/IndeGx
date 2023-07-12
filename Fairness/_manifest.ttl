@@ -247,6 +247,10 @@
                 GRAPH $rawEndpointUrl {
                     ?s ?p ?o .
                 }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    ?s ?p ?o .
+                }
             }
             """
         ]
