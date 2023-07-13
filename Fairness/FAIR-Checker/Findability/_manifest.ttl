@@ -224,10 +224,6 @@
                         { ?s a ?elem . }
                         UNION { ?s ?elem ?oGraph . }
                     }
-                    GRAPH ?kgGraph {
-                        { ?s a ?elem . }
-                        UNION { ?s ?elem ?oGraph . }
-                    }
                     SERVICE <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100> {
                         FILTER ( EXISTS {
                             ?elem ?p ?o .
@@ -273,15 +269,6 @@
                         UNION { ?kg a sd:Dataset }
                         UNION { ?kg a dataid:Dataset }
                     }
-                    FILTER ( NOT EXISTS {
-                        GRAPH ?kgGraph {
-                            { ?s a ?elem . }
-                            UNION { ?s ?elem ?oGraph . }
-                        }
-                        SERVICE <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100> {
-                            ?elem ?p ?o .
-                        }
-                    } )
                     FILTER (
                         NOT EXISTS {
                             GRAPH ?kgGraph {
@@ -291,6 +278,15 @@
                             }
                         }
                     )
+                    FILTER ( NOT EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?s a ?elem . }
+                            UNION { ?s ?elem ?oGraph . }
+                        }
+                        SERVICE <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100> {
+                            ?elem ?p ?o .
+                        }
+                    } )
                     BIND(Iri(CONCAT(STR(?kg), "#F2B")) AS ?measurement)
                 }
             """
