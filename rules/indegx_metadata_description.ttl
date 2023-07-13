@@ -1,0 +1,170 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat:       <http://www.w3.org/ns/dcat#> .
+@prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+@prefix prov:       <http://www.w3.org/ns/prov#> .
+@prefix schema:		<http://schema.org/> .
+@prefix void:       <http://rdfs.org/ns/void#> .
+@prefix sd:     	<http://www.w3.org/ns/sparql-service-description#> .
+@prefix dct:        <http://purl.org/dc/terms/> .
+@prefix skos:       <http://www.w3.org/2004/02/skos/core#> .
+@prefix kgi:        <http://ns.inria.fr/kg/index#> .
+@prefix virtrdf:	<http://www.openlinksw.com/schemas/virtrdf#> .
+@prefix formats:	<http://www.w3.org/ns/formats/> .
+@prefix dekalog:	<http://prod-dekalog.inria.fr/> .
+@prefix mf:         <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix earl:       <http://www.w3.org/ns/earl#> .
+@prefix pav:        <http://purl.org/pav/> .
+@prefix orcid:      <https://orcid.org/> .
+@prefix ror:        <https://ror.org/> .
+@prefix voidext:    <http://ldf.fi/void-ext#> .
+@prefix cc:         <http://creativecommons.org/ns#> .
+@prefix dce:        <http://purl.org/dc/elements/1.1/> .
+@prefix dqv:        <http://www.w3.org/ns/dqv#> .
+@prefix bif:        <bif:> .
+@prefix sql:        <sql:> .
+@prefix geo:        <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+kgi:IndeGxDataset
+    a   dcat:Dataset, schema:Dataset, void:Dataset, prov:Entity, sd:Dataset ;
+    dct:title       "IndeGx datasets descriptions"@en ;
+    dct:description     "This dataset contains les results of IndeGx extraction of descriptions of datasets and endpoints."@en ;
+
+    foaf:homepage       dekalog: ;
+
+    dcat:contactPoint   "pierre.maillot@inria.fr" ;
+
+    dct:creator             orcid:0000-0002-9814-439X ;
+    dct:publisher           ror:0496p8026 , ror:02kvxyf05 , ror:02feahw73 , <https://team.inria.fr/wimmics/> ;
+    prov:wasAttributedTo    orcid:0000-0002-9814-439X ;
+    schema:editor           orcid:0000-0002-9814-439X , orcid:0000-0001-9064-0463 , orcid:0000-0001-5959-5561 ;
+    dct:contributor         orcid:0000-0001-9064-0463 , orcid:0000-0001-5959-5561 ;
+
+    dct:license     <https://www.gnu.org/licenses/gpl-3.0> ;
+
+    dct:language        "en" ;
+    void:vocabulary     rdf: , rdfs: , owl: , dct: , sd: , void: , dcat: , kgi: , prov: , schema: , voidext: , cc: , skos: , foaf: , dce: , earl: , dqv: , schema: , pav: , mf: ;
+
+    prov:wasGeneratedBy     <https://github.com/Wimmics/IndeGx> ;
+
+    dcat:keyword    "Metadata" , "Quality" ;
+
+    void:uriSpace           "http://ns.inria.fr/kg/index#" ;
+    void:uriRegexPattern    "^http://ns.inria.fr/kg/index#.*" ;
+
+    void:sparqlEndpoint dekalog:sparql ;
+    dcat:distribution [
+        a               dcat:Distribution ;
+        dct:title       "IndeGx's endpoint" ;
+        dcat:accessURL  dekalog:sparql ;
+        dcat:mediaType  "application/sparql-query" ;
+        dcat:accessService dekalog:sparql-sd
+    ] ;
+
+    pav:createdBy   orcid:0000-0002-9814-439X ;
+    pav:createdOn   "2021-08-31"^^xsd:date ;
+    pav:createdWith <https://github.com/Wimmics/IndeGx> ;
+    pav:createdAt <https://team.inria.fr/wimmics/> , [ geo:lat "43.615359" ; geo:long "7.071734" ] ;
+    pav:lastUpdateOn "2023-07-13"^^xsd:date ;
+
+    dcat:service dekalog:sparql-sd .
+
+dekalog:sparql-sd
+    a sd:Service, dcat:DataService , prov:Entity ;
+    dcat:servesDataset kgi:IndeGxDataset ;
+    sd:availableGraphs kgi:IndeGxDataset ;
+    sd:endpoint             dekalog:sparql ;
+    dcat:endpointUrl        dekalog:sparql ;
+    dct:creator             orcid:0000-0002-9814-439X , orcid:0000-0001-9064-0463 ;
+    prov:wasAttributedTo    orcid:0000-0002-9814-439X , orcid:0000-0001-9064-0463 ;
+    sd:feature 	sd:UnionDefaultGraph ,
+            sd:RequiresDataset ,
+            sd:EmptyGraphs ,
+            sd:BasicFederatedQuery ;
+    sd:resultFormat formats:N3 ,
+            formats:N-triples ,
+            formats:RDFa ,
+            formats:RDF_XML ,
+            formats:SPARQL_Results_XML ,
+            formats:SPARQL_Results_JSON ,
+            formats:SPARQL_Results_CSV ,
+            formats:Turtle ,
+            virtrdf:FileFormat_SPARQL_Results_HTML ,
+            virtrdf:FileFormat_SPARQL_Results_Spreadsheet ,
+            virtrdf:FileFormat_SPARQL_Results_Javascript ,
+            virtrdf:FileFormat_SPARQL_Results_CXML ,
+            virtrdf:FileFormat_SPARQL_Results_CXML_QR ,
+            virtrdf:FileFormat_Triples_RDF_JSON ,
+            virtrdf:FileFormat_Triples_XHTML_RDFa ,
+            virtrdf:FileFormat_Triples_ATOM_XML ,
+            virtrdf:FileFormat_Triples_ODATA_JSON ,
+            virtrdf:FileFormat_Triples_HTML_list ,
+            virtrdf:FileFormat_Triples_HTML_table ,
+            virtrdf:FileFormat_Triples_HTML_Microdata ,
+            virtrdf:FileFormat_Triples_Microdata_JSON ,
+            virtrdf:FileFormat_Triples_CSV ,
+            virtrdf:FileFormat_Triples_CXML ,
+            virtrdf:FileFormat_Triples_CXML_QR ,
+            virtrdf:FileFormat_Quads_TriG ;
+    sd:supportedLanguage sd:SPARQL10Query ,
+            sd:SPARQL11Query ;
+    sd:languageExtension	virtrdf:SSG_SD_QUAD_MAP ,
+        virtrdf:SSG_SD_OPTION ,
+        virtrdf:SSG_SD_IN ,
+        virtrdf:SSG_SD_LIKE ,
+        virtrdf:SSG_SD_GLOBALS ,
+        virtrdf:SSG_SD_BI ,
+        virtrdf:SSG_SD_VIRTSPECIFIC ,
+        virtrdf:SSG_SD_SERVICE ,
+        virtrdf:SSG_SD_TRANSIT ,
+        virtrdf:SSG_SD_SPARQL11_DRAFT ;
+    sd:propertyFeature	bif:contains ;
+    sd:extensionFunction	bif:abs ;
+    sd:extensionAggregate	sql:STDDEV .
+
+<https://ror.org/0496p8026>
+    a foaf:Organization, prov:Organization;
+    foaf:name "University Côte d'Azur";
+    foaf:homepage <https://univ-cotedazur.fr>.
+
+<https://ror.org/02kvxyf05>
+    a foaf:Organization, prov:Organization;
+    foaf:name "Inria";
+    foaf:homepage <https://www.inria.fr>.
+
+<https://ror.org/02feahw73>
+    a foaf:Organization, prov:Organization;
+    foaf:name "CNRS";
+    foaf:homepage <https://www.cnrs.fr>.
+
+<https://team.inria.fr/wimmics/> a foaf:Organization, prov:Organization;
+    dct:isPartOf <https://ror.org/02kvxyf05> ;
+    foaf:name "Wimmics research team".
+
+<https://orcid.org/0000-0002-9814-439X>
+    a foaf:Person , prov:Person;
+    prov:actedOnBehalfOf  <https://team.inria.fr/wimmics/> ;
+    foaf:name "Pierre MAILLOT" ;
+    schema:name "Pierre MAILLOT" ;
+    schema:sameAs <https://cv.archives-ouvertes.fr/pierre-maillot>, <https://www.researchgate.net/profile/Pierre-Maillot> .
+
+<https://orcid.org/0000-0001-9064-0463>
+    a foaf:Person, prov:Person;
+    prov:actedOnBehalfOf  <https://team.inria.fr/wimmics/> ;
+    foaf:name "Franck MICHEL";
+    schema:name "Franck MICHEL";
+    foaf:homepage <https://w3id.org/people/franckmichel>;
+    schema:sameAs <https://cv.archives-ouvertes.fr/fmichel/>, <https://www.researchgate.net/profile/Franck_Michel3>.
+
+<https://orcid.org/0000-0001-5959-5561>
+    a foaf:Person, prov:Person;
+    prov:actedOnBehalfOf  <https://team.inria.fr/wimmics/> ;
+    schema:name "Catherine FARON";
+    foaf:name "Catherine FARON";
+    foaf:homepage <http://www.i3s.unice.fr/~faron/>;
+    schema:sameAs <https://cv.archives-ouvertes.fr/catherine-faron-zucker>,
+        <https://www.researchgate.net/profile/Catherine_Faron-Zucker>.
+
+<https://github.com/Wimmics/IndeGx> a prov:SoftwareAgent .
