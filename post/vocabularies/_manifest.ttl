@@ -1,0 +1,42 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+        <../redundancy/manifest.ttl>
+    ) ;
+    mf:include (
+        <classes/_manifest.ttl>
+        <properties/_manifest.ttl>
+        # <resources/_manifest.ttl>
+    ) ;
+    mf:entries (
+        <loadVocabularies.ttl>
+    ) .
+
+<loadVocabularies.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            prefix xt: <http://ns.inria.fr/sparql-extension/>
+            prefix us: <http://ns.inria.fr/sparql-extension/user/>
+            prefix rq: <http://ns.inria.fr/sparql-function/>
+            prefix dt: <http://ns.inria.fr/sparql-datatype/>
+            INSERT {
+                GRAPH ?vocab { 
+                    ?s ?p ?o .
+                }
+            }
+            WHERE {
+                GRAPH ?kgGraph {
+                    ?kg void:vocabulary ?vocab .
+                }
+                bind (xt:load(?vocab) as ?g)
+                GRAPH ?g { 
+                    ?s ?p ?o .
+                }
+            }
+            """
+        ]
+    ) .

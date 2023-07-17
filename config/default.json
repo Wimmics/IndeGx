@@ -1,7 +1,7 @@
 {
-    "manifest": "file:///input/Fairness/_manifest.ttl",
-    "post": "file:///input/Fairness/_post_manifest.ttl",
-    "catalog": "file:///input/web_semantics_catalog.ttl",
+    "manifest": "https://raw.githubusercontent.com/Wimmics/IndeGx/Fairness/Fairness/_manifest.ttl",
+    "post": "https://github.com/Wimmics/IndeGx/blob/Fairness/Fairness/_post_manifest.ttl",
+    "catalog": "https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,

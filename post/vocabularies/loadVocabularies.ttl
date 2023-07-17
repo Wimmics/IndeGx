@@ -6,5 +6,4 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <_manifest.ttl> ;
-    dcterms:description "FAIR-Checker verifies that at least one property from SKOS or DCTerms or RDFS aimed at  documenting terms such as dct:title, rdfs:label, skos:definition, etc." .
+    dcterms:isReferencedBy <_manifest.ttl> .

@@ -610,6 +610,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                         return "";
                                     }).then(constructResultNTString => {
                                         constructResult.close();
+                                        constructResultNTString = RDFUtils.fixCommonTurtleStringErrors(constructResultNTString);
                                         if (object.type.localeCompare("insert") == 0) {
                                             let insertDataQuery = "INSERT DATA { " + constructResultNTString + " }";
                                             if (object.graph != undefined) {

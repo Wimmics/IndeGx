@@ -66,6 +66,7 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
     result = result.replaceAll("genid-", "_:"); // Dirty hack to fix blank nodes with genid- prefix
     result = result.replaceAll(regexBnB, "$1_:$2 "); // Dirty hack to fix blank nodes with b prefix
     result = result.replaceAll(regexNodeB, "$1_:$2 "); // Dirty hack to fix blank nodes with node prefix
+    result = Global.replaceUnicode(result);
     return result;
 }
 

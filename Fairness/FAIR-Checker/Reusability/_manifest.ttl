@@ -40,6 +40,7 @@
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
+                            rdfs:comment ?comment ;
                             rdfs:label "Metadata includes license"@en ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/R1#R11> ;
                             dqv:value ?value .
@@ -69,6 +70,23 @@
                         }
                         FILTER(! isBlank(?o))
                     }, 2, 0) AS ?value )
+                    OPTIONAL {
+                        GRAPH ?kgGraph {
+                            ?kg ?p ?o . 
+                        }
+                        VALUES ?p {  
+                            schema:license 
+                            dcterms:license 
+                            doap:license 
+                            dbpo:license 
+                            cc:license 
+                            xhv:license 
+                            sto:license 
+                            nie:license 
+                        }
+                        FILTER(! isBlank(?o))
+                        BIND(CONCAT("License found: ", STR(?o)) AS ?comment)
+                    }
                     BIND(Iri(CONCAT(STR(?kg), "#R11")) AS ?measurement)
                 }
                 """
@@ -100,6 +118,7 @@
                         ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Metadata includes provenance"@en ;
+                            rdfs:comment ?comment ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/R1#R12> ;
                             dqv:value ?value .
                     }
@@ -150,6 +169,45 @@
                             schema:funder
                         }
                     }, 2, 0) AS ?value )
+                    OPTIONAL {
+                        GRAPH ?kgGraph {
+                            ?kg ?p ?o . 
+                        }
+                        VALUES ?p {  
+                            prov:wasGeneratedBy 
+                            prov:wasDerivedFrom 
+                            prov:wasAttributedTo 
+                            prov:used 
+                            prov:wasInformedBy 
+                            prov:wasAssociatedWith
+                            prov:startedAtTime 
+                            prov:endedAtTime
+                            dcterms:hasVersion
+                            dcterms:isVersionOf 
+                            dcterms:creator 
+                            dcterms:contributor 
+                            dcterms:publisher
+                            pav:hasVersion
+                            pav:version 
+                            pav:hasCurrentVersion 
+                            pav:createdBy 
+                            pav:authoredBy 
+                            pav:retrievedFrom 
+                            pav:importedFrom 
+                            pav:createdWith 
+                            pav:retrievedBy 
+                            pav:importedBy 
+                            pav:curatedBy 
+                            pav:createdAt 
+                            pav:previousVersion
+                            schema:creator
+                            schema:author
+                            schema:publisher
+                            schema:provider
+                            schema:funder
+                        }
+                        BIND(CONCAT("Provenance found: ", STR(?p)) AS ?comment)
+                    }
                     BIND(Iri(CONCAT(STR(?kg), "#R12")) AS ?measurement)
                 }
                 """

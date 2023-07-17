@@ -7,4 +7,4 @@
 
 <> rdf:type kgi:DummyTest ;
     dcterms:isReferencedBy <_manifest.ttl> ;
-    dcterms:description "Weak: FAIR-Checker verifies that at least one used ontology class or property are known in major ontology registries (LOV) Strong: FAIR-Checker verifies that all used ontology classes or properties are known in major ontology registries (LOV)" .
+    dcterms:description """Checks if none of the classes and properties in the metadata are un LOV""" .
