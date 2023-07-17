@@ -9,7 +9,7 @@
     ) .
 
 <A11.ttl> a mf:ManifestEntry ;
-    dcterms:comment """This test should test wether the evaluated resource uses the HTTP protocol. Due to our speialization toward endpoints, ths test is automatically passed if any description was found.""" ;
+    dcterms:comment """This test should test wether the evaluated resource uses the HTTP protocol. Due to our speialization toward endpoints, ths test is automatically passed if any KG description with an http based URI is found. URIs in the KGI namespace are ignored.""" ;
     kgi:onSuccess (
         [
             mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -25,11 +25,13 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Open resolution protocol"@en ;
+                            rdfs:comment ?comment ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/A1#A11> ;
                             dqv:value ?value .
                     }
@@ -42,8 +44,9 @@
                         UNION { ?kg a sd:Dataset }
                         UNION { ?kg a dataid:Dataset }
                     }
-                    BIND( IF( STRSTARTS( STR(?kg), "http"), 2, 0)  AS ?value)
+                    BIND( IF( IsIRI(?kg) && REGEX( STR(?kg), "^(?:https?|ftp)") && ! STRSTARTS(STR(?kg), str(kgi:) ), 2, 0)  AS ?value)
                     BIND( Iri( CONCAT( STR(?kg), "#A11")) AS ?measurement)
+                    BIND( CONCAT( "The KG resource was found ", str(?kg)) AS ?comment )
                 }
             """
         ]
@@ -71,6 +74,7 @@
                         ?kg dqv:hasQualityMeasurement ?measurement .
                         ?measurement a dqv:QualityMeasurement ;
                             rdfs:label "Authorisation procedure or access rights"@en ;
+                            rdfs:comment ?comment ;
                             dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/A1#A12> ;
                             dqv:value ?value .
                     }
@@ -96,6 +100,19 @@
                         }
                     }, 2, 0) AS ?value)
                     BIND(Iri(CONCAT(STR(?kg), "#A12")) AS ?measurement)
+                    OPTIONAL {
+                        GRAPH ?kgGraph {
+                            ?kg ?p ?o . 
+                        }
+                        VALUES ?p { 
+                            odrl:hasPolicy
+                            dcterms:rights
+                            dcterms:accessRights
+                            dcterms:license
+                            schema:license
+                        }
+                        BIND( CONCAT( "Access rights procedure was found ", str(?p)) AS ?comment )
+                    }
                 }
                 """
         ]
