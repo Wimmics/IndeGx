@@ -59,9 +59,9 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dqv: <http://www.w3.org/ns/dqv#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-SELECT DISTINCT ?endpointUrl ?kg  ?measureF1A ?measureF1B ?measureF2A ?measureF2B ?measureA11 ?measureA12 ?measureI1 ?measureI1A ?measureI1B ?measureI2 ?measureI2A ?measureI2B ?measureI3 ?measureR11 ?measureR12 ?measureR13 WHERE {
+SELECT DISTINCT ?endpointUrl ?kg  ?measureF1A ?measureF1B ?measureF2A ?measureF2B ?measureA11 ?measureA12 ?measureI1 ?measureI2 ?measureI3 ?measureR11 ?measureR12 ?measureR13 WHERE {
   GRAPH ?kgGraph {
-    ?kg dqv:hasQualityMeasurement ?measurementF1A, ?measurementF1B, ?measurementF2A, ?measurementF2B, ?measurementA11, ?measurementA12, ?measurementI1, ?measurementI1A, ?measurementI1B, ?measurementI2, ?measurementI2A, ?measurementI2B, ?measurementI3, ?measurementR11, ?measurementR12, ?measurementR13 .
+    ?kg dqv:hasQualityMeasurement ?measurementF1A, ?measurementF1B, ?measurementF2A, ?measurementF2B, ?measurementA11, ?measurementA12, ?measurementI1, ?measurementI2, ?measurementI3, ?measurementR11, ?measurementR12, ?measurementR13 .
     
     ?measurementF1A a dqv:QualityMeasurement ;
         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
@@ -91,25 +91,9 @@ SELECT DISTINCT ?endpointUrl ?kg  ?measureF1A ?measureF1B ?measureF2A ?measureF2
         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1> ;
         dqv:value ?measureI1 .
         
-    ?measurementI1A a dqv:QualityMeasurement ;
-        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1A> ;
-        dqv:value ?measureI1A .
-        
-    ?measurementI1B a dqv:QualityMeasurement ;
-        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I1#I1B> ;
-        dqv:value ?measureI1B .
-        
     ?measurementI2 a dqv:QualityMeasurement ;
         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2> ;
         dqv:value ?measureI2 .
-        
-    ?measurementI2A a dqv:QualityMeasurement ;
-        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2A> ;
-        dqv:value ?measureI2A .
-        
-    ?measurementI2B a dqv:QualityMeasurement ;
-        dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I2#I2B> ;
-        dqv:value ?measureI2B .
         
     ?measurementI3 a dqv:QualityMeasurement ;
         dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/I3> ;
