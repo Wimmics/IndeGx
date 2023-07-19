@@ -1,3 +1,6 @@
 #!/bin/bash
 
-docker-compose up --abort-on-container-exit
+[ ! -d "input/" ] && mkdir input/
+[ ! -d "output/" ] && mkdir output/
+
+docker-compose up --abort-on-container-exit --build
