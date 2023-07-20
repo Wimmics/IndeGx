@@ -16,6 +16,8 @@ The usage of `$rawEndpointUrl` is discouraged in those rules as its value is the
 
 [Inclusion rules](./inclusion/) are a work in progress. Their goal is to test the description of KGs progressively to determine if they are equivalent or one is included in another and to which degree.
 
+## Vocabularies rules
+
 ## Performance rules
 
 [WIP](./performance/)
