@@ -206,6 +206,9 @@
         <F2B_None.ttl>
     ) ;
     kgi:onFailure (
+        <F2B_AtLeastOne.ttl>
+        <F2B_All.ttl>
+        <F2B_None.ttl>
         [
             mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 PREFIX void: <http://rdfs.org/ns/void#>
@@ -268,18 +271,6 @@
                             dqv:value 1 .
                     }
                 } WHERE {
-                    BIND ( EXISTS {
-                        SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
-                            ?elem ?p ?o .
-                        }
-                    } AS ?LOVAvailable)
-                    BIND ( EXISTS {
-                        SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
-                            ?elem ?p ?o .
-                        }
-                    } AS ?LOVAlternativeAvailable)
-                    FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
-                    BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
                     {
                         SELECT DISTINCT ?kgGraph ?kg ?elem {
                             GRAPH ?kgGraph {
@@ -294,6 +285,18 @@
                             }
                             
                             FILTER ( EXISTS {
+                                BIND ( EXISTS {
+                                    SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
+                                        ?elem ?p ?o .
+                                    }
+                                } AS ?LOVAvailable)
+                                BIND ( EXISTS {
+                                    SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
+                                        ?elem ?p ?o .
+                                    }
+                                } AS ?LOVAlternativeAvailable)
+                                FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
+                                BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
                                 SERVICE ?LOVEndpointURL {
                                     ?elem ?p ?o .
                                 }
@@ -350,19 +353,19 @@
                             }
                         }
                     )
-                    BIND ( EXISTS {
-                        SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
-                            ?elem ?p ?o .
-                        }
-                    } AS ?LOVAvailable)
-                    BIND ( EXISTS {
-                        SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
-                            ?elem ?p ?o .
-                        }
-                    } AS ?LOVAlternativeAvailable)
-                    FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
-                    BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
                     FILTER ( EXISTS {
+                        BIND ( EXISTS {
+                            SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
+                                ?elem ?p ?o .
+                            }
+                        } AS ?LOVAvailable)
+                        BIND ( EXISTS {
+                            SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
+                                ?elem ?p ?o .
+                            }
+                        } AS ?LOVAlternativeAvailable)
+                        FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
+                        BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
                         GRAPH ?kgGraph {
                             { ?s a ?elem . }
                             UNION { ?s ?elem ?oGraph . }
