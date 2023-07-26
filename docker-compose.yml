@@ -11,7 +11,7 @@ services:
       - ./output:/usr/local/corese/log
       - ./config:/usr/local/corese/config
   indegx:
-    build: https://github.com/Wimmics/IndeGx.git#FAIRSavoirExperiment
+    build: .
     depends_on:
       - corese
     volumes:
