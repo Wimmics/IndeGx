@@ -61,7 +61,7 @@ export function setDefaultQueryTimeout(timeout: number) {
     }
 }
 
-export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQueryTimeout): Promise<void | $rdf.Store | SPARQLJSONResult> {
+export function sparqlQueryPromise(endpoint: string, query: string, baseURI: string, timeout: number = defaultQueryTimeout): Promise<void | $rdf.Store | SPARQLJSONResult> {
     let jsonHeaders = {};
     if (isSparqlSelect(query)) {
         jsonHeaders["accept"] = "application/sparql-results+json";
@@ -77,7 +77,7 @@ export function sparqlQueryPromise(endpoint, query, timeout: number = defaultQue
         return fetchGETPromise(queryUrl).then(result => {
             let resultStore = RDFUtils.createStore();
             result = RDFUtils.fixCommonTurtleStringErrors(result)
-            return RDFUtils.parseTurtleToStore(result, resultStore).catch(error => {
+            return RDFUtils.parseTurtleToStore(result, resultStore, "").catch(error => {
                 Logger.error(endpoint, query, error, result);
                 return resultStore;
             });

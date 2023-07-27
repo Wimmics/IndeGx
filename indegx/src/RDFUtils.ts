@@ -118,7 +118,7 @@ function getGraphyReadingFunction(contentType: FileContentType) {
     }
 }
 
-function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI = KGI("").value, filename = KGI("").value) {
+function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI, filename = KGI("").value) {
     function createValidBlankNode(node, baseURI) {
         if (node.termType === "BlankNode") {
             return $rdf.sym(baseURI + "#" + node.value);
@@ -231,10 +231,10 @@ export function loadRDFFiles(files: Array<string>, store: $rdf.Store, generalBas
     }
 }
 
-export function serializeStoreToTurtlePromise(store: $rdf.Store): Promise<string> {
+export function serializeStoreToTurtlePromise(store: $rdf.Store, baseURI?: string): Promise<string> {
     return new Promise((accept, reject) => {
         try {
-            $rdf.serialize(null, store, KGI("").value, 'text/turtle', function (err, str) {
+            $rdf.serialize(null, store, baseURI, 'text/turtle', function (err, str) {
                 if (err != null) {
                     reject(err);
                 }
@@ -247,10 +247,10 @@ export function serializeStoreToTurtlePromise(store: $rdf.Store): Promise<string
     })
 }
 
-export function serializeStoreToNTriplesPromise(store: $rdf.Store): Promise<string> {
+export function serializeStoreToNTriplesPromise(store: $rdf.Store, baseURI?: string): Promise<string> {
     return new Promise((accept, reject) => {
         try {
-            $rdf.serialize(null, store, KGI("").value, 'application/n-triples', function (err, str) {
+            $rdf.serialize(null, store, baseURI, 'application/n-triples', function (err, str) {
                 if (err != null) {
                     reject(err);
                 }
@@ -266,10 +266,10 @@ export function serializeStoreToNTriplesPromise(store: $rdf.Store): Promise<stri
     })
 }
 
-export function serializeStoreToTriGPromise(store: $rdf.Store): Promise<string> {
+export function serializeStoreToTriGPromise(store: $rdf.Store, baseURI?: string): Promise<string> {
     return new Promise((accept, reject) => {
         try {
-            $rdf.serialize(null, store, KGI("").value, 'application/trig', function (err, str) {
+            $rdf.serialize(null, store, baseURI, 'application/trig', function (err, str) {
                 if (err != null) {
                     reject(err);
                 }
@@ -282,10 +282,10 @@ export function serializeStoreToTriGPromise(store: $rdf.Store): Promise<string> 
     })
 }
 
-export function serializeStoreToQuadsPromise(store: $rdf.Store): Promise<string> {
+export function serializeStoreToQuadsPromise(store: $rdf.Store, baseURI?: string): Promise<string> {
     return new Promise((accept, reject) => {
         try {
-            $rdf.serialize(null, store, KGI("").value, 'application/nquads', function (err, str) {
+            $rdf.serialize(null, store, baseURI, 'application/nquads', function (err, str) {
                 if (err != null) {
                     reject(err);
                 }
@@ -298,11 +298,11 @@ export function serializeStoreToQuadsPromise(store: $rdf.Store): Promise<string>
     })
 }
 
-export function parseNTriplesToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
+export function parseNTriplesToStore(content: string, store: $rdf.Store, baseURI: string): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
             // content = Global.unicodeToUrlendcode(content)
-            $rdf.parse(content, store, KGI("").value, "application/n-triples", (err, kb) => {
+            $rdf.parse(content, store, baseURI, "application/n-triples", (err, kb) => {
                 if (err != null) {
                     reject(err);
                 }
@@ -314,11 +314,11 @@ export function parseNTriplesToStore(content: string, store: $rdf.Store): Promis
     });
 }
 
-export function parseN3ToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
+export function parseN3ToStore(content: string, store: $rdf.Store, baseURI: string): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
             // content = Global.unicodeToUrlendcode(content)
-            $rdf.parse(content, store, KGI("").value, "text/n3", (err, kb) => {
+            $rdf.parse(content, store, baseURI, "text/n3", (err, kb) => {
                 if (err != null) {
                     reject(err);
                 }
@@ -330,14 +330,14 @@ export function parseN3ToStore(content: string, store: $rdf.Store): Promise<$rdf
     });
 }
 
-export function parseTurtleToStore(content: string, store: $rdf.Store, base = KGI("").value): Promise<$rdf.Store> {
+export function parseTurtleToStore(content: string, store: $rdf.Store, baseURI: string): Promise<$rdf.Store> {
     return new Promise((accept, reject) => {
         try {
             content = fixCommonTurtleStringErrors(content)
             ttl_read(content, {
-                baseIRI: base,
+                baseIRI: baseURI,
                 data(y_quad) {
-                    graphyQuadLoadingToStore(store, y_quad, base, "")
+                    graphyQuadLoadingToStore(store, y_quad, baseURI, "")
                 },
                 
                 eof(h_prefixes) {
@@ -355,10 +355,10 @@ export function parseTurtleToStore(content: string, store: $rdf.Store, base = KG
     });
 }
 
-export function parseHTMLToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
+export function parseHTMLToStore(content: string, store: $rdf.Store, baseURI: string): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
-            $rdf.parse(content, store, KGI("").value, "text/html", (err, kb) => {
+            $rdf.parse(content, store, baseURI, "text/html", (err, kb) => {
                 if (err != null) {
                     reject(err);
                 }
@@ -370,11 +370,11 @@ export function parseHTMLToStore(content: string, store: $rdf.Store): Promise<$r
     });
 }
 
-export function parseJSONLDToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
+export function parseJSONLDToStore(content: string, store: $rdf.Store, baseURI: string): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
             // content = Global.unicodeToUrlendcode(content)
-            $rdf.parse(content, store, KGI("").value, "application/ld+json", (err, kb) => {
+            $rdf.parse(content, store, baseURI, "application/ld+json", (err, kb) => {
                 if (err != null) {
                     reject(err);
                 }
@@ -386,11 +386,10 @@ export function parseJSONLDToStore(content: string, store: $rdf.Store): Promise<
     });
 }
 
-export function parseNQuadsToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
+export function parseNQuadsToStore(content: string, store: $rdf.Store, baseURI: string): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
-            // content = Global.unicodeToUrlendcode(content)
-            $rdf.parse(content, store, KGI("").value, "application/nquads", (err, kb) => {
+            $rdf.parse(content, store, baseURI, "application/nquads", (err, kb) => {
                 if (err != null) {
                     reject(err);
                 }
@@ -402,11 +401,10 @@ export function parseNQuadsToStore(content: string, store: $rdf.Store): Promise<
     });
 }
 
-export function parseRDFXMLToStore(content: string, store: $rdf.Store): Promise<$rdf.Formula> {
+export function parseRDFXMLToStore(content: string, store: $rdf.Store, baseURI: string): Promise<$rdf.Formula> {
     return new Promise((accept, reject) => {
         try {
-            // content = Global.unicodeToUrlendcode(content)
-            $rdf.parse(content, store, KGI("").value, "application/rdf+xml", (err, kb) => {
+            $rdf.parse(content, store, baseURI, "application/rdf+xml", (err, kb) => {
                 if (err != null) {
                     reject(err);
                 }
@@ -443,7 +441,6 @@ export function queryRDFLibStore(store: $rdf.Store, query: string) {
     @returns {$rdf.Node[]} An array of nodes representing the collection.
     */
 export function collectionToArray(collection: $rdf.NamedNode | $rdf.BlankNode | $rdf.Variable, store: $rdf.Store): $rdf.Node[] {
-    // Logger.log("collectionToArray", collection.toNT());
     let result = [];
 
     store.statementsMatching(collection, RDF("first")).forEach(statement => {
@@ -462,7 +459,6 @@ export function collectionToArray(collection: $rdf.NamedNode | $rdf.BlankNode | 
         }
     });
 
-    // Logger.log("collectionToArray result", result.map(node => node.toNT()));
     return [...new Set(result)];
 }
 
