@@ -2,6 +2,34 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 
 <> a mf:Manifest ;
+    mf:entries (
+        <cleanup.ttl>
+    ) ;
     mf:include (
         <FAIR-Checker/_manifest.ttl>
+    ) .
+
+<cleanup.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <FAIR-Checker/_manifest.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            DELETE {
+                GRAPH ?g {
+                    ?s ?p ?o .
+                }
+            }
+            WHERE {
+                GRAPH ?g {
+                    ?s ?p ?o .
+                }
+                FILTER(NOT EXISTS {
+                    kgi:FAIRness kgi:dataGraph ?g .
+                })
+            }
+            """
+        ]
     ) .

@@ -5,11 +5,7 @@
 <> a mf:Manifest ;
     mf:entries (
         <I1.ttl>
-        # <I1A.ttl>
-        # <I1B.ttl>
         <I2.ttl>
-        # <I2A.ttl>
-        # <I2B.ttl>
         <I3.ttl>
     ) .
 
@@ -31,6 +27,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -40,6 +37,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -79,6 +77,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -88,6 +87,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?F2Bmeasurement .
                         ?F2Bmeasurement a dqv:QualityMeasurement ;
@@ -116,6 +116,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -132,6 +133,7 @@
                                 SELECT DISTINCT ?ns ?kg ?kgGraph {
                                     {
                                         SELECT DISTINCT ?elem ?kg ?kgGraph {
+                                            kgi:FAIRness kgi:dataGraph ?kgGraph .
                                             GRAPH ?kgGraph {
                                                 { ?s ?elem ?o . }
                                                 UNION { ?s a ?elem . }
