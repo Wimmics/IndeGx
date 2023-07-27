@@ -15,15 +15,16 @@
     kgi:onSuccess (
         [
             mf:action """
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.aa.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.ab.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.ac.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.ad.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.ae.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.af.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.ag.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.ah.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/Fairness/FAIR-Checker/Findability/lov.25122022.ai.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov>
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.aa.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ab.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ac.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ad.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ae.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.af.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ag.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ah.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ai.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.aj.nq> INTO GRAPH <https://lov.linkeddata.es/dataset/lov>
             """
         ]
     ) .
