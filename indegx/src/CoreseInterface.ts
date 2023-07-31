@@ -6,9 +6,9 @@ import * as Logger from "./LogUtils.js"
 export const coreseServerUrl = "http://corese:8080/sparql";
 export const coreseDefaultGraphURI = "http://ns.inria.fr/corese/kgram/default";
 
-export function sendUpdate(endpoint: string, queryString: string, timeout: number = defaultQueryTimeout): Promise<void> {
+export function sendUpdate(endpoint: string, queryString: string, baseURI: string, timeout: number = defaultQueryTimeout): Promise<void> {
     if (isSparqlUpdate(queryString)) {
-        return sparqlQueryPromise(coreseServerUrl, queryString, timeout).then(() => {
+        return sparqlQueryPromise(coreseServerUrl, queryString, baseURI, timeout).then(() => {
             return ;
         }).catch(error => {
             Logger.error("Error sending update", error)
@@ -21,13 +21,13 @@ export function sendUpdate(endpoint: string, queryString: string, timeout: numbe
     }
 }
 
-export function sendConstruct(endpoint: string, queryString: string, timeout?: number): Promise<$rdf.Store> {
+export function sendConstruct(endpoint: string, queryString: string, baseURI: string, timeout?: number): Promise<$rdf.Store> {
     let parser = new sparqljs.Parser();
     const parsedQuery = parser.parse(queryString);
     if (isSparqlConstruct(queryString)) {
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(parsedQuery);
-        return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
+        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, timeout).then(result => {
             return result as $rdf.Store;
         }).catch(error => {
             Logger.error("Error sending construct", error)
@@ -36,13 +36,13 @@ export function sendConstruct(endpoint: string, queryString: string, timeout?: n
     }
 }
 
-export function sendSelect(endpoint: string, queryString: string, timeout?: number): Promise<SELECTJSONResult> {
+export function sendSelect(endpoint: string, queryString: string, baseURI: string, timeout?: number): Promise<SELECTJSONResult> {
     let parser = new sparqljs.Parser();
     const parsedQuery = parser.parse(queryString);
     if (isSparqlSelect(queryString)) {
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(parsedQuery);
-        return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
+        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, timeout).then(result => {
             return result as SELECTJSONResult;
         }).catch(error => {
             Logger.error("Error sending select", error)
@@ -53,13 +53,13 @@ export function sendSelect(endpoint: string, queryString: string, timeout?: numb
     }
 }
 
-export function sendAsk(endpoint: string, queryString: string, timeout?: number): Promise<boolean> {
+export function sendAsk(endpoint: string, queryString: string, baseURI: string, timeout?: number): Promise<boolean> {
     if (isSparqlAsk(queryString)) {
         let parser = new sparqljs.Parser();
         const parsedQuery = parser.parse(queryString);
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(parsedQuery);
-        return sparqlQueryPromise(coreseServerUrl, finalQueryString, timeout).then(result => {
+        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, timeout).then(result => {
             if (result != undefined && (result as ASKJSONResult).boolean != undefined) {
                 return (result as ASKJSONResult).boolean;
             } else {

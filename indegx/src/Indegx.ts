@@ -93,7 +93,7 @@ if (currentConfig.data !== undefined) {
     let data = currentConfig.data;
     let loadDataQueryString = "LOAD <" + data + ">";
     Logger.info("Loading data", data);
-    initPromise = sendUpdate(coreseServerUrl, loadDataQueryString).then(() => {
+    initPromise = sendUpdate(coreseServerUrl, loadDataQueryString, data).then(() => {
         Logger.info("Data loaded");
     }).catch(error => {
         Logger.error("Error loading data", error);

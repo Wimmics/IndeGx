@@ -25,9 +25,12 @@
             PREFIX dce: <http://purl.org/dc/elements/1.1/>
             PREFIX dcterms: <http://purl.org/dc/terms/>
             PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                kgi:FAIRness kgi:dataGraph ?kgGraph .
+
                 GRAPH ?kgGraph {
-                    ?kg ?p ?o .
+                    ?kgEdited ?p ?o .
                 }
             } WHERE {
                 SERVICE $rawEndpointUrl {
@@ -65,6 +68,7 @@
                         }
                     }
                 }
+                BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
                 BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
             }
             """
@@ -84,9 +88,11 @@
             PREFIX dce: <http://purl.org/dc/elements/1.1/>
             PREFIX dcterms: <http://purl.org/dc/terms/>
             PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                kgi:FAIRness kgi:dataGraph ?kgGraph .
                 GRAPH ?kgGraph {
-                    ?s ?p ?kg .
+                    ?s ?p ?kgEdited .
                 }
             } WHERE {
                 SERVICE $rawEndpointUrl {
@@ -99,6 +105,7 @@
                     UNION { ?kg a dataid:Dataset }
                     ?s ?p ?kg .
                 }
+                BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
                 BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
             }
             """
@@ -116,9 +123,11 @@
             prefix us: <http://ns.inria.fr/sparql-extension/user/>
             prefix rq: <http://ns.inria.fr/sparql-function/>
             prefix dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                kgi:FAIRness kgi:dataGraph ?kgGraph .
                 GRAPH ?kgGraph {
-                    ?s ?p ?o .
+                    ?kgEdited ?p ?o .
                 }
             }
             WHERE {
@@ -133,84 +142,15 @@
                 }
                 bind (xt:load(?kg) as ?g)
                 GRAPH ?g { 
-                    ?s ?p ?o .
+                    ?kg ?p ?o .
                 }
+                BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
                 BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
             };
-            DELETE {
-                GRAPH ?kg {
-                    ?s ?p ?o .
-                }
-            } WHERE {
-                GRAPH ?kg {
-                    # Find the KG : is a Dataset
-                    { ?kg a dcat:Dataset }
-                    UNION { ?kg a void:Dataset }
-                    UNION { ?kg a dcmitype:Dataset }
-                    UNION { ?kg a schema:Dataset }
-                    UNION { ?kg a sd:Dataset }
-                    UNION { ?kg a dataid:Dataset }
-                }
-            }
-            """
-        ]
-        [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            mf:action """PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX schema: <http://schema.org/>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            prefix xt: <http://ns.inria.fr/sparql-extension/>
-            prefix us: <http://ns.inria.fr/sparql-extension/user/>
-            prefix rq: <http://ns.inria.fr/sparql-function/>
-            prefix dt: <http://ns.inria.fr/sparql-datatype/>
             INSERT {
+                kgi:FAIRness kgi:dataGraph ?kgGraph .
                 GRAPH ?kgGraph {
-                    ?s ?p ?o .
-                }
-            }
-            WHERE {
-                bind (xt:load($rawEndpointUrl) as ?g)
-                GRAPH ?g { 
-                    { ?kg a dcat:Dataset }
-                    UNION { ?kg a void:Dataset }
-                    UNION { ?kg a dcmitype:Dataset }
-                    UNION { ?kg a schema:Dataset }
-                    UNION { ?kg a sd:Dataset }
-                    UNION { ?kg a dataid:Dataset }
-                    ?s ?p ?o .
-                }
-                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
-            };
-            DELETE {
-                GRAPH $rawEndpointUrl {
-                    ?s ?p ?o .
-                }
-            } WHERE {
-                GRAPH $rawEndpointUrl {
-                    ?s ?p ?o .
-                }
-            }
-            """
-        ]
-        [
-            dcterms:title "Retrieval of dereferenced endpoint description" ;
-            kgi:timeout "PT120S"^^xsd:duration ;
-            mf:action """PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX schema: <http://schema.org/>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            prefix xt: <http://ns.inria.fr/sparql-extension/>
-            prefix us: <http://ns.inria.fr/sparql-extension/user/>
-            prefix rq: <http://ns.inria.fr/sparql-function/>
-            prefix dt: <http://ns.inria.fr/sparql-datatype/>
-            INSERT {
-                GRAPH ?kgGraph {
-                    ?s ?p ?o .
+                    ?s ?p ?kgEdited .
                 }
             }
             WHERE {
@@ -222,35 +162,188 @@
                     UNION { ?kg a schema:Dataset }
                     UNION { ?kg a sd:Dataset }
                     UNION { ?kg a dataid:Dataset }
-
-                    # is linked directly or not to the endpoint
-                    { ?kg ?endpointLink $rawEndpointUrl . }
-                    UNION {?kg dcat:accessService ?service .
-                           ?service dcat:endpointURL $rawEndpointUrl .  }
-                    UNION {?kg dcat:accessService ?service .
-                           ?service sd:endpoint $rawEndpointUrl . }
-                    UNION {?service dcat:servesDataset ?kg .
-                           ?service dcat:endpointURL $rawEndpointUrl . }
-                    UNION {?service dcat:servesDataset ?kg .
-                           ?service sd:endpoint $rawEndpointUrl . }
                 }
-                bind (xt:load($rawEndpointUrl) as ?g)
+                bind (xt:load(?kg) as ?g)
                 GRAPH ?g { 
-                    ?s ?p ?o .
+                    ?s ?p ?kg .
                 }
+                BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
                 BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
             };
             DELETE {
-                GRAPH $rawEndpointUrl {
+                GRAPH ?kg {
                     ?s ?p ?o .
                 }
             } WHERE {
-                GRAPH $rawEndpointUrl {
-                    ?s ?p ?o .
+                GRAPH ?kg {
+                    # Find the KG : is a Dataset
+                    { ?kg a dcat:Dataset }
+                    UNION { ?kg a void:Dataset }
+                    UNION { ?kg a dcmitype:Dataset }
+                    UNION { ?kg a schema:Dataset }
+                    UNION { ?kg a sd:Dataset }
+                    UNION { ?kg a dataid:Dataset }
                 }
             }
             """
         ]
+        # [
+        #     kgi:timeout "PT120S"^^xsd:duration ;
+        #     mf:action """PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+        #     PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        #     PREFIX schema: <http://schema.org/>
+        #     PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        #     PREFIX void: <http://rdfs.org/ns/void#>
+        #     PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        #     prefix xt: <http://ns.inria.fr/sparql-extension/>
+        #     prefix us: <http://ns.inria.fr/sparql-extension/user/>
+        #     prefix rq: <http://ns.inria.fr/sparql-function/>
+        #     prefix dt: <http://ns.inria.fr/sparql-datatype/>
+        #     PREFIX kgi: <http://ns.inria.fr/kg/index#>
+        #     INSERT {
+        #         kgi:FAIRness kgi:dataGraph ?kgGraph .
+        #         GRAPH ?kgGraph {
+        #             ?kgEdited ?p ?o .
+        #         }
+        #     }
+        #     WHERE {
+        #         bind (xt:load($rawEndpointUrl) as ?g)
+        #         GRAPH ?g { 
+        #             { ?kg a dcat:Dataset }
+        #             UNION { ?kg a void:Dataset }
+        #             UNION { ?kg a dcmitype:Dataset }
+        #             UNION { ?kg a schema:Dataset }
+        #             UNION { ?kg a sd:Dataset }
+        #             UNION { ?kg a dataid:Dataset }
+        #             ?kg ?p ?o .
+        #         }
+        #         BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
+        #         BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+        #     };
+        #     INSERT {
+        #         kgi:FAIRness kgi:dataGraph ?kgGraph .
+        #         GRAPH ?kgGraph {
+        #             ?s ?p ?kgEdited .
+        #         }
+        #     }
+        #     WHERE {
+        #         bind (xt:load($rawEndpointUrl) as ?g)
+        #         GRAPH ?g { 
+        #             { ?kg a dcat:Dataset }
+        #             UNION { ?kg a void:Dataset }
+        #             UNION { ?kg a dcmitype:Dataset }
+        #             UNION { ?kg a schema:Dataset }
+        #             UNION { ?kg a sd:Dataset }
+        #             UNION { ?kg a dataid:Dataset }
+        #             ?s ?p ?kg .
+        #         }
+        #         BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
+        #         BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+        #     };
+        #     DELETE {
+        #         GRAPH $rawEndpointUrl {
+        #             ?s ?p ?o .
+        #         }
+        #     } WHERE {
+        #         GRAPH $rawEndpointUrl {
+        #             ?s ?p ?o .
+        #         }
+        #     }
+        #     """
+        # ]
+        # [
+        #     dcterms:title "Retrieval of dereferenced endpoint description" ;
+        #     kgi:timeout "PT120S"^^xsd:duration ;
+        #     mf:action """PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+        #     PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        #     PREFIX schema: <http://schema.org/>
+        #     PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        #     PREFIX void: <http://rdfs.org/ns/void#>
+        #     PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        #     prefix xt: <http://ns.inria.fr/sparql-extension/>
+        #     prefix us: <http://ns.inria.fr/sparql-extension/user/>
+        #     prefix rq: <http://ns.inria.fr/sparql-function/>
+        #     prefix dt: <http://ns.inria.fr/sparql-datatype/>
+        #     PREFIX kgi: <http://ns.inria.fr/kg/index#>
+        #     INSERT {
+        #         kgi:FAIRness kgi:dataGraph ?kgGraph .
+        #         GRAPH ?kgGraph {
+        #             ?kgEdited ?p ?o .
+        #         }
+        #     }
+        #     WHERE {
+        #         SERVICE $rawEndpointUrl {
+        #             # Find the KG : is a Dataset
+        #             { ?kg a dcat:Dataset }
+        #             UNION { ?kg a void:Dataset }
+        #             UNION { ?kg a dcmitype:Dataset }
+        #             UNION { ?kg a schema:Dataset }
+        #             UNION { ?kg a sd:Dataset }
+        #             UNION { ?kg a dataid:Dataset }
+
+        #             # is linked directly or not to the endpoint
+        #             { ?kg ?endpointLink $rawEndpointUrl . }
+        #             UNION {?kg dcat:accessService ?service .
+        #                    ?service dcat:endpointURL $rawEndpointUrl .  }
+        #             UNION {?kg dcat:accessService ?service .
+        #                    ?service sd:endpoint $rawEndpointUrl . }
+        #             UNION {?service dcat:servesDataset ?kg .
+        #                    ?service dcat:endpointURL $rawEndpointUrl . }
+        #             UNION {?service dcat:servesDataset ?kg .
+        #                    ?service sd:endpoint $rawEndpointUrl . }
+        #         }
+        #         bind (xt:load($rawEndpointUrl) as ?g)
+        #         GRAPH ?g { 
+        #             ?kg ?p ?o .
+        #         }
+        #         BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
+        #         BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+        #     };
+        #     INSERT {
+        #         kgi:FAIRness kgi:dataGraph ?kgGraph .
+        #         GRAPH ?kgGraph {
+        #             ?s ?p ?kgEdited .
+        #         }
+        #     }
+        #     WHERE {
+        #         SERVICE $rawEndpointUrl {
+        #             # Find the KG : is a Dataset
+        #             { ?kg a dcat:Dataset }
+        #             UNION { ?kg a void:Dataset }
+        #             UNION { ?kg a dcmitype:Dataset }
+        #             UNION { ?kg a schema:Dataset }
+        #             UNION { ?kg a sd:Dataset }
+        #             UNION { ?kg a dataid:Dataset }
+
+        #             # is linked directly or not to the endpoint
+        #             { ?kg ?endpointLink $rawEndpointUrl . }
+        #             UNION {?kg dcat:accessService ?service .
+        #                    ?service dcat:endpointURL $rawEndpointUrl .  }
+        #             UNION {?kg dcat:accessService ?service .
+        #                    ?service sd:endpoint $rawEndpointUrl . }
+        #             UNION {?service dcat:servesDataset ?kg .
+        #                    ?service dcat:endpointURL $rawEndpointUrl . }
+        #             UNION {?service dcat:servesDataset ?kg .
+        #                    ?service sd:endpoint $rawEndpointUrl . }
+        #         }
+        #         bind (xt:load($rawEndpointUrl) as ?g)
+        #         GRAPH ?g { 
+        #             ?s ?p ?kg .
+        #         }
+        #         BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
+        #         BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+        #     };
+        #     DELETE {
+        #         GRAPH $rawEndpointUrl {
+        #             ?s ?p ?o .
+        #         }
+        #     } WHERE {
+        #         GRAPH $rawEndpointUrl {
+        #             ?s ?p ?o .
+        #         }
+        #     }
+        #     """
+        # ]
         [
             dcterms:title "Retrieval of .well-known/void description" ;
             kgi:timeout "PT120S"^^xsd:duration ;
@@ -264,9 +357,11 @@
             prefix us: <http://ns.inria.fr/sparql-extension/user/>
             prefix rq: <http://ns.inria.fr/sparql-function/>
             prefix dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                kgi:FAIRness kgi:dataGraph ?kgGraph .
                 GRAPH ?kgGraph {
-                    ?s ?p ?o .
+                    ?kgEdited ?p ?o .
                 }
             }
             WHERE {
@@ -294,8 +389,45 @@
                 BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
                 bind (xt:load(?wellknown) as ?g)
                 GRAPH ?g { 
-                    ?s ?p ?o .
+                    ?kg ?p ?o .
                 }
+                BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+            };
+            INSERT {
+                kgi:FAIRness kgi:dataGraph ?kgGraph .
+                GRAPH ?kgGraph {
+                    ?s ?p ?kgEdited .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    # Find the KG : is a Dataset
+                    { ?kg a dcat:Dataset }
+                    UNION { ?kg a void:Dataset }
+                    UNION { ?kg a dcmitype:Dataset }
+                    UNION { ?kg a schema:Dataset }
+                    UNION { ?kg a sd:Dataset }
+                    UNION { ?kg a dataid:Dataset }
+
+                    # is linked directly or not to the endpoint
+                    { ?kg ?endpointLink $rawEndpointUrl . }
+                    UNION {?kg dcat:accessService ?service .
+                           ?service dcat:endpointURL $rawEndpointUrl .  }
+                    UNION {?kg dcat:accessService ?service .
+                           ?service sd:endpoint $rawEndpointUrl . }
+                    UNION {?service dcat:servesDataset ?kg .
+                           ?service dcat:endpointURL $rawEndpointUrl . }
+                    UNION {?service dcat:servesDataset ?kg .
+                           ?service sd:endpoint $rawEndpointUrl . }
+                }
+                FILTER(REGEX(STR($rawEndpointUrl), "sparql/?$", "i"))
+                BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
+                bind (xt:load(?wellknown) as ?g)
+                GRAPH ?g { 
+                    ?s ?p ?kg .
+                }
+                BIND(IF( REGEX( STR(?kg), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?"), ?kg, IRI( CONCAT( str($rawEndpointUrl), ENCODE_FOR_URI( str(?kg) ) ) ) ) AS ?kgEdited)
                 BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
             };
             DELETE {

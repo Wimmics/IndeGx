@@ -4,10 +4,29 @@
 
 <> a mf:Manifest ;
     mf:entries (
+        <loadLOV.ttl>
         <F1A.ttl>
         <F1B.ttl>
         <F2A.ttl>
         <F2B.ttl>
+    ) .
+
+<loadLOV.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.aa.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ab.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ac.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ad.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ae.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.af.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ag.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ah.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ai.nq> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.aj.nq>
+            """
+        ]
     ) .
 
 <F1A.ttl> a mf:ManifestEntry ;
@@ -27,6 +46,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -36,6 +56,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -63,7 +84,7 @@
     ) .
 
 <F1B.ttl> a mf:ManifestEntry ;
-    dcterms:description "Weak evaluation should check the dataset identifier namespace in identifiers.org. However, has identifier?org has no SPARQL endpoint, we cannot check this." ;
+    dcterms:description "Weak evaluation should check the dataset identifier namespace in identifiers.org. However, has identifier.org has no SPARQL endpoint, we cannot check this." ;
     kgi:onSuccess (
         [
             dcterms:description "There is a schema of dcterms identifier." ;
@@ -81,6 +102,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -91,6 +113,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -139,6 +162,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -149,6 +173,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -200,6 +225,9 @@
     ) .
 
 <F2B.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( 
+        <loadLOV.ttl> 
+    ) ;
     kgi:onSuccess (
         <F2B_AtLeastOne.ttl>
         <F2B_All.ttl>
@@ -223,6 +251,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
 
                 INSERT {
                     GRAPH ?kgGraph {
@@ -230,6 +259,7 @@
                         ?measurement rdfs:comment "Official Linked Open Vocabularies SPARQL endpoint is not available." .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -261,6 +291,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -271,39 +302,26 @@
                             dqv:value 1 .
                     }
                 } WHERE {
-                    {
-                        SELECT DISTINCT ?kgGraph ?kg ?elem {
-                            GRAPH ?kgGraph {
-                                { ?kg a dcat:Dataset }
-                                UNION { ?kg a void:Dataset }
-                                UNION { ?kg a dcmitype:Dataset }
-                                UNION { ?kg a schema:Dataset }
-                                UNION { ?kg a sd:Dataset }
-                                UNION { ?kg a dataid:Dataset }
-                                { ?s a ?elem . }
-                                UNION { ?s ?elem ?oGraph . }
-                            }
-                            
-                            FILTER ( EXISTS {
-                                BIND ( EXISTS {
-                                    SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
-                                        ?elem ?p ?o .
-                                    }
-                                } AS ?LOVAvailable)
-                                BIND ( EXISTS {
-                                    SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
-                                        ?elem ?p ?o .
-                                    }
-                                } AS ?LOVAlternativeAvailable)
-                                FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
-                                BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
-                                SERVICE ?LOVEndpointURL {
-                                    ?elem ?p ?o .
-                                }
-                            } )
-                        }
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
                     }
-                    BIND( STRLANG( CONCAT( "Class of property found in LOV:", GROUP_CONCAT( STR( ?elem) ; separator=", " ) ) , "en" ) AS ?comment )
+                    
+                    FILTER ( EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?s a ?elem . }
+                            UNION { ?s ?elem ?oGraph . }
+                        }
+                        GRAPH ?anyGraph {
+                            ?elem ?p ?o .
+                        }
+                    } )
+                    BIND( STRLANG( "Class or property found in LOV:" , "en" ) AS ?comment )
                     BIND( Iri( CONCAT( STR( ?kg ), "#F2B" ) ) AS ?measurement )
                 }
             """
@@ -327,6 +345,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -336,6 +355,7 @@
                             dqv:value 2 .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -354,23 +374,11 @@
                         }
                     )
                     FILTER ( EXISTS {
-                        BIND ( EXISTS {
-                            SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
-                                ?elem ?p ?o .
-                            }
-                        } AS ?LOVAvailable)
-                        BIND ( EXISTS {
-                            SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
-                                ?elem ?p ?o .
-                            }
-                        } AS ?LOVAlternativeAvailable)
-                        FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
-                        BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
                         GRAPH ?kgGraph {
                             { ?s a ?elem . }
                             UNION { ?s ?elem ?oGraph . }
                         }
-                        SERVICE ?LOVEndpointURL {
+                        GRAPH ?anyGraph {
                             ?elem ?p ?o .
                         }
                     } )
@@ -397,6 +405,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -406,6 +415,7 @@
                             dqv:value 0 .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }

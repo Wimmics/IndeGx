@@ -36,6 +36,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -46,6 +47,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -113,6 +115,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -123,6 +126,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -234,6 +238,7 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -243,6 +248,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?F2Bmeasurement .
                         ?F2Bmeasurement a dqv:QualityMeasurement ;
