@@ -1,0 +1,31 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/post/redundancy/manifest.ttl>
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/post/vocabularies/_manifest.ttl>
+    ) ;
+    mf:entries (
+        <loadLOV.ttl>
+    ) .
+
+<loadLOV.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            LOAD <file:///data/lov.27072023.aa.nq> ;
+            LOAD <file:///data/lov.27072023.ab.nq> ;
+            LOAD <file:///data/lov.27072023.ac.nq> ;
+            LOAD <file:///data/lov.27072023.ad.nq> ;
+            LOAD <file:///data/lov.27072023.ae.nq> ;
+            LOAD <file:///data/lov.27072023.af.nq> ;
+            LOAD <file:///data/lov.27072023.ag.nq> ;
+            LOAD <file:///data/lov.27072023.ah.nq> ;
+            LOAD <file:///data/lov.27072023.ai.nq> ;
+            LOAD <file:///data/lov.27072023.aj.nq>
+            """
+        ]
+    ) .

@@ -1,7 +1,7 @@
 {
-    "manifest": "file:///input/test_manifest.ttl",
-    "post": "file:///input/test_post_manifest.ttl",
-    "catalog": "https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/catalogs/all_catalog_partition_0-50.ttl",
+    "manifest": "file:///vocabulary_statistics/_manifest.ttl",
+    "post": "file:///vocabulary_statistics/_post_manifest.ttl",
+    "catalog": "file:///catalogs/all_catalog_edited.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
