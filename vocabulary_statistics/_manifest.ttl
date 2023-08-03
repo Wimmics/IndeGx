@@ -1,12 +1,30 @@
 @prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 
 <> a mf:Manifest ;
     kgi:requiredAssets (
     ) ;
     mf:include (
-        <statistics/manifest.ttl>
-        <summary/manifest.ttl>
     ) ;
     mf:entries (
+        <init.ttl>
+    ) .
+
+
+<init.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT DATA {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+            }
+            """
+        ]
     ) .

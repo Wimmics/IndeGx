@@ -6,4 +6,5 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <manifest.ttl> .
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description """Creates a graph for each endpoint""" .

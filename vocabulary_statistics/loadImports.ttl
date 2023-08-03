@@ -3,7 +3,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix earl: <http://www.w3.org/ns/earl#> .
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 <> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <manifest.ttl> .
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description """Loads vocabularies defined as imported by others""" .
