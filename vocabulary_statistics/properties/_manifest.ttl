@@ -9,8 +9,8 @@
 <> a mf:Manifest ;
     kgi:requiredAssets (
         <../loadLOV.ttl>
-        <../loadImports.ttl>
-        <../cleanImportedData.ttl>
+        # <../loadImports.ttl>
+        # <../cleanImportedData.ttl>
     ) ;
     mf:entries (
         <propertyUsage.ttl>
@@ -32,27 +32,12 @@
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
 
             INSERT {
-                GRAPH ?vocabGraph {
-                    ?elem voaf:reusedByDatasets ?nbUsedByDatasets .
-                }
+                ?elem voaf:reusedByDatasets ?nbUsedByDatasets .
             }
             WHERE {
-                FILTER(NOT EXISTS {
-                    kgi: sd:namedGraph ?vocabGraph .
-                } )
-                GRAPH ?vocabGraph {
-                    {
-                        ?elem a ?type .
-                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
-                    } UNION {
-                        ?elem ?prop ?type .
-                        FILTER( ?prop IN ( owl:domain, owl:range ) )
-                    }
-                }
+                ?elem a rdf:Property .
                 BIND( IF( EXISTS {
-                    GRAPH ?vocabGraph {
-                        ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
-                    }
+                    ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
                 }, ?occurences, 0) AS ?nbUsedByDatasets )
             }
             """
@@ -71,30 +56,17 @@
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
 
             INSERT {
-                GRAPH ?vocabGraph {
-                    ?elem voaf:usageInDataset ?elemDatasetOccurence ;
-                        voaf:reusedByDatasets ?nbUsedByDatasets .
-                    ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                        voaf:inDataset ?endpointUrl .
-                }
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                    voaf:reusedByDatasets ?nbUsedByDatasets .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset ?endpointUrl .
             }
             WHERE {
-                FILTER( NOT EXISTS {
-                    kgi: sd:namedGraph ?vocabGraph .
-                } )
                 kgi: sd:namedGraph ?endpointGraph .
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                GRAPH ?vocabGraph {
-                    {
-                        ?elem a ?type .
-                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
-                    } UNION {
-                        ?elem ?prop ?type .
-                        FILTER( ?prop IN ( owl:domain, owl:range ) )
-                    }
-                }
+                ?elem a rdf:Property .
                 FILTER( EXISTS {
                     SERVICE ?endpointUrl {
                         ?s ?elem ?o .
@@ -103,9 +75,7 @@
 
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
-                    GRAPH ?vocabGraph {
-                        ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
-                    }
+                    ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
                 }, ?occurences + 1, 1) AS ?nbUsedByDatasets )
             }
             """
@@ -124,40 +94,25 @@
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
 
             INSERT {
-                GRAPH ?vocabGraph {
-                    ?elem voaf:usageInDataset ?elemDatasetOccurence ;
-                        voaf:occurrencesInDatasets ?nbDatasetOccurences .
-                    ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                        voaf:occurrences ?nbTriples .
-                }
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                    voaf:occurrencesInDatasets ?nbDatasetOccurences .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:occurrences ?nbTriples .
             }
             WHERE {
-                FILTER( NOT EXISTS {
-                    kgi: sd:namedGraph ?vocabGraph .
-                } )
                 kgi: sd:namedGraph ?endpointGraph .
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                GRAPH ?vocabGraph {
-                    {
-                        ?elem a ?type .
-                        FILTER( ?type IN ( owl:ObjectProperty, owl:DatatypeProperty, owl:AnnotationProperty, owl:OntologyProperty, rdf:Property ) )
-                    } UNION {
-                        ?elem ?prop ?type .
-                        FILTER( ?prop IN ( owl:domain, owl:range ) )
-                    }
-                }
+                ?elem a rdf:Property .
                 SERVICE ?endpointUrl {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {
                         ?s ?elem ?o .
                     } GROUP BY ?elem
                 }
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?kg) ) ) ) ) AS ?elemDatasetOccurence )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
-                    GRAPH ?vocabGraph {
-                        ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
-                    }
+                    ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbTriples, ?nbTriples) AS ?nbDatasetOccurences )
             }
             """

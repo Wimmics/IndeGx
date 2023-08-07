@@ -34,26 +34,13 @@
             PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
             INSERT {
-                GRAPH ?vocabGraph {
-                    ?elem voaf:reusedByDatasets ?nbUsedByDatasets .
-                }
+                ?elem voaf:reusedByDatasets ?nbUsedByDatasets .
             }
             WHERE {
-                FILTER(NOT EXISTS {
-                    kgi: sd:namedGraph ?vocabGraph .
-                } )
-                GRAPH ?vocabGraph {
-                    {
-                        ?elem a ?type .
-                        FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                        FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                    }
-                }
+                ?elem a owl:Class .
                 FILTER(isIRI(?elem))
                 BIND( IF( EXISTS {
-                    GRAPH ?vocabGraph {
-                        ?elem voaf:reusedByDatasets ?occurences .
-                    }
+                    ?elem voaf:reusedByDatasets ?occurences .
                 }, ?occurences, 0) AS ?nbUsedByDatasets )
             }
             """
@@ -74,30 +61,16 @@
             PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
             INSERT {
-                GRAPH ?vocabGraph {
-                    ?elem voaf:usageInDataset ?elemDatasetOccurence ;
-                        voaf:reusedByDatasets ?nbUsedByDatasets .
-                    ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                        voaf:inDataset ?endpointUrl .
-                }
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                    voaf:reusedByDatasets ?nbUsedByDatasets .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset ?endpointUrl .
             }
             WHERE {
-                FILTER( NOT EXISTS {
-                    kgi: sd:namedGraph ?vocabGraph .
-                } )
-                FILTER( EXISTS {
-                    kgi: sd:namedGraph ?endpointGraph .
-                } )
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                GRAPH ?vocabGraph {
-                    {
-                        ?elem a ?type .
-                        FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                        FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                    }
-                }
+                ?elem a owl:Class .
                 FILTER(isIRI(?elem))
                 SERVICE ?endpointUrl {
                     { ?elem a owl:Class }
@@ -106,9 +79,7 @@
                 }
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
-                    GRAPH ?vocabGraph {
-                        ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
-                    }
+                    ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
                 }, ?occurences + 1, 1) AS ?nbUsedByDatasets )
             }
             """
@@ -137,22 +108,13 @@
                 }
             }
             WHERE {
-                FILTER( NOT EXISTS {
-                    kgi: sd:namedGraph ?vocabGraph .
-                } )
                 FILTER( EXISTS {
                     kgi: sd:namedGraph ?endpointGraph .
                 } )
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                GRAPH ?vocabGraph {
-                    {
-                        ?elem a ?type .
-                        FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                        FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                    }
-                }
+                ?elem a owl:Class .
                 FILTER(isIRI(?elem))
                 SERVICE ?endpointUrl {
                     {
@@ -167,9 +129,7 @@
                 }
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
-                    GRAPH ?vocabGraph {
-                        ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
-                    }
+                    ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbEntities, ?nbEntities) AS ?nbDatasetOccurences )
             }
             """
