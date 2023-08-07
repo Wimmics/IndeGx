@@ -46,20 +46,13 @@
                     {
                         ?elem a ?type .
                         FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                    } UNION {
-                        ?elem ?prop ?type .
-                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
-                    } UNION {
-                        ?type ?prop ?elem .
-                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
-                    } UNION {
-                        ?thing ?prop ?elem .
-                        FILTER( ?prop IN ( rdf:type, rdfs:range , rdfs:domain ) )
+                        FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
                     }
                 }
+                FILTER(isIRI(?elem))
                 BIND( IF( EXISTS {
                     GRAPH ?vocabGraph {
-                        ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
+                        ?elem voaf:reusedByDatasets ?occurences .
                     }
                 }, ?occurences, 0) AS ?nbUsedByDatasets )
             }
@@ -102,17 +95,10 @@
                     {
                         ?elem a ?type .
                         FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                    } UNION {
-                        ?elem ?prop ?type .
-                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
-                    } UNION {
-                        ?type ?prop ?elem .
-                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
-                    } UNION {
-                        ?thing ?prop ?elem .
-                        FILTER( ?prop IN ( rdf:type, rdfs:range , rdfs:domain ) )
+                        FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
                     }
                 }
+                FILTER(isIRI(?elem))
                 SERVICE ?endpointUrl {
                     { ?elem a owl:Class }
                     UNION { ?elem a rdfs:Class }
@@ -164,17 +150,10 @@
                     {
                         ?elem a ?type .
                         FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
-                    } UNION {
-                        ?elem ?prop ?type .
-                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
-                    } UNION {
-                        ?type ?prop ?elem .
-                        FILTER( ?prop IN ( rdfs:subClassOf, owl:equivalentClass, owl:complementOf ) )
-                    } UNION {
-                        ?thing ?prop ?elem .
-                        FILTER( ?prop IN ( rdf:type, rdfs:range , rdfs:domain ) )
+                        FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
                     }
                 }
+                FILTER(isIRI(?elem))
                 SERVICE ?endpointUrl {
                     {
                         SELECT ?type (count(?instance) AS ?nbEntities)
