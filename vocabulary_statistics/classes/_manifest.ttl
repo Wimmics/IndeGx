@@ -9,8 +9,6 @@
 <> a mf:Manifest ;
     kgi:requiredAssets (
         <../loadLOV.ttl>
-        <../loadImports.ttl>
-        <../cleanImportedData.ttl>
     ) ;
     mf:entries (
         <classUsage.ttl>

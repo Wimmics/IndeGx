@@ -10,26 +10,10 @@
     ) ;
     mf:entries (
         <loadLOV.ttl>
-        # <loadImports.ttl>
-        # <cleanImportedData.ttl>
     ) .
 
 <loadLOV.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
-        # [
-        #     mf:action """
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.aa.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.ab.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.ac.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.ad.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.ae.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.af.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.ag.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.ah.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.ai.nq> ;
-        #     LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/lov.27072023.aj.nq>
-        #     """
-        # ]
         [
             mf:action """
             LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.classes.ttl> ;
@@ -37,70 +21,3 @@
             """
         ]
     ) .
-
-# <loadImports.ttl> a mf:ManifestEntry ;
-#     kgi:requiredAssets (
-#         <loadLOV.ttl>
-#     ) ;
-#     kgi:onSuccess (
-#         [
-#             mf:action """
-#             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-#             prefix xt: <http://ns.inria.fr/sparql-extension/>
-#             prefix us: <http://ns.inria.fr/sparql-extension/user/>
-#             prefix rq: <http://ns.inria.fr/sparql-function/>
-#             prefix dt: <http://ns.inria.fr/sparql-datatype/>
-#             PREFIX owl: <http://www.w3.org/2002/07/owl#>
-#             PREFIX kgi: <http://ns.inria.fr/kg/index#>
-#             INSERT {
-#                 GRAPH ?g {
-#                     ?s ?p ?o .
-#                 }
-#             }
-#             WHERE {
-#                 GRAPH ?vocabGraph {
-#                     ?vocabGraph owl:imports ?imported .
-#                 }
-#                 bind (xt:load(?imported) as ?g)
-#                 GRAPH ?g {
-#                     ?s ?p ?o .
-#                 }
-#             }
-#             """
-#         ]
-#     ) .
-
-# <cleanImportedData.ttl> a mf:ManifestEntry ;
-#     kgi:requiredAssets (
-#         <loadLOV.ttl>
-#         # <loadImports.ttl>
-#     ) ;
-#     kgi:onSuccess (
-#         [
-#             mf:action """
-#             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-#             prefix xt: <http://ns.inria.fr/sparql-extension/>
-#             prefix us: <http://ns.inria.fr/sparql-extension/user/>
-#             prefix rq: <http://ns.inria.fr/sparql-function/>
-#             prefix dt: <http://ns.inria.fr/sparql-datatype/>
-#             PREFIX owl: <http://www.w3.org/2002/07/owl#>
-#             PREFIX kgi: <http://ns.inria.fr/kg/index#>
-#             PREFIX voaf: <http://purl.org/vocommons/voaf#>
-#             DELETE {
-#                 GRAPH ?vocabGraph {
-#                     ?s ?p ?o .
-#                 }
-#             }
-#             WHERE {
-#                 GRAPH ?vocabGraph {
-#                     ?s ?p ?o .
-#                 }
-#                 VALUES ?p {
-#                     voaf:reusedByDatasets
-#                     voaf:usageInDataset
-#                     voaf:inDataset
-#                 }
-#             }
-#             """
-#         ]
-#     ) .
