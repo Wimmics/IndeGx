@@ -53,11 +53,11 @@ Supplementary files to load because they are not in the LOV dump:
 ```sparql
 LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
 LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/spin.ttl> INTO GRAPH <http://spinrdf.org/spin#> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl#>
 ```
 
 ### Classes
 
-```sparql
 ```sparql
 PREFIX spin: <http://spinrdf.org/spin#>
 PREFIX sp: <http://spinrdf.org/sp#>
@@ -86,6 +86,7 @@ CONSTRUCT {
         skos:
         rdf:
         rdfs:
+        owl:
         sh:
     	spin:
     	foaf:
@@ -127,6 +128,7 @@ CONSTRUCT {
         skos:
         rdf:
         rdfs:
+        owl:
         sh:
     	spin:
     	foaf:
