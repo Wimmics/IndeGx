@@ -70,7 +70,9 @@
                 }
                 ?elem a owl:Class .
                 FILTER(isIRI(?elem))
-                SERVICE ?endpointUrl {
+
+                BIND( Iri( CONCAT( STR( ?endpointUrl), "?binding=values" ) ) AS ?coreseEndpointUrl )
+                SERVICE ?coreseEndpointUrl {
                     { ?elem a owl:Class }
                     UNION { ?elem a rdfs:Class }
                     UNION { ?whatever a ?elem }
@@ -114,7 +116,9 @@
                 }
                 ?elem a owl:Class .
                 FILTER(isIRI(?elem))
-                SERVICE ?endpointUrl {
+
+                BIND( Iri( CONCAT( STR( ?endpointUrl), "?binding=values" ) ) AS ?coreseEndpointUrl )
+                SERVICE ?coreseEndpointUrl {
                     {
                         SELECT ?type (count(?instance) AS ?nbEntities)
                         WHERE {

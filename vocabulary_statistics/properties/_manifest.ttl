@@ -65,8 +65,10 @@
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
                 ?elem a rdf:Property .
+
+                BIND( Iri( CONCAT( STR( ?endpointUrl), "?binding=values" ) ) AS ?coreseEndpointUrl )
                 FILTER( EXISTS {
-                    SERVICE ?endpointUrl {
+                    SERVICE ?coreseEndpointUrl {
                         ?s ?elem ?o .
                     }
                 } )
@@ -103,7 +105,9 @@
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
                 ?elem a rdf:Property .
-                SERVICE ?endpointUrl {
+
+                BIND( Iri( CONCAT( STR( ?endpointUrl), "?binding=values" ) ) AS ?coreseEndpointUrl )
+                SERVICE ?coreseEndpointUrl {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {
                         ?s ?elem ?o .
                     } GROUP BY ?elem
