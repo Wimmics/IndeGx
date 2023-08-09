@@ -51,9 +51,9 @@ Not found: SWRL
 
 Supplementary files to load because they are not in the LOV dump:
 ```sparql
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/spin.ttl> INTO GRAPH <http://spinrdf.org/spin#> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl#>
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/UsualSuspectsExperiment/data/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/UsualSuspectsExperiment/data/spin.ttl> INTO GRAPH <http://spinrdf.org/spin#> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/UsualSuspectsExperiment/data/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl#>
 ```
 
 ### Classes
@@ -71,7 +71,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 CONSTRUCT {
-    ?elem a rdf:Class;
+    ?elem a owl:Class;
     rdfs:isDefinedBy ?vocabGraph .
 } WHERE {
     GRAPH ?vocabGraph {
@@ -136,4 +136,34 @@ CONSTRUCT {
     	schema:
     }
 }
+```
+
+## Results
+
+### Classes
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?vocab ?class (COUNT(DISTINCT ?occurence) AS ?count) {
+    ?class a owl:Class;
+    	rdfs:isDefinedBy ?vocab ;
+     	voaf:usageInDataset ?occurence .
+} GROUP BY ?vocab ?class
+```
+
+### Properties
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?vocab ?property (COUNT(DISTINCT ?occurence) AS ?count) {
+      ?property a rdf:Property ;
+          rdfs:isDefinedBy ?vocab ;
+          voaf:usageInDataset ?occurence .
+} GROUP BY ?property ?vocab
 ```
