@@ -138,7 +138,7 @@ export function fetchPromise(url: string, header: Record<string, string> = {}, m
     }
 }
 
-export function fetchGETPromise(url, header: Record<string, string> = {}): Promise<any> {
+export function fetchGETPromise(url, header?: Record<string, string>): Promise<any> {
     return fetchPromise(url, header);
 }
 
@@ -153,7 +153,7 @@ export function fetchJSONPromise(url, otherHeaders: Record<string, string> = {})
         header[key] = otherHeaders[key];
     });
     return fetchGETPromise(url, header).then(response => {
-        if(response == null || response == undefined || response == "") {
+        if (response == null || response == undefined || response == "") {
             return {};
         } else {
             try {
@@ -177,9 +177,13 @@ export function unicodeToUrlendcode(text: string): string {
 
 export function replaceUnicode(text: string): string {
     return text.replace(/\\u[\dA-F]{4}/gi,
-    function (match) {
-        let unicodeMatch = String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-        let urlEncodedMatch = encodeURIComponent(unicodeMatch);
-        return urlEncodedMatch;
-    });
+        function (match) {
+            let unicodeMatch = String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+            let urlEncodedMatch = "";
+            try {
+                urlEncodedMatch = encodeURIComponent(unicodeMatch);
+            } catch (error) {
+            }
+            return urlEncodedMatch;
+        });
 }
