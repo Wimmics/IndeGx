@@ -16,8 +16,8 @@
     kgi:onSuccess (
         [
             mf:action """
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.classes.ttl> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.properties.ttl> 
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/UsualSuspectsExperiment/data/LOV_redux.usual-suspects.classes.ttl> ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/UsualSuspectsExperiment/data/LOV_redux.usual-suspects.properties.ttl> 
             """
         ]
     ) .

@@ -12,6 +12,8 @@
     ) ;
     mf:entries (
         <propertyUsage.ttl>
+        <datasetOccurence.ttl>
+        <datasetOccurenceCount.ttl>
     ) .
 
 <propertyUsage.ttl> a mf:ManifestEntry ;
@@ -30,16 +32,21 @@
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
 
             INSERT {
-                ?elem voaf:reusedByDatasets ?nbUsedByDatasets .
+                ?elem voaf:reusedByDatasets 0 .
             }
             WHERE {
                 ?elem a rdf:Property .
-                BIND( IF( EXISTS {
-                    ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
-                }, ?occurences, 0) AS ?nbUsedByDatasets )
+                FILTER( isIRI(?elem) )
             }
             """
         ]
+    ) .
+
+<datasetOccurence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyUsage.ttl>
+    ) ;
+    kgi:onSuccess (
         [
             # Creating the occurences object of each property in each dataset
             mf:action """
@@ -52,7 +59,6 @@
             prefix owl: <http://www.w3.org/2002/07/owl#>
             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-
             INSERT {
                 ?elem voaf:usageInDataset ?elemDatasetOccurence ;
                     voaf:reusedByDatasets ?nbUsedByDatasets .
@@ -60,24 +66,42 @@
                     voaf:inDataset ?endpointUrl .
             }
             WHERE {
+
                 kgi: sd:namedGraph ?endpointGraph .
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                ?elem a rdf:Property .
-                FILTER( EXISTS {
-                    SERVICE ?endpointUrl {
+
+                SERVICE ?endpointUrl {
+                    FILTER( EXISTS {
                         ?s ?elem ?o .
-                    }
-                } )
+                    } )
+                }
+                
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem) )
 
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-                BIND( IF( EXISTS {
-                    ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
-                }, ?occurences + 1, 1) AS ?nbUsedByDatasets )
+                ?elem voaf:reusedByDatasets ?occurences .
+                BIND( ?occurences + 1 AS ?nbUsedByDatasets )
+            };
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {
+                ?elem voaf:reusedByDatasets ?occurencesLow ;
+                    voaf:reusedByDatasets ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]
+    ) .
+
+<datasetOccurenceCount.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <datasetOccurence.ttl>
+    ) ;
+    kgi:onSuccess (
         [
             # Counting the number of appearances of each property in each dataset
             mf:action """
@@ -102,16 +126,28 @@
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                ?elem a rdf:Property .
+
                 SERVICE ?endpointUrl {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {
                         ?s ?elem ?o .
                     } GROUP BY ?elem
                 }
+                
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem) )
+
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
-                    ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
+                    ?elem voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbTriples, ?nbTriples) AS ?nbDatasetOccurences )
+            };
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {
+                ?elem voaf:occurrencesInDatasets ?occurencesLow ;
+                    voaf:occurrencesInDatasets ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]

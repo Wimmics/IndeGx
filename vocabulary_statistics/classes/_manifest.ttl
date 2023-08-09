@@ -12,6 +12,8 @@
     ) ;
     mf:entries (
         <classUsage.ttl>
+        <datasetOccurence.ttl>
+        <datasetOccurenceCount.ttl>
     ) .
 
 <classUsage.ttl> a mf:ManifestEntry ;
@@ -32,17 +34,21 @@
             PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
             INSERT {
-                ?elem voaf:reusedByDatasets ?nbUsedByDatasets .
+                ?elem voaf:reusedByDatasets 0 .
             }
             WHERE {
                 ?elem a owl:Class .
                 FILTER(isIRI(?elem))
-                BIND( IF( EXISTS {
-                    ?elem voaf:reusedByDatasets ?occurences .
-                }, ?occurences, 0) AS ?nbUsedByDatasets )
             }
             """
         ]
+    ) .
+
+<datasetOccurence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classUsage.ttl>
+    ) ;
+    kgi:onSuccess (
         [
             # Creating the occurences object of each property in each dataset
             mf:action """
@@ -65,23 +71,48 @@
                     voaf:inDataset ?endpointUrl .
             }
             WHERE {
+                kgi: sd:namedGraph ?endpointGraph .
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                ?elem a owl:Class .
-                FILTER(isIRI(?elem))
+
                 SERVICE ?endpointUrl {
-                    { ?elem a owl:Class }
-                    UNION { ?elem a rdfs:Class }
-                    UNION { ?whatever a ?elem }
+                    {
+                        ?elem a ?type .
+                        VALUES ?type {
+                            owl:Class
+                            rdfs:Class
+                        }
+                    } UNION {
+                        ?whatever a ?elem .
+                    }
                 }
+
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
+                        
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-                BIND( IF( EXISTS {
-                    ?elemDatasetOccurence voaf:reusedByDatasets ?occurences .
-                }, ?occurences + 1, 1) AS ?nbUsedByDatasets )
+
+                ?elem voaf:reusedByDatasets ?occurences .
+                BIND( ?occurences + 1 AS ?nbUsedByDatasets )
+            };
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {
+                ?elem voaf:reusedByDatasets ?occurencesLow ;
+                    voaf:reusedByDatasets ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]
+    ) .
+
+<datasetOccurenceCount.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <datasetOccurence.ttl>
+    ) ;
+    kgi:onSuccess (
         [
             # Counting the number of appearances of each class in each dataset
             mf:action """
@@ -98,22 +129,17 @@
             PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
             INSERT {
-                GRAPH ?vocabGraph {
-                    ?elem voaf:usageInDataset ?elemDatasetOccurence ;
-                        voaf:occurrencesInDatasets ?nbDatasetOccurences .
-                    ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                        voaf:occurrences ?nbEntities .
-                }
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                    voaf:occurrencesInDatasets ?nbDatasetOccurences .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:occurrences ?nbEntities .
             }
             WHERE {
-                FILTER( EXISTS {
-                    kgi: sd:namedGraph ?endpointGraph .
-                } )
+                kgi: sd:namedGraph ?endpointGraph .
                 GRAPH ?endpointGraph {
                     ?endpointGraph void:sparqlEndpoint ?endpointUrl .
                 }
-                ?elem a owl:Class .
-                FILTER(isIRI(?elem))
+
                 SERVICE ?endpointUrl {
                     {
                         SELECT ?type (count(?instance) AS ?nbEntities)
@@ -125,10 +151,22 @@
                         } GROUP BY ?type
                     }
                 }
+
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
+
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
-                    ?elemDatasetOccurence voaf:occurrencesInDatasets ?datasetOccurences .
+                    ?elem voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbEntities, ?nbEntities) AS ?nbDatasetOccurences )
+            };
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {
+                ?elem voaf:occurrencesInDatasets ?occurencesLow ;
+                    voaf:occurrencesInDatasets ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]
