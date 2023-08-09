@@ -12,14 +12,13 @@ import * as SPARQLUtils from "./SPARQLUtils.js";
     @returns {Promise<void>} A Promise that resolves to void when the index graph is successfully written or rejects with an error if there is a problem.
     */
 export function writeIndex(filename: string): Promise<void> {
-    return Global.fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g {?s ?p ?o} } WHERE { GRAPH ?g {?s ?p ?o} }") + "&format=trig")
-        .then(trig => {
-            Global.writeFile(filename, RDFUtils.fixCommonTurtleStringErrors(trig))
-            Logger.info("IndeGx treatment done")
-            return;
-        }).catch(error => {
-            Logger.error("writing index", filename, error);
-        });
+    let trigHeader = { "accept": "application/trig" } as Record<string, string>;
+    return Global.fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g { ?s ?p ?o } } WHERE { GRAPH ?g { ?s ?p ?o } }"), trigHeader).then(trig => {
+        Global.writeFile(filename, RDFUtils.fixCommonTurtleStringErrors(trig))
+        Logger.info("IndeGx treatment done")
+    }).catch(error => {
+        Logger.error("writing index", filename, error);
+    });
 }
 
 /**
@@ -42,7 +41,7 @@ export function sendFileToIndex(filename: string, graph?: string): Promise<void>
 export function sendStoreContentToIndex(store: $rdf.Store, graph?: string): Promise<void> {
     return RDFUtils.serializeStoreToNTriplesPromise(store).then(trig => {
         store.close();
-        if(graph === undefined) {
+        if (graph === undefined) {
             return SPARQLUtils.sendUpdateQuery(coreseServerUrl, `INSERT DATA { ${trig} }`)
         } else {
             return SPARQLUtils.sendUpdateQuery(coreseServerUrl, `INSERT DATA { GRAPH <${graph}> { ${trig} } }`)
