@@ -89,6 +89,10 @@
                 ?elem voaf:reusedByDatasets ?occurencesLow .
             } 
             WHERE {
+                
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem) )
+                
                 ?elem voaf:reusedByDatasets ?occurencesLow ;
                     voaf:reusedByDatasets ?occurencesHigh .
                 FILTER( ?occurencesLow < ?occurencesHigh )
@@ -145,8 +149,18 @@
                 ?elem voaf:reusedByDatasets ?occurencesLow .
             } 
             WHERE {
-                ?elem voaf:occurrencesInDatasets ?occurencesLow ;
-                    voaf:occurrencesInDatasets ?occurencesHigh .
+                kgi: sd:namedGraph ?endpointGraph .
+                GRAPH ?endpointGraph {
+                    ?endpointGraph void:sparqlEndpoint ?endpointUrl .
+                }
+                
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem) )
+
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+
+                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
+                    voaf:occurrences ?occurencesHigh .
                 FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
