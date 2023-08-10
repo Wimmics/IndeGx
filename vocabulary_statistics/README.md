@@ -147,11 +147,11 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-SELECT DISTINCT ?vocab ?class (COUNT(DISTINCT ?occurence) AS ?count) {
+SELECT DISTINCT ?class (COUNT(DISTINCT ?endpointUrl) AS ?count) {
     ?class a owl:Class;
-    	rdfs:isDefinedBy ?vocab ;
      	voaf:usageInDataset ?occurence .
-} GROUP BY ?vocab ?class
+    ?occurence voaf:inDataset ?endpointUrl .
+} GROUP BY ?class
 ```
 
 ### Properties
@@ -162,8 +162,8 @@ PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?vocab ?property (COUNT(DISTINCT ?occurence) AS ?count) {
-      ?property a rdf:Property ;
-          rdfs:isDefinedBy ?vocab ;
-          voaf:usageInDataset ?occurence .
+    ?property a rdf:Property ;
+        rdfs:isDefinedBy ?vocab ;
+        voaf:usageInDataset ?occurence .
 } GROUP BY ?property ?vocab
 ```
