@@ -1,7 +1,7 @@
 {
-    "manifest": "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/_rootManifest.ttl",
-    "post": "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/_postRootManifest.ttl",
-    "catalog": "https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/catalogs/all_catalog_edited.ttl",
+    "manifest": "file:///vocabulary_statistics/_manifest.ttl",
+    "post": "file:///vocabulary_statistics/_post_manifest.ttl",
+    "catalog": "file:///catalogs/all_catalog_edited.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,

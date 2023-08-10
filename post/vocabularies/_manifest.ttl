@@ -8,13 +8,34 @@
     mf:include (
         <classes/_manifest.ttl>
         <properties/_manifest.ttl>
-        # <resources/_manifest.ttl>
     ) ;
     mf:entries (
         <loadVocabularies.ttl>
+        <loadLOV.ttl>
+    ) .
+
+<loadLOV.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            LOAD <file:///data/lov.27072023.aa.nq> ;
+            LOAD <file:///data/lov.27072023.ab.nq> ;
+            LOAD <file:///data/lov.27072023.ac.nq> ;
+            LOAD <file:///data/lov.27072023.ad.nq> ;
+            LOAD <file:///data/lov.27072023.ae.nq> ;
+            LOAD <file:///data/lov.27072023.af.nq> ;
+            LOAD <file:///data/lov.27072023.ag.nq> ;
+            LOAD <file:///data/lov.27072023.ah.nq> ;
+            LOAD <file:///data/lov.27072023.ai.nq> ;
+            LOAD <file:///data/lov.27072023.aj.nq>
+            """
+        ]
     ) .
 
 <loadVocabularies.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( 
+        <loadLOV.ttl>
+    ) ;
     kgi:onSuccess (
         [
             mf:action """
@@ -32,6 +53,7 @@
                 GRAPH ?kgGraph {
                     ?kg void:vocabulary ?vocab .
                 }
+                FILTER( NOT EXISTS { GRAPH ?vocab { ?s ?p ?o } } )
                 bind (xt:load(?vocab) as ?g)
                 GRAPH ?g { 
                     ?s ?p ?o .

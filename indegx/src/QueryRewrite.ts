@@ -106,8 +106,13 @@ export function replacePlaceholders(inputString: string, keywordReplacementObjec
         }
     }
     if (result.includes(reasonPlaceholder)) {
-        if (keywordReplacementObject.reasonString !== undefined) {
-            const errorStringLiteral = $rdf.literal(JSON.stringify(keywordReplacementObject.reasonString));
+        if (keywordReplacementObject.reasonString !== undefined){ 
+            let errorStringLiteral;
+            if(JSON.stringify(keywordReplacementObject.reasonString).length < 2000) {
+                errorStringLiteral = $rdf.literal(JSON.stringify(keywordReplacementObject.reasonString));
+            } else {
+                errorStringLiteral = $rdf.literal(JSON.stringify(keywordReplacementObject.reasonString).substring(0, 2000) + " ...");
+            }
             result = regexReplaceAll(result, reasonPlaceholderRegex, errorStringLiteral.toNT());
         } else {
             throw new Error("No replacement for keyword " + reasonPlaceholder + " given as input for " + result)
