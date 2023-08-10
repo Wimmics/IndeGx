@@ -15,16 +15,9 @@
     kgi:onSuccess (
         [
             mf:action """
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.aa.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ab.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ac.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ad.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ae.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.af.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ag.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ah.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.ai.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/FAIR-Checker/Findability/lov.27072023.aj.nq>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.classes.ttl> INTO GRAPH kgi:LOV_redux ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.properties.ttl> INTO GRAPH kgi:LOV_redux
             """
         ]
     ) .
@@ -229,13 +222,13 @@
         <loadLOV.ttl> 
     ) ;
     kgi:onSuccess (
-        <F2B_AtLeastOne.ttl>
         <F2B_All.ttl>
+        <F2B_AtLeastOne.ttl>
         <F2B_None.ttl>
     ) ;
     kgi:onFailure (
-        <F2B_AtLeastOne.ttl>
         <F2B_All.ttl>
+        <F2B_AtLeastOne.ttl>
         <F2B_None.ttl>
         [
             mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -276,6 +269,7 @@
     ) .
         
 <F2B_AtLeastOne.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( <F2B_All.ttl> ) ;
     kgi:onSuccess (
         [
             mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -311,14 +305,24 @@
                         UNION { ?kg a sd:Dataset }
                         UNION { ?kg a dataid:Dataset }
                     }
+
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                ?kg dqv:hasQualityMeasurement ?measurement .
+                                ?measurement dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                                    dqv:value ?anyValue .
+                            }
+                        }
+                    )
                     
                     FILTER ( EXISTS {
                         GRAPH ?kgGraph {
                             { ?s a ?elem . }
                             UNION { ?s ?elem ?oGraph . }
                         }
-                        GRAPH ?anyGraph {
-                            ?elem ?p ?o .
+                        GRAPH kgi:LOV_redux {
+                            ?elem a ?o .
                         }
                     } )
                     BIND( STRLANG( "Class or property found in LOV:" , "en" ) AS ?comment )
@@ -329,7 +333,6 @@
     ) .
 
 <F2B_All.ttl> a mf:ManifestEntry ;
-    kgi:requiredAssets ( <F2B_AtLeastOne.ttl> ) ;
     kgi:onSuccess (
         [
             mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -364,6 +367,7 @@
                         UNION { ?kg a sd:Dataset }
                         UNION { ?kg a dataid:Dataset }
                     }
+
                     FILTER (
                         NOT EXISTS {
                             GRAPH ?kgGraph {
@@ -373,14 +377,17 @@
                             }
                         }
                     )
-                    FILTER ( EXISTS {
+
+                    FILTER ( NOT EXISTS {
                         GRAPH ?kgGraph {
                             { ?s a ?elem . }
                             UNION { ?s ?elem ?oGraph . }
                         }
-                        GRAPH ?anyGraph {
-                            ?elem ?p ?o .
-                        }
+                        FILTER ( NOT EXISTS {
+                            GRAPH kgi:LOV_redux {
+                                ?elem a ?o .
+                            }
+                        } )
                     } )
                     BIND(Iri(CONCAT(STR(?kg), "#F2B")) AS ?measurement)
                 }
@@ -389,7 +396,7 @@
     ) .
 
 <F2B_None.ttl> a mf:ManifestEntry ;
-    kgi:requiredAssets ( <F2B_All.ttl> ) ;
+    kgi:requiredAssets ( <F2B_AtLeastOne.ttl> ) ;
     kgi:onSuccess (
         [
             mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
