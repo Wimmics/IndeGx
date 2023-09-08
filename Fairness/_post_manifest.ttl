@@ -2,6 +2,8 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 
 <> a mf:Manifest ;
+    mf:entries (
+    ) ;
     mf:include (
         <FAIR-Checker/_manifest.ttl>
     ) .

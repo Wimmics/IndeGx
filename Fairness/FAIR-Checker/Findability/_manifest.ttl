@@ -4,10 +4,22 @@
 
 <> a mf:Manifest ;
     mf:entries (
+        <loadLOV.ttl>
         <F1A.ttl>
         <F1B.ttl>
         <F2A.ttl>
         <F2B.ttl>
+    ) .
+
+<loadLOV.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.classes.ttl> INTO GRAPH kgi:LOV_redux ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.properties.ttl> INTO GRAPH kgi:LOV_redux
+            """
+        ]
     ) .
 
 <F1A.ttl> a mf:ManifestEntry ;
@@ -27,6 +39,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -36,6 +49,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -63,7 +77,7 @@
     ) .
 
 <F1B.ttl> a mf:ManifestEntry ;
-    dcterms:description "Weak evaluation should check the dataset identifier namespace in identifiers.org. However, has identifier?org has no SPARQL endpoint, we cannot check this." ;
+    dcterms:description "Weak evaluation should check the dataset identifier namespace in identifiers.org. However, has identifier.org has no SPARQL endpoint, we cannot check this." ;
     kgi:onSuccess (
         [
             dcterms:description "There is a schema of dcterms identifier." ;
@@ -81,6 +95,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -91,6 +106,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -139,6 +155,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -149,6 +166,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -200,14 +218,17 @@
     ) .
 
 <F2B.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( 
+        <loadLOV.ttl> 
+    ) ;
     kgi:onSuccess (
-        <F2B_AtLeastOne.ttl>
         <F2B_All.ttl>
+        <F2B_AtLeastOne.ttl>
         <F2B_None.ttl>
     ) ;
     kgi:onFailure (
-        <F2B_AtLeastOne.ttl>
         <F2B_All.ttl>
+        <F2B_AtLeastOne.ttl>
         <F2B_None.ttl>
         [
             mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -223,6 +244,7 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
 
                 INSERT {
                     GRAPH ?kgGraph {
@@ -230,6 +252,7 @@
                         ?measurement rdfs:comment "Official Linked Open Vocabularies SPARQL endpoint is not available." .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -246,141 +269,6 @@
     ) .
         
 <F2B_AtLeastOne.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-                PREFIX schema: <http://schema.org/>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX pav: <http://purl.org/pav/>
-                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                PREFIX dqv: <http://www.w3.org/ns/dqv#>
-                PREFIX dce: <http://purl.org/dc/elements/1.1/>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-                INSERT {
-                    GRAPH ?kgGraph {
-                        ?kg dqv:hasQualityMeasurement ?measurement .
-                        ?measurement a dqv:QualityMeasurement ;
-                            rdfs:label "Shared vocabularies for metadata"@en ;
-                            rdfs:comment ?comment ;
-                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
-                            dqv:value 1 .
-                    }
-                } WHERE {
-                    {
-                        SELECT DISTINCT ?kgGraph ?kg ?elem {
-                            GRAPH ?kgGraph {
-                                { ?kg a dcat:Dataset }
-                                UNION { ?kg a void:Dataset }
-                                UNION { ?kg a dcmitype:Dataset }
-                                UNION { ?kg a schema:Dataset }
-                                UNION { ?kg a sd:Dataset }
-                                UNION { ?kg a dataid:Dataset }
-                                { ?s a ?elem . }
-                                UNION { ?s ?elem ?oGraph . }
-                            }
-                            
-                            FILTER ( EXISTS {
-                                BIND ( EXISTS {
-                                    SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
-                                        ?elem ?p ?o .
-                                    }
-                                } AS ?LOVAvailable)
-                                BIND ( EXISTS {
-                                    SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
-                                        ?elem ?p ?o .
-                                    }
-                                } AS ?LOVAlternativeAvailable)
-                                FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
-                                BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
-                                SERVICE ?LOVEndpointURL {
-                                    ?elem ?p ?o .
-                                }
-                            } )
-                        }
-                    }
-                    BIND( STRLANG( CONCAT( "Class of property found in LOV:", GROUP_CONCAT( STR( ?elem) ; separator=", " ) ) , "en" ) AS ?comment )
-                    BIND( Iri( CONCAT( STR( ?kg ), "#F2B" ) ) AS ?measurement )
-                }
-            """
-        ]
-    ) .
-
-<F2B_All.ttl> a mf:ManifestEntry ;
-    kgi:requiredAssets ( <F2B_AtLeastOne.ttl> ) ;
-    kgi:onSuccess (
-        [
-            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-                PREFIX schema: <http://schema.org/>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX pav: <http://purl.org/pav/>
-                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                PREFIX dqv: <http://www.w3.org/ns/dqv#>
-                PREFIX dce: <http://purl.org/dc/elements/1.1/>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-                INSERT {
-                    GRAPH ?kgGraph {
-                        ?kg dqv:hasQualityMeasurement ?measurement .
-                        ?measurement a dqv:QualityMeasurement ;
-                            rdfs:label "Shared vocabularies for metadata"@en ;
-                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
-                            dqv:value 2 .
-                    }
-                } WHERE {
-                    GRAPH ?kgGraph {
-                        { ?kg a dcat:Dataset }
-                        UNION { ?kg a void:Dataset }
-                        UNION { ?kg a dcmitype:Dataset }
-                        UNION { ?kg a schema:Dataset }
-                        UNION { ?kg a sd:Dataset }
-                        UNION { ?kg a dataid:Dataset }
-                    }
-                    FILTER (
-                        NOT EXISTS {
-                            GRAPH ?kgGraph {
-                                ?kg dqv:hasQualityMeasurement ?measurement .
-                                ?measurement dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
-                                    dqv:value ?anyValue .
-                            }
-                        }
-                    )
-                    FILTER ( EXISTS {
-                        BIND ( EXISTS {
-                            SERVICE <https://lov.linkeddata.es/dataset/lov/sparql> {
-                                ?elem ?p ?o .
-                            }
-                        } AS ?LOVAvailable)
-                        BIND ( EXISTS {
-                            SERVICE <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql> {
-                                ?elem ?p ?o .
-                            }
-                        } AS ?LOVAlternativeAvailable)
-                        FILTER( ?LOVAvailable || ?LOVAlternativeAvailable )
-                        BIND(IF( ?LOVAvailable, <https://lov.linkeddata.es/dataset/lov/sparql?loop=true&limit=100>, <https://api.triplydb.com/datasets/okfn/lov/services/lov/sparql?loop=true&limit=100>) AS ?LOVEndpointURL )
-                        GRAPH ?kgGraph {
-                            { ?s a ?elem . }
-                            UNION { ?s ?elem ?oGraph . }
-                        }
-                        SERVICE ?LOVEndpointURL {
-                            ?elem ?p ?o .
-                        }
-                    } )
-                    BIND(Iri(CONCAT(STR(?kg), "#F2B")) AS ?measurement)
-                }
-            """
-        ]
-    ) .
-
-<F2B_None.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets ( <F2B_All.ttl> ) ;
     kgi:onSuccess (
         [
@@ -397,6 +285,134 @@
                 PREFIX dce: <http://purl.org/dc/elements/1.1/>
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Shared vocabularies for metadata"@en ;
+                            rdfs:comment ?comment ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                            dqv:value 1 .
+                    }
+                } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
+                    }
+
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                ?kg dqv:hasQualityMeasurement ?measurement .
+                                ?measurement dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                                    dqv:value ?anyValue .
+                            }
+                        }
+                    )
+                    
+                    FILTER ( EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?s a ?elem . }
+                            UNION { ?s ?elem ?oGraph . }
+                        }
+                        GRAPH kgi:LOV_redux {
+                            ?elem a ?o .
+                        }
+                    } )
+                    BIND( STRLANG( "Class or property found in LOV:" , "en" ) AS ?comment )
+                    BIND( Iri( CONCAT( STR( ?kg ), "#F2B" ) ) AS ?measurement )
+                }
+            """
+        ]
+    ) .
+
+<F2B_All.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Shared vocabularies for metadata"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                            dqv:value 2 .
+                    }
+                } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
+                    }
+
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                ?kg dqv:hasQualityMeasurement ?measurement .
+                                ?measurement dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                                    dqv:value ?anyValue .
+                            }
+                        }
+                    )
+
+                    FILTER ( NOT EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?s a ?elem . }
+                            UNION { ?s ?elem ?oGraph . }
+                        }
+                        FILTER ( NOT EXISTS {
+                            GRAPH kgi:LOV_redux {
+                                ?elem a ?o .
+                            }
+                        } )
+                    } )
+                    BIND(Iri(CONCAT(STR(?kg), "#F2B")) AS ?measurement)
+                }
+            """
+        ]
+    ) .
+
+<F2B_None.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( <F2B_AtLeastOne.ttl> ) ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -406,6 +422,7 @@
                             dqv:value 0 .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }

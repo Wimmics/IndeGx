@@ -36,6 +36,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }
@@ -69,6 +70,7 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
                 PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?kgGraph {
                         ?kg dqv:hasQualityMeasurement ?measurement .
@@ -79,6 +81,7 @@
                             dqv:value ?value .
                     }
                 } WHERE {
+                    kgi:FAIRness kgi:dataGraph ?kgGraph .
                     GRAPH ?kgGraph {
                         { ?kg a dcat:Dataset }
                         UNION { ?kg a void:Dataset }

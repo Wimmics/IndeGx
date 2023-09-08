@@ -1,0 +1,184 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+        <../loadLOV.ttl>
+    ) ;
+    mf:entries (
+        <classUsage.ttl>
+        <datasetOccurence.ttl>
+        <datasetOccurenceCount.ttl>
+    ) .
+
+<classUsage.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            # Creating the basic description of each class
+            mf:action """
+            PREFIX voaf: <http://purl.org/vocommons/voaf#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                ?elem voaf:reusedByDatasets 0 .
+            }
+            WHERE {
+                ?elem a owl:Class .
+                FILTER(isIRI(?elem))
+            }
+            """
+        ]
+    ) .
+
+<datasetOccurence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classUsage.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            # Creating the occurences object of each property in each dataset
+            mf:action """
+            prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                    voaf:reusedByDatasets ?nbUsedByDatasets .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset ?endpointUrl .
+            }
+            WHERE {
+                kgi: sd:namedGraph ?endpointGraph .
+                GRAPH ?endpointGraph {
+                    ?endpointGraph void:sparqlEndpoint ?endpointUrl .
+                }
+
+                SERVICE ?endpointUrl {
+                    {
+                        ?elem a ?type .
+                        VALUES ?type {
+                            owl:Class
+                            rdfs:Class
+                        }
+                    } UNION {
+                        ?whatever a ?elem .
+                    }
+                }
+
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
+                        
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+
+                ?elem voaf:reusedByDatasets ?occurences .
+                BIND( ?occurences + 1 AS ?nbUsedByDatasets )
+            };
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {
+                ?elem a owl:Class ;
+                    voaf:reusedByDatasets ?occurencesLow ;
+                    voaf:reusedByDatasets ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
+            }
+            """
+        ]
+    ) .
+
+<datasetOccurenceCount.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <datasetOccurence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            # Counting the number of appearances of each class in each dataset
+            mf:action """
+            prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                    voaf:occurrencesInDatasets ?nbDatasetOccurences .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:occurrences ?nbEntities .
+            }
+            WHERE {
+                kgi: sd:namedGraph ?endpointGraph .
+                GRAPH ?endpointGraph {
+                    ?endpointGraph void:sparqlEndpoint ?endpointUrl .
+                }
+
+                SERVICE ?endpointUrl {
+                    {
+                        SELECT ?type (count(?instance) AS ?nbEntities)
+                        WHERE {
+                            SELECT DISTINCT ?type ?instance
+                            WHERE {
+                                ?instance a ?type
+                            }
+                        } GROUP BY ?type
+                    }
+                }
+
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
+
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+                BIND( IF( EXISTS {
+                    ?elem voaf:occurrencesInDatasets ?datasetOccurences .
+                }, ?datasetOccurences + ?nbEntities, ?nbEntities) AS ?nbDatasetOccurences )
+            };
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {
+                kgi: sd:namedGraph ?endpointGraph .
+                GRAPH ?endpointGraph {
+                    ?endpointGraph void:sparqlEndpoint ?endpointUrl .
+                }
+
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
+
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+
+                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
+                    voaf:occurrences ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
+            }
+            """
+        ]
+    ) .

@@ -39,22 +39,22 @@ function getSuccessPattern(): Promise<string> {
     }
 }
 
-export function sendFailureReportUpdate(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error): Promise<any> {
+export function sendFailureReportUpdate(endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error): Promise<any> {
     if (getLogMode()) {
         return getFailurePattern().then(template => {
             const query = replacePatternPlaceholders(template, endpointUrl, queryString, entryObject, startTime, endTime, error);
-            return Corese.sendUpdate(endpointUrl, query);
+            return Corese.sendUpdate(endpointUrl, query, baseURI);
         });
     } else {
         return Promise.resolve();
     }
 }
 
-function sendSuccessReportUpdate(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs): Promise<any> {
+function sendSuccessReportUpdate(endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs): Promise<any> {
     if (getLogMode()) {
         return getSuccessPattern().then(template => {
             const query = replacePatternPlaceholders(template, endpointUrl, queryString, entryObject, startTime, endTime);
-            return Corese.sendUpdate(endpointUrl, query);
+            return Corese.sendUpdate(endpointUrl, query, baseURI);
         });
     } else {
         return Promise.resolve();
@@ -66,43 +66,43 @@ function replacePatternPlaceholders(template: string, endpointUrl: string, query
     return result;
 }
 
-export function sendUpdateWithTraceHandling(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
-    return sendQueryWithTraceHandling(Corese.sendUpdate, endpointUrl, queryString, entryObject, startTime, timeout);
+export function sendUpdateWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
+    return sendQueryWithTraceHandling(Corese.sendUpdate, endpointUrl, queryString, baseURI, entryObject, startTime, timeout);
 }
 
-export function sendConstructWithTraceHandling(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout): Promise<$rdf.Store> {
-    return sendQueryWithTraceHandling(Corese.sendConstruct, endpointUrl, queryString, entryObject, startTime, timeout).finally(() => "");
+export function sendConstructWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout): Promise<$rdf.Store> {
+    return sendQueryWithTraceHandling(Corese.sendConstruct, endpointUrl, queryString, baseURI, entryObject, startTime, timeout).finally(() => "");
 }
 
-export function sendSelectWithTraceHandling(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
-    return sendQueryWithTraceHandling(Corese.sendSelect, endpointUrl, queryString, entryObject, startTime, timeout).finally(() => { });
+export function sendSelectWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
+    return sendQueryWithTraceHandling(Corese.sendSelect, endpointUrl, queryString, baseURI, entryObject, startTime, timeout).finally(() => { });
 }
 
-export function sendAskWithTraceHandling(endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
-    return sendQueryWithTraceHandling(Corese.sendAsk, endpointUrl, queryString, entryObject, startTime, timeout).finally(() => false);
+export function sendAskWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
+    return sendQueryWithTraceHandling(Corese.sendAsk, endpointUrl, queryString, baseURI, entryObject, startTime, timeout).finally(() => false);
 }
 
-function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c?: number) => Promise<any>, endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number): Promise<any> {
-    return queryFunction(endpointUrl, queryString, timeout).then(results => {
+function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: string, d?: number) => Promise<any>, endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number): Promise<any> {
+    return queryFunction(endpointUrl, queryString, baseURI, timeout).then(results => {
         const endTime = dayjs();
         if (results === undefined || results.error !== undefined) {
             if (results === undefined) {
-                return sendFailureReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime, "No results returned").then(() => {
+                return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "No results returned").then(() => {
                     return results;
                 });
             } else {
-                return sendFailureReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime, results.error).then(() => {
+                return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, results.error).then(() => {
                     return results;
                 });
             }
         } else {
-            return sendSuccessReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime).then(() => {
+            return sendSuccessReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime).then(() => {
                 return results;
             });
         }
     }).catch(error => {
         Logger.error("Error sendQueryWithTraceHandling", error)
         const endTime = dayjs();
-        return sendFailureReportUpdate(endpointUrl, queryString, entryObject, startTime, endTime, error);
+        return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, error);
     })
 }

@@ -197,7 +197,7 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
                 testQuery = generator.stringify(parsedQuery);
             }
             if (SPARQLUtils.isSparqlAsk(testQuery)) {
-                testsPool.push(sendAskWithTraceHandling(endpointObject.endpoint, testQuery, entryObject, startTime).then(askResult => {
+                testsPool.push(sendAskWithTraceHandling(endpointObject.endpoint, testQuery, endpointObject.endpoint, entryObject, startTime).then(askResult => {
                     if (askResult.error !== undefined) {
                         return false;
                     } else {
@@ -205,7 +205,7 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
                     }
                 }).finally(() => false));
             } else if (SPARQLUtils.isSparqlSelect(testQuery)) {
-                testsPool.push(sendSelectWithTraceHandling(endpointObject.endpoint, testQuery, entryObject, startTime).then(selectResult => {
+                testsPool.push(sendSelectWithTraceHandling(endpointObject.endpoint, testQuery, endpointObject.endpoint, entryObject, startTime).then(selectResult => {
                     if (selectResult.error !== undefined) {
                         return false;
                     } else {
@@ -213,13 +213,13 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
                     }
                 }).finally(() => false));
             } else if (SPARQLUtils.isSparqlConstruct(testQuery)) {
-                testsPool.push(sendConstructWithTraceHandling(endpointObject.endpoint, testQuery, entryObject, startTime).then(constructResult => {
+                testsPool.push(sendConstructWithTraceHandling(endpointObject.endpoint, testQuery, endpointObject.endpoint, entryObject, startTime).then(constructResult => {
                     const result = constructResult !== undefined;
                     constructResult.close();
                     return result;
                 }).finally(() => false));
             } else if (SPARQLUtils.isSparqlUpdate(testQuery)) {
-                testsPool.push(sendUpdateWithTraceHandling(endpointObject.endpoint, testQuery, entryObject, startTime).then(updateResponse => {
+                testsPool.push(sendUpdateWithTraceHandling(endpointObject.endpoint, testQuery, endpointObject.endpoint, entryObject, startTime).then(updateResponse => {
                     if (updateResponse.error !== undefined) {
                         return false;
                     } else {
@@ -412,11 +412,11 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
         });
 
         function updateWithTraceHandling(endpointUrl, queryString, actionTimeout): Promise<void> {
-            return sendUpdateWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout);
+            return sendUpdateWithTraceHandling(endpointUrl, queryString, endpointObject.endpoint, entryObject, startTime, actionTimeout);
         }
 
         function constructWithTraceHandling(endpointUrl, queryString, actionTimeout): Promise<void> {
-            return sendConstructWithTraceHandling(endpointUrl, queryString, entryObject, startTime, actionTimeout).then((result) => {
+            return sendConstructWithTraceHandling(endpointUrl, queryString, endpointObject.endpoint, entryObject, startTime, actionTimeout).then((result) => {
                 return IndexUtils.sendStoreContentToIndex(result);
             });
         }
@@ -582,7 +582,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                         let generatedQuery = generator.stringify(queryObject);
 
                         // We send the paginated CONSTRUCT query
-                        return sendConstructWithTraceHandling(endpointUrl, generatedQuery, entryObject, startTime).then(constructResult => {
+                        return sendConstructWithTraceHandling(endpointUrl, generatedQuery, endpointObject.endpoint, entryObject, startTime).then(constructResult => {
                             if (constructResult !== undefined) {
                                 if (constructResult.length > 0) {
                                     let graphName = undefined;
@@ -616,13 +616,13 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                             if (object.graph != undefined) {
                                                 insertDataQuery = "INSERT DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
                                             }
-                                            return sendUpdateWithTraceHandling(endpointUrl, insertDataQuery, entryObject, startTime);
+                                            return sendUpdateWithTraceHandling(endpointUrl, insertDataQuery, endpointObject.endpoint, entryObject, startTime);
                                         } else if (object.type.localeCompare("delete") == 0) {
                                             let deleteDataQuery = "DELETE DATA { " + constructResultNTString + " }";
                                             if (object.graph != undefined) {
                                                 deleteDataQuery = "DELETE DATA { GRAPH <" + object.graph + "> { " + constructResultNTString + " } }";
                                             }
-                                            return sendUpdateWithTraceHandling(endpointUrl, deleteDataQuery, entryObject, startTime);
+                                            return sendUpdateWithTraceHandling(endpointUrl, deleteDataQuery, endpointObject.endpoint, entryObject, startTime);
                                         }
                                     }).then(() => {
                                         return paginateQuery(object, pageSize, iteration + 1, offsetMin, offsetMax);
@@ -630,7 +630,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
                                 } else {
                                     let endTime = dayjs();
                                     constructResult.close();
-                                    return sendFailureReportUpdate(endpointUrl, generatedQuery, entryObject, startTime, endTime, "No triples returned by the query");
+                                    return sendFailureReportUpdate(endpointUrl, generatedQuery, endpointObject.endpoint, entryObject, startTime, endTime, "No triples returned by the query");
                                 }
                             } else {
                                 return paginateQuery(object, pageSize, iteration + 1, offsetMin, offsetMax);

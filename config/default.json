@@ -1,7 +1,7 @@
 {
-    "manifest": "https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/_manifest.ttl",
-    "post": "https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/Fairness/_post_manifest.ttl",
-    "catalog": "https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/catalogs/all_catalog_partition_0-100.ttl",
+    "manifest": "file:///Fairness/_manifest.ttl",
+    "post": "file:///Fairness/_post_manifest.ttl",
+    "catalog": "file:///catalogs/all_catalog_edited.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
