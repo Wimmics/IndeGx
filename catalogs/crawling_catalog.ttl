@@ -42,7 +42,7 @@ kgi:catalog a dcat:Catalog ;
             void:sparqlEndpoint <https://io.datascience-paris-saclay.fr/sparql>
         ] ,
         [
-            void:sparqlEndpoint <http://virtuoso.plateforme.dipso.inrae.fr/sparql/>
+            void:sparqlEndpoint <http://virtuoso.plateforme.dipso.inrae.fr/sparql>
         ] ,
         [
             void:sparqlEndpoint <https://imagesnippets.com/sparql/imgtag>
@@ -78,7 +78,7 @@ kgi:catalog a dcat:Catalog ;
             void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql>
         ] ,
         [
-            void:sparqlEndpoint <https://vocabularies.unesco.org/sparql-form/>
+            void:sparqlEndpoint <https://vocabularies.unesco.org/sparql>
         ] ,
         [
             void:sparqlEndpoint <https://taxref/mnhn.fr/sparql>
@@ -99,17 +99,29 @@ kgi:catalog a dcat:Catalog ;
             void:sparqlEndpoint <https://data.europa.eu/sparql>
         ] ,
         [
-            void:sparqlEndpoint <https://virtuoso.plateforme.dipso.inrae.fr/sparql/>
+            void:sparqlEndpoint <https://virtuoso.plateforme.dipso.inrae.fr/sparql>
         ] ,
         [
-            void:sparqlEndpoint <https://smt.esante.gouv.fr/sparql/>
+            void:sparqlEndpoint <https://smt.esante.gouv.fr/sparql>
         ] ,
         [
             void:sparqlEndpoint <http://rdf.muninn-project.org/sparql>
         ] ,
         [
             void:sparqlEndpoint <http://www.lotico.com:3030/lotico/sparql>
-        ]  .
+        ] ,
+        [
+            void:sparqlEndpoint <https://fuseki.kupferdigital.org/demonstrator/sparql>
+        ] ,
+        [
+            void:sparqlEndpoint <https://vocabularies.unesco.org/sparql>
+        ] ,
+        [
+            void:sparqlEndpoint <https://db.project-hobbit.eu/sparql>
+        ] ,
+        [
+            void:sparqlEndpoint <https://pgxlod.loria.fr/sparql>
+        ] .
 
 kgi:Joconde void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> .
 
