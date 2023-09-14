@@ -1,21 +1,8 @@
-import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise } from "./GlobalUtils.js";
+import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise, JSONObject } from "./GlobalUtils.js";
 import * as $rdf from "rdflib";
 import * as RDFUtils from "./RDFUtils.js";
 import sparqljs, { SparqlQuery } from "sparqljs";
 import * as Logger from "./LogUtils.js"
-
-export type JSONValue =
-    | string
-    | number
-    | boolean
-    | JSONObject
-    | JSONArray;
-
-interface JSONObject {
-    [x: string]: JSONValue;
-}
-
-interface JSONArray extends Array<JSONValue> { }
 
 export interface SPARQLJSONResult extends JSONObject {
     head: {
