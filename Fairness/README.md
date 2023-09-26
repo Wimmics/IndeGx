@@ -1,6 +1,10 @@
-# Treatment of experiment results
+# FAIRness evaluation implementation
 
-## Query to extract the results from the [accountability](https://github.com/Jendersen/KG_accountability) experiment
+This folder contains the generation assets used to reimplement the FAIR-Checker FAIRness measure for IndeGx.
+
+## Treatment of experiment results
+
+### Query to extract the results from the [accountability](https://github.com/Jendersen/KG_accountability) experiment
 
 ```sparql
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -127,7 +131,7 @@ WHERE {
 } ORDER BY ?kge ?mlab
 ```
 
-## Query to extract the results from both FAIR-Checker and Accountability experiments
+### Query to extract the results from both FAIR-Checker and Accountability experiments
 
 ```sparql
 PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>

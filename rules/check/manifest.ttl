@@ -144,6 +144,23 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl")), "Measure")) AS ?endpointProvenanceMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointProvenanceMeasurement .
                     ?endpointProvenanceMeasurement a dqv:QualityMeasurement ;
@@ -176,6 +193,23 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl")), "Measure")) AS ?endpointProvenanceMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointProvenanceMeasurement .
                     ?endpointProvenanceMeasurement a dqv:QualityMeasurement ;
@@ -198,6 +232,31 @@
 
 <basicProvenance.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/basicProvenance.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/basicProvenance.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/basicProvenance.ttl")), "Measure")) AS ?endpointBasicProvenanceMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
         [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -279,6 +338,24 @@
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/shortUris.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/shortUris.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
+                } WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/shortUris.ttl")), "Measure")) AS ?endpointShortUrisMeasurement)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+                """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription dqv:hasQualityMeasurement ?endpointShortUrisMeasurement .
                         ?endpointShortUrisMeasurement a dqv:QualityMeasurement ;
@@ -334,6 +411,24 @@
                         <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/RDFDataStructures.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/RDFDataStructures.ttl> ;
                             prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                     }
+                } WHERE {
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/RDFDataStructures.ttl")), "Measure")) AS ?endpointRDFDataStructuresMeasurement)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+                }
+                """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                INSERT {
                     GRAPH ?curatedDescriptionGraph {
                         ?datasetDescription dqv:hasQualityMeasurement ?endpointRDFDataStructuresMeasurement .
                         ?endpointRDFDataStructuresMeasurement a dqv:QualityMeasurement ;
@@ -389,6 +484,24 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/blankNodeUsage.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/blankNodeUsage.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/blankNodeUsage.ttl")), "Measure")) AS ?endpointBlankNodeUsageMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointBlankNodeUsageMeasurement .
                     ?endpointBlankNodeUsageMeasurement a dqv:QualityMeasurement ;
@@ -445,6 +558,30 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/readableLabels.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/readableLabels.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/readableLabels.ttl")), "Measure")) AS ?endpointReadableLabelsMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX powder-s: <http://www.w3.org/2007/05/powder-s#>
+            PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+            PREFIX schema: <https://schema.org/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointReadableLabelsMeasurement .
                     ?endpointReadableLabelsMeasurement a dqv:QualityMeasurement ;
@@ -515,6 +652,30 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/readableLabels.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/multipleLanguages.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/multipleLanguages.ttl")), "Measure")) AS ?endpointMultipleLanguagesMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX powder-s: <http://www.w3.org/2007/05/powder-s#>
+            PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl>
+            PREFIX schema: <https://schema.org/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointMultipleLanguagesMeasurement .
                     ?endpointMultipleLanguagesMeasurement a dqv:QualityMeasurement ;
@@ -571,6 +732,23 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/uriPattern.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/uriPattern.ttl")), "Measure")) AS ?endpointUriPatternMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointUriPatternMeasurement .
                     ?endpointUriPatternMeasurement a dqv:QualityMeasurement ;
@@ -603,6 +781,23 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/uriPattern.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/uriPattern.ttl")), "Measure")) AS ?endpointUriPatternMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointUriPatternMeasurement .
                     ?endpointUriPatternMeasurement a dqv:QualityMeasurement ;
@@ -637,6 +832,23 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/coolUri.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/coolUri.ttl")), "Measure")) AS ?endpointCoolUriMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointCoolUriMeasurement .
                     ?endpointCoolUriMeasurement a dqv:QualityMeasurement ;
@@ -669,6 +881,23 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/coolUri.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/coolUri.ttl")), "Measure")) AS ?endpointCoolUriMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointCoolUriMeasurement .
                     ?endpointCoolUriMeasurement a dqv:QualityMeasurement ;
@@ -704,6 +933,24 @@
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/indicatesUsedVocabularies.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/indicatesUsedVocabularies.ttl")), "Measure")) AS ?endpointIndicatesUsedVocabulariesMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointIndicatesUsedVocabulariesMeasurement .
                     ?endpointIndicatesUsedVocabulariesMeasurement a dqv:QualityMeasurement ;
@@ -754,17 +1001,36 @@
         ]
     ) ;
     kgi:onFailure (
-        [ mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX void: <http://rdfs.org/ns/void#>
             INSERT {
                 GRAPH ?metadataDescriptionGraph {
                     ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/indicatesUsedVocabularies.ttl#activity> .
                     <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/provenance.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/indicatesUsedVocabularies.ttl> ;
                         prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
                 }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/check/indicatesUsedVocabularies.ttl")), "Measure")) AS ?endpointIndicatesUsedVocabulariesMeasurement)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [ 
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription dqv:hasQualityMeasurement ?endpointIndicatesUsedVocabulariesMeasurement .
                     ?endpointIndicatesUsedVocabulariesMeasurement a dqv:QualityMeasurement ;

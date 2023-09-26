@@ -65,7 +65,7 @@ SELECT DISTINCT ?kg ?endpointUrl WHERE {
 
 function dataTreatment() {
     if (!fs.existsSync(resultFilename)) {
-        let SPARQLqueryResultPromise: Promise<Sparql.SPARQLJSONResult>;;
+        let SPARQLqueryResultPromise: Promise<Sparql.SPARQLJSONResult>;
         if (!fs.existsSync(result_Indegx)) {
             SPARQLqueryResultPromise = Sparql.sparqlQueryPromise(localEndpointUrl, endpointQuery).then((sparqlResults) => {
                 Global.writeFile(result_Indegx, JSON.stringify(sparqlResults));
