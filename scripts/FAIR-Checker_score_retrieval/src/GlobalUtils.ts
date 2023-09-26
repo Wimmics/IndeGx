@@ -10,6 +10,7 @@ export let maxConccurentQueries = 300;
 export let delayMillisecondsTimeForConccurentQuery = 1000
 export let delayMillisecondsBetweenIterativePromises = 0
 
+
 export type JSONValue =
     | string
     | number
@@ -156,7 +157,7 @@ export function fetchPOSTPromise(url, query = "", header: Record<string, string>
     return fetchPromise(url, header, "POST", query);
 }
 
-export function fetchJSONPromise(url, otherHeaders: Record<string, string> = {}): Promise<any> {
+export function fetchJSONPromise(url, otherHeaders: Record<string, string> = {}): Promise<JSONValue> {
     let header = {};
     header['accept'] = 'application/json';
     Object.keys(otherHeaders).forEach(key => {
