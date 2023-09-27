@@ -44,7 +44,8 @@ if (options.help) {
 type ConfigType = {
     manifest: string,
     catalog: string,
-    post: string,
+    post?: string,
+    pre?: string,
     nbFetchRetries: number,
     millisecondsBetweenRetries: number,
     maxConccurentQueries: number,
@@ -54,8 +55,7 @@ type ConfigType = {
     outputFile: string,
     manifestJSON: string,
     postManifestJSON: string,
-    queryLog?: boolean,
-    data?: string
+    queryLog?: boolean
 }
 
 let currentConfig: ConfigType = config; //[options.config];
@@ -89,14 +89,14 @@ SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
 let initPromise = Promise.resolve();
-if (currentConfig.data !== undefined) {
-    let data = currentConfig.data;
-    let loadDataQueryString = "LOAD <" + data + ">";
-    Logger.info("Loading data", data);
-    initPromise = sendUpdate(coreseServerUrl, loadDataQueryString, data).then(() => {
-        Logger.info("Data loaded");
-    }).catch(error => {
-        Logger.error("Error loading data", error);
+if (currentConfig.pre !== undefined) {
+    Logger.info("Reading pre-treatment manifest tree")
+    let premanifestRoot = currentConfig.pre;
+    initPromise = readRules(premanifestRoot).then(premanifest => {
+        Logger.info("Pre-treatment manifest tree read")
+        return applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
+            Logger.info("Pre treatment ends");
+        })
     })
 }
 
