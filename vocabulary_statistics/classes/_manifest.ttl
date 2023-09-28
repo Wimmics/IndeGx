@@ -80,8 +80,8 @@
                 FILTER( isIRI(?elem))
                 
                 SERVICE $rawEndpointUrl {
+                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     {
-                        VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                         ?elem a ?type .
                         VALUES ?type {
                             owl:Class
