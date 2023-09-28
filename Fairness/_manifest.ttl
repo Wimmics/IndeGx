@@ -42,17 +42,7 @@
                         UNION { ?kg a schema:Dataset }
                         UNION { ?kg a sd:Dataset }
                         UNION { ?kg a dataid:Dataset }
-
-                        # is linked directly or not to the endpoint
-                        { ?kg ?endpointLink $rawEndpointUrl . }
-                        UNION {?kg dcat:accessService ?service .
-                            ?service dcat:endpointURL $rawEndpointUrl .  }
-                        UNION {?kg dcat:accessService ?service .
-                            ?service sd:endpoint $rawEndpointUrl . }
-                        UNION {?service dcat:servesDataset ?kg .
-                            ?service dcat:endpointURL $rawEndpointUrl . }
-                        UNION {?service dcat:servesDataset ?kg .
-                            ?service sd:endpoint $rawEndpointUrl . }
+                        
                         ?kg ?p ?o .
                     }
                     UNION {
@@ -216,17 +206,6 @@
                     UNION { ?kg a schema:Dataset }
                     UNION { ?kg a sd:Dataset }
                     UNION { ?kg a dataid:Dataset }
-
-                    # is linked directly or not to the endpoint
-                    { ?kg ?endpointLink $rawEndpointUrl . }
-                    UNION {?kg dcat:accessService ?service .
-                           ?service dcat:endpointURL $rawEndpointUrl .  }
-                    UNION {?kg dcat:accessService ?service .
-                           ?service sd:endpoint $rawEndpointUrl . }
-                    UNION {?service dcat:servesDataset ?kg .
-                           ?service dcat:endpointURL $rawEndpointUrl . }
-                    UNION {?service dcat:servesDataset ?kg .
-                           ?service sd:endpoint $rawEndpointUrl . }
                 }
                 FILTER(REGEX(STR($rawEndpointUrl), "sparql/?$", "i"))
                 BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
@@ -252,17 +231,6 @@
                     UNION { ?kg a schema:Dataset }
                     UNION { ?kg a sd:Dataset }
                     UNION { ?kg a dataid:Dataset }
-
-                    # is linked directly or not to the endpoint
-                    { ?kg ?endpointLink $rawEndpointUrl . }
-                    UNION {?kg dcat:accessService ?service .
-                           ?service dcat:endpointURL $rawEndpointUrl .  }
-                    UNION {?kg dcat:accessService ?service .
-                           ?service sd:endpoint $rawEndpointUrl . }
-                    UNION {?service dcat:servesDataset ?kg .
-                           ?service dcat:endpointURL $rawEndpointUrl . }
-                    UNION {?service dcat:servesDataset ?kg .
-                           ?service sd:endpoint $rawEndpointUrl . }
                 }
                 FILTER(REGEX(STR($rawEndpointUrl), "sparql/?$", "i"))
                 BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
