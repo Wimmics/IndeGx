@@ -11,40 +11,12 @@
         <../init.ttl>
     ) ;
     mf:entries (
-        <propertyUsage.ttl>
         <datasetOccurence.ttl>
         <datasetOccurenceCount.ttl>
     ) .
 
-<propertyUsage.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            # Creating the ontology element description of each property
-            mf:action """
-            prefix voaf: <http://purl.org/vocommons/voaf#>
-            prefix kgi: <http://ns.inria.fr/kg/index#>
-            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-            prefix prov: <http://www.w3.org/ns/prov#>
-            prefix dcat: <http://www.w3.org/ns/dcat#>
-            prefix void: <http://rdfs.org/ns/void#>
-            prefix owl: <http://www.w3.org/2002/07/owl#>
-            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-
-            INSERT {
-                ?elem voaf:reusedByDatasets 0 .
-            }
-            WHERE {
-                ?elem a rdf:Property .
-                FILTER( isIRI(?elem) )
-            }
-            """
-        ]
-    ) .
-
 <datasetOccurence.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
-        <propertyUsage.ttl>
     ) ;
     kgi:onSuccess (
         [
@@ -70,7 +42,11 @@
                     ?propertyPartition void:property ?elem ;
                 }
             }
-            WHERE {                
+            WHERE {
+                FILTER( EXISTS {
+                    kgi: sd:namedGraph $rawEndpointUrl .
+                })
+
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem))
 
@@ -127,6 +103,10 @@
                     voaf:occurrences ?nbTriples .
             }
             WHERE {
+                FILTER( EXISTS {
+                    kgi: sd:namedGraph $rawEndpointUrl .
+                })
+
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem))
 
