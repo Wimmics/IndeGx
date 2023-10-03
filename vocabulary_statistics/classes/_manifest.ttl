@@ -7,15 +7,15 @@
 
 
 <> a mf:Manifest ;
-    kgi:requiredAssets (
-        <../init.ttl>
-    ) ;
     mf:entries (
         <datasetOccurence.ttl>
         <datasetOccurenceCount.ttl>
     ) .
 
 <datasetOccurence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <../init.ttl>
+    ) ;
     kgi:onSuccess (
         [
             # Creating the occurences object of each property in each dataset
