@@ -64,15 +64,17 @@
                     voaf:reusedByDatasets ?nbUsedByDatasets .
                 ?elemDatasetOccurence a voaf:DatasetOccurences ;
                     voaf:inDataset $rawEndpointUrl .
-            }
-            WHERE {
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?elem ;
                 }
-                
+            }
+            WHERE {                
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem))
+
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
 
                 SERVICE $rawEndpointUrl {
                     values ?elem { undef } # Fix for better binding by Corese (Magic ?)
@@ -88,12 +90,7 @@
             DELETE {
                 ?elem voaf:reusedByDatasets ?occurencesLow .
             } 
-            WHERE {
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint $rawEndpointUrl .
-                }
-                
+            WHERE {                
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem) )
                 
@@ -130,11 +127,6 @@
                     voaf:occurrences ?nbTriples .
             }
             WHERE {
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint $rawEndpointUrl .
-                }
-                
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem))
 
@@ -154,19 +146,15 @@
                 ?elem voaf:reusedByDatasets ?occurencesLow .
             } 
             WHERE {
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint $rawEndpointUrl .
-                }
+
+                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
+                    voaf:occurrences ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
                 
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem) )
 
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-
-                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
-                    voaf:occurrences ?occurencesHigh .
-                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]

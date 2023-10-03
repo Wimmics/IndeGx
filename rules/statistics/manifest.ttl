@@ -1137,6 +1137,7 @@
             INSERT {
                 GRAPH ?curatedDescriptionGraph {
                     ?datasetDescription void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?p ;
                 }
             }
             WHERE {
