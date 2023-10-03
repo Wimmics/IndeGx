@@ -16,8 +16,6 @@
     ) .
 
 <datasetOccurence.ttl> a mf:ManifestEntry ;
-    kgi:requiredAssets (
-    ) ;
     kgi:onSuccess (
         [
             # Creating the occurences object of each property in each dataset
@@ -74,20 +72,6 @@
                 }
                         
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            };
-            DELETE {
-                ?elem voaf:reusedByDatasets ?occurencesLow .
-            } 
-            WHERE {
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint $rawEndpointUrl .
-                }
-                
-                ?elem a owl:Class ;
-                    voaf:reusedByDatasets ?occurencesLow ;
-                    voaf:reusedByDatasets ?occurencesHigh .
-                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]
@@ -144,20 +128,6 @@
                 BIND( IF( EXISTS {
                     ?elem voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbEntities, ?nbEntities) AS ?nbDatasetOccurences )
-            };
-            DELETE {
-                ?elem voaf:reusedByDatasets ?occurencesLow .
-            } 
-            WHERE {
-
-                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
-                    voaf:occurrences ?occurencesHigh .
-                FILTER( ?occurencesLow < ?occurencesHigh )
-
-                ?elem a owl:Class .
-                FILTER( isIRI(?elem))
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-
             }
             """
         ]
