@@ -7,44 +7,14 @@
 
 
 <> a mf:Manifest ;
-    kgi:requiredAssets (
-        <../init.ttl>
-    ) ;
     mf:entries (
-        <propertyUsage.ttl>
         <datasetOccurence.ttl>
         <datasetOccurenceCount.ttl>
     ) .
 
-<propertyUsage.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            # Creating the ontology element description of each property
-            mf:action """
-            prefix voaf: <http://purl.org/vocommons/voaf#>
-            prefix kgi: <http://ns.inria.fr/kg/index#>
-            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-            prefix prov: <http://www.w3.org/ns/prov#>
-            prefix dcat: <http://www.w3.org/ns/dcat#>
-            prefix void: <http://rdfs.org/ns/void#>
-            prefix owl: <http://www.w3.org/2002/07/owl#>
-            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-
-            INSERT {
-                ?elem voaf:reusedByDatasets 0 .
-            }
-            WHERE {
-                ?elem a rdf:Property .
-                FILTER( isIRI(?elem) )
-            }
-            """
-        ]
-    ) .
-
 <datasetOccurence.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
-        <propertyUsage.ttl>
+        <../init.ttl>
     ) ;
     kgi:onSuccess (
         [
@@ -63,39 +33,33 @@
                 ?elem voaf:usageInDataset ?elemDatasetOccurence ;
                     voaf:reusedByDatasets ?nbUsedByDatasets .
                 ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                    voaf:inDataset ?endpointUrl .
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?elem ;
+                }
             }
             WHERE {
+                FILTER( EXISTS {
+                    kgi: sd:namedGraph $rawEndpointUrl .
+                })
 
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint ?endpointUrl .
-                }
-                
                 ?elem a rdf:Property .
-                FILTER( isIRI(?elem) && BOUND(?elem))
+                FILTER( isIRI(?elem))
 
-                SERVICE ?endpointUrl {
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
+
+                SERVICE $rawEndpointUrl {
+                    values ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     FILTER( EXISTS {
                         ?s ?elem ?o .
                     } )
                 }
 
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 ?elem voaf:reusedByDatasets ?occurences .
                 BIND( ?occurences + 1 AS ?nbUsedByDatasets )
-            };
-            DELETE {
-                ?elem voaf:reusedByDatasets ?occurencesLow .
-            } 
-            WHERE {
-                
-                ?elem a rdf:Property .
-                FILTER( isIRI(?elem) )
-                
-                ?elem voaf:reusedByDatasets ?occurencesLow ;
-                    voaf:reusedByDatasets ?occurencesHigh .
-                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]
@@ -126,42 +90,24 @@
                     voaf:occurrences ?nbTriples .
             }
             WHERE {
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint ?endpointUrl .
-                }
-                
-                ?elem a rdf:Property .
-                FILTER( isIRI(?elem) && BOUND(?elem))
+                FILTER( EXISTS {
+                    kgi: sd:namedGraph $rawEndpointUrl .
+                })
 
-                SERVICE ?endpointUrl {
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem))
+
+                SERVICE $rawEndpointUrl {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {
+                        VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                         ?s ?elem ?o .
                     } GROUP BY ?elem
                 }
 
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
                     ?elem voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbTriples, ?nbTriples) AS ?nbDatasetOccurences )
-            };
-            DELETE {
-                ?elem voaf:reusedByDatasets ?occurencesLow .
-            } 
-            WHERE {
-                kgi: sd:namedGraph ?endpointGraph .
-                GRAPH ?endpointGraph {
-                    ?endpointGraph void:sparqlEndpoint ?endpointUrl .
-                }
-                
-                ?elem a rdf:Property .
-                FILTER( isIRI(?elem) )
-
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR(?endpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-
-                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
-                    voaf:occurrences ?occurencesHigh .
-                FILTER( ?occurencesLow < ?occurencesHigh )
             }
             """
         ]

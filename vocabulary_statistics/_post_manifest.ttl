@@ -7,4 +7,108 @@
     mf:include (
     ) ;
     mf:entries (
+        <cleanRedundantData.ttl>
+    ) .
+
+
+<cleanRedundantData.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {
+                ?elem a owl:Class ;
+                    voaf:reusedByDatasets ?occurencesLow ;
+                    voaf:reusedByDatasets ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
+            }"""
+        ]
+        [
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            DELETE {
+                ?elemDatasetOccurence voaf:occurrences ?occurencesLow .
+            } 
+            WHERE {
+
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
+
+                ?elem voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
+                    voaf:occurrences ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
+
+            }"""
+        ]
+        [
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            DELETE {
+                ?elemDatasetOccurence voaf:occurrences ?occurencesLow .
+            } 
+            WHERE {
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem) )
+
+                ?elem voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence voaf:occurrences ?occurencesLow ;
+                    voaf:occurrences ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
+            }"""
+        ]
+        [
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            DELETE {
+                ?elem voaf:reusedByDatasets ?occurencesLow .
+            } 
+            WHERE {                
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem) )
+                
+                ?elem voaf:reusedByDatasets ?occurencesLow ;
+                    voaf:reusedByDatasets ?occurencesHigh .
+                FILTER( ?occurencesLow < ?occurencesHigh )
+            }"""
+        ]
     ) .
