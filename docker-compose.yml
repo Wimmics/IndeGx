@@ -18,3 +18,5 @@ services:
       - ./input:/input
       - ./output:/output
       - ./config:/indegx/config
+    environment:
+      - INDEGX_ARGS=${INDEGX_ARGS}

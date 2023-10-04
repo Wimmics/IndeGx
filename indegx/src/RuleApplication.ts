@@ -11,6 +11,12 @@ import { EndpointObject } from "./CatalogInput.js";
 import sparqljs from "sparqljs";
 import { AssetTracker } from "./AssetTracker.js";
 
+let resilienceMode = false;
+
+export function setResilienceMode(mode: boolean) {
+    resilienceMode = mode;
+}
+
 export function applyRuleTree(endpointObject: EndpointObject, manifestObject: RuleTree.Manifest, postMode: boolean = false): Promise<void> {
     if (AssetTracker.getInstance().hasApplicationPromise(manifestObject.uri, endpointObject.endpoint)) {
         return AssetTracker.getInstance().getApplicationPromise(manifestObject.uri, endpointObject.endpoint);

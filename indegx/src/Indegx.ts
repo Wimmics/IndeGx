@@ -1,22 +1,24 @@
 import { coreseServerUrl, sendUpdate } from "./CoreseInterface.js";
 import * as GlobalUtils from "./GlobalUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";
-import { applyRuleTree } from "./RuleApplication.js";
+import * as RuleApplication from "./RuleApplication.js";
 import { readRules } from "./RuleCreation.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
 import { writeIndex } from "./IndexUtils.js";
 import * as ReportUtils from "./ReportUtils.js";
-import { config } from 'node-config-ts';
 import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
+import { readFileSync } from 'node:fs';
 
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
+    { name: 'config', alias: 'c', type: String, defaultOption: "config/default.json" },
 ]
 
 type Option = {
-    help?: boolean
+    help?: boolean,
+    config?: string,
 }
 
 const options: Option = commandLineArgs(optionDefinitions)
@@ -31,14 +33,30 @@ if (options.help) {
             optionList: [
                 {
                     name: 'help',
+                    alias: 'h',
+                    type: Boolean,
                     description: 'Print this usage guide.'
+                },
+                {
+                    name: 'config',
+                    alias: 'c',
+                    type: String,
+                    typeLabel: '{underline file}',
+                    description: 'Configuration file, in JSON format. Default is config/default.json.'
                 }
             ]
+        },
+        {
+          content: 'Project home: {underline https://github.com/Wimmics/IndeGx}'
         }
     ]
     const usage = commandLineUsage(sections)
     console.info(usage)
     process.exit()
+}
+let configFilename: string = "config/default.json";
+if(options.config !== undefined) {
+    configFilename = options.config;
 }
 
 type ConfigType = {
@@ -55,13 +73,14 @@ type ConfigType = {
     outputFile: string,
     manifestJSON: string,
     postManifestJSON: string,
-    queryLog?: boolean
+    queryLog?: boolean, // default true, log queries in the index if true
+    resilience?: boolean, // default false, store the result of the processing of each endpoint in a temporary file if true
 }
 
-let currentConfig: ConfigType = config; //[options.config];
+let currentConfig: ConfigType = JSON.parse(readFileSync(configFilename).toString()); // default config
 if (currentConfig === undefined) {
-    Logger.error("No config found in " + config);
-    throw new Error("No config found in " + config);
+    Logger.error("No config found in " + configFilename);
+    throw new Error("No config found in " + configFilename);
 }
 
 Logger.info("Using config", currentConfig);
@@ -76,7 +95,11 @@ let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
 let logFile: string = currentConfig.logFile;
 let queryLog: boolean = currentConfig.queryLog;
 if(queryLog !== undefined && ! queryLog) {
-    ReportUtils.setLogMode(false);
+    ReportUtils.setLogMode(queryLog);
+}
+let resilience: boolean = currentConfig.resilience;
+if(resilience !== undefined && resilience) {
+    RuleApplication.setResilienceMode(resilience);
 }
 let outputFile: string = currentConfig.outputFile;
 let manifestTreeFile: string = currentConfig.manifestJSON;
@@ -94,7 +117,7 @@ if (currentConfig.pre !== undefined) {
     let premanifestRoot = currentConfig.pre;
     initPromise = readRules(premanifestRoot).then(premanifest => {
         Logger.info("Pre-treatment manifest tree read")
-        return applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
+        return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
             Logger.info("Pre treatment ends");
         })
     })
@@ -114,7 +137,7 @@ initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
         Logger.info("Catalog read")
         endpointObjectList.forEach(endpointObject => {
             Logger.info("Treating endpoint", endpointObject.endpoint);
-            endpointPool.push(applyRuleTree(endpointObject, manifest).then(() => {
+            endpointPool.push(RuleApplication.applyRuleTree(endpointObject, manifest).then(() => {
                 Logger.info("Endpoint", endpointObject.endpoint, "treated");
                 return;
             }).catch(error => {
@@ -139,7 +162,7 @@ initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
                 GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
             }
             Logger.info("Post treatment starts");
-            return applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
+            return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
                 Logger.info("Post treatment ends");
             })
         })
