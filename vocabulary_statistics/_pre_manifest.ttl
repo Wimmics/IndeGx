@@ -22,7 +22,7 @@
         ]
     ) .
 
-<classUsage.ttl> a mf:ManifestEntry ;
+<classes/classUsage.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
         <loadLOV.ttl>
     ) ;
@@ -53,7 +53,7 @@
         ]
     ) .
 
-<propertyUsage.ttl> a mf:ManifestEntry ;
+<properties/propertyUsage.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
         <loadLOV.ttl>
     ) ;
