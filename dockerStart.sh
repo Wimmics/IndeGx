@@ -5,4 +5,4 @@ sleep 20
 cd /indegx
 
 # Start the IndeGx app
-npm run run
+node src/Indegx.js $INDEGX_ARGS

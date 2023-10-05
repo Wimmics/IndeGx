@@ -1,22 +1,26 @@
 import { coreseServerUrl, sendUpdate } from "./CoreseInterface.js";
 import * as GlobalUtils from "./GlobalUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";
-import { applyRuleTree } from "./RuleApplication.js";
+import * as RuleApplication from "./RuleApplication.js";
 import { readRules } from "./RuleCreation.js";
 import { readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
-import { writeIndex } from "./IndexUtils.js";
+import { sendStoreContentToIndex, writeIndex } from "./IndexUtils.js";
 import * as ReportUtils from "./ReportUtils.js";
-import { config } from 'node-config-ts';
 import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
+import { readFileSync, accessSync } from 'node:fs';
+import { createStore, loadRDFFile } from "./RDFUtils.js";
 
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
+    { name: 'resume', alias: 'r', type: Boolean },
+    { name: 'config', alias: 'c', type: String, defaultOption: "config/default.json" },
 ]
 
 type Option = {
-    help?: boolean
+    help?: boolean,
+    config?: string,
 }
 
 const options: Option = commandLineArgs(optionDefinitions)
@@ -31,15 +35,39 @@ if (options.help) {
             optionList: [
                 {
                     name: 'help',
+                    alias: 'h',
+                    type: Boolean,
                     description: 'Print this usage guide.'
+                },
+                {
+                    name: 'resume',
+                    alias: 'r',
+                    type: Boolean,
+                    description: 'Will reuse the files in the output/tmp/ folders as starting data and test at for each rule and each endpoint if it needs to be re-applied. Useless if query logging has been disabled.'
+                },
+                {
+                    name: 'config',
+                    alias: 'c',
+                    type: String,
+                    typeLabel: '{underline file}',
+                    description: 'Configuration file, in JSON format. Default is config/default.json.'
                 }
             ]
+        },
+        {
+            content: 'Project home: {underline https://github.com/Wimmics/IndeGx}'
         }
     ]
     const usage = commandLineUsage(sections)
     console.info(usage)
     process.exit()
 }
+let configFilename: string = "config/default.json";
+if (options.config !== undefined) {
+    configFilename = options.config;
+}
+
+let resumeMode: boolean = false;
 
 type ConfigType = {
     manifest: string,
@@ -53,18 +81,19 @@ type ConfigType = {
     defaultQueryTimeout: number,
     logFile: string,
     outputFile: string,
-    manifestJSON: string,
-    postManifestJSON: string,
-    queryLog?: boolean
+    manifestJSON?: string,
+    postManifestJSON?: string,
+    queryLog?: boolean, // default true, log queries in the index if true. Incompatible with resilience.
+    resilience?: boolean, // default false, store the result of the current state of the index in a temporary file if true. Incompatible with disabling query logging.
 }
 
-let currentConfig: ConfigType = config; //[options.config];
+let currentConfig: ConfigType = JSON.parse(readFileSync(configFilename).toString()); // default config
 if (currentConfig === undefined) {
-    Logger.error("No config found in " + config);
-    throw new Error("No config found in " + config);
+    Logger.error("No configuration found in " + configFilename);
+    throw new Error("No configuration found in " + configFilename);
 }
 
-Logger.info("Using config", currentConfig);
+Logger.info("Using configuration", currentConfig);
 let rootManifestFilename: string = currentConfig.manifest;
 let catalog: string = currentConfig.catalog;
 let post: string = currentConfig.post;
@@ -75,8 +104,15 @@ let delayMillisecondsTimeForConccurentQuery: number = currentConfig.delayMillise
 let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
 let logFile: string = currentConfig.logFile;
 let queryLog: boolean = currentConfig.queryLog;
-if(queryLog !== undefined && ! queryLog) {
-    ReportUtils.setLogMode(false);
+if (queryLog !== undefined) {
+    ReportUtils.setLogMode(queryLog);
+}
+let resilience: boolean = currentConfig.resilience;
+if (resilience !== undefined) {
+    RuleApplication.setResilienceMode(resilience);
+}
+if(resilience && !queryLog){
+    Logger.error("Resilience mode is useless without query logging. This is probably a mistake in the configuration file.");
 }
 let outputFile: string = currentConfig.outputFile;
 let manifestTreeFile: string = currentConfig.manifestJSON;
@@ -89,14 +125,42 @@ SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
 let initPromise = Promise.resolve();
+
+if (resumeMode) {
+    Logger.info("Resuming from previous execution");
+    let resumingStore = createStore();
+
+    if (accessSync("tmp/main/indeg.trig") !== undefined) {
+        initPromise = loadRDFFile("tmp/main/indeg.trig", resumingStore).then(() => {
+            return sendStoreContentToIndex(resumingStore).finally(() => {
+                resumingStore.close();
+                return;
+            });
+        })
+    } else if (accessSync("tmp/pre/indeg.trig") !== undefined) {
+        initPromise = loadRDFFile("tmp/pre/indeg.trig", resumingStore).then(() => {
+            return sendStoreContentToIndex(resumingStore).finally(() => {
+                resumingStore.close();
+                return;
+            });
+        })
+    }
+}
+
 if (currentConfig.pre !== undefined) {
     Logger.info("Reading pre-treatment manifest tree")
     let premanifestRoot = currentConfig.pre;
-    initPromise = readRules(premanifestRoot).then(premanifest => {
+    initPromise.then(() => readRules(premanifestRoot).then(premanifest => {
         Logger.info("Pre-treatment manifest tree read")
-        return applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
+        return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
             Logger.info("Pre treatment ends");
         })
+    })).finally(() => {
+        if (resilience !== undefined && resilience) {
+            return writeIndex("tmp/pre/indeg.trig")
+        } else {
+            return;
+        }
     })
 }
 
@@ -114,7 +178,7 @@ initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
         Logger.info("Catalog read")
         endpointObjectList.forEach(endpointObject => {
             Logger.info("Treating endpoint", endpointObject.endpoint);
-            endpointPool.push(applyRuleTree(endpointObject, manifest).then(() => {
+            endpointPool.push(RuleApplication.applyRuleTree(endpointObject, manifest).then(() => {
                 Logger.info("Endpoint", endpointObject.endpoint, "treated");
                 return;
             }).catch(error => {
@@ -129,6 +193,12 @@ initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
         return Promise.allSettled(endpointPool).then(() => {
             Logger.info("All endpoints treated")
         });
+    }).finally(() => {
+        if (resilience !== undefined && resilience) {
+            return writeIndex("tmp/main/indeg.trig")
+        } else {
+            return;
+        }
     })
 }).then(() => {
     if (post !== undefined && post !== "") {
@@ -139,7 +209,7 @@ initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
                 GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
             }
             Logger.info("Post treatment starts");
-            return applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
+            return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
                 Logger.info("Post treatment ends");
             })
         })
