@@ -81,8 +81,8 @@ type ConfigType = {
     defaultQueryTimeout: number,
     logFile: string,
     outputFile: string,
-    manifestJSON: string,
-    postManifestJSON: string,
+    manifestJSON?: string,
+    postManifestJSON?: string,
     queryLog?: boolean, // default true, log queries in the index if true. Incompatible with resilience.
     resilience?: boolean, // default false, store the result of the current state of the index in a temporary file if true. Incompatible with disabling query logging.
 }
@@ -130,15 +130,15 @@ if (resumeMode) {
     Logger.info("Resuming from previous execution");
     let resumingStore = createStore();
 
-    if (accessSync("tmp/main/" + outputFile) !== undefined) {
-        initPromise = loadRDFFile("tmp/main/" + outputFile, resumingStore).then(() => {
+    if (accessSync("tmp/main/indeg.trig") !== undefined) {
+        initPromise = loadRDFFile("tmp/main/indeg.trig", resumingStore).then(() => {
             return sendStoreContentToIndex(resumingStore).finally(() => {
                 resumingStore.close();
                 return;
             });
         })
-    } else if (accessSync("tmp/pre/" + outputFile) !== undefined) {
-        initPromise = loadRDFFile("tmp/pre/" + outputFile, resumingStore).then(() => {
+    } else if (accessSync("tmp/pre/indeg.trig") !== undefined) {
+        initPromise = loadRDFFile("tmp/pre/indeg.trig", resumingStore).then(() => {
             return sendStoreContentToIndex(resumingStore).finally(() => {
                 resumingStore.close();
                 return;
@@ -157,7 +157,7 @@ if (currentConfig.pre !== undefined) {
         })
     })).finally(() => {
         if (resilience !== undefined && resilience) {
-            return writeIndex("tmp/pre/" + outputFile)
+            return writeIndex("tmp/pre/indeg.trig")
         } else {
             return;
         }
@@ -195,7 +195,7 @@ initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
         });
     }).finally(() => {
         if (resilience !== undefined && resilience) {
-            return writeIndex("tmp/main/" + outputFile)
+            return writeIndex("tmp/main/indeg.trig")
         } else {
             return;
         }
