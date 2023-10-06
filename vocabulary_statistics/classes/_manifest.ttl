@@ -44,6 +44,7 @@
                 }
             }
             WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?mode=trap&binding=filter&focus=elem&skip=occurences&slice=10" ) AS ?editedEndpointUrl)
                 FILTER( EXISTS {
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
@@ -56,7 +57,7 @@
 
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "ClassPartition")) AS ?classPartition)
                 
-                SERVICE $rawEndpointUrl {
+                SERVICE ?editedEndpointUrl {
                     VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     FILTER( EXISTS {
                         {
@@ -104,6 +105,8 @@
                     voaf:occurrences ?nbEntities .
             }
             WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?mode=trap&binding=filter&focus=elem&skip=occurences&slice=10" ) AS ?editedEndpointUrl)
+
                 FILTER( EXISTS {
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
@@ -111,17 +114,17 @@
                 ?elem a owl:Class .
                 FILTER( isIRI(?elem))
 
-                SERVICE $rawEndpointUrl {
-                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
-                    {
-                        SELECT ?elem (count(?instance) AS ?nbEntities)
-                        WHERE {
-                            SELECT DISTINCT ?elem ?instance
-                            WHERE {
-                                ?instance a ?elem
+                {
+                    SELECT ?elem (count(DISTINCT ?instance) AS ?nbEntities) {
+                        SERVICE ?editedEndpointUrl {
+                            VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                            {
+                                SELECT DISTINCT ?elem ?instance {
+                                    ?instance a ?elem
+                                }
                             }
-                        } GROUP BY ?elem
-                    }
+                        }
+                    } GROUP BY ?elem
                 }
 
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )

@@ -41,6 +41,8 @@
                 }
             }
             WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?mode=trap&binding=filter&focus=elem&skip=occurences&slice=10" ) AS ?editedEndpointUrl)
+
                 FILTER( EXISTS {
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
@@ -50,7 +52,7 @@
 
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
 
-                SERVICE $rawEndpointUrl {
+                SERVICE ?editedEndpointUrl {
                     values ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     FILTER( EXISTS {
                         ?s ?elem ?o .
@@ -90,6 +92,8 @@
                     voaf:occurrences ?nbTriples .
             }
             WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?mode=trap&binding=filter&focus=elem&slice=10" ) AS ?editedEndpointUrl)
+
                 FILTER( EXISTS {
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
@@ -97,10 +101,12 @@
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem))
 
-                SERVICE $rawEndpointUrl {
+                {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {
-                        VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
-                        ?s ?elem ?o .
+                        SERVICE ?editedEndpointUrl {
+                            VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                            ?s ?elem ?o .
+                        }
                     } GROUP BY ?elem
                 }
 
