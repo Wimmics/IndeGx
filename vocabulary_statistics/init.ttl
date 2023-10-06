@@ -8,8 +8,6 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <_manifest.ttl> ;
     dcterms:description """Creates a graph for each endpoint""" ;
-    kgi:query """
-    SELECT * {
+    kgi:query """ASK {
         ?s ?p ?o
-    } LIMIT 1
-    """  .
+    }"""  .
