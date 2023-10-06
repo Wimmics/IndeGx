@@ -66,23 +66,34 @@ function replacePatternPlaceholders(template: string, endpointUrl: string, query
     return result;
 }
 
-export function sendUpdateWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
+export function sendUpdateWithTraceHandling(endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
     return sendQueryWithTraceHandling(Corese.sendUpdate, endpointUrl, queryString, baseURI, entryObject, startTime, timeout);
 }
 
-export function sendConstructWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout): Promise<$rdf.Store> {
+export function sendConstructWithTraceHandling(endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout): Promise<$rdf.Store> {
     return sendQueryWithTraceHandling(Corese.sendConstruct, endpointUrl, queryString, baseURI, entryObject, startTime, timeout).finally(() => "");
 }
 
-export function sendSelectWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
+export function sendSelectWithTraceHandling(endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
     return sendQueryWithTraceHandling(Corese.sendSelect, endpointUrl, queryString, baseURI, entryObject, startTime, timeout).finally(() => { });
 }
 
-export function sendAskWithTraceHandling(endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
+export function sendAskWithTraceHandling(endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number = SPARQLUtils.defaultQueryTimeout) {
     return sendQueryWithTraceHandling(Corese.sendAsk, endpointUrl, queryString, baseURI, entryObject, startTime, timeout).finally(() => false);
 }
 
-function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: string, d?: number) => Promise<any>, endpointUrl: string, queryString: string, baseURI:string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number): Promise<any> {
+/**
+ * Sends a query to the specified endpoint URL with the given query string and base URI, and handles success and failure reports.
+ * @param queryFunction - The function to use for sending the query.
+ * @param endpointUrl - The URL of the endpoint to send the query to.
+ * @param queryString - The query string to send.
+ * @param baseURI - The base URI to use for the query.
+ * @param entryObject - The manifest entry object for the query.
+ * @param startTime - The start time of the query.
+ * @param timeout - The timeout for the query.
+ * @returns A promise that resolves with the query results, or rejects with an error.
+ */
+function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: string, d?: number) => Promise<any>, endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number): Promise<any> {
     return queryFunction(endpointUrl, queryString, baseURI, timeout).then(results => {
         const endTime = dayjs();
         if (results === undefined || results.error !== undefined) {
@@ -104,5 +115,36 @@ function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: str
         Logger.error("Error sendQueryWithTraceHandling", error)
         const endTime = dayjs();
         return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, error);
+    })
+}
+
+/**
+ * Checks if a previous execution of a query has passed for a given endpoint URL and query string.
+ * @param endpointUrl - The URL of the SPARQL endpoint to check.
+ * @param query - The query string to check.
+ * @param baseURI - The base URI for the query.
+ * @returns A Promise that resolves to a boolean indicating whether a previous execution has passed.
+ */
+export function checkPreviousExecution(endpointUrl: string, query: String, baseURI: string): Promise<boolean> {
+    return Corese.sendAsk(Corese.coreseServerUrl, `ASK {
+        {
+            GRAPH ?g {
+                kgi:trace [
+                    earl:result [
+                        earl:outcome earl:passed ;
+                        kgi:sentQuery ${query} 
+                    ] ;
+                    earl:subject ${endpointUrl} ;
+            }
+        } UNION {
+            kgi:trace [
+                earl:result [
+                    earl:outcome earl:passed ;
+                    kgi:sentQuery ${query} 
+                ] ;
+                earl:subject ${endpointUrl} ;
+        }
+    }`, baseURI).finally(() => {
+        return Promise.resolve(false);
     })
 }

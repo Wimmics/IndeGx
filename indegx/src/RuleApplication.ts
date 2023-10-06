@@ -10,13 +10,26 @@ import { replacePlaceholders } from "./QueryRewrite.js";
 import { EndpointObject } from "./CatalogInput.js";
 import sparqljs from "sparqljs";
 import { AssetTracker } from "./AssetTracker.js";
+import { coreseServerUrl, sendAsk } from "./CoreseInterface.js";
 
 let resilienceMode = false;
 
+/**
+ * Set the resilience mode. If true, the application of a rule tree will try to pick up where it left off if it was interrupted by looking for the trace of successfull applications.
+ * @param mode 
+ */
 export function setResilienceMode(mode: boolean) {
     resilienceMode = mode;
 }
 
+/**
+ * Applies a rule tree to an endpoint object and a manifest object.
+ * 
+ * @param endpointObject - The endpoint object to apply the rule tree to.
+ * @param manifestObject - The manifest object containing the rule tree to apply.
+ * @param postMode - Whether to apply the rule tree in post mode.
+ * @returns A promise that resolves when the rule tree has been applied.
+ */
 export function applyRuleTree(endpointObject: EndpointObject, manifestObject: RuleTree.Manifest, postMode: boolean = false): Promise<void> {
     if (AssetTracker.getInstance().hasApplicationPromise(manifestObject.uri, endpointObject.endpoint)) {
         return AssetTracker.getInstance().getApplicationPromise(manifestObject.uri, endpointObject.endpoint);
@@ -78,6 +91,13 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
     }
 }
 
+/**
+ * Applies a manifest entry to an endpoint object.
+ * @param endpointObject The endpoint object to apply the manifest entry to.
+ * @param entryObject The manifest entry to apply.
+ * @param postMode A boolean indicating whether the application is in post mode.
+ * @returns A promise that resolves when the manifest entry has been applied.
+ */
 function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTree.ManifestEntry, postMode: boolean): Promise<void> {
     let requiredAssets = entryObject.requiredAssets;
     let requiredPromises = [];
@@ -180,7 +200,7 @@ function applyManifestEntry(endpointObject: EndpointObject, entryObject: RuleTre
     return result;
 }
 
-function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry, postMode): Promise<boolean> {
+function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, entryObject: RuleTree.ManifestEntry, postMode: boolean ): Promise<boolean> {
     Logger.info("Test ", entryObject.test.uri, "starting on endpoint", endpointObject.endpoint)
     let parser = new sparqljs.Parser();
     let generator = new sparqljs.Generator();
@@ -250,10 +270,10 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
 
 /**
  * Utility function for pagination. It adds the list of configured graph to the SELECT query found in a SERVICE clause, or create a SELECT query around the content of the SERVICE clause if it doesn't contain one.
- * @param endpointObject 
- * @param patterns 
- * @param inService 
- * @returns 
+ * @param endpointObject - The endpoint object containing the endpoint URL and the graphs to add.
+ * @param patterns - The set of patterns to add the graphs to.
+ * @param inService - A boolean indicating whether the patterns are in a SERVICE clause.
+ * @returns The set of patterns with the graphs added to the inner queries.
  */
 function addGraphToInnerQueries(endpointObject: EndpointObject, patterns: any[], inService: boolean = false): any[] {
     let endpointUrl = endpointObject.endpoint;
@@ -363,6 +383,14 @@ function searchForSelect(patterns: any[]): boolean {
     return result
 }
 
+/**
+ * Applies the given action to the given endpoint object and entry object.
+ * @param endpointObject The endpoint object to apply the action to.
+ * @param actionObject The action object to apply.
+ * @param entryObject The manifest entry object.
+ * @param postMode The post mode. In post mode, a service clause toward the endpoint is not added to the query when it is missing.
+ * @returns A promise that resolves when the action has been applied.
+ */
 function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Action, entryObject: RuleTree.ManifestEntry, postMode): Promise<void> {
     if (AssetTracker.getInstance().hasApplicationPromise(actionObject.uri, endpointObject.endpoint)) {
         return AssetTracker.getInstance().getApplicationPromise(actionObject.uri, endpointObject.endpoint);
