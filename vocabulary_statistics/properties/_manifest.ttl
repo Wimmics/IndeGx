@@ -41,7 +41,7 @@
                 }
             }
             WHERE {
-                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&skip=occurences&slice=10&limit=100" ) AS ?editedEndpointUrl)
+                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&skip=occurences&slice=10&limit=100&method=get" ) AS ?editedEndpointUrl)
 
                 FILTER( EXISTS {
                     kgi: sd:namedGraph $rawEndpointUrl .
@@ -92,7 +92,7 @@
                     voaf:occurrences ?nbTriples .
             }
             WHERE {
-                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&slice=10&limit=100" ) AS ?editedEndpointUrl)
+                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&slice=10&limit=100&method=get" ) AS ?editedEndpointUrl)
 
                 FILTER( EXISTS {
                     kgi: sd:namedGraph $rawEndpointUrl .
