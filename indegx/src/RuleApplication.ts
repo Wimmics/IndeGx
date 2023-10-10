@@ -430,8 +430,10 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
             if (actionObject.timeout != undefined) {
                 actionTimeout = actionObject.timeout;
             }
+
+            // Sending the query accordingly
             if (SPARQLUtils.isSparqlUpdate(queryString)) {
-                if (actionObject.pagination != undefined) {
+                if (actionObject.pagination != undefined && actionObject.pagination > 0) {
                     const pageSize = actionObject.pagination;
                     const paginatedConstructQueriesPromise = paginateUpdateQueryPromise(endpointObject, queryString, pageSize);
                     actionPool.push(paginatedConstructQueriesPromise)

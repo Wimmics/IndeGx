@@ -8,12 +8,14 @@ import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 
 export let successTemplateFilename = "templates/generationAssetApplicationSuccess.sparql";
+export let successTestTemplateFilename = "templates/generationAssetApplicationSuccessTest.sparql";
 export let failureTemplateFilename = "templates/generationAssetApplicationFailure.sparql";
 
 let logMode = true;
 
 let failurePattern = null;
 let successPattern = null;
+let successTestPattern = null;
 
 export function setLogMode(mode: boolean) {
     logMode = mode;
@@ -39,6 +41,14 @@ function getSuccessPattern(): Promise<string> {
     }
 }
 
+function getSuccessTestPattern(endpointUrl: string, queryString: string, baseURI: string): Promise<string> {
+    if (successPattern === null) {
+        return GlobalUtils.readFile(successTestTemplateFilename).then(content => { successTestPattern = replacePatternPlaceholders(content, endpointUrl, queryString); return successTestPattern })
+    } else {
+        return new Promise<string>((resolve, reject) => resolve(successTestPattern))
+    }
+}
+
 export function sendFailureReportUpdate(endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error): Promise<any> {
     if (getLogMode()) {
         return getFailurePattern().then(template => {
@@ -61,7 +71,7 @@ function sendSuccessReportUpdate(endpointUrl: string, queryString: string, baseU
     }
 }
 
-function replacePatternPlaceholders(template: string, endpointUrl: string, queryString: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, endTime: dayjs.Dayjs, error = undefined): string {
+function replacePatternPlaceholders(template: string, endpointUrl: string, queryString: string, entryObject?: RuleTree.ManifestEntry, startTime?: dayjs.Dayjs, endTime?: dayjs.Dayjs, error?): string {
     const result = Rewrite.replacePlaceholders(template, { endpointUrlString: endpointUrl, queryString: queryString, testString: entryObject.uri, startTime: startTime, endTime: endTime, reasonString: error });
     return result;
 }
@@ -125,26 +135,8 @@ function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: str
  * @param baseURI - The base URI for the query.
  * @returns A Promise that resolves to a boolean indicating whether a previous execution has passed.
  */
-export function checkPreviousExecution(endpointUrl: string, query: String, baseURI: string): Promise<boolean> {
-    return Corese.sendAsk(Corese.coreseServerUrl, `ASK {
-        {
-            GRAPH ?g {
-                kgi:trace [
-                    earl:result [
-                        earl:outcome earl:passed ;
-                        kgi:sentQuery ${query} 
-                    ] ;
-                    earl:subject ${endpointUrl} ;
-            }
-        } UNION {
-            kgi:trace [
-                earl:result [
-                    earl:outcome earl:passed ;
-                    kgi:sentQuery ${query} 
-                ] ;
-                earl:subject ${endpointUrl} ;
-        }
-    }`, baseURI).finally(() => {
+export function checkPreviousExecution(endpointUrl: string, query: string, baseURI: string): Promise<boolean> {
+    return getSuccessTestPattern(endpointUrl, query, baseURI).then(pattern => Corese.sendAsk(endpointUrl, pattern, baseURI)).finally(() => {
         return Promise.resolve(false);
     })
 }

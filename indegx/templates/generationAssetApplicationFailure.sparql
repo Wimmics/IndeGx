@@ -3,8 +3,8 @@ PREFIX earl: <http://www.w3.org/ns/earl#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 
 INSERT {
-    GRAPH ?logGraph {
-        ?logGraph kgi:trace [
+    GRAPH kgi:Logs {
+        kgi:Logs kgi:trace [
             earl:result [
                     earl:outcome earl:failed ;
                     kgi:sentQuery $query ;
