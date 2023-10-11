@@ -1,5 +1,6 @@
-@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 <> a mf:Manifest ;
     kgi:requiredAssets (
@@ -28,9 +29,8 @@
     ) ;
     kgi:onSuccess (
         [
-            # Creating the basic description of each class
-            mf:action """
-            PREFIX voaf: <http://purl.org/vocommons/voaf#>
+            rdfs:label "Creating the basic description of each class" ;
+            mf:action """PREFIX voaf: <http://purl.org/vocommons/voaf#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -48,8 +48,7 @@
             WHERE {
                 ?elem a owl:Class .
                 FILTER(isIRI(?elem))
-            }
-            """
+            }"""
         ]
     ) .
 
@@ -59,9 +58,8 @@
     ) ;
     kgi:onSuccess (
         [
-            # Creating the ontology element description of each property
-            mf:action """
-            prefix voaf: <http://purl.org/vocommons/voaf#>
+            rdfs:label "Creating the ontology element description of each property" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
             prefix kgi: <http://ns.inria.fr/kg/index#>
             prefix xsd: <http://www.w3.org/2001/XMLSchema#>
             prefix prov: <http://www.w3.org/ns/prov#>
@@ -77,7 +75,6 @@
             WHERE {
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem) )
-            }
-            """
+            }"""
         ]
     ) .

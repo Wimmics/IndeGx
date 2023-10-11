@@ -17,8 +17,7 @@
 <init.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            mf:action """
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX void: <http://rdfs.org/ns/void#>
             INSERT DATA {
@@ -26,7 +25,6 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
                 }
-            }
-            """
+            }"""
         ]
     ) .
