@@ -531,4 +531,5 @@ kgi:catalogResource  a dcat:Catalog ;
         dcat:dataset  [ void:sparqlEndpoint  <http://quantum.agroparistech.fr/graphdb/repositories/Composite_making_process> ] ;
         dcat:dataset  [ void:sparqlEndpoint  <https://data.culture.fr/thesaurus/sparql> ] ;
         dcat:dataset  [ void:sparqlEndpoint  <https://slod.fiz-karlsruhe.de/sparql> ] ;
-        dcat:dataset  [ void:sparqlEndpoint  <http://isidore.science/sparql> ] .
+        dcat:dataset  [ void:sparqlEndpoint  <http://isidore.science/sparql> ] ;
+        dcat:dataset  [ void:sparqlEndpoint  <https://yago-knowledge.org/sparql/query> ] .
