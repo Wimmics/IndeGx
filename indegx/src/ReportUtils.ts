@@ -107,12 +107,16 @@ function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: str
     return queryFunction(endpointUrl, queryString, baseURI, timeout).then(results => {
         const endTime = dayjs();
         if (results === undefined || results.error !== undefined) {
-            if (results === undefined) {
+            if (results === undefined && ( SPARQLUtils.isSparqlSelect(queryString) || SPARQLUtils.isSparqlConstruct(queryString) || SPARQLUtils.isSparqlAsk(queryString))) {
                 return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "No results returned").then(() => {
                     return results;
                 });
-            } else {
+            } else if(results !== undefined && results.error !== undefined){
                 return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, results.error).then(() => {
+                    return results;
+                });
+            } else {
+                return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "Unknown error").then(() => {
                     return results;
                 });
             }

@@ -1,15 +1,15 @@
 @prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
-@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 @prefix earl: <http://www.w3.org/ns/earl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
 
 <> a mf:Manifest ;
     mf:entries (
         <datasetOccurence.ttl>
-        <datasetOccurenceCount.ttl>
+        # <datasetOccurenceCount.ttl>
     ) .
 
 <datasetOccurence.ttl> a mf:ManifestEntry ;
@@ -18,9 +18,8 @@
     ) ;
     kgi:onSuccess (
         [
-            # Creating the occurences object of each property in each dataset
-            mf:action """
-            prefix voaf: <http://purl.org/vocommons/voaf#>
+            rdfs:label "Creating the occurences object of each property in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
             prefix kgi: <http://ns.inria.fr/kg/index#>
             prefix xsd: <http://www.w3.org/2001/XMLSchema#>
             prefix prov: <http://www.w3.org/ns/prov#>
@@ -30,8 +29,7 @@
             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             INSERT {
-                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
-                    voaf:reusedByDatasets ?nbUsedByDatasets .
+                ?elem voaf:usageInDataset ?elemDatasetOccurence .
                 ?elemDatasetOccurence a voaf:DatasetOccurences ;
                     voaf:inDataset $rawEndpointUrl .
 
@@ -41,29 +39,30 @@
                 }
             }
             WHERE {
-                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&skip=occurences&slice=10&limit=100" ) AS ?editedEndpointUrl)
+                kgi: sd:namedGraph $rawEndpointUrl .
 
-                FILTER( EXISTS {
-                    kgi: sd:namedGraph $rawEndpointUrl .
-                })
+                BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl)
+
+                SERVICE ?editedEndpointUrl {
+                    {
+                        SELECT DISTINCT ?elem {
+                            {
+                                ?s ?elem ?o .
+                            } UNION {
+                                GRAPH ?g {
+                                    ?s ?elem ?o .
+                                }
+                            }
+                        }
+                    }
+                }
+
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
 
                 ?elem a rdf:Property .
                 FILTER( isIRI(?elem))
-
-                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
-
-                SERVICE ?editedEndpointUrl {
-                    values ?elem { undef } # Fix for better binding by Corese (Magic ?)
-                    FILTER( EXISTS {
-                        ?s ?elem ?o .
-                    } )
-                }
-
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-                ?elem voaf:reusedByDatasets ?occurences .
-                BIND( ?occurences + 1 AS ?nbUsedByDatasets )
-            }
-            """
+            }"""
         ]
     ) .
 
@@ -73,9 +72,8 @@
     ) ;
     kgi:onSuccess (
         [
-            # Counting the number of appearances of each property in each dataset
-            mf:action """
-            prefix voaf: <http://purl.org/vocommons/voaf#>
+            rdfs:label "Counting the number of appearances of each property in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
             prefix kgi: <http://ns.inria.fr/kg/index#>
             prefix xsd: <http://www.w3.org/2001/XMLSchema#>
             prefix prov: <http://www.w3.org/ns/prov#>
@@ -92,20 +90,26 @@
                     voaf:occurrences ?nbTriples .
             }
             WHERE {
-                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&slice=10&limit=100" ) AS ?editedEndpointUrl)
+                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&slice=20&limit=1000&method=get" ) AS ?editedEndpointUrl)
 
                 FILTER( EXISTS {
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
 
-                ?elem a rdf:Property .
                 FILTER( isIRI(?elem))
+                ?elem a rdf:Property .
 
                 {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {
                         SERVICE ?editedEndpointUrl {
                             VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
-                            ?s ?elem ?o .
+                            {
+                                ?s ?elem ?o .
+                            } UNION {
+                                GRAPH ?g {
+                                    ?s ?elem ?o .
+                                }
+                            }
                         }
                     } GROUP BY ?elem
                 }
@@ -114,7 +118,6 @@
                 BIND( IF( EXISTS {
                     ?elem voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbTriples, ?nbTriples) AS ?nbDatasetOccurences )
-            }
-            """
+            }"""
         ]
     ) .

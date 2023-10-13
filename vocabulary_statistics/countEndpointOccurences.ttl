@@ -5,9 +5,6 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-<> rdf:type kgi:TestQuery ;
+<> rdf:type kgi:DummyTest ;
     dcterms:isReferencedBy <_manifest.ttl> ;
-    dcterms:description """Creates a graph for each endpoint""" ;
-    kgi:query """SELECT * {
-        ?s ?p ?o
-    } LIMIT 1"""  .
+    dcterms:description """Count the number of endpoint each element has appeared in""" .
