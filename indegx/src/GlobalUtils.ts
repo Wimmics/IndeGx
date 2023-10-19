@@ -54,7 +54,7 @@ export function appendToFile(filename, content) {
 }
 
 export function writeFile(filename, content) {
-    fs.writeFile(filename, content).catch(error => {
+    fs.writeFile(filename, content, { flag: "w+" }).catch(error => {
         Logger.error("Error writing to file", filename, error)
     });
 }

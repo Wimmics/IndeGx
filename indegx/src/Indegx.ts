@@ -3,7 +3,7 @@ import * as GlobalUtils from "./GlobalUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";
 import * as RuleApplication from "./RuleApplication.js";
 import { readRules } from "./RuleCreation.js";
-import { readCatalog } from "./CatalogInput.js";
+import { EndpointObject, readCatalog } from "./CatalogInput.js";
 import * as Logger from "./LogUtils.js"
 import { sendStoreContentToIndex, writeIndex } from "./IndexUtils.js";
 import * as ReportUtils from "./ReportUtils.js";
@@ -11,6 +11,8 @@ import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
 import { readFileSync, accessSync } from 'node:fs';
 import { createStore, loadRDFFile } from "./RDFUtils.js";
+import { Manifest } from "./RuleTree.js";
+import md5 from "md5"
 
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
@@ -85,6 +87,7 @@ type ConfigType = {
     postManifestJSON?: string,
     queryLog?: boolean, // default true, log queries in the index if true. Incompatible with resilience.
     resilience?: boolean, // default false, store the result of the current state of the index in a temporary file if true. Incompatible with disabling query logging.
+    catalogBinSize: number // default 0. 0 or lower process all endpoints at a the same time. any value n superior to zero will make IndeGx process only n endpoints at a time
 }
 
 let currentConfig: ConfigType = JSON.parse(readFileSync(configFilename).toString()); // default config
@@ -111,8 +114,12 @@ let resilience: boolean = currentConfig.resilience;
 if (resilience !== undefined) {
     RuleApplication.setResilienceMode(resilience);
 }
-if(resilience && !queryLog){
+if (resilience && !queryLog) {
     Logger.error("Resilience mode is useless without query logging. This is probably a mistake in the configuration file.");
+}
+let catalogBinSize = currentConfig.catalogBinSize;
+if (catalogBinSize === undefined || catalogBinSize <= 0) {
+    catalogBinSize = 0;
 }
 let outputFile: string = currentConfig.outputFile;
 let manifestTreeFile: string = currentConfig.manifestJSON;
@@ -124,101 +131,145 @@ GlobalUtils.setDelayMillisecondsTimeForConccurentQuery(delayMillisecondsTimeForC
 SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
-let initPromise = Promise.resolve();
+function indegxProcess(): Promise<void> {
 
-if (resumeMode) {
-    Logger.info("Resuming from previous execution");
-    let resumingStore = createStore();
+    function preProcess(): Promise<void> {
+        let initPromise = Promise.resolve();
 
-    if (accessSync("tmp/main/indeg.trig") !== undefined) {
-        initPromise = loadRDFFile("tmp/main/indeg.trig", resumingStore).then(() => {
-            return sendStoreContentToIndex(resumingStore).finally(() => {
-                resumingStore.close();
-                return;
-            });
-        })
-    } else if (accessSync("tmp/pre/indeg.trig") !== undefined) {
-        initPromise = loadRDFFile("tmp/pre/indeg.trig", resumingStore).then(() => {
-            return sendStoreContentToIndex(resumingStore).finally(() => {
-                resumingStore.close();
-                return;
-            });
-        })
-    }
-}
+        if (resumeMode) {
+            Logger.info("Resuming from previous execution");
+            let resumingStore = createStore();
 
-if (currentConfig.pre !== undefined) {
-    Logger.info("Reading pre-treatment manifest tree")
-    let premanifestRoot = currentConfig.pre;
-    initPromise.then(() => readRules(premanifestRoot).then(premanifest => {
-        Logger.info("Pre-treatment manifest tree read")
-        return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
-            Logger.info("Pre treatment ends");
-        })
-    })).finally(() => {
-        if (resilience !== undefined && resilience) {
-            return writeIndex("tmp/pre/indeg.trig")
-        } else {
-            return;
-        }
-    })
-}
-
-Logger.info("Reading manifest tree ", rootManifestFilename)
-initPromise.then(() => readRules(rootManifestFilename).then(manifest => {
-    Logger.info("Manifest tree read")
-    if (manifestTreeFile !== undefined && manifestTreeFile !== "") {
-        Logger.info("Writing manifest tree to file", manifestTreeFile)
-        GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifest))
-    }
-
-    Logger.info("Reading catalog", catalog)
-    let endpointPool = [];
-    return readCatalog(catalog).then(endpointObjectList => {
-        Logger.info("Catalog read")
-        endpointObjectList.forEach(endpointObject => {
-            Logger.info("Treating endpoint", endpointObject.endpoint);
-            endpointPool.push(RuleApplication.applyRuleTree(endpointObject, manifest).then(() => {
-                Logger.info("Endpoint", endpointObject.endpoint, "treated");
-                return;
-            }).catch(error => {
-                Logger.error("Error treating endpoint", endpointObject.endpoint, error)
-            }).finally(() => {
-                return;
-            }));
-        })
-    }).catch(error => {
-        Logger.error("Error treating catalog", catalog, error)
-    }).then(() => {
-        return Promise.allSettled(endpointPool).then(() => {
-            Logger.info("All endpoints treated")
-        });
-    }).finally(() => {
-        if (resilience !== undefined && resilience) {
-            return writeIndex("tmp/main/indeg.trig")
-        } else {
-            return;
-        }
-    })
-}).then(() => {
-    if (post !== undefined && post !== "") {
-        return readRules(post).then(postManifest => {
-            Logger.info("Post manifest tree read.");
-            if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
-                Logger.info("Writing post manifest tree to file", postManifestTreeFile)
-                GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
+            if (accessSync("/output/tmp/main/indeg.trig") !== undefined) {
+                initPromise = loadRDFFile("tmp/main/indeg.trig", resumingStore).then(() => {
+                    return sendStoreContentToIndex(resumingStore).finally(() => {
+                        resumingStore.close();
+                        return;
+                    });
+                })
+            } else if (accessSync("/output/tmp/pre/indeg.trig") !== undefined) {
+                initPromise = loadRDFFile("/output/tmp/pre/indeg.trig", resumingStore).then(() => {
+                    return sendStoreContentToIndex(resumingStore).finally(() => {
+                        resumingStore.close();
+                        return;
+                    });
+                })
             }
-            Logger.info("Post treatment starts");
-            return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
-                Logger.info("Post treatment ends");
+        }
+
+        if (currentConfig.pre !== undefined) {
+            Logger.info("Reading pre-treatment manifest tree")
+            let premanifestRoot = currentConfig.pre;
+            initPromise.then(() => readRules(premanifestRoot).then(premanifest => {
+                Logger.info("Pre-treatment manifest tree read")
+                return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
+                    Logger.info("Pre treatment ends");
+                })
+            })).finally(() => {
+                if (resilience !== undefined && resilience) {
+                    return writeIndex("/output/tmp/pre/indeg.trig")
+                } else {
+                    return;
+                }
             })
-        })
-    } else {
-        Logger.info("No post treatment specified");
-        return;
+        }
+        return initPromise;
     }
-}).finally(() => {
-    return writeIndex(outputFile)
-}).catch(error => {
-    Logger.error("During indexation", error);
-}));
+
+    function postProcess(): Promise<void> {
+        if (post !== undefined && post !== "") {
+            return readRules(post).then(postManifest => {
+                Logger.info("Post manifest tree read.");
+                if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
+                    Logger.info("Writing post manifest tree to file", postManifestTreeFile)
+                    GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
+                }
+                Logger.info("Post treatment starts");
+                return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
+                    Logger.info("Post treatment ends");
+                })
+            })
+        } else {
+            Logger.info("No post treatment specified");
+            return;
+        }
+    }
+
+    function process(endpointObjectList: EndpointObject[], manifest: Manifest, recursive = false): Promise<void> {
+        let endpointPool = [];
+
+        function processEndpoint(endpointObject, manifest): Promise<void> {
+            return Promise.resolve().then(() => {
+                Logger.info("Treating endpoint", endpointObject.endpoint);
+                return RuleApplication.applyRuleTree(endpointObject, manifest).then(() => {
+                    Logger.info("Endpoint", endpointObject.endpoint, "treated");
+                    return;
+                }).catch(error => {
+                    Logger.error("Error treating endpoint", endpointObject.endpoint, error)
+                }).finally(() => {
+                    return;
+                });
+            })
+        }
+
+        return Promise.resolve().then(() => {
+            if (catalogBinSize == 0 || recursive) {
+                endpointObjectList.forEach(endpointObject => {
+                    endpointPool.push(processEndpoint(endpointObject, manifest));
+                })
+            } else {
+                let slices = [];
+                for (let start = 0; start < endpointObjectList.length; start += catalogBinSize) {
+                    slices.push(endpointObjectList.slice(start, start + catalogBinSize))
+                }
+                let iterativeProcessArgs = slices.map(chunkEndpointList => [chunkEndpointList, manifest, true])
+                endpointPool.push(GlobalUtils.iterativePromises(iterativeProcessArgs, process))
+            }
+            return;
+        }).then(() => {
+            return Promise.allSettled(endpointPool).then(() => {
+                Logger.info("All endpoints treated")
+            });
+        }).catch(error => {
+            Logger.error("Error treating catalog", catalog, error)
+        }).finally(() => {
+            if ((resilience !== undefined && resilience) || recursive) {
+                let tmpIndexFilename = "/output/tmp/main/indeg.trig";
+                if(recursive) {
+                    let endpointListId = md5(endpointObjectList.map(endpointObject => endpointObject.endpoint).toString());
+                    tmpIndexFilename = "/output/tmp/main/indegx_" + endpointListId + ".trig";
+                }
+                return writeIndex(tmpIndexFilename)
+            } else {
+                return;
+            }
+        })
+    }
+
+    let preProcessPromise = preProcess();
+
+    Logger.info("Reading manifest tree ", rootManifestFilename)
+    return preProcessPromise.then(() => readRules(rootManifestFilename).then(manifest => {
+        Logger.info("Manifest tree read")
+        if (manifestTreeFile !== undefined && manifestTreeFile !== "") {
+            Logger.info("Writing manifest tree to file", manifestTreeFile)
+            GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifest))
+        }
+
+        Logger.info("Reading catalog", catalog)
+        return readCatalog(catalog).then(endpointObjectList => {
+            Logger.info("Catalog read")
+            let processPromise = process(endpointObjectList, manifest);
+            return processPromise;
+        })
+    }).then(() => {
+        let postProcessPromise = postProcess();
+        return postProcessPromise;
+    }).finally(() => {
+        return writeIndex(outputFile)
+    }).catch(error => {
+        Logger.error("During indexation", error);
+    }));
+}
+
+indegxProcess();
