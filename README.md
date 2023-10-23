@@ -8,13 +8,13 @@ This repository hosts the new version of the IndeGx application. This new versio
 
 IndeGx is a framework created for the creation of an RDF knowledge graph that can be used as an index of knowledge graphs available online. It uses a set of rules to extract and compute the content of this index using SPARQL queries.
 
-IndeGx is designed to make full use of existing semantic web standards and existing technologies. Any set of rules expressed with the correct vocabulary can be used to generate a knowledge graph.
+IndeGx is designed to fully use existing semantic web standards and existing technologies. Any rules expressed with the correct vocabulary can be used to generate a knowledge graph.
 
 ### Differences with the previous version
 
 This new version of IndeGx has advantages compared to the previous one in the DeKaLoG repository:
 
-- The previous version was a Java application coded with Apache Jena, this version uses an engine coded in Typescript with [rdflib](https://github.com/linkeddata/rdflib.js), [graphy](https://github.com/blake-regalia/graphy.js#readme), [sparqljs](https://github.com/RubenVerborgh/SPARQL.js#readme), coupled with a [Corese](https://corese.inria.fr/) Server, in a [docker](https://www.docker.com/get-started/) application.
+- The [previous version](https://github.com/Wimmics/dekalog) was a Java application coded with Apache Jena, this version uses an engine coded in Typescript with [rdflib](https://github.com/linkeddata/rdflib.js), [graphy](https://github.com/blake-regalia/graphy.js#readme), [sparqljs](https://github.com/RubenVerborgh/SPARQL.js#readme), coupled with a [Corese](https://corese.inria.fr/) Server, in a [docker](https://www.docker.com/get-started/) application.
 - Treatment of endpoints in parallel
 - The automatic pagination of simple queries to avoid overwhelming SPARQL endpoints.
 - The usage of Corese as an interface with SPARQL endpoints to reduce missing data due to errors coming from incorrect standard compliance in distant SPARQL endpoints.
@@ -26,7 +26,7 @@ This new version of IndeGx has advantages compared to the previous one in the De
 
 The index extraction rules have been modified as follows:
 
-- The asserted and computed elements of a knowledge base description are now separated into different graphs. Each description now consists of 3 graphs for one KB. More details are in [the rule folder](./rules/README.md).
+- A knowledge base description's asserted and computed elements are now separated into different graphs. Each description now consists of 3 graphs for one KB. More details are in [the rule folder](./rules/README.md).
 - The extraction of a summary of datasets using the HiBisCus format: (\<hostname of subject\> \<property\> \<hostname of object, placeholder literal\>)
 - The computation of statistics of the usage of vocabularies and the usage of the hostnames of resources in the dataset.
 
@@ -34,7 +34,7 @@ The index extraction rules have been modified as follows:
 
 ### Requirements
 
-IndeGx requires to have git, docker-compose installed on a Linux-based system.
+IndeGx requires git, and docker-compose installed on a Linux-based system.
 
 ### Installation
 
