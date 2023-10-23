@@ -1,3 +1,7 @@
+# Vocabulary Statistics rules
+
+This folder contains the generation assets used to extract statistics on the usage of known vocabularies in datasets
+
 ## Generation of LOV_redux from LOV dump
 
 Supplementary files to load because they are not in the LOV dump:
