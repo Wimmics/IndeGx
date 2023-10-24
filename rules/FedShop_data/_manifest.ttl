@@ -8,11 +8,11 @@
     mf:include (
     ) ;
     mf:entries (
-        <init.ttl>
+        <main/init.ttl>
+        <main/datasetDescription.ttl>
     ) .
 
-
-<init.ttl> a mf:ManifestEntry ;
+<main/init.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             mf:action """
@@ -23,6 +23,104 @@
                 kgi: sd:namedGraph $rawEndpointUrl .
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+            }
+            """
+        ]
+    ) .
+
+<main/datasetDescription.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?dataset {
+                    ?dataset ?p ?o
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        { ?dataset a dcat:Dataset }
+                        UNION { ?dataset a void:Dataset }
+                        UNION { ?dataset a dcmitype:Dataset }
+                        UNION { ?dataset a schema:Dataset }
+                        UNION { ?dataset a sd:Dataset }
+                        UNION { ?dataset a dataid:Dataset }
+                        ?dataset ?p ?o
+                    } UNION {
+                        GRAPH ?g {
+                            { ?dataset a dcat:Dataset }
+                            UNION { ?dataset a void:Dataset }
+                            UNION { ?dataset a dcmitype:Dataset }
+                            UNION { ?dataset a schema:Dataset }
+                            UNION { ?dataset a sd:Dataset }
+                            UNION { ?dataset a dataid:Dataset }
+                            ?dataset ?p ?o
+                        }
+                    }
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?dataset {
+                    ?s ?p ?dataset
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        { ?dataset a dcat:Dataset }
+                        UNION { ?dataset a void:Dataset }
+                        UNION { ?dataset a dcmitype:Dataset }
+                        UNION { ?dataset a schema:Dataset }
+                        UNION { ?dataset a sd:Dataset }
+                        UNION { ?dataset a dataid:Dataset }
+                        ?s ?p ?dataset
+                    } UNION {
+                        GRAPH ?g {
+                            { ?dataset a dcat:Dataset }
+                            UNION { ?dataset a void:Dataset }
+                            UNION { ?dataset a dcmitype:Dataset }
+                            UNION { ?dataset a schema:Dataset }
+                            UNION { ?dataset a sd:Dataset }
+                            UNION { ?dataset a dataid:Dataset }
+                            ?s ?p ?dataset
+                        }
+                    }
                 }
             }
             """
