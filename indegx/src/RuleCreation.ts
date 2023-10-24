@@ -296,7 +296,7 @@ function readManifestEntry(uri: string, store: $rdf.Store, postPromiseCreationPo
             let successActionsCollection = store.statementsMatching(generationAssetResource, kgiOnSuccessProperty, null).map(statement => statement.object);
             successActionsCollection.forEach(collection => {
                 if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
-                    let actions = actionFromCollection(collection, store, postPromiseCreationPool).then(actions => {
+                    let actions = actionFromCollection(collection, store, resultGenerationAsset, postPromiseCreationPool).then(actions => {
                         resultGenerationAsset.actionsSuccess = resultGenerationAsset.actionsSuccess.concat(actions);
                     });
                     promiseCreationPool.push(actions);
@@ -307,7 +307,7 @@ function readManifestEntry(uri: string, store: $rdf.Store, postPromiseCreationPo
             let failureActionsCollection = store.statementsMatching(generationAssetResource, kgiOnFailureProperty, null).map(statement => statement.object);
             failureActionsCollection.forEach(collection => {
                 if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
-                    let actions = actionFromCollection(collection, store, postPromiseCreationPool).then(actions => {
+                    let actions = actionFromCollection(collection, store, resultGenerationAsset, postPromiseCreationPool).then(actions => {
                         resultGenerationAsset.actionsFailure = resultGenerationAsset.actionsFailure.concat(actions);
                     });
                     promiseCreationPool.push(actions);
@@ -332,17 +332,29 @@ function readManifestEntry(uri: string, store: $rdf.Store, postPromiseCreationPo
     @param {$rdf.Store} store An $rdf.Store object containing the RDF graph to be queried.
     @returns {Promise<Array<ManifestEntry | Action | Manifest>>} A Promise that resolves to an array of ManifestEntry, Action, or Manifest objects that can be executed.
     */
-function actionFromCollection(collection: $rdf.BlankNode | $rdf.NamedNode, store: $rdf.Store, postPromiseCreationPool: Promise<void>[]): Promise<Asset[]> {
+function actionFromCollection(collection: $rdf.BlankNode | $rdf.NamedNode, store: $rdf.Store, entry: ManifestEntry, postPromiseCreationPool: Promise<void>[]): Promise<Asset[]> {
     let result: Asset[] = [];
     let promiseCreationPool: Promise<void>[] = [];
     if ($rdf.isBlankNode(collection) || $rdf.isNamedNode(collection)) {
         const actionsNodeArray = collectionToArray(collection, store);
+        let actionCount = 0;
         actionsNodeArray.forEach(node => {
             if (store.holds(node, manifestActionProperty, null)) {
                 // Action is a leaf node
                 if ($rdf.isBlankNode(node) || $rdf.isNamedNode(node)) {
                     let actionNode = node as $rdf.BlankNode | $rdf.NamedNode;
                     const actionObject = getActionLeafNode(actionNode, store);
+                    actionObject.uri = entry.uri + `#${actionCount}`;
+                    actionCount++;
+                    const newActionNode = $rdf.namedNode(actionObject.uri);
+                    store.statementsMatching(node, null, null).forEach(nodeSubjectStatement => {
+                        store.add(newActionNode, nodeSubjectStatement.predicate, nodeSubjectStatement.object);
+                        store.remove(nodeSubjectStatement);
+                    });
+                    store.statementsMatching( null, null, node).forEach(nodeObjectStatement => {
+                        store.add(nodeObjectStatement.subject, nodeObjectStatement.predicate, newActionNode);
+                        store.remove(nodeObjectStatement);
+                    });
                     result.push(actionObject);
                 }
             } else {
