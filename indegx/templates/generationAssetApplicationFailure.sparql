@@ -2,7 +2,7 @@ PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX earl: <http://www.w3.org/ns/earl#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 
-INSERT {
+INSERT DATA {
     GRAPH kgi:Logs {
         kgi:Logs kgi:trace [
             earl:result [
@@ -17,6 +17,4 @@ INSERT {
             prov:endedAtTime $endTime
         ]
     }
-} WHERE {
-    BIND(Iri(CONCAT(str(kgi:), "Logs") ) AS ?logGraph)
 }
