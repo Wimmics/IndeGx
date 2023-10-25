@@ -106,22 +106,24 @@ export function sendAskWithTraceHandling(endpointUrl: string, queryString: strin
 function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: string, d?: number) => Promise<any>, endpointUrl: string, queryString: string, baseURI: string, entryObject: RuleTree.ManifestEntry, startTime: dayjs.Dayjs, timeout: number): Promise<any> {
     return queryFunction(endpointUrl, queryString, baseURI, timeout).then(results => {
         const endTime = dayjs();
-        if (results === undefined || results.error !== undefined) {
-            if (results === undefined && ( SPARQLUtils.isSparqlSelect(queryString) || SPARQLUtils.isSparqlConstruct(queryString) || SPARQLUtils.isSparqlAsk(queryString))) {
-                return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "No results returned").then(() => {
-                    return results;
-                });
-            } else if(results !== undefined && results.error !== undefined){
-                return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, results.error).then(() => {
-                    return results;
-                });
-            } else {
-                return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "Unknown error").then(() => {
-                    return results;
-                });
-            }
-        } else {
+        if (results === undefined && !SPARQLUtils.isSparqlUpdate(queryString)) {
+            return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "No results returned").then(() => {
+                return results;
+            });
+        } else if (results !== undefined && results.error !== undefined) {
+            return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, results.error).then(() => {
+                return results;
+            });
+        } else if (results !== undefined && results.error === undefined) {
             return sendSuccessReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime).then(() => {
+                return results;
+            });
+        } else if (results === undefined && SPARQLUtils.isSparqlUpdate(queryString)) {
+            return sendSuccessReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime).then(() => {
+                return results;
+            });
+        } else {
+            return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "Unknown error: " + JSON.stringify(results)).then(() => {
                 return results;
             });
         }
