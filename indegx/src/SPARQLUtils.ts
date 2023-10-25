@@ -77,7 +77,7 @@ export function sparqlQueryPromise(endpoint: string, query: string, baseURI: str
         return fetchGETPromise(queryUrl).then(result => {
             let resultStore = RDFUtils.createStore();
             result = RDFUtils.fixCommonTurtleStringErrors(result)
-            return RDFUtils.parseTurtleToStore(result, resultStore, "").catch(error => {
+            return RDFUtils.parseTurtleToStore(result, resultStore, baseURI).catch(error => {
                 Logger.error(endpoint, query, error, result);
                 return resultStore;
             });
