@@ -66,11 +66,20 @@ export function sparqlQueryPromise(endpoint: string, query: string, baseURI: str
     if (isSparqlSelect(query)) {
         jsonHeaders["accept"] = "application/sparql-results+json";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
-        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => (result as SELECTJSONResult)).catch(error => { Logger.error(endpoint, query, error); throw error })
+        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => {
+            return (result as SELECTJSONResult)
+        }).catch(error => { 
+            Logger.error(endpoint, query, error); 
+            throw error 
+        })
     } else if (isSparqlAsk(query)) {
         jsonHeaders["accept"] = "application/sparql-results+json";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
-        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => (result as ASKJSONResult)).catch(() => { return { head: {}, boolean: false } as ASKJSONResult})
+        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => {
+            return (result as ASKJSONResult)
+        }).catch(() => { 
+            return { head: {}, boolean: false } as ASKJSONResult
+        })
     } else if (isSparqlConstruct(query)) {
         jsonHeaders["accept"] = "text/turtle";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=turtle&timeout=' + timeout;
@@ -83,7 +92,9 @@ export function sparqlQueryPromise(endpoint: string, query: string, baseURI: str
             });
         }).catch(error => { Logger.error(endpoint, query, error); throw error })
     } else if (isSparqlUpdate(query)) {
-        return sendUpdateQuery(endpoint, query).catch(error => { Logger.error(endpoint, query, error); throw error });
+        return sendUpdateQuery(endpoint, query).then(response => {
+            return response;
+        }).catch(error => { Logger.error(endpoint, query, error); throw error });
     } else {
         Logger.error(new Error("Unexpected query type"))
     }

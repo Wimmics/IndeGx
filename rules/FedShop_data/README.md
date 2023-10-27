@@ -14,7 +14,27 @@
 
 ### Basic statistics on datasets
 ```sparql
-
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT DISTINCT ?dataset ?triples ?classes ?properties ?distinctSubjects ?distinctObjects {
+    OPTIONAL {
+      ?dataset void:triples ?triples .
+    }
+    OPTIONAL {
+      ?dataset void:classes ?classes .
+    }
+    OPTIONAL {
+      ?dataset void:properties ?properties .
+    }
+    OPTIONAL {
+      ?dataset void:distinctSubjects ?distinctSubjects .
+    }
+    OPTIONAL {
+      ?dataset void:distinctObjects ?distinctObjects .
+    }
+}
 ```
 
 ### Number of classes instances
@@ -41,7 +61,6 @@ SELECT DISTINCT ?dataset ?c ?p ?cpcount ?oc ?cpoccount {
     void:propertyPartition ?classPropertyPartition .
   ?classPropertyPartition void:inDataset ?dataset ;
     void:property ?p ;
-    void:entities ?cpcount ;
     void:classPartition ?objectClassPartition .
   ?objectClassPartition void:inDataset ?dataset ;
     void:class ?oc ;
@@ -61,7 +80,6 @@ SELECT DISTINCT ?dataset ?c ?p ?cpcount ?oc ?cpodcount ?min ?max {
     void:propertyPartition ?classPropertyPartition .
   ?classPropertyPartition void:inDataset ?dataset ;
     void:property ?p ;
-	void:entities ?cpcount ;
     void:classPartition ?objectDatatypePartition .
   ?objectDatatypePartition void:inDataset ?dataset ;
     void:datatype ?oc ;

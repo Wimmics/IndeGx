@@ -16,8 +16,10 @@ export function writeIndex(filename: string): Promise<void> {
     return Global.fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g { ?s ?p ?o } } WHERE { GRAPH ?g { ?s ?p ?o } }"), trigHeader).then(trig => {
         Global.writeFile(filename, RDFUtils.fixCommonTurtleStringErrors(trig))
         Logger.info("IndeGx treatment done")
+        return ;
     }).catch(error => {
         Logger.error("writing index", filename, error);
+        return ;
     });
 }
 

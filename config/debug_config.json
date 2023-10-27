@@ -1,7 +1,7 @@
 {
-    "pre": "file:///rules/vocabulary_statistics/_pre_manifest.ttl",
-    "manifest": "file:///rules/vocabulary_statistics/_manifest.ttl",
-    "post": "file:///rules/vocabulary_statistics/_post_manifest.ttl",
+    "pre": "file:///rules/FedShop_data/_pre_manifest.ttl",
+    "manifest": "file:///rules/FedShop_data/_manifest.ttl",
+    "post": "file:///rules/FedShop_data/_post_manifest.ttl",
     "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
@@ -11,6 +11,6 @@
     "manifestJSON": "/output/rules.json",
     "logFile": "/output/indegx_debug.log",
     "outputFile": "/output/indegx_debug.trig",
-    "queryLog": false,
-    "catalogBinSize": 2
+    "queryLog": true,
+    "resilience": true
 }

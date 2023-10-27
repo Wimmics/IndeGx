@@ -13,8 +13,42 @@
 
 kgi:catalogResource  a dcat:Catalog ;
     dcat:dataset [ 
+        # void:sparqlEndpoint <http://api.parliament.uk/sparql> ; # 3 CUT
+        # void:sparqlEndpoint <http://ccny-cuny.eagle-i.net/sparqler/sparql> ;
+        # void:sparqlEndpoint <http://cr.eionet.europa.eu/sparql> ;
+        # void:sparqlEndpoint <http://agrold.southgreen.fr/sparql> ;
+        # void:sparqlEndpoint <http://api.finto.fi/sparql> ;
+        # void:sparqlEndpoint <http://d2kab.i3s.unice.fr/sparql> ;
+        # void:sparqlEndpoint <http://cdrewu.eagle-i.net/sparqler/sparql> ; # 3 CUT END
+        # void:sparqlEndpoint <http://agrovoc.uniroma2.it/sparql> ; # 2 CUT  # 4 CUT 
+        # void:sparqlEndpoint <http://cedropendata.mfcr.cz/c3lod/cedr/sparql> ;
+        # void:sparqlEndpoint <http://bio2rdf.org/sparql> ; # 4 CUT END # FINAL CUT
+        # void:sparqlEndpoint <http://api.cooperationdatabank.org/datasets/coda/databank/services/databank/sparql> ;
+        # void:sparqlEndpoint <http://193.190.127.165:7200/repositories/ERA-KG-latest> ;
+        # void:sparqlEndpoint <http://caligraph.org/sparql> ;
+        # void:sparqlEndpoint <http://apps.morelab.deusto.es/labman/sparql> ;
+        # void:sparqlEndpoint <http://colil.dbcls.jp/sparql> ; # 2 CUT END
+        # void:sparqlEndpoint <http://cultura.linkeddata.es/sparql> ; # 1 CUT
+        # void:sparqlEndpoint <http://aopwiki.rdf.bigcat-bioinformatics.org/sparql> ;
+        # void:sparqlEndpoint <http://affymetrix.bio2rdf.org/sparql> ;
+        # void:sparqlEndpoint <http://147.100.179.235:8082/blazegraph/namespace/AnaEE_sites/sparql> ;
+        # void:sparqlEndpoint <http://bgee.org/sparql> ;
+        # void:sparqlEndpoint <http://covidontheweb.inria.fr/sparql> ;
+        # void:sparqlEndpoint <http://alaska.eagle-i.net/sparqler/sparql> ;
+        # void:sparqlEndpoint <http://cau.eagle-i.net/sparqler/sparql> ;
+        # void:sparqlEndpoint <http://bnb.data.bl.uk/sparql> ;
+        # void:sparqlEndpoint <http://alma.uni.lu/sparql> ;
+        # void:sparqlEndpoint <http://ct-linkdata.aegean.gr/gcam/sparql> ;
+        # void:sparqlEndpoint <http://colinda.org/endpoint.php> ;
+        # void:sparqlEndpoint <http://cs.dbpedia.org/sparql> ;
+        # void:sparqlEndpoint <http://data.allie.dbcls.jp/sparql> ;
+        # void:sparqlEndpoint <http://api.data.muziekweb.nl/datasets/muziekweborganization/Muziekweb/services/Muziekweb/sparql> ;
+        # void:sparqlEndpoint <http://clara.univ-nantes.fr/sparql> ;
+        # void:sparqlEndpoint <http://agrovoc.fao.org/sparql> ; # 1 CUT END
         void:sparqlEndpoint <http://134.59.132.36:3030/FAIRSavoir/sparql> ;
         void:sparqlEndpoint <http://134.59.132.36:3030/LOV/sparql> ;
         void:sparqlEndpoint <http://134.59.132.36:3030/LOV_redux/sparql> ;
-        void:sparqlEndpoint <http://134.59.132.36:3030/Metadatamatic/sparql> 
+        void:sparqlEndpoint <http://134.59.132.36:3030/Metadatamatic/sparql> ;
+        # void:sparqlEndpoint <http://147.100.179.235:8082/blazegraph/namespace/AnaEE_sites/sparql>
+        # void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql>
     ] .
