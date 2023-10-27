@@ -1,0 +1,550 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <post/singleElementCount.ttl>
+        <post/propertyCount.ttl>
+        <post/classCount.ttl>
+        <post/classPropertyOccurences.ttl>
+        <post/classPropertyObjectTypes.ttl>
+        <post/classPropertyObjectMinMax.ttl>
+    ) .
+
+<post/singleElementCount.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of triples""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            INSERT {
+                ?dataset void:triples ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT ?dataset (COUNT(DISTINCT *) AS ?count) {
+                        {
+                            SELECT DISTINCT ?dataset ?s ?p ?o {
+                                GRAPH ?dataset {
+                                    ?s ?p ?o
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Number of classes""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            INSERT {
+                ?dataset void:classes ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT ?dataset (COUNT(DISTINCT *) AS ?count) {
+                        {
+                            SELECT DISTINCT ?dataset ?o {
+                                GRAPH ?dataset {
+                                    ?s a ?o
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Number of properties""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            INSERT {
+                ?dataset void:properties ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT ?dataset (COUNT(DISTINCT *) AS ?count) {
+                        {
+                            SELECT DISTINCT ?dataset ?p {
+                                GRAPH ?dataset {
+                                    ?s ?p ?o
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Number of distinct subjects""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            INSERT {
+                ?dataset void:distinctSubjects ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT ?dataset (COUNT(DISTINCT *) AS ?count) {
+                        {
+                            SELECT DISTINCT ?dataset ?s {
+                                GRAPH ?dataset {
+                                    ?s ?p ?o
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Number of distinct objects""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            INSERT {
+                ?dataset void:distinctObjects ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT ?dataset (COUNT(DISTINCT *) AS ?count) {
+                        {
+                            SELECT DISTINCT ?dataset ?o {
+                                GRAPH ?dataset {
+                                    ?s ?p ?o
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<post/classCount.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class partitions with number of instances""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:classPartition ?classPartition .
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:entities ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT DISTINCT ?dataset ?c ( COUNT(DISTINCT ?s) AS ?count ) {
+                        GRAPH ?dataset {
+                            ?s a ?c
+                        }
+                    } GROUP BY ?c
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
+            }"""
+        ]
+    ) .
+
+<post/propertyCount.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property partitions with number of instances using them""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:propertyPartition ?propertyPartition .
+                ?propertyPartition void:inDataset ?dataset ;
+                    void:property ?p ; 
+                    void:triples ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                    ?s ?p ?o
+                }
+                {
+                    SELECT ?dataset (COUNT(DISTINCT *) AS ?count)
+                    {
+                        SELECT DISTINCT ?dataset ?s ?o {
+                            GRAPH ?dataset {
+                                ?s ?p ?o
+                            }
+                        } GROUP BY ?p
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?p) ) ) ) ) AS ?propertyPartition )
+            }"""
+        ]
+    ) .
+
+<post/classPropertyOccurences.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class/Property partitions with number of instances using a property""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p ;
+                    void:entities ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT DISTINCT ?dataset ?c ?p (COUNT(DISTINCT ?s) AS ?count) {
+                        GRAPH ?dataset {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                        }
+                    } GROUP BY ?c
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
+            }"""
+        ]
+    ) .
+
+<post/classPropertyObjectTypes.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class of the object in the Class/Property partitions with number of instances""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p ;
+                    void:classPartition ?objectClassPartition .
+                ?objectClassPartition void:inDataset ?dataset ;
+                    void:class ?oc ;
+                    void:entities ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                        GRAPH ?dataset {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                            ?o a ?oc .
+                        }
+                    } GROUP BY ?c ?p
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectClassPartition )
+            }"""
+        ]
+        [
+            dcterms:description """Datatype of the object in the Class/Property partitions with number of instances""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p ;
+                    void:classPartition ?objectDatatypePartition .
+                ?objectDatatypePartition void:inDataset ?dataset ;
+                    void:datatype ?oc ;
+                    void:entities ?count .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                        GRAPH ?dataset {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                        }
+                        FILTER(isLiteral(?o))
+                        BIND(DATATYPE(?o) AS ?oc)
+                    } GROUP BY ?c ?p
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectDatatypePartition )
+            }"""
+        ]
+    ) .
+
+<post/classPropertyObjectMinMax.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Minimum of the literals object of a property in relation to class instances""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p ;
+                    void:classPartition ?objectDatatypePartition .
+                ?objectDatatypePartition void:inDataset ?dataset ;
+                    void:datatype ?oc ;
+                    kgi:minimum ?min .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc (MIN(?o) AS ?min) {
+                        GRAPH ?dataset {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                        }
+                        FILTER(isLiteral(?o))
+                        BIND(DATATYPE(?o) AS ?oc)
+                    } GROUP BY ?c ?p
+                }
+                FILTER(?oc != xsd:string && ?oc != rdf:langString)
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectDatatypePartition )
+            }"""
+        ]
+        [
+            dcterms:description """Maximum of the literals object of a property in relation to class instances""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p ;
+                    void:classPartition ?objectDatatypePartition .
+                ?objectDatatypePartition void:inDataset ?dataset ;
+                    void:datatype ?oc ;
+                    kgi:maximum ?max .
+            } WHERE {
+                GRAPH ?dataset {
+                    { ?dataset a dcat:Dataset }
+                    UNION { ?dataset a void:Dataset }
+                    UNION { ?dataset a dcmitype:Dataset }
+                    UNION { ?dataset a schema:Dataset }
+                    UNION { ?dataset a sd:Dataset }
+                    UNION { ?dataset a dataid:Dataset }
+                }
+                {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc (MAX(?o) AS ?max) {
+                        GRAPH ?dataset {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                        }
+                        FILTER(isLiteral(?o))
+                        BIND(DATATYPE(?o) AS ?oc)
+                    } GROUP BY ?c ?p
+                }
+                FILTER(?oc != xsd:string && ?oc != rdf:langString)
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectDatatypePartition )
+            }"""
+        ]
+    ) .

@@ -1,101 +1,54 @@
-_:B3920fbcfX2Df16bX2D4e48X2D8160X2D43f95ade1a5c <http://rdfs.org/ns/void#sparqlEndpoint> <https://genome.microbedb.jp/sparql> .
-_:B69b68eb6X2Db7acX2D41c3X2D9532X2De25b034bf2b9 <http://rdfs.org/ns/void#sparqlEndpoint> <https://forum.semantic-metabolomics.fr/sparql> .
-_:B645d5cceX2Da2d0X2D44b7X2D9bd2X2D1e18f8a41db2 <http://rdfs.org/ns/void#sparqlEndpoint> <https://lod.abes.fr/sparql> .
-_:Bd1bdc6b3X2Db8cbX2D4122X2D893bX2D1e4cae1fd197 <http://rdfs.org/ns/void#sparqlEndpoint> <https://id.dbpedia.org/sparql> .
-_:Bb14cceedX2DeaddX2D4f57X2D8922X2D79a210807834 <http://rdfs.org/ns/void#sparqlEndpoint> <https://ko.dbpedia.org/sparql> .
-_:B58f66cccX2DdbcbX2D4c0aX2Daa02X2D37f5250cde19 <http://rdfs.org/ns/void#sparqlEndpoint> <https://libris.kb.se/sparql> .
-_:Ba46d62bbX2Db418X2D407eX2D96f6X2D928b92ef39d2 <http://rdfs.org/ns/void#sparqlEndpoint> <https://jsu.eagle-i.net/sparqler/sparql> .
-_:B10cd22d9X2D4ce3X2D4b8fX2D826fX2D53f8fcc8eee4 <http://rdfs.org/ns/void#sparqlEndpoint> <https://linkeddata.uriburner.com/sparql> .
-_:Bd263ee4bX2D89d0X2D4d8fX2D91b7X2Da9c2b96dd2f6 <http://rdfs.org/ns/void#sparqlEndpoint> <https://fr.dbpedia.org/sparql> .
-_:B2763b16aX2D5f58X2D457eX2Dbb23X2Da0eba050c883 <http://rdfs.org/ns/void#sparqlEndpoint> <https://hu.dbpedia.org/sparql> .
-_:B91afc2bfX2D0b65X2D442aX2Db345X2D9b2e83214c8b <http://rdfs.org/ns/void#sparqlEndpoint> <https://kaiko.getalp.org/sparql> .
-_:Bfd54229bX2D50e2X2D44e0X2D9c6cX2D994ffb81c0f4 <http://rdfs.org/ns/void#sparqlEndpoint> <https://ldf.fi/mufi/sparql> .
-_:Bb84cfea9X2D64a5X2D4a05X2Daf33X2De2810bb965d1 <http://rdfs.org/ns/void#sparqlEndpoint> <https://ldf.fi/kirjasampo/sparql> .
-_:B5c344e88X2D38a1X2D48f0X2D9379X2Da658293c195f <http://rdfs.org/ns/void#sparqlEndpoint> <https://id.nlm.nih.gov/mesh/sparql> .
-_:Bc4399951X2D6c81X2D4387X2D8e82X2D8bc1dd695fa6 <http://rdfs.org/ns/void#sparqlEndpoint> <https://linkedlifedata.com/sparql> .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B645d5cceX2Da2d0X2D44b7X2D9bd2X2D1e18f8a41db2 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B5c344e88X2D38a1X2D48f0X2D9379X2Da658293c195f .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Ba15ffcecX2D56a6X2D4edaX2D9fd8X2Dfdeb1b6cc78f .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B43fe228bX2De8fcX2D425bX2Daeb3X2Dc363a6b59bd5 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bd1e256a6X2D6091X2D47efX2D8cb9X2Dc1a4e60da518 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bd1bdc6b3X2Db8cbX2D4122X2D893bX2D1e4cae1fd197 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B6d401828X2D63ebX2D47d6X2Daf61X2D21858a5ed88a .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/dcat#Catalog> .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B4e8d302dX2D179eX2D403bX2D8251X2D6b58144a4be4 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Ba46d62bbX2Db418X2D407eX2D96f6X2D928b92ef39d2 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bc825ca26X2D1ef3X2D4cfdX2Dbe6cX2D86123280eb65 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B58f66cccX2DdbcbX2D4c0aX2Daa02X2D37f5250cde19 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Beb47d55cX2D7649X2D43d6X2Db6c2X2D89747b2cbb23 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B6df4e6c2X2D38e3X2D45a8X2Da91aX2Df0fc4fdd3a99 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B28a880e2X2D0160X2D4315X2D97e3X2Dcf93a394e20e .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bf28264a2X2Dfa03X2D43aaX2D8306X2D38ab07bdb54b .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bd263ee4bX2D89d0X2D4d8fX2D91b7X2Da9c2b96dd2f6 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B3920fbcfX2Df16bX2D4e48X2D8160X2D43f95ade1a5c .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B11f92867X2D9d5cX2D4a6fX2Daba9X2D8ab92f6dc225 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bb14cceedX2DeaddX2D4f57X2D8922X2D79a210807834 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bc544b2bcX2D3c37X2D420eX2Dbfa1X2D4778f5f24a11 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bebbbb613X2D77edX2D4077X2D9cd6X2Da1986b37b31a .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B78727c83X2D021eX2D4892X2D8746X2Dfeb3f605ff9d .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B69b68eb6X2Db7acX2D41c3X2D9532X2De25b034bf2b9 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B609d3eacX2Df29cX2D4601X2D8dc0X2D31c5fe56f3a5 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bb84cfea9X2D64a5X2D4a05X2Daf33X2De2810bb965d1 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B2cbdd06dX2D2a7bX2D4317X2Da0e5X2D498e10940cc1 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bb6669766X2De732X2D4866X2D93b4X2D0351ff23a006 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bb668cb60X2Dbc36X2D4c10X2Da7dfX2D8b189f0f2db2 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B2763b16aX2D5f58X2D457eX2Dbb23X2Da0eba050c883 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B9939b6e1X2Dc0a7X2D40e9X2D9d07X2D6cf7a2fbfc2a .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bd97f752bX2D6a6aX2D470bX2Da948X2D56cac77c2f9d .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B4335dd1dX2D9675X2D4b39X2Daaa7X2D3a14fde225eb .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B91afc2bfX2D0b65X2D442aX2Db345X2D9b2e83214c8b .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B0a3d965aX2D8017X2D4624X2Db77eX2Dce5b62a2989c .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bfd54229bX2D50e2X2D44e0X2D9c6cX2D994ffb81c0f4 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B1dd03454X2D184dX2D4ae2X2D9147X2D3b2fe266c8a1 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bc4399951X2D6c81X2D4387X2D8e82X2D8bc1dd695fa6 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B13ffadb0X2D233eX2D461aX2D803eX2D8daee547c79e .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B41559363X2D5bf8X2D4820X2D8e7eX2D4039ccb60e1c .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Be0b39e64X2D854bX2D40ebX2D9f69X2Df779907b8f6b .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B974ab371X2D8423X2D4643X2D9312X2Db8727320279c .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B239e33bdX2D300eX2D4333X2Daa75X2D6fc4257df20e .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B2f1b883bX2Dd50eX2D4388X2Dbc5fX2D8900ce2808e8 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B1f077699X2D5165X2D4823X2D8dc7X2D9007e6e3bd6c .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bf367b5d0X2Dc928X2D4604X2D97f7X2D18ec42c5a041 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bfc43166fX2D6624X2D4363X2D93adX2Da7b46b1a13cc .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B10cd22d9X2D4ce3X2D4b8fX2D826fX2D53f8fcc8eee4 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:Bea214e8bX2D853eX2D463aX2DaebdX2D16af25a3abd5 .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B8a591337X2D8673X2D45c9X2D8ceaX2D9e06d4062fae .
-<http://ns.inria.fr/kg/index#catalog> <http://www.w3.org/ns/dcat#dataset> _:B852402ccX2D9e21X2D4ca5X2Da407X2D817caa5d9b51 .
-_:B1dd03454X2D184dX2D4ae2X2D9147X2D3b2fe266c8a1 <http://rdfs.org/ns/void#sparqlEndpoint> <https://ld.cultural.jp/sparql> .
-_:B1f077699X2D5165X2D4823X2D8dc7X2D9007e6e3bd6c <http://rdfs.org/ns/void#sparqlEndpoint> <https://linked.opendata.cz/sparql> .
-_:B6df4e6c2X2D38e3X2D45a8X2Da91aX2Df0fc4fdd3a99 <http://rdfs.org/ns/void#sparqlEndpoint> <https://linked.ec-dataplatform.eu/sparql> .
-_:B8a591337X2D8673X2D45c9X2D8ceaX2D9e06d4062fae <http://rdfs.org/ns/void#sparqlEndpoint> <https://fuseki.gwascentral.org/gc/query> .
-_:B28a880e2X2D0160X2D4315X2D97e3X2Dcf93a394e20e <http://rdfs.org/ns/void#sparqlEndpoint> <https://glyconnect.expasy.org/sparql> .
-_:Bc544b2bcX2D3c37X2D420eX2Dbfa1X2D4778f5f24a11 <http://rdfs.org/ns/void#sparqlEndpoint> <https://hkcan.julac.org/lod/sparql> .
-_:B2cbdd06dX2D2a7bX2D4317X2Da0e5X2D498e10940cc1 <http://rdfs.org/ns/void#sparqlEndpoint> <https://lingualibre.fr/bigdata/namespace/wdq/sparql> .
-_:Bc825ca26X2D1ef3X2D4cfdX2Dbe6cX2D86123280eb65 <http://rdfs.org/ns/void#sparqlEndpoint> <https://isidore.science/sparql> .
-_:B13ffadb0X2D233eX2D461aX2D803eX2D8daee547c79e <http://rdfs.org/ns/void#sparqlEndpoint> <https://id.sgcb.mcu.es/sparql> .
-_:Bf367b5d0X2Dc928X2D4604X2D97f7X2D18ec42c5a041 <http://rdfs.org/ns/void#sparqlEndpoint> <https://lingualibre.org/bigdata/namespace/wdq/sparql> .
-_:Bf28264a2X2Dfa03X2D43aaX2D8306X2D38ab07bdb54b <http://rdfs.org/ns/void#sparqlEndpoint> <https://io.datascience-paris-saclay.fr/sparql> .
-_:B11f92867X2D9d5cX2D4a6fX2Daba9X2D8ab92f6dc225 <http://rdfs.org/ns/void#sparqlEndpoint> <https://linkedwiki.com/sparql> .
-_:Bebbbb613X2D77edX2D4077X2D9cd6X2Da1986b37b31a <http://rdfs.org/ns/void#sparqlEndpoint> <https://hamap.expasy.org/sparql> .
-_:Ba15ffcecX2D56a6X2D4edaX2D9fd8X2Dfdeb1b6cc78f <http://rdfs.org/ns/void#sparqlEndpoint> <https://hawaii.eagle-i.net/sparqler/sparql> .
-_:Beb47d55cX2D7649X2D43d6X2Db6c2X2D89747b2cbb23 <http://rdfs.org/ns/void#sparqlEndpoint> <https://geo.linkeddata.es/sparql> .
-_:B43fe228bX2De8fcX2D425bX2Daeb3X2Dc363a6b59bd5 <http://rdfs.org/ns/void#sparqlEndpoint> <https://geco.ecophytopic.fr:8890/sparql> .
-_:B2f1b883bX2Dd50eX2D4388X2Dbc5fX2D8900ce2808e8 <http://rdfs.org/ns/void#sparqlEndpoint> <https://ideal-rdf.dbcls.jp/sparql> .
-_:B78727c83X2D021eX2D4892X2D8746X2Dfeb3f605ff9d <http://rdfs.org/ns/void#sparqlEndpoint> <https://ico.iate.inra.fr/fuseki/annotation/query> .
-_:B4335dd1dX2D9675X2D4b39X2Daaa7X2D3a14fde225eb <http://rdfs.org/ns/void#sparqlEndpoint> <https://ldf.fi/ww1lod/sparql> .
-_:B4e8d302dX2D179eX2D403bX2D8251X2D6b58144a4be4 <http://rdfs.org/ns/void#sparqlEndpoint> <https://lod.openaire.eu/sparql> .
-_:B974ab371X2D8423X2D4643X2D9312X2Db8727320279c <http://rdfs.org/ns/void#sparqlEndpoint> <https://linkeddata.finki.ukim.mk/sparql> .
-_:B852402ccX2D9e21X2D4ca5X2Da407X2D817caa5d9b51 <http://rdfs.org/ns/void#sparqlEndpoint> <https://linkedgeodata.org/sparql> .
-_:Bb668cb60X2Dbc36X2D4c10X2Da7dfX2D8b189f0f2db2 <http://rdfs.org/ns/void#sparqlEndpoint> <https://imagesnippets.com/sparql/imgtag> .
-_:Bea214e8bX2D853eX2D463aX2DaebdX2D16af25a3abd5 <http://rdfs.org/ns/void#sparqlEndpoint> <https://linkeddata1.calcul.u-psud.fr/sparql> .
-_:Bb6669766X2De732X2D4866X2D93b4X2D0351ff23a006 <http://rdfs.org/ns/void#sparqlEndpoint> <https://landregistry.data.gov.uk/landregistry/query> .
-_:B0a3d965aX2D8017X2D4624X2Db77eX2Dce5b62a2989c <http://rdfs.org/ns/void#sparqlEndpoint> <https://ja.dbpedia.org/sparql> .
-_:B9939b6e1X2Dc0a7X2D40e9X2D9d07X2D6cf7a2fbfc2a <http://rdfs.org/ns/void#sparqlEndpoint> <https://linkedspending.aksw.org/sparql> .
-_:Be0b39e64X2D854bX2D40ebX2D9f69X2Df779907b8f6b <http://rdfs.org/ns/void#sparqlEndpoint> <https://hunter-cuny.eagle-i.net/sparqler/sparql> .
-_:Bd1e256a6X2D6091X2D47efX2D8cb9X2Dc1a4e60da518 <http://rdfs.org/ns/void#sparqlEndpoint> <https://ldf.fi/warsa/sparql> .
-_:B239e33bdX2D300eX2D4333X2Daa75X2D6fc4257df20e <http://rdfs.org/ns/void#sparqlEndpoint> <https://howard.eagle-i.net/sparqler/sparql> .
-_:B609d3eacX2Df29cX2D4601X2D8dc0X2D31c5fe56f3a5 <http://rdfs.org/ns/void#sparqlEndpoint> <https://jpsearch.go.jp/rdf/sparql> .
-_:B6d401828X2D63ebX2D47d6X2Daf61X2D21858a5ed88a <http://rdfs.org/ns/void#sparqlEndpoint> <https://ldf.fi/folklore/sparql> .
-_:Bd97f752bX2D6a6aX2D470bX2Da948X2D56cac77c2f9d <http://rdfs.org/ns/void#sparqlEndpoint> <https://imagesnippets.com/sparql/images> .
-_:Bfc43166fX2D6624X2D4363X2D93adX2Da7b46b1a13cc <http://rdfs.org/ns/void#sparqlEndpoint> <https://ico.iate.inra.fr/fuseki/ontology/query> .
-_:B41559363X2D5bf8X2D4820X2D8e7eX2D4039ccb60e1c <http://rdfs.org/ns/void#sparqlEndpoint> <https://lod.nl.go.kr/sparql> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+
+<http://ns.inria.fr/kg/index#catalog> a dcat:Catalog ;
+    dcat:dataset [ void:sparqlEndpoint <https://imagesnippets.com/sparql/images> ],
+        [ void:sparqlEndpoint <https://fuseki.gwascentral.org/gc/query> ],
+        [ void:sparqlEndpoint <https://linkedwiki.com/sparql> ],
+        [ void:sparqlEndpoint <https://ja.dbpedia.org/sparql> ],
+        [ void:sparqlEndpoint <https://genome.microbedb.jp/sparql> ],
+        [ void:sparqlEndpoint <https://lod.abes.fr/sparql> ],
+        [ void:sparqlEndpoint <https://linkedspending.aksw.org/sparql> ],
+        [ void:sparqlEndpoint <https://ideal-rdf.dbcls.jp/sparql> ],
+        [ void:sparqlEndpoint <https://hunter-cuny.eagle-i.net/sparqler/sparql> ],
+        [ void:sparqlEndpoint <https://howard.eagle-i.net/sparqler/sparql> ],
+        [ void:sparqlEndpoint <https://ldf.fi/kirjasampo/sparql> ],
+        [ void:sparqlEndpoint <https://linkeddata.uriburner.com/sparql> ],
+        [ void:sparqlEndpoint <https://forum.semantic-metabolomics.fr/sparql> ],
+        [ void:sparqlEndpoint <https://jpsearch.go.jp/rdf/sparql> ],
+        [ void:sparqlEndpoint <https://ld.cultural.jp/sparql> ],
+        [ void:sparqlEndpoint <https://geco.ecophytopic.fr:8890/sparql> ],
+        [ void:sparqlEndpoint <https://lod.nl.go.kr/sparql> ],
+        [ void:sparqlEndpoint <https://hkcan.julac.org/lod/sparql> ],
+        [ void:sparqlEndpoint <https://libris.kb.se/sparql> ],
+        [ void:sparqlEndpoint <https://imagesnippets.com/sparql/imgtag> ],
+        [ void:sparqlEndpoint <https://lingualibre.fr/bigdata/namespace/wdq/sparql> ],
+        [ void:sparqlEndpoint <https://linked.ec-dataplatform.eu/sparql> ],
+        [ void:sparqlEndpoint <https://ldf.fi/ww1lod/sparql> ],
+        [ void:sparqlEndpoint <https://linkedgeodata.org/sparql> ],
+        [ void:sparqlEndpoint <https://linked.opendata.cz/sparql> ],
+        [ void:sparqlEndpoint <https://linkeddata.finki.ukim.mk/sparql> ],
+        [ void:sparqlEndpoint <https://io.datascience-paris-saclay.fr/sparql> ],
+        [ void:sparqlEndpoint <https://linkeddata1.calcul.u-psud.fr/sparql> ],
+        [ void:sparqlEndpoint <https://ldf.fi/mufi/sparql> ],
+        [ void:sparqlEndpoint <https://ldf.fi/warsa/sparql> ],
+        [ void:sparqlEndpoint <https://ko.dbpedia.org/sparql> ],
+        [ void:sparqlEndpoint <https://hawaii.eagle-i.net/sparqler/sparql> ],
+        [ void:sparqlEndpoint <https://fr.dbpedia.org/sparql> ],
+        [ void:sparqlEndpoint <https://jsu.eagle-i.net/sparqler/sparql> ],
+        [ void:sparqlEndpoint <https://kaiko.getalp.org/sparql> ],
+        [ void:sparqlEndpoint <https://linkedlifedata.com/sparql> ],
+        [ void:sparqlEndpoint <https://id.dbpedia.org/sparql> ],
+        [ void:sparqlEndpoint <https://id.nlm.nih.gov/mesh/sparql> ],
+        [ void:sparqlEndpoint <https://glyconnect.expasy.org/sparql> ],
+        [ void:sparqlEndpoint <https://landregistry.data.gov.uk/landregistry/query> ],
+        [ void:sparqlEndpoint <https://hamap.expasy.org/sparql> ],
+        [ void:sparqlEndpoint <https://geo.linkeddata.es/sparql> ],
+        [ void:sparqlEndpoint <https://ldf.fi/folklore/sparql> ],
+        [ void:sparqlEndpoint <https://lingualibre.org/bigdata/namespace/wdq/sparql> ],
+        [ void:sparqlEndpoint <https://isidore.science/sparql> ],
+        [ void:sparqlEndpoint <https://ico.iate.inra.fr/fuseki/ontology/query> ],
+        [ void:sparqlEndpoint <https://lod.openaire.eu/sparql> ],
+        [ void:sparqlEndpoint <https://id.sgcb.mcu.es/sparql> ],
+        [ void:sparqlEndpoint <https://hu.dbpedia.org/sparql> ],
+        [ void:sparqlEndpoint <https://ico.iate.inra.fr/fuseki/annotation/query> ] .
