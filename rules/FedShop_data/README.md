@@ -1,18 +1,26 @@
 # Rules for the extraction of real probabilities for the configuration of dataset description generation as part of the DeKaloG project
 
-- Classes
-    - [x] Number of instances
-    - Properties around instances
-        - [x] Number of instances of properties around class instances
-        - Objects
-            - [x] Datatypes
-                - [x] Min/max values
-            - [x] Classes
-            - [x] Number of different values
+- [ ] Number of Dataset descriptions
+- [ ] Size of the extracted dataset description
+- General or for each dataset
+    - [ ] Basic statistics (triples, classes, properties, distinctSubjects, distinctObjects)
+    - Classes
+        - [x] Number of instances
+        - Properties around instances
+            - [x] Number of instances of properties around class instances
+            - Objects
+                - [x] Datatypes
+                    - [x] Min/max values
+                - [x] Classes
+                - [x] Number of different values
 
 ## Result retrieval queries
 
-### Basic statistics on datasets
+### In general
+
+### For each dataset
+
+#### Basic statistics on datasets
 ```sparql
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -37,7 +45,7 @@ SELECT DISTINCT ?dataset ?triples ?classes ?properties ?distinctSubjects ?distin
 }
 ```
 
-### Number of classes instances
+#### Number of classes instances
 ```sparql
 PREFIX void: <http://rdfs.org/ns/void#>
 SELECT DISTINCT ?dataset ?c ?count {
@@ -48,9 +56,9 @@ SELECT DISTINCT ?dataset ?c ?count {
 } GROUP BY ?dataset ?c ?count
 ```
 
-### Properties appearing around class instances with number of triples, class and datatype of object, min/max of values
+#### Properties appearing around class instances with number of triples, class and datatype of object, min/max of values
 
-#### Type of the objects of the properties appearing around instances of classes
+##### Type of the objects of the properties appearing around instances of classes
 ```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX void: <http://rdfs.org/ns/void#>
@@ -68,7 +76,7 @@ SELECT DISTINCT ?dataset ?c ?p ?cpcount ?oc ?cpoccount {
 } GROUP BY ?dataset ?c ?p ?cpcount ?oc ?cpoccount
 ```
 
-#### Datatype of the objects of the properties appearing around instances of classes
+##### Datatype of the objects of the properties appearing around instances of classes
 ```sparql
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
