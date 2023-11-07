@@ -16,8 +16,8 @@
         [
             mf:action """
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.classes.ttl> INTO GRAPH kgi:LOV_redux ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/data/LOV_redux.properties.ttl> INTO GRAPH kgi:LOV_redux
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/input/LOV_redux.classes.ttl> INTO GRAPH kgi:LOV_redux ;
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/VocabularyExperiment/input/LOV_redux.properties.ttl> INTO GRAPH kgi:LOV_redux
             """
         ]
     ) .
