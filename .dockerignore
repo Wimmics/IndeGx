@@ -1,28 +1,34 @@
-*.jar
-*.js
-indegx/node_modules
-indegx/package-lock.json
-indegx/src/*.js
+# Mounted directories
+catalogs/*
+config/*
+input/*
+rules/*
 
-*.drawio
-*.drawio.pdf
-
-catalogs
-config
-data
-input
-output
-rules
-scripts
-
+# Folders that should not be copied
+scripts/*
 .github
 
+# Folders with generated content
+indegx/node_modules
+output/*
+
+# Generated files
+*.js
+indegx/package-lock.json
+indegx/src/*.js
+*.log
+*.old
+*.tmp
+
+# Documentation files
+*.md
+*.drawio
+*.drawio.pdf
+*.png
+
+# static files that are not used in the docker image
+*.jar
 Dockerfile
 .gitignore
 .dockerignore
 docker-compose.yml
-*.md
-
-*.log
-*.old
-*.tmp
