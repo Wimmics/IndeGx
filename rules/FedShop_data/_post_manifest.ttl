@@ -175,9 +175,9 @@
                     void:triples ?count .
             } WHERE {
                 {
-                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count)
+                    SELECT DISTINCT ?dataset ?p (COUNT(DISTINCT *) AS ?count)
                     {
-                        SELECT DISTINCT ?dataset ?s ?o {
+                        SELECT DISTINCT ?dataset ?p ?s ?o {
                             GRAPH ?endpoint {
                                 ?endpoint dcat:servesDataset ?dataset
                             }
@@ -185,7 +185,7 @@
                                 ?s ?p ?o
                             }
                         } GROUP BY ?p
-                    } GROUP BY ?dataset
+                    } GROUP BY ?dataset ?p 
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?p) ) ) ) ) AS ?propertyPartition )
             }"""
