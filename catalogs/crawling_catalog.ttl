@@ -1,129 +1,46 @@
-@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
-@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
-@prefix earl: <http://www.w3.org/ns/earl#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix void: <http://rdfs.org/ns/void#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix pav: <http://purl.org/pav/> .
+@prefix void: <http://rdfs.org/ns/void#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
 
-<http://ns.inria.fr/kg/index#catalog> a dcat:Catalog ;
+kgi:catalog a dcat:Catalog ;
     dcterms:title "Catalog from metadatamatic submissions and google crawling" ;
-    pav:lastUpdateOn "2023-06-14T10:26:00Z"^^xsd:dateTime ;
-    dcat:dataset kgi:Joconde , 
-        kgi:calmip , 
-        kgi:dataportalwatch ,
-        [
-            void:sparqlEndpoint <http://data.bnf.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://lod.openlinksw.com/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://clara.univ-nantes.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://193.190.127.165:7200/repositories/ERA-KG-latest>
-        ] ,
-        [
-            void:sparqlEndpoint <https://taxref.mnhn.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://d2kab.i3s.unice.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://io.datascience-paris-saclay.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://virtuoso.plateforme.dipso.inrae.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://imagesnippets.com/sparql/imgtag>
-        ] ,
-        [
-            void:sparqlEndpoint <https://linked.ec-dataplatform.eu/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://clara.univ-nantes.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://bio2rdf.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://data.nobelprize.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://ts.opendata.inrae.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://dbpedia.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://weakg.i3s.unice.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query>
-        ] ,
-        [
-            void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://vocabularies.unesco.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://taxref/mnhn.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://weakg.i3s.unice.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://imagesnippets.com/sparql/images>
-        ] ,
-        [
-            void:sparqlEndpoint <http://fr.dbpedia.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://query.wikidata.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://data.europa.eu/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://virtuoso.plateforme.dipso.inrae.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://smt.esante.gouv.fr/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://rdf.muninn-project.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <http://www.lotico.com:3030/lotico/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://fuseki.kupferdigital.org/demonstrator/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://vocabularies.unesco.org/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://db.project-hobbit.eu/sparql>
-        ] ,
-        [
-            void:sparqlEndpoint <https://pgxlod.loria.fr/sparql>
-        ] .
-
-kgi:Joconde void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> .
-
-kgi:calmip void:sparqlEndpoint <https://allegro.callisto.calmip.univ-toulouse.fr/#/repositories/sms> .
-
-kgi:dataportalwatch void:sparqlEndpoint <https://data.wu.ac.at/sparql/> .
+    pav:lastUpdateOn "2023-11-08T15:26:13.462000+01:00"^^xsd:dateTime ;
+    dcat:dataset 
+        [ void:sparqlEndpoint <http://193.190.127.165:7200/repositories/ERA-KG-latest> ],
+        [ void:sparqlEndpoint <https://allegro.callisto.calmip.univ-toulouse.fr/#/repositories/sms> ],
+        [ void:sparqlEndpoint <https://bio2rdf.org/sparql> ],
+        [ void:sparqlEndpoint <http://d2kab.i3s.unice.fr/sparql> ],
+        [ void:sparqlEndpoint <http://data.bnf.fr/sparql> ],
+        [ void:sparqlEndpoint <https://data.wu.ac.at/sparql/> ],
+        [ void:sparqlEndpoint <http://clara.univ-nantes.fr/sparql> ],
+        [ void:sparqlEndpoint <https://clara.univ-nantes.fr/sparql> ],
+        [ void:sparqlEndpoint <https://data.europa.eu/sparql> ],
+        [ void:sparqlEndpoint <https://data.nobelprize.org/sparql> ],
+        [ void:sparqlEndpoint <https://db.project-hobbit.eu/sparql> ],
+        [ void:sparqlEndpoint <https://forum.semantic-metabolomics.fr/sparql> ],
+        [ void:sparqlEndpoint <https://fuseki.kupferdigital.org/demonstrator/sparql> ],
+        [ void:sparqlEndpoint <http://id.nlm.nih.gov/mesh/sparql> ],
+        [ void:sparqlEndpoint <https://imagesnippets.com/sparql/images> ],
+        [ void:sparqlEndpoint <https://imagesnippets.com/sparql/imgtag> ],
+        [ void:sparqlEndpoint <https://io.datascience-paris-saclay.fr/sparql> ],
+        [ void:sparqlEndpoint <https://query.wikidata.org/sparql> ],
+        [ void:sparqlEndpoint <https://linked.ec-dataplatform.eu/sparql> ],
+        [ void:sparqlEndpoint <https://lod.openlinksw.com/sparql> ],
+        [ void:sparqlEndpoint <http://www.lotico.com:3030/lotico/sparql> ],
+        [ void:sparqlEndpoint <https://pgxlod.loria.fr/sparql> ],
+        [ void:sparqlEndpoint <http://rdf.muninn-project.org/sparql> ],
+        [ void:sparqlEndpoint <https://smt.esante.gouv.fr/sparql> ],
+        [ void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> ],
+        [ void:sparqlEndpoint <https://taxref.mnhn.fr/sparql> ],
+        [ void:sparqlEndpoint <http://ts.opendata.inrae.fr/sparql> ],
+        [ void:sparqlEndpoint <http://virtuoso.plateforme.dipso.inrae.fr/sparql> ],
+        [ void:sparqlEndpoint <https://virtuoso.plateforme.dipso.inrae.fr/sparql> ],
+        [ void:sparqlEndpoint <https://vocabularies.unesco.org/sparql> ],
+        [ void:sparqlEndpoint <http://weakg.i3s.unice.fr/sparql> ],
+        [ void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql> ],
+        [ void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> ],
+        [ void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql> ],
+        [ void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> ].
