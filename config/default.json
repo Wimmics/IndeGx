@@ -1,15 +1,16 @@
 {
-    "manifest": "file:///rules/vocabulary_statistics/_manifest.ttl",
-    "post": "file:///rules/vocabulary_statistics/_post_manifest.ttl",
-    "pre": "file:///rules/vocabulary_statistics/_pre_manifest.ttl",
-    "catalog": "file:///catalogs/all_catalog_edited.ttl",
+    "pre": "file:///rules/FedShop_data/_pre_manifest.ttl",
+    "manifest": "file:///rules/FedShop_data/_manifest.ttl",
+    "post": "file:///rules/FedShop_data/_post_manifest.ttl",
+    "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
     "maxConccurentQueries": 300,
     "delayMillisecondsTimeForConccurentQuery": 1000,
-    "logFile": "/output/indegx_vocabularies.log",
-    "outputFile": "/output/indegx_vocabularies.trig",
+    "manifestJSON": "/output/rules.json",
+    "logFile": "/output/indegx_debug.log",
+    "outputFile": "/output/indegx_debug.trig",
     "queryLog": false,
-    "resilience": true
+    "resilience": false
 }

@@ -14,10 +14,17 @@ import { createStore, loadRDFFile } from "./RDFUtils.js";
 import { Manifest } from "./RuleTree.js";
 import md5 from "md5"
 
+
+const defaultConfigFilename = "/config/default.json";
+const mainTmpIndexSaveFilename = "/output/tmp/main/indeg.trig";
+const mainTmpIndexSaveFilenamePrefix = "/output/tmp/main/indegx_";
+const mainTmpIndexSaveFilenameSuffix = ".trig";
+const preTmpIndexSaveFilename = "/output/tmp/pre/indeg.trig";
+
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
     { name: 'resume', alias: 'r', type: Boolean },
-    { name: 'config', alias: 'c', type: String, defaultOption: "config/default.json" },
+    { name: 'config', alias: 'c', type: String, defaultOption: defaultConfigFilename },
 ]
 
 type Option = {
@@ -52,7 +59,7 @@ if (options.help) {
                     alias: 'c',
                     type: String,
                     typeLabel: '{underline file}',
-                    description: 'Configuration file, in JSON format. Default is config/default.json.'
+                    description: `Configuration file, in JSON format. Default is ${defaultConfigFilename}.`
                 }
             ]
         },
@@ -64,7 +71,7 @@ if (options.help) {
     console.info(usage)
     process.exit()
 }
-let configFilename: string = "config/default.json";
+let configFilename: string = defaultConfigFilename;
 if (options.config !== undefined) {
     configFilename = options.config;
 }
@@ -76,7 +83,7 @@ type ConfigType = {
     catalog: string,
     post?: string,
     pre?: string,
-    nbFetchRetries: number,
+    nbFetchRetries?: number,
     millisecondsBetweenRetries: number,
     maxConccurentQueries: number,
     delayMillisecondsTimeForConccurentQuery: number,
@@ -101,11 +108,29 @@ let rootManifestFilename: string = currentConfig.manifest;
 let catalog: string = currentConfig.catalog;
 let post: string = currentConfig.post;
 let nbFetchRetries: number = currentConfig.nbFetchRetries;
+if (nbFetchRetries !== undefined) {
+    GlobalUtils.setNbFetchRetries(nbFetchRetries);
+}
 let millisecondsBetweenRetries: number = currentConfig.millisecondsBetweenRetries;
+if(millisecondsBetweenRetries !== undefined) {
+    GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
+}
 let maxConccurentQueries: number = currentConfig.maxConccurentQueries;
+if (maxConccurentQueries !== undefined) {
+    GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
+}
 let delayMillisecondsTimeForConccurentQuery: number = currentConfig.delayMillisecondsTimeForConccurentQuery;
+if(delayMillisecondsTimeForConccurentQuery !== undefined) {
+    GlobalUtils.setDelayMillisecondsTimeForConccurentQuery(delayMillisecondsTimeForConccurentQuery);
+}
 let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
+if (defaultQueryTimeout !== undefined) {
+    SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
+}
 let logFile: string = currentConfig.logFile;
+if(logFile !== undefined) {
+    Logger.setLogFileName(logFile);
+}
 let queryLog: boolean = currentConfig.queryLog;
 if (queryLog !== undefined) {
     ReportUtils.setLogMode(queryLog);
@@ -124,11 +149,6 @@ if (catalogBinSize === undefined || catalogBinSize <= 0) {
 let outputFile: string = currentConfig.outputFile;
 let manifestTreeFile: string = currentConfig.manifestJSON;
 let postManifestTreeFile: string = currentConfig.postManifestJSON;
-GlobalUtils.setNbFetchRetries(nbFetchRetries);
-GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
-GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
-GlobalUtils.setDelayMillisecondsTimeForConccurentQuery(delayMillisecondsTimeForConccurentQuery);
-SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
 Logger.setLogFileName(logFile);
 
 function indegxProcess(): Promise<void> {
@@ -140,15 +160,15 @@ function indegxProcess(): Promise<void> {
             Logger.info("Resuming from previous execution");
             let resumingStore = createStore();
 
-            if (accessSync("/output/tmp/main/indeg.trig") !== undefined) {
-                initPromise = loadRDFFile("tmp/main/indeg.trig", resumingStore).then(() => {
+            if (accessSync(mainTmpIndexSaveFilename) !== undefined) {
+                initPromise = loadRDFFile(mainTmpIndexSaveFilename, resumingStore).then(() => {
                     return sendStoreContentToIndex(resumingStore).finally(() => {
                         resumingStore.close();
                         return;
                     });
                 })
-            } else if (accessSync("/output/tmp/pre/indeg.trig") !== undefined) {
-                initPromise = loadRDFFile("/output/tmp/pre/indeg.trig", resumingStore).then(() => {
+            } else if (accessSync(preTmpIndexSaveFilename) !== undefined) {
+                initPromise = loadRDFFile(preTmpIndexSaveFilename, resumingStore).then(() => {
                     return sendStoreContentToIndex(resumingStore).finally(() => {
                         resumingStore.close();
                         return;
@@ -167,7 +187,7 @@ function indegxProcess(): Promise<void> {
                 })
             })).finally(() => {
                 if (resilience !== undefined && resilience) {
-                    return writeIndex("/output/tmp/pre/indeg.trig")
+                    return writeIndex(preTmpIndexSaveFilename)
                 } else {
                     return;
                 }
@@ -234,10 +254,10 @@ function indegxProcess(): Promise<void> {
             Logger.error("Error treating catalog", catalog, error)
         }).finally(() => {
             if ((resilience !== undefined && resilience) || recursive) {
-                let tmpIndexFilename = "/output/tmp/main/indeg.trig";
+                let tmpIndexFilename = mainTmpIndexSaveFilename;
                 if(recursive) {
                     let endpointListId = md5(endpointObjectList.map(endpointObject => endpointObject.endpoint).toString());
-                    tmpIndexFilename = "/output/tmp/main/indegx_" + endpointListId + ".trig";
+                    tmpIndexFilename = mainTmpIndexSaveFilenamePrefix + endpointListId + mainTmpIndexSaveFilenameSuffix;
                 }
                 return writeIndex(tmpIndexFilename)
             } else {

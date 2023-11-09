@@ -2,7 +2,6 @@
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix earl: <http://www.w3.org/ns/earl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix kgi: <http://ns.inria.fr/kg/index#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -11,7 +10,7 @@
 @prefix pav: <http://purl.org/pav/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-kgi:catalog a dcat:Catalog ;
+<http://ns.inria.fr/kg/index#catalog> a dcat:Catalog ;
     dcterms:title "Catalog from metadatamatic submissions and google crawling" ;
     pav:lastUpdateOn "2023-06-14T10:26:00Z"^^xsd:dateTime ;
     dcat:dataset kgi:Joconde , 

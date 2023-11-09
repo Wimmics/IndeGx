@@ -6,19 +6,19 @@ This folder contains the generation assets used to extract statistics on the usa
 
 Supplementary files to load because they are not in the LOV dump:
 ```sparql
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.aa.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.ab.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.ac.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.ad.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.ae.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.af.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.ag.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.ah.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.ai.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/lov.27072023.aj.nq> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/spin.ttl> INTO GRAPH <http://spinrdf.org/spin#> ;
-LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/data/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl#>
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.aa.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.ab.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.ac.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.ad.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.ae.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.af.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.ag.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.ah.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.ai.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/lov.27072023.aj.nq> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/spin.ttl> INTO GRAPH <http://spinrdf.org/spin#> ;
+LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/FAIRSavoirExperiment/input/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl#>
 ```
 
 Not found: SWRL

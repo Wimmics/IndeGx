@@ -31,7 +31,7 @@ VOLUME ["/input"]
 WORKDIR /output
 VOLUME ["/output"]
 # Colume containing the configuration file
-VOLUME ["/indegx/config"]
+VOLUME ["/config"]
 
 WORKDIR /indegx
 RUN npm install
