@@ -8,7 +8,8 @@ export enum LogLevel {
     INFO = "INFO"
 }
 
-let logFileName = "indegx.log"
+export const defaultLogFileName = "/output/indegx.log"
+let logFileName = defaultLogFileName
 let defaultLogLevel = LogLevel.LOG;
 
 /**
@@ -34,9 +35,7 @@ export function setLogLevel(level: LogLevel) {
 }
 
 export function setLogFileName(fileName: string) {
-    if(fileName == null || fileName == undefined || fileName == "") {
-        logFileName = "indegx.log";
-    } else {
+    if(fileName !== null && fileName !== undefined && fileName !== "") {
         logFileName = fileName;
     }
 }

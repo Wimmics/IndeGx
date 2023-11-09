@@ -8,7 +8,7 @@ This repository hosts the new version of the IndeGx application. This new versio
 
 IndeGx is a framework created for the creation of an RDF knowledge graph that can be used as an index of knowledge graphs available online. It uses a set of rules to extract and compute the content of this index using SPARQL queries.
 
-IndeGx is designed to fully use existing semantic web standards and existing technologies. Any rules expressed with the correct vocabulary can be used to generate a knowledge graph.
+IndeGx is designed to make full use of semantic web standards. Any rules expressed with a standard SPARQL syntax can be used to generate a knowledge graph.
 
 ### Differences with the previous version
 
@@ -32,6 +32,8 @@ The index extraction rules have been modified as follows:
 
 ## Execution
 
+IndeGx as an application is executed in a docker container. It contains the IndeGx engine, anda Corese server. The Corese server is used both to execute the rules against remote SPARQL endpoints and to store the results of the rules application. The Corese server is not accessible from outside the docker container.
+
 ### Requirements
 
 IndeGx requires git, and docker-compose installed on a Linux-based system.
@@ -39,19 +41,35 @@ IndeGx requires git, and docker-compose installed on a Linux-based system.
 ### Installation
 
 To use IndeGx, first clone this repository in a folder using :
-`git clone https://github.com/Wimmics/IndeGx.git .`
+```
+git clone https://github.com/Wimmics/IndeGx.git .
+```
 
 ### Commands
 
-Compilation:
-`./build.sh`
-
 Execution:
-`./run.sh`
+```
+./run.sh
+```
 
-### Configuration
+## Directories
 
-The IndeGx application is configured by a config file in the `/config` folder.
+There are 7 directories in this repository:
+- `catalog`: contains catalogs of SPARQL endpoints as RDF files. Catalogs are expected to be writtent using the [DCAT vocabulary](https://www.w3.org/TR/vocab-dcat-2/). They will be available from the inside of the inside of the docker container from `/catalog/`.
+- `config`: contains configuration for both IndeGx and its Corese server. They will be available from the inside of the inside of the docker container from `/config/`. More details in the [configuration section](#configuration).
+- `indegx`: contains the code of the IndeGx engine.
+- `input`: should contain the input files for the current rules. They will be available from the inside of the docker container from `/input/`.
+- `output`: will contain the output files of the execution of IndeGx. They will contain the logs from the IndeGx engine and from the Corese server. They will also contain the result of the application of the rules, in the from of a TriG file. They will be available from the inside of the docker container from `/output/`.
+- `rules`: contains the rules for the extraction of the index. They will be available from the inside of the docker container from `/rules/`. More details in the [rules section](#rules).
+- `scripts`: contains scripts used in the different experiments done as part of the development and publications of IndeGx.
+
+At the execution of `run.sh`, the content of the `indegx` folder will be copied to the docker container. The `catalog`, `config`, `input`, `output`, and `rules` folders will be mounted as volumes in the docker container. The `scripts` folder will not be copied nor mounted.
+
+## Configuration
+
+#### IndeGx configuration
+
+The IndeGx application is configured by a config file in the `/config` folder. By default, the application will use the `default.json` file. The config file is a JSON file with the following structure:
 
 ```json
 {
@@ -68,7 +86,37 @@ The IndeGx application is configured by a config file in the `/config` folder.
 }
 ```
 
-### Future improvements
+The structure of the config file is the following:
+```typescript
+{
+    manifest: string, // Path to the main manifest file. It must be in one of the mounted volumes. It must be a valid RDF file. It is recomanded to store it in either the input or the rules folder.
+    catalog: string, // Path to the catalog file. It must be in one of the mounted volumes. It must be a valid RDF file. It is recomanded to store it in the input
+    post?: string, // Path to the post manifest file. It must be in one of the mounted volumes. It must be a valid RDF file. It is recomanded to store it in either the input or the rules folder.
+    pre?: string, // Path to the pre manifest file. It must be in one of the mounted volumes. It must be a valid RDF file. It is recomanded to store it in either the input or the rules folder.
+    nbFetchRetries?: number, // Default 10, number of retries to fetch a remote file if it fails.
+    millisecondsBetweenRetries?: number, // Default 5000, number of milliseconds to wait between two retries.
+    maxConccurentQueries?: number, // Default 300, maximum number of concurrent queries to execute against a SPARQL endpoint.
+    delayMillisecondsTimeForConccurentQuery?: number, // Default 1000, number of milliseconds to wait between two queries against a SPARQL endpoint.
+    defaultQueryTimeout?: number, // Default 60000, number of seconds to wait for a query to execute before considering it as a failure.
+    logFile?: string, // Default /output/indegx.log, path to the log file. It must be in one of the mounted volumes.
+    outputFile?: string, // Default /output/index.trig, path to the output file. It must be in one of the mounted volumes.
+    manifestJSON?: string, // Path to the manifest file in JSON format. It must be in one of the mounted volumes. Will not be generated if not provided.
+    postManifestJSON?: string, // Path to the post manifest file in JSON format. It must be in one of the mounted volumes. Will not be generated if not provided.
+    queryLog?: boolean, // Default true, log queries in the index if true. Incompatible with resilience.
+    resilience?: boolean, // default false, store the result of the current state at the end of the pre step and main step of the index in a temporary file if true. Incompatible with disabling query logging.
+}
+```
+
+#### Corese configuration
+
+The Corese server in configured by the `corese-properties.properties` file, in the `/config` folder. It is a standard Corese configuration file. More information can be found on the [Corese documentation](https://github.com/Wimmics/corese/blob/master/docs/getting%20started/Getting%20Started%20With%20Corese-server.md).
+
+
+## Rules
+
+The `rules` contains several sets of rules used in different use cases during the development of IndeGx. The declaration of the rules is done using the [IndeGx vocabulary](./indegx_vocabulary.md) and the W3C manifest vocabulary (see [the rules folder](./rules/README.md) for more details).
+
+## Future improvements
 
 - The index extraction rules are continually updated with new features
 - As soon as it is technologically sustainable, IndeGx will use the RDF Star standard

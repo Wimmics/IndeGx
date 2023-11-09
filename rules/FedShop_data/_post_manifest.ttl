@@ -145,7 +145,7 @@
                         GRAPH ?dataset {
                             ?s a ?c
                         }
-                    } GROUP BY ?c
+                    } GROUP BY ?dataset ?c 
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
             }"""
@@ -175,7 +175,7 @@
                     void:triples ?count .
             } WHERE {
                 {
-                    SELECT ?dataset (COUNT(DISTINCT *) AS ?count)
+                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count)
                     {
                         SELECT DISTINCT ?dataset ?s ?o {
                             GRAPH ?endpoint {
@@ -185,7 +185,7 @@
                                 ?s ?p ?o
                             }
                         } GROUP BY ?p
-                    }
+                    } GROUP BY ?dataset
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?p) ) ) ) ) AS ?propertyPartition )
             }"""
@@ -226,7 +226,7 @@
                             ?s a ?c .
                             ?s ?p ?o .
                         }
-                    } GROUP BY ?c
+                    } GROUP BY ?dataset ?c ?p
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
@@ -316,7 +316,7 @@
                         }
                         FILTER(isLiteral(?o))
                         BIND(DATATYPE(?o) AS ?oc)
-                    } GROUP BY ?c ?p
+                    } GROUP BY ?dataset ?c ?p ?oc
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
@@ -366,7 +366,7 @@
                         }
                         FILTER(isLiteral(?o))
                         BIND(DATATYPE(?o) AS ?oc)
-                    } GROUP BY ?c ?p
+                    } GROUP BY ?dataset ?c ?p ?oc
                 }
                 FILTER(?oc != xsd:string && ?oc != rdf:langString)
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
@@ -413,7 +413,7 @@
                         }
                         FILTER(isLiteral(?o))
                         BIND(DATATYPE(?o) AS ?oc)
-                    } GROUP BY ?c ?p
+                    } GROUP BY ?dataset ?c ?p ?oc
                 }
                 FILTER(?oc != xsd:string && ?oc != rdf:langString)
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )

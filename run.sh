@@ -12,3 +12,5 @@ containerName=`sed 's/.*/\L&/g' < <(echo "$containerName")`
 echo "INDEGX_ARGS=$*" > .env
 
 docker-compose -p $containerName up --abort-on-container-exit --build
+
+docker-compose -p $containerName down --remove-orphans --rmi local --volumes

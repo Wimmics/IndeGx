@@ -17,6 +17,8 @@ services:
     volumes:
       - ./input:/input
       - ./output:/output
-      - ./config:/indegx/config
+      - ./config:/config
+      - ./catalogs:/catalogs
+      - ./rules:/rules
     environment:
       - INDEGX_ARGS=${INDEGX_ARGS}
