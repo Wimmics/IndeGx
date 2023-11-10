@@ -62,16 +62,14 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
     if(ttlString == null || ttlString == undefined) {
         throw new Error("Invalid turtle string " + ttlString);
     } else {
-        const regexBnB = /([ \n])(b[0-9]+) /g;
-        const regexNodeB = /([ \n])(node[0-9]+) /g;
-        const regexBlankNodeReplacement = "$1_:$2 "
+        const betterRegexNodeB = /(\s)+(((node|b)[a-zA-Z0-9]+[^:]))(\s)+/g;
+        const betterRegexNodeBReplacement = "$1_:$2$5"
         const regexURIWithoutBracketsRegex = /(\s)(([a-zA-Z0-9-]+:\/\/(([a-zA-Z0-9-]+\.)?[a-zA-Z0-9-]+)+(\.[a-zA-Z0-9\-_:]+)\/)([a-zA-Z0-9\-_:])*)(\s+)/g
         const regexURIWithoutBracketsReplacement = "$1<$2>$8"
         let result = ttlString;
         result = result.replaceAll("nodeID://", "_:"); // Dirty hack to fix nodeID:// from Virtuoso servers for turtle
         result = result.replaceAll("genid-", "_:"); // Dirty hack to fix blank nodes with genid- prefix
-        result = result.replaceAll(regexBnB, regexBlankNodeReplacement); // Dirty hack to fix blank nodes with b prefix
-        result = result.replaceAll(regexNodeB, regexBlankNodeReplacement); // Dirty hack to fix blank nodes with node prefix
+        result = result.replaceAll(betterRegexNodeB, betterRegexNodeBReplacement); // Dirty hack to fix blank nodes with b or node prefix and without ":"
         result = result.replaceAll(regexURIWithoutBracketsRegex, regexURIWithoutBracketsReplacement); // Dirty hack ot remove property URIs that appear in Turtle returned by Corese when they have two ":". Should be fixed in Corese >4.4.1
         result = Global.replaceUnicode(result);
         return result;
