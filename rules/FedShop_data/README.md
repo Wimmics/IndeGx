@@ -44,22 +44,12 @@ PREFIX void: <http://rdfs.org/ns/void#>
 SELECT DISTINCT ?dataset ?triples ?classes ?properties ?distinctSubjects ?distinctObjects {
     GRAPH ?dataset {
     }
-    OPTIONAL {
-      ?dataset void:triples ?triples .
-    }
-    OPTIONAL {
-      ?dataset void:classes ?classes .
-    }
-    OPTIONAL {
-      ?dataset void:properties ?properties .
-    }
-    OPTIONAL {
-      ?dataset void:distinctSubjects ?distinctSubjects .
-    }
-    OPTIONAL {
-      ?dataset void:distinctObjects ?distinctObjects .
-    }
-} GROUP BY ?dataset
+      ?dataset void:triples ?triples ;
+               void:classes ?classes ;
+               void:properties ?properties ;
+               void:distinctSubjects ?distinctSubjects ;
+               void:distinctObjects ?distinctObjects .
+} GROUP BY ?dataset ?triples ?classes ?properties ?distinctSubjects ?distinctObjects
 ```
 
 ### Number of classes instances
