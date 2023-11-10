@@ -62,15 +62,18 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
     if(ttlString == null || ttlString == undefined) {
         throw new Error("Invalid turtle string " + ttlString);
     } else {
-        const betterRegexNodeB = /(\s)+(((node|b)[a-zA-Z0-9]+[^:]))(\s)+/g;
-        const betterRegexNodeBReplacement = "$1_:$2$5"
+        const betterRegexNodeB = /([\s|\n]+)((node|b)[a-zA-Z0-9]+[^:])(\s)+/g;
+        const betterRegexNodeBReplacement = "$1_:$2$4"
         const regexURIWithoutBracketsRegex = /(\s)(([a-zA-Z0-9-]+:\/\/(([a-zA-Z0-9-]+\.)?[a-zA-Z0-9-]+)+(\.[a-zA-Z0-9\-_:]+)\/)([a-zA-Z0-9\-_:])*)(\s+)/g
         const regexURIWithoutBracketsReplacement = "$1<$2>$8"
+        const prefixedURIwithSlashesRegex = /([\s|\n]+)(([a-zA-Z0-9]+:)((\/[a-zA-Z0-9]*)+)+)([\s|\n]+)/g
+        const prefixedURIwithSlashesRegexReplacement = "$1$3$6"
         let result = ttlString;
         result = result.replaceAll("nodeID://", "_:"); // Dirty hack to fix nodeID:// from Virtuoso servers for turtle
         result = result.replaceAll("genid-", "_:"); // Dirty hack to fix blank nodes with genid- prefix
         result = result.replaceAll(betterRegexNodeB, betterRegexNodeBReplacement); // Dirty hack to fix blank nodes with b or node prefix and without ":"
         result = result.replaceAll(regexURIWithoutBracketsRegex, regexURIWithoutBracketsReplacement); // Dirty hack ot remove property URIs that appear in Turtle returned by Corese when they have two ":". Should be fixed in Corese >4.4.1
+        result = result.replaceAll(prefixedURIwithSlashesRegex, prefixedURIwithSlashesRegexReplacement) // Very dirty hack: Edit malformed prefixed URIs that contain slashes by removing everything after the first slash
         result = Global.replaceUnicode(result);
         return result;
     }
