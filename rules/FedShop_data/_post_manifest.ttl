@@ -8,15 +8,18 @@
     mf:include (
     ) ;
     mf:entries (
-        <post/singleElementCount.ttl>
-        <post/propertyCount.ttl>
+        <post/triples.ttl>
+        <post/classes.ttl>
+        <post/properties.ttl>
+        <post/distinctSubjectsObjects.ttl>
         <post/classCount.ttl>
+        <post/propertyCount.ttl>
         <post/classPropertyOccurences.ttl>
         <post/classPropertyObjectTypes.ttl>
         <post/classPropertyObjectMinMax.ttl>
     ) .
 
-<post/singleElementCount.ttl> a mf:ManifestEntry ;
+<post/triples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             dcterms:description """Number of triples""" ;
@@ -27,16 +30,22 @@
             } WHERE {
                 {
                     SELECT DISTINCT ?dataset (count(DISTINCT *) as ?triples) {
-                        GRAPH ?endpoint {
-                            ?endpoint dcat:servesDataset ?dataset
-                        }
-                        GRAPH ?dataset {
-                            ?s ?p ?o
+                        SELECT ?dataset ?s ?p ?o {
+                            GRAPH ?endpoint {
+                                ?endpoint dcat:servesDataset ?dataset
+                            }
+                            GRAPH ?dataset {
+                                ?s ?p ?o
+                            }
                         }
                     } GROUP BY ?dataset
                 }
             }"""
         ]
+    ) .
+
+<post/classes.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
         [
             dcterms:description """Number of classes""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
@@ -56,6 +65,10 @@
                 }
             }"""
         ]
+    ) .
+
+<post/properties.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
         [
             dcterms:description """Number of properties""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
@@ -75,6 +88,10 @@
                 }
             }"""
         ]
+    ) .
+
+<post/distinctSubjectsObjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
         [
             dcterms:description """Number of distinct subjects""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>

@@ -1,9 +1,8 @@
 # Rules for the extraction of real probabilities for the configuration of dataset description generation as part of the DeKaloG project
 
-- [ ] Number of Dataset descriptions
-- [ ] Size of the extracted dataset description
+- [x] Number of Dataset descriptions
 - General or for each dataset
-    - [ ] Basic statistics (triples, classes, properties, distinctSubjects, distinctObjects)
+    - [x] Basic statistics (triples, classes, properties, distinctSubjects, distinctObjects)
     - Classes
         - [x] Number of instances
         - Properties around instances
@@ -13,8 +12,87 @@
                     - [x] Min/max values
                 - [x] Classes
                 - [x] Number of different values
+    - [x] Associations (class - property - class)
 
 ## Result retrieval queries
+
+### Meta stats on datasets and endpoints
+
+#### Number of endpoints with dataset descriptions
+```sparql
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT DISTINCT (COUNT(DISTINCT ?endpoint) AS ?countEndpoint) {
+    GRAPH ?endpoint {
+        ?endpoint dcat:servesDataset ?dataset
+    }
+    GRAPH ?dataset {
+    	?s ?p ?o
+    }
+} 
+```
+
+##### Result
+103
+
+#### Number of dataset description
+```sparql
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT DISTINCT (COUNT(DISTINCT ?dataset) AS ?countDataset) {
+    GRAPH ?endpoint {
+        ?endpoint dcat:servesDataset ?dataset
+    }
+    GRAPH ?dataset {
+        ?s ?p ?o
+    }
+} 
+```
+
+##### Result
+9762
+
+#### Number of dataset per endpoint
+```sparql
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT DISTINCT ?endpoint (COUNT(DISTINCT ?dataset) AS ?countDataset) {
+    GRAPH ?endpoint {
+        ?endpoint dcat:servesDataset ?dataset
+    }
+    GRAPH ?dataset {
+    	?s ?p ?o
+    }
+} GROUP BY ?endpoint
+ORDER BY DESC(?countDataset)
+```
+
+#### Average number of dataset per endpoint
+```sparql
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT (AVG(?countDataset) AS ?average) {
+  SELECT DISTINCT ?endpoint (COUNT(DISTINCT ?dataset) AS ?countDataset) {
+      GRAPH ?endpoint {
+          ?endpoint dcat:servesDataset ?dataset
+      }
+      GRAPH ?dataset {
+          ?s ?p ?o
+      }
+  } GROUP BY ?endpoint
+}
+```
+
+##### Result
+152.93
 
 ### Basic statistics on datasets
 
@@ -29,6 +107,7 @@ SELECT DISTINCT (SUM(?triples) AS ?triplesAll) (SUM(?classes) AS ?classesAll) (S
         ?endpoint dcat:servesDataset ?dataset
     }
     GRAPH ?dataset {
+        ?s ?p ?o
     }
   	?dataset void:triples ?triples ;
     	void:classes ?classes ;
@@ -49,6 +128,7 @@ SELECT DISTINCT ?dataset ?triples ?classes ?properties ?distinctSubjects ?distin
         ?endpoint dcat:servesDataset ?dataset
     }
     GRAPH ?dataset {
+        ?s ?p ?o
     }
       ?dataset void:triples ?triples ;
                void:classes ?classes ;
@@ -69,6 +149,7 @@ SELECT DISTINCT (AVG(?triples) AS ?avgTriples) (AVG(?classes) AS ?avgClasses) (A
         ?endpoint dcat:servesDataset ?dataset
     }
     GRAPH ?dataset {
+        ?s ?p ?o
     }
       ?dataset void:triples ?triples ;
                void:classes ?classes ;
@@ -89,6 +170,7 @@ SELECT DISTINCT ?c (SUM(?count) AS ?countAll) {
         ?endpoint dcat:servesDataset ?dataset
     }
     GRAPH ?dataset {
+        ?s ?p ?o
     }
     ?dataset void:classPartition ?classPartition .
     ?classPartition void:inDataset ?dataset ;
@@ -118,11 +200,12 @@ SELECT DISTINCT ?dataset ?c ?count {
 ```sparql
 PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
-SELECT DISTINCT ?c (AVG(?count) AS ?average) {
+SELECT DISTINCT ?c (ROUND(AVG(?count)) AS ?average) {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
     GRAPH ?dataset {
+        ?s ?p ?o
     }
     ?dataset void:classPartition ?classPartition .
     ?classPartition void:inDataset ?dataset ;
@@ -140,23 +223,27 @@ SELECT DISTINCT ?c (AVG(?count) AS ?average) {
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX void: <http://rdfs.org/ns/void#>
-SELECT DISTINCT ?c ?p ?oc (SUM(?cpoccount) AS ?cpoccountAll) {
-    GRAPH ?endpoint {
-        ?endpoint dcat:servesDataset ?dataset
-    }
-    GRAPH ?dataset {
-    }
-    ?dataset void:classPartition ?classPartition.
-    ?classPartition void:inDataset ?dataset ;
-        void:class ?c ;
-        void:propertyPartition ?classPropertyPartition .
-    ?classPropertyPartition void:inDataset ?dataset ;
-        void:property ?p ;
-        void:classPartition ?objectClassPartition .
-    ?objectClassPartition void:inDataset ?dataset ;
-        void:class ?oc ;
-        void:entities ?cpoccount .
-} GROUP BY ?c ?p ?oc
+SELECT DISTINCT ?c ?p ?oc (SUM(?cpoccount) AS ?cpoccountTotal) {
+  SELECT DISTINCT ?dataset ?c ?p ?oc ?cpoccount {
+      GRAPH ?endpoint {
+          ?endpoint dcat:servesDataset ?dataset
+      }
+      GRAPH ?dataset {
+          ?s ?p ?o
+      }
+      ?dataset void:classPartition ?classPartition.
+      ?classPartition void:inDataset ?dataset ;
+          void:class ?c ;
+          void:propertyPartition ?classPropertyPartition .
+      ?classPropertyPartition void:inDataset ?dataset ;
+          void:property ?p ;
+          void:classPartition ?objectClassPartition .
+      ?objectClassPartition void:inDataset ?dataset ;
+          void:class ?oc ;
+          void:entities ?cpoccount .
+  }
+} GROUP BY ?c ?p ?oc 
+ORDER BY DESC(?cpoccountTotal) DESC(?c) DESC(?p) DESC(?oc)
 ```
 
 ##### Per dataset 
@@ -181,6 +268,7 @@ SELECT DISTINCT ?dataset ?c ?p ?oc ?cpoccount {
         void:class ?oc ;
         void:entities ?cpoccount .
 } GROUP BY ?dataset ?c ?p ?oc ?cpoccount
+ORDER BY DESC(?cpoccount) DESC(?c) DESC(?p) DESC(?oc)
 ```
 
 ##### Average among datasets
@@ -188,23 +276,30 @@ SELECT DISTINCT ?dataset ?c ?p ?oc ?cpoccount {
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX void: <http://rdfs.org/ns/void#>
-SELECT DISTINCT ?c ?p ?oc (AVG(?cpoccount) AS ?avgCPOCCount) {
-    GRAPH ?endpoint {
-        ?endpoint dcat:servesDataset ?dataset
-    }
-    GRAPH ?dataset {
-    }
-    ?dataset void:classPartition ?classPartition.
-    ?classPartition void:inDataset ?dataset ;
-        void:class ?c ;
-        void:propertyPartition ?classPropertyPartition .
-    ?classPropertyPartition void:inDataset ?dataset ;
-        void:property ?p ;
-        void:classPartition ?objectClassPartition .
-    ?objectClassPartition void:inDataset ?dataset ;
-        void:class ?oc ;
-        void:entities ?cpoccount .
-} GROUP BY  ?c ?p ?oc
+SELECT DISTINCT ?c ?p ?oc (AVG(?cpoccount) AS ?cpoccountAverage) {
+  SELECT DISTINCT ?dataset ?c ?p ?oc ?cpoccount {
+      GRAPH ?endpoint {
+          ?endpoint dcat:servesDataset ?dataset
+      }
+      GRAPH ?dataset {
+          ?s ?p ?o
+      }
+      ?dataset void:classPartition ?classPartition.
+      ?classPartition void:inDataset ?dataset ;
+          void:class ?c ;
+          void:propertyPartition ?classPropertyPartition .
+      ?classPropertyPartition void:inDataset ?dataset ;
+          void:property ?p ;
+          void:classPartition ?objectClassPartition .
+      ?objectClassPartition void:inDataset ?dataset ;
+          void:class ?oc ;
+          void:entities ?cpoccount .
+    FILTER(?c = dcat:Dataset)
+    FILTER(?p = dcat:distribution)
+    FILTER(?oc = dcat:Distribution)
+  }
+} GROUP BY ?c ?p ?oc 
+ORDER BY DESC(?cpoccountTotal) DESC(?c) DESC(?p) DESC(?oc)
 ```
 
 #### Datatype of the objects of the properties appearing around instances of classes
@@ -273,7 +368,7 @@ PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX void: <http://rdfs.org/ns/void#>
-SELECT DISTINCT  ?c ?p ?oc (AVG(?cpodcount) AS ?avgCPODCount){
+SELECT DISTINCT  ?c ?p ?oc (ROUND(AVG(?cpodcount)) AS ?avgCPODCount){
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
@@ -290,4 +385,62 @@ SELECT DISTINCT  ?c ?p ?oc (AVG(?cpodcount) AS ?avgCPODCount){
         void:datatype ?oc ;
         void:entities ?cpodcount .
 } GROUP BY ?c ?p ?oc ?cpodcount
+```
+
+### Associations
+
+#### In general
+```sparql
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT DISTINCT ?c1 ?p ?c2 (SUM(?c1count) AS ?totalC1Count) (SUM(?c2count) AS ?totalC2Count) {
+    GRAPH ?endpoint {
+        ?endpoint dcat:servesDataset ?dataset
+    }
+    GRAPH ?dataset {
+    }
+    ?dataset void:classPartition ?classPartition1, ?classPartition2.
+    ?classPartition1 void:inDataset ?dataset ;
+        void:class ?c1 ;
+        void:entities ?c1count ;
+        void:propertyPartition ?class1PropertyPartition .
+    ?class1PropertyPartition void:inDataset ?dataset ;
+        void:property ?p ;
+        void:classPartition ?objectClass2Partition .
+    ?objectClass2Partition void:inDataset ?dataset ;
+        void:class ?c2 ;
+        void:entities ?c2count .
+} GROUP BY ?c1 ?p ?c2
+ORDER BY DESC(?totalC1Count) DESC(?totalC2Count)
+```
+
+#### Per dataset
+```sparql
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT DISTINCT ?c1 ?p ?c2 (SUM(?c1count) AS ?totalC1Count) (SUM(?c2count) AS ?totalC2Count) {
+    GRAPH ?endpoint {
+        ?endpoint dcat:servesDataset ?dataset
+    }
+    GRAPH ?dataset {
+    }
+    ?dataset void:classPartition ?classPartition1, ?classPartition2.
+    ?classPartition1 void:inDataset ?dataset ;
+        void:class ?c1 ;
+        void:entities ?c1count ;
+        void:propertyPartition ?class1PropertyPartition .
+    ?class1PropertyPartition void:inDataset ?dataset ;
+        void:property ?p ;
+        void:classPartition ?objectClass2Partition .
+    ?objectClass2Partition void:inDataset ?dataset ;
+        void:class ?c2 ;
+        void:entities ?c2count .
+} GROUP BY ?c1 ?p ?c2
+ORDER BY DESC(?totalC1Count) DESC(?totalC2Count)
 ```
