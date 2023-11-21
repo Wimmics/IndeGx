@@ -62,7 +62,7 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
     if(ttlString == null || ttlString == undefined) {
         throw new Error("Invalid turtle string " + ttlString);
     } else {
-        const betterRegexNodeB = /([\s|\n]+)((node|b)[a-zA-Z0-9]+[^:])(\s)+/g;
+        const betterRegexNodeB = /([\s|\n]+)((node|b)[^:\s]+)(\s)+/g;
         const betterRegexNodeBReplacement = "$1_:$2$4"
         const regexURIWithoutBracketsRegex = /(\s)(([a-zA-Z0-9-]+:\/\/(([a-zA-Z0-9-]+\.)?[a-zA-Z0-9-]+)+(\.[a-zA-Z0-9\-_:]+)\/)([a-zA-Z0-9\-_:])*)(\s+)/g
         const regexURIWithoutBracketsReplacement = "$1<$2>$8"
