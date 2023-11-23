@@ -28,8 +28,8 @@ SELECT DISTINCT (COUNT(DISTINCT ?endpoint) AS ?countEndpoint) {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
-    	?s ?p ?o
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
 } 
 ```
@@ -66,8 +66,8 @@ SELECT DISTINCT ?endpoint (COUNT(DISTINCT ?dataset) AS ?countDataset) {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
-    	?s ?p ?o
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
 } GROUP BY ?endpoint
 ORDER BY DESC(?countDataset)
@@ -84,9 +84,9 @@ SELECT (AVG(?countDataset) AS ?average) {
       GRAPH ?endpoint {
           ?endpoint dcat:servesDataset ?dataset
       }
-      GRAPH ?dataset {
-          ?s ?p ?o
-      }
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
+    }
   } GROUP BY ?endpoint
 }
 ```
@@ -106,8 +106,8 @@ SELECT DISTINCT (SUM(?triples) AS ?triplesAll) (SUM(?classes) AS ?classesAll) (S
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
-        ?s ?p ?o
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
   	?dataset void:triples ?triples ;
     	void:classes ?classes ;
@@ -127,8 +127,8 @@ SELECT DISTINCT ?dataset ?triples ?classes ?properties ?distinctSubjects ?distin
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
-        ?s ?p ?o
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
       ?dataset void:triples ?triples ;
                void:classes ?classes ;
@@ -148,8 +148,8 @@ SELECT DISTINCT (AVG(?triples) AS ?avgTriples) (AVG(?classes) AS ?avgClasses) (A
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
-        ?s ?p ?o
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
       ?dataset void:triples ?triples ;
                void:classes ?classes ;
@@ -169,8 +169,8 @@ SELECT DISTINCT ?c (SUM(?count) AS ?countAll) {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
-        ?s ?p ?o
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
     ?dataset void:classPartition ?classPartition .
     ?classPartition void:inDataset ?dataset ;
@@ -187,7 +187,8 @@ SELECT DISTINCT ?dataset ?c ?count {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
     ?dataset void:classPartition ?classPartition .
     ?classPartition void:inDataset ?dataset ;
@@ -204,8 +205,8 @@ SELECT DISTINCT ?c (ROUND(AVG(?count)) AS ?average) {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
-        ?s ?p ?o
+    GRAPH ?datasetGraph {
+    	?dataset ?p ?o
     }
     ?dataset void:classPartition ?classPartition .
     ?classPartition void:inDataset ?dataset ;
@@ -228,9 +229,9 @@ SELECT DISTINCT ?c ?p ?oc (SUM(?cpoccount) AS ?cpoccountTotal) {
       GRAPH ?endpoint {
           ?endpoint dcat:servesDataset ?dataset
       }
-      GRAPH ?dataset {
-          ?s ?p ?o
-      }
+    GRAPH ?datasetGraph {
+    	?dataset ?dp ?do
+    }
       ?dataset void:classPartition ?classPartition.
       ?classPartition void:inDataset ?dataset ;
           void:class ?c ;
@@ -255,7 +256,8 @@ SELECT DISTINCT ?dataset ?c ?p ?oc ?cpoccount {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
+    GRAPH ?datasetGraph {
+    	?dataset ?dp ?do
     }
     ?dataset void:classPartition ?classPartition.
     ?classPartition void:inDataset ?dataset ;
@@ -278,12 +280,12 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX void: <http://rdfs.org/ns/void#>
 SELECT DISTINCT ?c ?p ?oc (AVG(?cpoccount) AS ?cpoccountAverage) {
   SELECT DISTINCT ?dataset ?c ?p ?oc ?cpoccount {
-      GRAPH ?endpoint {
-          ?endpoint dcat:servesDataset ?dataset
-      }
-      GRAPH ?dataset {
-          ?s ?p ?o
-      }
+        GRAPH ?endpoint {
+            ?endpoint dcat:servesDataset ?dataset
+        }
+        GRAPH ?datasetGraph {
+            ?dataset ?dp ?do
+        }
       ?dataset void:classPartition ?classPartition.
       ?classPartition void:inDataset ?dataset ;
           void:class ?c ;
@@ -314,7 +316,8 @@ SELECT DISTINCT ?c ?p ?oc (SUM(?cpodcount) AS ?cpodcountsum) (MIN(?min) AS ?minA
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
+    GRAPH ?datasetGraph {
+    	?dataset ?dp ?do
     }
     ?dataset void:classPartition ?classPartition.
     ?classPartition void:inDataset ?dataset ;
@@ -343,7 +346,8 @@ SELECT DISTINCT ?dataset ?c ?p ?oc ?cpodcount ?min ?max {
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
+    GRAPH ?datasetGraph {
+    	?dataset ?dp ?do
     }
     ?dataset void:classPartition ?classPartition.
     ?classPartition void:inDataset ?dataset ;
@@ -372,7 +376,8 @@ SELECT DISTINCT  ?c ?p ?oc (ROUND(AVG(?cpodcount)) AS ?avgCPODCount){
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
+    GRAPH ?datasetGraph {
+    	?dataset ?dp ?do
     }
     ?dataset void:classPartition ?classPartition.
     ?classPartition void:inDataset ?dataset ;
@@ -400,7 +405,8 @@ SELECT DISTINCT ?c1 ?p ?c2 (SUM(?c1count) AS ?totalC1Count) (SUM(?c2count) AS ?t
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
+    GRAPH ?datasetGraph {
+    	?dataset ?dp ?do
     }
     ?dataset void:classPartition ?classPartition1, ?classPartition2.
     ?classPartition1 void:inDataset ?dataset ;
@@ -428,7 +434,8 @@ SELECT DISTINCT ?c1 ?p ?c2 (SUM(?c1count) AS ?totalC1Count) (SUM(?c2count) AS ?t
     GRAPH ?endpoint {
         ?endpoint dcat:servesDataset ?dataset
     }
-    GRAPH ?dataset {
+    GRAPH ?datasetGraph {
+    	?dataset ?dp ?do
     }
     ?dataset void:classPartition ?classPartition1, ?classPartition2.
     ?classPartition1 void:inDataset ?dataset ;

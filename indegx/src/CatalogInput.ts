@@ -37,6 +37,10 @@ export function readCatalog(filename: string): Promise<Array<EndpointObject>> {
                         let endpointObject: EndpointObject = {
                             endpoint: endpointStatement.object.value
                         }
+                        // Rewriting localhost endpoint URLs to make them reach the host machine network
+                        endpointObject.endpoint.replace("http://localhost:", "http://host.docker.internal:")
+                        endpointObject.endpoint.replace("http://localhost/", "http://host.docker.internal/")
+                        // Extracting named graphs
                         store.statementsMatching(datasetURIReTyped, sdNamedGraphProperty, null).forEach(graphStatement => {
                             if (!endpointObject.graphs) {
                                 endpointObject.graphs = [];

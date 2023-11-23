@@ -25,6 +25,7 @@
             dcterms:description """Number of triples""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 ?dataset void:triples ?triples .
             } WHERE {
@@ -34,8 +35,9 @@
                             GRAPH ?endpoint {
                                 ?endpoint dcat:servesDataset ?dataset
                             }
-                            GRAPH ?dataset {
-                                ?s ?p ?o
+                            BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                            GRAPH ?datasetGraph {
+                                ?s ?p ?o .
                             }
                         }
                     } GROUP BY ?dataset
@@ -50,6 +52,7 @@
             dcterms:description """Number of classes""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 ?dataset void:classes ?classes .
             } WHERE {
@@ -58,7 +61,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c
                         }
                     } GROUP BY ?dataset
@@ -73,6 +77,7 @@
             dcterms:description """Number of properties""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 ?dataset void:properties ?properties .
             } WHERE {
@@ -81,7 +86,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s ?p ?o
                         }
                     } GROUP BY ?dataset
@@ -96,6 +102,7 @@
             dcterms:description """Number of distinct subjects""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 ?dataset void:distinctSubjects ?distinctSubjects .
             } WHERE {
@@ -104,7 +111,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s ?p ?o
                         }
                     } GROUP BY ?dataset
@@ -115,6 +123,7 @@
             dcterms:description """Number of distinct objects""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 ?dataset void:distinctObjects ?distinctObjects .
             } WHERE {
@@ -123,7 +132,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s ?p ?o
                         }
                     } GROUP BY ?dataset
@@ -159,7 +169,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c
                         }
                     } GROUP BY ?dataset ?c 
@@ -198,7 +209,8 @@
                             GRAPH ?endpoint {
                                 ?endpoint dcat:servesDataset ?dataset
                             }
-                            GRAPH ?dataset {
+                            BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                            GRAPH ?datasetGraph {
                                 ?s ?p ?o
                             }
                         } GROUP BY ?p
@@ -239,7 +251,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }
@@ -284,7 +297,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                             ?o a ?oc .
@@ -327,7 +341,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }
@@ -377,7 +392,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }
@@ -424,7 +440,8 @@
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
-                        GRAPH ?dataset {
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }

@@ -32,6 +32,7 @@
 <main/datasetDescription.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -49,22 +50,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    ?dataset a dcat:Dataset .
-                    ?dataset ?p ?o .
-                    OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a dcat:Dataset .
+                            ?dataset ?p ?o .
+                            OPTIONAL { ?o a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
+                    }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -82,22 +95,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    ?dataset a void:Dataset .
-                    ?dataset ?p ?o .
-                    OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a void:Dataset .
+                            ?dataset ?p ?o .
+                            OPTIONAL { ?o a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
+                    }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -115,22 +140,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    ?dataset a dcmitype:Dataset .
-                    ?dataset ?p ?o .
-                    OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a dcmitype:Dataset .
+                            ?dataset ?p ?o .
+                            OPTIONAL { ?o a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
+                    }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -148,22 +185,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    ?dataset a schema:Dataset .
-                    ?dataset ?p ?o .
-                    OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a schema:Dataset .
+                            ?dataset ?p ?o .
+                            OPTIONAL { ?o a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }   
+                        }
+                    }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -181,90 +230,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
-                    ?dataset ?p ?o .
-                    ?o a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    ?dataset a sd:Dataset .
-                    ?dataset ?p ?o .
-                    OPTIONAL { ?o a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    ?dataset a dataid:Dataset .
-                    ?dataset ?p ?o .
-                    OPTIONAL { ?o a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
-                    ?dataset ?p ?o .
-                    ?o a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a dcat:Dataset .
-                        ?dataset ?p ?o .
-                        OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a sd:Dataset .
+                            ?dataset ?p ?o .
+                            OPTIONAL { ?o a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -282,24 +275,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a void:Dataset .
-                        ?dataset ?p ?o .
-                        OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a dataid:Dataset .
+                            ?dataset ?p ?o .
+                            OPTIONAL { ?o a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -317,24 +320,36 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a dcmitype:Dataset .
-                        ?dataset ?p ?o .
-                        OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a dcat:Dataset .
+                                ?dataset ?p ?o .
+                                OPTIONAL { ?o a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -352,24 +367,36 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a schema:Dataset .
-                        ?dataset ?p ?o .
-                        OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a void:Dataset .
+                                ?dataset ?p ?o .
+                                OPTIONAL { ?o a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -387,24 +414,36 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a sd:Dataset .
-                        ?dataset ?p ?o .
-                        OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a dcmitype:Dataset .
+                                ?dataset ?p ?o .
+                                OPTIONAL { ?o a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -422,24 +461,36 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?dataset ?p ?o .
                     ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a dataid:Dataset .
-                        ?dataset ?p ?o .
-                        OPTIONAL { ?o a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a schema:Dataset .
+                                ?dataset ?p ?o .
+                                OPTIONAL { ?o a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -457,222 +508,36 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
+                GRAPH ?datasetGraph {
+                    ?dataset ?p ?o .
+                    ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    ?dataset a dcat:Dataset .
-                    ?s ?p ?dataset .
-                    OPTIONAL { ?s a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    ?dataset a void:Dataset .
-                    ?s ?p ?dataset .
-                    OPTIONAL { ?s a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    ?dataset a dcmitype:Dataset .
-                    ?s ?p ?dataset .
-                    OPTIONAL { ?s a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    ?dataset a schema:Dataset .
-                    ?s ?p ?dataset .
-                    OPTIONAL { ?s a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    ?dataset a sd:Dataset .
-                    ?s ?p ?dataset .
-                    OPTIONAL { ?s a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    ?dataset a dataid:Dataset .
-                    ?s ?p ?dataset .
-                    OPTIONAL { ?s a ?oc . }
-                }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
-            }
-            """
-        ]
-        [
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl dcat:servesDataset ?dataset .
-                }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
-                }
-            } WHERE {
-                kgi: sd:namedGraph $rawEndpointUrl .
-                SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a dcat:Dataset .
-                        ?s ?p ?dataset .
-                        OPTIONAL { ?s a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a sd:Dataset .
+                                ?dataset ?p ?o .
+                                OPTIONAL { ?o a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -690,24 +555,36 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
-                    ?s ?p ?dataset .
-                    ?s a ?oc .
+                GRAPH ?datasetGraph {
+                    ?dataset ?p ?o .
+                    ?o a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a void:Dataset .
-                        ?s ?p ?dataset .
-                        OPTIONAL { ?s a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a dataid:Dataset .
+                                ?dataset ?p ?o .
+                                OPTIONAL { ?o a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -725,24 +602,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?s ?p ?dataset .
                     ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a dcmitype:Dataset .
-                        ?s ?p ?dataset .
-                        OPTIONAL { ?s a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a dcat:Dataset .
+                            ?s ?p ?dataset .
+                            OPTIONAL { ?s a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -760,24 +647,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?s ?p ?dataset .
                     ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a schema:Dataset .
-                        ?s ?p ?dataset .
-                        OPTIONAL { ?s a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a void:Dataset .
+                            ?s ?p ?dataset .
+                            OPTIONAL { ?s a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -795,24 +692,34 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?s ?p ?dataset .
                     ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a sd:Dataset .
-                        ?s ?p ?dataset .
-                        OPTIONAL { ?s a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a dcmitype:Dataset .
+                            ?s ?p ?dataset .
+                            OPTIONAL { ?s a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
+            kgi:recommendedPagination 500 ;
             mf:action """
             PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -830,20 +737,401 @@
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl dcat:servesDataset ?dataset .
                 }
-                GRAPH ?dataset {
+                GRAPH ?datasetGraph {
                     ?s ?p ?dataset .
                     ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
                 }
             } WHERE {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 SERVICE $rawEndpointUrl {
-                    GRAPH ?g {
-                        ?dataset a dataid:Dataset .
-                        ?s ?p ?dataset .
-                        OPTIONAL { ?s a ?oc . }
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a schema:Dataset .
+                            ?s ?p ?dataset .
+                            OPTIONAL { ?s a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
                     }
                 }
-                FILTER(isIRI(?dataset)) # Bug fix for Corese aversion to named graph with blank nodes as name
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a sd:Dataset .
+                            ?s ?p ?dataset .
+                            OPTIONAL { ?s a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            ?dataset a dataid:Dataset .
+                            ?s ?p ?dataset .
+                            OPTIONAL { ?s a ?oc . }
+                            OPTIONAL { 
+                                FILTER(isBlank(?s))
+                                ?s ?ssp ?sso .
+                                ?sos ?sop ?soo .
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a dcat:Dataset .
+                                ?s ?p ?dataset .
+                                OPTIONAL { ?s a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a void:Dataset .
+                                ?s ?p ?dataset .
+                                OPTIONAL { ?s a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a dcmitype:Dataset .
+                                ?s ?p ?dataset .
+                                OPTIONAL { ?s a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a schema:Dataset .
+                                ?s ?p ?dataset .
+                                OPTIONAL { ?s a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a sd:Dataset .
+                                ?s ?p ?dataset .
+                                OPTIONAL { ?s a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl dcat:servesDataset ?dataset .
+                }
+                GRAPH ?datasetGraph {
+                    ?s ?p ?dataset .
+                    ?s a ?oc .
+                    ?s ?ssp ?sso .
+                    ?sos ?sop ?soo .
+                }
+            } WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT * {
+                            GRAPH ?g {
+                                ?dataset a dataid:Dataset .
+                                ?s ?p ?dataset .
+                                OPTIONAL { ?s a ?oc . }
+                                OPTIONAL { 
+                                    FILTER(isBlank(?s))
+                                    ?s ?ssp ?sso .
+                                    ?sos ?sop ?soo .
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]

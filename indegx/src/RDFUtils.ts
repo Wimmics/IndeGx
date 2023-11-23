@@ -344,6 +344,7 @@ export function parseTurtleToStore(content: string, store: $rdf.Store, baseURI: 
         try {
             content = fixCommonTurtleStringErrors(content)
             ttl_read(content, {
+                relax: true,
                 baseIRI: baseURI,
                 data(y_quad) {
                     graphyQuadLoadingToStore(store, y_quad, baseURI, "")

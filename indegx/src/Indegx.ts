@@ -52,7 +52,7 @@ if (options.help) {
                     name: 'resume',
                     alias: 'r',
                     type: Boolean,
-                    description: 'Will reuse the files in the output/tmp/ folders as starting data and test at for each rule and each endpoint if it needs to be re-applied. Useless if query logging has been disabled.'
+                    description: 'Will reuse the files in the output/tmp/ folders as starting data and test for each rule and each endpoint if it needs to be re-applied. Useless if query logging has been disabled.'
                 },
                 {
                     name: 'config',
