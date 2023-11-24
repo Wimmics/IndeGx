@@ -62,7 +62,7 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
     if(ttlString == null || ttlString == undefined) {
         throw new Error("Invalid turtle string " + ttlString);
     } else {
-        const betterRegexNodeB = /([\s|\n]+)((node|b)[a-zA-Z0-9]+[^:])(\s)+/g;
+        const betterRegexNodeB = /([\s|\n]+)((node|b)[^:\s]+)(\s)+/g;
         const betterRegexNodeBReplacement = "$1_:$2$4"
         const regexURIWithoutBracketsRegex = /(\s)(([a-zA-Z0-9-]+:\/\/(([a-zA-Z0-9-]+\.)?[a-zA-Z0-9-]+)+(\.[a-zA-Z0-9\-_:]+)\/)([a-zA-Z0-9\-_:])*)(\s+)/g
         const regexURIWithoutBracketsReplacement = "$1<$2>$8"
@@ -344,6 +344,7 @@ export function parseTurtleToStore(content: string, store: $rdf.Store, baseURI: 
         try {
             content = fixCommonTurtleStringErrors(content)
             ttl_read(content, {
+                relax: true,
                 baseIRI: baseURI,
                 data(y_quad) {
                     graphyQuadLoadingToStore(store, y_quad, baseURI, "")
