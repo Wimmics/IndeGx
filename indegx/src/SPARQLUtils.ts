@@ -64,7 +64,7 @@ export function setDefaultQueryTimeout(timeout: number) {
 export function sparqlQueryPromise(endpoint: string, query: string, baseURI: string, timeout: number = defaultQueryTimeout): Promise<void | $rdf.Store | SPARQLJSONResult> {
     let jsonHeaders = {};
     if (isSparqlSelect(query)) {
-        jsonHeaders["accept"] = "application/sparql-results+json";
+        jsonHeaders["accept"] = "application/sparql-results+json, application/json";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
         return fetchJSONPromise(queryUrl, jsonHeaders).then(result => {
             return (result as SELECTJSONResult)
@@ -73,7 +73,7 @@ export function sparqlQueryPromise(endpoint: string, query: string, baseURI: str
             throw error 
         })
     } else if (isSparqlAsk(query)) {
-        jsonHeaders["accept"] = "application/sparql-results+json";
+        jsonHeaders["accept"] = "application/sparql-results+json, application/json";
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
         return fetchJSONPromise(queryUrl, jsonHeaders).then(result => {
             return (result as ASKJSONResult)

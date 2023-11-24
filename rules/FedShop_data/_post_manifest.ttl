@@ -8,159 +8,112 @@
     mf:include (
     ) ;
     mf:entries (
-        <post/singleElementCount.ttl>
-        <post/propertyCount.ttl>
+        <post/triples.ttl>
+        <post/classes.ttl>
+        <post/properties.ttl>
+        <post/distinctSubjectsObjects.ttl>
         <post/classCount.ttl>
+        <post/propertyCount.ttl>
         <post/classPropertyOccurences.ttl>
         <post/classPropertyObjectTypes.ttl>
         <post/classPropertyObjectMinMax.ttl>
     ) .
 
-<post/singleElementCount.ttl> a mf:ManifestEntry ;
+<post/triples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             dcterms:description """Number of triples""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                ?dataset void:triples ?count .
+                ?dataset void:triples ?triples .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
-                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count) {
-                        {
-                            SELECT DISTINCT ?dataset ?s ?p ?o {
-                                GRAPH ?dataset {
-                                    ?s ?p ?o
-                                }
+                    SELECT DISTINCT ?dataset (count(DISTINCT *) as ?triples) {
+                        SELECT ?dataset ?s ?p ?o {
+                            GRAPH ?endpoint {
+                                ?endpoint dcat:servesDataset ?dataset
+                            }
+                            BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                            GRAPH ?datasetGraph {
+                                ?s ?p ?o .
                             }
                         }
                     } GROUP BY ?dataset
                 }
             }"""
         ]
+    ) .
+
+<post/classes.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
         [
             dcterms:description """Number of classes""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                ?dataset void:classes ?count .
+                ?dataset void:classes ?classes .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
-                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count) {
-                        {
-                            SELECT DISTINCT ?dataset ?o {
-                                GRAPH ?dataset {
-                                    ?s a ?o
-                                }
-                            }
+                    SELECT DISTINCT ?dataset (count(DISTINCT ?c) as ?classes) {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s a ?c
                         }
                     } GROUP BY ?dataset
                 }
             }"""
         ]
+    ) .
+
+<post/properties.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
         [
             dcterms:description """Number of properties""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                ?dataset void:properties ?count .
+                ?dataset void:properties ?properties .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
-                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count) {
-                        {
-                            SELECT DISTINCT ?dataset ?p {
-                                GRAPH ?dataset {
-                                    ?s ?p ?o
-                                }
-                            }
+                    SELECT DISTINCT ?dataset (count(DISTINCT ?p) as ?properties) {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s ?p ?o
                         }
                     } GROUP BY ?dataset
                 }
             }"""
         ]
+    ) .
+
+<post/distinctSubjectsObjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
         [
             dcterms:description """Number of distinct subjects""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                ?dataset void:distinctSubjects ?count .
+                ?dataset void:distinctSubjects ?distinctSubjects .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
-                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count) {
-                        {
-                            SELECT DISTINCT ?dataset ?s {
-                                GRAPH ?dataset {
-                                    ?s ?p ?o
-                                }
-                            }
+                    SELECT DISTINCT ?dataset (count(DISTINCT ?s) as ?distinctSubjects) {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s ?p ?o
                         }
                     } GROUP BY ?dataset
                 }
@@ -170,34 +123,18 @@
             dcterms:description """Number of distinct objects""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                ?dataset void:distinctObjects ?count .
+                ?dataset void:distinctObjects ?distinctObjects .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
-                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count) {
-                        {
-                            SELECT DISTINCT ?dataset ?o {
-                                GRAPH ?dataset {
-                                    ?s ?p ?o
-                                }
-                            }
+                    SELECT DISTINCT ?dataset (count(DISTINCT ?o) as ?distinctObjects) {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s ?p ?o
                         }
                     } GROUP BY ?dataset
                 }
@@ -227,17 +164,13 @@
                     void:class ?c ;
                     void:entities ?count .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
                     SELECT DISTINCT ?dataset ?c ( COUNT(DISTINCT ?s) AS ?count ) {
-                        GRAPH ?dataset {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c
                         }
                     } GROUP BY ?dataset ?c 
@@ -269,25 +202,19 @@
                     void:property ?p ; 
                     void:triples ?count .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                    ?s ?p ?o
-                }
                 {
-                    SELECT DISTINCT ?dataset (COUNT(DISTINCT *) AS ?count)
+                    SELECT DISTINCT ?dataset ?p (COUNT(DISTINCT *) AS ?count)
                     {
-                        SELECT DISTINCT ?dataset ?s ?o 
-                        {
-                            GRAPH ?dataset {
+                        SELECT DISTINCT ?dataset ?p ?s ?o {
+                            GRAPH ?endpoint {
+                                ?endpoint dcat:servesDataset ?dataset
+                            }
+                            BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                            GRAPH ?datasetGraph {
                                 ?s ?p ?o
                             }
                         } GROUP BY ?p
-                    } GROUP BY ?dataset
+                    } GROUP BY ?dataset ?p 
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?p) ) ) ) ) AS ?propertyPartition )
             }"""
@@ -319,17 +246,13 @@
                     void:property ?p ;
                     void:entities ?count .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
                     SELECT DISTINCT ?dataset ?c ?p (COUNT(DISTINCT ?s) AS ?count) {
-                        GRAPH ?dataset {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }
@@ -369,17 +292,13 @@
                     void:class ?oc ;
                     void:entities ?count .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
                     SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
-                        GRAPH ?dataset {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                             ?o a ?oc .
@@ -417,17 +336,13 @@
                     void:datatype ?oc ;
                     void:entities ?count .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
                     SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
-                        GRAPH ?dataset {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }
@@ -472,17 +387,13 @@
                     void:datatype ?oc ;
                     kgi:minimum ?min .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
                     SELECT DISTINCT ?dataset ?c ?p ?oc (MIN(?o) AS ?min) {
-                        GRAPH ?dataset {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }
@@ -524,17 +435,13 @@
                     void:datatype ?oc ;
                     kgi:maximum ?max .
             } WHERE {
-                GRAPH ?dataset {
-                    { ?dataset a dcat:Dataset }
-                    UNION { ?dataset a void:Dataset }
-                    UNION { ?dataset a dcmitype:Dataset }
-                    UNION { ?dataset a schema:Dataset }
-                    UNION { ?dataset a sd:Dataset }
-                    UNION { ?dataset a dataid:Dataset }
-                }
                 {
                     SELECT DISTINCT ?dataset ?c ?p ?oc (MAX(?o) AS ?max) {
-                        GRAPH ?dataset {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
                             ?s a ?c .
                             ?s ?p ?o .
                         }

@@ -2,15 +2,14 @@
     "pre": "file:///rules/FedShop_data/_pre_manifest.ttl",
     "manifest": "file:///rules/FedShop_data/_manifest.ttl",
     "post": "file:///rules/FedShop_data/_post_manifest.ttl",
-    "catalog": "file:///catalogs/debug_catalog.ttl",
+    "catalog": "file:///catalogs/local_common_crawl.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
     "maxConccurentQueries": 300,
     "delayMillisecondsTimeForConccurentQuery": 1000,
-    "manifestJSON": "/output/rules.json",
-    "logFile": "/output/indegx_debug.log",
-    "outputFile": "/output/indegx_debug.trig",
+    "logFile": "/output/indegx_common_crawl.log",
+    "outputFile": "/output/indegx_common_crawl.trig",
     "queryLog": true,
-    "resilience": true
+    "resilience": false
 }

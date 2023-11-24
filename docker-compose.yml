@@ -5,11 +5,14 @@ services:
     hostname: corese
     environment:
       OPTIONS: "-su"
+      JVM_XMX: "15g"
     expose: 
       - "8080"
     volumes:
       - ./output:/usr/local/corese/log
       - ./config:/usr/local/corese/config
+    extra_hosts:
+      - host.docker.internal:host-gateway
   indegx:
     build: .
     depends_on:
