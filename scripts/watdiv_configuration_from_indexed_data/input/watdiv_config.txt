@@ -1,0 +1,2207 @@
+#namespace	ns0=http://www.w3.org/ns/prov#
+#namespace	ns1=http://purl.obolibrary.org/obo/
+#namespace	ns2=http://www.w3.org/2002/07/owl#
+#namespace	ns3=http://lexvo.org/ontology#
+#namespace	ns4=http://bio2rdf.org/
+#namespace	ns5=http://www.w3.org/ns/org#
+#namespace	ns6=http://purl.org/ontology/bibo/
+#namespace	ns7=http://rdf.geospecies.org/ont/geospecies#
+#namespace	ns8=http://semanticscience.org/resource/
+#namespace	ns9=http://purl.org/linked-data/sdmx/2009/code#
+#namespace	ns10=http://pgxo.loria.fr/
+#namespace	ns11=http://www.wikidata.org/entity/
+#namespace	ns12=http://ldf.fi/ww1lod/schema#
+#namespace	ns13=http://purl.org/dc/terms/
+#namespace	ns14=http://id.nlm.nih.gov/mesh/vocab#
+#namespace	ns15=http://lexvo.org/id/
+#namespace	ns16=http://geovocab.org/spatial#
+#namespace	ns17=http://purl.org/linked-data/sdmx#
+#namespace	ns18=https://schema.org/
+#namespace	ns19=http://purl.bioontology.org/ontology/NDFRT/
+#namespace	ns20=http://www.w3.org/ns/dx/conneg/altr#
+#namespace	ns21=http://purl.org/query/voidext#
+#namespace	ns22=http://www.w3.org/1999/02/22-rdf-syntax-ns#
+#namespace	ns23=http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#
+#namespace	ns24=http://www.w3.org/ns/dcat#
+#namespace	ns25=http://rdf.muninn-project.org/ontologies/military#
+#namespace	ns26=http://purl.org/linked-data/cube#
+#namespace	ns27=http://purl.org/vocommons/voaf#
+#namespace	ns28=http://purl.org/spar/fabio/
+#namespace	ns29=http://www.cidoc-crm.org/cidoc-crm/
+#namespace	ns30=http://entryscape.com/terms/
+#namespace	ns31=http://creativecommons.org/ns#
+#namespace	ns32=https://data.muziekweb.nl/vocab/
+#namespace	ns33=https://data.archives-ouvertes.fr/doctype/
+#namespace	ns34=http://schema.org/
+#namespace	ns35=http://zbw.eu/namespaces/zbw-extensions/
+#namespace	ns36=http://www.w3.org/2006/vcard/ns#
+#namespace	ns37=http://metadb.riken.jp/db/DBcatalog/
+#namespace	ns38=http://www.openlinksw.com/schema/attribution#
+#namespace	ns39=http://www.w3.org/2000/01/rdf-schema#
+#namespace	ns40=http://purl.bioontology.org/ontology/SNOMEDCT/
+#namespace	ns41=http://vocabularies.wikipathways.org/wp#
+#namespace	ns42=http://rdf.muninn-project.org/ontologies/organization#
+#namespace	ns43=http://www.w3.org/2006/time#
+#namespace	ns44=http://www.w3.org/ns/sosa/
+#namespace	ns45=http://www.w3.org/ns/sparql-service-description#
+#namespace	ns46=http://www.w3.org/ns/lemon/lime#
+#namespace	ns47=http://purl.org/allie/ontology/201108#
+#namespace	ns48=http://sparql.cwrc.ca/ontologies/cwrc#
+#namespace	ns49=https://jpsearch.go.jp/term/
+#namespace	ns50=http://xmlns.com/foaf/0.1/
+#namespace	ns51=http://rs.tdwg.org/ontology/voc/TaxonName#
+#namespace	ns52=http://purl.org/dc/dcmitype/
+#namespace	ns53=http://rdfs.org/sioc/ns#
+#namespace	ns54=http://www.opengis.net/ont/geosparql#
+#namespace	ns55=http://www.w3.org/2004/02/skos/core#
+#namespace	ns56=http://dbpedia.org/ontology/
+#namespace	ns57=http://rdfs.org/ns/void#
+#namespace	ns58=http://wikiba.se/ontology#
+#namespace	ns59=http://rdf.ncbi.nlm.nih.gov/
+#namespace	ns60=http://identifiers.org/idot/
+#namespace	ns61=http://rdf.geospecies.org/ont/families/wQViY/wQViY_ontology.owl#
+#namespace	ns62=http://www.w3.org/ns/lemon/ontolex#
+#namespace	ns63=http://purl.org/net/provenance/ns#
+#namespace	ns64=http://purl.org/stuff/rev#
+#namespace	ns65=http://vocabularies.wikipathways.org/gpml#
+#namespace	ns66=http://labs.mondeca.com/vocab/voaf#
+#namespace	ns67=https://jpsearch.go.jp/term/type/
+#namespace	ns68=http://metadb.riken.jp/
+#namespace	ns69=http://purl.org/ontology/wi/core#
+#namespace	ns70=http://id.loc.gov/vocabulary/relators/
+#namespace	ns71=http://purl.org/dc/elements/1.1/
+#namespace	ns72=http://purl.org/pav/
+#namespace	ns73=http://purl.org/spar/cito/
+#namespace	ns74=http://purl.org/net/cito/
+#namespace	ns75=http://usefulinc.com/ns/doap#
+#namespace	ns76=http://vocabularies.bridgedb.org/ops#
+#namespace	ns77=http://vocab.deri.ie/void#
+#namespace	ns78=http://www.w3.org/ns/dCAN#
+#namespace	ns79=http://purl.org/vocab/vann/
+#namespace	ns80=http://ldf.fi/void-ext#
+#namespace	ns81=http://purl.org/nkos/
+#namespace	ns82=http://ldf.fi/schema/ldf/
+#namespace	ns83=http://purl.org/pav/2.0/
+#namespace	ns84=http://qudt.org/schema/qudt/
+#namespace 	wsdbm=http://db.uwaterloo.ca/~galuc/wsdbm/
+<type*> ns24:Dataset 1
+<pgroup> 0.036228900782214905
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.036228900782214905
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.03499382461918485
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.026759983532317826
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.026348291477974475
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.02470152326060107
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.02470152326060107
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.02428983120625772
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.011939069575957185
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.01029230135858378
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.009468917249897077
+#predicate ns30:publicSector name
+</pgroup>
+<pgroup> 0.0032935364347468094
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.002881844380403458
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.002881844380403458
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns57:uriSpace string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns71:title string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:generatedAtTime date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:comment string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:publisher string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:author string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns82:starRating integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:language string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:inLanguage string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns6:doi string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:contactPoint string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns84:acronym string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateCreated date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+</type>
+<type*> ns57:Dataset 1
+<pgroup> 0.06628242074927954
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.05269658295594895
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.04075751337999177
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.02140798682585426
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.02099629477151091
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.018937834499794155
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.018526142445450804
+#predicate ns60:exampleIdentifier string
+</pgroup>
+<pgroup> 0.018526142445450804
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.013585837793330589
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns37:metadata_link string
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns60:identifierPattern string
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns72:curatedOn date
+</pgroup>
+<pgroup> 0.011527377521613832
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.011527377521613832
+#predicate ns60:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.01070399341292713
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.009880609304240428
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.009880609304240428
+#predicate ns57:classes integer
+</pgroup>
+<pgroup> 0.008645533141210375
+#predicate ns57:entities integer
+</pgroup>
+<pgroup> 0.008233841086867023
+#predicate ns57:uriSpace string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns57:uriRegexPattern string
+</pgroup>
+<pgroup> 0.006175380815150268
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.004528612597776863
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.004116920543433511
+#predicate ns71:creator string
+</pgroup>
+<pgroup> 0.004116920543433511
+#predicate ns57:properties integer
+</pgroup>
+<pgroup> 0.004116920543433511
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.0032935364347468094
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns72:version string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns71:description string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns39:comment string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns80:subjectClasses integer
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns80:datatypes integer
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns80:objectClasses integer
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns80:distinctLiterals integer
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns80:distinctRDFNodes integer
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns80:propertyClasses integer
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:distinctIRIReferenceObjects integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:generatedAtTime date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:averageLiteralLength integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:distinctIRIReferenceSubjects integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns39:comment string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:distinctIRIReferences integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:distinctBlankNodeSubjects integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:languages integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns60:preferredPrefix string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:source string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:averageIRILength integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:distinctBlankNodes integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns80:distinctBlankNodeObjects integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns57:triples string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:publisher string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns57:entities string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:createdWith string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns50:name string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns24:byteSize integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:importedOn string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns71:title string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns55:definition string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:seeAlso string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:author string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns81:updateFrequency string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:dataDump string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns31:attributionName string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns82:starRating integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:language string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns6:doi string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:publisher string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:inLanguage string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns2:versionInfo integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns2:versionNumber string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:importedOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:accrualPeriodicity string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:contactPoint string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:source string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns84:acronym string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:title string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateCreated date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:version integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns31:morePermissions string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:publisher string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:vocabulary string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns31:attributionURL string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns81:sizeNote string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:hasVersion string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:modified string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:entities integer
+</pgroup>
+</type>
+<type*> ns2:Class 1
+</type>
+<type*> ns24:Distribution 1
+<pgroup> 0.03417044051049815
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.03252367229312474
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.018526142445450804
+#predicate ns60:exampleIdentifier string
+</pgroup>
+<pgroup> 0.0177027583367641
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.013585837793330589
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns60:identifierPattern string
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns72:curatedOn date
+</pgroup>
+<pgroup> 0.011527377521613832
+#predicate ns60:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.008233841086867023
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns57:entities integer
+</pgroup>
+<pgroup> 0.00699876492383697
+#predicate ns57:uriRegexPattern string
+</pgroup>
+<pgroup> 0.00699876492383697
+#predicate ns57:classes integer
+</pgroup>
+<pgroup> 0.004528612597776863
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns60:preferredPrefix string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns72:version string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns57:properties integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns24:byteSize integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:vocabulary string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:version integer
+</pgroup>
+</type>
+<type*> ns52:Dataset 1
+<pgroup> 0.06010703993412927
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.054343351173322355
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:uri string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:namespace string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:identifier string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.019349526554137506
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.018937834499794155
+#predicate ns60:exampleIdentifier string
+</pgroup>
+<pgroup> 0.015644298065047343
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns60:identifierPattern string
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns72:curatedOn date
+</pgroup>
+<pgroup> 0.011527377521613832
+#predicate ns60:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.007410456978180321
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.007410456978180321
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.007410456978180321
+#predicate ns57:entities integer
+</pgroup>
+<pgroup> 0.00699876492383697
+#predicate ns57:classes integer
+</pgroup>
+<pgroup> 0.006587072869493619
+#predicate ns57:uriRegexPattern string
+</pgroup>
+<pgroup> 0.004528612597776863
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns60:preferredPrefix string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:version string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns24:byteSize integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:preferredPrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:properties integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:alternatePrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:version integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:entities integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:accrualPeriodicity string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:vocabulary string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:identifierPattern string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:exampleIdentifier string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:uriRegexPattern string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:properties integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctSubjects integer
+</pgroup>
+</type>
+<type*> ns34:Dataset 1
+<pgroup> 0.012762453684643887
+#predicate ns34:softwareVersion string
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns34:version integer
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns58:identifiers integer
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns58:statements integer
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns58:sitelinks integer
+</pgroup>
+<pgroup> 0.009057225195553726
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.008233841086867023
+#predicate ns39:comment string
+</pgroup>
+<pgroup> 0.008233841086867023
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns34:position string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns34:archivedAt string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns34:discussionUrl string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns34:assesses string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns1:IAO_0000028 string
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns34:headline string
+</pgroup>
+<pgroup> 0.005351996706463565
+#predicate ns1:PCL_0010061 integer
+</pgroup>
+<pgroup> 0.0032935364347468094
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.002881844380403458
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.002881844380403458
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns1:PCL_0010060 integer
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns57:uriSpace string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:generatedAtTime date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns6:doi string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:inLanguage string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:language string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:author string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateCreated date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns84:acronym string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:contactPoint string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:bibliographicCitation string
+</pgroup>
+</type>
+<type*> ns39:Class 1
+</type>
+<type*> ns45:Graph 1
+<pgroup> 0.0032935364347468094
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0032935364347468094
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:source string
+</pgroup>
+</type>
+<type*> ns50:Organization 1
+</type>
+<type*> ns0:Entity 1
+<pgroup> 0.002470152326060107
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns57:uriSpace string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns0:generatedAtTime date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateCreated date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:contactPoint string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns84:acronym string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns6:doi string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:inLanguage string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:author string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:comment string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:language string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:occurrencesInDatasets integer
+</pgroup>
+</type>
+<type*> ns45:NamedGraph 1
+</type>
+<type*> ns57:Linkset 1
+<pgroup> 0.01399752984767394
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.01399752984767394
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.011115685467270481
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.011115685467270481
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.011115685467270481
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.011115685467270481
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.011115685467270481
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.01070399341292713
+#predicate ns60:identifierPattern string
+</pgroup>
+<pgroup> 0.01070399341292713
+#predicate ns60:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.01070399341292713
+#predicate ns60:exampleIdentifier string
+</pgroup>
+<pgroup> 0.01070399341292713
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.01070399341292713
+#predicate ns72:curatedOn date
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns57:classes integer
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns57:entities integer
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.002881844380403458
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns71:description string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:importedOn string
+</pgroup>
+</type>
+<type*> ns37:RIKENorganization 1
+</type>
+<type*> ns15:iso639-3 1
+</type>
+<type*> ns0:Activity 1
+</type>
+<type*> ns13:Dataset 1
+</type>
+<type*> ns39:Resource 1
+</type>
+<type*> ns4:lsr_vocabulary:Resource 2
+<pgroup> 0.025936599423631124
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:identifier string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:namespace string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:uri string
+</pgroup>
+<pgroup> 0.02387813915191437
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.019761218608480857
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:alternative string
+</pgroup>
+</type>
+<type*> ns4:lsr_vocabulary:Dataset 1
+<pgroup> 0.025936599423631124
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:identifier string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:uri string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:namespace string
+</pgroup>
+<pgroup> 0.02387813915191437
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.019761218608480857
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:alternative string
+</pgroup>
+</type>
+<type*> ns0:Organization 1
+<pgroup> 0.0020584602717167557
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:description string
+</pgroup>
+</type>
+<type*> ns37:BioTarget 1
+</type>
+<type*> ns36:Organization 1
+</type>
+<type*> ns37:BioDataType 1
+</type>
+<type*> ns50:Person 1
+</type>
+<type*> ns45:defaultGraph 1
+</type>
+<type*> ns68:db 1
+<pgroup> 0.013174145738987238
+#predicate ns37:metadata_link string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.002881844380403458
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:alternative string
+</pgroup>
+</type>
+<type*> ns0:Agent 1
+</type>
+<type*> ns58:Item 1
+</type>
+<type*> ns59:pubmed 1
+</type>
+<type*> ns2:AnnotationProperty 1
+</type>
+<type*> ns0:Derivation 1
+</type>
+<type*> ns2:NamedIndividual 1
+<pgroup> 0.007822149032523672
+#predicate ns34:assesses string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns1:IAO_0000028 string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns34:position string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns34:discussionUrl string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns39:comment string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns34:archivedAt string
+</pgroup>
+<pgroup> 0.005763688760806916
+#predicate ns34:headline string
+</pgroup>
+<pgroup> 0.005351996706463565
+#predicate ns1:PCL_0010061 integer
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns1:PCL_0010060 integer
+</pgroup>
+</type>
+<type*> ns13:ProvenanceStatement 1
+</type>
+<type*> ns24:DataService 1
+</type>
+<type*> ns13:Location 1
+</type>
+<type*> ns2:Ontology 1
+<pgroup> 0.002470152326060107
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns0:generatedAtTime date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:uriSpace string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns6:doi string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns84:acronym string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateCreated date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:title string
+</pgroup>
+</type>
+<type*> ns30:ServedByDataService 1
+<pgroup> 0.008645533141210375
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.008645533141210375
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.008645533141210375
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.008645533141210375
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.008645533141210375
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.008645533141210375
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.008233841086867023
+#predicate ns30:publicSector name
+</pgroup>
+</type>
+<type*> ns30:ServiceDistribution 1
+</type>
+<type*> ns1:PCL_0010002 1
+</type>
+<type*> ns2:class 1
+</type>
+<type*> ns45:Dataset 1
+<pgroup> 0.0016467682173734047
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns57:uriSpace string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns72:version string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:inLanguage string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns83:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:language string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns82:starRating integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:comment string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:contactPoint string
+</pgroup>
+</type>
+<type*> ns45:Service 1
+</type>
+<type*> ns30:IndependentDataService 1
+</type>
+<type*> ns22:Property 1
+</type>
+<type*> ns57:DatasetDescription 1
+</type>
+<type*> ns4:miriam_vocabulary:Resource 1
+</type>
+<type*> ns4:pubmed_vocabulary:Resource 1
+</type>
+<type*> ns27:Vocabulary 1
+<pgroup> 0.002470152326060107
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.002470152326060107
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0020584602717167557
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns27:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateCreated date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:title string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:name string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns84:acronym string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns6:doi string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:uriSpace string
+</pgroup>
+</type>
+<type*> ns4:bioportal_vocabulary:Resource 1
+</type>
+<type*> ns1:ECO_0000205 1
+</type>
+<type*> ns3:Language 1
+</type>
+<type*> ns2:ObjectProperty 3
+</type>
+<type*> ns64:Review 1
+</type>
+<type*> ns24:CatalogRecord 1
+</type>
+<type*> ns1:ECO_0000212 1
+</type>
+<type*> ns29:E5_Event 1
+</type>
+<type*> ns55:ConceptScheme 1
+<pgroup> 0.0008233841086867024
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns81:updateFrequency string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns0:generatedAtTime date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:uriSpace string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns31:attributionName string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:uriRegexPattern string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns6:doi string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateModified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:creator string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:publisher string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:keywords string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:datePublished date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:subject string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns27:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns0:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns84:acronym string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:dateCreated date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns55:prefLabel string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns31:morePermissions string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:publisher string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns81:sizeNote string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns31:attributionURL string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns34:name string
+</pgroup>
+</type>
+<type*> ns55:Concept 1
+</type>
+<type*> ns2:DatatypeProperty 4
+</type>
+<type*> ns1:ECO_0000266 1
+</type>
+<type*> ns2:FunctionalProperty 1
+</type>
+<type*> ns21:SharedInstanceSet 1
+</type>
+<type*> ns38:DataSource 2
+</type>
+<type*> ns21:SimpleLinkSet 1
+</type>
+<type*> ns4:biodbcore_vocabulary:Resource 1
+</type>
+<type*> ns5:FormalOrganization 1
+</type>
+<type*> ns2:Thing 1
+<pgroup> 0.0004116920543433512
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:contributor string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:modified date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns24:keyword string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns79:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns71:title string
+</pgroup>
+</type>
+<type*> ns60:AccessPattern 1
+</type>
+<type*> ns23:C7057 1
+</type>
+<type*> ns6:Document 1
+</type>
+<type*> ns33:Article 1
+</type>
+<type*> ns43:Interval 1
+</type>
+<type*> ns44:Platform 1
+</type>
+<type*> ns6:AcademicArticle 1
+</type>
+<type*> ns24:Catalog 1
+</type>
+<type*> ns13:PeriodOfTime 1
+</type>
+<type*> ns52:Dataset 1
+<pgroup> 0.06010703993412927
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.054343351173322355
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:uri string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:namespace string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns39:label string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns4:bio2rdf_vocabulary:identifier string
+</pgroup>
+<pgroup> 0.025936599423631124
+#predicate ns13:identifier string
+</pgroup>
+<pgroup> 0.019349526554137506
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.018937834499794155
+#predicate ns60:exampleIdentifier string
+</pgroup>
+<pgroup> 0.015644298065047343
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.013174145738987238
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.012762453684643887
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns60:identifierPattern string
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.012350761630300536
+#predicate ns72:curatedOn date
+</pgroup>
+<pgroup> 0.011527377521613832
+#predicate ns60:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.007822149032523672
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.007410456978180321
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.007410456978180321
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.007410456978180321
+#predicate ns57:entities integer
+</pgroup>
+<pgroup> 0.00699876492383697
+#predicate ns57:classes integer
+</pgroup>
+<pgroup> 0.006587072869493619
+#predicate ns57:uriRegexPattern string
+</pgroup>
+<pgroup> 0.004528612597776863
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns60:preferredPrefix string
+</pgroup>
+<pgroup> 0.0016467682173734047
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.0012350761630300535
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:format string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:version string
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns24:byteSize integer
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0008233841086867024
+#predicate ns13:alternative string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:createdOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:preferredPrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:properties integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:alternatePrefix string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:version string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:version integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns72:authoredOn date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:entities integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:accrualPeriodicity string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:vocabulary string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:triples integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:created date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:issued date
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctSubjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:identifierPattern string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns60:exampleIdentifier string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:uriRegexPattern string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns13:rights string
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:properties integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctObjects integer
+</pgroup>
+<pgroup> 0.0004116920543433512
+#predicate ns57:distinctSubjects integer
+</pgroup>
+</type>
+<type*> ns34:CreativeWork 2
+</type>
+<type*> ns54:Feature 1
+</type>
+<type*> ns36:Individual 1
+</type>
+<type*> ns63:DataItem 1
+</type>

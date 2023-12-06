@@ -1,0 +1,357 @@
+#namespace	dc=http://purl.org/dc/terms/
+#namespace	foaf=http://xmlns.com/foaf/
+#namespace	gr=http://purl.org/goodrelations/
+#namespace	gn=http://www.geonames.org/ontology#
+#namespace	mo=http://purl.org/ontology/mo/
+#namespace	og=http://ogp.me/ns#
+#namespace	rev=http://purl.org/stuff/rev#
+#namespace	rdf=http://www.w3.org/1999/02/22-rdf-syntax-ns#
+#namespace	rdfs=http://www.w3.org/2000/01/rdf-schema#
+#namespace	sorg=http://schema.org/
+#namespace 	wsdbm=http://db.uwaterloo.ca/~galuc/wsdbm/
+
+<type*>		wsdbm:Genre 21
+</type>
+<type*>		wsdbm:SubGenre 145
+</type>
+<type*>		wsdbm:Topic 250
+</type>
+<type*>		wsdbm:ProductCategory 15
+</type>
+<type*>		wsdbm:City 240
+</type>
+<type*>		wsdbm:Country 25
+</type>
+<type*>		wsdbm:Language 35
+</type>
+<type*>		wsdbm:Role 3
+</type>
+<type*>		wsdbm:AgeGroup	9
+</type>
+<type*>		wsdbm:Gender	2
+</type>
+
+// Declaration of wsdbm:Product type ////////////////////////////////////////////////////
+<type>		wsdbm:Product 250
+
+// Default attributes for every product...///////////////////////////////////////////////
+<pgroup>	1.0
+#predicate	og:title		string
+</pgroup>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Optional attributes common to every product...////////////////////////////////////////
+<pgroup>	0.6
+#predicate	sorg:description	string
+</pgroup>
+<pgroup>	0.3
+#predicate	sorg:contentRating	integer	6 18
+</pgroup>
+<pgroup>	0.3
+#predicate	sorg:keywords		string
+</pgroup>
+<pgroup>	0.3
+#predicate	sorg:text		string
+</pgroup>
+<pgroup>	0.1
+#predicate	sorg:contentSize	integer 0 9999
+</pgroup>
+<pgroup>	0.1
+#predicate	sorg:caption		string
+</pgroup>
+<pgroup>	0.05
+#predicate	sorg:expires		date	2014-01-01 2019-12-31
+</pgroup>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Attributes for wsdbm:ProductCategory0 (i.e., Classical Music Concert)/////////////////
+<pgroup>	0.8			@wsdbm:ProductCategory0
+#predicate	mo:opus			integer	0 999
+#predicate	mo:movement		integer 0 9
+</pgroup>
+<pgroup>	0.5			@wsdbm:ProductCategory0
+#predicate	wsdbm:composer		name
+</pgroup>
+<pgroup>	0.5			@wsdbm:ProductCategory0
+#predicate	mo:performer		string
+</pgroup>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Attributes for wsdbm:ProductCategory1 (i.e., Music Album)/////////////////////////////
+<pgroup>	0.5			@wsdbm:ProductCategory1
+#predicate	mo:producer		string
+</pgroup>
+<pgroup>	0.5			@wsdbm:ProductCategory1
+#predicate	mo:record_number	integer 0 999
+</pgroup>
+<pgroup>	0.5			@wsdbm:ProductCategory1
+#predicate	mo:release		date
+</pgroup>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Attributes for wsdbm:ProductCategory2 (i.e., Movie)///////////////////////////////////
+<pgroup>	0.3			@wsdbm:ProductCategory2
+#predicate	sorg:duration		integer 0 500
+</pgroup>
+<pgroup>	0.5			@wsdbm:ProductCategory2
+#predicate	sorg:producer		string
+</pgroup>
+<pgroup>	0.1			@wsdbm:ProductCategory2
+#predicate	sorg:award		string
+</pgroup>
+<pgroup>	0.1			@wsdbm:ProductCategory2
+#predicate	sorg:award		string
+</pgroup>
+<pgroup>	0.1			@wsdbm:ProductCategory2
+#predicate	sorg:award		string
+</pgroup>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Attributes for wsdbm:ProductCategory3 (i.e., Book)////////////////////////////////////
+<pgroup>	1.0			@wsdbm:ProductCategory3
+#predicate	sorg:isbn		integer
+</pgroup>
+<pgroup>	0.5			@wsdbm:ProductCategory3
+#predicate	sorg:bookEdition	integer	1 6 	normal
+</pgroup>
+<pgroup>	0.25			@wsdbm:ProductCategory3
+#predicate	sorg:numberOfPages	integer 1 999	normal
+</pgroup>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Attributes for wsdbm:ProductCategory4 (i.e., NewsArticle)/////////////////////////////
+<pgroup>	0.8			@wsdbm:ProductCategory4
+#predicate	sorg:publisher		string
+</pgroup>
+<pgroup>	0.7			@wsdbm:ProductCategory4
+#predicate	sorg:datePublished	date
+</pgroup>
+<pgroup>	0.2			@wsdbm:ProductCategory4
+#predicate	sorg:wordCount		integer	250 10000	normal
+</pgroup>
+<pgroup>	0.2			@wsdbm:ProductCategory4
+#predicate	sorg:printColumn	integer 1970 2013
+#predicate	sorg:printEdition	integer	1 36
+</pgroup>
+<pgroup>	0.2			@wsdbm:ProductCategory4
+#predicate	sorg:printPage		integer 1 999
+#predicate	sorg:printSection	integer 1 9
+</pgroup>
+/////////////////////////////////////////////////////////////////////////////////////////
+</type>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+<type>		wsdbm:Retailer 12
+<pgroup>	1.0
+#predicate	gr:name			string
+#predicate	gr:description		string
+</pgroup>
+<pgroup>	0.8
+#predicate	sorg:openingHours	integer 6 18
+</pgroup>
+<pgroup>	0.6
+#predicate	sorg:paymentAccepted	string
+</pgroup>
+<pgroup>	0.8
+#predicate	sorg:email		string
+</pgroup>
+<pgroup>	0.7
+#predicate	sorg:telephone		integer	1111111 9999999
+</pgroup>
+<pgroup>	0.1
+#predicate	sorg:faxNumber		integer	1111111 9999999
+</pgroup>
+<pgroup>	0.4
+#predicate	sorg:aggregateRating	integer 1 10
+</pgroup>
+<pgroup>	0.1
+#predicate	sorg:legalName		string
+</pgroup>
+</type>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+<type>		wsdbm:Offer 900
+<pgroup>	1.0
+#predicate	gr:serialNumber		integer	11111111 99999999
+</pgroup>
+<pgroup>	1.0
+#predicate	gr:price		integer	0 999
+</pgroup>
+<pgroup>	0.4
+#predicate	gr:validFrom		date	2013-01-01 2013-06-21
+</pgroup>
+<pgroup>	0.4
+#predicate	gr:validThrough		date	2013-09-01 2013-12-31
+</pgroup>
+<pgroup>	0.2
+#predicate	sorg:priceValidUntil	date	2013-06-22 2013-08-31
+</pgroup>
+<pgroup>
+#predicate	sorg:eligibleQuantity	integer 1 9
+</pgroup>
+</type>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+<type>		wsdbm:Purchase 1500
+<pgroup>	1.0
+#predicate	gr:price		integer 0 999
+</pgroup>
+<pgroup>	0.3
+#predicate	wsdbm:purchaseDate	date	2012-01-01 2012-12-31
+</pgroup>
+</type>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+<type>		wsdbm:Website 50
+<pgroup>	1.0
+#predicate	sorg:url		string
+#predicate	wsdbm:hits		integer 0 10000
+</pgroup>
+</type>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+<type>		wsdbm:Review 1500
+<pgroup>	1.0
+#predicate	rev:rating		integer 0 10
+</pgroup>
+<pgroup>	0.3
+#predicate	rev:title		string
+</pgroup>
+<pgroup>	0.7
+#predicate	rev:text		string
+</pgroup>
+<pgroup>	0.05
+#predicate	rev:totalVotes		integer 1 999
+</pgroup>
+</type>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////
+<type> 		wsdbm:User 1000
+<pgroup>	1.0
+#predicate	wsdbm:userId	integer	1000000	9999999
+</pgroup>
+<pgroup>	0.7
+#predicate	foaf:givenName	name
+#predicate	foaf:familyName	name
+</pgroup>
+<pgroup>	0.2
+#predicate	sorg:birthDate	date	1970-01-01 1999-12-31
+</pgroup>
+<pgroup>	0.9
+#predicate	sorg:email	string
+</pgroup>
+<pgroup>	0.05
+#predicate	sorg:telephone	integer 1111111 9999999
+</pgroup>
+<pgroup>	0.05
+#predicate	sorg:jobTitle	string
+</pgroup>
+</type>
+/////////////////////////////////////////////////////////////////////////////////////////
+
+#association	wsdbm:SubGenre	rdf:type		wsdbm:Genre		2 1		1.0	UNIFORM
+#association	wsdbm:SubGenre	og:tag			wsdbm:Topic		2 6[uniform]	1.0	UNIFORM
+
+#association	wsdbm:Product 	rdf:type 		wsdbm:ProductCategory	2 1		1.0	UNIFORM
+
+#association	wsdbm:Product	wsdbm:hasGenre		wsdbm:SubGenre		2 2		1.0	NORMAL
+#association	wsdbm:Product	wsdbm:hasGenre		wsdbm:SubGenre		2 3[uniform]	0.25	NORMAL
+
+#association	wsdbm:Product	og:tag			wsdbm:Topic		2 20[normal]	0.6	UNIFORM
+
+#association	wsdbm:Product	foaf:homepage		wsdbm:Website		2 1		0.25	UNIFORM
+
+#association	wsdbm:City	gn:parentCountry	wsdbm:Country		2 1		1.0	ZIPFIAN
+
+// Associations for wsdbm:Website ///////////////////////////////////////////////////////
+#association	wsdbm:Website	sorg:language		wsdbm:Language		2 1		1.0	ZIPFIAN
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:User //////////////////////////////////////////////////////////
+#association	wsdbm:User	rdf:type		wsdbm:Role		2 3		0.01	ZIPFIAN
+#association	wsdbm:User	rdf:type		wsdbm:Role		2 2		0.1	ZIPFIAN
+#association	wsdbm:User	rdf:type		wsdbm:Role		2 1		1.0	ZIPFIAN
+#association	wsdbm:User	wsdbm:likes		wsdbm:Product		2 5[normal]	0.2	ZIPFIAN
+#association	wsdbm:User	wsdbm:likes		wsdbm:Product		2 25[normal]	0.05	UNIFORM
+#association	wsdbm:User	foaf:homepage		wsdbm:Website		1 1		0.05	UNIFORM
+#association	wsdbm:User	wsdbm:subscribes	wsdbm:Website		2 15[normal]	0.2	UNIFORM
+#association	wsdbm:User	wsdbm:follows		wsdbm:User		2 5[normal]	0.2	ZIPFIAN @null		@wsdbm:Role2
+#association	wsdbm:User	wsdbm:follows		wsdbm:User		2 15[normal]	0.3	UNIFORM @null		@wsdbm:Role1
+#association	wsdbm:User	wsdbm:follows		wsdbm:User		2 100[normal]	0.6	UNIFORM	@null		@wsdbm:Role0	
+#association	wsdbm:User	wsdbm:friendOf		wsdbm:User		2 225[normal]	0.4	UNIFORM
+#association	wsdbm:User	dc:Location		wsdbm:City		2 1		0.4	ZIPFIAN
+#association	wsdbm:User	foaf:age		wsdbm:AgeGroup		2 1		0.5	NORMAL
+#association	wsdbm:User	wsdbm:gender		wsdbm:Gender		2 1		0.6	UNIFORM
+#association	wsdbm:User	sorg:nationality	wsdbm:Country		2 1		0.2	ZIPFIAN
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:ProductCategory0 (i.e., Classical Music Concert)///////////////
+#association	wsdbm:Product	mo:conductor		wsdbm:User		2 1		0.5	UNIFORM	@wsdbm:ProductCategory0	@wsdbm:Role2
+#association	wsdbm:Product	mo:performed_in		wsdbm:City		2 1		0.5	ZIPFIAN	@wsdbm:ProductCategory0	@null
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:ProductCategory1 (i.e., Music Album)///////////////////////////
+#association	wsdbm:Product	mo:artist		wsdbm:User		2 1		0.8	ZIPFIAN @wsdbm:ProductCategory1 @wsdbm:Role2
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:ProductCategory2 (i.e., Movie)/////////////////////////////////
+#association	wsdbm:Product	sorg:actor		wsdbm:User		2 25[normal]	0.8	UNIFORM	@wsdbm:ProductCategory2	@wsdbm:Role2
+#association	wsdbm:Product	sorg:director		wsdbm:User		2 1		0.8	ZIPFIAN	@wsdbm:ProductCategory2	@wsdbm:Role2
+#association	wsdbm:Product	sorg:trailer		wsdbm:Website		2 3[uniform]	0.1	UNIFORM @wsdbm:ProductCategory2 @null
+#association	wsdbm:Product	sorg:language		wsdbm:Language		2 4[uniform]	0.3	ZIPFIAN	@wsdbm:ProductCategory2	@null
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:ProductCategory3 (i.e., Book)//////////////////////////////////
+#association	wsdbm:Product	sorg:author		wsdbm:User		2 4[normal]	0.8	UNIFORM @wsdbm:ProductCategory3 @wsdbm:Role2
+#association	wsdbm:Product	sorg:editor		wsdbm:User		2 4[normal]	0.4	UNIFORM @wsdbm:ProductCategory3 @wsdbm:Role2
+#association	wsdbm:Product	sorg:language		wsdbm:Language		2 10[uniform]	0.05	ZIPFIAN @wsdbm:ProductCategory3 @null
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:ProductCategory4 (i.e., NewsArticle)///////////////////////////
+#association	wsdbm:Product	sorg:author		wsdbm:User		2 1		0.8	UNIFORM @wsdbm:ProductCategory4 @null
+#association	wsdbm:Product	sorg:editor		wsdbm:User		2 3[normal]	0.1	UNIFORM @wsdbm:ProductCategory4 @null
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:Retailer///////////////////////////////////////////////////////
+#association	wsdbm:Retailer	gr:offers		wsdbm:Offer		2 180[normal]	1.0	ZIPFIAN
+#association	wsdbm:Retailer	gr:offers		wsdbm:Offer		2 90[normal]	0.5	NORMAL
+#association	wsdbm:Retailer	gr:offers		wsdbm:Offer		2 45[normal]	0.25	UNIFORM
+///////////////////////////////////////----------////////////////////////////////////////
+#association	wsdbm:Retailer	sorg:contactPoint	wsdbm:User		1 1		0.8	UNIFORM
+#association	wsdbm:Retailer	sorg:employee		wsdbm:User		1 10[uniform]	0.2	UNIFORM
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:Offer /////////////////////////////////////////////////////////
+#association	wsdbm:Offer	gr:includes		wsdbm:Product		2 1		1.0	UNIFORM
+#association	wsdbm:Offer	sorg:eligibleRegion	wsdbm:Country		2 5		0.5	ZIPFIAN
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:Purchase //////////////////////////////////////////////////////
+#association	wsdbm:User	wsdbm:makesPurchase	wsdbm:Purchase		1 20[normal]	0.3	UNIFORM	@wsdbm:Role0	@null
+#association	wsdbm:Purchase	wsdbm:purchaseFor	wsdbm:Product		2 1		1.0	ZIPFIAN
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// Associations for wsdbm:Review ////////////////////////////////////////////////////////
+#association	wsdbm:Review	rev:reviewer		wsdbm:User		2 1		1.0	UNIFORM	@null		@wsdbm:Role1
+#association	wsdbm:Product	rev:hasReview		wsdbm:Review		1 60[normal]	0.2	UNIFORM
+/////////////////////////////////////////////////////////////////////////////////////////
+
+//#statistics	wsdbm:SubGenre	rdf:type		wsdbm:Genre
+//#statistics	wsdbm:SubGenre	og:tag			wsdbm:Topic
+//#statistics	wsdbm:Product	rdf:type		wsdbm:ProductCategory
+//#statistics	wsdbm:Product	wsdbm:hasGenre		wsdbm:SubGenre
+//#statistics	wsdbm:Product	og:tag			wsdbm:Topic
+//#statistics	wsdbm:City	gn:parentCountry	wsdbm:Country
+//#statistics	wsdbm:Retailer	gr:offers		wsdbm:Offer
+//#statistics	wsdbm:User	rdf:type		wsdbm:Role
+//#statistics	wsdbm:User	wsdbm:makesPurchase	wsdbm:Purchase
+//#statistics	wsdbm:Purchase	wsdbm:purchaseFor	wsdbm:Product
+//#statistics	wsdbm:User	wsdbm:likes		wsdbm:Product
+//#statistics	wsdbm:User	wsdbm:follows		wsdbm:User
+//#statistics	wsdbm:User	wsdbm:friendOf		wsdbm:User
