@@ -1,0 +1,1850 @@
+#namespace	ns0=http://www.w3.org/ns/dcat#
+#namespace	ns1=http://www.w3.org/1999/02/22-rdf-syntax-ns#
+#namespace	ns2=http://www.w3.org/2002/07/owl#
+#namespace	ns3=http://purl.org/dc/terms/
+#namespace	ns4=http://xmlns.com/foaf/0.1/
+#namespace	ns5=http://rdfs.org/ns/void#
+#namespace	ns6=http://www.w3.org/ns/sparql-service-description#
+#namespace	ns7=http://www.w3.org/ns/prov#
+#namespace	ns8=http://purl.org/pav/
+#namespace	ns9=http://schema.org/
+#namespace	ns10=http://www.w3.org/2000/01/rdf-schema#
+#namespace	ns11=http://www.w3.org/2004/02/skos/core#
+#namespace	ns12=http://purl.org/ontology/bibo/
+#namespace	ns13=http://purl.org/dc/elements/1.1/
+#namespace	ns14=http://purl.org/vocommons/voaf#
+#namespace	ns15=http://entryscape.com/terms/
+#namespace	ns16=http://www.w3.org/2006/vcard/ns#
+#namespace	ns17=http://dbpedia.org/ontology/
+#namespace	ns18=http://purl.org/ontology/wi/core#
+#namespace	ns19=http://purl.obolibrary.org/obo/
+#namespace	ns20=http://bio2rdf.org/
+#namespace	ns21=http://id.loc.gov/vocabulary/relators/
+#namespace	ns22=https://data.archives-ouvertes.fr/doctype/
+#namespace	ns23=http://purl.org/query/voidext#
+#namespace	ns24=http://purl.org/spar/cito/
+#namespace	ns25=http://metadb.riken.jp/
+#namespace	ns26=http://purl.org/net/cito/
+#namespace	ns27=http://rdf.ncbi.nlm.nih.gov/
+#namespace	ns28=http://usefulinc.com/ns/doap#
+#namespace	ns29=http://www.cidoc-crm.org/cidoc-crm/
+#namespace	ns30=http://wikiba.se/ontology#
+#namespace	ns31=http://semanticscience.org/resource/
+#namespace	ns32=http://vocabularies.bridgedb.org/ops#
+#namespace	ns33=http://www.openlinksw.com/schema/attribution#
+#namespace	ns34=http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#
+#namespace	ns35=http://lexvo.org/ontology#
+#namespace	ns36=http://purl.org/stuff/rev#
+#namespace	ns37=http://metadb.riken.jp/db/DBcatalog/
+#namespace	ns38=http://lexvo.org/id/
+#namespace	ns39=http://creativecommons.org/ns#
+#namespace	ns40=http://identifiers.org/idot/
+#namespace	ns41=http://vocab.deri.ie/void#
+#namespace	ns42=http://purl.org/net/provenance/ns#
+#namespace	ns43=http://www.w3.org/ns/dCAN#
+#namespace	ns44=http://purl.org/vocab/vann/
+#namespace	ns45=http://ldf.fi/void-ext#
+#namespace	ns46=http://purl.org/nkos/
+#namespace	ns47=http://ldf.fi/schema/ldf/
+#namespace	ns48=http://purl.org/pav/2.0/
+#namespace	ns49=http://qudt.org/schema/qudt/
+#namespace	ns50=http://www.w3.org/ns/org#
+#namespace	ns51=http://www.w3.org/2006/time#
+#namespace	ns52=http://www.w3.org/ns/sosa/
+#namespace	ns53=http://www.opengis.net/ont/geosparql#
+<type*> ns0:Dataset 1
+<pgroup> 0.12810707456978968
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.11892925430210326
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.061950286806883366
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.056978967495219884
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.04130019120458891
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.034034416826003826
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.030210325047801148
+#predicate ns3:alternative string
+</pgroup>
+<pgroup> 0.028680688336520075
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.024474187380497132
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:uri string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:namespace string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:identifier string
+</pgroup>
+<pgroup> 0.023709369024856597
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.022944550669216062
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.022179732313575527
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.01797323135755258
+#predicate ns40:exampleIdentifier string
+</pgroup>
+<pgroup> 0.01491395793499044
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.01491395793499044
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.012619502868068833
+#predicate ns3:format string
+</pgroup>
+<pgroup> 0.012237093690248566
+#predicate ns37:metadata_link string
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns40:identifierPattern string
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns9:softwareVersion string
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns8:authoredOn date
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns9:dateModified date
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns9:version integer
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.011472275334608031
+#predicate ns30:statements integer
+</pgroup>
+<pgroup> 0.011472275334608031
+#predicate ns8:curatedOn date
+</pgroup>
+<pgroup> 0.011472275334608031
+#predicate ns30:identifiers integer
+</pgroup>
+<pgroup> 0.011472275334608031
+#predicate ns30:sitelinks integer
+</pgroup>
+<pgroup> 0.011089866156787764
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.010707456978967494
+#predicate ns5:distinctSubjects integer
+</pgroup>
+<pgroup> 0.010707456978967494
+#predicate ns40:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.009177820267686425
+#predicate ns5:distinctObjects integer
+</pgroup>
+<pgroup> 0.009177820267686425
+#predicate ns5:classes integer
+</pgroup>
+<pgroup> 0.009177820267686425
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.008795411089866157
+#predicate ns10:comment string
+</pgroup>
+<pgroup> 0.008795411089866157
+#predicate ns15:publicSector name
+</pgroup>
+<pgroup> 0.00803059273422562
+#predicate ns5:entities integer
+</pgroup>
+<pgroup> 0.0076481835564053535
+#predicate ns5:uriSpace string
+</pgroup>
+<pgroup> 0.0076481835564053535
+#predicate ns11:prefLabel string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns9:discussionUrl string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns5:uriRegexPattern string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns9:archivedAt string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns9:position string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns19:IAO_0000028 string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns9:assesses string
+</pgroup>
+<pgroup> 0.006118546845124283
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns9:headline string
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.00497131931166348
+#predicate ns19:PCL_0010061 integer
+</pgroup>
+<pgroup> 0.00497131931166348
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.004588910133843212
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.004206500956022944
+#predicate ns5:distinctSubjects integer
+</pgroup>
+<pgroup> 0.0038240917782026767
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0038240917782026767
+#predicate ns5:properties integer
+</pgroup>
+<pgroup> 0.0038240917782026767
+#predicate ns11:prefLabel string
+</pgroup>
+<pgroup> 0.0030592734225621415
+#predicate ns8:version string
+</pgroup>
+<pgroup> 0.0026768642447418736
+#predicate ns9:datePublished date
+</pgroup>
+<pgroup> 0.0026768642447418736
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0026768642447418736
+#predicate ns9:name string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns19:PCL_0010060 integer
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns44:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns44:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns9:keywords string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:subject string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns40:preferredPrefix string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns45:subjectClasses integer
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns3:creator string
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns45:objectClasses integer
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns45:datatypes integer
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns45:distinctRDFNodes integer
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns45:distinctLiterals integer
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns45:propertyClasses integer
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns3:alternative string
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns3:format string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns7:generatedAtTime date
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns3:publisher string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:distinctIRIReferenceObjects integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:averageLiteralLength integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:distinctIRIReferenceSubjects integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns10:comment string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:distinctIRIReferences integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:distinctBlankNodeSubjects integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns7:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns0:version string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:languages integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns8:authoredOn date
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:distinctBlankNodes integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:averageIRILength integer
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns3:source string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns45:distinctBlankNodeObjects integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns5:triples string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns5:entities string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns8:createdWith string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns4:name string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns0:byteSize integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns8:importedOn string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns11:definition string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:version string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns10:seeAlso string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:dataDump string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns46:updateFrequency string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:author string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:createdOn string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns47:starRating integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:language string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns39:attributionName string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:description string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:publisher string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:inLanguage string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns48:version string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns40:alternatePrefix string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateModified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns12:doi string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:importedOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns2:versionNumber string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns2:versionInfo integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:creator string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:accrualPeriodicity string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns0:contactPoint string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:source string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:name string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns49:acronym string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:distinctObjects integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns39:morePermissions string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:version integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateCreated date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:distinctSubjects integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:publisher string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:entities integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:modified string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:hasVersion string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns39:attributionURL string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns46:sizeNote string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:vocabulary string
+</pgroup>
+</type>
+<type*> ns0:Distribution 1
+<pgroup> 0.03173996175908222
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.030210325047801148
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.017208413001912046
+#predicate ns40:exampleIdentifier string
+</pgroup>
+<pgroup> 0.01644359464627151
+#predicate ns3:alternative string
+</pgroup>
+<pgroup> 0.012619502868068833
+#predicate ns3:format string
+</pgroup>
+<pgroup> 0.012237093690248566
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.012237093690248566
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns40:identifierPattern string
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns8:authoredOn date
+</pgroup>
+<pgroup> 0.011854684512428298
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.011472275334608031
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.011472275334608031
+#predicate ns8:curatedOn date
+</pgroup>
+<pgroup> 0.010707456978967494
+#predicate ns40:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.0076481835564053535
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns5:distinctSubjects integer
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns5:distinctObjects integer
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns5:entities integer
+</pgroup>
+<pgroup> 0.00650095602294455
+#predicate ns5:uriRegexPattern string
+</pgroup>
+<pgroup> 0.00650095602294455
+#predicate ns5:classes integer
+</pgroup>
+<pgroup> 0.004206500956022944
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns3:format string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns40:preferredPrefix string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns3:alternative string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns8:version string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns8:authoredOn date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns5:properties integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns0:byteSize integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:vocabulary string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:version integer
+</pgroup>
+</type>
+<type*> ns6:Graph 1
+<pgroup> 0.0030592734225621415
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0030592734225621415
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns3:source string
+</pgroup>
+</type>
+<type*> ns4:Organization 1
+</type>
+<type*> ns7:Entity 1
+<pgroup> 0.002294455066921606
+#predicate ns9:name string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns9:datePublished date
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns9:keywords string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:subject string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns5:uriSpace string
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.0015296367112810707
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns7:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns7:generatedAtTime date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns0:version string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns44:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateCreated date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns44:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns11:prefLabel string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns0:contactPoint string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns49:acronym string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns12:doi string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:inLanguage string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns14:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateModified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns14:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:author string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:version string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns10:comment string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:creator string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:description string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:language string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns14:occurrencesInDatasets integer
+</pgroup>
+</type>
+<type*> ns6:NamedGraph 1
+</type>
+<type*> ns5:Linkset 1
+<pgroup> 0.0130019120458891
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0130019120458891
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.010325047801147227
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.010325047801147227
+#predicate ns8:authoredOn date
+</pgroup>
+<pgroup> 0.010325047801147227
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.010325047801147227
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.010325047801147227
+#predicate ns3:format string
+</pgroup>
+<pgroup> 0.00994263862332696
+#predicate ns40:identifierPattern string
+</pgroup>
+<pgroup> 0.00994263862332696
+#predicate ns40:accessIdentifierPattern string
+</pgroup>
+<pgroup> 0.00994263862332696
+#predicate ns40:exampleIdentifier string
+</pgroup>
+<pgroup> 0.00994263862332696
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.00994263862332696
+#predicate ns8:curatedOn date
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns5:distinctSubjects integer
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns5:distinctObjects integer
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns5:classes integer
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns5:entities integer
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.0026768642447418736
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:alternative string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns13:description string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns8:importedOn string
+</pgroup>
+</type>
+<type*> ns37:RIKENorganization 1
+</type>
+<type*> ns38:iso639-3 1
+</type>
+<type*> ns7:Activity 1
+</type>
+<type*> ns10:Resource 1
+</type>
+<type*> ns20:lsr_vocabulary:Resource 2
+<pgroup> 0.024091778202676863
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:identifier string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:namespace string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:uri string
+</pgroup>
+<pgroup> 0.022179732313575527
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.01835564053537285
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:alternative string
+</pgroup>
+</type>
+<type*> ns20:lsr_vocabulary:Dataset 1
+<pgroup> 0.024091778202676863
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:identifier string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:uri string
+</pgroup>
+<pgroup> 0.024091778202676863
+#predicate ns20:bio2rdf_vocabulary:namespace string
+</pgroup>
+<pgroup> 0.022179732313575527
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.01835564053537285
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:alternative string
+</pgroup>
+</type>
+<type*> ns7:Organization 1
+<pgroup> 0.0019120458891013384
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:alternative string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns3:description string
+</pgroup>
+</type>
+<type*> ns37:BioTarget 1
+</type>
+<type*> ns16:Organization 1
+</type>
+<type*> ns37:BioDataType 1
+</type>
+<type*> ns4:Person 1
+</type>
+<type*> ns6:defaultGraph 1
+</type>
+<type*> ns25:db 1
+<pgroup> 0.012237093690248566
+#predicate ns37:metadata_link string
+</pgroup>
+<pgroup> 0.012237093690248566
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.012237093690248566
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0026768642447418736
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:alternative string
+</pgroup>
+</type>
+<type*> ns7:Agent 1
+</type>
+<type*> ns30:Item 1
+</type>
+<type*> ns27:pubmed 1
+</type>
+<type*> ns2:AnnotationProperty 1
+</type>
+<type*> ns7:Derivation 1
+</type>
+<type*> ns2:NamedIndividual 1
+<pgroup> 0.007265774378585086
+#predicate ns9:assesses string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns11:prefLabel string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns19:IAO_0000028 string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns9:position string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns9:discussionUrl string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns10:comment string
+</pgroup>
+<pgroup> 0.007265774378585086
+#predicate ns9:archivedAt string
+</pgroup>
+<pgroup> 0.005353728489483747
+#predicate ns9:headline string
+</pgroup>
+<pgroup> 0.00497131931166348
+#predicate ns19:PCL_0010061 integer
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns19:PCL_0010060 integer
+</pgroup>
+</type>
+<type*> ns3:ProvenanceStatement 1
+</type>
+<type*> ns0:DataService 1
+</type>
+<type*> ns3:Location 1
+</type>
+<type*> ns2:Ontology 1
+<pgroup> 0.002294455066921606
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns44:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns44:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns7:generatedAtTime date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:uriSpace string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns12:doi string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateModified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:keywords string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:datePublished date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:subject string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns7:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns49:acronym string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns0:version string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateCreated date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:name string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:title string
+</pgroup>
+</type>
+<type*> ns15:ServedByDataService 1
+<pgroup> 0.00803059273422562
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.00803059273422562
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.00803059273422562
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.00803059273422562
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.00803059273422562
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.00803059273422562
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.0076481835564053535
+#predicate ns15:publicSector name
+</pgroup>
+</type>
+<type*> ns15:ServiceDistribution 1
+</type>
+<type*> ns19:PCL_0010002 1
+</type>
+<type*> ns2:class 1
+</type>
+<type*> ns6:Service 1
+</type>
+<type*> ns15:IndependentDataService 1
+</type>
+<type*> ns1:Property 1
+</type>
+<type*> ns5:DatasetDescription 1
+</type>
+<type*> ns20:miriam_vocabulary:Resource 1
+</type>
+<type*> ns20:pubmed_vocabulary:Resource 1
+</type>
+<type*> ns14:Vocabulary 1
+<pgroup> 0.002294455066921606
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns44:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns44:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.002294455066921606
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.0019120458891013384
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.001147227533460803
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns14:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateCreated date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:title string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:name string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns7:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns49:acronym string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns0:version string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateModified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns12:doi string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:datePublished date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:keywords string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:subject string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:uriSpace string
+</pgroup>
+</type>
+<type*> ns20:bioportal_vocabulary:Resource 1
+</type>
+<type*> ns19:ECO_0000205 1
+</type>
+<type*> ns35:Language 1
+</type>
+<type*> ns2:ObjectProperty 3
+</type>
+<type*> ns36:Review 1
+</type>
+<type*> ns0:CatalogRecord 1
+</type>
+<type*> ns19:ECO_0000212 1
+</type>
+<type*> ns29:E5_Event 1
+</type>
+<type*> ns11:ConceptScheme 1
+<pgroup> 0.0007648183556405354
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns2:versionInfo string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:identifier string
+</pgroup>
+<pgroup> 0.0007648183556405354
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns46:updateFrequency string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns7:generatedAtTime date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns14:occurrencesInDatasets integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:uriSpace string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns39:attributionName string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:uriRegexPattern string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns12:doi string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateModified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:creator string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns14:reusedByDatasets integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:publisher string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:keywords string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:datePublished date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:subject string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:creator string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns14:reusedByVocabularies integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:rights string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:bibliographicCitation string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns7:wasGeneratedAtTime date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns49:acronym string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns0:version string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:dateCreated date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns11:prefLabel string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns39:morePermissions string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns8:createdOn date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns44:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns5:triples integer
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:publisher string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns44:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns46:sizeNote string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns39:attributionURL string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns9:name string
+</pgroup>
+</type>
+<type*> ns11:Concept 1
+</type>
+<type*> ns2:DatatypeProperty 4
+</type>
+<type*> ns19:ECO_0000266 1
+</type>
+<type*> ns2:FunctionalProperty 1
+</type>
+<type*> ns23:SharedInstanceSet 1
+</type>
+<type*> ns33:DataSource 2
+</type>
+<type*> ns23:SimpleLinkSet 1
+</type>
+<type*> ns20:biodbcore_vocabulary:Resource 1
+</type>
+<type*> ns50:FormalOrganization 1
+</type>
+<type*> ns2:Thing 1
+<pgroup> 0.0003824091778202677
+#predicate ns3:issued date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:contributor string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:description string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:modified date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:created date
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns10:label string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns44:preferredNamespaceUri string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns0:keyword string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns3:title string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns44:preferredNamespacePrefix string
+</pgroup>
+<pgroup> 0.0003824091778202677
+#predicate ns13:title string
+</pgroup>
+</type>
+<type*> ns40:AccessPattern 1
+</type>
+<type*> ns34:C7057 1
+</type>
+<type*> ns12:Document 1
+</type>
+<type*> ns22:Article 1
+</type>
+<type*> ns51:Interval 1
+</type>
+<type*> ns52:Platform 1
+</type>
+<type*> ns12:AcademicArticle 1
+</type>
+<type*> ns0:Catalog 1
+</type>
+<type*> ns3:PeriodOfTime 1
+</type>
+<type*> ns9:CreativeWork 2
+</type>
+<type*> ns53:Feature 1
+</type>
+<type*> ns16:Individual 1
+</type>
+<type*> ns42:DataItem 1
+</type>
+#association ns0:Dataset ns1:type ns2:Class 1 3[uniform] 0.0019120458891013384
+#association ns0:Dataset ns3:creator ns4:Person 1 13[uniform] 0.0019120458891013384
+#association ns0:Dataset ns5:subset ns0:Dataset 1 18[uniform] 0.0019120458891013384
+#association ns0:Dataset ns5:vocabulary ns2:Ontology 1 5[uniform] 0.0019120458891013384
+#association ns0:Dataset ns3:publisher ns4:Organization 1 5[uniform] 0.0015296367112810707
+#association ns5:Linkset ns5:subjectsTarget ns0:Dataset 4 3[uniform] 0.0015296367112810707
+#association ns6:Service ns6:defaultDataset ns0:Dataset 1 2[uniform] 0.001147227533460803
+#association ns0:Dataset ns7:wasDerivedFrom ns0:Dataset 1 3[uniform] 0.001147227533460803
+#association ns5:DatasetDescription ns4:primaryTopic ns0:Dataset 1 1[uniform] 0.001147227533460803
+#association ns0:Dataset ns6:defaultGraph ns6:Graph 1 2[uniform] 0.001147227533460803
+#association ns0:Dataset ns8:authoredBy ns4:Person 1 5[uniform] 0.001147227533460803
+#association ns7:Entity ns7:wasGeneratedBy ns7:Activity 8 15[uniform] 0.001147227533460803
+#association ns7:Entity ns9:publisher ns4:Organization 8 4[uniform] 0.001147227533460803
+#association ns0:Dataset ns0:distribution ns0:Distribution 1 35[uniform] 0.001147227533460803
+#association ns0:Dataset ns1:type ns10:Class 1 5[uniform] 0.001147227533460803
+#association ns0:Dataset ns7:wasGeneratedBy ns7:Activity 1 16[uniform] 0.001147227533460803
+#association ns0:Distribution ns5:subset ns0:Dataset 5 18[uniform] 0.001147227533460803
+#association ns7:Entity ns0:distribution ns0:Distribution 8 3[uniform] 0.001147227533460803
+#association ns7:Entity ns3:publisher ns4:Organization 8 4[uniform] 0.001147227533460803
+#association ns6:Service ns0:servesDataset ns0:Dataset 1 1[uniform] 0.001147227533460803
+#association ns0:Dataset ns9:publisher ns4:Organization 1 4[uniform] 0.001147227533460803
+#association ns0:DataService ns0:servesDataset ns0:Dataset 2 1[uniform] 0.001147227533460803
+#association ns7:Entity ns7:wasDerivedFrom ns0:Dataset 8 3[uniform] 0.001147227533460803
+#association ns0:Dataset ns5:sparqlEndpoint ns6:Service 1 2[uniform] 0.001147227533460803
+#association ns11:ConceptScheme ns1:type ns2:Class 1 5[uniform] 0.0007648183556405354
+#association ns0:Distribution ns3:publisher ns7:Organization 5 11[uniform] 0.0007648183556405354
+#association ns0:Distribution ns7:wasDerivedFrom ns0:Distribution 5 13[uniform] 0.0007648183556405354
+#association ns7:Entity ns7:hadPrimarySource ns0:Dataset 8 16[uniform] 0.0007648183556405354
+#association ns0:Dataset ns7:wasDerivedFrom ns0:Distribution 1 9[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:publisher ns7:Organization 1 10[uniform] 0.0007648183556405354
+#association ns11:Concept ns11:inScheme ns0:Dataset 154 2[uniform] 0.0007648183556405354
+#association ns0:Distribution ns3:creator ns4:Person 5 13[uniform] 0.0007648183556405354
+#association ns5:Linkset ns5:target ns0:Dataset 4 3[uniform] 0.0007648183556405354
+#association ns0:Dataset ns8:createdBy ns4:Person 1 2[uniform] 0.0007648183556405354
+#association ns0:Dataset ns9:author ns4:Person 1 3[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:creator ns4:Organization 1 5[uniform] 0.0007648183556405354
+#association ns0:Distribution ns8:createdBy ns4:Person 5 2[uniform] 0.0007648183556405354
+#association ns7:Entity ns3:contributor ns4:Person 8 2[uniform] 0.0007648183556405354
+#association ns7:Entity ns9:subjectOf ns12:AcademicArticle 8 1[uniform] 0.0007648183556405354
+#association ns0:Distribution ns8:authoredBy ns4:Person 5 6[uniform] 0.0007648183556405354
+#association ns5:Linkset ns1:type ns10:Class 4 3[uniform] 0.0007648183556405354
+#association ns2:DatatypeProperty ns10:isDefinedBy ns0:Dataset 8 2[uniform] 0.0007648183556405354
+#association ns11:Concept ns11:topConceptOf ns0:Dataset 154 2[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:rightsHolder ns4:Organization 1 4[uniform] 0.0007648183556405354
+#association ns5:Linkset ns5:objectsTarget ns0:Dataset 4 2[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:contributor ns4:Organization 1 9[uniform] 0.0007648183556405354
+#association ns7:Entity ns9:author ns4:Person 8 3[uniform] 0.0007648183556405354
+#association ns0:Dataset ns9:subjectOf ns12:AcademicArticle 1 1[uniform] 0.0007648183556405354
+#association ns0:Dataset ns5:linkPredicate ns1:Property 1 2[uniform] 0.0007648183556405354
+#association ns0:Distribution ns1:type ns10:Class 5 4[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:contributor ns4:Person 1 2[uniform] 0.0007648183556405354
+#association ns7:Entity ns3:creator ns4:Person 8 3[uniform] 0.0007648183556405354
+#association ns2:ObjectProperty ns10:isDefinedBy ns0:Dataset 11 2[uniform] 0.0007648183556405354
+#association ns0:Dataset ns11:hasTopConcept ns11:Concept 1 5[uniform] 0.0007648183556405354
+#association ns0:Dataset ns13:publisher ns4:Organization 1 8[uniform] 0.0007648183556405354
+#association ns2:Ontology ns5:exampleResource ns2:Class 4 6[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:isVersionOf ns0:Dataset 1 7[uniform] 0.0007648183556405354
+#association ns7:Entity ns1:type ns2:Class 8 5[uniform] 0.0007648183556405354
+#association ns0:Distribution ns3:source ns0:Distribution 5 2[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:source ns0:Dataset 1 8[uniform] 0.0007648183556405354
+#association ns2:NamedIndividual ns1:type ns2:Class 1 2[uniform] 0.0007648183556405354
+#association ns11:ConceptScheme ns11:hasTopConcept ns11:Concept 1 5[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:hasPart ns0:Dataset 1 14[uniform] 0.0007648183556405354
+#association ns0:Dataset ns7:hadPrimarySource ns0:Dataset 1 16[uniform] 0.0007648183556405354
+#association ns0:Dataset ns3:source ns0:Distribution 1 2[uniform] 0.0007648183556405354
+#association ns0:Distribution ns14:extends ns0:Dataset 5 3[uniform] 0.0003824091778202677
+#association ns7:Entity ns5:exampleResource ns2:Class 8 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns4:fundedBy ns4:Organization 8 5[uniform] 0.0003824091778202677
+#association ns15:ServedByDataService ns0:contactPoint ns16:Individual 1 2[uniform] 0.0003824091778202677
+#association ns6:NamedGraph ns5:linkPredicate ns1:Property 9 2[uniform] 0.0003824091778202677
+#association ns6:NamedGraph ns6:name ns0:Dataset 9 38[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:accessService ns6:Service 1 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns11:hasTopConcept ns11:Concept 8 1[uniform] 0.0003824091778202677
+#association ns2:Thing ns1:type ns2:Class 2 5[uniform] 0.0003824091778202677
+#association ns2:Thing ns17:wikiPageExternalLink ns0:Dataset 2 1[uniform] 0.0003824091778202677
+#association ns1:Property ns10:isDefinedBy ns0:Dataset 6 2[uniform] 0.0003824091778202677
+#association ns6:NamedGraph ns7:wasAssociatedWith ns4:Organization 9 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns13:publisher ns4:Organization 8 3[uniform] 0.0003824091778202677
+#association ns2:Ontology ns1:type ns2:Class 4 9[uniform] 0.0003824091778202677
+#association ns0:Dataset ns18:evidence ns19:ECO_0000205 1 3[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns9:publisher ns4:Organization 1 4[uniform] 0.0003824091778202677
+#association ns0:Distribution ns0:theme ns10:Class 5 5[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns5:inDataset ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns3:publisher ns20:lsr_vocabulary:Resource 1 40[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:landingPage ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns21:ctb ns11:Concept 1 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns9:subjectOf ns22:Article 1 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns8:previousVersion ns0:Distribution 5 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:accrualPeriodicity ns11:Concept 1 1[uniform] 0.0003824091778202677
+#association ns5:Linkset ns23:isSubsetOf ns0:Dataset 4 3[uniform] 0.0003824091778202677
+#association ns7:Organization ns3:publisher ns0:Distribution 1 5[uniform] 0.0003824091778202677
+#association ns0:Dataset ns23:isSubsetOf ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns2:DatatypeProperty ns5:inDataset ns0:Dataset 8 1[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns11:hasTopConcept ns11:Concept 5 1[uniform] 0.0003824091778202677
+#association ns0:DataService ns6:defaultDataset ns0:Dataset 2 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns7:wasDerivedFrom ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:propertyPartition ns0:Dataset 1 16[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns3:contributor ns4:Person 1 2[uniform] 0.0003824091778202677
+#association ns9:CreativeWork ns17:wikiPageExternalLink ns0:Dataset 279 1[uniform] 0.0003824091778202677
+#association ns7:Derivation ns7:hadUsage ns0:Dataset 7 1[uniform] 0.0003824091778202677
+#association ns2:Ontology ns7:wasDerivedFrom ns0:Dataset 4 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns24:citesAsAuthority ns20:pubmed_vocabulary:Resource 1 11[uniform] 0.0003824091778202677
+#association ns5:DatasetDescription ns4:topic ns0:Dataset 1 8[uniform] 0.0003824091778202677
+#association ns5:Linkset ns3:creator ns7:Organization 4 1[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns4:fundedBy ns4:Organization 5 5[uniform] 0.0003824091778202677
+#association ns2:Ontology ns9:subjectOf ns22:Article 4 1[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns5:exampleResource ns2:Class 5 11[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns9:subjectOf ns22:Article 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns20:lsr_vocabulary:x-miriam ns20:miriam_vocabulary:Resource 1 10[uniform] 0.0003824091778202677
+#association ns6:Graph ns5:vocabulary ns1:Property 6 4[uniform] 0.0003824091778202677
+#association ns11:Concept ns3:isPartOf ns0:Dataset 154 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns20:lsr_vocabulary:x-bioportal ns20:bioportal_vocabulary:Resource 1 8[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:theme ns10:Class 1 10[uniform] 0.0003824091778202677
+#association ns2:ObjectProperty ns5:inDataset ns0:Dataset 11 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns18:evidence ns19:ECO_0000205 5 3[uniform] 0.0003824091778202677
+#association ns25:db ns26:citesAsAuthority ns27:pubmed 1 6[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns28:maintainer ns4:Person 5 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns20:lsr_vocabulary:x-biodbcore ns20:biodbcore_vocabulary:Resource 1 3[uniform] 0.0003824091778202677
+#association ns5:Linkset ns0:theme ns10:Class 4 2[uniform] 0.0003824091778202677
+#association ns25:db ns0:organism ns2:Class 1 11[uniform] 0.0003824091778202677
+#association ns12:AcademicArticle ns3:references ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns25:db ns1:type ns10:Class 1 1[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns7:hadPrimarySource ns0:Dataset 5 1[uniform] 0.0003824091778202677
+#association ns6:NamedGraph ns7:wasGeneratedBy ns7:Activity 9 12[uniform] 0.0003824091778202677
+#association ns0:Dataset ns8:hasCurrentVersion ns0:Dataset 1 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:exampleResource ns29:E5_Event 1 4[uniform] 0.0003824091778202677
+#association ns7:Entity ns4:homepage ns7:Entity 8 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns4:homepage ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns7:Organization ns3:creator ns0:Distribution 1 5[uniform] 0.0003824091778202677
+#association ns11:Concept ns1:type ns2:Class 154 5[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns10:isDefinedBy ns0:Dataset 5 1[uniform] 0.0003824091778202677
+#association ns30:Item ns4:topic ns0:Dataset 1 29[uniform] 0.0003824091778202677
+#association ns12:Document ns10:isDefinedBy ns0:Dataset 379 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:contactPoint ns16:Organization 1 49[uniform] 0.0003824091778202677
+#association ns6:Graph ns3:creator ns4:Organization 6 1[uniform] 0.0003824091778202677
+#association ns5:Linkset ns8:previousVersion ns0:Distribution 4 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns7:wasInfluencedBy ns0:Dataset 1 5[uniform] 0.0003824091778202677
+#association ns23:SimpleLinkSet ns5:target ns0:Dataset 2 3[uniform] 0.0003824091778202677
+#association ns2:FunctionalProperty ns5:inDataset ns0:Dataset 10 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns4:homepage ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns5:Linkset ns3:publisher ns7:Organization 4 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns31:has-member ns2:Class 3 63[uniform] 0.0003824091778202677
+#association ns0:Dataset ns8:previousVersion ns0:Distribution 1 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns9:editor ns4:Person 8 3[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:createdBy ns4:Person 1 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns9:author ns4:Person 1 4[uniform] 0.0003824091778202677
+#association ns5:Linkset ns8:createdBy ns4:Person 4 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:target ns0:Dataset 1 2[uniform] 0.0003824091778202677
+#association ns22:Article ns9:about ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns2:Ontology ns9:author ns4:Person 4 4[uniform] 0.0003824091778202677
+#association ns7:Entity ns6:availableGraphs ns0:Dataset 8 1[uniform] 0.0003824091778202677
+#association ns9:CreativeWork ns17:wikiPageWikiLink ns0:Dataset 279 1[uniform] 0.0003824091778202677
+#association ns0:Catalog ns0:dataset ns0:Dataset 1 2[uniform] 0.0003824091778202677
+#association ns0:Distribution ns32:objectsDatatype ns10:Class 5 2[uniform] 0.0003824091778202677
+#association ns5:Linkset ns5:vocabulary ns1:Property 4 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns7:wasAttributedTo ns4:Organization 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns13:creator ns4:Person 1 1[uniform] 0.0003824091778202677
+#association ns6:NamedGraph ns7:hadPrimarySource ns0:Dataset 9 31[uniform] 0.0003824091778202677
+#association ns7:Entity ns3:rightsHolder ns4:Organization 8 5[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns7:wasGeneratedBy ns7:Activity 5 1[uniform] 0.0003824091778202677
+#association ns2:AnnotationProperty ns10:isDefinedBy ns0:Dataset 3 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:vocabulary ns33:DataSource 1 9[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:vocabulary ns1:Property 1 1[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns5:subset ns5:Linkset 5 3[uniform] 0.0003824091778202677
+#association ns34:C7057 ns1:type ns10:Class 215 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns5:subset ns5:Linkset 8 3[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns9:editor ns4:Person 1 3[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns3:rightsHolder ns4:Organization 5 5[uniform] 0.0003824091778202677
+#association ns2:Thing ns17:wikiPageWikiLink ns0:Dataset 2 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns14:specializes ns0:Dataset 5 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns3:publisher ns20:lsr_vocabulary:Resource 3 40[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns5:inDataset ns0:Dataset 3 1[uniform] 0.0003824091778202677
+#association ns15:ServedByDataService ns3:spatial ns3:Location 1 20[uniform] 0.0003824091778202677
+#association ns5:Linkset ns0:distribution ns0:Dataset 4 13[uniform] 0.0003824091778202677
+#association ns0:Dataset ns9:includedInDataCatalog ns2:NamedIndividual 1 3[uniform] 0.0003824091778202677
+#association ns11:Concept ns5:inDataset ns0:Dataset 154 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns32:subjectsDatatype ns10:Class 1 2[uniform] 0.0003824091778202677
+#association ns7:Entity ns1:type ns10:Class 8 2[uniform] 0.0003824091778202677
+#association ns5:Linkset ns32:subjectsDatatype ns10:Class 4 2[uniform] 0.0003824091778202677
+#association ns6:Graph ns5:exampleResource ns29:E5_Event 6 7[uniform] 0.0003824091778202677
+#association ns7:Entity ns0:servesDataset ns0:Dataset 8 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:distribution ns0:Dataset 1 16[uniform] 0.0003824091778202677
+#association ns5:Linkset ns32:objectsDatatype ns10:Class 4 2[uniform] 0.0003824091778202677
+#association ns2:Ontology ns3:creator ns4:Person 4 7[uniform] 0.0003824091778202677
+#association ns7:Entity ns5:vocabulary ns2:Ontology 8 6[uniform] 0.0003824091778202677
+#association ns2:Ontology ns5:inDataset ns0:Dataset 4 1[uniform] 0.0003824091778202677
+#association ns7:Organization ns18:evidence ns19:ECO_0000205 1 3[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns3:creator ns4:Person 1 4[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns3:language ns35:Language 5 2[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns5:inDataset ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns2:Thing ns5:inDataset ns0:Dataset 2 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns5:rootResource ns11:Concept 8 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns31:has-member ns2:Class 1 63[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns9:subjectOf ns12:AcademicArticle 5 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns32:objectsDatatype ns10:Class 1 2[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns5:exampleResource ns11:Concept 1 3[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns36:hasReview ns0:Distribution 5 16[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns3:contributor ns4:Person 5 11[uniform] 0.0003824091778202677
+#association ns5:Linkset ns5:inDataset ns0:Dataset 4 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns5:target ns0:Dataset 5 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns4:primaryTopic ns37:BioTarget 1 10[uniform] 0.0003824091778202677
+#association ns0:Distribution ns3:createdBy ns4:Person 5 1[uniform] 0.0003824091778202677
+#association ns15:ServedByDataService ns3:provenance ns3:ProvenanceStatement 1 20[uniform] 0.0003824091778202677
+#association ns0:Distribution ns0:distribution ns0:Dataset 5 13[uniform] 0.0003824091778202677
+#association ns7:Activity ns7:used ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns7:wasAssociatedWith ns4:Organization 8 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns9:isBasedOn ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns15:servedByDataService ns0:DataService 1 24[uniform] 0.0003824091778202677
+#association ns7:Entity ns36:hasReview ns0:Distribution 8 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns9:author ns4:Organization 1 7[uniform] 0.0003824091778202677
+#association ns7:Entity ns6:namedGraph ns7:Entity 8 7[uniform] 0.0003824091778202677
+#association ns0:Dataset ns6:namedGraph ns0:Dataset 1 39[uniform] 0.0003824091778202677
+#association ns0:Distribution ns32:subjectsDatatype ns10:Class 5 2[uniform] 0.0003824091778202677
+#association ns2:Thing ns0:distribution ns0:Distribution 2 2[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns3:publisher ns4:Organization 1 6[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns5:rootResource ns11:Concept 5 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns20:lsr_vocabulary:x-bioportal ns20:bioportal_vocabulary:Resource 3 8[uniform] 0.0003824091778202677
+#association ns2:Ontology ns3:publisher ns4:Organization 4 6[uniform] 0.0003824091778202677
+#association ns7:Entity ns6:name ns0:Dataset 8 38[uniform] 0.0003824091778202677
+#association ns7:Entity ns3:language ns35:Language 8 2[uniform] 0.0003824091778202677
+#association ns2:Ontology ns0:distribution ns0:Distribution 4 6[uniform] 0.0003824091778202677
+#association ns7:Entity ns5:linkPredicate ns1:Property 8 2[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns5:vocabulary ns2:Ontology 5 10[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns9:publisher ns4:Organization 5 5[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns20:lsr_vocabulary:x-biodbcore ns20:biodbcore_vocabulary:Resource 3 3[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns0:distribution ns0:Distribution 1 3[uniform] 0.0003824091778202677
+#association ns0:Dataset ns26:citesAsAuthority ns27:pubmed 1 54[uniform] 0.0003824091778202677
+#association ns6:Graph ns7:hadPrimarySource ns0:Dataset 6 31[uniform] 0.0003824091778202677
+#association ns0:Distribution ns5:subjectsTarget ns0:Dataset 5 2[uniform] 0.0003824091778202677
+#association ns0:Distribution ns32:linksetJustification ns10:Class 5 2[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns5:rootResource ns0:Dataset 1 2[uniform] 0.0003824091778202677
+#association ns2:Ontology ns5:subset ns5:Linkset 4 3[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns7:wasGeneratedBy ns7:Activity 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:organism ns2:Class 1 33[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns5:subset ns5:Linkset 1 3[uniform] 0.0003824091778202677
+#association ns2:Ontology ns7:wasGeneratedBy ns7:Activity 4 1[uniform] 0.0003824091778202677
+#association ns2:NamedIndividual ns9:includedInDataCatalog ns2:NamedIndividual 1 3[uniform] 0.0003824091778202677
+#association ns25:db ns3:language ns38:iso639-3 1 2[uniform] 0.0003824091778202677
+#association ns2:Ontology ns1:type ns10:Class 4 2[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns9:author ns4:Person 5 4[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:subset ns5:Linkset 1 3[uniform] 0.0003824091778202677
+#association ns0:Dataset ns9:about ns30:Item 1 30[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:rootResource ns0:Dataset 1 2[uniform] 0.0003824091778202677
+#association ns5:Linkset ns7:wasGeneratedBy ns7:Activity 4 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:temporal ns3:PeriodOfTime 1 1[uniform] 0.0003824091778202677
+#association ns23:SharedInstanceSet ns5:target ns0:Dataset 2 3[uniform] 0.0003824091778202677
+#association ns7:Entity ns3:creator ns4:Organization 8 7[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:Distribution ns0:Distribution 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:spatial ns3:Location 1 23[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:classPartition ns0:Dataset 1 10[uniform] 0.0003824091778202677
+#association ns7:Entity ns7:wasAttributedTo ns4:Organization 8 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns20:lsr_vocabulary:x-bioportal ns20:bioportal_vocabulary:Resource 1 8[uniform] 0.0003824091778202677
+#association ns25:db ns0:theme ns37:BioDataType 1 5[uniform] 0.0003824091778202677
+#association ns10:Resource ns31:is-member-of ns0:Dataset 1 4[uniform] 0.0003824091778202677
+#association ns0:Dataset ns39:license ns2:NamedIndividual 1 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns40:accessPattern ns40:AccessPattern 5 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns20:lsr_vocabulary:x-biodbcore ns20:biodbcore_vocabulary:Resource 1 3[uniform] 0.0003824091778202677
+#association ns7:Entity ns5:vocabulary ns1:Property 8 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns5:vocabulary ns2:Ontology 5 1[uniform] 0.0003824091778202677
+#association ns6:Graph ns3:source ns4:Organization 6 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns5:vocabulary ns33:DataSource 8 9[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:Linkset ns0:Dataset 1 14[uniform] 0.0003824091778202677
+#association ns22:Article ns3:references ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns2:Ontology ns3:rightsHolder ns4:Organization 4 5[uniform] 0.0003824091778202677
+#association ns0:Distribution ns4:page ns40:AccessPattern 5 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns3:rightsHolder ns4:Organization 1 5[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:subset ns0:Distribution 1 29[uniform] 0.0003824091778202677
+#association ns2:Ontology ns3:contributor ns4:Person 4 6[uniform] 0.0003824091778202677
+#association ns2:Ontology ns36:hasReview ns0:Distribution 4 16[uniform] 0.0003824091778202677
+#association ns5:Linkset ns5:linkPredicate ns1:Property 4 1[uniform] 0.0003824091778202677
+#association ns5:Linkset ns6:name ns0:Dataset 4 10[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns3:contributor ns4:Person 1 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns36:hasReview ns0:Distribution 1 2[uniform] 0.0003824091778202677
+#association ns2:Thing ns3:contributor ns4:Person 2 10[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:subject ns2:Class 1 15[uniform] 0.0003824091778202677
+#association ns6:Service ns6:availableGraphs ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:language ns35:Language 1 3[uniform] 0.0003824091778202677
+#association ns0:Dataset ns6:name ns0:Dataset 1 37[uniform] 0.0003824091778202677
+#association ns34:C7057 ns5:inDataset ns0:Dataset 215 1[uniform] 0.0003824091778202677
+#association ns0:DataService ns6:availableGraphs ns0:Dataset 2 1[uniform] 0.0003824091778202677
+#association ns2:FunctionalProperty ns10:isDefinedBy ns0:Dataset 10 2[uniform] 0.0003824091778202677
+#association ns7:Entity ns9:isBasedOn ns0:Dataset 8 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns7:wasAssociatedWith ns4:Organization 1 1[uniform] 0.0003824091778202677
+#association ns2:Ontology ns3:language ns35:Language 4 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:provenance ns3:ProvenanceStatement 1 23[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns24:citesAsAuthority ns20:pubmed_vocabulary:Resource 1 11[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns5:inDataset ns0:Dataset 5 1[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns3:creator ns4:Person 5 7[uniform] 0.0003824091778202677
+#association ns5:Linkset ns32:linksetJustification ns10:Class 4 2[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns3:language ns35:Language 1 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns36:hasReview ns0:Distribution 1 7[uniform] 0.0003824091778202677
+#association ns0:Dataset ns32:linksetJustification ns10:Class 1 2[uniform] 0.0003824091778202677
+#association ns7:Entity ns9:author ns4:Organization 8 7[uniform] 0.0003824091778202677
+#association ns2:Thing ns3:language ns35:Language 2 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns6:namedGraph ns0:Dataset 8 39[uniform] 0.0003824091778202677
+#association ns0:Dataset ns6:namedGraph ns7:Entity 1 22[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:subjectsTarget ns0:Dataset 1 2[uniform] 0.0003824091778202677
+#association ns2:Ontology ns9:subjectOf ns12:AcademicArticle 4 1[uniform] 0.0003824091778202677
+#association ns12:Document ns41:inDataset ns0:Dataset 379 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns20:lsr_vocabulary:x-miriam ns20:miriam_vocabulary:Resource 1 10[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns9:subjectOf ns12:AcademicArticle 1 1[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns3:publisher ns4:Organization 5 7[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns5:rootResource ns11:Concept 1 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Dataset ns1:type ns2:Class 1 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns8:contributedBy ns4:Person 1 2[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns0:accessService ns6:Service 1 1[uniform] 0.0003824091778202677
+#association ns2:Ontology ns5:rootResource ns11:Concept 4 1[uniform] 0.0003824091778202677
+#association ns2:Ontology ns5:vocabulary ns2:Ontology 4 7[uniform] 0.0003824091778202677
+#association ns2:Ontology ns9:publisher ns4:Organization 4 5[uniform] 0.0003824091778202677
+#association ns15:ServedByDataService ns0:distribution ns0:Distribution 1 106[uniform] 0.0003824091778202677
+#association ns0:Dataset ns4:page ns40:AccessPattern 1 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns5:vocabulary ns2:Ontology 1 6[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns9:publisher ns4:Organization 1 5[uniform] 0.0003824091778202677
+#association ns15:ServedByDataService ns15:servedByDataService ns0:DataService 1 24[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns0:distribution ns0:Distribution 5 10[uniform] 0.0003824091778202677
+#association ns2:Thing ns36:hasReview ns36:Review 2 3[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:identifier ns0:Dataset 1 217[uniform] 0.0003824091778202677
+#association ns0:Distribution ns5:Linkset ns0:Dataset 5 14[uniform] 0.0003824091778202677
+#association ns5:Linkset ns0:downloadURL ns0:Dataset 4 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns40:accessPattern ns40:AccessPattern 1 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:downloadURL ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:inDataset ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns42:DataItem ns1:type ns2:Class 1 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns3:publisher ns20:lsr_vocabulary:Resource 1 40[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:rootResource ns11:Concept 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns0:contactPoint ns16:Individual 1 2[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns6:namedGraph ns0:Dataset 1 39[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns3:publisher ns4:Organization 1 4[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns0:distribution ns0:Distribution 1 2[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns1:type ns2:Class 5 9[uniform] 0.0003824091778202677
+#association ns6:Graph ns7:wasAssociatedWith ns4:Organization 6 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns9:subjectOf ns22:Article 8 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns39:Jurisdiction ns2:NamedIndividual 1 1[uniform] 0.0003824091778202677
+#association ns6:Graph ns6:name ns0:Dataset 6 38[uniform] 0.0003824091778202677
+#association ns6:Graph ns5:linkPredicate ns1:Property 6 2[uniform] 0.0003824091778202677
+#association ns25:db ns4:primaryTopic ns37:BioTarget 1 9[uniform] 0.0003824091778202677
+#association ns0:Dataset ns21:fnd ns4:Organization 1 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns5:linkPredicate ns2:AnnotationProperty 5 2[uniform] 0.0003824091778202677
+#association ns25:db ns13:publisher ns37:RIKENorganization 1 8[uniform] 0.0003824091778202677
+#association ns14:Vocabulary ns7:wasDerivedFrom ns0:Dataset 5 1[uniform] 0.0003824091778202677
+#association ns5:Linkset ns3:isVersionOf ns0:Dataset 4 12[uniform] 0.0003824091778202677
+#association ns2:Thing ns5:exampleResource ns2:Class 2 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns4:fundedBy ns4:Organization 1 5[uniform] 0.0003824091778202677
+#association ns0:Dataset ns31:has-member ns2:Class 1 63[uniform] 0.0003824091778202677
+#association ns2:Ontology ns4:fundedBy ns4:Organization 4 5[uniform] 0.0003824091778202677
+#association ns0:Dataset ns6:namedGraph ns6:NamedGraph 1 40[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns3:creator ns4:Person 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:exampleResource ns2:Class 1 1[uniform] 0.0003824091778202677
+#association ns0:CatalogRecord ns4:primaryTopic ns0:Dataset 1 5[uniform] 0.0003824091778202677
+#association ns0:Dataset ns43:landingPage ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns4:fundedBy ns4:Organization 1 5[uniform] 0.0003824091778202677
+#association ns5:Linkset ns3:source ns0:Dataset 4 6[uniform] 0.0003824091778202677
+#association ns2:Ontology ns11:hasTopConcept ns11:Concept 4 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns0:accessService ns6:Service 8 1[uniform] 0.0003824091778202677
+#association ns11:ConceptScheme ns7:hadPrimarySource ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:linkPredicate ns2:AnnotationProperty 1 2[uniform] 0.0003824091778202677
+#association ns2:Ontology ns7:hadPrimarySource ns0:Dataset 4 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns28:maintainer ns4:Person 1 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns7:wasInfluencedBy ns0:Dataset 8 5[uniform] 0.0003824091778202677
+#association ns6:Graph ns7:wasGeneratedBy ns7:Activity 6 12[uniform] 0.0003824091778202677
+#association ns5:Linkset ns5:linkPredicate ns2:AnnotationProperty 4 2[uniform] 0.0003824091778202677
+#association ns0:Dataset ns5:subSet ns2:Ontology 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns9:editor ns4:Person 1 3[uniform] 0.0003824091778202677
+#association ns9:CreativeWork ns10:isDefinedBy ns0:Dataset 279 1[uniform] 0.0003824091778202677
+#association ns5:Linkset ns7:hadPrimarySource ns0:Dataset 4 11[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns1:type ns2:Class 3 2[uniform] 0.0003824091778202677
+#association ns7:Organization ns1:type ns10:Class 1 3[uniform] 0.0003824091778202677
+#association ns0:Dataset ns4:homepage ns7:Entity 1 1[uniform] 0.0003824091778202677
+#association ns6:NamedGraph ns5:vocabulary ns1:Property 9 1[uniform] 0.0003824091778202677
+#association ns2:Ontology ns28:maintainer ns4:Person 4 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns24:citesAsAuthority ns20:pubmed_vocabulary:Resource 3 11[uniform] 0.0003824091778202677
+#association ns5:Linkset ns3:source ns0:Distribution 4 2[uniform] 0.0003824091778202677
+#association ns12:AcademicArticle ns9:about ns0:Dataset 1 1[uniform] 0.0003824091778202677
+#association ns7:Entity ns6:defaultDataset ns0:Dataset 8 1[uniform] 0.0003824091778202677
+#association ns20:lsr_vocabulary:Resource ns20:lsr_vocabulary:x-miriam ns20:miriam_vocabulary:Resource 3 10[uniform] 0.0003824091778202677
+#association ns7:Derivation ns7:entity ns0:Dataset 7 6[uniform] 0.0003824091778202677
+#association ns2:Thing ns10:isDefinedBy ns0:Dataset 2 1[uniform] 0.0003824091778202677
+#association ns0:Distribution ns3:isVersionOf ns0:Dataset 5 12[uniform] 0.0003824091778202677
+#association ns6:defaultGraph ns9:author ns4:Person 1 1[uniform] 0.0003824091778202677
+#association ns0:Dataset ns10:isDefinedBy ns2:Ontology 1 3[uniform] 0.0003824091778202677
+#association ns2:Ontology ns10:isDefinedBy ns0:Dataset 4 1[uniform] 0.0003824091778202677
