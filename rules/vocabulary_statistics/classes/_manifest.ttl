@@ -10,7 +10,7 @@
 <> a mf:Manifest ;
     mf:entries (
         <datasetOccurence.ttl>
-        # <datasetOccurenceCount.ttl>
+        <datasetOccurenceCount.ttl>
     ) .
 
 <datasetOccurence.ttl> a mf:ManifestEntry ;
@@ -46,7 +46,11 @@
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl )
                 kgi: sd:namedGraph $rawEndpointUrl .
                 
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
+
                 SERVICE ?editedEndpointUrl {
+                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     {
                         SELECT DISTINCT ?elem {
                             {
@@ -78,9 +82,6 @@
 
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-
-                ?elem a owl:Class .
-                FILTER( isIRI(?elem))
             }"""
         ]
     ) .
@@ -117,7 +118,10 @@
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
                 
-                ?elem a owl:Class .
+                ?elem a owl:Class ;
+                    voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
                 FILTER( isIRI(?elem))
 
                 {
@@ -139,7 +143,6 @@
                     } GROUP BY ?elem
                 }
 
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
                     ?elem voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbEntities, ?nbEntities) AS ?nbDatasetOccurences )

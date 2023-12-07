@@ -9,7 +9,7 @@
 <> a mf:Manifest ;
     mf:entries (
         <datasetOccurence.ttl>
-        # <datasetOccurenceCount.ttl>
+        <datasetOccurenceCount.ttl>
     ) .
 
 <datasetOccurence.ttl> a mf:ManifestEntry ;
@@ -43,7 +43,11 @@
 
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl)
 
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem))
+
                 SERVICE ?editedEndpointUrl {
+                    VALUES ?elem { UNDEF } # Fix for better binding by Corese
                     {
                         SELECT DISTINCT ?elem {
                             {
@@ -59,9 +63,6 @@
 
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-
-                ?elem a rdf:Property .
-                FILTER( isIRI(?elem))
             }"""
         ]
     ) .
@@ -86,8 +87,7 @@
             INSERT {
                 ?elem voaf:usageInDataset ?elemDatasetOccurence ;
                     voaf:occurrencesInDatasets ?nbDatasetOccurences .
-                ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                    voaf:occurrences ?nbTriples .
+                ?elemDatasetOccurence voaf:occurrences ?nbTriples .
             }
             WHERE {
                 BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&slice=20&limit=1000&method=get" ) AS ?editedEndpointUrl)
@@ -97,12 +97,15 @@
                 })
 
                 FILTER( isIRI(?elem))
-                ?elem a rdf:Property .
+                ?elem a rdf:Property ;
+                    voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
 
-                {
-                    SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {
-                        SERVICE ?editedEndpointUrl {
-                            VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                SERVICE ?editedEndpointUrl {
+                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                    {
+                        SELECT DISTINCT ?elem (COUNT(*) AS ?nbTriples) WHERE {
                             {
                                 ?s ?elem ?o .
                             } UNION {
@@ -110,11 +113,10 @@
                                     ?s ?elem ?o .
                                 }
                             }
-                        }
-                    } GROUP BY ?elem
+                        } GROUP BY ?elem
+                    }
                 }
 
-                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT(STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
                 BIND( IF( EXISTS {
                     ?elem voaf:occurrencesInDatasets ?datasetOccurences .
                 }, ?datasetOccurences + ?nbTriples, ?nbTriples) AS ?nbDatasetOccurences )
