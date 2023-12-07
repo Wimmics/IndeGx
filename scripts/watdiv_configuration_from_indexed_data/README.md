@@ -1,14 +1,14 @@
 # Generation of a WATdiv configuration file from statistics extracted from dataset descriptions
 
 This script generates a WATdiv configuration file from statistics extracted from dataset descriptions.
-The configuration will generate dataset description that will be used to describe the dataset of a fictive shop in the setting of FedShop. Each shop will correspond to one dataset. Each dataset will be described by a dataset description containing informations about the shop in the same proportion as the descriptions found in datasets available online.
+The configuration will generate a dataset description that will be used to describe the dataset of a fictive shop in the setting of FedShop. Each shop will correspond to one dataset. Each dataset will be described by a description containing information about the shop in the same proportion as the descriptions found in online datasets.
 
 ## Limitations set on the dataset description
-The classes and properties will be limited to the those that are both:
+The classes and properties will be limited to those that are both:
 - used in dataset descriptions online
 - appear in more than one dataset description
 
-As watdiv do not make it possible to define entities that are instances of several classes, we will only declare and instance of dcat:Dataset at the root of the dataset description. dcat:Dataset is the class the most often used to type the resource describing a dataset. 
+As watdiv do not make it possible to define entities that are instances of several classes, we will only declare one instance of dcat:Dataset at the root of the dataset description. dcat:Dataset is the most often used class to type the resource describing a dataset. Properties appearing around other Dataset classes have their number of apparition added to the dcat:Dataset.
 
 ## Queries used to extract statistics
 
@@ -75,7 +75,7 @@ SELECT DISTINCT ?c (MIN(?count) AS ?minCount) (MAX(?count) AS ?maxCount) (ROUND(
 
 ### Association of classes and properties to datasets
 
-#### Properties and types of objects appearing around instances, with min, max and average number of occurrences in a dataset. Instances of dataset classes are grouped together into dcat:Dataset
+#### Properties and types of objects appearing around instances, with min, max, and average number of occurrences in a dataset. Instances of dataset classes are grouped into dcat:Dataset
 Used in [class_property_object-class_MinMaxAverage_NbDatasets.csv](class_property_object-class_MinMaxAverage_NbDatasets.csv)
 
 ```sparql
@@ -119,7 +119,7 @@ SELECT DISTINCT ?c ?p ?oc (MIN(?minC) AS ?minAllC) (MAX(?maxC) AS ?maxAllC) (ROU
 } GROUP BY ?c ?p ?oc 
 ```
 
-#### Properties and datatypes of objects appearing around instances of DATASET classes, with min, max and average number of occurrences in a dataset
+#### Properties and datatypes of objects appearing around instances of DATASET classes, with min, max, and average number of occurrences in a dataset
 Used in [class_property_object-datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.csv](class_property_object-datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.csv)
 
 ```sparql
