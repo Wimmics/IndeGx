@@ -102,7 +102,7 @@ The structure of the config file is the following:
     outputFile?: string, // Default /output/index.trig, path to the output file. It must be in one of the mounted volumes.
     manifestJSON?: string, // Path to the manifest file in JSON format. It must be in one of the mounted volumes. Will not be generated if not provided.
     postManifestJSON?: string, // Path to the post manifest file in JSON format. It must be in one of the mounted volumes. Will not be generated if not provided.
-    queryLog?: boolean, // Default true, log queries in the index if true. Incompatible with resilience.
+    queryLog?: boolean, // Default true, log queries in the index if true. 
     resilience?: boolean, // default false, store the result of the current state at the end of the pre step and main step of the index in a temporary file if true. Incompatible with disabling query logging.
 }
 ```
