@@ -75,10 +75,10 @@ type LiteralPropertyData = {
 
 let classCardinality: Map<string, number> = new Map();
 let namespacePrefixMap: Map<string, string> = new Map();
-const totalNumberOfDataset = 2429;
+const totalNumberOfDataset = 2615;
 
 const excludedClasses = [
-    OWL('Class').value, 
+    OWL('Class').value,
     RDFS("Class").value
 ]
 
@@ -88,8 +88,12 @@ const datasetClasses = [
     DCMITYPE("Dataset").value,
     SCHEMA("Dataset").value,
     SD("Dataset").value,
-    DATAID("Dataset").value
+    DATAID("Dataset").value,
+    DCT("Dataset").value
 ]
+
+// Chosen because it is the one that appear the most
+const uniqueDatasetClass = DCAT("Dataset").value;
 
 const accessStatementProperties = [
     DCE('rights').value,
@@ -97,7 +101,7 @@ const accessStatementProperties = [
     DCT('accessRights').value
 ]
 
-const exampleProperties =[
+const exampleProperties = [
     SCHEMA("workExample").value,
     VOID("exampleResource").value,
     SKOS("example").value
@@ -167,7 +171,7 @@ const creationLocationProperties = [
     PAV("createdAt").value
 ]
 
-const languageProperties = [ 
+const languageProperties = [
     SCHEMA("inLanguage").value,
     DCT("language").value
 ]
@@ -328,15 +332,46 @@ const publisherProperties = [
     PAV("providedBy").value
 ]
 
-let datasetMinOccurences = new Map<string, number>()
-let datasetMaxOccurences = new Map<string, number>()
-let datasetAverageOccurences = new Map<string, number>()
+const equivalentPropertiesGroups = [
+    accessStatementProperties,
+    exampleProperties,
+    qualityAnnotationProperties,
+    alternativeLabelProperties,
+    identifierProperties,
+    serializationProperties,
+    audienceProperties,
+    sourceProperties,
+    creationDateProperties,
+    languageProperties,
+    spatialCoverageProperties,
+    creationMethodProperties,
+    licenseProperties,
+    temporalCoverageProperties,
+    creatorProperties,
+    titleProperties,
+    descriptionProperties,
+    modificationDateProperties,
+    topicProperties,
+    distributionProperties,
+    otherPagesProperties,
+    versionNotesProperties,
+    editorProperties,
+    contributorProperties,
+    publisherProperties,
+    vocabulariesProperties,
+    endAvailabilityProperties,
+    publicationReferencesProperties,
+    webpageProperties,
+    endValidityProperties,
+    publisherProperties
+]
+let allEquivalentProperties = [...new Set(equivalentPropertiesGroups.flat())]
 
 Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(data => {
     const csvData = csv.parse(data, { columns: true, delimiter: ',' });
     let entityDataset: EntityDeclarationData[] = csvData.map((row: any) => {
         return {
-            class: uriToPrefixedUri(row.c),
+            class: row.c,
             min: parseInt(row.minCount),
             max: parseInt(row.maxCount),
             average: parseFloat(row.avgCount),
@@ -358,17 +393,21 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
         return 0;
     })
 
+    // We regroup all kind of dataset instances to one instance of dcat:Dataset
     entityDataset.forEach((row: EntityDeclarationData) => {
-        classCardinality.set(row.class, row.average);
+        if (!datasetClasses.includes(row.class)) {
+            classCardinality.set(row.class, row.average);
+        }
     })
+    classCardinality.set(uniqueDatasetClass, 1)
 
     return Global.readFile("class_property_object-class_MinMaxAverage_NbDatasets.csv").then(cpocData => {
         const csvData = csv.parse(cpocData, { columns: true, delimiter: ',' });
         let nonLiteralPropertyDataset: NonLiteralPropertyData[] = csvData.map((row: any) => {
             return {
-                class: uriToPrefixedUri(row.c),
-                property: uriToPrefixedUri(row.p),
-                objectClass: uriToPrefixedUri(row.oc),
+                class: row.c,
+                property: row.p,
+                objectClass: row.oc,
                 min: parseInt(row.minAllC),
                 max: parseInt(row.maxAllC),
                 average: parseFloat(row.averageAll),
@@ -386,16 +425,14 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
             return 0;
         })
 
-        Logger.log(JSON.stringify(classCardinality));
-
         const watdivNonLiteralProperties = classPropertyObjectClassToWatdivNonLiteralProperties(nonLiteralPropertyDataset, classCardinality);
 
         return Global.readFile("class_property_object-datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.csv").then(cpodData => {
             const csvData = csv.parse(cpodData, { columns: true, delimiter: ',' });
             let literalPropertyDataset: LiteralPropertyData[] = csvData.map((row: any) => {
                 return {
-                    class: uriToPrefixedUri(row.c),
-                    property: uriToPrefixedUri(row.p),
+                    class: row.c,
+                    property: row.p,
                     objectDatatype: row.od,
                     min: parseInt(row.minAllC),
                     max: parseInt(row.maxAllC),
@@ -418,7 +455,7 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
 
             const watdivEntities = classInstancesToWatdivEntityDeclaration(entityDataset, literalPropertyDataset, classCardinality);
 
-            return Global.writeFile("watdiv_config.txt", namespacesToWatdivPrefixes() + watdivEntities + watdivNonLiteralProperties)
+            return Global.writeFile("input/watdiv_config.txt", namespacesToWatdivPrefixes() + watdivEntities + watdivNonLiteralProperties)
         })
 
     })
@@ -426,25 +463,35 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
 })
 
 function classInstancesToWatdivEntityDeclaration(entityDataset: EntityDeclarationData[], literalPropertyDataset: LiteralPropertyData[], classCardinality: Map<string, number>) {
-    let watdiv = "";
+    let watdiv = `<type*> ${uriToPrefixedUri(DCAT("Dataset").value)} 1\n${classPropertyObjectDatatypeToWatdivLiteralProperties(DCAT("Dataset").value, literalPropertyDataset, classCardinality)}</type>\n`;
     entityDataset.forEach((row: EntityDeclarationData) => {
         const classLiteralPropertiesDeclarations = classPropertyObjectDatatypeToWatdivLiteralProperties(row.class, literalPropertyDataset, classCardinality);
-        if(! excludedClasses.includes(row.class)) {
-            watdiv += `<type*> ${row.class} ${row.min}\n${classLiteralPropertiesDeclarations}</type>\n`;
+        if (!excludedClasses.includes(row.class) && ! datasetClasses.includes(row.class)) {
+            watdiv += `<type*> ${uriToPrefixedUri(row.class)} ${row.min}\n${classLiteralPropertiesDeclarations}</type>\n`;
         }
     })
     return watdiv;
 }
 
 function classPropertyObjectClassToWatdivNonLiteralProperties(dataset: NonLiteralPropertyData[], classCardinality: Map<string, number>) {
+
+    // Writing the associations
     let watdiv = "";
     dataset.forEach((row: NonLiteralPropertyData) => {
-        const subjectCardinality = classCardinality.get(row.class);
-        const objectCardinality = classCardinality.get(row.objectClass);
-        if (subjectCardinality !== undefined && objectCardinality !== undefined && ! excludedClasses.includes(row.class)) {
-            watdiv += `#association ${row.class} ${row.property} ${row.objectClass} ${subjectCardinality} ${row.min}[uniform] ${row.nbDataset / totalNumberOfDataset}\n`;
+        if (!excludedClasses.includes(row.class) ) {
+            let objectClass = row.objectClass;
+            if (datasetClasses.includes(row.objectClass)) {
+                objectClass = uniqueDatasetClass;
+            }
+            const subjectCardinality = classCardinality.get(row.class);
+            const objectCardinality = classCardinality.get(objectClass);
+            if (subjectCardinality !== undefined && objectCardinality !== undefined) {
+                watdiv += `#association ${uriToPrefixedUri(row.class)} ${uriToPrefixedUri(row.property)} ${uriToPrefixedUri(objectClass)} ${subjectCardinality} ${row.average}[uniform] ${row.nbDataset / totalNumberOfDataset}\n`;
+                Logger.log(row.class, row.property, objectClass, subjectCardinality, row.average, row.nbDataset)
+            }
         }
     })
+
     return watdiv;
 }
 
@@ -455,7 +502,7 @@ function classPropertyObjectDatatypeToWatdivLiteralProperties(className: string,
         const subjectCardinality = classCardinality.get(row.class);
         if (subjectCardinality !== undefined) {
             const literalType = datatypeToWatdivLiteralType(row.objectDatatype);
-            watdiv += `<pgroup> ${row.nbDataset / totalNumberOfDataset}\n#predicate ${row.property} ${literalType}\n</pgroup>\n`;
+            watdiv += `<pgroup> ${row.nbDataset / totalNumberOfDataset}\n#predicate ${uriToPrefixedUri(row.property)} ${literalType}\n</pgroup>\n`;
         }
     })
     return watdiv;
@@ -464,7 +511,7 @@ function classPropertyObjectDatatypeToWatdivLiteralProperties(className: string,
 function namespacesToWatdivPrefixes() {
     let watdiv = "";
     for (const [namespace, prefix] of namespacePrefixMap.entries()) {
-        if(namespace !== undefined && prefix !== undefined) {
+        if (namespace !== undefined && prefix !== undefined) {
             watdiv += `#namespace\t${prefix}=${namespace}\n`;
         }
     }
@@ -567,7 +614,7 @@ function extractNamepaceFromUri(uri: string) {
 function uriToPrefixedUri(uri: string) {
     const namespace = extractNamepaceFromUri(uri);
     const prefix = namespaceToPrefix(namespace);
-    if(namespace !== undefined && prefix !== undefined) {
+    if (namespace !== undefined && prefix !== undefined) {
         return uri.replace(namespace, prefix + ":");
     } else {
         return uri;
