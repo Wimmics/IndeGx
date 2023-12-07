@@ -6,7 +6,6 @@ The configuration will generate dataset description that will be used to describ
 ## Limitations set on the dataset description
 The classes and properties will be limited to the those that are both:
 - used in dataset descriptions online
-- defined by Linked Open Vocabulary (LOV) ontologies
 - appear in more than one dataset description
 
 As watdiv do not make it possible to define entities that are instances of several classes, we will only declare and instance of dcat:Dataset at the root of the dataset description. dcat:Dataset is the class the most often used to type the resource describing a dataset. 
@@ -181,6 +180,7 @@ npm run run
 ```
 
 ### Generate the configuration file
+Test with [watdiv-docker](https://github.com/MaillPierre/watdiv-docker/tree/master).
 ```bash
 sudo docker run --rm -it -v $(pwd)/input/:/input -v $(pwd)/output/:/output watdiv -m /input/watdiv_config.txt
 ```
