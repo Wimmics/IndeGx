@@ -72,7 +72,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -117,7 +117,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -162,7 +162,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -207,14 +207,13 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
         [
             kgi:recommendedPagination 500 ;
-            mf:action """
-            PREFIX void: <http://rdfs.org/ns/void#>
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
             PREFIX schema: <http://schema.org/>
@@ -252,7 +251,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -297,7 +296,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -344,7 +343,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -391,7 +390,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -438,7 +437,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -485,7 +484,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -532,7 +531,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -579,7 +578,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -624,7 +623,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -669,7 +668,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -714,7 +713,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -759,7 +758,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -804,7 +803,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -849,7 +848,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -896,7 +895,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -943,7 +942,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -990,7 +989,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -1037,7 +1036,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -1084,7 +1083,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]
@@ -1131,7 +1130,7 @@
                         }
                     }
                 }
-                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR($rawEndpointUrl) ) ), "Dataset" ) ) ) AS ?datasetGraph)
             }
             """
         ]

@@ -103,6 +103,11 @@ if (currentConfig === undefined) {
     throw new Error("No configuration found in " + configFilename);
 }
 
+let logFile: string = currentConfig.logFile;
+if(logFile !== undefined) {
+    Logger.setLogFileName(logFile);
+}
+
 Logger.info("Using configuration", currentConfig);
 let rootManifestFilename: string = currentConfig.manifest;
 let catalog: string = currentConfig.catalog;
@@ -126,10 +131,6 @@ if(delayMillisecondsTimeForConccurentQuery !== undefined) {
 let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
 if (defaultQueryTimeout !== undefined) {
     SparqlUtils.setDefaultQueryTimeout(defaultQueryTimeout);
-}
-let logFile: string = currentConfig.logFile;
-if(logFile !== undefined) {
-    Logger.setLogFileName(logFile);
 }
 let queryLog: boolean = currentConfig.queryLog;
 if (queryLog !== undefined) {
