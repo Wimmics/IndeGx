@@ -1,0 +1,11 @@
+log_enable(3,1);
+
+CLEAR DB.DBA.LOAD_LIST;
+
+ld_dir_all ('upload/', '%.trig', 'http://ns.inria.fr/indegx#');
+
+rdf_loader_run ();
+
+checkpoint;
+
+select * from DB.DBA.LOAD_LIST where ll_error IS NOT NULL;
