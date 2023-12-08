@@ -91,7 +91,7 @@
                     prov:wasDerivedFrom ?endpointDescription .
 
                 ?indexationActivity a prov:Activity ;
-                    prov:used <https://github.com/Wimmics/IndeGx> ;
+                    prov:used <https://github.com/Wimmics/IndeGx/tree/main/rules/IndeGx_original_rules> ;
                     prov:generatedAtTime  ?time ;
                     prov:used ?endpointDescription .
 
