@@ -16,10 +16,10 @@ for catalog in `ls catalogs/ | grep all_catalog_partition_*`; do
     "logFile": "/output/indegx_CATALOG.log",
     "outputFile": "/output/indegx_CATALOG.trig",
     "queryLog": true,
-    "resilience": false
+    "resilience": true
 }'
-    partition_config_filename="/config/config_$catalog.json"
+    partition_config_filename="config/config_$catalog.json"
     echo $partition_config | sed -e s/CATALOG/$catalog/g > $partition_config_filename
-    echo "./run.sh -c $partition_config_filename"
+    ./run.sh -c /$partition_config_filename
 done
 
