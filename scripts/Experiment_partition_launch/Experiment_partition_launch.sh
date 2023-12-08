@@ -5,9 +5,8 @@ cd ../..
 for catalog in `ls catalogs/ | grep all_catalog_partition_*`; do
     echo $catalog
     partition_config='{
-    "pre": "file:///rules/vocabulary_statistics/_pre_manifest.ttl",
-    "manifest": "file:///rules/vocabulary_statistics/_manifest.ttl",
-    "post": "file:///rules/vocabulary_statistics/_post_manifest.ttl",
+    "manifest": "file:///rules/IndeGx_original_rules/manifest.ttl",
+    "post": "file:///rules/IndeGx_original_rules/post/manifest.ttl",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
