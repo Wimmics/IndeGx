@@ -1,0 +1,1133 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <main/init.ttl>
+        <main/classes.ttl>
+        <main/classExistence.ttl>
+        <main/classInstancesFromExistence.ttl>
+        <main/classCooccurrenceExistence.ttl>
+        <main/classPropertyExistences.ttl>
+        <main/classPropertyObjectTypesEntitiesFromExistence.ttl>
+        <main/classPropertyObjectTypesExistence.ttl>
+        <main/classPropertyObjectTypesMinMaxFromExistence.ttl>
+        <main/classPropertyObjectTypesTriplesFromExistence.ttl>
+        <main/classPropertyTriplesFromExistence.ttl>
+        <main/datatypeExistence.ttl>
+        <main/distinctSubjectsObjects.ttl>
+        <main/namespaceInit.ttl>
+        <main/namespaceExistence.ttl>
+        <main/properties.ttl>
+        <main/propertyExistence.ttl>
+        <main/propertyTriplesFromExistence.ttl>
+        <main/triples.ttl>
+    ) .
+
+<main/init.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT DATA {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+            }
+            """
+        ]
+    ) .
+
+
+<main/triples.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of triples""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:triples ?triples .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT (count(DISTINCT *) as ?triples) {
+                            { ?s ?p ?o . }
+                            UNION { 
+                                GRAPH ?g { ?s ?p ?o . }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/classes.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classes ?classes .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT (count(DISTINCT ?c) as ?classes) {
+                            { 
+                                ?s a ?c 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c 
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/properties.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of properties""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:properties ?properties .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                {
+                    SELECT DISTINCT (count(DISTINCT ?p) as ?properties) {
+                        { 
+                            ?s ?p ?o 
+                        } UNION { 
+                            GRAPH ?g { 
+                                ?s ?p ?o 
+                            }
+                        }
+                    }
+                }
+                }
+            }"""
+        ]
+    ) .
+
+<main/distinctSubjectsObjects.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of distinct subjects""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:distinctSubjects ?distinctSubjects .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT (count(DISTINCT ?s) as ?distinctSubjects) {
+                            { 
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p ?o 
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Number of distinct objects""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:distinctObjects ?distinctObjects .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT (count(DISTINCT ?o) as ?distinctObjects) {
+                            { 
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p ?o 
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/datatypeExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of distinct datatypes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl kgi:availableLiteralDatatypes ?datatype .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?datatype {
+                            { 
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p ?o 
+                                }
+                            }
+                            FILTER(isLiteral(?o))
+                            BIND(DATATYPE(?o) AS ?datatype)
+                        }
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/classExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?c {
+                            { 
+                                ?s a ?c 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c) ) ) ) ) AS ?classPartition )
+            }"""
+        ]
+    ) .
+
+<main/classInstancesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class partitions with number of instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classPartition void:entities ?count .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ( COUNT(DISTINCT ?s) AS ?count ) {
+                            { 
+                                ?s a ?c 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c 
+                                }
+                            }
+                        } GROUP BY ?c 
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/propertyExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p .
+                }
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?p {
+                            { 
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p ?o 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p) ) ) ) ) AS ?propertyPartition )
+            }"""
+        ]
+    ) .
+
+<main/propertyTriplesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/propertyExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property partitions with number of instances using them""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyPartition void:triples ?count .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p { UNDEF }
+                    {
+                        SELECT DISTINCT ?p (COUNT(DISTINCT *) AS ?count) {
+                            { 
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p ?o 
+                                }
+                            }
+                        } GROUP BY ?p 
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/classPropertyExistences.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class/Property partitions with number of instances using a property""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classPartition void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o 
+                                }
+                            }
+                        } GROUP BY ?c ?p
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
+            }"""
+        ]
+    ) .
+
+<main/classPropertyTriplesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classPropertyExistences.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class/Property partitions with number of instances using a property""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classPropertyPartition void:triples ?count .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p (COUNT(DISTINCT ?s) AS ?count) {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o 
+                                }
+                            }
+                        } GROUP BY ?c ?p
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/classPropertyObjectTypesExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classPropertyExistences.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class of the object in the Class/Property partitions with number of instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classPropertyPartition void:classPartition ?objectClassPartition .
+                    ?objectClassPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?oc .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p ?oc {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o .
+                                ?o a ?oc .
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o .
+                                    ?o a ?oc .
+                                }
+                            }
+                        } GROUP BY ?c ?p
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectClassPartition )
+            }"""
+        ]
+        [
+            dcterms:description """Datatype of the object in the Class/Property partitions with number of instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classPropertyPartition void:classPartition ?objectDatatypePartition .
+                    ?objectDatatypePartition void:inDataset $rawEndpointUrl ;
+                        kgi:availableLiteralDatatypes ?oc .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p ?oc {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o 
+                                }
+                            }
+                            FILTER(isLiteral(?o))
+                            BIND(DATATYPE(?o) AS ?oc)
+                        } GROUP BY ?c ?p ?oc
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectDatatypePartition )
+            }"""
+        ]
+    ) .
+
+<main/classPropertyObjectTypesTriplesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classPropertyObjectTypesExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class of the object in the Class/Property partitions with number of instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?objectClassPartition void:triples ?count .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p ;
+                        void:classPartition ?objectClassPartition .
+                    ?objectClassPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?oc .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    VALUES ?oc { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o .
+                                ?o a ?oc .
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o .
+                                    ?o a ?oc .
+                                }
+                            }
+                        } GROUP BY ?c ?p ?oc
+                    }
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Datatype of the object in the Class/Property partitions with number of instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?objectDatatypePartition void:triples ?count .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p ;
+                        void:classPartition ?objectDatatypePartition .
+                    ?objectDatatypePartition void:inDataset $rawEndpointUrl ;
+                        kgi:availableLiteralDatatypes ?oc .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    VALUES ?oc { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o 
+                                }
+                            }
+                            FILTER(isLiteral(?o))
+                            FILTER(DATATYPE(?o) = ?oc)
+                        } GROUP BY ?c ?p ?oc
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/classPropertyObjectTypesMinMaxFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classPropertyObjectTypesExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Minimum of the literals object of a property in relation to class instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?objectDatatypePartition kgi:minimum ?min .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p ;
+                        void:classPartition ?objectDatatypePartition .
+                    ?objectDatatypePartition void:inDataset $rawEndpointUrl ;
+                        kgi:availableLiteralDatatypes ?oc .
+                }
+                FILTER(?oc != xsd:string && ?oc != rdf:langString)
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    VALUES ?oc { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p ?oc (MIN(?o) AS ?min) {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o 
+                                }
+                            }
+                            FILTER(isLiteral(?o))
+                            FILTER(DATATYPE(?o) = ?oc)
+                        } GROUP BY ?c ?p ?oc
+                    }
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Maximum of the literals object of a property in relation to class instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?objectDatatypePartition kgi:maximum ?max .
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p ;
+                        void:classPartition ?objectDatatypePartition .
+                    ?objectDatatypePartition void:inDataset $rawEndpointUrl ;
+                        kgi:availableLiteralDatatypes ?oc .
+                }
+                FILTER(?oc != xsd:string && ?oc != rdf:langString)
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    VALUES ?oc { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p ?oc (MAX(?o) AS ?max) {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o 
+                                }
+                            }
+                            FILTER(isLiteral(?o))
+                            FILTER(DATATYPE(?o) = ?oc)
+                        } GROUP BY ?c ?p ?oc
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+
+
+<main/classPropertyObjectTypesEntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classPropertyObjectTypesExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of literals object of a certain datatype for a property in relation to a specific class instances""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?objectDatatypePartition void:entities ?entities .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition.
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p ;
+                        void:classPartition ?objectDatatypePartition .
+                    ?objectDatatypePartition void:inDataset $rawEndpointUrl ;
+                        kgi:availableLiteralDatatypes ?oc .
+                }
+                FILTER(?oc != xsd:string && ?oc != rdf:langString)
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c { UNDEF }
+                    VALUES ?p { UNDEF }
+                    VALUES ?oc { UNDEF }
+                    {
+                        SELECT DISTINCT ?c ?p ?oc (COUNT(?o) AS ?entities) {
+                            { 
+                                ?s a ?c .
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c .
+                                    ?s ?p ?o 
+                                }
+                            }
+                            FILTER(isLiteral(?o))
+                            FILTER(DATATYPE(?o) = ?oc)
+                        } GROUP BY ?c ?p ?oc
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/namespaceInit.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+            PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
+            PREFIX dcat:       <http://www.w3.org/ns/dcat#>
+            PREFIX foaf:       <http://xmlns.com/foaf/0.1/>
+            PREFIX prov:       <http://www.w3.org/ns/prov#>
+            PREFIX schema:		<http://schema.org/>
+            PREFIX void:       <http://rdfs.org/ns/void#>
+            PREFIX sd:     	<http://www.w3.org/ns/sparql-service-description#>
+            PREFIX dct:        <http://purl.org/dc/terms/>
+            PREFIX skos:       <http://www.w3.org/2004/02/skos/core#>
+            PREFIX kgi:        <http://ns.inria.fr/kg/index#>
+
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl kgi:summary ?summaryDescriptionGraph .
+                }
+            } WHERE  {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Summary")) AS ?summaryDescriptionGraph)
+            }"""
+        ]
+    ) .
+
+<main/namespaceExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/namespaceInit.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+            PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
+            PREFIX dcat:       <http://www.w3.org/ns/dcat#>
+            PREFIX foaf:       <http://xmlns.com/foaf/0.1/>
+            PREFIX prov:       <http://www.w3.org/ns/prov#>
+            PREFIX schema:		<http://schema.org/>
+            PREFIX void:       <http://rdfs.org/ns/void#>
+            PREFIX sd:     	<http://www.w3.org/ns/sparql-service-description#>
+            PREFIX dct:        <http://purl.org/dc/terms/>
+            PREFIX skos:       <http://www.w3.org/2004/02/skos/core#>
+            PREFIX kgi:        <http://ns.inria.fr/kg/index#>
+
+            INSERT {
+                GRAPH ?summaryDescriptionGraph {
+                    ?subjectAutority ?p ?objectAutority .
+                }
+            } WHERE  {
+                SERVICE $rawEndpointUrl {
+                    SELECT DISTINCT ((IRI(SUBSTR(str(?s), 1, ?sLength - ?sEndLength ))) AS ?subjectAutority) ?p ((IRI(SUBSTR(str(?o), 1, ?oLength - ?oEndLength ))) AS ?objectAutority) WHERE {
+                        ?s ?p ?o .
+                        FILTER(isIri(?s))
+                        FILTER(isIri(?o))
+                        BIND( REPLACE(str(?s), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?subjectUrlEnd)
+                        BIND( REPLACE(str(?o), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?objectUrlEnd)
+      					BIND(STRLEN(str(?s)) AS ?sLength)
+      					BIND(STRLEN(str(?subjectUrlEnd)) AS ?sEndLength)
+      					BIND(STRLEN(str(?o)) AS ?oLength)
+      					BIND(STRLEN(str(?objectUrlEnd)) AS ?oEndLength)
+                        FILTER(?sLength > ?sEndLength)
+                        FILTER(?oLength > ?oEndLength)
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Summary")) AS ?summaryDescriptionGraph)
+            }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """
+            PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+            PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
+            PREFIX dcat:       <http://www.w3.org/ns/dcat#>
+            PREFIX foaf:       <http://xmlns.com/foaf/0.1/>
+            PREFIX prov:       <http://www.w3.org/ns/prov#>
+            PREFIX schema:		<http://schema.org/>
+            PREFIX void:       <http://rdfs.org/ns/void#>
+            PREFIX sd:     	<http://www.w3.org/ns/sparql-service-description#>
+            PREFIX dct:        <http://purl.org/dc/terms/>
+            PREFIX skos:       <http://www.w3.org/2004/02/skos/core#>
+            PREFIX kgi:        <http://ns.inria.fr/kg/index#>
+
+            INSERT {
+                GRAPH ?summaryDescriptionGraph {
+                    ?subjectAutority ?p "lit" .
+                }
+            } WHERE  {
+                SERVICE $rawEndpointUrl {
+                    SELECT DISTINCT ((IRI(SUBSTR(str(?s), 1, ?sLength - ?sEndLength ))) AS ?subjectAutority) ?p WHERE {
+                        ?s ?p ?o .
+                        FILTER(isIri(?s))
+                        FILTER(isLiteral(?o))
+      					BIND(STRLEN(str(?s)) AS ?sLength)
+      					BIND(STRLEN(str(?subjectUrlEnd)) AS ?sEndLength)
+                        BIND( REPLACE(str(str(?s)), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?subjectUrlEnd)
+                        FILTER(?sLength > ?sEndLength)
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Summary")) AS ?summaryDescriptionGraph)
+            }"""
+        ]
+    ) .
+
+<main/classCooccurrenceExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?c ?classes {
+                            { 
+                                ?s a ?c 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c 
+                                }
+                            }
+                            {
+                                SELECT DISTINCT ?s (GROUP_CONCAT(DISTINCT ?c; SEPARATOR=',') AS ?classes) {
+                                    { 
+                                        ?s a ?c 
+                                    } UNION { 
+                                        GRAPH ?g { 
+                                            ?s a ?c 
+                                        }
+                                    }
+                                } GROUP BY ?s
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(<http://prod-dekalog.inria.fr/sparql>), STR(?classes) ) ) ) ) AS ?classCoPartition )
+            }"""
+        ]
+    ) .

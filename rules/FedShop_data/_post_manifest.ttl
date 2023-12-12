@@ -8,15 +8,19 @@
     mf:include (
     ) ;
     mf:entries (
-        <post/triples.ttl>
         <post/classes.ttl>
-        <post/properties.ttl>
+        <post/classExistence.ttl>
+        <post/classInstancesFromExistence.ttl>
+        <post/classPropertyExistences.ttl>
+        <post/classPropertyObjectMinMaxFromExistence.ttl>
+        <post/classPropertyObjectTypesExistence.ttl>
+        <post/classPropertyObjectTypesTriplesFromExistence.ttl>
+        <post/classPropertyTriplesFromExistence.ttl>
         <post/distinctSubjectsObjects.ttl>
-        <post/classCount.ttl>
-        <post/propertyCount.ttl>
-        <post/classPropertyOccurences.ttl>
-        <post/classPropertyObjectTypes.ttl>
-        <post/classPropertyObjectMinMax.ttl>
+        <post/properties.ttl>
+        <post/propertyExistence.ttl>
+        <post/propertyTriplesFromExistence.ttl>
+        <post/triples.ttl>
     ) .
 
 <post/triples.ttl> a mf:ManifestEntry ;
@@ -142,7 +146,47 @@
         ]
     ) .
 
-<post/classCount.ttl> a mf:ManifestEntry ;
+<post/classExistence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class partitions""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:classPartition ?classPartition .
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c .
+            } WHERE {
+                {
+                    SELECT DISTINCT ?dataset ?c {
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s a ?c
+                        }
+                    } GROUP BY ?dataset ?c
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
+            }"""
+        ]
+    ) .
+
+<post/classInstancesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <post/classExistence.ttl>
+    ) ;
     kgi:onSuccess (
         [
             dcterms:description """Class partitions with number of instances""" ;
@@ -159,13 +203,15 @@
             PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                ?classPartition void:entities ?count .
+            } WHERE {
                 ?dataset void:classPartition ?classPartition .
                 ?classPartition void:inDataset ?dataset ;
-                    void:class ?c ;
-                    void:entities ?count .
-            } WHERE {
+                    void:class ?c 
                 {
                     SELECT DISTINCT ?dataset ?c ( COUNT(DISTINCT ?s) AS ?count ) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
@@ -180,10 +226,10 @@
         ]
     ) .
 
-<post/propertyCount.ttl> a mf:ManifestEntry ;
+<post/propertyExistence.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            dcterms:description """Property partitions with number of instances using them""" ;
+            dcterms:description """Property partitions""" ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX dcat: <http://www.w3.org/ns/dcat#>
             PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
@@ -199,11 +245,10 @@
             INSERT {
                 ?dataset void:propertyPartition ?propertyPartition .
                 ?propertyPartition void:inDataset ?dataset ;
-                    void:property ?p ; 
-                    void:triples ?count .
+                    void:property ?p .
             } WHERE {
                 {
-                    SELECT DISTINCT ?dataset ?p (COUNT(DISTINCT *) AS ?count)
+                    SELECT DISTINCT ?dataset ?p 
                     {
                         SELECT DISTINCT ?dataset ?p ?s ?o {
                             GRAPH ?endpoint {
@@ -221,7 +266,58 @@
         ]
     ) .
 
-<post/classPropertyOccurences.ttl> a mf:ManifestEntry ;
+<post/propertyTriplesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <post/propertyExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property partitions with number of instances using them""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?dataset void:propertyPartition ?propertyPartition .
+                ?propertyPartition void:triples ?count .
+            } WHERE {
+                ?dataset void:propertyPartition ?propertyPartition .
+                ?propertyPartition void:inDataset ?dataset ;
+                    void:property ?p .
+                {
+                    SELECT DISTINCT ?dataset ?p (COUNT(DISTINCT *) AS ?count) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?p { UNDEF }
+                        SELECT DISTINCT ?dataset ?p ?s ?o {
+                            VALUES ?dataset { UNDEF }
+                            VALUES ?p { UNDEF }
+                            GRAPH ?endpoint {
+                                ?endpoint dcat:servesDataset ?dataset
+                            }
+                            BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                            GRAPH ?datasetGraph {
+                                ?s ?p ?o
+                            }
+                        } GROUP BY ?p
+                    } GROUP BY ?dataset ?p 
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?p) ) ) ) ) AS ?propertyPartition )
+            }"""
+        ]
+    ) .
+
+<post/classPropertyExistences.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <post/classExistence.ttl>
+    ) ;
     kgi:onSuccess (
         [
             dcterms:description """Class/Property partitions with number of instances using a property""" ;
@@ -238,16 +334,17 @@
             PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                ?classPartition void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p .
+            } WHERE {
                 ?dataset void:classPartition ?classPartition.
                 ?classPartition void:inDataset ?dataset ;
-                    void:class ?c ;
-                    void:propertyPartition ?classPropertyPartition .
-                ?classPropertyPartition void:inDataset ?dataset ;
-                    void:property ?p ;
-                    void:entities ?count .
-            } WHERE {
+                    void:class ?c .
                 {
                     SELECT DISTINCT ?dataset ?c ?p (COUNT(DISTINCT ?s) AS ?count) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
@@ -258,13 +355,62 @@
                         }
                     } GROUP BY ?dataset ?c ?p
                 }
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
             }"""
         ]
     ) .
 
-<post/classPropertyObjectTypes.ttl> a mf:ManifestEntry ;
+<post/classPropertyTriplesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <post/classPropertyExistences.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class/Property partitions with number of instances using a property""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?classPropertyPartition void:triples ?count .
+            } WHERE {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p .
+                {
+                    SELECT DISTINCT ?dataset ?c ?p (COUNT(DISTINCT ?s) AS ?count) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
+                        VALUES ?p { UNDEF }
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                        }
+                    } GROUP BY ?dataset ?c ?p
+                }
+            }"""
+        ]
+    ) .
+
+<post/classPropertyObjectTypesExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <post/classPropertyExistences.ttl>
+    ) ;
     kgi:onSuccess (
         [
             dcterms:description """Class of the object in the Class/Property partitions with number of instances""" ;
@@ -281,19 +427,21 @@
             PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                ?classPropertyPartition void:classPartition ?objectClassPartition .
+                ?objectClassPartition void:inDataset ?dataset ;
+                    void:class ?oc .
+            } WHERE {
                 ?dataset void:classPartition ?classPartition.
                 ?classPartition void:inDataset ?dataset ;
                     void:class ?c ;
                     void:propertyPartition ?classPropertyPartition .
                 ?classPropertyPartition void:inDataset ?dataset ;
-                    void:property ?p ;
-                    void:classPartition ?objectClassPartition .
-                ?objectClassPartition void:inDataset ?dataset ;
-                    void:class ?oc ;
-                    void:entities ?count .
-            } WHERE {
+                    void:property ?p .
                 {
-                    SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
+                        VALUES ?p { UNDEF }
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
@@ -305,8 +453,6 @@
                         }
                     } GROUP BY ?c ?p
                 }
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectClassPartition )
             }"""
         ]
@@ -325,19 +471,21 @@
             PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                ?classPropertyPartition void:classPartition ?objectDatatypePartition .
+                ?objectDatatypePartition void:inDataset ?dataset ;
+                    void:datatype ?oc .
+            } WHERE {
                 ?dataset void:classPartition ?classPartition.
                 ?classPartition void:inDataset ?dataset ;
                     void:class ?c ;
                     void:propertyPartition ?classPropertyPartition .
                 ?classPropertyPartition void:inDataset ?dataset ;
-                    void:property ?p ;
-                    void:classPartition ?objectDatatypePartition .
-                ?objectDatatypePartition void:inDataset ?dataset ;
-                    void:datatype ?oc ;
-                    void:entities ?count .
-            } WHERE {
+                    void:property ?p .
                 {
-                    SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
+                        VALUES ?p { UNDEF }
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
@@ -350,14 +498,113 @@
                         BIND(DATATYPE(?o) AS ?oc)
                     } GROUP BY ?dataset ?c ?p ?oc
                 }
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectDatatypePartition )
             }"""
         ]
     ) .
 
-<post/classPropertyObjectMinMax.ttl> a mf:ManifestEntry ;
+<post/classPropertyObjectTypesTriplesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <post/classPropertyObjectTypesExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class of the object in the Class/Property partitions with number of instances""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?objectClassPartition void:triples ?count .
+            } WHERE {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p ;
+                    void:classPartition ?objectClassPartition .
+                ?objectClassPartition void:inDataset ?dataset ;
+                    void:class ?oc .
+                {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
+                        VALUES ?p { UNDEF }
+                        VALUES ?oc { UNDEF }
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                            ?o a ?oc .
+                        }
+                    } GROUP BY ?c ?p
+                }
+            }"""
+        ]
+        [
+            dcterms:description """Datatype of the object in the Class/Property partitions with number of instances""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                ?objectDatatypePartition void:triples ?count .
+            } WHERE {
+                ?dataset void:classPartition ?classPartition.
+                ?classPartition void:inDataset ?dataset ;
+                    void:class ?c ;
+                    void:propertyPartition ?classPropertyPartition .
+                ?classPropertyPartition void:inDataset ?dataset ;
+                    void:property ?p ;
+                    void:classPartition ?objectDatatypePartition .
+                ?objectDatatypePartition void:inDataset ?dataset ;
+                    void:datatype ?oc .
+                {
+                    SELECT DISTINCT ?dataset ?c ?p ?oc (COUNT(DISTINCT ?o) AS ?count) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
+                        VALUES ?p { UNDEF }
+                        VALUES ?oc { UNDEF }
+                        GRAPH ?endpoint {
+                            ?endpoint dcat:servesDataset ?dataset
+                        }
+                        BIND( IF(isIRI(?dataset), ?dataset, IRI( CONCAT( STR(kgi:), MD5(STR(?dataset)), "Dataset" ) ) ) AS ?datasetGraph)
+                        GRAPH ?datasetGraph {
+                            ?s a ?c .
+                            ?s ?p ?o .
+                        }
+                        FILTER(isLiteral(?o))
+                        BIND(DATATYPE(?o) AS ?oc)
+                    } GROUP BY ?dataset ?c ?p ?oc
+                }
+            }"""
+        ]
+    ) .
+
+<post/classPropertyObjectMinMaxFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <post/classPropertyObjectTypesExistence.ttl>
+    ) ;
     kgi:onSuccess (
         [
             dcterms:description """Minimum of the literals object of a property in relation to class instances""" ;
@@ -376,6 +623,8 @@
             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                ?objectDatatypePartition kgi:minimum ?min .
+            } WHERE {
                 ?dataset void:classPartition ?classPartition.
                 ?classPartition void:inDataset ?dataset ;
                     void:class ?c ;
@@ -384,11 +633,13 @@
                     void:property ?p ;
                     void:classPartition ?objectDatatypePartition .
                 ?objectDatatypePartition void:inDataset ?dataset ;
-                    void:datatype ?oc ;
-                    kgi:minimum ?min .
-            } WHERE {
+                    void:datatype ?oc .
                 {
                     SELECT DISTINCT ?dataset ?c ?p ?oc (MIN(?o) AS ?min) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
+                        VALUES ?p { UNDEF }
+                        VALUES ?oc { UNDEF }
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
@@ -402,9 +653,6 @@
                     } GROUP BY ?dataset ?c ?p ?oc
                 }
                 FILTER(?oc != xsd:string && ?oc != rdf:langString)
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectDatatypePartition )
             }"""
         ]
         [
@@ -424,6 +672,8 @@
             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
+                ?objectDatatypePartition kgi:maximum ?max .
+            } WHERE {
                 ?dataset void:classPartition ?classPartition.
                 ?classPartition void:inDataset ?dataset ;
                     void:class ?c ;
@@ -432,11 +682,13 @@
                     void:property ?p ;
                     void:classPartition ?objectDatatypePartition .
                 ?objectDatatypePartition void:inDataset ?dataset ;
-                    void:datatype ?oc ;
-                    kgi:maximum ?max .
-            } WHERE {
+                    void:datatype ?oc .
                 {
                     SELECT DISTINCT ?dataset ?c ?p ?oc (MAX(?o) AS ?max) {
+                        VALUES ?dataset { UNDEF }
+                        VALUES ?c { UNDEF }
+                        VALUES ?p { UNDEF }
+                        VALUES ?oc { UNDEF }                        
                         GRAPH ?endpoint {
                             ?endpoint dcat:servesDataset ?dataset
                         }
@@ -450,9 +702,6 @@
                     } GROUP BY ?dataset ?c ?p ?oc
                 }
                 FILTER(?oc != xsd:string && ?oc != rdf:langString)
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c) ) ) ) ) AS ?classPartition )
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p) ) ) ) ) AS ?classPropertyPartition )
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(?dataset), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectDatatypePartition )
             }"""
         ]
     ) .

@@ -1,0 +1,49 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <post/datatypeExistenceFromclassPropertyObjectTypesExistence.ttl>
+    ) .
+
+
+<post/datatypeExistenceFromclassPropertyObjectTypesExistence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Datatypes of the literals in the dataset""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?endpoint {
+                    ?endpoint kgi:availableLiteralDatatypes ?datatype .
+                }
+            } WHERE {
+                GRAPH ?endpoint {
+                    ?endpoint void:classPartition ?classPartition.
+                    ?classPartition void:inDataset ?endpoint ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset ?endpoint ;
+                        void:property ?p ;
+                        void:classPartition ?objectDatatypePartition .
+                    ?objectDatatypePartition void:inDataset ?endpoint ;
+                        kgi:availableLiteralDatatypes ?datatype .
+                }
+            }"""
+        ]
+    ) .
