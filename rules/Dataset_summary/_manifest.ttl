@@ -1259,7 +1259,7 @@
                         }
                     }
                 }
-                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
+                BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
             }"""
         ]
         [
@@ -1283,7 +1283,7 @@
                         }
                     }
                 }
-                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
+                BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
             }"""
         ]
     ) .
@@ -1311,7 +1311,7 @@
                     ?classPartition void:inDataset $rawEndpointUrl ;
                         void:class ?elem .
                 }
-                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
+                BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
             }"""
         ]
         [
@@ -1332,7 +1332,7 @@
                     ?propertyPartition void:inDataset $rawEndpointUrl ;
                         void:property ?elem .
                 }
-                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
+                BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns) .
             }"""
         ]
     ) .
