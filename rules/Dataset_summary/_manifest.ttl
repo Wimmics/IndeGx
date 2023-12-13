@@ -23,12 +23,16 @@
         <main/classPropertyTriplesFromExistence.ttl>
         <main/datatypeExistence.ttl>
         <main/distinctSubjectsObjects.ttl>
+        <main/languageExistence.ttl>
+        <main/languagePartitionFromExistence.ttl>
         <main/namespaceInit.ttl>
         <main/namespaceExistence.ttl>
         <main/properties.ttl>
         <main/propertyExistence.ttl>
         <main/propertyTriplesFromExistence.ttl>
         <main/triples.ttl>
+        <main/vocabularyExistence.ttl>
+        <main/vocabularyFromClassesAndPropertyExistence.ttl>
     ) .
 
 <main/init.ttl> a mf:ManifestEntry ;
@@ -1128,6 +1132,207 @@
                     }
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(<http://prod-dekalog.inria.fr/sparql>), STR(?classes) ) ) ) ) AS ?classCoPartition )
+            }"""
+        ]
+    ) .
+
+<main/languageExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Language list""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl schema:availableLanguage ?lang ;
+                        dcterms:language ?lang .
+                }
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT (lang(?o) as ?lang) {
+                            FILTER( isLiteral(?o) )
+                            FILTER( lang(?o) != "" )
+                            { 
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p ?o 
+                                }
+                            }
+                        }
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/languagePartitionFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/languageExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Language list""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl kgi:languagePartition ?languagePartition .
+                    ?languagePartition schema:availableLanguage ?lang ;
+                        dcterms:language ?lang ;
+                        void:entities ?count .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl schema:availableLanguage ?lang ;
+                        dcterms:language ?lang .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?lang { UNDEF }
+                    {
+                        SELECT DISTINCT ?lang (COUNT(DISTINCT ?o) as ?count) {
+                            FILTER( isLiteral(?o) )
+                            FILTER( lang(?o) != ?lang )
+                            { 
+                                ?s ?p ?o 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p ?o 
+                                }
+                            }
+                        } GROUP BY ?lang
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<main/vocabularyExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        $rawEndpointUrl void:vocabulary ?ns .
+                    }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?elem {
+                        ?s ?elem ?o .
+                        }
+                    }
+                }
+                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
+            }"""
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription void:vocabulary ?ns .
+                    }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?elem {
+                            ?s a ?elem .
+                        }
+                    }
+                }
+                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
+            }"""
+        ]
+    ) .
+
+<main/vocabularyFromClassesAndPropertyExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <main/classExistence.ttl>
+        <main/propertyExistence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:vocabulary ?ns .
+                }
+            }
+            WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?elem .
+                }
+                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
+            }"""
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription void:vocabulary ?ns .
+                }
+            }
+            WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?elem .
+                }
+                BIND(IRI(REPLACE( str(?elem), "(([a-zA-Z0-9-]+:\/\/)(([a-zA-Z0-9\-_]+\.)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_:]+)+[\/#]))([a-zA-Z0-9\-_:\#\?\=\.]+)*", "$1")) AS ?ns) .
             }"""
         ]
     ) .
