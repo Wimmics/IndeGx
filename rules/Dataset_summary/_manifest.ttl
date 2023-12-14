@@ -8,13 +8,13 @@
     kgi:requiredAssets (
     ) ;
     mf:include (
+        <main/cooccurrence/_manifest.ttl>
     ) ;
     mf:entries (
         <main/init.ttl>
         <main/classes.ttl>
         <main/classExistence.ttl>
         <main/classInstancesFromExistence.ttl>
-        <main/classCooccurrenceExistence.ttl>
         <main/classPropertyExistences.ttl>
         <main/classPropertyObjectTypesEntitiesFromExistence.ttl>
         <main/classPropertyObjectTypesExistence.ttl>
@@ -608,7 +608,7 @@
                                     ?o a ?oc .
                                 }
                             }
-                        } GROUP BY ?c ?p
+                        } GROUP BY ?c ?p ?oc
                     }
                 }
                 BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c), STR(?p), STR(?oc) ) ) ) ) AS ?objectClassPartition )
@@ -860,7 +860,9 @@
             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                ?objectDatatypePartition kgi:maximum ?max .
+                GRAPH $rawEndpointUrl {
+                    ?objectDatatypePartition kgi:maximum ?max .
+                }
             } WHERE {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classPartition.
@@ -969,8 +971,6 @@
     ) ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
             mf:action """PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX owl:        <http://www.w3.org/2002/07/owl#>
             PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
@@ -1001,7 +1001,7 @@
     kgi:onSuccess (
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
+            kgi:recommendedPagination 1000 ;
             mf:action """PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX owl:        <http://www.w3.org/2002/07/owl#>
             PREFIX xsd:        <http://www.w3.org/2001/XMLSchema#>
@@ -1041,7 +1041,7 @@
         ]
         [
             kgi:timeout "PT120S"^^xsd:duration ;
-            kgi:recommendedPagination 100 ;
+            kgi:recommendedPagination 1000 ;
             mf:action """
             PREFIX rdfs:       <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX owl:        <http://www.w3.org/2002/07/owl#>
@@ -1073,65 +1073,6 @@
                     }
                 }
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Summary")) AS ?summaryDescriptionGraph)
-            }"""
-        ]
-    ) .
-
-<main/classCooccurrenceExistence.ttl> a mf:ManifestEntry ;
-    kgi:requiredAssets (
-        <main/init.ttl>
-    ) ;
-    kgi:onSuccess (
-        [
-            dcterms:description """Class cooccurrence partitions""" ;
-            kgi:timeout "PT120S"^^xsd:duration ;
-            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
-            PREFIX schema: <http://schema.org/>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX pav: <http://purl.org/pav/>
-            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-            PREFIX dce: <http://purl.org/dc/elements/1.1/>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl void:classPartition ?classCoPartition .
-                    ?classCoPartition void:inDataset $rawEndpointUrl ;
-                        void:class ?c .
-                }
-            } WHERE {
-                GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
-                }
-                SERVICE $rawEndpointUrl {
-                    {
-                        SELECT DISTINCT ?c ?classes {
-                            { 
-                                ?s a ?c 
-                            } UNION { 
-                                GRAPH ?g { 
-                                    ?s a ?c 
-                                }
-                            }
-                            {
-                                SELECT DISTINCT ?s (GROUP_CONCAT(DISTINCT ?c; SEPARATOR=',') AS ?classes) {
-                                    { 
-                                        ?s a ?c 
-                                    } UNION { 
-                                        GRAPH ?g { 
-                                            ?s a ?c 
-                                        }
-                                    }
-                                } GROUP BY ?s
-                            }
-                        }
-                    }
-                }
-                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR(<http://prod-dekalog.inria.fr/sparql>), STR(?classes) ) ) ) ) AS ?classCoPartition )
             }"""
         ]
     ) .
@@ -1230,6 +1171,7 @@
                         } GROUP BY ?lang
                     }
                 }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?lang) ) ) ) ) AS ?languagePartition )
             }"""
         ]
     ) .
@@ -1271,8 +1213,8 @@
                 PREFIX dcterms: <http://purl.org/dc/terms/>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
-                    GRAPH ?curatedDescriptionGraph {
-                        ?datasetDescription void:vocabulary ?ns .
+                    GRAPH $rawEndpointUrl {
+                        $rawEndpointUrl void:vocabulary ?ns .
                     }
             }
             WHERE {
@@ -1322,8 +1264,8 @@
             PREFIX dcterms: <http://purl.org/dc/terms/>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
-                GRAPH ?curatedDescriptionGraph {
-                    ?datasetDescription void:vocabulary ?ns .
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:vocabulary ?ns .
                 }
             }
             WHERE {

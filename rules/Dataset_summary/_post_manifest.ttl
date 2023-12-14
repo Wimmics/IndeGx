@@ -34,13 +34,6 @@
                 }
             } WHERE {
                 GRAPH ?endpoint {
-                    ?endpoint void:classPartition ?classPartition.
-                    ?classPartition void:inDataset ?endpoint ;
-                        void:class ?c ;
-                        void:propertyPartition ?classPropertyPartition .
-                    ?classPropertyPartition void:inDataset ?endpoint ;
-                        void:property ?p ;
-                        void:classPartition ?objectDatatypePartition .
                     ?objectDatatypePartition void:inDataset ?endpoint ;
                         kgi:availableLiteralDatatypes ?datatype .
                 }
