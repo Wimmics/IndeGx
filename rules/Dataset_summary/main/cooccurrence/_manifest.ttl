@@ -68,7 +68,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classCoPartition .
-                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                    ?classCoPartition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:class ?c1 ;
                         void:class ?c2 .
                 }
@@ -119,11 +120,7 @@
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl void:classPartition ?classCoPartition .
-                    ?classCoPartition void:inDataset $rawEndpointUrl ;
-                        void:class ?c1 ;
-                        void:class ?c2 ;
-                        void:entities ?entities .
+                    ?classCoPartition void:entities ?entities .
                 }
             } WHERE {
                 FILTER(STR(?c1) > STR(?c2))
@@ -178,7 +175,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classCo3Partition .
-                    ?classCo3Partition void:inDataset $rawEndpointUrl ;
+                    ?classCo3Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:class ?c1 ;
                         void:class ?c2 ;
                         void:class ?c3 .
@@ -297,7 +295,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classCo4Partition .
-                    ?classCo4Partition void:inDataset $rawEndpointUrl ;
+                    ?classCo4Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:class ?c1 ;
                         void:class ?c2;
                         void:class ?c3 ;
@@ -428,7 +427,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classCo5Partition .
-                    ?classCo5Partition void:inDataset $rawEndpointUrl ;
+                    ?classCo5Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:class ?c1 ;
                         void:class ?c2 ;
                         void:class ?c3 ;
@@ -499,14 +499,7 @@
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl void:classPartition ?classCoPartition .
-                    ?classCoPartition void:inDataset $rawEndpointUrl ;
-                        void:class ?c1 ;
-                        void:class ?c2 ;
-                        void:class ?c3 ;
-                        void:class ?c4 ;
-                        void:class ?c5 ;
-                        void:entities ?entities .
+                    ?classCoPartition void:entities ?entities .
                 }
             } WHERE {
                 FILTER(STR(?c1) > STR(?c2)) 
@@ -579,7 +572,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classCo6Partition .
-                    ?classCo6Partition void:inDataset $rawEndpointUrl ;
+                    ?classCo6Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:class ?c1 ;
                         void:class ?c2 ;
                         void:class ?c3 ;
@@ -657,15 +651,7 @@
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl void:classPartition ?classCoPartition .
-                    ?classCoPartition void:inDataset $rawEndpointUrl ;
-                        void:class ?c1 ;
-                        void:class ?c2 ;
-                        void:class ?c3 ;
-                        void:class ?c4 ;
-                        void:class ?c5 ;
-                        void:class ?c6 ;
-                        void:entities ?entities .
+                    ?classCoPartition void:entities ?entities .
                 }
             } WHERE {
                 FILTER(STR(?c1) > STR(?c2)) 
@@ -744,7 +730,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classCo7Partition .
-                    ?classCo7Partition void:inDataset $rawEndpointUrl ;
+                    ?classCo7Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:class ?c1 ;
                         void:class ?c2 ;
                         void:class ?c3 ;
@@ -829,16 +816,7 @@
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl void:classPartition ?classCoPartition .
-                    ?classCoPartition void:inDataset $rawEndpointUrl ;
-                        void:class ?c1 ;
-                        void:class ?c2 ;
-                        void:class ?c3 ;
-                        void:class ?c4 ;
-                        void:class ?c5 ;
-                        void:class ?c6 ;
-                        void:class ?c7 ;
-                        void:entities ?entities .
+                    ?classCoPartition void:entities ?entities .
                 }
             } WHERE {
                 FILTER(STR(?c1) > STR(?c2)) 
@@ -923,7 +901,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:classPartition ?classCo8Partition .
-                    ?classCo8Partition void:inDataset $rawEndpointUrl ;
+                    ?classCo8Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:class ?c1 ;
                         void:class ?c2 ;
                         void:class ?c3 ;
@@ -1015,17 +994,7 @@
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
             INSERT {
                 GRAPH $rawEndpointUrl {
-                    $rawEndpointUrl void:classPartition ?classCoPartition .
-                    ?classCoPartition void:inDataset $rawEndpointUrl ;
-                        void:class ?c1 ;
-                        void:class ?c2 ;
-                        void:class ?c3 ;
-                        void:class ?c4 ;
-                        void:class ?c5 ;
-                        void:class ?c6 ;
-                        void:class ?c7 ;
-                        void:class ?c8 ;
-                        void:entities ?entities .
+                    ?classCoPartition void:entities ?entities .
                 }
             } WHERE {
                 FILTER(STR(?c1) > STR(?c2)) 
@@ -1113,7 +1082,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
-                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 .
                 }
@@ -1220,7 +1190,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo3Partition .
-                    ?propertyCo3Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo3Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 .
@@ -1343,7 +1314,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo4Partition .
-                    ?propertyCo4Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo4Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -1479,7 +1451,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo5Partition .
-                    ?propertyCo5Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo5Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -1627,7 +1600,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo6Partition .
-                    ?propertyCo6Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo6Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -1788,7 +1762,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo7Partition .
-                    ?propertyCo7Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo7Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -1962,7 +1937,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo8Partition .
-                    ?propertyCo8Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo8Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -2149,7 +2125,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo9Partition .
-                    ?propertyCo9Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo9Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -2349,7 +2326,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo10Partition .
-                    ?propertyCo10Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo10Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -2372,7 +2350,8 @@
                 FILTER(STR(?p8) > STR(?p9))
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo9Partition .
-                    ?propertyCo9Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo9Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -2562,7 +2541,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo11Partition .
-                    ?propertyCo11Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo11Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;
@@ -2788,7 +2768,8 @@
             INSERT {
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:propertyPartition ?propertyCo12Partition .
-                    ?propertyCo12Partition void:inDataset $rawEndpointUrl ;
+                    ?propertyCo12Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
                         void:property ?p1 ;
                         void:property ?p2 ;
                         void:property ?p3 ;

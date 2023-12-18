@@ -12,12 +12,12 @@ For each endpoint:
                 - [x] Min/max values
             - [x] Classes
             - [x] Number of different values
-    - [ ] Cooccurrences around the same instance (class - classes)
-        - < 5 properties
+    - [x] Cooccurrences around the same instance (class - classes)
+        - < 8 classes
 - Properties
     - [x] Number of triples
-    - [ ] Cooccurrences around the same instance (property - properties)
-        - < 9 properties
+    - [x] Cooccurrences around the same instance (property - properties)
+        - < 12 properties
 - [x] Datatypes
     -> Post-processing
     - [ ] Triples
@@ -32,7 +32,7 @@ For each endpoint:
         - -> Post-processing
     - [ ] Number of classes
         - -> Post-processing
-    - [ ] Associations (subject namespace - property - object namespace/object datatype)
+    - [x] Associations (subject namespace - property - object namespace)
 
 qudt:lowerBound
 qudt:upperBound

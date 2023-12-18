@@ -25,8 +25,8 @@
         <main/distinctSubjectsObjects.ttl>
         <main/languageExistence.ttl>
         <main/languagePartitionFromExistence.ttl>
-        <main/namespaceInit.ttl>
-        <main/namespaceExistence.ttl>
+        <main/summaryInit.ttl>
+        <main/summary.ttl>
         <main/properties.ttl>
         <main/propertyExistence.ttl>
         <main/propertyTriplesFromExistence.ttl>
@@ -965,7 +965,7 @@
         ]
     ) .
 
-<main/namespaceInit.ttl> a mf:ManifestEntry ;
+<main/summaryInit.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
         <main/init.ttl>
     ) ;
@@ -994,9 +994,9 @@
         ]
     ) .
 
-<main/namespaceExistence.ttl> a mf:ManifestEntry ;
+<main/summary.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
-        <main/namespaceInit.ttl>
+        <main/summaryInit.ttl>
     ) ;
     kgi:onSuccess (
         [
