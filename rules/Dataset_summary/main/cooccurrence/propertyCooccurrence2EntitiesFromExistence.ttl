@@ -6,5 +6,5 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <> rdf:type kgi:DummyTest ;
-    dcterms:isReferencedBy <../_manifest.ttl> ;
-    dcterms:description """Extract dataset descriptions""" .
+    dcterms:isReferencedBy <../_post_manifest.ttl> ;
+    dcterms:description """Number of instances with properties appearing around the same instance""" .

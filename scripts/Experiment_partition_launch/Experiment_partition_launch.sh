@@ -5,9 +5,9 @@ cd ../..
 for catalog in `ls catalogs/ | grep all_catalog_partition_*`; do
     echo $catalog
     partition_config='{
-    "pre": "file:///rules/vocabulary_statistics/_pre_manifest.ttl",
-    "manifest": "file:///rules/vocabulary_statistics/_manifest.ttl",
-    "post": "file:///rules/vocabulary_statistics/_post_manifest.ttl",
+    "pre": "file:///rules/Dataset_summary/_pre_manifest.ttl",
+    "manifest": "file:///rules/Dataset_summary/_manifest.ttl",
+    "post": "file:///rules/Dataset_summary/_post_manifest.ttl",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
@@ -17,10 +17,10 @@ for catalog in `ls catalogs/ | grep all_catalog_partition_*`; do
     "logFile": "/output/indegx_CATALOG.log",
     "outputFile": "/output/indegx_CATALOG.trig",
     "queryLog": true,
-    "resilience": false
+    "resilience": true
 }'
-    partition_config_filename="/config/config_$catalog.json"
+    partition_config_filename="config/config_$catalog.json"
     echo $partition_config | sed -e s/CATALOG/$catalog/g > $partition_config_filename
-    echo "./run.sh -c $partition_config_filename"
+    ./run.sh -c /$partition_config_filename
 done
 

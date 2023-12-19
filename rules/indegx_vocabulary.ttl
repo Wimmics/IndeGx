@@ -217,6 +217,12 @@ kgi:summary rdf:type owl:ObjectProperty ;
     rdfs:domain void:Dataset ;
     rdfs:range sd:NamedGraph .
 
+kgi:graph rdf:type owl:ObjectProperty ;
+    rdfs:label "graph"@en ;
+    rdfs:comment "Link between a dataset and a graph containing its content."@en ;
+    rdfs:domain void:Dataset ;
+    rdfs:range sd:NamedGraph .
+
 # Description of the common elements between datasets
 
 kgi:CommonalityDescription rdf:type rdfs:Class ;

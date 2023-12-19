@@ -1,15 +1,15 @@
 {
-    "pre": "file:///rules/FedShop_data/_pre_manifest.ttl",
-    "manifest": "file:///rules/FedShop_data/_manifest.ttl",
-    "post": "file:///rules/FedShop_data/_post_manifest.ttl",
-    "catalog": "file:///catalogs/local_common_crawl.ttl",
+    "pre": "file:///rules/Dataset_summary/_pre_manifest.ttl",
+    "manifest": "file:///rules/Dataset_summary/_manifest.ttl",
+    "post": "file:///rules/Dataset_summary/_post_manifest.ttl",
+    "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
     "maxConccurentQueries": 300,
     "delayMillisecondsTimeForConccurentQuery": 1000,
-    "logFile": "/output/indegx_common_crawl.log",
-    "outputFile": "/output/indegx_common_crawl.trig",
+    "logFile": "/output/debug_log.log",
+    "outputFile": "/output/debug.trig",
     "queryLog": true,
     "resilience": true
 }
