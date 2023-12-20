@@ -1,0 +1,28 @@
+{
+    "name": "lod-cloud-data-to-rdf",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Retrieve the LOAD Cloud raw data and convert it in an annotated DCAT catalog in RDF",
+    "main": "src/script.ts",
+    "scripts": {
+      "build": "npx tsc",
+      "devrun": "npx tsc && node src/script.js",
+      "run": "node src/script.js",
+      "clean": "rm -rf src/*.js src/*.js.map *.log",
+      "deepclean": "rm -rf src/*.js src/*.js.map node_modules package-lock.json *.log"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@types/node": "latest",
+      "@types/node-fetch": "latest",
+      "dayjs": "latest",
+      "node-fetch": "latest",
+      "typescript": "latest",
+      "rdflib": "latest",
+      "sparqljs": "latest",
+      "graphy": "latest",
+      "md5": "latest"
+    }
+  }
+  
