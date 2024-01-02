@@ -26,15 +26,17 @@ type JSONCatalog = {
         description: {
             [langage: string]: string,
         },
-        owner: string,
+        owner: PersonObject | string,
         website: string,
         domain: string,
         namespace: string,
-        contact_point: {
-            name: string,
-            email: string
-        }
+        contact_point: PersonObject
     }
+}
+
+type PersonObject = {
+    name: string,
+    email: string
 }
 
 type LinksObject = {
@@ -467,11 +469,11 @@ function generateDatasetExampleTriples(datasetResource, datasetExample: ExampleO
             datasetExample.forEach(exampleObject => {
                 if (exampleObject.access_url != undefined && exampleObject.access_url != null && exampleObject.access_url != "") {
                     // void:exampleResource
-                    result.push($rdf.st(datasetResource, RDFUtils.VOID("exampleResource"), $rdf.sym(RDFUtils.sanitizeURI(exampleObject.access_url))));
+                    result.push($rdf.st(datasetResource, RDFUtils.VOID("exampleResource"), $rdf.lit(RDFUtils.sanitizeURI(exampleObject.access_url))));
                     // schema:workExample
-                    result.push($rdf.st(datasetResource, RDFUtils.SCHEMA("workExample"), $rdf.sym(RDFUtils.sanitizeURI(exampleObject.access_url))));
+                    result.push($rdf.st(datasetResource, RDFUtils.SCHEMA("workExample"), $rdf.lit(RDFUtils.sanitizeURI(exampleObject.access_url))));
                     // skos:example
-                    result.push($rdf.st(datasetResource, RDFUtils.SKOS("example"), $rdf.sym(RDFUtils.sanitizeURI(exampleObject.access_url))));
+                    result.push($rdf.st(datasetResource, RDFUtils.SKOS("example"), $rdf.lit(RDFUtils.sanitizeURI(exampleObject.access_url))));
                 }
             })
         }
@@ -531,21 +533,37 @@ function generateDatasetDescriptionTriples(datasetResource, descriptionObject: {
     return result;
 }
 
-function generatePublisherTriples(datasetResource, owner: string): $rdf.Statement[] {
+function generatePublisherTriples(datasetResource, owner: PersonObject | string): $rdf.Statement[] {
     let result = [];
 
     try {
         if (owner != undefined && owner != null && owner != "") {
-            // dct:publisher
-            result.push($rdf.st(datasetResource, RDFUtils.DCT("publisher"), $rdf.lit(owner)));
-            // dce:publisher
-            result.push($rdf.st(datasetResource, RDFUtils.DCE("publisher"), $rdf.lit(owner)));
-            // schema:publisher
-            result.push($rdf.st(datasetResource, RDFUtils.SCHEMA("publisher"), $rdf.lit(owner)));
-            // schema:sdPublisher
-            result.push($rdf.st(datasetResource, RDFUtils.SCHEMA("sdPublisher"), $rdf.lit(owner)));
-            // pav:providedBy 
-            result.push($rdf.st(datasetResource, RDFUtils.PAV("providedBy"), $rdf.lit(owner)));
+            if (((owner as PersonObject).name != undefined && (owner as PersonObject).name != null && (owner as PersonObject).name != "") || ((owner as PersonObject).email != undefined && (owner as PersonObject).email != null && (owner as PersonObject).email != "")) {
+                let concatenatedOwner = (owner as PersonObject).name + (owner as PersonObject).email;
+                let ownermd5 = md5(concatenatedOwner);
+                let personResource = RDFUtils.KGI(ownermd5 + "Person");
+                result.push($rdf.st(personResource, RDFUtils.rdfTypeProperty, RDFUtils.FOAF("Person")));
+                result.push($rdf.st(personResource, RDFUtils.rdfTypeProperty, RDFUtils.SCHEMA("Person")));
+
+                // dct:publisher
+                result.push($rdf.st(datasetResource, RDFUtils.DCT("publisher"), personResource));
+                // dce:publisher
+                result.push($rdf.st(datasetResource, RDFUtils.DCE("publisher"), personResource));
+                // schema:publisher
+                result.push($rdf.st(datasetResource, RDFUtils.SCHEMA("publisher"), personResource));
+                // schema:sdPublisher
+                result.push($rdf.st(datasetResource, RDFUtils.SCHEMA("sdPublisher"), personResource));
+                // pav:providedBy 
+                result.push($rdf.st(datasetResource, RDFUtils.PAV("providedBy"), personResource));
+                if ((owner as PersonObject).name != undefined && (owner as PersonObject).name != null && (owner as PersonObject).name != "") {
+                    result.push($rdf.st(personResource, RDFUtils.FOAF("name"), $rdf.lit((owner as PersonObject).name)));
+                    result.push($rdf.st(personResource, RDFUtils.SCHEMA("name"), $rdf.lit((owner as PersonObject).name)));
+                }
+                if ((owner as PersonObject).email != undefined && (owner as PersonObject).email != null && (owner as PersonObject).email != "") {
+                    result.push($rdf.st(personResource, RDFUtils.FOAF("mbox"), $rdf.lit((owner as PersonObject).email)));
+                    result.push($rdf.st(personResource, RDFUtils.SCHEMA("email"), $rdf.lit((owner as PersonObject).email)));
+                }
+            }
         }
     } catch (error) {
         Logger.error("Error generating publisher triples", error, datasetResource.value, owner);
