@@ -28,3 +28,5 @@ while [ $partition_start -lt $max_number_of_endpoint ]; do
     partition_end=$((partition_end + slice_size))
     rm partition_construct_edited.rq
 done
+
+exit 0
