@@ -2,22 +2,21 @@ PREFIX void: <http://www.w3.org/2002/07/owl#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX pav: <http://purl.org/pav/>
 
 CONSTRUCT {
     kgi:Catalog a dcat:Catalog ;
+        pav:lastRefreshedOn ?date ;
         dcat:dataset ?dataset .
-    ?dataset a dcat:Dataset ;
+    ?dataset a dcat:Dataset ; 
+        pav:importedFrom ?source ;
         void:sparqlEndpoint ?sparql ;
         dcat:endpointURL ?sparql .
 } WHERE {
-    {
-        ?s ?p ?URL .
-    } UNION {
-        GRAPH ?g {
-            ?s ?p ?URL .
-        }
-    }
-    BIND(IRI(STR(?URL)) as ?sparql)
+    ?originaldataset ?p ?URL ;
+        pav:importedFrom ?source .
+    BIND( IRI( STR(?URL) ) as ?sparql)
+    BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( STR( ?sparql ) ) ) ) AS ?dataset )
+    BIND(NOW() as ?date)
     FILTER (?p IN (void:sparqlEndpoint, dcat:endpointURL, sd:endpoint))
-    BIND (IRI(CONCAT(STR(kgi:), ENCODE_FOR_URI(?sparql))) AS ?dataset)
 }

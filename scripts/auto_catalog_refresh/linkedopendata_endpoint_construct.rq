@@ -4,12 +4,10 @@ PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX pav: <http://purl.org/pav/>
 
 CONSTRUCT { 
-    kgi:Catalog a dcat:Catalog ;
-        dcat:dataset ?dataset .
-    ?dataset a dcat:Dataset ;
-        void:sparqlEndpoint ?sparql ;
+    ?dataset pav:importedFrom <SOURCE> ;
         dcat:endpointURL ?sparql .
 } WHERE {
     ?Endpoint wdt:P35 wd:Q3287501;

@@ -2,9 +2,11 @@ PREFIX void: <http://www.w3.org/2002/07/owl#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX pav: <http://purl.org/pav/>
 
 CONSTRUCT {
-    ?dataset dcat:endpointURL ?sparql .
+    ?dataset dcat:endpointURL ?sparql ; 
+        pav:importedFrom <SOURCE> .
 } WHERE {
     {
         ?s ?p ?URL .
