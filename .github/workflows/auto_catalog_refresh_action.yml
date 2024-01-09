@@ -19,7 +19,7 @@ jobs:
       working-directory: ./scripts/auto_catalog_refresh
       run: ./script.sh
     - name: Copy the resulting catalog
-      run: cp scripts/auto_catalog_refresh/catalog.final.trig ./catalogs/catalog.auto_refresh.ttl
+      run: cp ./scripts/auto_catalog_refresh/catalog.final.trig ./catalogs/catalog.auto_refresh.ttl
     - name: Commit files
       run: |
         git diff-index --quiet HEAD || git add ./catalogs/catalog.auto_refresh.ttl
