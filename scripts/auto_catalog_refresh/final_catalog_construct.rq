@@ -5,18 +5,17 @@ PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
 PREFIX pav: <http://purl.org/pav/>
 
 CONSTRUCT {
-    kgi:Catalog a dcat:Catalog ;
-        pav:lastRefreshedOn ?date ;
-        dcat:dataset ?dataset .
+    kgi:Catalog dcat:dataset ?dataset ;
+        pav:lastRefreshedOn ?date .
     ?dataset a dcat:Dataset ; 
         pav:importedFrom ?source ;
         void:sparqlEndpoint ?sparql ;
         dcat:endpointURL ?sparql .
 } WHERE {
+    kgi:Catalog pav:lastRefreshedOn ?date .
     ?originaldataset ?p ?URL ;
         pav:importedFrom ?source .
     BIND( IRI( STR(?URL) ) as ?sparql)
     BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( STR( ?sparql ) ) ) ) AS ?dataset )
-    BIND(NOW() as ?date)
-    FILTER (?p IN (void:sparqlEndpoint, dcat:endpointURL, sd:endpoint))
+    FILTER ( ?p IN (void:sparqlEndpoint, dcat:endpointURL, sd:endpoint) )
 }
