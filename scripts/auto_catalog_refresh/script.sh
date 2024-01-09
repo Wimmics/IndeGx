@@ -27,18 +27,15 @@ tmp_lod_jsonld_file=lod-data.jsonld
 tmp_lod_rdf_file=lod-data.ttl
 lod_output_file=lod_endpoints.trig
 
-echo "curl -s -L $lod_json_file -o $tmp_local_lod_file"
 curl -s -L $lod_json_file -o $tmp_local_lod_file 
-echo "cat $tmp_local_lod_file | ./$jq_executable '[ { \"http://www.w3.org/ns/dcat#endpointURL\": { \"@id\":to_entries.[].value.sparql.[].access_url } } ]' > $tmp_lod_jsonld_file"
 cat $tmp_local_lod_file | ./$jq_executable '[ { "http://www.w3.org/ns/dcat#endpointURL": { "@id":to_entries.[].value.sparql.[].access_url } } ]' > $tmp_lod_jsonld_file
 java -jar $corese_jar convert -i $tmp_lod_jsonld_file -if application/ld+json -o $tmp_lod_rdf_file -of trig
 
 cat $generic_endpoint_query > $tmp_query_file
 sed -i "s,SOURCE,$lod_json_file,g" $tmp_query_file
-echo "java -jar $corese_jar sparql -i $tmp_lod_rdf_file -o $lod_output_file -q $tmp_query_file -of trig"
 java -jar $corese_jar sparql -i $tmp_lod_rdf_file -o $lod_output_file -q $tmp_query_file -of trig
 cat $lod_output_file >> $raw_final_file
-echo "Local LOD cloud converted to RDF treated, `wc -l $lod_output_file` lines"
+echo "Remote LOD cloud file treated, `wc -l $lod_output_file` lines"
 rm $lod_output_file
 rm $tmp_query_file
 rm $tmp_lod_jsonld_file
@@ -53,7 +50,6 @@ wikidata_output_file=wikidata_endpoints.nt
 
 cat $wikidata_query > $tmp_query_file
 sed -i "s,SOURCE,$wikidata_endpoint,g" $tmp_query_file
-echo "java -jar $corese_jar remote-sparql -e $wikidata_endpoint -o $wikidata_output_file -q $tmp_query_file -a application/n-triples"
 java -jar $corese_jar remote-sparql -e $wikidata_endpoint -o $wikidata_output_file -q $tmp_query_file -a application/n-triples
 cat $wikidata_output_file >> $raw_final_file
 echo "Remote Wikidata endpoint treated, `wc -l $wikidata_output_file` lines"
@@ -68,7 +64,6 @@ linkedopendata_output_file=linkedopendata_endpoints.nt
 
 cat $linkedopendata_query > $tmp_query_file
 sed -i "s,SOURCE,$linkedopendata_endpoint,g" $tmp_query_file
-echo "java -jar $corese_jar remote-sparql -e $linkedopendata_endpoint -o $linkedopendata_output_file -q $tmp_query_file -a application/n-triples"
 java -jar $corese_jar remote-sparql -e $linkedopendata_endpoint -o $linkedopendata_output_file -q $tmp_query_file -a application/n-triples
 cat $linkedopendata_output_file >> $raw_final_file
 echo "Remote Linked Open Data endpoint treated, `wc -l $linkedopendata_output_file` lines"
@@ -84,7 +79,6 @@ openlink_output_file=openlink_endpoints.trig
 
 cat $generic_endpoint_query > $tmp_query_file
 sed -i "s,SOURCE,$openlink_file,g" $tmp_query_file
-echo "java -jar $corese_jar sparql -i $openlink_file -o $openlink_output_file -q $tmp_query_file -of trig"
 java -jar $corese_jar sparql -i $openlink_file -o $openlink_output_file -q $tmp_query_file -of trig
 cat $openlink_output_file >> $raw_final_file
 echo "Remote Openlink file treated, `wc -l $openlink_output_file` lines"
@@ -104,7 +98,6 @@ java -jar $corese_jar convert -i $tmp_json_yummy_file -if application/ld+json -o
 
 cat $generic_endpoint_query > $tmp_query_file
 sed -i "s,SOURCE,$yummy_API,g" $tmp_query_file
-echo "java -jar $corese_jar sparql -i $tmp_ttl_yummy_file -o $yummy_output_file -q $tmp_query_file -of trig"
 java -jar $corese_jar sparql -i $tmp_ttl_yummy_file -o $yummy_output_file -q $tmp_query_file -of trig
 cat $yummy_output_file >> $raw_final_file
 echo "Remote Yummy API treated, `wc -l $yummy_output_file` lines"
@@ -122,7 +115,6 @@ indegx_output_file=indegx_endpoints.trig
 
 cat $generic_endpoint_query > $tmp_query_file
 sed -i "s,SOURCE,$indegx_file,g" $tmp_query_file
-echo "java -jar $corese_jar sparql -i $indegx_file -o $indegx_output_file -q $tmp_query_file -of trig"
 java -jar $corese_jar sparql -i $indegx_file -o $indegx_output_file -q $tmp_query_file -of trig
 cat $indegx_output_file >> $raw_final_file
 echo "Remote IndeGx file treated, `wc -l $indegx_output_file` lines"
@@ -140,6 +132,5 @@ final_file=catalog.final.trig
 
 final_catalog_query=final_catalog_construct.rq
 echo "Cumulated list of endpoints contains `wc -l $raw_final_file` lines"
-echo "java -jar $corese_jar sparql -i $raw_final_file -o $final_file -q $final_catalog_query -of trig"
 java -jar $corese_jar sparql -i $raw_final_file -o $final_file -q $final_catalog_query -of trig
 rm $raw_final_file
