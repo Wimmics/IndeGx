@@ -1,0 +1,55 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+<http://ns.inria.fr/kg/index#cffc6534d9330fd9bac069a5e576e456Endpoint> void:sparqlEndpoint <http://dbtune.org/jamendo/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#8480caaa41972a6c5ad762a10c024398Endpoint> void:sparqlEndpoint <https://lod.abes.fr/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#7f78ab0af06eba907be3315faeed6598Endpoint> void:sparqlEndpoint <http://lod.openlinksw.com/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#5bc7eddf98949b6d8f88e198031a3b19Endpoint> void:sparqlEndpoint <http://sparql.proconsortium.org/virtuoso/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#f2df3716d398ccf75f2a4730959c5bb2Endpoint> void:sparqlEndpoint <https://data.ordnancesurvey.co.uk/datasets/opennames/apis/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#c5b6f41e6aa3e7f1ac5a66eb279d1296Endpoint> void:sparqlEndpoint <http://digital-agenda-data.eu/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#044b5be796b092ede1d06c7f0e8f5f70Endpoint> void:sparqlEndpoint <https://data.wu.ac.at/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#016c6711daaa53414ea107191cb3ea86Endpoint> void:sparqlEndpoint <http://dati.beniculturali.it/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#c74db3aac035b2ca19628d4f1feb0a44Endpoint> void:sparqlEndpoint <http://budapest.rkbexplorer.com/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#743a4f8215ca42bf0ae884fa6857ba53Endpoint> void:sparqlEndpoint <http://jisc.rkbexplorer.com/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#2a57470847c2baf4fa370d26058797c5Endpoint> void:sparqlEndpoint <https://sparql.proconsortium.org/virtuoso/sparql> ;
+rdf:type dcat:Dataset .
+
+<http://ns.inria.fr/kg/index#catalogResource> rdf:type dcat:Catalog ;
+dcat:dataset <http://ns.inria.fr/kg/index#c5b6f41e6aa3e7f1ac5a66eb279d1296Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#044b5be796b092ede1d06c7f0e8f5f70Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#c74db3aac035b2ca19628d4f1feb0a44Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#8480caaa41972a6c5ad762a10c024398Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#a22bd8278fa7908b505e7e047412519eEndpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#f2df3716d398ccf75f2a4730959c5bb2Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#7f78ab0af06eba907be3315faeed6598Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#2a57470847c2baf4fa370d26058797c5Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#cffc6534d9330fd9bac069a5e576e456Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#743a4f8215ca42bf0ae884fa6857ba53Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#5bc7eddf98949b6d8f88e198031a3b19Endpoint> ;
+dcat:dataset <http://ns.inria.fr/kg/index#016c6711daaa53414ea107191cb3ea86Endpoint> .
+
+<http://ns.inria.fr/kg/index#a22bd8278fa7908b505e7e047412519eEndpoint> void:sparqlEndpoint <http://datos.bcn.cl/sparql> ;
+rdf:type dcat:Dataset .
+

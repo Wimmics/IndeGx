@@ -100,8 +100,9 @@ function processDataset(datasetName: string, datasetJSON: JSONCatalog[string]): 
     return Promise.resolve().then(() => {
         if (datasetJSON != undefined) {
             let datasetIdentifier = datasetJSON.identifier;
-            let datasetResource = RDFUtils.KGI(GlobalUtils.unicodeToUrlendcode(datasetIdentifier));
-            resultStore.add(datasetResource, RDFUtils.RDF("type"), RDFUtils.VOID("Dataset"));
+            let sanitizeDatasetIdentifier = GlobalUtils.unicodeToUrlendcode(datasetIdentifier).replaceAll('-', '%2D');
+            let datasetResource = RDFUtils.KGI(sanitizeDatasetIdentifier);
+            resultStore.add(datasetResource, RDFUtils.rdfTypeProperty, RDFUtils.VOID("Dataset"));
             resultStore.add(catalogResource, RDFUtils.DCAT("dataset"), datasetResource);
 
             const identifierTriples = generateDatasetIdentifierTriples(datasetResource, datasetIdentifier);
@@ -294,7 +295,7 @@ function generateDatasetLinksTriples(datasetResource, linksObjects: LinksObject[
         if (linksObjects != undefined && linksObjects != null && linksObjects.length > 0) {
             linksObjects.forEach(linkObject => {
                 if (linkObject.target != undefined && linkObject.target != null && linkObject.target != "" && linkObject.value != undefined && linkObject.value != null && linkObject.value != "0") {
-                    let linkTarget = RDFUtils.KGI(GlobalUtils.unicodeToUrlendcode(linkObject.target));
+                    let linkTarget = RDFUtils.KGI(GlobalUtils.unicodeToUrlendcode(linkObject.target).replaceAll('-', '%2D'));
                     let linkValue = linkObject.value;
                     let linkResource = RDFUtils.KGI(md5(datasetResource.value + linkTarget.value) + "Linkset");
                     // void:target

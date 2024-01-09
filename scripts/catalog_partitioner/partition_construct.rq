@@ -1,0 +1,12 @@
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX void: <http://rdfs.org/ns/void#>
+
+CONSTRUCT {
+    ?catalog a dcat:Catalog ;
+        dcat:dataset ?dataset .
+    ?dataset a dcat:Dataset ;
+        void:sparqlEndpoint ?endpoint .
+} WHERE {
+    ?catalog dcat:dataset ?dataset .
+    ?dataset void:sparqlEndpoint ?endpoint .
+} 
