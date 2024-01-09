@@ -20,9 +20,9 @@ jobs:
       uses: actions/checkout@v4
     - name: checking where stuff is
       run: ls -la
-    - name: Moving to script folder
-      run: cd ./scripts/auto_catalog_refresh/
     - name: checking where stuff is
+      working-directory: scripts/auto_catalog_refresh/
       run: ls -la
     - name: Script launch
+      working-directory: scripts/auto_catalog_refresh/
       run: script.sh
