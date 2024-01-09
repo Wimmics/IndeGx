@@ -22,5 +22,7 @@ jobs:
       run: ls -la
     - name: Moving to script folder
       run: cd ./scripts/auto_catalog_refresh/
+    - name: checking where stuff is
+      run: ls -la
     - name: Script launch
       run: script.sh
