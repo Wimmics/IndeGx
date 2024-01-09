@@ -21,8 +21,8 @@ jobs:
     - name: checking where stuff is
       run: ls -la
     - name: checking where stuff is
-      working-directory: scripts/auto_catalog_refresh/
+      working-directory: ./scripts/auto_catalog_refresh
       run: ls -la
     - name: Script launch
-      working-directory: scripts/auto_catalog_refresh/
+      working-directory: ./scripts/auto_catalog_refresh
       run: script.sh
