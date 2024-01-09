@@ -19,14 +19,15 @@ jobs:
       working-directory: ./scripts/auto_catalog_refresh
       run: ./script.sh
     - name: Copy the resulting catalog
-      run: cp ./scripts/auto_catalog_refresh/catalog.final.trig ./catalogs/catalog.auto_refresh.ttl
+      run: cp ./scripts/auto_catalog_refresh/catalog.final.trig ./catalogs/catalog.auto_refresh.trig
     - name: Commit files
       run: |
-        git diff-index --quiet HEAD || git add ./catalogs/catalog.auto_refresh.ttl
+        git add ./catalogs/catalog.auto_refresh.ttl
         git config --local user.email "pierre.maillot@inria.fr"
         git config --local user.name "Pierre Maillot"
-        git diff-index --quiet HEAD || git commit -m "Automatic catalog update" -a
+        git commit -m "Automatic catalog update" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
