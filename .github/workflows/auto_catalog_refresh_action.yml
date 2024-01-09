@@ -22,7 +22,7 @@ jobs:
       run: cp ./scripts/auto_catalog_refresh/catalog.final.trig ./catalogs/catalog.auto_refresh.trig
     - name: Commit files
       run: |
-        git add ./catalogs/catalog.auto_refresh.trig
+        git add ./catalogs/catalog.auto_refresh.trig -f
         git config --local user.email "pierre.maillot@inria.fr"
         git config --local user.name "Pierre Maillot"
         git commit -m "Automatic catalog update" -a
