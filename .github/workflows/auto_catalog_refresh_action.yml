@@ -25,4 +25,4 @@ jobs:
       run: ls -la
     - name: Script launch
       working-directory: ./scripts/auto_catalog_refresh
-      run: script.sh
+      run: ./script.sh
