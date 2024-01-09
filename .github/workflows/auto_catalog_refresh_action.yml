@@ -18,5 +18,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Moving to script folder
+      run: cd ./scripts/auto_catalog_refresh/
     - name: Script launch
-      run: ./scripts/auto_catalog_refresh/script.sh
+      run: script.sh
