@@ -10,7 +10,6 @@ kgi:catalog a dcat:Catalog ;
     pav:lastUpdateOn "2023-11-08T15:26:13.462000+01:00"^^xsd:dateTime ;
     dcat:dataset 
         [ void:sparqlEndpoint <http://193.190.127.165:7200/repositories/ERA-KG-latest> ],
-        [ void:sparqlEndpoint <https://allegro.callisto.calmip.univ-toulouse.fr/#/repositories/sms> ],
         [ void:sparqlEndpoint <https://bio2rdf.org/sparql> ],
         [ void:sparqlEndpoint <http://d2kab.i3s.unice.fr/sparql> ],
         [ void:sparqlEndpoint <http://data.bnf.fr/sparql> ],
