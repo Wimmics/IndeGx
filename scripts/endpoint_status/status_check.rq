@@ -1,0 +1,47 @@
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX schema: <https://schema.org/>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+
+CONSTRUCT {
+    kgi:catalog a dcat:Catalog ;
+        dcat:service ?dataset .
+    ?dataset a sd:Service , dcat:DataService ;
+        dcat:endpointURL ?e ;
+        sd:endpoint ?e ;
+        schema:serverStatus ?status ;
+        schema:dateModified ?time ;
+        dcterms:available ?time .
+}
+{
+    BIND(NOW() AS ?time)
+
+    {
+        SELECT DISTINCT ?e ?status {
+            VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+            {
+                GRAPH ?g { 
+                    ?s ?endpointProperty ?e 
+                }
+            } UNION {
+                ?s ?endpointProperty ?e
+            }
+
+            OPTIONAL {
+                SERVICE SILENT ?e {
+                    { SELECT ?t { ?x ?y ?t } LIMIT 1 }
+                }
+            }
+
+            # This is a best-effort query; it assumes at least one type triple in the default graph
+            # It should work for 99% of the cases
+            # The issue is, that I don't trust lecacy endpoints to handle ?s ?p ?o well
+            # (especially mysql based ones: first copy everything into a temporary table of everything, than pick the 1 result...)
+            # And some may even complain about exceeded execution time estimations
+            BIND(IF(BOUND(?t), schema:Online, schema:OfflineTemporarily) AS ?status)
+        }
+    }
+    BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( STR( ?e ) ) ) ) AS ?dataset )
+}
