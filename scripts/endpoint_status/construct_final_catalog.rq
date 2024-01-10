@@ -1,0 +1,59 @@
+PREFIX schema: <https://schema.org/> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+
+CONSTRUCT {
+    kgi:catalog a dcat:Catalog ;
+        dcat:service ?dataset .
+    ?dataset a sd:Service , dcat:DataService ;
+        dcat:endpointURL ?e ;
+        sd:endpoint ?e ;
+        schema:serverStatus ?status ;
+        schema:dateModified ?maxTime ;
+        dcterms:available ?maxTime ;
+        pav:sourceAccessedOn ?minTime ;
+        pav:sourceLastAccessedOn ?maxTime .
+}
+{
+    VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+    VALUES ?timeProperty { schema:dateModified dcterms:available pav:sourceAccessedOn pav:sourceLastAccessedOn }
+
+    ?s ?endpointProperty ?e ;
+        schema:serverStatus ?status .
+    
+    OPTIONAL {
+        {
+            SELECT ?e ?minTime
+            WHERE {
+                ?s a sd:Service ;
+                    ?endpointProperty ?e ;
+                    ?timeProperty ?minTime ;
+                    schema:serverStatus schema:Online .
+                FILTER( NOT EXISTS { 
+                    ?s ?endpointProperty ?e ;
+                        ?timeProperty ?time . 
+                    FILTER( ?time < ?minTime )
+                } )
+            }
+        }
+    }
+    OPTIONAL {
+        {
+            SELECT ?e (MAX(?time) AS ?maxTime)
+            WHERE {
+                ?s ?endpointProperty ?e ;
+                    ?timeProperty ?maxTime .
+                FILTER( NOT EXISTS { 
+                    ?s ?endpointProperty ?e ;
+                        ?timeProperty ?time . 
+                    FILTER( ?time > ?maxTime )
+                } )
+            }
+        }
+    }
+    BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( STR( ?e ) ) ) ) AS ?dataset )
+}
