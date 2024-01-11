@@ -8,9 +8,9 @@ Many Linked Data clients can consume the data directly from [https://raw.githubu
 
 There is [this git action](.github/workflows/main.yml) which invokes the following process every hour.
 
-The script [update-status.sh](update-status.sh) first downloads [the latest automatic catalog of endpoints from the IndeGx framework](https://raw.githubusercontent.com/Wimmics/IndeGx/catalog_auto_refresh/catalogs/catalog.auto_refresh.trig), and then runs the SPARQL query in [status-check.sparql](status-check.sparql) on each endpoint URL.
+The script [script.sh](script.sh) first downloads [the latest automatic catalog of endpoints from the IndeGx framework](https://raw.githubusercontent.com/Wimmics/IndeGx/catalog_auto_refresh/catalogs/catalog.auto_refresh.trig), and then runs the SPARQL query in [status-check.rq](status-check.rq) on each endpoint URL.
 
-The workflow runner is our [sparql-integrate command line tool](https://github.com/SmartDataAnalytics/Sparqlintegrate), built on [Apache Jena](https://jena.apache.org/), which simplifies the process of mashing-up RDF datasets and SPARQL queries.
+The workflow runner is [Corese command](https://github.com/Wimmics/corese/blob/master/docs/getting%20started/Getting%20Started%20With%20Corese-command.md), built on [Corese](https://github.com/Wimmics/corese).
 
 ### Is Service Monitoring using GitActions Permitted?
 
