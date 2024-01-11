@@ -16,7 +16,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        branch: catalog_auto_refresh
+        ref: catalog_auto_refresh
     - name: Script launch
       working-directory: ./scripts/auto_catalog_refresh
       run: ./script.sh
@@ -29,7 +29,6 @@ jobs:
         message: 'Automatic catalog update'
         author_name: 'Pierre Maillot'
         author_email: 'pierre.maillot@inria.fr'
-        branch: catalog_auto_refresh
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
