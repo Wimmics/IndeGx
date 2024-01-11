@@ -16,6 +16,7 @@ fi
 
 generic_endpoint_query=generic_endpoint_construct.rq
 dummy_dataset=dummy_dataset.ttl
+published_catalog=../../catalogs/catalog.auto_refresh.ttl
 tmp_query_file=tmp_query.rq
 raw_final_file=catalog.raw.nt
 echo "" > $raw_final_file
@@ -131,7 +132,7 @@ rm $tmp_query_file
 echo "Treating Europa endpoint"
 europa_endpoint=https://data.europa.eu/sparql
 europa_endpoints_query=europa_with_corese_loop_query.rq
-europa_output_file=europ_endpoints.rdf
+europa_output_file=europa_endpoints.rdf
 
 cat $europa_endpoints_query > $tmp_query_file
 sed -i "s,SOURCE,$europa_endpoint,g" $tmp_query_file
@@ -140,21 +141,38 @@ echo "Europa endpoint treated, `wc -l $europa_output_file` lines"
 
 rm $tmp_query_file
 
+# Previous version of the catalog
+if [ -e $published_catalog ]; then
+    echo "Treating previous version of the catalog"
+    published_catalog_url=https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl
+    previous_catalog_output_file=previous_catalog_endpoints.rdf
+
+    cat $generic_endpoint_query > $tmp_query_file
+    sed -i "s,SOURCE,$published_catalog_url,g" $tmp_query_file
+
+    java -jar $corese_jar sparql -i $published_catalog -o $previous_catalog_output_file -q $tmp_query_file -of rdf
+    echo "Previous version of the catalog treated, `wc -l $previous_catalog_output_file` lines"
+
+    rm $tmp_query_file
+fi
+
 # Concatenation of the resulting files
 final_catalog_query=final_catalog_construct.rq
 init_catalog_query=init_catalog_construct.rq
 tmp_raw_init_catalog_file=init_catalog.rdf
 final_raw_file=catalog.final.rdf
-final_file=catalog.final.trig
+final_file=catalog.final.ttl
 
 echo "Init of the catalog"
 echo "java -jar $corese_jar sparql -i $dummy_dataset -o $tmp_raw_init_catalog_file -q $init_catalog_query -of rdf"
 java -jar $corese_jar sparql -i $dummy_dataset -o $tmp_raw_init_catalog_file -q $init_catalog_query -of rdf
 echo "java -jar $corese_jar sparql -i `ls | grep .rdf` -o $final_raw_file -q $final_catalog_query -of rdf"
 java -jar $corese_jar sparql -i `ls | grep .rdf` -o $final_raw_file -q $final_catalog_query -of rdf
-echo "java -jar $corese_jar convert -i $final_raw_file -r trig -o $final_file"
-java -jar $corese_jar convert -i $final_raw_file -r trig -o $final_file
+echo "java -jar $corese_jar convert -i $final_raw_file -r ttl -o $final_file"
+java -jar $corese_jar convert -i $final_raw_file -r ttl -o $final_file
 echo "Final catalog contains `wc -l $final_file` lines"
+
+mv $final_file $published_catalog
 
 rm $lod_output_file
 rm $wikidata_output_file
@@ -164,5 +182,8 @@ rm $yummy_output_file
 rm $indegx_output_file
 rm $crawling_output_file
 rm $europa_output_file
+if [ -e $previous_catalog_output_file ]; then
+    rm $previous_catalog_output_file
+fi
 rm $tmp_raw_init_catalog_file
 rm $final_raw_file
