@@ -13,7 +13,7 @@ CONSTRUCT {
         dcat:endpointURL ?e ;
         sd:endpoint ?e ;
         schema:serverStatus ?status ;
-        schema:dateModified ?maxTime ;
+        schema:dateModified ?testedTime ;
         dcterms:available ?maxTime ;
         pav:sourceAccessedOn ?minTime ;
         pav:sourceLastAccessedOn ?maxTime .
@@ -27,14 +27,11 @@ CONSTRUCT {
     
     OPTIONAL {
         {
-            SELECT ?e ?minTime
-            WHERE {
-                VALUES ?timeProperty { schema:dateModified dcterms:available pav:sourceAccessedOn pav:sourceLastAccessedOn }
+            SELECT ?e ?minTime {
+                VALUES ?timeProperty { dcterms:available pav:sourceAccessedOn pav:sourceLastAccessedOn }
                 VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
-                ?s a sd:Service ;
-                    ?endpointProperty ?e ;
-                    ?timeProperty ?minTime ;
-                    schema:serverStatus schema:Online .
+                ?s ?endpointProperty ?e ;
+                    ?timeProperty ?minTime .
                 FILTER( NOT EXISTS { 
                     ?s ?endpointProperty ?e ;
                         ?timeProperty ?time . 
@@ -45,16 +42,31 @@ CONSTRUCT {
     }
     OPTIONAL {
         {
-            SELECT ?e (MAX(?time) AS ?maxTime)
-            WHERE {
+            SELECT ?e ?maxTime {
                 VALUES ?timeProperty { schema:dateModified dcterms:available pav:sourceAccessedOn pav:sourceLastAccessedOn }
                 VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
                 ?s ?endpointProperty ?e ;
-                    ?timeProperty ?maxTime .
+                    ?timeProperty ?maxTime ;
+                    schema:serverStatus schema:Online .
                 FILTER( NOT EXISTS { 
                     ?s ?endpointProperty ?e ;
                         ?timeProperty ?time . 
                     FILTER( ?time > ?maxTime )
+                } )
+            }
+        }
+    }
+    OPTIONAL {
+        {
+            SELECT ?e ?testedTime {
+                VALUES ?timeProperty { schema:dateModified }
+                VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                ?s ?endpointProperty ?e ;
+                    ?timeProperty ?testedTime .
+                FILTER( NOT EXISTS { 
+                    ?s ?endpointProperty ?e ;
+                        ?timeProperty ?time . 
+                    FILTER( ?time > ?testedTime )
                 } )
             }
         }

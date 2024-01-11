@@ -3,6 +3,7 @@ PREFIX schema: <https://schema.org/>
 PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX pav: <http://purl.org/pav/>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 
 CONSTRUCT {
@@ -12,8 +13,7 @@ CONSTRUCT {
         dcat:endpointURL ?e ;
         sd:endpoint ?e ;
         schema:serverStatus ?status ;
-        schema:dateModified ?time ;
-        dcterms:available ?time .
+        schema:dateModified ?time .
 }
 {
     BIND(NOW() AS ?time)

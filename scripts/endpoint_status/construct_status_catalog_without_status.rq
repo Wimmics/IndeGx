@@ -1,0 +1,30 @@
+PREFIX schema: <https://schema.org/> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+
+CONSTRUCT {
+    kgi:catalog a dcat:Catalog ;
+        dcat:service ?dataset .
+    ?dataset a sd:Service , dcat:DataService ;
+        dcat:endpointURL ?e ;
+        sd:endpoint ?e ;
+        schema:dateModified ?modifiedTime ;
+        dcterms:available ?time ;
+        pav:sourceAccessedOn ?time ;
+        pav:sourceLastAccessedOn ?time .
+}
+{
+    VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+    VALUES ?accessedTimeProperty { dcterms:available pav:sourceAccessedOn pav:sourceLastAccessedOn }
+
+    ?s ?endpointProperty ?e ;
+        schema:dateModified ?modifiedTime ;
+        ?accessedTimeProperty ?time ;
+        schema:serverStatus ?status .
+    
+    BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( STR( ?e ) ) ) ) AS ?dataset )
+}
