@@ -100,8 +100,6 @@ rm $tmp_query_file
 rm $tmp_json_yummy_file
 rm $tmp_ttl_yummy_file
 
-# <https://linkedwiki.com> 
-
 # <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> 
 echo "Treating remote IndeGx file"
 indegx_file=https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl
