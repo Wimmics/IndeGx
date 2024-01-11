@@ -29,6 +29,8 @@ CONSTRUCT {
         {
             SELECT ?e ?minTime
             WHERE {
+                VALUES ?timeProperty { schema:dateModified dcterms:available pav:sourceAccessedOn pav:sourceLastAccessedOn }
+                VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
                 ?s a sd:Service ;
                     ?endpointProperty ?e ;
                     ?timeProperty ?minTime ;
@@ -45,6 +47,8 @@ CONSTRUCT {
         {
             SELECT ?e (MAX(?time) AS ?maxTime)
             WHERE {
+                VALUES ?timeProperty { schema:dateModified dcterms:available pav:sourceAccessedOn pav:sourceLastAccessedOn }
+                VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
                 ?s ?endpointProperty ?e ;
                     ?timeProperty ?maxTime .
                 FILTER( NOT EXISTS { 
