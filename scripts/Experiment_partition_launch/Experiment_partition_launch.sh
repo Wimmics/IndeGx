@@ -1,9 +1,30 @@
 #!/bin/bash
 
+corese_version=4.5.0
+corese_jar=corese-command-$corese_version.jar
+
+# Download corese if not already present
+if [ ! -e $corese_jar ]; then
+    wget -q https://github.com/Wimmics/corese/releases/download/release-$corese_version/$corese_jar
+fi
+
+online_status_source_catalog_url=https://raw.githubusercontent.com/Wimmics/IndeGx/endpoint_status/catalogs/catalog.latest-status.ttl
+online_endpoint_catalog_query=online_endpoint_catalog_query.rq
+online_endpoint_catalog_file=online_endpoint_catalog.trig
+
+# Extract a catalog of the endpoint that have been online in the last hour
+java -jar $corese_jar sparql -i $online_status_source_catalog_url -o $online_endpoint_catalog_file -q $online_endpoint_catalog_query -of trig
+
+mv $online_endpoint_catalog_file ../../catalogs/$online_endpoint_catalog_file
+
+# Partitioning the online catalog to bit size
+cd ../catalog_partitioner
+./script.sh ../../catalogs/$online_endpoint_catalog_file 20
+
 cd ../..
 
-for catalog in `ls catalogs/ | grep all_catalog_partition_*`; do
-    echo $catalog
+for catalog in `ls catalogs/ | grep *-partition_*`; do
+    echo "Treating $catalog"
     partition_config='{
     "pre": "file:///rules/Dataset_summary/_pre_manifest.ttl",
     "manifest": "file:///rules/Dataset_summary/_manifest.ttl",
@@ -22,5 +43,9 @@ for catalog in `ls catalogs/ | grep all_catalog_partition_*`; do
     partition_config_filename="config/config_$catalog.json"
     echo $partition_config | sed -e s/CATALOG/$catalog/g > $partition_config_filename
     ./run.sh -c /$partition_config_filename
+
+    rm $partition_config_filename
+    rm $catalog
 done
 
+rm catalogs/$online_endpoint_catalog_file
