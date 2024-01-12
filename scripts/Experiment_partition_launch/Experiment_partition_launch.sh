@@ -15,15 +15,16 @@ online_endpoint_catalog_file=online_endpoint_catalog.trig
 # Extract a catalog of the endpoint that have been online in the last hour
 java -jar $corese_jar sparql -i $online_status_source_catalog_url -o $online_endpoint_catalog_file -q $online_endpoint_catalog_query -of trig
 
-mv $online_endpoint_catalog_file ../../catalogs/$online_endpoint_catalog_file
+cp $online_endpoint_catalog_file ../../catalogs/$online_endpoint_catalog_file
 
 # Partitioning the online catalog to bit size
 cd ../catalog_partitioner
 ./script.sh ../../catalogs/$online_endpoint_catalog_file 20
+rm ../../catalogs/$online_endpoint_catalog_file
 
 cd ../..
 
-for catalog in `ls catalogs/ | grep *-partition_*`; do
+for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     echo "Treating $catalog"
     partition_config='{
     "pre": "file:///rules/Dataset_summary/_pre_manifest.ttl",
