@@ -51,7 +51,7 @@
         "build": "npx tsc",
         "run": "node src/Indegx.js",
         "devrun": "npm run build && npm run run",
-        "clean": "rm -rf src/*.js src/*.js.map src/*.d.ts",
+        "clean": "rm -rf src/*.js src/*.js.map src/*.d.ts *.log",
         "deepclean": "npm run clean && rm -rf node_modules package-lock.json"
     }
 }

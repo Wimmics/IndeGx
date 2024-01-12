@@ -1,0 +1,17 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX pav: <http://purl.org/pav/>
+
+CONSTRUCT { 
+    ?dataset pav:importedFrom <SOURCE> ;
+        dcat:endpointURL ?sparql .
+} WHERE {
+    ?Endpoint wdt:P35 wd:Q3287501;
+        wdt:P445 ?URL .
+    BIND(IRI(STR(?URL)) as ?sparql)
+    BIND (IRI(CONCAT(STR(kgi:), ENCODE_FOR_URI(STR(?sparql)))) AS ?dataset)
+}
