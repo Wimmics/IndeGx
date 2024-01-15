@@ -20,6 +20,7 @@ kgi:catalog a dcat:Catalog ;
         [ void:sparqlEndpoint <https://data.nobelprize.org/sparql> ],
         [ void:sparqlEndpoint <https://data.wu.ac.at/sparql/> ],
         [ void:sparqlEndpoint <https://db.project-hobbit.eu/sparql> ],
+        [ void:sparqlEndpoint <http://erebe-vm2.i3s.unice.fr:5000/sparql> ],
         [ void:sparqlEndpoint <https://forum.semantic-metabolomics.fr/sparql> ],
         [ void:sparqlEndpoint <https://fuseki.kupferdigital.org/demonstrator/sparql> ],
         [ void:sparqlEndpoint <http://id.nlm.nih.gov/mesh/sparql> ],
@@ -46,3 +47,4 @@ kgi:catalog a dcat:Catalog ;
         [ void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> ],
         [ void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql> ],
         [ void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> ] .
+    
