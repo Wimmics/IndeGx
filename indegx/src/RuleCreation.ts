@@ -1,5 +1,5 @@
 import { Manifest, ManifestEntry, Test, Action, Asset } from "./RuleTree.js"
-import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI, urlIsAbsolute, sanitizeUrl } from "./RDFUtils.js";
+import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI, urlIsWellFormed, sanitizeUrl } from "./RDFUtils.js";
 import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 import duration from 'dayjs/plugin/duration.js';

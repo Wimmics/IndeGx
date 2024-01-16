@@ -34,25 +34,48 @@ export function urlToBaseURI(url: string) {
     return baseURI;
 }
 
-export function urlIsAbsolute(url: string) {
-    var regex = new RegExp('^(?:[a-z+]+:)?//', 'i');
-    return regex.test(url);
+/**
+ * 
+ * @param url URL to check
+ * @returns true is the URL is well formed according to the RFC 3986 (plus the forbidding of whitespace characters in the URI), false otherwise
+ */
+export function urlIsWellFormed(url: string) {
+    const wellformedURIRegex = new RegExp("^(([^:/?#\s]+):)(\/\/([^/?#\s]*))?([^?#\s]*)(\?([^#\s]*))?(#(.*))?", "i");
+    return wellformedURIRegex.test(url);
 }
 
+/**
+ * 
+ * @param url URL to sanitize
+ * @param baseURI Base URI used for the sanitization
+ * @param filename Filename of the dataset from which the URL comes from
+ * @returns string The sanitized URL
+ */
 export function sanitizeUrl(url: string, baseURI: string, filename?: string): string {
     let result = url;
+    
+    // URL is empty, we return the filename or the base URI
     if(url.localeCompare("") == 0) {
-        result = filename;
+        if(filename != null && filename != undefined && filename != "") {
+            result = filename;
+        } else {
+            result = baseURI;
+        }
     }
-    if(! urlIsAbsolute(result)) { 
+
+    // Make any non-well-formed URI to start with https or the base URI and encode the forbidden characters in it
+    if(! urlIsWellFormed(result)) {
         if(filename != null && filename != undefined && filename != "") {
             result = resolve(filename, result);
         } else {
-            result = resolve(baseURI, result);
+            const httpsScheme = "https://";
+            let httpResult = resolve( httpsScheme, result);
+            if( urlIsWellFormed(httpResult) ) { // The url whas missing a scheme, we add https://
+                result = httpResult;
+            } else {
+                result = resolve(baseURI, encodeURIComponent(result)); // The url is malformed in an original way, we add it to the base URI
+            }
         }
-    }
-    if (!(result.startsWith("http://") || result.startsWith("https://") || result.startsWith("file://"))) {
-        result = "file://" + result;
     }
 
     return result;
