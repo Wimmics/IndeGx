@@ -19,14 +19,14 @@ kgi:DocumentedEndpoint a owl:Class ;
 <https://www.dbpedia.org/sparql/> a TargetedEndpoint .
 <https://targ.et/sparql/> a TargetedEndpoint .
 # ...
-
+# In IndeGx V2, the endpoint are declared as object of dcat:endpointURL (and other equivalent properties)
 
 # Define the ontological conditions as rules / the tests
-INSERT { GRAPH ?graphname {?endpoint kgi:passedTest <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResource.ttl> . } } # Endpoint contains a description
+INSERT { GRAPH ?graphname {?endpoint kgi:passedTest <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResource.ttl> . } } # Endpoint contains a description linked to its URL
 WHERE
 {
    ?endpoint a TargetedEndpoint .
-   OPTIONAL { SERVICE ?endpoint { ?res sd:endpoint ?endpoint .  } }
+   OPTIONAL { SERVICE ?endpoint { ?res sd:endpoint ?endpoint .  } } # Looking for a description linked to the endpoint URL
    BIND ( IF(bound(?res), kgi:DocumentedEndpoint, kgi:UndocumentedEndpoint) AS ?type )
    BIND ( CONCAT(?endpoint,"-metadata-graph") AS ?graphname)
 }
@@ -47,14 +47,14 @@ WHERE { GRAPH ?graphname { ?endpoint a kgi:DocumentedEndpoint } }
 # Exemple of a test triggered by another
 
 kgi:UndirectlyDocumentedEndpoint a owl:Class ;
-   rdfs:subClassOf kgi:UndocumentedEndpoint ;
+   rdfs:subClassOf kgi:UndocumentedEndpoint ; # Endpoint does not contain a description linked to its URL
    owl:equivalentClass
       [ a owl:Restriction ;
           owl:onProperty kgi:passedTest ;
-          owl:hasValue <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResourceLocalhost.ttl> ] .
+          owl:hasValue <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResourceLocalhost.ttl> ] . # but the endpoint contains a description linked to a localhost URL
 
 
-kgi:UndirectlyUndocumentedEndpoint a owl:Class ;
+kgi:UndirectlyUndocumentedEndpoint a owl:Class ; # Endpoint does not contain any description linked to its URL or to a localhost URL
    rdfs:subClassOf kgi:UndocumentedEndpoint ;
    owl:equivalentClass
       [ a owl:Restriction ;
