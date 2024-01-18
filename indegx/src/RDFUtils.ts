@@ -28,7 +28,7 @@ export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 
 export const rdfTypeProperty = RDF("type");
 
-const charactersThatAreNotSafeInURI = /[^\w\-\.!~\*'()?:;/=\[\]+@&$,%#~]+/
+const charactersThatAreNotSafeInURI = /[^\w\-\.!~\*'()?:;/=\[\]+@&$,%#~{}]+/
 
 export function urlToBaseURI(url: string) {
     let baseURI = url.replace(/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gmu, "");
