@@ -1,5 +1,5 @@
 import { Manifest, ManifestEntry, Test, Action, Asset } from "./RuleTree.js"
-import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI, urlIsWellFormed, sanitizeUrl } from "./RDFUtils.js";
+import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI, uriIsWellFormed, sanitizeURI } from "./RDFUtils.js";
 import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 import duration from 'dayjs/plugin/duration.js';
@@ -95,7 +95,7 @@ export function resourceIsAction(resource: $rdf.Node, store: $rdf.Store): boolea
     */
 function readManifest(manifestFilename: string, store: $rdf.Store, postPromiseCreationPool: Promise<void>[]): Promise<Manifest> {
     let baseURI = urlToBaseURI(manifestFilename);
-    let manifestURI = sanitizeUrl(manifestFilename, baseURI, manifestFilename);
+    let manifestURI = sanitizeURI(manifestFilename, baseURI, manifestFilename);
     let promiseCreationPool: Promise<void>[] = [];
 
     if (AssetTracker.getInstance().hasAsset(manifestURI)) {

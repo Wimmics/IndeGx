@@ -28,6 +28,8 @@ export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 
 export const rdfTypeProperty = RDF("type");
 
+const charactersThatAreNotSafeInURI = /[^\w\-\.!~\*'()?:;/=\[\]+@&$,%#~]+/
+
 export function urlToBaseURI(url: string) {
     let baseURI = url.replace(/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gmu, "");
     baseURI = baseURI.substring(0, baseURI.lastIndexOf("/") + 1);
@@ -39,28 +41,28 @@ export function urlToBaseURI(url: string) {
  * @param url URL to check
  * @returns true is the URL is well formed according to the RFC 3986 (plus the forbidding of whitespace characters in the URI), false otherwise
  */
-export function urlIsWellFormed(url: string) {
+export function uriIsWellFormed(url: string) {
     const wellformedURIRegex = /^(([^:/?#\s]+):)(\/\/([^/?#\s]*))?([^?#\s]*)(\?([^#\s]*))?(#(.*))?/gmu;
-    return wellformedURIRegex.test(url);
+    return wellformedURIRegex.test(url) && !charactersThatAreNotSafeInURI.test(url);
 }
 
 /**
  * 
- * @param url URL to sanitize
+ * @param uri URL to sanitize
  * @param baseURI Base URI used for the sanitization
  * @param filename Filename of the dataset from which the URL comes from
  * @returns string The sanitized URL
  */
-export function sanitizeUrl(url: string, baseURI: string, filename?: string): string {
-    let result = url;
+export function sanitizeURI(uri: string, baseURI: string, filename?: string): string {
+    let result = uri;
     const filenamePresent = filename != null && filename != undefined && filename != "";
 
-    if (filenamePresent && !urlIsWellFormed(filename)) {
+    if (filenamePresent && !uriIsWellFormed(filename)) {
         filename = "file://" + filename;
     }
 
     // URL is empty, we return the filename or the base URI
-    if (url.localeCompare("") == 0) {
+    if (uri.localeCompare("") == 0) {
         if (filenamePresent) {
             result = filename;
         } else {
@@ -69,16 +71,22 @@ export function sanitizeUrl(url: string, baseURI: string, filename?: string): st
     }
 
     // Make any non-well-formed URI to start with https or the base URI and encode the forbidden characters in it
-    if (!urlIsWellFormed(result)) {
+    if (!uriIsWellFormed(result)) {
         if (filenamePresent) {
             result = resolve(filename, result);
         } else {
             const httpsScheme = "https://";
             let httpResult = resolve(httpsScheme, result);
-            if (urlIsWellFormed(httpResult)) { // The url whas missing a scheme, we add https://
+            if (uriIsWellFormed(httpResult)) { // The url whas missing a scheme, we add https://
                 result = httpResult;
             } else {
-                result = resolve(baseURI, encodeURIComponent(result)); // The url is malformed in an original way, encode it and we add it to the base URI
+                result.match(charactersThatAreNotSafeInURI)?.forEach(match => { // The url is malformed in an original way, encode every part that contains unsafe characters
+                    result = result.replaceAll(match, encodeURIComponent(match));
+                }); 
+                if(!uriIsWellFormed(result)) {
+                    result = resolve(baseURI, result); // The url is still malformed, we try to fix it with the base URI
+                }
+                return result;
             }
         }
     }
@@ -86,6 +94,19 @@ export function sanitizeUrl(url: string, baseURI: string, filename?: string): st
     return result;
 }
 
+/**
+ * Error list:
+ * - Blank nodes with nodeID:// prefix
+ * - Blank nodes with genid- prefix
+ * - Blank nodes with b or node prefix and without ":"
+ * - Property URIs that appear in Turtle returned by Corese when they have two ":". Should be fixed in Corese >4.4.1
+ * - Malformed prefixed URIs that contain slashes by removing everything after the first slash
+ * - Non-URI-encoded unicode characters 
+ * - Unicode characters in \u1111 format
+ * 
+ * @param ttlString Turtle string to fix
+ * @returns 
+ */
 export function fixCommonTurtleStringErrors(ttlString: string): string {
     if (ttlString == null || ttlString == undefined) {
         throw new Error("Invalid turtle string " + ttlString);
@@ -102,7 +123,10 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
         result = result.replaceAll(betterRegexNodeB, betterRegexNodeBReplacement); // Dirty hack to fix blank nodes with b or node prefix and without ":"
         result = result.replaceAll(regexURIWithoutBracketsRegex, regexURIWithoutBracketsReplacement); // Dirty hack ot remove property URIs that appear in Turtle returned by Corese when they have two ":". Should be fixed in Corese >4.4.1
         result = result.replaceAll(prefixedURIwithSlashesRegex, prefixedURIwithSlashesRegexReplacement) // Very dirty hack: Edit malformed prefixed URIs that contain slashes by removing everything after the first slash
-        result = Global.replaceUnicode(result);
+        result = Global.replaceUnicode(result); // Replace unicode characters in \u1111 format by their URI encoded version
+        result.match(charactersThatAreNotSafeInURI)?.forEach(match => { // Replace any non-encoded character in the file by its URL encoded version
+            result = result.replaceAll(match, encodeURIComponent(match));
+        }); 
         return result;
     }
 }
@@ -158,7 +182,7 @@ function getGraphyReadingFunction(contentType: FileContentType) {
 function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI: string, filename?: string) {
 
     if (filename != null && filename != undefined && filename != "") {
-        if (!urlIsWellFormed(filename)) {
+        if (!uriIsWellFormed(filename)) {
             filename = "file://" + filename;
         }
     }
@@ -183,7 +207,7 @@ function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI: strin
         let s = undefined;
         try {
             if (y_quad.subject.termType === "NamedNode") {
-                s = $rdf.sym(sanitizeUrl(y_quad.subject.value, baseURI, filename));
+                s = $rdf.sym(sanitizeURI(y_quad.subject.value, baseURI, filename));
             } else if (y_quad.subject.termType === "Literal") {
                 if (y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
                     s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
@@ -202,7 +226,7 @@ function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI: strin
         let o = undefined;
         try {
             if (y_quad.object.termType === "NamedNode") {
-                o = $rdf.sym(sanitizeUrl(y_quad.object.value, baseURI, filename));
+                o = $rdf.sym(sanitizeURI(y_quad.object.value, baseURI, filename));
             } else if (y_quad.object.termType === "Literal") {
                 if (y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
                     o = $rdf.lit(y_quad.object.value, y_quad.object.language)
@@ -298,7 +322,6 @@ export function serializeStoreToTurtlePromise(store: $rdf.Store, baseURI?: strin
                 if (err != null) {
                     reject(err);
                 }
-                // str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, { namespaces: store.namespaces });
         } catch (error) {
@@ -314,7 +337,6 @@ export function serializeStoreToNTriplesPromise(store: $rdf.Store, baseURI?: str
                 if (err != null) {
                     reject(err);
                 }
-                // str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, {
                 // flags: 'deinprstux', // r: Flag to escape /u unicode characters, t: flag to replace rdf:type by "a", d: flag to use the default namespace for unqualified terms with prefix ":"
@@ -333,7 +355,6 @@ export function serializeStoreToTriGPromise(store: $rdf.Store, baseURI?: string)
                 if (err != null) {
                     reject(err);
                 }
-                // str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, { namespaces: store.namespaces });
         } catch (error) {
@@ -349,7 +370,6 @@ export function serializeStoreToQuadsPromise(store: $rdf.Store, baseURI?: string
                 if (err != null) {
                     reject(err);
                 }
-                // str = Global.unicodeToUrlendcode(str)
                 accept(str)
             }, { namespaces: store.namespaces });
         } catch (error) {
