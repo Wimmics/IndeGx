@@ -1,0 +1,65 @@
+
+# Define the ontological primitives
+kgi:TargetedEndpoint a owl:Class ;
+   rdfs:subClassOf kgi:Endpoint .
+
+kgi:DocumentedEndpoint a owl:Class ;
+   rdfs:subClassOf kgi:Endpoint ;
+   owl:intersectionOf
+   ( [ owl:complementOf kgi:UndocumentedEndpoint ]
+     kgi:Endpoint) ;
+   owl:equivalentClass
+   [ a owl:Restriction ;
+          owl:onProperty kgi:passedTest ;
+          owl:hasValue <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResource.ttl> ] .
+
+
+# Declare the targetted endpoints
+
+<https://www.dbpedia.org/sparql/> a TargetedEndpoint .
+<https://targ.et/sparql/> a TargetedEndpoint .
+# ...
+
+
+# Define the ontological conditions as rules / the tests
+INSERT { GRAPH ?graphname {?endpoint kgi:passedTest <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResource.ttl> . } } # Endpoint contains a description
+WHERE
+{
+   ?endpoint a TargetedEndpoint .
+   OPTIONAL { SERVICE ?endpoint { ?res sd:endpoint ?endpoint .  } }
+   BIND ( IF(bound(?res), kgi:DocumentedEndpoint, kgi:UndocumentedEndpoint) AS ?type )
+   BIND ( CONCAT(?endpoint,"-metadata-graph") AS ?graphname)
+}
+
+
+# Additional rules for metadata building if test succeeds using typing
+INSERT { GRAPH ?graphname {?res sd:endpoint ?endpoint ; ?p ?v . } }
+WHERE
+{  GRAPH ?graphname { ?endpoint a kgi:DocumentedEndpoint }.
+   SERVICE ?endpoint { ?res sd:endpoint ?endpoint ; ?p ?v .  } }
+
+
+# Additional rules for provenance
+INSERT { GRAPH ?graphname { ?graphname prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResource.ttl> } }
+WHERE { GRAPH ?graphname { ?endpoint a kgi:DocumentedEndpoint } }
+
+
+# Exemple of a test triggered by another
+
+kgi:UndirectlyDocumentedEndpoint a owl:Class ;
+   rdfs:subClassOf kgi:UndocumentedEndpoint ;
+   owl:equivalentClass
+      [ a owl:Restriction ;
+          owl:onProperty kgi:passedTest ;
+          owl:hasValue <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResourceLocalhost.ttl> ] .
+
+
+kgi:UndirectlyUndocumentedEndpoint a owl:Class ;
+   rdfs:subClassOf kgi:UndocumentedEndpoint ;
+   owl:equivalentClass
+      [ a owl:Restriction ;
+          owl:onProperty kgi:failedTest ;
+          owl:hasValue <https://raw.githubusercontent.com/Wimmics/dekalog/master/rules/extraction/endpointDescResourceLocalhost.ttl> ] .
+
+ [] a     owl:AllDisjointClasses ;
+    owl:members  ( kgi:UndirectlyDocumentedEndpoint kgi:UndirectlyUndocumentedEndpoint ) .
