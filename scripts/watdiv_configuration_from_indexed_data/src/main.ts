@@ -5,7 +5,7 @@ import * as Logger from "./LogUtils.js"
 import * as Global from "./GlobalUtils.js"
 
 import * as csv from 'csv-parse/sync';
-import { ADMS, CC, DATAID, DCAT, DCE, DCMITYPE, DCT, DOAP, DQV, FOAF, NIE, OWL, PAV, PROV, RDFS, SCHEMA, SD, SKOS, STO, VOID, XHV } from './RDFUtils.js';
+import { ADMS, BIBO, CC, DATAID, DCAT, DCE, DCMITYPE, DCT, DOAP, DQV, FOAF, NIE, OWL, PAV, PROV, RDF, RDFS, SCHEMA, SD, SKOS, STO, VCARD, VOAF, VOID, VOIDEXT, XHV, XSD } from './RDFUtils.js';
 
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
@@ -75,7 +75,37 @@ type LiteralPropertyData = {
 
 let classCardinality: Map<string, number> = new Map();
 let namespacePrefixMap: Map<string, string> = new Map();
-const totalNumberOfDataset = 2615;
+const totalNumberOfDataset = 1651;
+
+const knownVocabularies = [
+    ADMS, 
+    BIBO,
+    CC, 
+    DATAID, 
+    DCAT, 
+    DCE, 
+    DCMITYPE, 
+    DCT, 
+    DOAP, 
+    DQV, 
+    FOAF, 
+    NIE, 
+    OWL, 
+    PAV, 
+    PROV, 
+    RDF,
+    RDFS, 
+    SCHEMA, 
+    SD, 
+    SKOS, 
+    STO, 
+    VCARD,
+    VOAF,
+    VOID, 
+    VOIDEXT,
+    XHV,
+    XSD
+]
 
 const excludedClasses = [
     OWL('Class').value,
@@ -377,6 +407,8 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
             average: parseFloat(row.avgCount),
             nbDataset: parseInt(row.countDataset),
         }
+    }).filter((entityData: EntityDeclarationData) => {
+        return knownVocabularies.some((vocabFn) => entityData.class.includes(vocabFn("").value))
     })
 
     entityDataset = entityDataset.filter((row: any) => {
@@ -413,6 +445,14 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
                 average: parseFloat(row.averageAll),
                 nbDataset: parseInt(row.countAllDataset),
             }
+        }).filter((nonLiteralPropertyData: NonLiteralPropertyData) => {
+            return knownVocabularies.some((vocabFn) => 
+                nonLiteralPropertyData.class.includes(vocabFn("").value) 
+                // && nonLiteralPropertyData.objectClass.includes(vocabFn("").value)
+                ) 
+                && allEquivalentProperties.some((property) => 
+                    nonLiteralPropertyData.property.includes(property)
+                )
         })
 
         nonLiteralPropertyDataset = nonLiteralPropertyDataset.sort((a: any, b: any) => {
@@ -441,6 +481,12 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
                     maxValue: parseFloat(row.maxValueAll),
                     nbDataset: parseInt(row.countAllDataset),
                 }
+            }).filter((literalPropertyData: LiteralPropertyData) => {
+                return knownVocabularies.some((vocabFn) => 
+                    literalPropertyData.class.includes(vocabFn("").value)) && 
+                    allEquivalentProperties.some((property) => 
+                        literalPropertyData.property.includes(property)
+                    )
             })
 
             literalPropertyDataset = literalPropertyDataset.sort((a: any, b: any) => {

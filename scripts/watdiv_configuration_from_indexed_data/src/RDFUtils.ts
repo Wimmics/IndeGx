@@ -7,34 +7,38 @@ import nq_read from "@graphy/content.nq.read";
 import trig_read from "@graphy/content.trig.read";
 import {resolve } from "url";
 
-export const VOID = $rdf.Namespace("http://rdfs.org/ns/void#");
-export const XSD = $rdf.Namespace("http://www.w3.org/2001/XMLSchema#");
-export const DCAT = $rdf.Namespace("http://www.w3.org/ns/dcat#");
-export const PROV = $rdf.Namespace("http://www.w3.org/ns/prov#");
-export const SD = $rdf.Namespace("http://www.w3.org/ns/sparql-service-description#");
-export const DCT = $rdf.Namespace("http://purl.org/dc/terms/");
-export const PAV = $rdf.Namespace("http://purl.org/pav/");
-export const RDF = $rdf.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-export const RDFS = $rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#");
-export const OWL = $rdf.Namespace("http://www.w3.org/2002/07/owl#");
-export const FOAF = $rdf.Namespace("http://xmlns.com/foaf/0.1/");
-export const SCHEMA = $rdf.Namespace("http://schema.org/");
-export const DCE = $rdf.Namespace("http://purl.org/dc/elements/1.1/");
-export const SKOS = $rdf.Namespace("http://www.w3.org/2004/02/skos/core#");
-export const MOD = $rdf.Namespace("https://w3id.org/mod#");
 export const EARL = $rdf.Namespace("http://www.w3.org/ns/earl#");
 export const MANIFEST = $rdf.Namespace("http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#");
 export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 
-export const DQV = $rdf.Namespace("http://www.w3.org/ns/dqv#");
 export const ADMS = $rdf.Namespace("http://www.w3.org/ns/adms#");
-export const DATAID = $rdf.Namespace("http://dataid.dbpedia.org/ns/core#");
-export const DOAP = $rdf.Namespace("http://usefulinc.com/ns/doap#")
+export const BIBO = $rdf.Namespace("http://purl.org/ontology/bibo/");
 export const CC = $rdf.Namespace("http://creativecommons.org/ns#");
-export const XHV = $rdf.Namespace("http://www.w3.org/1999/xhtml/vocab#");
-export const STO = $rdf.Namespace("https://w3id.org/i40/sto#");
-export const NIE = $rdf.Namespace("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#")
+export const DATAID = $rdf.Namespace("http://dataid.dbpedia.org/ns/core#");
+export const DCAT = $rdf.Namespace("http://www.w3.org/ns/dcat#");
+export const DCE = $rdf.Namespace("http://purl.org/dc/elements/1.1/");
 export const DCMITYPE = $rdf.Namespace("http://purl.org/dc/dcmitype/");
+export const DCT = $rdf.Namespace("http://purl.org/dc/terms/");
+export const DOAP = $rdf.Namespace("http://usefulinc.com/ns/doap#")
+export const DQV = $rdf.Namespace("http://www.w3.org/ns/dqv#");
+export const FOAF = $rdf.Namespace("http://xmlns.com/foaf/0.1/");
+export const MOD = $rdf.Namespace("https://w3id.org/mod#");
+export const NIE = $rdf.Namespace("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#")
+export const OWL = $rdf.Namespace("http://www.w3.org/2002/07/owl#");
+export const PAV = $rdf.Namespace("http://purl.org/pav/");
+export const PROV = $rdf.Namespace("http://www.w3.org/ns/prov#");
+export const RDF = $rdf.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+export const RDFS = $rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#");
+export const SCHEMA = $rdf.Namespace("http://schema.org/");
+export const SD = $rdf.Namespace("http://www.w3.org/ns/sparql-service-description#");
+export const SKOS = $rdf.Namespace("http://www.w3.org/2004/02/skos/core#");
+export const STO = $rdf.Namespace("https://w3id.org/i40/sto#");
+export const VCARD = $rdf.Namespace("http://www.w3.org/2006/vcard/ns#");
+export const VOAF = $rdf.Namespace("http://purl.org/vocommons/voaf#");
+export const VOID = $rdf.Namespace("http://rdfs.org/ns/void#");
+export const VOIDEXT = $rdf.Namespace("http://purl.org/query/voidext#");
+export const XHV = $rdf.Namespace("http://www.w3.org/1999/xhtml/vocab#");
+export const XSD = $rdf.Namespace("http://www.w3.org/2001/XMLSchema#");
 
 export const rdfTypeProperty = RDF("type");
 
