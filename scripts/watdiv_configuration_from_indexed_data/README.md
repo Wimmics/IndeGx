@@ -1,7 +1,7 @@
 # Generation of a WATdiv configuration file from statistics extracted from dataset descriptions
 
 This script generates a WATdiv configuration file from statistics extracted from dataset descriptions.
-The configuration will generate a dataset description that will be used to describe the dataset of a fictive shop in the setting of FedShop. Each shop will correspond to one dataset. Each dataset will be described by a description containing information about the shop in the same proportion as the descriptions found in online datasets.
+The configuration will generate a dataset description that will be used to describe the dataset of a fictive shop in the setting of FedShop. Each shop will correspond to one dataset. Each dataset will be described by a description containing information about the shop with properties appearing in the same proportion as the descriptions found in online datasets.
 
 ## Limitations set on the dataset description
 The classes and properties will be limited to those that are both:
@@ -11,6 +11,8 @@ The classes and properties will be limited to those that are both:
 As watdiv do not make it possible to define entities that are instances of several classes, we will only declare one instance of dcat:Dataset at the root of the dataset description. dcat:Dataset is the most often used class to type the resource describing a dataset. Properties appearing around other Dataset classes have their number of apparition added to the dcat:Dataset.
 
 ## Queries used to extract statistics
+
+The data was extracted from 101 endpoints.
 
 ### Number of datasets
 
