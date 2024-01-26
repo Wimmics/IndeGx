@@ -6,7 +6,7 @@ Many Linked Data clients can consume the data directly from [https://raw.githubu
 
 ### How Does It Work
 
-There is [this git action](.github/workflows/main.yml) which invokes the following process every hour.
+There is [this git action](.github/workflows/catalog_status_action.yml) which invokes the following process every hour.
 
 The script [script.sh](script.sh) first downloads [the latest automatic catalog of endpoints updated daily](https://github.com/Wimmics/IndeGx/blob/endpoint_status/scripts/auto_catalog_refresh/README.md), and then runs the SPARQL query in [status-check.rq](status-check.rq) on each endpoint URL.
 
