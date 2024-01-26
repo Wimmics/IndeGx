@@ -6,8 +6,8 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 
 kgi:catalog a dcat:Catalog ;
-    dcterms:title "Catalog from metadatamatic submissions and google crawling" ;
-    pav:lastUpdateOn "2023-11-08T15:26:13.462000+01:00"^^xsd:dateTime ;
+    dcterms:title "Catalog from metadatamatic submissions, google crawling, manual searchs and reports on X" ;
+    pav:lastUpdateOn "2024-01-26T11:26:13.462000+01:00"^^xsd:dateTime ;
     dcat:dataset 
         [ void:sparqlEndpoint <http://193.190.127.165:7200/repositories/ERA-KG-latest> ],
         [ void:sparqlEndpoint <https://bio2rdf.org/sparql> ],
@@ -38,6 +38,7 @@ kgi:catalog a dcat:Catalog ;
         [ void:sparqlEndpoint <https://smt.esante.gouv.fr/sparql> ],
         [ void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> ],
         [ void:sparqlEndpoint <https://taxref.mnhn.fr/sparql> ],
+        [ void:sparqlEndpoint <https://www.thegazette.co.uk/sparql> ],
         [ void:sparqlEndpoint <http://ts.opendata.inrae.fr/sparql> ],
         [ void:sparqlEndpoint <http://virtuoso.plateforme.dipso.inrae.fr/sparql> ],
         [ void:sparqlEndpoint <https://virtuoso.plateforme.dipso.inrae.fr/sparql> ],
