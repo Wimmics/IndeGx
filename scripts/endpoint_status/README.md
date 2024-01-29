@@ -27,6 +27,7 @@ This project uses:
 - [Openlink's list of endpoint](https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl), 
 - [Yummy Data](https://yummydata.org/) 
 - our [general](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl) and our ["serendipity"](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl) catalogs from the [IndeGx](https://github.com/Wimmics/IndeGx) and [Metadatamatic](https://github.com/Wimmics/voidmatic) projects
+
 as sources, which themselves retrieve endpoints from different sources. In this repository, the "[`crawling_catalog.ttl`](https://github.com/Wimmics/IndeGx/blob/main/catalogs/crawling_catalog.ttl)" is used to manually add new endpoints. Please make pull requests to modify this file if you wish to add new endpoints.
 
 #### ... Additional Service Information?
