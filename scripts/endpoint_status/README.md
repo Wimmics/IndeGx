@@ -10,7 +10,7 @@ There is [this git action](.github/workflows/catalog_status_action.yml) which in
 
 The script [script.sh](script.sh) first downloads [the latest automatic catalog of endpoints updated daily](https://github.com/Wimmics/IndeGx/blob/endpoint_status/scripts/auto_catalog_refresh/README.md), and then runs the SPARQL query in [status-check.rq](status-check.rq) on each endpoint URL.
 
-The workflow runner is [corese-command](https://github.com/Wimmics/corese/tree/master#corese-command) which allows us to easily query RDF files, SPARQL endpoints, and to make federated queries.
+The workflow runner is [corese-command](https://github.com/Wimmics/corese/tree/master#corese-command) which allows us to easily query RDF files, and SPARQL endpoints, and to make federated queries.
 
 ### Is Service Monitoring using GitActions Permitted?
 
@@ -26,15 +26,15 @@ This project uses:
 - [Linked Open Data](https://query.linkedopendata.eu/sparql), 
 - [Openlink's list of endpoint](https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl), 
 - [Yummy Data](https://yummydata.org/) 
-- our [general](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl) and our ["seredenpidity"](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl) catalogs from the [IndeGx](https://github.com/Wimmics/IndeGx) and [Metadatamatic](https://github.com/Wimmics/voidmatic) projects
+- our [general](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl) and our ["serendipity"](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl) catalogs from the [IndeGx](https://github.com/Wimmics/IndeGx) and [Metadatamatic](https://github.com/Wimmics/voidmatic) projects
 as sources, which themselves retrieve endpoints from different sources. In this repository, the "[`crawling_catalog.ttl`](https://github.com/Wimmics/IndeGx/blob/main/catalogs/crawling_catalog.ttl)" is used to manually add new endpoints. Please make pull requests to modify this file if you wish to add new endpoints.
 
 #### ... Additional Service Information?
 
-As github has API limits (1000 requests per hour) it may be better to make separate projects for other kind of information, such as void descriptions. Note, that one can use this service status dataset as the basis in order to not waste requests!
+As GitHub has API limits (1000 requests per hour) it may be better to make separate projects for other kinds of information, such as void descriptions. Note, that one can use this service status dataset as the basis in order to not waste requests!
 
 ### Origin
 
-This script and its associated Github actions are inspired of the original [LODservatory](https://github.com/SmartDataAnalytics/lodservatory) by SmartDataAnalytics. It has been redone to use [corese-command](https://github.com/Wimmics/corese/tree/master#corese-command) and the resources of the IndeGx framework.
+This script and its associated Github actions are inspired by the original [LODservatory](https://github.com/SmartDataAnalytics/lodservatory) by SmartDataAnalytics. It has been redone to use [corese-command](https://github.com/Wimmics/corese/tree/master#corese-command) and the resources of the IndeGx framework.
 
 
