@@ -54,35 +54,69 @@ export interface ASKJSONResult extends SPARQLJSONResult {
 export let defaultQueryTimeout = 60000;
 
 export function setDefaultQueryTimeout(timeout: number) {
-    if(timeout != undefined && timeout != null && timeout >= 0) {
+    if (timeout != undefined && timeout != null && timeout >= 0) {
         defaultQueryTimeout = timeout;
     } else {
         throw new Error("Timeout must be a positive number")
     }
 }
 
-export function sparqlQueryPromise(endpoint: string, query: string, baseURI: string, timeout: number = defaultQueryTimeout): Promise<void | $rdf.Store | SPARQLJSONResult> {
-    let jsonHeaders = {};
+export type sparqlQueryPromiseConfig = {
+    timeout?: number,
+    accept?: string
+}
+
+export function sparqlQueryPromise(endpoint: string, query: string, baseURI: string, config: sparqlQueryPromiseConfig = {}): Promise<void | $rdf.Store | SPARQLJSONResult | string> {
+    let httpHeaders = {};
+
+    if (config.accept != undefined) {
+        httpHeaders["accept"] = config.accept;
+    } else {
+        if (isSparqlSelect(query) || isSparqlAsk(query)) {
+            httpHeaders["accept"] = "application/sparql-results+json, application/json";
+        } else if (isSparqlConstruct(query)) {
+            httpHeaders["accept"] = "text/turtle";
+        }
+    }
+    if (config.timeout == undefined) {
+        config.timeout = defaultQueryTimeout;
+    }
+
     if (isSparqlSelect(query)) {
-        jsonHeaders["accept"] = "application/sparql-results+json, application/json";
-        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
-        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => {
-            return (result as SELECTJSONResult)
-        }).catch(error => { 
-            Logger.error(endpoint, query, error); 
-            throw error 
-        })
+        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&timeout=' + config.timeout;
+        if (httpHeaders["accept"] != undefined && httpHeaders["accept"].includes("json")) {
+            return fetchJSONPromise(queryUrl, httpHeaders).then(result => {
+                return (result as SELECTJSONResult)
+            }).catch(error => {
+                Logger.error(endpoint, query, error);
+                throw error
+            })
+        } else {
+            return fetchGETPromise(queryUrl).then(result => {
+                return result;
+            }).catch(error => {
+                Logger.error(endpoint, query, error);
+                throw error;
+            })
+        }
     } else if (isSparqlAsk(query)) {
-        jsonHeaders["accept"] = "application/sparql-results+json, application/json";
-        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + timeout;
-        return fetchJSONPromise(queryUrl, jsonHeaders).then(result => {
-            return (result as ASKJSONResult)
-        }).catch(() => { 
-            return { head: {}, boolean: false } as ASKJSONResult
-        })
+        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&timeout=' + config.timeout;
+        if (httpHeaders["accept"] != undefined && httpHeaders["accept"].includes("json")) {
+            return fetchJSONPromise(queryUrl, httpHeaders).then(result => {
+                return (result as ASKJSONResult)
+            }).catch(() => {
+                return { head: {}, boolean: false } as ASKJSONResult
+            })
+        } else {
+            return fetchGETPromise(queryUrl).then(result => {
+                return result;
+            }).catch(error => {
+                Logger.error(endpoint, query, error);
+                throw error;
+            })
+        }
     } else if (isSparqlConstruct(query)) {
-        jsonHeaders["accept"] = "text/turtle";
-        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=turtle&timeout=' + timeout;
+        const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=turtle&timeout=' + config.timeout;
         return fetchGETPromise(queryUrl).then(result => {
             let resultStore = RDFUtils.createStore();
             result = RDFUtils.fixCommonTurtleStringErrors(result)
@@ -106,7 +140,7 @@ export function sendUpdateQuery(endpoint, updateQuery) {
     return fetchPOSTPromise(endpoint, updateQuery, updateHeader).then(response => {
         return response;
     }).catch(error => {
-        Logger.error("Error send update query",  error);
+        Logger.error("Error send update query", error);
     })
 }
 
@@ -116,9 +150,9 @@ function checkSparqlType(queryString: string, queryType: "CONSTRUCT" | "SELECT" 
         let parsedQuery;
         try {
             parsedQuery = parser.parse(queryString);
-        } catch(parsingError) {
+        } catch (parsingError) {
             // This is a strange parsing error on INSERT DATA generated from pagination
-            if((parsingError as Error).message.includes("Parse error on line 1") && queryString.startsWith("INSERT DATA")) {
+            if ((parsingError as Error).message.includes("Parse error on line 1") && queryString.startsWith("INSERT DATA")) {
                 return true;
             }
             Logger.error("Query parsing error", queryString, parsingError)
@@ -197,10 +231,10 @@ export function addServiceClause(queryString: string, endpoint: string): string 
     let parser = new sparqljs.Parser();
     try {
         const parsedQuery = parser.parse(queryString);
-        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString) ) {
+        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString)) {
             let serviceClause = {
                 type: "service",
-                name: {termType:"NamedNode",value: endpoint},
+                name: { termType: "NamedNode", value: endpoint },
                 silent: false,
                 patterns: parsedQuery.where
             }

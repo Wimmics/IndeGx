@@ -8,7 +8,7 @@ export const coreseDefaultGraphURI = "http://ns.inria.fr/corese/kgram/default";
 
 export function sendUpdate(endpoint: string, queryString: string, baseURI: string, timeout: number = defaultQueryTimeout): Promise<void> {
     if (isSparqlUpdate(queryString)) {
-        return sparqlQueryPromise(coreseServerUrl, queryString, baseURI, timeout).then(() => {
+        return sparqlQueryPromise(coreseServerUrl, queryString, baseURI, {timeout: timeout}).then(() => {
             return ;
         }).catch(error => {
             Logger.error("Error sending update", error)
@@ -27,7 +27,7 @@ export function sendConstruct(endpoint: string, queryString: string, baseURI: st
     if (isSparqlConstruct(queryString)) {
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(parsedQuery);
-        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, timeout).then(result => {
+        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, {timeout: timeout}).then(result => {
             return result as $rdf.Store;
         }).catch(error => {
             Logger.error("Error sending construct", error)
@@ -42,7 +42,7 @@ export function sendSelect(endpoint: string, queryString: string, baseURI: strin
     if (isSparqlSelect(queryString)) {
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(parsedQuery);
-        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, timeout).then(result => {
+        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, {timeout: timeout}).then(result => {
             return result as SELECTJSONResult;
         }).catch(error => {
             Logger.error("Error sending select", error)
@@ -59,7 +59,7 @@ export function sendAsk(endpoint: string, queryString: string, baseURI: string, 
         const parsedQuery = parser.parse(queryString);
         const queryGenerator = new sparqljs.Generator();
         const finalQueryString = queryGenerator.stringify(parsedQuery);
-        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, timeout).then(result => {
+        return sparqlQueryPromise(coreseServerUrl, finalQueryString, baseURI, {timeout: timeout}).then(result => {
             if (result != undefined && (result as ASKJSONResult).boolean != undefined) {
                 return (result as ASKJSONResult).boolean;
             } else {

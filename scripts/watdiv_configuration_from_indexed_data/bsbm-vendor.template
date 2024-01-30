@@ -1,0 +1,562 @@
+#namespace	ocp=http://www.ocp.com/
+#namespace	bsbm=http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/
+#namespace	rdfs=http://www.w3.org/2000/01/rdf-schema#
+#namespace	rdf=http://www.w3.org/1999/02/22-rdf-syntax-ns#
+#namespace	dc=http://purl.org/dc/elements/1.1/
+#namespace  foaf=http://xmlns.com/foaf/0.1/
+#namespace  __provenance={%provenance}
+#namespace  __output_org=monolithic
+#namespace  __output_dir={%export_output_dir}
+#namespace  __output_file={%vendor_id}
+#namespace  __output_dep={%export_dep_output_dir}
+#namespace  __output_dep_org=fragmented
+#namespace  __output_dep_rename_exception_predicates=<http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/country>;
+#namespace  __replicated=false
+
+// ===== ENTITIES & LITERAL PROPERTIES ===== //
+
+
+// ----- Product ----- //
+
+<type> bsbm:Product {%product_n}
+</type>
+
+
+// ----- Vendor ----- //
+<type> bsbm:Vendor 1
+
+<pgroup> 1.0
+#predicate rdfs:label string{%label_wc}
+</pgroup>
+
+<pgroup> 1.0
+#predicate rdfs:comment string{%comment_wc}
+</pgroup>
+
+<pgroup> 1.0
+#predicate bsbm:country country
+</pgroup>
+
+<pgroup> 1.0
+#predicate foaf:homepage string10
+</pgroup>
+
+<pgroup> 1.0
+#predicate bsbm:publishDate date 2000-09-20 2006-12-23
+</pgroup>
+
+// ----- Product accoutability metadata according to stats from real datasets ----- //
+<pgroup> 0.5692307692307692
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.49230769230769234
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.4
+#predicate dct:issued date
+</pgroup>
+<pgroup> 0.36923076923076925
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.2923076923076923
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.24615384615384617
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.24615384615384617
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.24615384615384617
+#predicate rdfs:label string
+</pgroup>
+<pgroup> 0.23076923076923078
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.2153846153846154
+#predicate pav:version string
+</pgroup>
+<pgroup> 0.2153846153846154
+#predicate dct:modified date
+</pgroup>
+<pgroup> 0.2153846153846154
+#predicate dct:identifier string
+</pgroup>
+<pgroup> 0.2
+#predicate dct:issued date
+</pgroup>
+<pgroup> 0.16923076923076924
+#predicate owl:versionInfo string
+</pgroup>
+<pgroup> 0.16923076923076924
+#predicate rdfs:comment string
+</pgroup>
+<pgroup> 0.16923076923076924
+#predicate owl:versionInfo string
+</pgroup>
+<pgroup> 0.16923076923076924
+#predicate rdfs:label string
+</pgroup>
+<pgroup> 0.16923076923076924
+#predicate dct:creator string
+</pgroup>
+<pgroup> 0.15384615384615385
+#predicate dcat:keyword string
+</pgroup>
+<pgroup> 0.13846153846153847
+#predicate schema:datePublished date
+</pgroup>
+<pgroup> 0.13846153846153847
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.13846153846153847
+#predicate schema:keywords string
+</pgroup>
+<pgroup> 0.13846153846153847
+#predicate dct:subject string
+</pgroup>
+<pgroup> 0.13846153846153847
+#predicate schema:name string
+</pgroup>
+<pgroup> 0.1076923076923077
+#predicate prov:generatedAtTime date
+</pgroup>
+<pgroup> 0.1076923076923077
+#predicate dct:issued date
+</pgroup>
+<pgroup> 0.1076923076923077
+#predicate dct:rights string
+</pgroup>
+<pgroup> 0.09230769230769231
+#predicate dct:rights string
+</pgroup>
+<pgroup> 0.09230769230769231
+#predicate rdfs:label string
+</pgroup>
+<pgroup> 0.09230769230769231
+#predicate rdfs:comment string
+</pgroup>
+<pgroup> 0.09230769230769231
+#predicate dct:publisher string
+</pgroup>
+<pgroup> 0.09230769230769231
+#predicate dcat:version string
+</pgroup>
+<pgroup> 0.07692307692307693
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.07692307692307693
+#predicate schema:dateModified date
+</pgroup>
+<pgroup> 0.07692307692307693
+#predicate pav:createdOn date
+</pgroup>
+<pgroup> 0.07692307692307693
+#predicate dct:format string
+</pgroup>
+<pgroup> 0.07692307692307693
+#predicate schema:version integer
+</pgroup>
+<pgroup> 0.07692307692307693
+#predicate dct:rights string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:publisher string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dc:creator string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:creator string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dc:publisher string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dcat:version string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:identifier string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:publisher string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dc:creator string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate schema:dateModified date
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate pav:createdOn date
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate schema:dateCreated date
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate pav:createdOn date
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:creator string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dc:publisher string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:alternative string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:alternative string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:contributor string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate pav:version string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate schema:datePublished date
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate dct:alternative string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate schema:name string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate dcat:keyword string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate dct:modified date
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate pav:version integer
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate schema:author string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate dc:description string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate void:vocabulary string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate pav:createdOn date
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:modified date
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dcat:keyword string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:format string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dc:description string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:rights string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate schema:inLanguage string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate schema:version string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:source string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate owl:versionInfo integer
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dc:contributor string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate schema:name string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dc:title string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate pav:createdOn string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:language string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate pav:createdWith string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dc:title string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate schema:description string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:hasVersion string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate rdfs:seeAlso string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate pav:createdOn date
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:source string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:modified string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:identifier string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:hasVersion string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:format string
+
+</type>
+
+// ----- Offer ----- //
+<type> bsbm:Offer {%offer_n}
+
+<pgroup> 1.0
+#predicate bsbm:price float 5 10000 normal
+</pgroup>
+
+<pgroup> 1.0
+#predicate bsbm:validFrom date
+</pgroup>
+
+<pgroup> 1.0
+#predicate bsbm:validTo date
+</pgroup>
+
+<pgroup> 1.0
+#predicate bsbm:deliveryDays integer 1 21
+</pgroup>
+
+<pgroup> 1.0
+#predicate bsbm:offerWebpage string10
+</pgroup>
+
+// (today - 97 days) to today
+<pgroup> 1.0
+#predicate bsbm:publishDate date 2008-02-13 2008-05-20
+</pgroup>
+
+</type>
+
+// ----- Entities used in accountability metadata according to stats from real datasets ----- //
+
+<type*> sd:Service 1
+</type>
+<type*> foaf:Person 1
+</type>
+<type*> void:Linkset 1
+<pgroup> 0.03076923076923077
+#predicate dc:description string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:alternative string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:title string
+</pgroup>
+</type>
+<type*> foaf:Organization 1
+</type>
+<type*> dcat:Distribution 1
+<pgroup> 0.046153846153846156
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.046153846153846156
+#predicate dct:alternative string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:rights string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:format string
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate pav:createdOn date
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:issued date
+</pgroup>
+<pgroup> 0.03076923076923077
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:created date
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:description string
+</pgroup>
+</type>
+<type*> sd:Graph 1
+</type>
+<type*> skos:Concept 1
+</type>
+<type*> bibo:AcademicArticle 1
+</type>
+<type*> sd:NamedGraph 7
+</type>
+<type*> skos:ConceptScheme 2
+<pgroup> 0.06153846153846154
+#predicate dc:creator string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:publisher string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate owl:versionInfo string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:issued date
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dc:publisher string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:creator string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:identifier string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate rdfs:label string
+</pgroup>
+<pgroup> 0.06153846153846154
+#predicate dct:rights string
+</pgroup>
+</type>
+<type*> schema:Person 2
+</type>
+<type*> prov:Organization 1
+<pgroup> 0.015384615384615385
+#predicate dct:title string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:alternative string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:description string
+</pgroup>
+<pgroup> 0.015384615384615385
+#predicate dct:description string
+</pgroup>
+</type>
+<type*> prov:SoftwareAgent 1
+</type>
+<type*> dct:PeriodOfTime 1
+</type>
+<type*> dct:Location 1
+</type>
+
+// Several bsbm:Offer is related to [1] bsbm:Vendor (drawn with a ZIPFIAN) with the probability 1.0 
+#association bsbm:Offer bsbm:vendor bsbm:Vendor 2 1 NORMAL NORMAL
+
+// Every existing bsbm:Offer is related to [1] bsbm:Product (drawn with a ZIPFIAN) with the probability 1.0 
+#association1 bsbm:Offer bsbm:product bsbm:Product 2 1 NORMAL NORMAL
+
+// ----- Associations of the accountability metadata entities ----- //
+
+#association bsbm:Vendor dct:creator foaf:Person 1 8[uniform] 0.16923076923076924
+#association bsbm:Vendor dct:publisher foaf:Organization 1 5[uniform] 0.16923076923076924
+#association bsbm:Vendor dcat:distribution dcat:Distribution 1 37[uniform] 0.15384615384615385
+#association bsbm:Vendor prov:wasDerivedFrom bsbm:Vendor 1 2[uniform] 0.13846153846153847
+#association bsbm:Vendor schema:publisher foaf:Organization 1 4[uniform] 0.13846153846153847
+#association bsbm:Vendor dct:creator foaf:Organization 1 4[uniform] 0.1076923076923077
+#association bsbm:Vendor void:sparqlEndpoint sd:Service 1 2[uniform] 0.1076923076923077
+#association bsbm:Vendor schema:author foaf:Person 1 3[uniform] 0.09230769230769231
+#association bsbm:Vendor pav:authoredBy foaf:Person 1 5[uniform] 0.09230769230769231
+#association bsbm:Vendor dct:rightsHolder foaf:Organization 1 4[uniform] 0.09230769230769231
+#association bsbm:Vendor dct:contributor foaf:Person 1 4[uniform] 0.09230769230769231
+#association bsbm:Vendor prov:hadPrimarySource bsbm:Vendor 1 10[uniform] 0.09230769230769231
+#association bsbm:Vendor dc:publisher foaf:Organization 1 7[uniform] 0.07692307692307693
+#association bibo:AcademicArticle dct:references bsbm:Vendor 1 1[uniform] 0.06153846153846154
+#association skos:ConceptScheme void:exampleResource skos:Concept 3 3[uniform] 0.06153846153846154
+#association bibo:AcademicArticle schema:about bsbm:Vendor 1 1[uniform] 0.06153846153846154
+#association bsbm:Vendor foaf:homepage bsbm:Vendor 1 1[uniform] 0.06153846153846154
+#association bsbm:Vendor dct:publisher foaf:Organization 1 8[uniform] 0.06153846153846154
+#association skos:ConceptScheme foaf:homepage bsbm:Vendor 3 1[uniform] 0.06153846153846154
+#association bsbm:Vendor pav:createdBy foaf:Person 1 1[uniform] 0.06153846153846154
+#association bsbm:Vendor schema:author schema:Person 1 4[uniform] 0.06153846153846154
+#association bsbm:Vendor void:exampleResource skos:Concept 1 3[uniform] 0.06153846153846154
+#association bsbm:Vendor foaf:homepage bsbm:Vendor 1 1[uniform] 0.06153846153846154
+#association bsbm:Vendor dct:source dcat:Distribution 1 1[uniform] 0.06153846153846154
+#association bsbm:Vendor dct:creator schema:Person 1 4[uniform] 0.06153846153846154
+#association bsbm:Vendor prov:wasDerivedFrom dcat:Distribution 1 6[uniform] 0.06153846153846154
+#association bsbm:Vendor dct:publisher prov:Organization 1 5[uniform] 0.06153846153846154
+#association bsbm:Vendor dct:isVersionOf bsbm:Vendor 1 9[uniform] 0.046153846153846156
+#association bsbm:Vendor dct:contributor foaf:Organization 1 6[uniform] 0.046153846153846156
+#association bsbm:Vendor dct:source bsbm:Vendor 1 11[uniform] 0.046153846153846156
+#association bsbm:Vendor pav:createdWith prov:SoftwareAgent 1 1[uniform] 0.046153846153846156
+#association bsbm:Vendor schema:isBasedOn bsbm:Vendor 1 1[uniform] 0.046153846153846156
+#association bsbm:Vendor schema:author foaf:Organization 1 7[uniform] 0.046153846153846156
+#association sd:Graph prov:hadPrimarySource bsbm:Vendor 2 31[uniform] 0.03076923076923077
+#association void:Linkset prov:hadPrimarySource bsbm:Vendor 3 11[uniform] 0.03076923076923077
+#association sd:NamedGraph prov:hadPrimarySource bsbm:Vendor 27 31[uniform] 0.03076923076923077
+#association bsbm:Vendor prov:hadPrimarySource bsbm:Vendor 1 30[uniform] 0.03076923076923077
+#association bsbm:Vendor pav:contributedBy foaf:Person 1 2[uniform] 0.03076923076923077
+#association bsbm:Vendor dct:identifier bsbm:Vendor 1 217[uniform] 0.03076923076923077
+#association bsbm:Vendor dc:creator foaf:Person 1 1[uniform] 0.03076923076923077
+#association bsbm:Vendor dct:temporal dct:PeriodOfTime 1 1[uniform] 0.03076923076923077
+#association bsbm:Vendor dct:spatial dct:Location 1 22[uniform] 0.03076923076923077
+#association bsbm:Vendor dcat:distribution bsbm:Vendor 1 14[uniform] 0.03076923076923077
+#association bsbm:Vendor schema:editor foaf:Person 1 3[uniform] 0.03076923076923077
+#association bsbm:Vendor pav:hasCurrentVersion bsbm:Vendor 1 2[uniform] 0.03076923076923077
+#association bsbm:Vendor pav:contributedBy foaf:Person 1 2[uniform] 0.03076923076923077
+#association bsbm:Vendor dct:identifier bsbm:Vendor 1 217[uniform] 0.03076923076923077
+#association bsbm:Vendor dct:source foaf:Organization 1 1[uniform] 0.03076923076923077
+#association bsbm:Vendor dcat:landingPage bsbm:Vendor 1 1[uniform] 0.015384615384615385
+#association dcat:Distribution pav:previousVersion dcat:Distribution 3 1[uniform] 0.015384615384615385
+#association prov:Organization dct:publisher dcat:Distribution 1 5[uniform] 0.015384615384615385
+#association prov:Organization dct:creator dcat:Distribution 1 5[uniform] 0.015384615384615385
+#association void:Linkset pav:previousVersion dcat:Distribution 3 1[uniform] 0.015384615384615385
+#association bsbm:Vendor pav:previousVersion dcat:Distribution 1 1[uniform] 0.015384615384615385
+#association bsbm:Vendor dct:createdBy foaf:Person 1 1[uniform] 0.015384615384615385
+#association bsbm:Vendor dcat:landingPage bsbm:Vendor 1 1[uniform] 0.015384615384615385
+#association bsbm:Vendor dct:creator dcat:Distribution 1 5[uniform] 0.015384615384615385
+#association bsbm:Vendor dct:creator prov:Organization 1 1[uniform] 0.015384615384615385
+#association bsbm:Vendor dct:publisher dcat:Distribution 1 5[uniform] 0.015384615384615385
+#association bsbm:Vendor pav:previousVersion dcat:Distribution 1 1[uniform] 0.015384615384615385

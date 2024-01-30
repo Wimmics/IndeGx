@@ -107,8 +107,6 @@ indegx/manifests.json
 
 indegx/manifestTree.json
 
-indegx/package-lock.json
-
 indegx/src/*.js
 
 indegx/log/
@@ -125,11 +123,7 @@ config/corese-profile.ttl
 
 scripts/FAIR-Checker_score_comparison/src/*.js
 
-scripts/FAIR-Checker_score_comparison/package-lock.json
-
 scripts/FAIR-Checker_score_retrieval/src/*.js
-
-scripts/FAIR-Checker_score_retrieval/package-lock.json
 
 *.csv
 
@@ -137,8 +131,20 @@ scripts/FAIR-Checker_score_retrieval/package-lock.json
 
 rules/FedShop_data/watdiv-data-model.txt
 
-scripts/watdiv_configuration_from_indexed_data/package-lock.json
-
 scripts/watdiv_configuration_from_indexed_data/input/
 
 *.js
+
+nohup.out
+
+scripts/LOD-cloud_data_to_RDF/lod-data.json
+
+scripts/auto_catalog_refresh/jq-linux64
+
+catalogs/*-partition_[0-9-]*.ttl
+
+**/corese-command-4.5.0.jar
+
+**/package-lock.json
+
+scripts/watdiv_configuration_from_indexed_data/*.rq.json

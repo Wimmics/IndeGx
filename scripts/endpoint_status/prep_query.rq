@@ -1,0 +1,13 @@
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#> 
+PREFIX void: <http://rdfs.org/ns/void#> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
+CONSTRUCT { 
+    GRAPH ?o { 
+        ?s ?endpointProperty ?o 
+    } 
+} 
+{ 
+    ?s ?endpointProperty ?x 
+    VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+    BIND(IRI(REPLACE(STR(?x), "\\s+", "")) AS ?o) 
+}

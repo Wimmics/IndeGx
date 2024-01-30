@@ -1,0 +1,2986 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <classCooccurrence2Existence.ttl>
+        <classCooccurrence2EntitiesFromExistence.ttl>
+        <classCooccurrence3Existence.ttl>
+        <classCooccurrence3EntitiesFromExistence.ttl>
+        <classCooccurrence4Existence.ttl>
+        <classCooccurrence4EntitiesFromExistence.ttl>
+        <classCooccurrence5Existence.ttl>
+        <classCooccurrence5EntitiesFromExistence.ttl>
+        <classCooccurrence6Existence.ttl>
+        <classCooccurrence6EntitiesFromExistence.ttl>
+        <classCooccurrence7Existence.ttl>
+        <classCooccurrence7EntitiesFromExistence.ttl>
+        <classCooccurrence8Existence.ttl>
+        <classCooccurrence8EntitiesFromExistence.ttl>
+        <propertyCooccurrence2Existence.ttl>
+        <propertyCooccurrence2EntitiesFromExistence.ttl>
+        <propertyCooccurrence3Existence.ttl>
+        <propertyCooccurrence3EntitiesFromExistence.ttl>
+        <propertyCooccurrence4Existence.ttl>
+        <propertyCooccurrence4EntitiesFromExistence.ttl>
+        <propertyCooccurrence5Existence.ttl>
+        <propertyCooccurrence5EntitiesFromExistence.ttl>
+        <propertyCooccurrence6Existence.ttl>
+        <propertyCooccurrence6EntitiesFromExistence.ttl>
+        <propertyCooccurrence7Existence.ttl>
+        <propertyCooccurrence7EntitiesFromExistence.ttl>
+        <propertyCooccurrence8Existence.ttl>
+        <propertyCooccurrence8EntitiesFromExistence.ttl>
+        <propertyCooccurrence9Existence.ttl>
+        <propertyCooccurrence9EntitiesFromExistence.ttl>
+        <propertyCooccurrence10Existence.ttl>
+        <propertyCooccurrence10EntitiesFromExistence.ttl>
+        <propertyCooccurrence11Existence.ttl>
+        <propertyCooccurrence11EntitiesFromExistence.ttl>
+        <propertyCooccurrence12Existence.ttl>
+        <propertyCooccurrence12EntitiesFromExistence.ttl>
+    ) .
+
+<classCooccurrence2Existence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence of 2 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?c1 ?c2 {
+                            FILTER(STR(?c1) > STR(?c2))
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c1), STR(?c2) ) ) ) ) AS ?classCoPartition )
+            }"""
+        ]
+    ) .
+
+<classCooccurrence2EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence2Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of instances of two classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    {
+                        SELECT DISTINCT ?c1 ?c2 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?c1) > STR(?c2))
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 . 
+                                }
+                            }
+                        } GROUP BY ?c1 ?c2
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<classCooccurrence3Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence2Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence of 3 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo3Partition .
+                    ?classCo3Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo2Partition .
+                    ?classCo2Partition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 .
+                }
+                FILTER(STR(?c1) > STR(?c2))
+                FILTER(STR(?c2) > STR(?c3))
+                SERVICE $rawEndpointUrl {
+                    FILTER(STR(?c1) > STR(?c2))
+                    FILTER(STR(?c2) > STR(?c3))
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    { 
+                        ?s a ?c1 ;
+                            a ?c2 ;
+                            a ?c3 . 
+                    } UNION { 
+                        GRAPH ?g { 
+                            ?s a ?c1 ;
+                                a ?c2 ;
+                                a ?c3 .  
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c1), STR(?c2), STR(?c3) ) ) ) ) AS ?classCo3Partition )
+            }"""
+        ]
+    ) .
+
+<classCooccurrence3EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence3Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of instances of 3 classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2))
+                FILTER(STR(?c2) > STR(?c3))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 .
+                }
+                SERVICE $rawEndpointUrl {
+                    FILTER(STR(?c1) > STR(?c2))
+                    FILTER(STR(?c2) > STR(?c3))
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    {
+                        SELECT DISTINCT ?c1 ?c2 ?c3 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 ;
+                                    a ?c3 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 ;
+                                        a ?c3 . 
+                                }
+                            }
+                        } GROUP BY ?c1 ?c2 ?c3
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<classCooccurrence4Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence3Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence of 4 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo4Partition .
+                    ?classCo4Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2;
+                        void:class ?c3 ;
+                        void:class ?c4 .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo3Partition .
+                    ?classCo3Partition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 .
+                }
+                SERVICE $rawEndpointUrl {
+                    FILTER(STR(?c1) > STR(?c2)) 
+                    FILTER(STR(?c2) > STR(?c3)) 
+                    FILTER(STR(?c3) > STR(?c4))
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    { 
+                        ?s a ?c1 ;
+                            a ?c2 ;
+                            a ?c3 ;
+                            a ?c4 . 
+                    } UNION { 
+                        GRAPH ?g { 
+                            ?s a ?c1 ;
+                                a ?c2 ;
+                                a ?c3 ;
+                                a ?c4 .  
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c1), STR(?c2), STR(?c3), STR(?c4) ) ) ) ) AS ?classCo4Partition )
+            }"""
+        ]
+    ) .
+
+<classCooccurrence4EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence4Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of instances of 4 classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    {
+                        SELECT DISTINCT ?c1 ?c2 ?c3 ?c4 ( COUNT(DISTINCT ?s) AS ?entities ){
+                            FILTER(STR(?c1) > STR(?c2)) 
+                            FILTER(STR(?c2) > STR(?c3)) 
+                            FILTER(STR(?c3) > STR(?c4))
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 ;
+                                    a ?c3 ;
+                                    a ?c4 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 ;
+                                        a ?c3 ;
+                                        a ?c4 . 
+                                }
+                            }
+                        } GROUP BY ?c1 ?c2 ?c3 ?c4
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<classCooccurrence5Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence4Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence of 5 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo5Partition .
+                    ?classCo5Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo4Partition .
+                    ?classCo4Partition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    FILTER(STR(?c1) > STR(?c2)) 
+                    FILTER(STR(?c2) > STR(?c3)) 
+                    FILTER(STR(?c3) > STR(?c4))
+                    FILTER(STR(?c4) > STR(?c5))
+                    { 
+                        ?s a ?c1 ;
+                            a ?c2 ;
+                            a ?c3 ;
+                            a ?c4 ;
+                            a ?c5 . 
+                    } UNION { 
+                        GRAPH ?g { 
+                            ?s a ?c1 ;
+                                a ?c2 ;
+                                a ?c3 ;
+                                a ?c4 ;
+                                a ?c5 .  
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c1), STR(?c2), STR(?c3), STR(?c4), STR(?c5) ) ) ) ) AS ?classCo5Partition )
+            }"""
+        ]
+    ) .
+
+<classCooccurrence5EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence5Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of instances of 5 classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                FILTER(STR(?c4) > STR(?c5))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    VALUES ?c5 { UNDEF }
+                    {
+                        SELECT DISTINCT ?c1 ?c2 ?c3 ?c4 ?c5 ( COUNT(DISTINCT ?s) AS ?entities ){
+                            FILTER(STR(?c1) > STR(?c2)) 
+                            FILTER(STR(?c2) > STR(?c3)) 
+                            FILTER(STR(?c3) > STR(?c4))
+                            FILTER(STR(?c4) > STR(?c5))
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 ;
+                                    a ?c3 ;
+                                    a ?c4 ;
+                                    a ?c5 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 ;
+                                        a ?c3 ;
+                                        a ?c4 ;
+                                        a ?c5 . 
+                                }
+                            }
+                        } GROUP BY ?c1 ?c2 ?c3 ?c4 ?c5
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<classCooccurrence6Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence5Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence of 6 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo6Partition .
+                    ?classCo6Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                FILTER(STR(?c4) > STR(?c5))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo5Partition .
+                    ?classCo5Partition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    VALUES ?c5 { UNDEF }
+                    FILTER(STR(?c1) > STR(?c2)) 
+                    FILTER(STR(?c2) > STR(?c3)) 
+                    FILTER(STR(?c3) > STR(?c4))
+                    FILTER(STR(?c4) > STR(?c5))
+                    FILTER(STR(?c5) > STR(?c6))
+                    { 
+                        ?s a ?c1 ;
+                            a ?c2 ;
+                            a ?c3 ;
+                            a ?c4 ;
+                            a ?c5 ;
+                            a ?c6 . 
+                    } UNION { 
+                        GRAPH ?g { 
+                            ?s a ?c1 ;
+                                a ?c2 ;
+                                a ?c3 ;
+                                a ?c4 ;
+                                a ?c5 ;
+                                a ?c6 .  
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c1), STR(?c2), STR(?c3), STR(?c4), STR(?c5), STR(?c6) ) ) ) ) AS ?classCo6Partition )
+            }"""
+        ]
+    ) .
+
+<classCooccurrence6EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence6Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of instances of 6 classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                FILTER(STR(?c4) > STR(?c5))
+                FILTER(STR(?c5) > STR(?c6))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    VALUES ?c5 { UNDEF }
+                    VALUES ?c6 { UNDEF }
+                    {
+                        SELECT DISTINCT ?c1 ?c2 ?c3 ?c4 ?c5 ?c6 ( COUNT(DISTINCT ?s) AS ?entities ){
+                            FILTER(STR(?c1) > STR(?c2)) 
+                            FILTER(STR(?c2) > STR(?c3)) 
+                            FILTER(STR(?c3) > STR(?c4))
+                            FILTER(STR(?c4) > STR(?c5))
+                            FILTER(STR(?c5) > STR(?c6))
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 ;
+                                    a ?c3 ;
+                                    a ?c4 ;
+                                    a ?c5 ;
+                                    a ?c6 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 ;
+                                        a ?c3 ;
+                                        a ?c4 ;
+                                        a ?c5 ;
+                                        a ?c6 . 
+                                }
+                            }
+                        } GROUP BY ?c1 ?c2 ?c3 ?c4 ?c5 ?c6
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<classCooccurrence7Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence6Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence of 7 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo7Partition .
+                    ?classCo7Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 ;
+                        void:class ?c7 .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                FILTER(STR(?c4) > STR(?c5))
+                FILTER(STR(?c5) > STR(?c6))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo6Partition .
+                    ?classCo6Partition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    VALUES ?c5 { UNDEF }
+                    VALUES ?c6 { UNDEF }
+                    FILTER(STR(?c1) > STR(?c2)) 
+                    FILTER(STR(?c2) > STR(?c3)) 
+                    FILTER(STR(?c3) > STR(?c4))
+                    FILTER(STR(?c4) > STR(?c5))
+                    FILTER(STR(?c5) > STR(?c6))
+                    FILTER(STR(?c6) > STR(?c7))
+                    { 
+                        ?s a ?c1 ;
+                            a ?c2 ;
+                            a ?c3 ;
+                            a ?c4 ;
+                            a ?c5 ;
+                            a ?c6 ;
+                            a ?c7 . 
+                    } UNION { 
+                        GRAPH ?g { 
+                            ?s a ?c1 ;
+                                a ?c2 ;
+                                a ?c3 ;
+                                a ?c4 ;
+                                a ?c5 ;
+                                a ?c6 ;
+                                a ?c7 .  
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c1), STR(?c2), STR(?c3), STR(?c4), STR(?c5), STR(?c6), STR(?c7) ) ) ) ) AS ?classCo7Partition )
+            }"""
+        ]
+    ) .
+
+<classCooccurrence7EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence7Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of instances of 7 classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                FILTER(STR(?c4) > STR(?c5))
+                FILTER(STR(?c5) > STR(?c6))
+                FILTER(STR(?c6) > STR(?c7))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 ;
+                        void:class ?c7 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    VALUES ?c5 { UNDEF }
+                    VALUES ?c6 { UNDEF }
+                    VALUES ?c7 { UNDEF }
+                    {
+                        SELECT DISTINCT ?c1 ?c2 ?c3 ?c4 ?c5 ?c6 ?c7 ( COUNT(DISTINCT ?s) AS ?entities ){
+                            FILTER(STR(?c1) > STR(?c2)) 
+                            FILTER(STR(?c2) > STR(?c3)) 
+                            FILTER(STR(?c3) > STR(?c4))
+                            FILTER(STR(?c4) > STR(?c5))
+                            FILTER(STR(?c5) > STR(?c6))
+                            FILTER(STR(?c6) > STR(?c7))
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 ;
+                                    a ?c3 ;
+                                    a ?c4 ;
+                                    a ?c5 ;
+                                    a ?c6 ;
+                                    a ?c7 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 ;
+                                        a ?c3 ;
+                                        a ?c4 ;
+                                        a ?c5 ;
+                                        a ?c6 ;
+                                        a ?c7 . 
+                                }
+                            }
+                        } GROUP BY ?c1 ?c2 ?c3 ?c4 ?c5 ?c6 ?c7
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<classCooccurrence8Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence7Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Class cooccurrence of 8 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo8Partition .
+                    ?classCo8Partition a void:ClassPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 ;
+                        void:class ?c7 ;
+                        void:class ?c8 .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                FILTER(STR(?c4) > STR(?c5))
+                FILTER(STR(?c5) > STR(?c6))
+                FILTER(STR(?c6) > STR(?c7))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCo7Partition .
+                    ?classCo7Partition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 ;
+                        void:class ?c7 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    VALUES ?c5 { UNDEF }
+                    VALUES ?c6 { UNDEF }
+                    VALUES ?c7 { UNDEF }
+                    FILTER(STR(?c1) > STR(?c2)) 
+                    FILTER(STR(?c2) > STR(?c3)) 
+                    FILTER(STR(?c3) > STR(?c4))
+                    FILTER(STR(?c4) > STR(?c5))
+                    FILTER(STR(?c5) > STR(?c6))
+                    FILTER(STR(?c6) > STR(?c7))
+                    FILTER(STR(?c7) > STR(?c8))
+                    { 
+                        ?s a ?c1 ;
+                            a ?c2 ;
+                            a ?c3 ;
+                            a ?c4 ;
+                            a ?c5 ;
+                            a ?c6 ;
+                            a ?c7 ;
+                            a ?c8 . 
+                    } UNION { 
+                        GRAPH ?g { 
+                            ?s a ?c1 ;
+                                a ?c2 ;
+                                a ?c3 ;
+                                a ?c4 ;
+                                a ?c5 ;
+                                a ?c6 ;
+                                a ?c7 ;
+                                a ?c8 .  
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?c1), STR(?c2), STR(?c3), STR(?c4), STR(?c5), STR(?c6), STR(?c7), STR(?c8) ) ) ) ) AS ?classCo8Partition )
+            }"""
+        ]
+    ) .
+
+<classCooccurrence8EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <classCooccurrence8Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of instances of 8 classes""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?classCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2)) 
+                FILTER(STR(?c2) > STR(?c3)) 
+                FILTER(STR(?c3) > STR(?c4))
+                FILTER(STR(?c4) > STR(?c5))
+                FILTER(STR(?c5) > STR(?c6))
+                FILTER(STR(?c6) > STR(?c7))
+                FILTER(STR(?c7) > STR(?c8))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classCoPartition .
+                    ?classCoPartition void:inDataset $rawEndpointUrl ;
+                        void:class ?c1 ;
+                        void:class ?c2 ;
+                        void:class ?c3 ;
+                        void:class ?c4 ;
+                        void:class ?c5 ;
+                        void:class ?c6 ;
+                        void:class ?c7 ;
+                        void:class ?c8 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?c1 { UNDEF }
+                    VALUES ?c2 { UNDEF }
+                    VALUES ?c3 { UNDEF }
+                    VALUES ?c4 { UNDEF }
+                    VALUES ?c5 { UNDEF }
+                    VALUES ?c6 { UNDEF }
+                    VALUES ?c7 { UNDEF }
+                    VALUES ?c8 { UNDEF }
+                    {
+                        SELECT DISTINCT ?c1 ?c2 ?c3 ?c4 ?c5 ?c6 ?c7 ?c8 ( COUNT(DISTINCT ?s) AS ?entities ){
+                            FILTER(STR(?c1) > STR(?c2)) 
+                            FILTER(STR(?c2) > STR(?c3)) 
+                            FILTER(STR(?c3) > STR(?c4))
+                            FILTER(STR(?c4) > STR(?c5))
+                            FILTER(STR(?c5) > STR(?c6))
+                            FILTER(STR(?c6) > STR(?c7))
+                            FILTER(STR(?c7) > STR(?c8))
+                            { 
+                                ?s a ?c1 ;
+                                    a ?c2 ;
+                                    a ?c3 ;
+                                    a ?c4 ;
+                                    a ?c5 ;
+                                    a ?c6 ;
+                                    a ?c7 ;
+                                    a ?c8 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s a ?c1 ;
+                                        a ?c2 ;
+                                        a ?c3 ;
+                                        a ?c4 ;
+                                        a ?c5 ;
+                                        a ?c6 ;
+                                        a ?c7 ;
+                                        a ?c8 . 
+                                }
+                            }
+                        } GROUP BY ?c1 ?c2 ?c3 ?c4 ?c5 ?c6 ?c7 ?c8
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence2Existence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 2 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 .
+                }
+            } WHERE {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?p1 ?p2 {
+                            FILTER(STR(?p1) > STR(?p2))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+    ) .
+
+
+<propertyCooccurrence2EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence2Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of subjects of the cooccurrence of 2 properties""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?c1) > STR(?c2))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 (COUNT(DISTINCT ?s) AS ?entities) {
+                            FILTER(STR(?p1) > STR(?p2))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence3Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence2Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 3 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo3Partition .
+                    ?propertyCo3Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2))
+                FILTER(STR(?p2) > STR(?p3))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo2Partition .
+                    ?propertyCo2Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 {
+                            FILTER(STR(?p1) > STR(?p2))
+                            FILTER(STR(?p2) > STR(?p3))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3) ) ) ) ) AS ?propertyCo3Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence3EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence3Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 3 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCo3Partition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2))
+                FILTER(STR(?p2) > STR(?p3))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo3Partition .
+                    ?propertyCo3Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 (COUNT(DISTINCT ?s) AS ?entities) {
+                            FILTER(STR(?p1) > STR(?p2))
+                            FILTER(STR(?p2) > STR(?p3))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence4Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence3Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 4 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo4Partition .
+                    ?propertyCo4Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo3Partition .
+                    ?propertyCo3Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4) ) ) ) ) AS ?propertyCo4Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence4EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence4Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 4 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCo4Partition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo4Partition .
+                    ?propertyCo4Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence5Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence4Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 5 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo5Partition .
+                    ?propertyCo5Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo4Partition .
+                    ?propertyCo4Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5) ) ) ) ) AS ?propertyCo5Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence5EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence5Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 5 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence6Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence5Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 6 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo6Partition .
+                    ?propertyCo6Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo5Partition .
+                    ?propertyCo5Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6) ) ) ) ) AS ?propertyCo6Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence6EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence6Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 6 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6  .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5 ?p6
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence7Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence6Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 7 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo7Partition .
+                    ?propertyCo7Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo6Partition .
+                    ?propertyCo6Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7) ) ) ) ) AS ?propertyCo7Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence7EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence7Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 7 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7  .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence8Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence7Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 8 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo8Partition .
+                    ?propertyCo8Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo7Partition .
+                    ?propertyCo7Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8) ) ) ) ) AS ?propertyCo8Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence8EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence8Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 8 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8  .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence9Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence8Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 9 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo9Partition .
+                    ?propertyCo9Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo8Partition .
+                    ?propertyCo8Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9) ) ) ) ) AS ?propertyCo9Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence9EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence9Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 9 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9  .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    VALUES ?p9 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence10Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence9Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 10 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo10Partition .
+                    ?propertyCo10Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo9Partition .
+                    ?propertyCo9Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    VALUES ?p9 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            FILTER(STR(?p9) > STR(?p10))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 ;
+                                    ?p10 ?o10 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 ;
+                                        ?p10 ?o10 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9), STR(?p10) ) ) ) ) AS ?propertyCo10Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence10EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence10Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 10 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10  .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    VALUES ?p9 { UNDEF }
+                    VALUES ?p10 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            FILTER(STR(?p9) > STR(?p10))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 ;
+                                    ?p10 ?o10 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 ;
+                                        ?p10 ?o10 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence11Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence10Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 11 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo11Partition .
+                    ?propertyCo11Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 ;
+                        void:property ?p11 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo10Partition .
+                    ?propertyCo10Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    VALUES ?p9 { UNDEF }
+                    VALUES ?p10 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ?p11 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            FILTER(STR(?p9) > STR(?p10))
+                            FILTER(STR(?p10) > STR(?p11))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 ;
+                                    ?p10 ?o10 ;
+                                    ?p11 ?o11 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 ;
+                                        ?p10 ?o10 ;
+                                        ?p11 ?o11 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9), STR(?p10), STR(?p11) ) ) ) ) AS ?propertyCo11Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence11EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence11Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 11 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                FILTER(STR(?p10) > STR(?p11))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 ;
+                        void:property ?p11 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    VALUES ?p9 { UNDEF }
+                    VALUES ?p10 { UNDEF }
+                    VALUES ?p11 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ?p11 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            FILTER(STR(?p9) > STR(?p10))
+                            FILTER(STR(?p10) > STR(?p11))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 ;
+                                    ?p10 ?o10 ;
+                                    ?p11 ?o11 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 ;
+                                        ?p10 ?o10 ;
+                                        ?p11 ?o11 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ?p11
+                    }
+                }
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence12Existence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence11Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Property cooccurrence of 12 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo12Partition .
+                    ?propertyCo12Partition a void:PropertyPartition ;
+                        void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 ;
+                        void:property ?p11 ;
+                        void:property ?p12 .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                FILTER(STR(?p10) > STR(?p11))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCo11Partition .
+                    ?propertyCo11Partition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 ;
+                        void:property ?p11 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    VALUES ?p9 { UNDEF }
+                    VALUES ?p10 { UNDEF }
+                    VALUES ?p11 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ?p11 ?p12 {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            FILTER(STR(?p9) > STR(?p10))
+                            FILTER(STR(?p10) > STR(?p11))
+                            FILTER(STR(?p11) > STR(?p12))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 ;
+                                    ?p10 ?o10 ;
+                                    ?p11 ?o11 ;
+                                    ?p12 ?o12 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 ;
+                                        ?p10 ?o10 ;
+                                        ?p11 ?o11 ;
+                                        ?p12 ?o12 . 
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9), STR(?p10), STR(?p11), STR(?p12) ) ) ) ) AS ?propertyCo12Partition )
+            }"""
+        ]
+    ) .
+
+<propertyCooccurrence12EntitiesFromExistence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <propertyCooccurrence12Existence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Number of property cooccurrence of 12 partitions""" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?propertyCoPartition void:entities ?entities .
+                }
+            } WHERE {
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                FILTER(STR(?p10) > STR(?p11))
+                FILTER(STR(?p11) > STR(?p12))
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition void:inDataset $rawEndpointUrl ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 ;
+                        void:property ?p11 ;
+                        void:property ?p12 .
+                }
+                SERVICE $rawEndpointUrl {
+                    VALUES ?p1 { UNDEF }
+                    VALUES ?p2 { UNDEF }
+                    VALUES ?p3 { UNDEF }
+                    VALUES ?p4 { UNDEF }
+                    VALUES ?p5 { UNDEF }
+                    VALUES ?p6 { UNDEF }
+                    VALUES ?p7 { UNDEF }
+                    VALUES ?p8 { UNDEF }
+                    VALUES ?p9 { UNDEF }
+                    VALUES ?p10 { UNDEF }
+                    VALUES ?p11 { UNDEF }
+                    VALUES ?p12 { UNDEF }
+                    {
+                        SELECT DISTINCT ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ?p11 ?p12 ( COUNT(DISTINCT ?s) AS ?entities ) {
+                            FILTER(STR(?p1) > STR(?p2)) 
+                            FILTER(STR(?p2) > STR(?p3)) 
+                            FILTER(STR(?p3) > STR(?p4))
+                            FILTER(STR(?p4) > STR(?p5))
+                            FILTER(STR(?p5) > STR(?p6))
+                            FILTER(STR(?p6) > STR(?p7))
+                            FILTER(STR(?p7) > STR(?p8))
+                            FILTER(STR(?p8) > STR(?p9))
+                            FILTER(STR(?p9) > STR(?p10))
+                            FILTER(STR(?p10) > STR(?p11))
+                            FILTER(STR(?p11) > STR(?p12))
+                            { 
+                                ?s ?p1 ?o1 ;
+                                    ?p2 ?o2 ;
+                                    ?p3 ?o3 ;
+                                    ?p4 ?o4 ;
+                                    ?p5 ?o5 ;
+                                    ?p6 ?o6 ;
+                                    ?p7 ?o7 ;
+                                    ?p8 ?o8 ;
+                                    ?p9 ?o9 ;
+                                    ?p10 ?o10 ;
+                                    ?p11 ?o11 ;
+                                    ?p12 ?o12 . 
+                            } UNION { 
+                                GRAPH ?g { 
+                                    ?s ?p1 ?o1 ;
+                                        ?p2 ?o2 ;
+                                        ?p3 ?o3 ;
+                                        ?p4 ?o4 ;
+                                        ?p5 ?o5 ;
+                                        ?p6 ?o6 ;
+                                        ?p7 ?o7 ;
+                                        ?p8 ?o8 ;
+                                        ?p9 ?o9 ;
+                                        ?p10 ?o10 ;
+                                        ?p11 ?o11 ;
+                                        ?p12 ?o12 . 
+                                }
+                            }
+                        } GROUP BY ?p1 ?p2 ?p3 ?p4 ?p5 ?p6 ?p7 ?p8 ?p9 ?p10 ?p11 ?p12
+                    }
+                }
+            }"""
+        ]
+    ) .

@@ -1,0 +1,69 @@
+PREFIX adms: <http://www.w3.org/ns/adms>
+PREFIX bibo: <http://purl.org/ontology/bibo/>
+PREFIX cc: <http://creativecommons.org/ns#>
+PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dce: <http://purl.org/dc/elements/1.1/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX doap: <http://usefulinc.com/ns/doap#>
+PREFIX dqv: <http://www.w3.org/ns/dqv#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mod: <https://w3id.org/mod#>
+PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sto: <https://w3id.org/i40/sto#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX voidext: <http://purl.org/query/voidext#>
+PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?c ?p ?oc (MIN(?minC) AS ?minAllC) (MAX(?maxC) AS ?maxAllC) (ROUND(AVG(?average)) AS ?averageAll) (COUNT(DISTINCT ?endpoint) AS ?countAllDataset) {
+    {
+        SELECT ?cGrouped ?p ?ocGrouped (MIN(?cpoccount) AS ?minC) (MAX(?cpoccount) AS ?maxC) (AVG(?cpoccount) AS ?average) ?endpoint {
+            {
+                SELECT DISTINCT ?endpoint ?c ?p ?oc ?cpoccount {
+                    GRAPH ?endpoint {
+                        ?endpoint dcat:servesDataset ?dataset
+                    }
+                    GRAPH ?datasetGraph {
+                      ?dataset ?pd ?s .
+            		  ?s ?p ?o .
+                      ?s a ?c .
+                      ?o a ?oc .
+                      VALUES ?dc { void:Dataset dcat:Dataset dcmitype:Dataset sd:Dataset schema:Dataset dct:Dataset }
+                      FILTER( NOT EXISTS { ?s a ?dc })
+                      FILTER( NOT EXISTS { ?o a ?dc })
+                      FILTER( ?c != owl:Class )
+                      FILTER( ?c != rdfs:Class )
+                      FILTER( ?oc != owl:Class )
+                      FILTER( ?oc != rdfs:Class )
+                    }
+                    ?dataset void:classPartition ?classPartition.
+                    ?classPartition void:inDataset ?dataset ;
+                        void:class ?c ;
+                        void:propertyPartition ?classPropertyPartition .
+                    ?classPropertyPartition void:inDataset ?dataset ;
+                        void:property ?p ;
+                        void:classPartition ?objectClassPartition .
+                    ?objectClassPartition void:inDataset ?dataset ;
+                        void:class ?oc ;
+                        void:entities ?cpoccount .
+                } GROUP BY ?endpoint ?c ?p ?oc ?cpoccount
+            }
+            BIND(IF((?c = dcat:Dataset || ?c = void:Dataset || ?c = dcmitype:Dataset || ?c = schema:Dataset || ?c = sd:Dataset || ?c = dataid:Dataset ), dcat:Dataset, ?c ) AS ?cGrouped)
+            BIND(IF((?oc = dcat:Dataset || ?oc = void:Dataset || ?oc = dcmitype:Dataset || ?oc = schema:Dataset || ?oc = sd:Dataset || ?oc = dataid:Dataset ), dcat:Dataset, ?oc ) AS ?ocGrouped)
+        } GROUP BY ?endpoint ?cGrouped ?p ?ocGrouped
+    }
+    BIND(?cGrouped AS ?c)
+    BIND(?ocGrouped AS ?oc)
+} GROUP BY ?c ?p ?oc 

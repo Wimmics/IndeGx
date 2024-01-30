@@ -5,71 +5,103 @@ import ttl_read from "@graphy/content.ttl.read";
 import nt_read from "@graphy/content.nt.read";
 import nq_read from "@graphy/content.nq.read";
 import trig_read from "@graphy/content.trig.read";
-import {resolve } from "url";
+import { resolve } from "url";
 
-export const VOID = $rdf.Namespace("http://rdfs.org/ns/void#");
-export const XSD = $rdf.Namespace("http://www.w3.org/2001/XMLSchema#");
-export const DCAT = $rdf.Namespace("http://www.w3.org/ns/dcat#");
-export const PROV = $rdf.Namespace("http://www.w3.org/ns/prov#");
-export const SD = $rdf.Namespace("http://www.w3.org/ns/sparql-service-description#");
-export const DCT = $rdf.Namespace("http://purl.org/dc/terms/");
-export const PAV = $rdf.Namespace("http://purl.org/pav/");
-export const RDF = $rdf.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-export const RDFS = $rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#");
-export const OWL = $rdf.Namespace("http://www.w3.org/2002/07/owl#");
-export const FOAF = $rdf.Namespace("http://xmlns.com/foaf/0.1/");
-export const SCHEMA = $rdf.Namespace("http://schema.org/");
-export const DCE = $rdf.Namespace("http://purl.org/dc/elements/1.1/");
-export const SKOS = $rdf.Namespace("http://www.w3.org/2004/02/skos/core#");
-export const MOD = $rdf.Namespace("https://w3id.org/mod#");
 export const EARL = $rdf.Namespace("http://www.w3.org/ns/earl#");
 export const MANIFEST = $rdf.Namespace("http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#");
 export const KGI = $rdf.Namespace("http://ns.inria.fr/kg/index#");
 
-export const DQV = $rdf.Namespace("http://www.w3.org/ns/dqv#");
 export const ADMS = $rdf.Namespace("http://www.w3.org/ns/adms#");
-export const DATAID = $rdf.Namespace("http://dataid.dbpedia.org/ns/core#");
-export const DOAP = $rdf.Namespace("http://usefulinc.com/ns/doap#")
+export const BIBO = $rdf.Namespace("http://purl.org/ontology/bibo/");
 export const CC = $rdf.Namespace("http://creativecommons.org/ns#");
-export const XHV = $rdf.Namespace("http://www.w3.org/1999/xhtml/vocab#");
-export const STO = $rdf.Namespace("https://w3id.org/i40/sto#");
-export const NIE = $rdf.Namespace("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#")
+export const DATAID = $rdf.Namespace("http://dataid.dbpedia.org/ns/core#");
+export const DCAT = $rdf.Namespace("http://www.w3.org/ns/dcat#");
+export const DCE = $rdf.Namespace("http://purl.org/dc/elements/1.1/");
 export const DCMITYPE = $rdf.Namespace("http://purl.org/dc/dcmitype/");
+export const DCT = $rdf.Namespace("http://purl.org/dc/terms/");
+export const DOAP = $rdf.Namespace("http://usefulinc.com/ns/doap#")
+export const DQV = $rdf.Namespace("http://www.w3.org/ns/dqv#");
+export const FOAF = $rdf.Namespace("http://xmlns.com/foaf/0.1/");
+export const MOD = $rdf.Namespace("https://w3id.org/mod#");
+export const NIE = $rdf.Namespace("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#")
+export const OWL = $rdf.Namespace("http://www.w3.org/2002/07/owl#");
+export const PAV = $rdf.Namespace("http://purl.org/pav/");
+export const PROV = $rdf.Namespace("http://www.w3.org/ns/prov#");
+export const RDF = $rdf.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+export const RDFS = $rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#");
+export const SCHEMA = $rdf.Namespace("http://schema.org/");
+export const SD = $rdf.Namespace("http://www.w3.org/ns/sparql-service-description#");
+export const SKOS = $rdf.Namespace("http://www.w3.org/2004/02/skos/core#");
+export const STO = $rdf.Namespace("https://w3id.org/i40/sto#");
+export const VCARD = $rdf.Namespace("http://www.w3.org/2006/vcard/ns#");
+export const VOAF = $rdf.Namespace("http://purl.org/vocommons/voaf#");
+export const VOID = $rdf.Namespace("http://rdfs.org/ns/void#");
+export const VOIDEXT = $rdf.Namespace("http://purl.org/query/voidext#");
+export const XHV = $rdf.Namespace("http://www.w3.org/1999/xhtml/vocab#");
+export const XSD = $rdf.Namespace("http://www.w3.org/2001/XMLSchema#");
 
 export const rdfTypeProperty = RDF("type");
 
 export function urlToBaseURI(url: string) {
-    let baseURI = url.replace(new RegExp("/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gm"), "");
-    baseURI = baseURI.substring(0, baseURI.lastIndexOf("/")+1);
+    let baseURI = url.replace(/^(?:.*\/)*([^\/\r\n]+?|)(?=(?:\.[^\/\r\n.\.]*\.)?$)/gmu, "");
+    baseURI = baseURI.substring(0, baseURI.lastIndexOf("/") + 1);
     return baseURI;
 }
 
-export function urlIsAbsolute(url: string) {
-    var regex = new RegExp('^(?:[a-z+]+:)?//', 'i');
-    return regex.test(url);
+/**
+ * 
+ * @param url URL to check
+ * @returns true is the URL is well formed according to the RFC 3986 (plus the forbidding of whitespace characters in the URI), false otherwise
+ */
+export function urlIsWellFormed(url: string) {
+    const wellformedURIRegex = /^(([^:/?#\s]+):)(\/\/([^/?#\s]*))?([^?#\s]*)(\?([^#\s]*))?(#(.*))?/gmu;
+    return wellformedURIRegex.test(url);
 }
 
+/**
+ * 
+ * @param url URL to sanitize
+ * @param baseURI Base URI used for the sanitization
+ * @param filename Filename of the dataset from which the URL comes from
+ * @returns string The sanitized URL
+ */
 export function sanitizeUrl(url: string, baseURI: string, filename?: string): string {
     let result = url;
-    if(url.localeCompare("") == 0) {
-        result = filename;
+    const filenamePresent = filename != null && filename != undefined && filename != "";
+
+    if (filenamePresent && !urlIsWellFormed(filename)) {
+        filename = "file://" + filename;
     }
-    if(! urlIsAbsolute(result)) { 
-        if(filename != null && filename != undefined && filename != "") {
-            result = resolve(filename, result);
+
+    // URL is empty, we return the filename or the base URI
+    if (url.localeCompare("") == 0) {
+        if (filenamePresent) {
+            result = filename;
         } else {
-            result = resolve(baseURI, result);
+            result = baseURI;
         }
     }
-    if (!(result.startsWith("http://") || result.startsWith("https://") || result.startsWith("file://"))) {
-        result = "file://" + result;
+
+    // Make any non-well-formed URI to start with https or the base URI and encode the forbidden characters in it
+    if (!urlIsWellFormed(result)) {
+        if (filenamePresent) {
+            result = resolve(filename, result);
+        } else {
+            const httpsScheme = "https://";
+            let httpResult = resolve(httpsScheme, result);
+            if (urlIsWellFormed(httpResult)) { // The url whas missing a scheme, we add https://
+                result = httpResult;
+            } else {
+                result = resolve(baseURI, encodeURIComponent(result)); // The url is malformed in an original way, encode it and we add it to the base URI
+            }
+        }
     }
 
     return result;
 }
 
 export function fixCommonTurtleStringErrors(ttlString: string): string {
-    if(ttlString == null || ttlString == undefined) {
+    if (ttlString == null || ttlString == undefined) {
         throw new Error("Invalid turtle string " + ttlString);
     } else {
         const betterRegexNodeB = /([\s|\n]+)((node|b)[^:\s]+)(\s)+/g;
@@ -137,45 +169,68 @@ function getGraphyReadingFunction(contentType: FileContentType) {
     }
 }
 
-function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI, filename = KGI("").value) {
-    function createValidBlankNode(node, baseURI) {
-        if (node.termType === "BlankNode") {
-            return $rdf.sym(baseURI + "#" + node.value);
-        } else {
-            throw new Error("Invalid node" + node + " expecting blank node");
+function graphyQuadLoadingToStore(store: $rdf.Store, y_quad: any, baseURI: string, filename?: string) {
+
+    if (filename != null && filename != undefined && filename != "") {
+        if (!urlIsWellFormed(filename)) {
+            filename = "file://" + filename;
+        }
+    }
+
+    function createURIFromBlankNode(node: $rdf.Node, baseURI: string): $rdf.NamedNode {
+        try {
+            if (node.termType === "BlankNode") {
+                if (filename != null && filename != undefined && filename != "") {
+                    return $rdf.sym(filename + "#" + node.value);
+                } else {
+                    return $rdf.sym(baseURI + "#" + node.value);
+                }
+            } else {
+                throw new Error("Invalid node" + node + " expecting blank node");
+            }
+        } catch (error) {
+            Logger.error("Error while creating an URI in replacement of ", node, "with base URI", baseURI, "error", error);
         }
     }
 
     try {
         let s = undefined;
-        if (y_quad.subject.termType === "NamedNode") {
+        try {
+            if (y_quad.subject.termType === "NamedNode") {
                 s = $rdf.sym(sanitizeUrl(y_quad.subject.value, baseURI, filename));
-        } else if (y_quad.subject.termType === "Literal") {
-            if (y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
-                s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
-            } else if (y_quad.subject.datatype != null && y_quad.subject.datatype != undefined && y_quad.subject.datatype != "") {
-                s = $rdf.lit(y_quad.subject.value, undefined, $rdf.sym(y_quad.subject.datatype))
+            } else if (y_quad.subject.termType === "Literal") {
+                if (y_quad.subject.language != null && y_quad.subject.language != undefined && y_quad.subject.language != "") {
+                    s = $rdf.lit(y_quad.subject.value, y_quad.subject.language)
+                } else if (y_quad.subject.datatype != null && y_quad.subject.datatype != undefined && y_quad.subject.datatype != "") {
+                    s = $rdf.lit(y_quad.subject.value, undefined, $rdf.sym(y_quad.subject.datatype))
+                } else {
+                    s = $rdf.lit(y_quad.subject.value)
+                }
             } else {
-                s = $rdf.lit(y_quad.subject.value)
-            }
-        } else {
-            s = createValidBlankNode(y_quad.subject, baseURI);
-        };
+                s = createURIFromBlankNode(y_quad.subject, baseURI);
+            };
+        } catch (error) {
+            Logger.error("Error while handling subject ", s, " of quad", y_quad, "error", error);
+        }
         const p = $rdf.sym(y_quad.predicate.value);
         let o = undefined;
-        if (y_quad.object.termType === "NamedNode") {
-            o = $rdf.sym(sanitizeUrl(y_quad.object.value, baseURI, filename));
-        } else if (y_quad.object.termType === "Literal") {
-            if (y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
-                o = $rdf.lit(y_quad.object.value, y_quad.object.language)
-            } else if (y_quad.object.datatype != null && y_quad.object.datatype != undefined && y_quad.object.datatype != "") {
-                o = $rdf.lit(y_quad.object.value, undefined, $rdf.sym(y_quad.object.datatype))
+        try {
+            if (y_quad.object.termType === "NamedNode") {
+                o = $rdf.sym(sanitizeUrl(y_quad.object.value, baseURI, filename));
+            } else if (y_quad.object.termType === "Literal") {
+                if (y_quad.object.language != null && y_quad.object.language != undefined && y_quad.object.language != "") {
+                    o = $rdf.lit(y_quad.object.value, y_quad.object.language)
+                } else if (y_quad.object.datatype != null && y_quad.object.datatype != undefined && y_quad.object.datatype != "") {
+                    o = $rdf.lit(y_quad.object.value, undefined, $rdf.sym(y_quad.object.datatype))
+                } else {
+                    o = $rdf.lit(y_quad.object.value)
+                }
             } else {
-                o = $rdf.lit(y_quad.object.value)
-            }
-        } else {
-            o = createValidBlankNode(y_quad.object, baseURI);
-        };
+                o = createURIFromBlankNode(y_quad.object, baseURI);
+            };
+        } catch (error) {
+            Logger.error("Error while handling object ", o, " of quad", y_quad, "error", error);
+        }
 
         if (!$rdf.isLiteral(s)) { // The application of RDF reasoning makes appear Literals as subjects, for some reason. We filter them out.
             if (y_quad.graph.value === '') {
@@ -357,9 +412,9 @@ export function parseTurtleToStore(content: string, store: $rdf.Store, baseURI: 
                 relax: true,
                 baseIRI: baseURI,
                 data(y_quad) {
-                    graphyQuadLoadingToStore(store, y_quad, baseURI, "")
+                    graphyQuadLoadingToStore(store, y_quad, baseURI)
                 },
-                
+
                 eof(h_prefixes) {
                     accept(store);
                 },

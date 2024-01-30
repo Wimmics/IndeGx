@@ -52,6 +52,12 @@ Execution:
 ./run.sh
 ```
 
+## Resources
+
+Two catalogs of endpoints are maintained in this repository:
+- The [catalog of endpoints](https://github.com/Wimmics/IndeGx/blob/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl), used in the [IndeGx paper](https://hal.science/hal-03946680) and updated every day from several online sources. The list of sources and the script used to generate the catalog are available in a dedicated [script folder](./scripts/auto_catalog_refresh/README.md).
+- The [catalog of the status of endpoint](https://github.com/Wimmics/IndeGx/blob/endpoint_status/catalogs/catalog.latest-status.ttl) is based on the catalog of endpoint and is updated every hour to indicate if an endpoint is online or not. The script is detailed in a dedicated [script folder](./scripts/endpoint_status/README.md).
+
 ## Directories
 
 There are 7 directories in this repository:

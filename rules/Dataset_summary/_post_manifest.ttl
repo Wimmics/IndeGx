@@ -1,0 +1,565 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <post/datatypeExistenceFromclassPropertyObjectTypesExistence.ttl>
+        <post/propertyCooccurencesFromSummary.ttl>
+    ) .
+
+
+<post/datatypeExistenceFromclassPropertyObjectTypesExistence.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            dcterms:description """Datatypes of the literals in the dataset""" ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?endpoint {
+                    ?endpoint kgi:availableLiteralDatatypes ?datatype .
+                }
+            } WHERE {
+                GRAPH ?endpoint {
+                    ?objectDatatypePartition void:inDataset ?endpoint ;
+                        kgi:availableLiteralDatatypes ?datatype .
+                }
+            }"""
+        ]
+    ) .
+
+<post/propertyCooccurencesFromSummary.ttl> a mf:ManifestEntry ;
+    dcterms:description """Property coocurrences from the summary""" ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 ; 
+                        ?p6 ?object6 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 ; 
+                        ?p6 ?object6 ; 
+                        ?p7 ?object7 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 ; 
+                        ?p6 ?object6 ; 
+                        ?p7 ?object7 ; 
+                        ?p8 ?object8 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 ; 
+                        ?p6 ?object6 ; 
+                        ?p7 ?object7 ; 
+                        ?p8 ?object8 ; 
+                        ?p9 ?object9 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 ; 
+                        ?p6 ?object6 ; 
+                        ?p7 ?object7 ; 
+                        ?p8 ?object8 ; 
+                        ?p9 ?object9 ; 
+                        ?p10 ?object10 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9), STR(?p10) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 ;
+                        void:property ?p11 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 ; 
+                        ?p6 ?object6 ; 
+                        ?p7 ?object7 ; 
+                        ?p8 ?object8 ; 
+                        ?p9 ?object9 ; 
+                        ?p10 ?object10 ; 
+                        ?p11 ?object11 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                FILTER(STR(?p10) > STR(?p11))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9), STR(?p10), STR(?p11) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?datasetGraph {
+                    ?dataset void:propertyPartition ?propertyCoPartition .
+                    ?propertyCoPartition a void:PropertyPartition ;
+                        void:property ?p1 ;
+                        void:property ?p2 ;
+                        void:property ?p3 ;
+                        void:property ?p4 ;
+                        void:property ?p5 ;
+                        void:property ?p6 ;
+                        void:property ?p7 ;
+                        void:property ?p8 ;
+                        void:property ?p9 ;
+                        void:property ?p10 ;
+                        void:property ?p11 ;
+                        void:property ?p12 .
+                }
+            } WHERE {
+                GRAPH ?datasetGraph {
+                    ?dataset kgi:summary ?summaryGraph .
+                }
+                GRAPH ?summaryGraph {
+                    ?subject ?p1 ?object1 ; 
+                        ?p2 ?object2 ; 
+                        ?p3 ?object3 ; 
+                        ?p4 ?object4 ; 
+                        ?p5 ?object5 ; 
+                        ?p6 ?object6 ; 
+                        ?p7 ?object7 ; 
+                        ?p8 ?object8 ; 
+                        ?p9 ?object9 ; 
+                        ?p10 ?object10 ; 
+                        ?p11 ?object11 ; 
+                        ?p12 ?object12 .
+                }
+                FILTER(STR(?p1) > STR(?p2)) 
+                FILTER(STR(?p2) > STR(?p3)) 
+                FILTER(STR(?p3) > STR(?p4))
+                FILTER(STR(?p4) > STR(?p5))
+                FILTER(STR(?p5) > STR(?p6))
+                FILTER(STR(?p6) > STR(?p7))
+                FILTER(STR(?p7) > STR(?p8))
+                FILTER(STR(?p8) > STR(?p9))
+                FILTER(STR(?p9) > STR(?p10))
+                FILTER(STR(?p10) > STR(?p11))
+                FILTER(STR(?p11) > STR(?p12))
+                BIND( IRI( CONCAT( STR(kgi:), MD5( CONCAT( STR($rawEndpointUrl), STR(?p1), STR(?p2), STR(?p3), STR(?p4), STR(?p5), STR(?p6), STR(?p7), STR(?p8), STR(?p9), STR(?p10), STR(?p11), STR(?p12) ) ) ) ) AS ?propertyCoPartition )
+            }"""
+        ]
+    ) .
