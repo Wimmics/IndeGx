@@ -8,7 +8,7 @@ export enum LogLevel {
     INFO = "INFO"
 }
 
-export const defaultLogFileName = "logs.log"
+export const defaultLogFileName = "script.log"
 let logFileName = defaultLogFileName
 let defaultLogLevel = LogLevel.LOG;
 
