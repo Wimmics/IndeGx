@@ -141,6 +141,10 @@ echo "Europa endpoint treated, `wc -l $europa_output_file` lines"
 
 rm $tmp_query_file
 
+# https://druid.datalegend.net/
+# List of datasets: https://druid.datalegend.net/_api/facets/datasets
+# Dataset SPARQL endpoint: https://druid.datalegend.net/datasets/{results[].ownerAccountName}/{results[].name}/sparql avec results[].sparql == true
+
 # Previous version of the catalog
 if [ -e $published_catalog ]; then
     echo "Treating previous version of the catalog"
