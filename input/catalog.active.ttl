@@ -1,0 +1,1101 @@
+@prefix schema: <https://schema.org/> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.hegroup.org%2Fsparql> void:sparqlEndpoint <http://sparql.hegroup.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ftuskegee.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://tuskegee.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fbbc%2Fpeel%2Fsparql%2F> void:sparqlEndpoint <http://dbtune.org/bbc/peel/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fyago-knowledge.org%2Fsparql%2Fquery> void:sparqlEndpoint <https://yago-knowledge.org/sparql/query> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flov.linkeddata.es%2Fdataset%2Flov%2Fsparql> void:sparqlEndpoint <https://lov.linkeddata.es/dataset/lov/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/HistoryOfWork/historyOfWork-all-latest/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdatos.gob.es%2Fvirtuoso%2Fsparql> void:sparqlEndpoint <https://datos.gob.es/virtuoso/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql%2F> void:sparqlEndpoint <https://hamap.expasy.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cervantesvirtual.com%2Fsparql> void:sparqlEndpoint <http://data.cervantesvirtual.com/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fgemeentegeschiedenis%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/gemeentegeschiedenis/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FHeritage%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/AdamNet/Heritage/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdigitaalerfgoed.poolparty.biz%2FPoolParty%2Fsparql%2Fterm%2Fid%2Fcht> void:sparqlEndpoint <https://digitaalerfgoed.poolparty.biz/PoolParty/sparql/term/id/cht> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.mpsv.cz%2Fsparql%2F> void:sparqlEndpoint <https://data.mpsv.cz/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fopendatacommunities.org%2Fsparql%2F> void:sparqlEndpoint <http://opendatacommunities.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fcr.eionet.europa.eu%2Fsparql> void:sparqlEndpoint <https://cr.eionet.europa.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flinkeddata.uriburner.com%2Fsparql> void:sparqlEndpoint <https://linkeddata.uriburner.com/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.bnf.fr%2Fsparql> void:sparqlEndpoint <http://data.bnf.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdruid.datalegend.net%2FAdamNet%2FHeritage%2Fsparql%2FHeritage> void:sparqlEndpoint <https://druid.datalegend.net/AdamNet/Heritage/sparql/Heritage> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhitontology.eu%2Fsparql%2F> void:sparqlEndpoint <https://hitontology.eu/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fsparql%2F> void:sparqlEndpoint <https://rpp-opendata.egon.gov.cz/odrpp/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fruian.linked.opendata.cz%2Fsparql> void:sparqlEndpoint <https://ruian.linked.opendata.cz/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdatos.bcn.cl%2Fsparql> void:sparqlEndpoint <https://datos.bcn.cl/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flinkedwiki.com%2Fsparql> void:sparqlEndpoint <https://linkedwiki.com/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.hegroup.org%2Fsparql%2F> void:sparqlEndpoint <http://sparql.hegroup.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flinkeddata.uriburner.com%2Fsparql%2F> void:sparqlEndpoint <http://linkeddata.uriburner.com/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> void:sparqlEndpoint <http://vulcan.cs.uga.edu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2Flithology> void:sparqlEndpoint <http://resource.geolba.ac.at/PoolParty/sparql/lithology> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Fweather%2Fsparql> void:sparqlEndpoint <https://ontology.inrae.fr/weather/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.doremus.org%2Fsparql> void:sparqlEndpoint <http://data.doremus.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flinkedgeodata.org%2Fsparql> void:sparqlEndpoint <http://linkedgeodata.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2Fthesaurus%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/MiconSchorsij/thesaurus/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.foodie-cloud.org%2Fsparql> void:sparqlEndpoint <https://www.foodie-cloud.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bne.es%2Fsparql> void:sparqlEndpoint <http://datos.bne.es/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fld.cultural.jp%2Fsparql> void:sparqlEndpoint <https://ld.cultural.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fstatistics.data.gov.uk%2Fsparql> void:sparqlEndpoint <http://statistics.data.gov.uk/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flingualibre.org%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> void:sparqlEndpoint <https://lingualibre.org/bigdata/namespace/wdq/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.glycoinfo.org%2Fsparql> void:sparqlEndpoint <https://sparql.glycoinfo.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fregulatorycircuits-lod.genouest.org%2Fsparql%2F> void:sparqlEndpoint <https://regulatorycircuits-lod.genouest.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.odw.tw> void:sparqlEndpoint <http://sparql.odw.tw> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FjobHoard-latest%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/HistoryOfWork/jobHoard-latest/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flod.sztaki.hu%2Fsparql> void:sparqlEndpoint <https://lod.sztaki.hu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fstwv%2Fquery> void:sparqlEndpoint <https://zbw.eu/beta/sparql/stwv/query> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fjsu.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://jsu.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.thegazette.co.uk%2Fsparql> void:sparqlEndpoint <https://www.thegazette.co.uk/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-DH%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/Admissies-DH/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FjobHoard%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/jobHoard/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpremon.fbk.eu%2Fsparql> void:sparqlEndpoint <http://premon.fbk.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fanzsrc-for> void:sparqlEndpoint <http://vocabs.ands.org.au/repository/api/sparql/anzsrc-for> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.lynx-project.eu%2F> void:sparqlEndpoint <http://sparql.lynx-project.eu/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fopendatacommunities.org%2Fsparql> void:sparqlEndpoint <http://opendatacommunities.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.nakala.fr%2Fsparql> void:sparqlEndpoint <https://www.nakala.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fkaiko.getalp.org%2Fsparql%2F> void:sparqlEndpoint <http://kaiko.getalp.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.idref.fr%2Fsparql> void:sparqlEndpoint <https://data.idref.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.data.muziekweb.nl%2Fdatasets%2Fmuziekweborganization%2FMuziekweb%2Fservices%2FMuziekweb%2Fsparql> void:sparqlEndpoint <https://api.data.muziekweb.nl/datasets/muziekweborganization/Muziekweb/services/Muziekweb/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FClio-Infra%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/Clio-Infra/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.cervantesvirtual.com%2Fsparql> void:sparqlEndpoint <https://data.cervantesvirtual.com/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fweakg.i3s.unice.fr%2Fsparql> void:sparqlEndpoint <https://weakg.i3s.unice.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flinguistic.linkeddata.es%2Fsparql%2F> void:sparqlEndpoint <http://linguistic.linkeddata.es/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata.mfcr.cz%2Flod%2Fsparql> void:sparqlEndpoint <https://opendata.mfcr.cz/lod/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql%2F> void:sparqlEndpoint <http://data.allie.dbcls.jp/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FATM-DEMO%2FATM-CLARIAH-DEMO%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/ATM-DEMO/ATM-CLARIAH-DEMO/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fclara.univ-nantes.fr%2Fsparql> void:sparqlEndpoint <https://clara.univ-nantes.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fideal-rdf.dbcls.jp%2Fsparql> void:sparqlEndpoint <https://ideal-rdf.dbcls.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.escr.fr%2Fsparql> void:sparqlEndpoint <https://data.escr.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fatted.jp%2Fsparql> void:sparqlEndpoint <https://atted.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fdcatap%2Fsparql> void:sparqlEndpoint <https://query.wikidata.org/bigdata/namespace/dcatap/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.uniprot.org%2Fsparql> void:sparqlEndpoint <https://sparql.uniprot.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.geneontology.org%2Fblazegraph%2Fsparql> void:sparqlEndpoint <http://rdf.geneontology.org/blazegraph/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.lotico.com%3A3030%2Flotico%2Fsparql> void:sparqlEndpoint <http://www.lotico.com:3030/lotico/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fjamendo%2Fsparql> void:sparqlEndpoint <http://dbtune.org/jamendo/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Ffolklore%2Fsparql> void:sparqlEndpoint <https://ldf.fi/folklore/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.orthodb.org%2Fsparql> void:sparqlEndpoint <http://sparql.orthodb.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fmakg.org%2Fsparql> void:sparqlEndpoint <https://makg.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Ftriplestore.iccu.sbn.it%2Fsparql> void:sparqlEndpoint <https://triplestore.iccu.sbn.it/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fknowledge.brc.riken.jp%2Fsparql> void:sparqlEndpoint <https://knowledge.brc.riken.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Forkg.org%2Ftriplestore> void:sparqlEndpoint <https://orkg.org/triplestore> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql> void:sparqlEndpoint <https://data.allie.dbcls.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flandportal.org%2Fsparql> void:sparqlEndpoint <https://landportal.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fmint%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/nlgis/mint/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fjoinup.ec.europa.eu%2Fsparql%2F> void:sparqlEndpoint <https://joinup.ec.europa.eu/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.cultura.gov.it%2Fsparql> void:sparqlEndpoint <https://dati.cultura.gov.it/sparql> .
+
+kgi:Catalog rdf:type dcat:Catalog ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fuccaribe.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.aucklandmuseum.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.southgreen.fr> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.orthodb.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.southgreen.fr%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ftaxref.mnhn.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flsd.dbcls.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.muninn-project.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fkirjasampo%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.lynx-project.eu> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cervantesvirtual.com%2Fopenrdf-sesame%2Frepositories%2Fdata> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.gesis.org%2Fclaimskg%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.curriculum.edu.au%2FPoolParty%2Fsparql%2Fscot> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fforum.semantic-metabolomics.fr%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.crssnky.xyz%2Fspql%2Fimas%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FjobHoard-latest%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fkirjasampo%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fenvironment.data.gov.uk%2Fsparql%2Fbwq%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.mpsv.cz%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fclassical%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fww1lod%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.govdata.de%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.muninn-project.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FORCID-data%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftriplestore.iccu.sbn.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FClio-Infra%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopen.bydata.de%2Fapi%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Faemet.linkeddata.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bne.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fopendatacommunities.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinkedgeodata.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.epo.org%2Flinked-data%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FCLARIAH-VL%2FGhent-Gazetteer%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fanzsrc-for> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhkcan.julac.org%2Flod%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ardc.edu.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_geologic-time-scale-2020> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fxula.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FmicroHeights%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.lynx-project.eu%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.logainm.ie%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2Fthesaurus%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2Ftectonicunit> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FESTA-DEMO%2Festa-demo-viz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.proconsortium.org%2Fvirtuoso%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata.aragon.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fbmrbpub.protein.osaka-u.ac.jp%2Fsearch%2Frdf> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdbmi-icode-01.dbmi.pitt.edu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.hegroup.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdb.artsdata.ca%2Frepositories%2Fartsdata> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fatted.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fweakg.i3s.unice.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.foodie-cloud.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsophox.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.datao.net%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fbio2rdf.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.glygen.org%3A8880%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2F147.100.179.235%3A8082%2Fblazegraph%2Fnamespace%2FAnaEE_sites%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.persee.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.muninn-project.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.uniprot.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.muziekweb.nl%2FMuziekwebOrganization%2FMuziekweb%2Fsparql%2FMuziekweb> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flandportal.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flinkeddata.uriburner.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fgenome.microbedb.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhitontology.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leden%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fbeta.sparql.swisslipids.org%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fja.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpatho.phenomebrowser.net%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fmufi%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fsicada%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fgeo.linkeddata.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fcoxpresdb.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.bibliotheken.nl%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.finto.fi%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fxn--slovnk-7va.gov.cz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Falaska.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinguistic.linkeddata.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ffr.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fjamendo%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Furiburner.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fyago-knowledge.org%2Fsparql%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fforum.semantic-metabolomics.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.europeana.eu> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fbio2rdf.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flov.okfn.org%2Fdataset%2Flov%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.insee.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Falma.uni.lu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FPer-LOD-ad-Astra%2FSleutelkastje%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fgemeentegeschiedenis%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fkaiko.getalp.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwebisa.webdatacommons.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.hegroup.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ftuskegee.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fbbc%2Fpeel%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flov.linkeddata.es%2Fdataset%2Flov%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdatos.gob.es%2Fvirtuoso%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cervantesvirtual.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FHeritage%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdigitaalerfgoed.poolparty.biz%2FPoolParty%2Fsparql%2Fterm%2Fid%2Fcht> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fopendatacommunities.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fcr.eionet.europa.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.bnf.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdruid.datalegend.net%2FAdamNet%2FHeritage%2Fsparql%2FHeritage> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhitontology.eu%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fruian.linked.opendata.cz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdatos.bcn.cl%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flinkedwiki.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinkeddata.uriburner.com%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2Flithology> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Fweather%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.doremus.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fld.cultural.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fstatistics.data.gov.uk%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flingualibre.org%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.glycoinfo.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fregulatorycircuits-lod.genouest.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.odw.tw> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flod.sztaki.hu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fstwv%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fjsu.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.thegazette.co.uk%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-DH%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FjobHoard%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpremon.fbk.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.nakala.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fkaiko.getalp.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.idref.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.data.muziekweb.nl%2Fdatasets%2Fmuziekweborganization%2FMuziekweb%2Fservices%2FMuziekweb%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.cervantesvirtual.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fweakg.i3s.unice.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinguistic.linkeddata.es%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata.mfcr.cz%2Flod%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FATM-DEMO%2FATM-CLARIAH-DEMO%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fclara.univ-nantes.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fideal-rdf.dbcls.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.escr.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fdcatap%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.geneontology.org%2Fblazegraph%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.lotico.com%3A3030%2Flotico%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Ffolklore%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.orthodb.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fmakg.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fknowledge.brc.riken.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Forkg.org%2Ftriplestore> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fmint%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fjoinup.ec.europa.eu%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.cultura.gov.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fagrovoc.fao.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.linkedopendata.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdati.beniculturali.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Feventmedia.eurecom.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Faffymetrix.bio2rdf.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.parliament.uk%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcaligraph.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.europa.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fbmrbpub.pdbj.org%2Fsearch%2Frdf> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fma-graph.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fpremon.fbk.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.crssnky.xyz%2Fspql%2Fimas%2Fquery%3Fquery%3D> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flod.b3kat.de%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Ffrenchcropusage%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fjoinup.ec.europa.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fid.eaufrance.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FLabourconflicts%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fid.nlm.nih.gov%2Fmesh%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fmusicbrainz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdba-rdf.biosciencedbc.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwikidata.demo.openlinksw.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinkedgeodata.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.nationallibrary.fi%2Fbib%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ffr.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FImages%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fohsu.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fgemeentegeschiedenis%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2FGeologicUnit> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsemanticweb.cs.vu.nl%2Fverrijktkoninkrijk%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcultura.linkeddata.es%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fsemparl%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendatacommunities.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fstirdata-semantic.ails.ece.ntua.gr%2Fapi%2Fcontent%2Fcy%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinkeddata.finki.ukim.mk%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2FOnTheWaterfront%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FHISCO-latest%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.persee.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fde.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.open.ac.uk%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.genome.jp%2Fsparql%2Flinkdb> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fkaiko.getalp.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fmmisw.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flinked.opendata.cz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fariadne-registry.dcu.gr%3A8890%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flibris.kb.se%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fchemdb.semweb.csdb.cn%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fwarsa%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdati.isprambiente.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FCollectie-Interviews-Wim-Kok-deel-2%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.hegroup.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdatos.bne.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Faopwiki.rdf.bigcat-bioinformatics.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fjamendo%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ferebe-vm2.i3s.unice.fr%3A5000%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Ffrenchcropusage%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.nextprot.org%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fts.glytoucan.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fupr.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ss-framework.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-Haarlem%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpublications.europa.eu%2Fwebapi%2Frdf%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.disgenet.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftaxref.mnhn.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.rism.info%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.isprambiente.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fhistoric-maps%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.nibb.ac.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Fbsv%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flod.abes.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fgeo.linkeddata.es%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fiisg-kg%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fpm20%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fslod.fiz-karlsruhe.de%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fpgxlod.loria.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fbittich.be%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.beniculturali.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fja.dbpedia.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.archaeologydataservice.ac.uk%2Fsparql%2Frepositories%2Farchives> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Ffolklore%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.nextprot.org> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2Fendpoint%2Fchebi> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fcshapes%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fopendata.aragon.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fjpsearch.go.jp%2Frdf%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bne.es%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdemo.openlinksw.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ffactforge.net%2Frepositories%2Fff-news> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FGeography%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCEDAR-S%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fwarsa%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.bnf.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.performing-arts.ch%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fstw%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.mff.cuni.cz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fmgkb.fiz-karlsruhe.de%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fes.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2Fall%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Faffymetrix.bio2rdf.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsibils.text-analytics.ch%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.glyconavi.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.cinematheque.qc.ca%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpsm.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flod.nl.go.kr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cervantesvirtual.com%2Fbvmc-lod%2Frepositories%2Fdata> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.rhea-db.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.dia.gov.cz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fjpsearch.go.jp%2Frdf%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fld.ncl.edu.tw%2Ffuseki%2Flod%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_2018> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FBaghdad-to-London%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.mimo-db.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.ox.ac.uk%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fcs.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2FOpenData> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fcolil.dbcls.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocab.getty.edu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdati.camera.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fglyconnect.expasy.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.genome.jp%2Fsparql%2Flinkdb> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flibris.kb.se%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bcn.cl%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhawaii.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fmsm.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.archives-ouvertes.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fww1lod%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fbbc%2Fpeel%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.logainm.ie%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fts.glycosmos.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fclassical%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2Fsemweb> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fchemblmirror.rdf.bigcat-bioinformatics.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fimagesnippets.com%2Fsparql%2Fimages> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Futep.eagle-i.net%2Fsparqler%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.nextprot.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fid.nlm.nih.gov%2Fmesh%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.snik.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.kunstmuseum.nl%2Fquery%2Fproxy%2Fwdqs%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.gov.cz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fts.opendata.inrae.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fschema.gov.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flandregistry.data.gov.uk%2Flandregistry%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata1.opendata.u-psud.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.cssz.cz%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flod.tamtamresearch.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.odw.tw%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.finto.fi%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvirtuoso.plateforme.dipso.inrae.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fpublications.europa.eu%2Fwebapi%2Frdf%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.proconsortium.org%2Fvirtuoso%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2Fendpoint%2Fidsm> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsemantic.eea.europa.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocab.nerc.ac.uk%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fvocab.nerc.ac.uk%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.europeana.eu%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flipidmaps.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fgnd%2Fquery> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flov.okfn.org%2Fdataset%2Flov%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fvocab.getty.edu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fga_geologic-unit-type_v0-1> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Faemet.linkeddata.es%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fes.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fes.dbpedia.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.europa.eu%2Feuodp%2Fsparqlep> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flod.nl.go.kr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ardc.edu.au%2Frepository%2Fapi%2Fsparql%2Faas_the-unified-astronomy-thesaurus_4-0-1> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flod.xdams.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flod.xdams.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Feventmedia.eurecom.fr%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2FGeologicTimeScale> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fd2kab.i3s.unice.fr%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.camera.it%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fedan.si.edu%2Fsaam%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhkcan.julac.org%2Flod%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fja.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flingualibre.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fmetadb.riken.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fmetadb.riken.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpatho.phenomebrowser.net%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fgenome.microbedb.jp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcultura.linkeddata.es%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpt.dbpedia.org%2Fsparql%2F> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpt.dbpedia.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fgeosparql.demo.openlinksw.com%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.entice.eu%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.uniprot.org> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsemanticweb.cs.vu.nl%2Fdss%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.wikipathways.org%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leerlingen%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fservices%2FhistoryOfWork-all-latest%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fmmm%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fcorresp%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fstrikes%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FRubenS%2Fmarc21%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2FANDB-ADB-all%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fmromanello%2Fhucit%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FjobHoard%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fdeaths-1910-1920%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fadb-leden%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCatasto%2Fsparql> ;
+dcat:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FVanMeerendonk%2Fsparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fagrovoc.fao.org%2Fsparql> void:sparqlEndpoint <https://agrovoc.fao.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.linkedopendata.eu%2Fsparql> void:sparqlEndpoint <https://query.linkedopendata.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdati.beniculturali.it%2Fsparql> void:sparqlEndpoint <http://dati.beniculturali.it/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Feventmedia.eurecom.fr%2Fsparql> void:sparqlEndpoint <http://eventmedia.eurecom.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Faffymetrix.bio2rdf.org%2Fsparql> void:sparqlEndpoint <http://affymetrix.bio2rdf.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql> void:sparqlEndpoint <https://hamap.expasy.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.parliament.uk%2Fsparql> void:sparqlEndpoint <https://api.parliament.uk/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fcaligraph.org%2Fsparql> void:sparqlEndpoint <http://caligraph.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.europa.eu%2Fsparql> void:sparqlEndpoint <https://data.europa.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fbmrbpub.pdbj.org%2Fsearch%2Frdf> void:sparqlEndpoint <https://bmrbpub.pdbj.org/search/rdf> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fma-graph.org%2Fsparql> void:sparqlEndpoint <http://ma-graph.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fpremon.fbk.eu%2Fsparql> void:sparqlEndpoint <https://premon.fbk.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Falma.uni.lu%2Fsparql> void:sparqlEndpoint <https://alma.uni.lu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.crssnky.xyz%2Fspql%2Fimas%2Fquery%3Fquery%3D> void:sparqlEndpoint <https://sparql.crssnky.xyz/spql/imas/query?query=> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ftaxref.mnhn.fr%2Fsparql> void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flod.b3kat.de%2Fsparql> void:sparqlEndpoint <http://lod.b3kat.de/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flsd.dbcls.jp%2Fsparql> void:sparqlEndpoint <https://lsd.dbcls.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Ffrenchcropusage%2Fsparql> void:sparqlEndpoint <https://ontology.inrae.fr/frenchcropusage/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fjoinup.ec.europa.eu%2Fsparql> void:sparqlEndpoint <https://joinup.ec.europa.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fid.eaufrance.fr%2Fsparql> void:sparqlEndpoint <http://id.eaufrance.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql> void:sparqlEndpoint <http://data.allie.dbcls.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fuccaribe.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://uccaribe.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FLabourconflicts%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG/Labourconflicts/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fmufi%2Fsparql> void:sparqlEndpoint <https://ldf.fi/mufi/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.southgreen.fr%2F> void:sparqlEndpoint <http://sparql.southgreen.fr/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fid.nlm.nih.gov%2Fmesh%2Fsparql> void:sparqlEndpoint <https://id.nlm.nih.gov/mesh/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fmusicbrainz%2Fsparql> void:sparqlEndpoint <http://dbtune.org/musicbrainz/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdba-rdf.biosciencedbc.jp%2Fsparql> void:sparqlEndpoint <https://dba-rdf.biosciencedbc.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwikidata.demo.openlinksw.com%2Fsparql> void:sparqlEndpoint <http://wikidata.demo.openlinksw.com/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fxula.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://xula.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flinkedgeodata.org%2Fsparql%2F> void:sparqlEndpoint <http://linkedgeodata.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.nationallibrary.fi%2Fbib%2Fsparql> void:sparqlEndpoint <https://data.nationallibrary.fi/bib/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwebisa.webdatacommons.org%2Fsparql> void:sparqlEndpoint <http://webisa.webdatacommons.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ffr.dbpedia.org%2Fsparql> void:sparqlEndpoint <http://fr.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FImages%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG/Images/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fohsu.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://ohsu.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fgemeentegeschiedenis%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/nlgis/gemeentegeschiedenis/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2FGeologicUnit> void:sparqlEndpoint <http://resource.geolba.ac.at/PoolParty/sparql/GeologicUnit> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsemanticweb.cs.vu.nl%2Fverrijktkoninkrijk%2Fsparql> void:sparqlEndpoint <https://semanticweb.cs.vu.nl/verrijktkoninkrijk/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.epo.org%2Flinked-data%2Fquery> void:sparqlEndpoint <https://data.epo.org/linked-data/query> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fcultura.linkeddata.es%2Fsparql%2F> void:sparqlEndpoint <http://cultura.linkeddata.es/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fsemparl%2Fsparql> void:sparqlEndpoint <http://ldf.fi/semparl/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2F147.100.179.235%3A8082%2Fblazegraph%2Fnamespace%2FAnaEE_sites%2Fsparql> void:sparqlEndpoint <http://147.100.179.235:8082/blazegraph/namespace/AnaEE_sites/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flinguistic.linkeddata.es%2Fsparql> void:sparqlEndpoint <http://linguistic.linkeddata.es/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fopendatacommunities.org%2Fsparql> void:sparqlEndpoint <https://opendatacommunities.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fstirdata-semantic.ails.ece.ntua.gr%2Fapi%2Fcontent%2Fcy%2Fsparql> void:sparqlEndpoint <https://stirdata-semantic.ails.ece.ntua.gr/api/content/cy/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flinkeddata.finki.ukim.mk%2Fsparql> void:sparqlEndpoint <http://linkeddata.finki.ukim.mk/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2FOnTheWaterfront%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/MiconSchorsij/OnTheWaterfront/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FHISCO-latest%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/HistoryOfWork/HISCO-latest/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.persee.fr%2Fsparql> void:sparqlEndpoint <http://data.persee.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fde.dbpedia.org%2Fsparql> void:sparqlEndpoint <http://de.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.open.ac.uk%2Fquery> void:sparqlEndpoint <http://data.open.ac.uk/query> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.genome.jp%2Fsparql%2Flinkdb> void:sparqlEndpoint <https://www.genome.jp/sparql/linkdb> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fkaiko.getalp.org%2Fsparql> void:sparqlEndpoint <http://kaiko.getalp.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fmmisw.org%2Fsparql> void:sparqlEndpoint <https://mmisw.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flinked.opendata.cz%2Fsparql> void:sparqlEndpoint <https://linked.opendata.cz/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fariadne-registry.dcu.gr%3A8890%2Fsparql> void:sparqlEndpoint <http://ariadne-registry.dcu.gr:8890/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flibris.kb.se%2Fsparql> void:sparqlEndpoint <http://libris.kb.se/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fbio2rdf.org%2Fsparql> void:sparqlEndpoint <https://bio2rdf.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Faemet.linkeddata.es%2Fsparql> void:sparqlEndpoint <http://aemet.linkeddata.es/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.crssnky.xyz%2Fspql%2Fimas%2Fquery> void:sparqlEndpoint <https://sparql.crssnky.xyz/spql/imas/query> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fchemdb.semweb.csdb.cn%2Fsparql> void:sparqlEndpoint <http://chemdb.semweb.csdb.cn/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fwarsa%2Fsparql> void:sparqlEndpoint <http://ldf.fi/warsa/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.muziekweb.nl%2FMuziekwebOrganization%2FMuziekweb%2Fsparql%2FMuziekweb> void:sparqlEndpoint <https://data.muziekweb.nl/MuziekwebOrganization/Muziekweb/sparql/Muziekweb> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdati.isprambiente.it%2Fsparql> void:sparqlEndpoint <http://dati.isprambiente.it/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FCollectie-Interviews-Wim-Kok-deel-2%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG-DA/Collectie-Interviews-Wim-Kok-deel-2/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://tsu.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.hegroup.org%2Fsparql> void:sparqlEndpoint <https://sparql.hegroup.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdatos.bne.es%2Fsparql> void:sparqlEndpoint <https://datos.bne.es/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Faopwiki.rdf.bigcat-bioinformatics.org%2Fsparql> void:sparqlEndpoint <https://aopwiki.rdf.bigcat-bioinformatics.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fjamendo%2Fsparql%2F> void:sparqlEndpoint <http://dbtune.org/jamendo/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ferebe-vm2.i3s.unice.fr%3A5000%2Fsparql> void:sparqlEndpoint <http://erebe-vm2.i3s.unice.fr:5000/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fhkcan.julac.org%2Flod%2Fsparql> void:sparqlEndpoint <http://hkcan.julac.org/lod/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.muninn-project.org%2Fsparql> void:sparqlEndpoint <http://rdf.muninn-project.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Ffrenchcropusage%2Fquery> void:sparqlEndpoint <https://ontology.inrae.fr/frenchcropusage/query> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.europeana.eu> void:sparqlEndpoint <http://sparql.europeana.eu> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fgeo.linkeddata.es%2Fsparql> void:sparqlEndpoint <http://geo.linkeddata.es/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.nextprot.org%2F> void:sparqlEndpoint <https://sparql.nextprot.org/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FORCID-data%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG-DA/ORCID-data/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Falaska.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://alaska.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fts.glytoucan.org%2Fsparql> void:sparqlEndpoint <https://ts.glytoucan.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fupr.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://upr.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ss-framework.com%2Fsparql> void:sparqlEndpoint <http://www.ss-framework.com/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2Ftectonicunit> void:sparqlEndpoint <http://resource.geolba.ac.at/PoolParty/sparql/tectonicunit> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-Haarlem%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/Admissies-Haarlem/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpublications.europa.eu%2Fwebapi%2Frdf%2Fsparql> void:sparqlEndpoint <http://publications.europa.eu/webapi/rdf/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.bibliotheken.nl%2Fsparql> void:sparqlEndpoint <http://data.bibliotheken.nl/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.disgenet.org%2Fsparql%2F> void:sparqlEndpoint <http://rdf.disgenet.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Ftaxref.mnhn.fr%2Fsparql> void:sparqlEndpoint <https://taxref.mnhn.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fcoxpresdb.jp%2Fsparql> void:sparqlEndpoint <https://coxpresdb.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.gesis.org%2Fclaimskg%2Fsparql> void:sparqlEndpoint <https://data.gesis.org/claimskg/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.rism.info%2Fsparql> void:sparqlEndpoint <http://data.rism.info/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flov.okfn.org%2Fdataset%2Flov%2Fsparql> void:sparqlEndpoint <http://lov.okfn.org/dataset/lov/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.isprambiente.it%2Fsparql> void:sparqlEndpoint <https://dati.isprambiente.it/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fhistoric-maps%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG/historic-maps/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.nibb.ac.jp%2Fsparql> void:sparqlEndpoint <http://sparql.nibb.ac.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Fbsv%2Fsparql> void:sparqlEndpoint <https://ontology.inrae.fr/bsv/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.datao.net%2Fsparql> void:sparqlEndpoint <http://sparql.datao.net/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fopen.bydata.de%2Fapi%2Fsparql> void:sparqlEndpoint <https://open.bydata.de/api/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FmicroHeights%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/microHeights/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.govdata.de%2Fsparql> void:sparqlEndpoint <https://www.govdata.de/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flod.abes.fr%2Fsparql> void:sparqlEndpoint <https://lod.abes.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fgeo.linkeddata.es%2Fsparql%2F> void:sparqlEndpoint <http://geo.linkeddata.es/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.muninn-project.org%2Fsparql%2F> void:sparqlEndpoint <http://rdf.muninn-project.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fiisg-kg%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG/iisg-kg/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.lynx-project.eu> void:sparqlEndpoint <http://sparql.lynx-project.eu> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Ffr.dbpedia.org%2Fsparql> void:sparqlEndpoint <https://fr.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdb.artsdata.ca%2Frepositories%2Fartsdata> void:sparqlEndpoint <http://db.artsdata.ca/repositories/artsdata> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fpm20%2Fquery> void:sparqlEndpoint <https://zbw.eu/beta/sparql/pm20/query> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdbpedia.org%2Fsparql> void:sparqlEndpoint <https://dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fslod.fiz-karlsruhe.de%2Fsparql> void:sparqlEndpoint <https://slod.fiz-karlsruhe.de/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fpgxlod.loria.fr%2Fsparql> void:sparqlEndpoint <https://pgxlod.loria.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fbittich.be%2Fsparql> void:sparqlEndpoint <https://bittich.be/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.beniculturali.it%2Fsparql> void:sparqlEndpoint <https://dati.beniculturali.it/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fja.dbpedia.org%2Fsparql%2F> void:sparqlEndpoint <http://ja.dbpedia.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fclassical%2Fsparql> void:sparqlEndpoint <http://dbtune.org/classical/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.archaeologydataservice.ac.uk%2Fsparql%2Frepositories%2Farchives> void:sparqlEndpoint <http://data.archaeologydataservice.ac.uk/sparql/repositories/archives> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsophox.org%2Fsparql> void:sparqlEndpoint <https://sophox.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Ffolklore%2Fsparql> void:sparqlEndpoint <http://ldf.fi/folklore/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.nextprot.org> void:sparqlEndpoint <https://sparql.nextprot.org> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2Fendpoint%2Fchebi> void:sparqlEndpoint <https://idsm.elixir-czech.cz/sparql/endpoint/chebi> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/andb/andb/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fcshapes%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/nlgis/cshapes/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fweakg.i3s.unice.fr%2Fsparql> void:sparqlEndpoint <http://weakg.i3s.unice.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fopendata.aragon.es%2Fsparql> void:sparqlEndpoint <http://opendata.aragon.es/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fjpsearch.go.jp%2Frdf%2Fsparql> void:sparqlEndpoint <https://jpsearch.go.jp/rdf/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bne.es%2Fsparql%2F> void:sparqlEndpoint <http://datos.bne.es/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdemo.openlinksw.com%2Fsparql> void:sparqlEndpoint <http://demo.openlinksw.com/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ffactforge.net%2Frepositories%2Fff-news> void:sparqlEndpoint <http://factforge.net/repositories/ff-news> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FGeography%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/AdamNet/Geography/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.orthodb.org%2Fsparql> void:sparqlEndpoint <https://sparql.orthodb.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FCLARIAH-VL%2FGhent-Gazetteer%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/CLARIAH-VL/Ghent-Gazetteer/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCEDAR-S%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/CEDAR-S/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fwarsa%2Fsparql> void:sparqlEndpoint <https://ldf.fi/warsa/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.bnf.fr%2Fsparql> void:sparqlEndpoint <https://data.bnf.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fkirjasampo%2Fsparql> void:sparqlEndpoint <https://ldf.fi/kirjasampo/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.performing-arts.ch%2Fsparql> void:sparqlEndpoint <https://www.performing-arts.ch/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fstw%2Fquery> void:sparqlEndpoint <https://zbw.eu/beta/sparql/stw/query> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.finto.fi%2Fsparql> void:sparqlEndpoint <http://api.finto.fi/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.mff.cuni.cz%2Fsparql> void:sparqlEndpoint <https://data.mff.cuni.cz/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fmgkb.fiz-karlsruhe.de%2Fsparql> void:sparqlEndpoint <https://mgkb.fiz-karlsruhe.de/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fes.dbpedia.org%2Fsparql> void:sparqlEndpoint <http://es.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leden%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/andb/andb-leden/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.insee.fr%2Fsparql> void:sparqlEndpoint <https://rdf.insee.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2Fall%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/AdamNet/all/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2Fsparql> void:sparqlEndpoint <https://rdf.metanetx.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.aucklandmuseum.com%2Fsparql> void:sparqlEndpoint <https://api.aucklandmuseum.com/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Faffymetrix.bio2rdf.org%2Fsparql%2F> void:sparqlEndpoint <http://affymetrix.bio2rdf.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsibils.text-analytics.ch%2Fsparql> void:sparqlEndpoint <https://sibils.text-analytics.ch/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.glyconavi.org%2Fsparql> void:sparqlEndpoint <https://sparql.glyconavi.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.cinematheque.qc.ca%2Fsparql> void:sparqlEndpoint <https://data.cinematheque.qc.ca/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpsm.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://psm.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flod.nl.go.kr%2Fsparql> void:sparqlEndpoint <http://lod.nl.go.kr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cervantesvirtual.com%2Fbvmc-lod%2Frepositories%2Fdata> void:sparqlEndpoint <http://data.cervantesvirtual.com/bvmc-lod/repositories/data> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.rhea-db.org%2Fsparql> void:sparqlEndpoint <https://sparql.rhea-db.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.dia.gov.cz%2Fsparql> void:sparqlEndpoint <https://data.dia.gov.cz/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fjpsearch.go.jp%2Frdf%2Fsparql%2F> void:sparqlEndpoint <https://jpsearch.go.jp/rdf/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fld.ncl.edu.tw%2Ffuseki%2Flod%2Fquery> void:sparqlEndpoint <https://ld.ncl.edu.tw/fuseki/lod/query> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_2018> void:sparqlEndpoint <http://vocabs.ands.org.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_2018> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fgenome.microbedb.jp%2Fsparql> void:sparqlEndpoint <https://genome.microbedb.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FBaghdad-to-London%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/Baghdad-to-London/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.mimo-db.eu%2Fsparql> void:sparqlEndpoint <http://data.mimo-db.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.ox.ac.uk%2Fsparql%2F> void:sparqlEndpoint <http://data.ox.ac.uk/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fcs.dbpedia.org%2Fsparql> void:sparqlEndpoint <https://cs.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2FOpenData> void:sparqlEndpoint <http://vocabulary.semantic-web.at/PoolParty/sparql/OpenData> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpatho.phenomebrowser.net%2Fsparql%2F> void:sparqlEndpoint <http://patho.phenomebrowser.net/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fsparql> void:sparqlEndpoint <https://rpp-opendata.egon.gov.cz/odrpp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fcolil.dbcls.jp%2Fsparql> void:sparqlEndpoint <https://colil.dbcls.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocab.getty.edu%2Fsparql> void:sparqlEndpoint <http://vocab.getty.edu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fkirjasampo%2Fsparql> void:sparqlEndpoint <http://ldf.fi/kirjasampo/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fxn--slovnk-7va.gov.cz%2Fsparql> void:sparqlEndpoint <https://xn--slovnk-7va.gov.cz/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fsicada%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG/sicada/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdati.camera.it%2Fsparql> void:sparqlEndpoint <http://dati.camera.it/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fglyconnect.expasy.org%2Fsparql> void:sparqlEndpoint <https://glyconnect.expasy.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fenvironment.data.gov.uk%2Fsparql%2Fbwq%2Fquery> void:sparqlEndpoint <http://environment.data.gov.uk/sparql/bwq/query> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.genome.jp%2Fsparql%2Flinkdb> void:sparqlEndpoint <http://www.genome.jp/sparql/linkdb> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flibris.kb.se%2Fsparql> void:sparqlEndpoint <https://libris.kb.se/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bcn.cl%2Fsparql> void:sparqlEndpoint <http://datos.bcn.cl/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fhawaii.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://hawaii.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fmsm.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://msm.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.archives-ouvertes.fr%2Fsparql> void:sparqlEndpoint <http://sparql.archives-ouvertes.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.persee.fr%2Fsparql> void:sparqlEndpoint <https://data.persee.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.curriculum.edu.au%2FPoolParty%2Fsparql%2Fscot> void:sparqlEndpoint <http://vocabulary.curriculum.edu.au/PoolParty/sparql/scot> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fww1lod%2Fsparql> void:sparqlEndpoint <http://ldf.fi/ww1lod/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fpublications.europa.eu%2Fwebapi%2Frdf%2Fsparql> void:sparqlEndpoint <https://publications.europa.eu/webapi/rdf/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.proconsortium.org%2Fvirtuoso%2Fsparql> void:sparqlEndpoint <https://sparql.proconsortium.org/virtuoso/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fbeta.sparql.swisslipids.org%2F> void:sparqlEndpoint <https://beta.sparql.swisslipids.org/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ardc.edu.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_geologic-time-scale-2020> void:sparqlEndpoint <http://vocabs.ardc.edu.au/repository/api/sparql/csiro_international-chronostratigraphic-chart_geologic-time-scale-2020> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fvocab.getty.edu%2Fsparql> void:sparqlEndpoint <https://vocab.getty.edu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2Fsemweb> void:sparqlEndpoint <http://vocabulary.semantic-web.at/PoolParty/sparql/semweb> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fja.dbpedia.org%2Fsparql> void:sparqlEndpoint <http://ja.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fes.dbpedia.org%2Fsparql%2F> void:sparqlEndpoint <http://es.dbpedia.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fbbc%2Fpeel%2Fsparql> void:sparqlEndpoint <http://dbtune.org/bbc/peel/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhkcan.julac.org%2Flod%2Fsparql> void:sparqlEndpoint <https://hkcan.julac.org/lod/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.uniprot.org> void:sparqlEndpoint <http://sparql.uniprot.org> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fedan.si.edu%2Fsaam%2Fsparql> void:sparqlEndpoint <https://edan.si.edu/saam/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flandregistry.data.gov.uk%2Flandregistry%2Fquery> void:sparqlEndpoint <https://landregistry.data.gov.uk/landregistry/query> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.europa.eu%2Feuodp%2Fsparqlep> void:sparqlEndpoint <https://data.europa.eu/euodp/sparqlep> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FESTA-DEMO%2Festa-demo-viz%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/ESTA-DEMO/esta-demo-viz/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdbmi-icode-01.dbmi.pitt.edu%2Fsparql> void:sparqlEndpoint <https://dbmi-icode-01.dbmi.pitt.edu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fdeaths-1910-1920%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/deaths-1910-1920/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocab.nerc.ac.uk%2Fsparql%2F> void:sparqlEndpoint <http://vocab.nerc.ac.uk/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Futep.eagle-i.net%2Fsparqler%2Fsparql> void:sparqlEndpoint <http://utep.eagle-i.net/sparqler/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.proconsortium.org%2Fvirtuoso%2Fsparql> void:sparqlEndpoint <http://sparql.proconsortium.org/virtuoso/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ardc.edu.au%2Frepository%2Fapi%2Fsparql%2Faas_the-unified-astronomy-thesaurus_4-0-1> void:sparqlEndpoint <http://vocabs.ardc.edu.au/repository/api/sparql/aas_the-unified-astronomy-thesaurus_4-0-1> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flod.xdams.org%2Fsparql> void:sparqlEndpoint <http://lod.xdams.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fstrikes%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/strikes/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fmetadb.riken.jp%2Fsparql> void:sparqlEndpoint <http://metadb.riken.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fmmm%2Fsparql> void:sparqlEndpoint <https://ldf.fi/mmm/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fbio2rdf.org%2Fsparql> void:sparqlEndpoint <http://bio2rdf.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fsparql> void:sparqlEndpoint <https://query.wikidata.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2Fendpoint%2Fidsm> void:sparqlEndpoint <https://idsm.elixir-czech.cz/sparql/endpoint/idsm> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fmromanello%2Fhucit%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/mromanello/hucit/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.cssz.cz%2Fsparql> void:sparqlEndpoint <https://data.cssz.cz/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.glygen.org%3A8880%2Fsparql> void:sparqlEndpoint <http://sparql.glygen.org:8880/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leerlingen%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/andb/andb-leerlingen/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fww1lod%2Fsparql> void:sparqlEndpoint <https://ldf.fi/ww1lod/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fts.opendata.inrae.fr%2Fsparql> void:sparqlEndpoint <http://ts.opendata.inrae.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpt.dbpedia.org%2Fsparql%2F> void:sparqlEndpoint <http://pt.dbpedia.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.kunstmuseum.nl%2Fquery%2Fproxy%2Fwdqs%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> void:sparqlEndpoint <https://api.kunstmuseum.nl/query/proxy/wdqs/bigdata/namespace/wdq/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fes.dbpedia.org%2Fsparql> void:sparqlEndpoint <https://es.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Furiburner.com%2Fsparql> void:sparqlEndpoint <http://uriburner.com/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FPer-LOD-ad-Astra%2FSleutelkastje%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/Per-LOD-ad-Astra/Sleutelkastje/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flipidmaps.org%2Fsparql> void:sparqlEndpoint <https://lipidmaps.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2FGeologicTimeScale> void:sparqlEndpoint <http://resource.geolba.ac.at/PoolParty/sparql/GeologicTimeScale> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fcultura.linkeddata.es%2Fsparql> void:sparqlEndpoint <http://cultura.linkeddata.es/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flingualibre.org%2Fsparql> void:sparqlEndpoint <https://lingualibre.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fforum.semantic-metabolomics.fr%2Fsparql> void:sparqlEndpoint <https://forum.semantic-metabolomics.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fgeosparql.demo.openlinksw.com%2Fsparql> void:sparqlEndpoint <http://geosparql.demo.openlinksw.com/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flov.okfn.org%2Fdataset%2Flov%2Fsparql> void:sparqlEndpoint <https://lov.okfn.org/dataset/lov/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpatho.phenomebrowser.net%2Fsparql> void:sparqlEndpoint <http://patho.phenomebrowser.net/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fga_geologic-unit-type_v0-1> void:sparqlEndpoint <http://vocabs.ands.org.au/repository/api/sparql/ga_geologic-unit-type_v0-1> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fgenome.microbedb.jp%2Fsparql> void:sparqlEndpoint <http://genome.microbedb.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flod.xdams.org%2Fsparql%2F> void:sparqlEndpoint <http://lod.xdams.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fmetadb.riken.jp%2Fsparql> void:sparqlEndpoint <https://metadb.riken.jp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FVanMeerendonk%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG/VanMeerendonk/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.odw.tw%2F> void:sparqlEndpoint <http://sparql.odw.tw/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCatasto%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/dataLegend/Catasto/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fschema.gov.it%2Fsparql> void:sparqlEndpoint <https://schema.gov.it/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Faemet.linkeddata.es%2Fsparql%2F> void:sparqlEndpoint <http://aemet.linkeddata.es/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fimagesnippets.com%2Fsparql%2Fimages> void:sparqlEndpoint <https://imagesnippets.com/sparql/images> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cervantesvirtual.com%2Fopenrdf-sesame%2Frepositories%2Fdata> void:sparqlEndpoint <http://data.cervantesvirtual.com/openrdf-sesame/repositories/data> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FjobHoard%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/IISG/jobHoard/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fkaiko.getalp.org%2Fsparql> void:sparqlEndpoint <https://kaiko.getalp.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.nextprot.org%2Fsparql> void:sparqlEndpoint <https://api.nextprot.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FRubenS%2Fmarc21%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/RubenS/marc21/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.camera.it%2Fsparql> void:sparqlEndpoint <https://dati.camera.it/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsemanticweb.cs.vu.nl%2Fdss%2Fsparql> void:sparqlEndpoint <https://semanticweb.cs.vu.nl/dss/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fgnd%2Fquery> void:sparqlEndpoint <https://zbw.eu/beta/sparql/gnd/query> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flod.tamtamresearch.com%2Fsparql> void:sparqlEndpoint <https://lod.tamtamresearch.com/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.logainm.ie%2Fsparql%2F> void:sparqlEndpoint <http://data.logainm.ie/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fforum.semantic-metabolomics.fr%2Fsparql%2F> void:sparqlEndpoint <https://forum.semantic-metabolomics.fr/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.logainm.ie%2Fsparql> void:sparqlEndpoint <http://data.logainm.ie/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fcorresp%2Fsparql> void:sparqlEndpoint <http://ldf.fi/corresp/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsemantic.eea.europa.eu%2Fsparql> void:sparqlEndpoint <https://semantic.eea.europa.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.europeana.eu%2F> void:sparqlEndpoint <http://sparql.europeana.eu/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata1.opendata.u-psud.fr%2Fsparql> void:sparqlEndpoint <https://opendata1.opendata.u-psud.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.entice.eu%2Fsparql> void:sparqlEndpoint <https://data.entice.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.gov.cz%2Fsparql> void:sparqlEndpoint <https://data.gov.cz/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhitontology.eu%2Fsparql> void:sparqlEndpoint <https://hitontology.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.snik.eu%2Fsparql> void:sparqlEndpoint <https://www.snik.eu/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.muninn-project.org%2Fsparql> void:sparqlEndpoint <https://rdf.muninn-project.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fbmrbpub.protein.osaka-u.ac.jp%2Fsearch%2Frdf> void:sparqlEndpoint <http://bmrbpub.protein.osaka-u.ac.jp/search/rdf> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fid.nlm.nih.gov%2Fmesh%2Fsparql> void:sparqlEndpoint <http://id.nlm.nih.gov/mesh/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.finto.fi%2Fsparql> void:sparqlEndpoint <https://api.finto.fi/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.wikipathways.org%2Fsparql> void:sparqlEndpoint <https://sparql.wikipathways.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fadb-leden%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/andb/adb-leden/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fd2kab.i3s.unice.fr%2Fsparql> void:sparqlEndpoint <http://d2kab.i3s.unice.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fclassical%2Fsparql%2F> void:sparqlEndpoint <http://dbtune.org/classical/sparql/> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fts.glycosmos.org%2Fsparql> void:sparqlEndpoint <https://ts.glycosmos.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2FANDB-ADB-all%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/andb/ANDB-ADB-all/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fvocab.nerc.ac.uk%2Fsparql> void:sparqlEndpoint <https://vocab.nerc.ac.uk/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Feventmedia.eurecom.fr%2Fsparql%2F> void:sparqlEndpoint <http://eventmedia.eurecom.fr/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fvirtuoso.plateforme.dipso.inrae.fr%2Fsparql> void:sparqlEndpoint <http://virtuoso.plateforme.dipso.inrae.fr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fservices%2FhistoryOfWork-all-latest%2Fsparql> void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/HistoryOfWork/historyOfWork-all-latest/services/historyOfWork-all-latest/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdbpedia.org%2Fsparql> void:sparqlEndpoint <http://dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Flod.nl.go.kr%2Fsparql> void:sparqlEndpoint <https://lod.nl.go.kr/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fja.dbpedia.org%2Fsparql> void:sparqlEndpoint <https://ja.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.southgreen.fr> void:sparqlEndpoint <http://sparql.southgreen.fr> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> void:sparqlEndpoint <https://query.wikidata.org/bigdata/namespace/wdq/sparql> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpt.dbpedia.org%2Fsparql> void:sparqlEndpoint <http://pt.dbpedia.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fchemblmirror.rdf.bigcat-bioinformatics.org%2Fsparql> void:sparqlEndpoint <https://chemblmirror.rdf.bigcat-bioinformatics.org/sparql> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata.aragon.es%2Fsparql> void:sparqlEndpoint <https://opendata.aragon.es/sparql> .
+
