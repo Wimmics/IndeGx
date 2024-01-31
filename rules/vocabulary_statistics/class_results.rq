@@ -1,0 +1,9 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?class (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+    ?class a owl:Class;
+     	voaf:usageInDataset ?occurence .
+    ?occurence voaf:inDataset ?endpointUrl .
+} GROUP BY ?class
