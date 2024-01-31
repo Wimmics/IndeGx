@@ -141,6 +141,29 @@ echo "Europa endpoint treated, `wc -l $europa_output_file` lines"
 
 rm $tmp_query_file
 
+# https://druid.datalegend.net/
+# List of datasets: https://druid.datalegend.net/_api/facets/datasets
+# Dataset SPARQL endpoint: https://api.druid.datalegend.net/datasets/{results[].ownerAccountName}/{results[].name}/sparql avec results[].sparql == true
+druid_datasets_list_api=https://druid.datalegend.net/_api/facets/datasets
+tmp_json_druid_file=druid_data.json
+tmp_jsonld_druid_file=druid_data.jsonld
+tmp_rdf_druid_file=druid_data.trig
+druid_output_file=druid_endpoints.rdf
+curl -s -L $druid_datasets_list_api -o $tmp_json_druid_file
+echo "Druid datasets list obtained, `wc -l $tmp_json_druid_file` lines"
+cat $tmp_json_druid_file | ./$jq_executable '[ .results[] | select(.sparql == "true") | select(.access == "public" ) | { "http://www.w3.org/ns/dcat#endpointURL": { "@id": ( "https://api.druid.datalegend.net/datasets/" + .ownerAccountName + "/" + .name + "/sparql") } } ]' > $tmp_jsonld_druid_file
+java -jar $corese_jar convert -i $tmp_jsonld_druid_file -if application/ld+json -o $tmp_rdf_druid_file -of trig
+
+cat $generic_endpoint_query > $tmp_query_file
+sed -i "s,SOURCE,$druid_datasets_list_api,g" $tmp_query_file
+java -jar $corese_jar sparql -i $tmp_rdf_druid_file -o $druid_output_file -q $tmp_query_file -of rdf
+echo "Remote Druid file treated, `wc -l $druid_output_file` lines"
+
+rm $tmp_query_file
+rm $tmp_json_druid_file
+rm $tmp_jsonld_druid_file
+rm $tmp_rdf_druid_file
+
 # Previous version of the catalog
 if [ -e $published_catalog ]; then
     echo "Treating previous version of the catalog"
@@ -182,6 +205,7 @@ rm $yummy_output_file
 rm $indegx_output_file
 rm $crawling_output_file
 rm $europa_output_file
+rm $druid_output_file
 if [ -e $previous_catalog_output_file ]; then
     rm $previous_catalog_output_file
 fi
