@@ -43,14 +43,11 @@
                 }
             }
             WHERE {
-                BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl )
                 kgi: sd:namedGraph $rawEndpointUrl .
-                
-                ?elem a owl:Class .
-                FILTER( isIRI(?elem))
+                BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl )
 
                 SERVICE ?editedEndpointUrl {
-                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                    # VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     {
                         SELECT DISTINCT ?elem {
                             {
@@ -76,9 +73,13 @@
                                     }
                                 }
                             }
+                            FILTER(IsIRI(?elem))
                         }
                     }
                 }
+                
+                ?elem a owl:Class .
+                FILTER( isIRI(?elem))
 
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
@@ -112,11 +113,8 @@
                     voaf:occurrences ?nbEntities .
             }
             WHERE {
+                kgi: sd:namedGraph $rawEndpointUrl .
                 BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&skip=occurences&slice=10&limit=100&method=get" ) AS ?editedEndpointUrl)
-
-                FILTER( EXISTS {
-                    kgi: sd:namedGraph $rawEndpointUrl .
-                })
                 
                 ?elem a owl:Class ;
                     voaf:usageInDataset ?elemDatasetOccurence .
@@ -127,7 +125,7 @@
                 {
                     SELECT ?elem (count(DISTINCT ?instance) AS ?nbEntities) {
                         SERVICE ?editedEndpointUrl {
-                            VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                            # VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                             {
                                 SELECT DISTINCT ?elem ?instance {
                                     {

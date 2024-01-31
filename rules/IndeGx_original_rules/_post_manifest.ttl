@@ -3,16 +3,16 @@
 
 <> a mf:Manifest ;
     mf:include (
-        <equivalences/manifest.ttl>
-        <inclusion/manifest.ttl>
-        <redundancy/manifest.ttl>
-        <vocabularies/_manifest.ttl>
+        <post/equivalences/manifest.ttl>
+        <post/inclusion/manifest.ttl>
+        <post/redundancy/manifest.ttl>
+        <post/vocabularies/_manifest.ttl>
     ) ;
     mf:entries (
-        <initialization.ttl>
+        <post/initialization.ttl>
     ) .
 
-<initialization.ttl>  a mf:ManifestEntry ;
+<post/initialization.ttl>  a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             mf:action """

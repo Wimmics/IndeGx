@@ -43,23 +43,53 @@
 
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl)
 
-                ?elem a rdf:Property .
-                FILTER( isIRI(?elem))
-
                 SERVICE ?editedEndpointUrl {
-                    VALUES ?elem { UNDEF } # Fix for better binding by Corese
+                    # VALUES ?elem { UNDEF } # Fix for better binding by Corese
                     {
                         SELECT DISTINCT ?elem {
                             {
-                                ?s ?elem ?o .
-                            } UNION {
-                                GRAPH ?g {
+                                {
                                     ?s ?elem ?o .
+                                } UNION {
+                                    GRAPH ?g {
+                                        ?s ?elem ?o .
+                                    }
+                                }
+                            } UNION {
+                                {
+                                    { ?elem a rdf:Property . }
+                                    UNION
+                                    { ?elem a owl:ObjectProperty . }
+                                    UNION
+                                    { ?elem a owl:DatatypeProperty . }
+                                    UNION
+                                    { ?elem a owl:AnnotationProperty . }
+                                    UNION
+                                    { ?elem a owl:OntologyProperty . }
+                                    UNION
+                                    { ?elem a owl:SymmetricProperty . }
+                                } UNION {
+                                    GRAPH ?g {
+                                        { ?elem a rdf:Property . }
+                                        UNION
+                                        { ?elem a owl:ObjectProperty . }
+                                        UNION
+                                        { ?elem a owl:DatatypeProperty . }
+                                        UNION
+                                        { ?elem a owl:AnnotationProperty . }
+                                        UNION
+                                        { ?elem a owl:OntologyProperty . }
+                                        UNION
+                                        { ?elem a owl:SymmetricProperty . }
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+                ?elem a rdf:Property .
+                FILTER( isIRI(?elem))
 
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
@@ -96,14 +126,8 @@
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
 
-                FILTER( isIRI(?elem))
-                ?elem a rdf:Property ;
-                    voaf:usageInDataset ?elemDatasetOccurence .
-                ?elemDatasetOccurence a voaf:DatasetOccurences ;
-                    voaf:inDataset $rawEndpointUrl .
-
                 SERVICE ?editedEndpointUrl {
-                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                    # VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     {
                         SELECT DISTINCT ?elem (COUNT(*) AS ?nbTriples) WHERE {
                             {
@@ -116,6 +140,12 @@
                         } GROUP BY ?elem
                     }
                 }
+
+                FILTER( isIRI(?elem))
+                ?elem a rdf:Property ;
+                    voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
 
                 BIND( IF( EXISTS {
                     ?elem voaf:occurrencesInDatasets ?datasetOccurences .
