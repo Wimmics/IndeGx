@@ -8,7 +8,7 @@ if [ ! -e $corese_jar ]; then
     wget -q https://github.com/Wimmics/corese/releases/download/release-$corese_version/$corese_jar
 fi
 
-original_catalog=https://raw.githubusercontent.com/Wimmics/IndeGx/catalog_auto_refresh/catalogs/catalog.auto_refresh.trig
+original_catalog=https://raw.githubusercontent.com/Wimmics/IndeGx/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl
 raw_catalog=catalog.raw.latest-status.trig
 initial_catalog=initial_catalog.trig # Each named graph is a separate endpoint
 tmp_final_catalog=final_catalog.tmp.ttl
