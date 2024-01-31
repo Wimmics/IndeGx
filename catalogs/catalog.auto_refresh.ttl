@@ -1356,7 +1356,8 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://crime.rkbexplorer.com/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FjobHoard-latest%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FjobHoard-latest%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns64:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns64:sparql .
@@ -1460,7 +1461,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns76:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.legilux.public.lu%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.legilux.public.lu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns77:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns77:sparql .
@@ -1505,7 +1507,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns83:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FORCID-data%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FORCID-data%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns84:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns84:sparql .
@@ -1528,7 +1531,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns87:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FClio-Infra%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FClio-Infra%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns88:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns88:sparql .
@@ -1665,7 +1669,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns104:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FCLARIAH-VL%2FGhent-Gazetteer%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FCLARIAH-VL%2FGhent-Gazetteer%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns105:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns105:sparql .
@@ -1777,7 +1782,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns120:aishephd .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FmicroHeights%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FmicroHeights%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns121:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns121:sparql .
@@ -1860,7 +1866,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns131:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2Fthesaurus%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2Fthesaurus%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns132:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns132:sparql .
@@ -1890,7 +1897,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns135:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FESTA-DEMO%2Festa-demo-viz%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FESTA-DEMO%2Festa-demo-viz%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns136:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns136:sparql .
@@ -2343,7 +2351,8 @@
   a ns10:Dataset ;
   ns10:endpointURL <https://www.data.gouv.fr/catalog.rdf> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leden%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leden%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns194:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns194:sparql .
@@ -2461,7 +2470,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns206:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fsicada%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fsicada%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns207:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns207:sparql .
@@ -2757,17 +2767,20 @@
   a ns10:Dataset ;
   ns10:endpointURL ns246:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FPer-LOD-ad-Astra%2FSleutelkastje%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FPer-LOD-ad-Astra%2FSleutelkastje%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns247:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns247:sparql .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.enzyme.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns248:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns248:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fgemeentegeschiedenis%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fgemeentegeschiedenis%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns249:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns249:sparql .
@@ -2941,7 +2954,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns273:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCatasto%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCatasto%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns274:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns274:sparql .
@@ -2972,7 +2986,8 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://epsrc.rkbexplorer.com/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FBaghdad-to-London%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FBaghdad-to-London%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns277:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns277:sparql .
@@ -3026,7 +3041,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns282:vsparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fservices%2FhistoryOfWork-all-latest%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fservices%2FhistoryOfWork-all-latest%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns283:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns283:sparql .
@@ -3106,7 +3122,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns290:query .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fgemeentegeschiedenis%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fgemeentegeschiedenis%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns291:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns291:sparql .
@@ -3226,7 +3243,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns305:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-Haarlem%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-Haarlem%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns306:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns306:sparql .
@@ -3355,7 +3373,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns321:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FATM-DEMO%2FATM-CLARIAH-DEMO%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FATM-DEMO%2FATM-CLARIAH-DEMO%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns322:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns322:sparql .
@@ -3419,7 +3438,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns331:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fmromanello%2Fhucit%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fmromanello%2Fhucit%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns332:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns332:sparql .
@@ -3529,7 +3549,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns343:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fstrikes%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fstrikes%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns344:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns344:sparql .
@@ -3547,12 +3568,14 @@
   a ns10:Dataset ;
   ns10:endpointURL ns346:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fadb-leden%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fadb-leden%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns347:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns347:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fcshapes%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fcshapes%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns348:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns348:sparql .
@@ -3792,7 +3815,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns378:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fhistoric-maps%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fhistoric-maps%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns379:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns379:sparql .
@@ -4043,7 +4067,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns408:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FjobHoard%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FjobHoard%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns409:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns409:sparql .
@@ -4512,7 +4537,8 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://os.rkbexplorer.com/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns460:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns460:sparql .
@@ -4569,7 +4595,8 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://jisc.rkbexplorer.com/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fdeaths-1910-1920%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fdeaths-1910-1920%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns468:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns468:sparql .
@@ -4725,7 +4752,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns485:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2FOnTheWaterfront%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FMiconSchorsij%2FOnTheWaterfront%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns486:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns486:sparql .
@@ -5068,7 +5096,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns525:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-DH%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FAdmissies-DH%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns526:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns526:sparql .
@@ -5131,7 +5160,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns533:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FHISCO-latest%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FHISCO-latest%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns534:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns534:sparql .
@@ -5182,7 +5212,8 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://dbtune.org/classical/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FjobHoard%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FjobHoard%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns539:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns539:sparql .
@@ -5370,7 +5401,8 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://doc.metalex.eu:8000/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fmmm%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fmmm%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns561:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns561:sparql .
@@ -5393,7 +5425,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns562:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FHeritage%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FHeritage%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns563:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns563:sparql .
@@ -5463,7 +5496,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns572:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FCollectie-Interviews-Wim-Kok-deel-2%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG-DA%2FCollectie-Interviews-Wim-Kok-deel-2%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns573:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns573:sparql .
@@ -5578,7 +5612,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns589:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Ferebe-vm2.i3s.unice.fr%3A5000%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ferebe-vm2.i3s.unice.fr%3A5000%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns590:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns590:sparql .
@@ -5667,7 +5702,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns603:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2FANDB-ADB-all%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2FANDB-ADB-all%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns604:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns604:sparql .
@@ -5678,7 +5714,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns605:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns606:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns606:sparql .
@@ -5853,7 +5890,8 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns628:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fdskg.org%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdskg.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns629:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns629:sparql .
@@ -5864,7 +5902,8 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns630:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leerlingen%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leerlingen%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns631:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns631:sparql .
@@ -5997,7 +6036,8 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL <http://kdata.kr/sparql/endpoint.jsp> .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fsemparl%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fsemparl%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns645:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns645:sparql .
@@ -6058,7 +6098,8 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns650:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fiisg-kg%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fiisg-kg%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns651:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns651:sparql .
@@ -6351,12 +6392,14 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns687:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.thegazette.co.uk%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.thegazette.co.uk%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns688:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns688:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2Fall%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2Fall%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns689:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns689:sparql .
@@ -6464,7 +6507,8 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns702:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FLabourconflicts%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FLabourconflicts%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns703:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns703:sparql .
@@ -6576,7 +6620,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns718:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:28:52.529Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
@@ -8117,7 +8161,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL <http://dbtune.org/jamendo/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fmint%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fnlgis%2Fmint%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns761:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns761:sparql .
@@ -8146,7 +8191,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns619:OpenData .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCEDAR-S%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCEDAR-S%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns763:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns763:sparql .
@@ -8334,7 +8380,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns790:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FGeography%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FAdamNet%2FGeography%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns791:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns791:sparql .
@@ -8377,12 +8424,14 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL <http://data.archiveshub.ac.uk/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FVanMeerendonk%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FVanMeerendonk%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns797:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns797:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fcorresp%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fcorresp%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns798:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns798:sparql .
@@ -8493,7 +8542,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL <http://pubmed.bio2rdf.org/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fmgkb.fiz-karlsruhe.de%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fmgkb.fiz-karlsruhe.de%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns8:sparqlEndpoint ns814:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns814:sparql .
@@ -8796,7 +8846,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns848:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FImages%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2FImages%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns849:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns849:sparql .
@@ -9263,7 +9314,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-31T13:58:34.180+01:00"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns905:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FRubenS%2Fmarc21%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FRubenS%2Fmarc21%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns906:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns906:sparql .
