@@ -5,7 +5,8 @@ import * as Logger from "./LogUtils.js"
 import * as Global from "./GlobalUtils.js"
 
 import * as csv from 'csv-parse/sync';
-import { ADMS, CC, DATAID, DCAT, DCE, DCMITYPE, DCT, DOAP, DQV, FOAF, NIE, OWL, PAV, PROV, RDFS, SCHEMA, SD, SKOS, STO, VOID, XHV } from './RDFUtils.js';
+import { ADMS, BIBO, CC, DATAID, DCAT, DCE, DCMITYPE, DCT, DOAP, DQV, FOAF, NIE, OWL, PAV, PROV, RDF, RDFS, SCHEMA, SD, SKOS, STO, VCARD, VOAF, VOID, VOIDEXT, XHV, XSD } from './RDFUtils.js';
+import * as Sparql from './SPARQLUtils.js';
 
 const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean },
@@ -68,14 +69,43 @@ type LiteralPropertyData = {
     min: number,
     max: number,
     average: number,
-    minValue: number,
-    maxValue: number,
+    minValue?: number,
+    maxValue?: number,
     nbDataset: number,
 }
 
 let classCardinality: Map<string, number> = new Map();
 let namespacePrefixMap: Map<string, string> = new Map();
-const totalNumberOfDataset = 2615;
+
+const knownVocabularies = [
+    ADMS,
+    BIBO,
+    CC,
+    DATAID,
+    DCAT,
+    DCE,
+    DCMITYPE,
+    DCT,
+    DOAP,
+    DQV,
+    FOAF,
+    NIE,
+    OWL,
+    PAV,
+    PROV,
+    RDF,
+    RDFS,
+    SCHEMA,
+    SD,
+    SKOS,
+    STO,
+    VCARD,
+    VOAF,
+    VOID,
+    VOIDEXT,
+    XHV,
+    XSD
+]
 
 const excludedClasses = [
     OWL('Class').value,
@@ -363,59 +393,78 @@ const equivalentPropertiesGroups = [
     publicationReferencesProperties,
     webpageProperties,
     endValidityProperties,
-    publisherProperties
+    publicationDateProperties,
+    versionProperties,
+    otherVersionProperties,
+    creationLocationProperties,
+    endpointURLProperties,
+    keywordsProperties
 ]
 let allEquivalentProperties = [...new Set(equivalentPropertiesGroups.flat())]
 
-Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(data => {
-    const csvData = csv.parse(data, { columns: true, delimiter: ',' });
-    let entityDataset: EntityDeclarationData[] = csvData.map((row: any) => {
-        return {
-            class: row.c,
-            min: parseInt(row.minCount),
-            max: parseInt(row.maxCount),
-            average: parseFloat(row.avgCount),
-            nbDataset: parseInt(row.countDataset),
-        }
-    })
+const endpoint = "http://localhost:3030/QualityShopper/sparql";
+const queryFiles = [
+    "class_instances_MinMaxAverageOccurences_NbDataset.rq",
+    "class_property_object_class_MinMaxAverage_NbDatasets.rq",
+    "class_property_object_datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.rq",
+    "dataset_instance_class_property_object_class_MinMaxAverage_NbDatasets.rq",
+    "dataset_instance_class_property_object_datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.rq",
+    "nbDataset_with_description.rq"
+]
+let entityDataset: EntityDeclarationData[];
+let nonLiteralPropertyDataset: NonLiteralPropertyData[];
+let literalPropertyDataset: LiteralPropertyData[];
+let totalNumberOfDataset = 0;
 
-    entityDataset = entityDataset.filter((row: any) => {
-        return row.nbDataset > 1;
-    })
-
-    entityDataset = entityDataset.sort((a: any, b: any) => {
-        if (a.nbDataset > b.nbDataset) {
-            return -1;
-        }
-        if (a.nbDataset < b.nbDataset) {
-            return 1;
-        }
-        return 0;
-    })
-
-    // We regroup all kind of dataset instances to one instance of dcat:Dataset
-    entityDataset.forEach((row: EntityDeclarationData) => {
-        if (!datasetClasses.includes(row.class)) {
-            classCardinality.set(row.class, row.average);
-        }
-    })
-    classCardinality.set(uniqueDatasetClass, 1)
-
-    return Global.readFile("class_property_object-class_MinMaxAverage_NbDatasets.csv").then(cpocData => {
-        const csvData = csv.parse(cpocData, { columns: true, delimiter: ',' });
-        let nonLiteralPropertyDataset: NonLiteralPropertyData[] = csvData.map((row: any) => {
-            return {
-                class: row.c,
-                property: row.p,
-                objectClass: row.oc,
-                min: parseInt(row.minAllC),
-                max: parseInt(row.maxAllC),
-                average: parseFloat(row.averageAll),
-                nbDataset: parseInt(row.countAllDataset),
+Global.iterativePromises(queryFiles.map(filename => [filename]), (queryFile: string) => {
+    Logger.info("reading file", queryFile)
+    return Global.readFile(queryFile).then(query => {
+        Logger.info("Executing query", queryFile)
+        return Sparql.sparqlQueryPromise(endpoint, query, endpoint, { timeout: 120000 }).then((data: Sparql.SPARQLJSONResult) => {
+            Logger.info("Result of", queryFile, "retrieved,")
+            if (data.results.bindings.length != undefined) {
+                Logger.info(queryFile, data.results.bindings.length, "rows");
+            } else {
+                Logger.info("Empty results", queryFile);
             }
+            Global.writeFile(queryFile + ".json", JSON.stringify(data));
+            return;
+        }).catch((error: any) => {
+            Logger.error(error)
+            return;
+        })
+    }).catch((error: any) => {
+        Logger.error(error)
+        return;
+    })
+}).then(() => {
+    return Global.readFile("nbDataset_with_description.rq.json").then((nbDatasetWithDescriptionString: string) => {
+        const nbDatasetWithDescription: Sparql.SPARQLJSONResult = JSON.parse(nbDatasetWithDescriptionString);
+        totalNumberOfDataset = parseInt(nbDatasetWithDescription.results.bindings[0].countAllDataset.value);
+        Logger.info("totalNumberOfDataset", totalNumberOfDataset)
+        return;
+    })
+}).then(() => {
+    return Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.rq.json").then((classInstancesMinMaxAverageOccurencesNbDatasetString: string) => {
+        const classInstancesMinMaxAverageOccurencesNbDataset: Sparql.SPARQLJSONResult = JSON.parse(classInstancesMinMaxAverageOccurencesNbDatasetString);
+
+        entityDataset = classInstancesMinMaxAverageOccurencesNbDataset.results.bindings.map((row: any) => {
+            return {
+                class: row.c.value,
+                min: parseInt(row.minCount.value),
+                max: parseInt(row.maxCount.value),
+                average: parseFloat(row.avgCount.value),
+                nbDataset: parseInt(row.countDataset.value),
+            }
+        }).filter((entityData: EntityDeclarationData) => {
+            return knownVocabularies.some((vocabFn) => entityData.class.includes(vocabFn("").value))
         })
 
-        nonLiteralPropertyDataset = nonLiteralPropertyDataset.sort((a: any, b: any) => {
+        entityDataset = entityDataset.filter((row: any) => {
+            return row.nbDataset > 1;
+        })
+
+        entityDataset = entityDataset.sort((a: any, b: any) => {
             if (a.nbDataset > b.nbDataset) {
                 return -1;
             }
@@ -425,25 +474,26 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
             return 0;
         })
 
-        const watdivNonLiteralProperties = classPropertyObjectClassToWatdivNonLiteralProperties(nonLiteralPropertyDataset, classCardinality);
+        // We regroup all kind of dataset instances to one instance of dcat:Dataset
+        entityDataset.forEach((row: EntityDeclarationData) => {
+            if (!datasetClasses.includes(row.class)) {
+                classCardinality.set(row.class, row.average);
+            }
+        })
+        classCardinality.set(uniqueDatasetClass, 1)
+        return;
+    })
+}).then(() => {
+    return Global.readFile("class_property_object_class_MinMaxAverage_NbDatasets.rq.json").then((classPropertyObjectclassMinMaxAverageNbDatasetsString: any) => {
+        const classPropertyObjectclassMinMaxAverageNbDatasets: Sparql.SPARQLJSONResult = JSON.parse(classPropertyObjectclassMinMaxAverageNbDatasetsString);
+        nonLiteralPropertyDataset = jsonResultsToNonLiteralPropertyData(classPropertyObjectclassMinMaxAverageNbDatasets);
+        return;
+    }).then(() => {
+        return Global.readFile("dataset_instance_class_property_object_class_MinMaxAverage_NbDatasets.rq.json").then((datasetInstanceClassPropertyObjectclassMinMaxAverageNbDatasetsString: string) => {
+            const datasetInstanceClassPropertyObjectclassMinMaxAverageNbDatasets: Sparql.SPARQLJSONResult = JSON.parse(datasetInstanceClassPropertyObjectclassMinMaxAverageNbDatasetsString);
+            nonLiteralPropertyDataset = nonLiteralPropertyDataset.concat(jsonResultsToNonLiteralPropertyData(datasetInstanceClassPropertyObjectclassMinMaxAverageNbDatasets));
 
-        return Global.readFile("class_property_object-datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.csv").then(cpodData => {
-            const csvData = csv.parse(cpodData, { columns: true, delimiter: ',' });
-            let literalPropertyDataset: LiteralPropertyData[] = csvData.map((row: any) => {
-                return {
-                    class: row.c,
-                    property: row.p,
-                    objectDatatype: row.od,
-                    min: parseInt(row.minAllC),
-                    max: parseInt(row.maxAllC),
-                    average: parseFloat(row.averageAll),
-                    minValue: parseFloat(row.minValueAll),
-                    maxValue: parseFloat(row.maxValueAll),
-                    nbDataset: parseInt(row.countAllDataset),
-                }
-            })
-
-            literalPropertyDataset = literalPropertyDataset.sort((a: any, b: any) => {
+            nonLiteralPropertyDataset = nonLiteralPropertyDataset.sort((a: any, b: any) => {
                 if (a.nbDataset > b.nbDataset) {
                     return -1;
                 }
@@ -452,21 +502,46 @@ Global.readFile("class_instances_MinMaxAverageOccurences_NbDataset.csv").then(da
                 }
                 return 0;
             })
+        }).then(() => {
 
-            const watdivEntities = classInstancesToWatdivEntityDeclaration(entityDataset, literalPropertyDataset, classCardinality);
+            const watdivNonLiteralProperties = classPropertyObjectClassToWatdivNonLiteralProperties(nonLiteralPropertyDataset, classCardinality);
 
-            return Global.writeFile("input/watdiv_config.txt", namespacesToWatdivPrefixes() + watdivEntities + watdivNonLiteralProperties)
+            return Global.readFile("class_property_object_datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.rq.json").then((classPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasetsString: string) => {
+                const classPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasets: Sparql.SPARQLJSONResult = JSON.parse(classPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasetsString);
+                literalPropertyDataset = jsonResultsToLiteralPropertyData(classPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasets);
+                return;
+            }).then(() => {
+                return Global.readFile("dataset_instance_class_property_object_datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets.rq.json").then((datasetInstanceClassPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasetsString: string) => {
+                    const datasetInstanceClassPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasets: Sparql.SPARQLJSONResult = JSON.parse(datasetInstanceClassPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasetsString);
+                    literalPropertyDataset = literalPropertyDataset.concat(jsonResultsToLiteralPropertyData(datasetInstanceClassPropertyObjectdatatypeMinMaxAverageOccurrencesMinMaxValuesNbDatasets));
+
+                    literalPropertyDataset = literalPropertyDataset.sort((a: any, b: any) => {
+                        if (a.nbDataset > b.nbDataset) {
+                            return -1;
+                        }
+                        if (a.nbDataset < b.nbDataset) {
+                            return 1;
+                        }
+                        return 0;
+                    })
+
+                    const watdivEntities = classInstancesToWatdivEntityDeclaration(entityDataset, literalPropertyDataset, classCardinality);
+
+                    return Global.writeFile("input/watdiv_config.txt", namespacesToWatdivPrefixes() + watdivEntities + watdivNonLiteralProperties)
+                })
+            })
+        }).catch((error: any) => {
+            Logger.error(error)
+            return;
         })
-
     })
-
 })
 
 function classInstancesToWatdivEntityDeclaration(entityDataset: EntityDeclarationData[], literalPropertyDataset: LiteralPropertyData[], classCardinality: Map<string, number>) {
     let watdiv = `<type*> ${uriToPrefixedUri(DCAT("Dataset").value)} 1\n${classPropertyObjectDatatypeToWatdivLiteralProperties(DCAT("Dataset").value, literalPropertyDataset, classCardinality)}</type>\n`;
     entityDataset.forEach((row: EntityDeclarationData) => {
         const classLiteralPropertiesDeclarations = classPropertyObjectDatatypeToWatdivLiteralProperties(row.class, literalPropertyDataset, classCardinality);
-        if (!excludedClasses.includes(row.class) && ! datasetClasses.includes(row.class)) {
+        if (!excludedClasses.includes(row.class) && !datasetClasses.includes(row.class)) {
             watdiv += `<type*> ${uriToPrefixedUri(row.class)} ${row.min}\n${classLiteralPropertiesDeclarations}</type>\n`;
         }
     })
@@ -478,7 +553,7 @@ function classPropertyObjectClassToWatdivNonLiteralProperties(dataset: NonLitera
     // Writing the associations
     let watdiv = "";
     dataset.forEach((row: NonLiteralPropertyData) => {
-        if (!excludedClasses.includes(row.class) ) {
+        if (!excludedClasses.includes(row.class)) {
             let objectClass = row.objectClass;
             if (datasetClasses.includes(row.objectClass)) {
                 objectClass = uniqueDatasetClass;
@@ -487,7 +562,6 @@ function classPropertyObjectClassToWatdivNonLiteralProperties(dataset: NonLitera
             const objectCardinality = classCardinality.get(objectClass);
             if (subjectCardinality !== undefined && objectCardinality !== undefined) {
                 watdiv += `#association ${uriToPrefixedUri(row.class)} ${uriToPrefixedUri(row.property)} ${uriToPrefixedUri(objectClass)} ${subjectCardinality} ${row.average}[uniform] ${row.nbDataset / totalNumberOfDataset}\n`;
-                Logger.log(row.class, row.property, objectClass, subjectCardinality, row.average, row.nbDataset)
             }
         }
     })
@@ -506,6 +580,71 @@ function classPropertyObjectDatatypeToWatdivLiteralProperties(className: string,
         }
     })
     return watdiv;
+}
+
+function jsonResultsToNonLiteralPropertyData(jsonResults: Sparql.SPARQLJSONResult): NonLiteralPropertyData[] {
+    let result: NonLiteralPropertyData[] = jsonResults.results.bindings.map((row: any) => {
+        return {
+            class: row.c.value,
+            property: row.p.value,
+            objectClass: row.oc.value,
+            min: parseInt(row.minAllC.value),
+            max: parseInt(row.maxAllC.value),
+            average: parseFloat(row.averageAll.value),
+            nbDataset: parseInt(row.countAllDataset.value),
+        }
+    }).filter((nonLiteralPropertyData: NonLiteralPropertyData) => {
+        return knownVocabularies.some((vocabFn) =>
+            nonLiteralPropertyData.class.includes(vocabFn("").value)
+            // && nonLiteralPropertyData.objectClass.includes(vocabFn("").value)
+        )
+            && allEquivalentProperties.some((property) =>
+                nonLiteralPropertyData.property.includes(property)
+            )
+    })
+    return result;
+}
+
+function jsonResultsToLiteralPropertyData(jsonResults: Sparql.SPARQLJSONResult): LiteralPropertyData[] {
+    let result = jsonResults.results.bindings.map((row: any) => {
+        try {
+            if (row.minValueAll == undefined || row.maxValueAll == undefined) {
+                return {
+                    class: row.c.value,
+                    property: row.p.value,
+                    objectDatatype: row.od.value,
+                    min: parseInt(row.minAllC.value),
+                    max: parseInt(row.maxAllC.value),
+                    average: parseFloat(row.averageAll.value),
+                    nbDataset: parseInt(row.countAllDataset.value),
+                }
+            } else {
+                return {
+                    class: row.c.value,
+                    property: row.p.value,
+                    objectDatatype: row.od.value,
+                    min: parseInt(row.minAllC.value),
+                    max: parseInt(row.maxAllC.value),
+                    average: parseFloat(row.averageAll.value),
+                    minValue: parseFloat(row.minValueAll.value),
+                    maxValue: parseFloat(row.maxValueAll.value),
+                    nbDataset: parseInt(row.countAllDataset.value),
+                }
+            }
+        } catch (error) {
+            Logger.error("Error treating class_property_object_datatype_MinMaxAverageOccurrences_MinMaxValues_NbDatasets ", error)
+            Logger.error(JSON.stringify(row))
+            throw error;
+        }
+    }).filter((literalPropertyData: LiteralPropertyData) => {
+        return knownVocabularies.some((vocabFn) =>
+            literalPropertyData.class.includes(vocabFn("").value)) &&
+            allEquivalentProperties.some((property) =>
+                literalPropertyData.property.includes(property)
+            )
+    })
+
+    return result;
 }
 
 function namespacesToWatdivPrefixes() {

@@ -6,10 +6,11 @@
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 
 kgi:catalog a dcat:Catalog ;
-    dcterms:title "Catalog from metadatamatic submissions and google crawling" ;
-    pav:lastUpdateOn "2023-11-08T15:26:13.462000+01:00"^^xsd:dateTime ;
+    dcterms:title "Catalog from metadatamatic submissions, google crawling, manual searchs and reports on X" ;
+    pav:lastUpdateOn "2024-01-26T11:26:13.462000+01:00"^^xsd:dateTime ;
     dcat:dataset 
         [ void:sparqlEndpoint <http://193.190.127.165:7200/repositories/ERA-KG-latest> ],
+        [ void:sparqlEndpoint <https://api.druid.datalegend.net/datasets/HistoryOfWork/historyOfWork-all-latest/services/historyOfWork-all-latest/sparql> ],
         [ void:sparqlEndpoint <https://bio2rdf.org/sparql> ],
         [ void:sparqlEndpoint <http://clara.univ-nantes.fr/sparql> ],
         [ void:sparqlEndpoint <https://clara.univ-nantes.fr/sparql> ],
@@ -17,9 +18,11 @@ kgi:catalog a dcat:Catalog ;
         [ void:sparqlEndpoint <https://data.europa.eu/sparql> ],
         [ void:sparqlEndpoint <http://data.bnf.fr/sparql> ] ,
         [ void:sparqlEndpoint <https://data.epo.org/linked-data/query> ],
+        [ void:sparqlEndpoint <https://data.legilux.public.lu/sparql> ],
         [ void:sparqlEndpoint <https://data.nobelprize.org/sparql> ],
         [ void:sparqlEndpoint <https://data.wu.ac.at/sparql/> ],
         [ void:sparqlEndpoint <https://db.project-hobbit.eu/sparql> ],
+        [ void:sparqlEndpoint <http://dskg.org/sparql> ],
         [ void:sparqlEndpoint <http://erebe-vm2.i3s.unice.fr:5000/sparql> ],
         [ void:sparqlEndpoint <https://forum.semantic-metabolomics.fr/sparql> ],
         [ void:sparqlEndpoint <https://fuseki.kupferdigital.org/demonstrator/sparql> ],
@@ -27,17 +30,22 @@ kgi:catalog a dcat:Catalog ;
         [ void:sparqlEndpoint <https://imagesnippets.com/sparql/images> ],
         [ void:sparqlEndpoint <https://imagesnippets.com/sparql/imgtag> ],
         [ void:sparqlEndpoint <https://io.datascience-paris-saclay.fr/sparql> ],
-        [ void:sparqlEndpoint <https://query.wikidata.org/sparql> ],
+        [ void:sparqlEndpoint <http://ldf.fi/corresp/sparql> ],
+        [ void:sparqlEndpoint <https://ldf.fi/mmm/sparql> ],
+        [ void:sparqlEndpoint <http://ldf.fi/semparl/sparql> ],
         [ void:sparqlEndpoint <https://linked.ec-dataplatform.eu/sparql> ],
         [ void:sparqlEndpoint <https://lod.openlinksw.com/sparql> ],
         [ void:sparqlEndpoint <http://www.lotico.com:3030/lotico/sparql> ],
+        [ void:sparqlEndpoint <https://mgkb.fiz-karlsruhe.de/sparql> ],
         [ void:sparqlEndpoint <https://opendatacommunities.org/sparql> ],
         [ void:sparqlEndpoint <https://orkg.org/triplestore> ],
         [ void:sparqlEndpoint <https://pgxlod.loria.fr/sparql> ],
+        [ void:sparqlEndpoint <https://query.wikidata.org/sparql> ],
         [ void:sparqlEndpoint <http://rdf.muninn-project.org/sparql> ],
         [ void:sparqlEndpoint <https://smt.esante.gouv.fr/sparql> ],
         [ void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> ],
         [ void:sparqlEndpoint <https://taxref.mnhn.fr/sparql> ],
+        [ void:sparqlEndpoint <https://www.thegazette.co.uk/sparql> ],
         [ void:sparqlEndpoint <http://ts.opendata.inrae.fr/sparql> ],
         [ void:sparqlEndpoint <http://virtuoso.plateforme.dipso.inrae.fr/sparql> ],
         [ void:sparqlEndpoint <https://virtuoso.plateforme.dipso.inrae.fr/sparql> ],

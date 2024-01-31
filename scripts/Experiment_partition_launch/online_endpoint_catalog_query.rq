@@ -1,0 +1,17 @@
+PREFIX schema: <https://schema.org/> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+
+CONSTRUCT {
+    kgi:catalog a dcat:Catalog ;
+        dcat:dataset ?dataset .
+    ?dataset dcat:endpointURL ?endpoint ;
+        void:sparqlEndpoint ?endpoint .
+} {
+    ?dataset dcat:endpointURL ?endpoint ;
+        schema:serverStatus schema:Online .
+}
