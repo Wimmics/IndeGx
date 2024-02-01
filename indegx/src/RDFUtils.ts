@@ -116,7 +116,7 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
         result = result.replaceAll(betterRegexNodeB, betterRegexNodeBReplacement); // Dirty hack to fix blank nodes with b or node prefix and without ":"
         result = result.replaceAll(regexURIWithoutBracketsRegex, regexURIWithoutBracketsReplacement); // Dirty hack ot remove property URIs that appear in Turtle returned by Corese when they have two ":". Should be fixed in Corese >4.4.1
         result = result.replaceAll(prefixedURIwithSlashesRegex, prefixedURIwithSlashesRegexReplacement) // Very dirty hack: Edit malformed prefixed URIs that contain slashes by removing everything after the first slash
-        result = Global.replaceUnicode(result);
+        result = Global.replaceUnicode(result); // Replace unicode characters in \u1111 format by their URI encoded version
         return result;
     }
 }
