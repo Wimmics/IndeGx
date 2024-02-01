@@ -138,9 +138,6 @@ export function fixCommonTurtleStringErrors(ttlString: string): string {
         result = result.replaceAll(regexURIWithoutBracketsRegex, regexURIWithoutBracketsReplacement); // Dirty hack ot remove property URIs that appear in Turtle returned by Corese when they have two ":". Should be fixed in Corese >4.4.1
         result = result.replaceAll(prefixedURIwithSlashesRegex, prefixedURIwithSlashesRegexReplacement) // Very dirty hack: Edit malformed prefixed URIs that contain slashes by removing everything after the first slash
         result = Global.replaceUnicode(result); // Replace unicode characters in \u1111 format by their URI encoded version
-        result.match(charactersThatAreNotSafeInURI)?.forEach(match => { // Replace any non-encoded character in the file by its URL encoded version
-            result = result.replaceAll(match, encodeURIComponent(match));
-        }); 
         return result;
     }
 }
