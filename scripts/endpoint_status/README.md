@@ -1,7 +1,7 @@
 # Linked Open Data and SPARQL Endpoints Observatory
 
 This folder contains the script used by the automated service monitoring of SPARQL Endpoints on an hourly basis.
-The results are published in the file [catalog.latest-status.ttl](https://github.com/Wimmics/IndeGx/blob/catalog_auto_refresh/catalogs/catalog.latest-status.ttl).
+The results are published in the file [catalog.latest-status.ttl](https://github.com/Wimmics/IndeGx/blob/endpoint_status/catalogs/catalog.latest-status.ttl).
 Many Linked Data clients can consume the data directly from [https://raw.githubusercontent.com/Wimmics/IndeGx/endpoint_status/catalogs/catalog.latest-status.ttl](https://raw.githubusercontent.com/Wimmics/IndeGx/endpoint_status/catalogs/catalog.latest-status.ttl)
 
 ### How Does It Work
