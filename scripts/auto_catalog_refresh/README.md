@@ -12,4 +12,4 @@ NOTICE: This script will be broken by very unusual endpoint URLs, such as <https
 - [https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl)
 - [https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl](https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl)
 - [https://data.europa.eu/sparql](https://data.europa.eu/sparql)
-- [https://druid.datalegend.net/_api/facets/datasets](https://druid.datalegend.net/_api/facets/datasets)
+- [Druid](https://druid.datalegend.net/_api/facets/datasets)
