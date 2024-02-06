@@ -1,14 +1,22 @@
 @prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix cc: <http://creativecommons.org/ns#> .
 @prefix dataid: <http://dataid.dbpedia.org/ns/core#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dce: <http://purl.org/dc/elements/1.1/> .
 @prefix dcmitype: <http://purl.org/dc/dcmitype/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
 @prefix dqv: <http://www.w3.org/ns/dqv#> .
 @prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix equiv: <https://ns.inria.fr/kg/equivalence#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
 @prefix kgi: <http://ns.inria.fr/kg/index#> .
 @prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pav: <http://purl.org/pav/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -16,10 +24,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix schema: <http://schema.org/> .
-@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sto: <https://w3id.org/i40/sto#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#>.
 @prefix void: <http://rdfs.org/ns/void#> .
+@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 kgi: rdf:type owl:Ontology, voaf:Vocabulary ;
     rdfs:label "IndeGx vocabulary"@en ;
@@ -32,7 +43,8 @@ kgi: rdf:type owl:Ontology, voaf:Vocabulary ;
     dcterms:format "RDF" ;
     dcterms:identifier kgi: ;
     voaf:extends void: , mf: , earl: ;
-    voaf:generalizes mf: , earl: .
+    voaf:generalizes mf: , earl: ;
+    owl:imports earl: , mf: .
 
 # Index structuration vocabulary
 
@@ -330,19 +342,356 @@ kgi:hostname rdf:type owl:ObjectProperty ;
 
 # Annotations
 
+## Availability
+
 kgi:Endpoint rdf:type owl:Class .
 
 kgi:AvailableEndpoint a owl:Class ;
     rdfs:label "Available endpoint"@en ;
     rdfs:comment "Annotation to indicate the availability of an endpoint."@en ;
-    rdfs:isDefinedBy kgi: .
-    rdfs:subClassOf kgi:Endpoint ;
-
-earl:subject(?a, ?x) ^ earl:result(?a, ?r) ^ earl:outcome(?r, earl:passed) -> kgi:AvailableEndpoint(?x)
+    rdfs:isDefinedBy kgi: ;
+    rdfs:subClassOf kgi:Endpoint .
 
 kgi:UnavailableEndpoint a owl:Class ;
     rdfs:label "Unavailable endpoint"@en ;
     rdfs:comment "Annotation to indicate the unavailability of an endpoint."@en ;
-    rdfs:isDefinedBy kgi: .
+    rdfs:isDefinedBy kgi: ;
     rdfs:subClassOf kgi:Endpoint ;
     owl:complementOf kgi:AvailableEndpoint .
+
+[ rdf:type owl:Axiom ;
+  owl:annotatedSource [ rdf:type owl:Restriction ;
+                        owl:onProperty [ owl:inverseOf earl:subject
+                                       ] ;
+                        owl:someValuesFrom owl:Thing ;
+                        rdfs:subClassOf kgi:AvailableEndpoint
+                      ] ;
+  owl:annotatedProperty rdfs:subClassOf ;
+  owl:annotatedTarget kgi:AvailableEndpoint ;
+  rdfs:comment "SWRL: earl:subject(?a, ?x) ^ earl:result(?a, ?r) ^ earl:outcome(?r, earl:passed) -> kgi:AvailableEndpoint(?x)"
+] .
+
+[ rdf:type owl:Axiom ;
+  owl:annotatedSource [ rdf:type owl:Restriction ;
+                        owl:onProperty [ owl:inverseOf earl:subject
+                                       ] ;
+                        owl:someValuesFrom owl:Thing ;
+                        rdfs:subClassOf kgi:UnavailableEndpoint
+                      ] ;
+  owl:annotatedProperty rdfs:subClassOf ;
+  owl:annotatedTarget kgi:UnavailableEndpoint ;
+  rdfs:comment "SWRL: earl:subject(?a, ?x) ^ earl:result(?a, ?r) ^ earl:outcome(?r, earl:failed) -> kgi:UnavailableEndpoint(?x)"
+] .
+
+## Equivalences
+
+:Dataset a equiv:AllEquivalentClasses ; 
+    owl:members (
+        schema:Dataset 
+        dcmitype:Dataset 
+        void:Dataset
+        dcat:Dataset
+        sd:Dataset 
+    ) .
+
+:identifier a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:identifier
+        skos:notation
+        adms:identifier
+        schema:identifier 
+    ) .
+
+:title a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:title
+        dce:title
+        schema:name
+        foaf:name
+        rdfs:label
+        skos:prefLabel
+        cc:attributionName
+    ) .
+
+:description a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:description
+        dce:description
+        schema:description
+        owl:comment
+        rdf:comment
+        skos:note 
+    ) .
+
+:creator a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:creator
+        schema:creator
+        schema:author
+        foaf:maker
+        dce:creator
+        pav:authoredBy
+        pav:createdBy 
+    ) .
+
+:contributor a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:editor
+        schema:contributor
+        dcterms:contributor
+        dce:contributor
+        pav:contributedBy 
+    ) .
+
+:publicationDate a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:issued
+        dcterms:available
+        schema:datePublished
+        schema:sdDatePublished
+        pav:authoredOn
+        pav:createdOn 
+    ) .
+
+:publisher a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:publisher
+        dce:publisher
+        schema:publisher
+        schema:sdPublisher
+        pav:providedBy 
+    ) .
+
+:creationDate a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:dateCreated
+        dcterms:created
+        pav:createdOn
+        prov:generatedAtTime 
+    ) .
+
+:creationLocation a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:locationCreated
+        pav:createdAt
+    ) .
+
+:creationMethod a equiv:AllEquivalentProperties ; 
+    owl:members (
+        pav:createdWith
+        pav:retrievedBy
+        pav:importedBy 
+    ) .
+
+:modificationDate a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:dateModified
+        dcterms:modified
+        pav:lastUpdateOn
+        pav:contributedOn 
+    ) .
+
+:endAvailability a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:expires
+        prov:invalidatedAtTime 
+    ) .
+
+:endValidity a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:valid
+        schema:expires
+    ) .
+
+:vocabulary a equiv:AllEquivalentProperties ; 
+    owl:members (
+        void:vocabulary
+        dcterms:conformsTo
+    ) .
+
+:theme a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcat:theme
+        schema:about
+        dcterms:subject
+        foaf:topic
+        foaf:primaryTopic
+        skos:subject
+    ) .
+
+:keyword a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:keywords
+        dcat:keyword
+    ) .
+
+:metaGraph a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:image
+        foaf:depiction
+    ) .
+
+:sparqlEndpoint a equiv:AllEquivalentProperties ; 
+    owl:members (
+        void:sparqlEndpoint
+        schema:contentURL
+    ) .
+
+:serviceSparqlEndpoint a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcat:endpointURL
+        sd:endpoint
+    ) .
+
+:distribution a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcat:distribution
+        schema:distribution
+    ) .
+
+:RESTAPI a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:mainEntityOfPage
+        fabio:ApplicationProgrammingInterface
+    ) .
+
+:format a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dce:format
+        dcterms:format
+        schema:encodingFormat
+    ) .
+
+:version a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcat:version
+        pav:version
+        dcterms:hasVersion
+        pav:hasCurrentVersion
+        schema:version
+    ) .
+
+:versionNotes a equiv:AllEquivalentProperties ; 
+    owl:members (
+        adms:versionNotes
+        owl:versionInfo
+    ) .
+
+:otherVersion a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:isVersionOf
+        pav:previousVersion
+        owl:priorVersion
+    ) .
+
+:language a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:language
+        dce:language
+        schema:inLanguage
+    ) .
+
+:identifier a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:identifier
+        dce:identifier
+        dcterms:identifier
+        adms:identifier
+    ) .
+
+:alternativeTitle a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:alternative
+        schema:alternateName
+        skos:altLabel
+    ) .
+
+:acronym a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:termCode
+        <http://qudt.org/schema/qudt/acronym>
+    ) .
+
+:homepage a equiv:AllEquivalentProperties ; 
+    owl:members (
+        foaf:homepage
+        schema:url
+        dcat:landingPage
+    ) .
+
+:otherPages a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:relatedLink
+        rdfs:seeAlso
+    ) .
+
+:publicationReferences a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:publication
+        dcterms:references
+    ) .
+
+:linkedresources a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dcterms:relation
+        void:target
+    ) .
+
+:example a equiv:AllEquivalentProperties ; 
+    owl:members (
+        void:exampleResource
+        schema:workExample
+        skos:example
+    ) .
+
+:license a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:license
+        dcterms:license
+        doap:license
+        dbpo:license
+        cc:license
+        xhv:license
+        sto:license
+        nie:license
+    ) .
+
+:qualityAnnotation a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:review
+        dqv:hasQualityAnnotation
+    ) .
+
+:accessStatement a equiv:AllEquivalentProperties ; 
+    owl:members (
+        dce:rights
+        dcterms:rights 
+        dcterms:accessRights
+    ) .
+
+:source a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:isBasedOn
+        dcterms:source
+        dce:source
+        dcterms:provenance
+        prov:hadPrimarySource
+        prov:wasDerivedFrom
+        pav:derivedFrom
+        pav:importedFrom
+        pav:retrievedFrom
+    ) .
+
+:spatial a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:spatialCoverage
+        dcterms:spatial
+    ) .
+
+:temporal a equiv:AllEquivalentProperties ; 
+    owl:members (
+        schema:temporalCoverage
+        dcterms:temporal
+    ) .
+
+mod:URI equiv:impliedProperty :identifier .
