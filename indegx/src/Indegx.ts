@@ -104,20 +104,19 @@ if (currentConfig === undefined) {
 }
 
 let logFile: string = currentConfig.logFile;
-if(logFile !== undefined) {
+if (logFile !== undefined) {
     Logger.setLogFileName(logFile);
 }
 
 Logger.info("Using configuration", currentConfig);
 let rootManifestFilename: string = currentConfig.manifest;
 let catalog: string = currentConfig.catalog;
-let post: string = currentConfig.post;
 let nbFetchRetries: number = currentConfig.nbFetchRetries;
 if (nbFetchRetries !== undefined) {
     GlobalUtils.setNbFetchRetries(nbFetchRetries);
 }
 let millisecondsBetweenRetries: number = currentConfig.millisecondsBetweenRetries;
-if(millisecondsBetweenRetries !== undefined) {
+if (millisecondsBetweenRetries !== undefined) {
     GlobalUtils.setMillisecondsBetweenRetries(millisecondsBetweenRetries);
 }
 let maxConccurentQueries: number = currentConfig.maxConccurentQueries;
@@ -125,7 +124,7 @@ if (maxConccurentQueries !== undefined) {
     GlobalUtils.setMaxConccurentQueries(maxConccurentQueries);
 }
 let delayMillisecondsTimeForConccurentQuery: number = currentConfig.delayMillisecondsTimeForConccurentQuery;
-if(delayMillisecondsTimeForConccurentQuery !== undefined) {
+if (delayMillisecondsTimeForConccurentQuery !== undefined) {
     GlobalUtils.setDelayMillisecondsTimeForConccurentQuery(delayMillisecondsTimeForConccurentQuery);
 }
 let defaultQueryTimeout: number = currentConfig.defaultQueryTimeout;
@@ -154,7 +153,7 @@ Logger.setLogFileName(logFile);
 
 function indegxProcess(): Promise<void> {
 
-    function preProcess(): Promise<void> {
+    function preProcess(preManifest: Manifest): Promise<void> {
         let initPromise = Promise.resolve();
 
         if (resumeMode) {
@@ -178,42 +177,32 @@ function indegxProcess(): Promise<void> {
             }
         }
 
-        if (currentConfig.pre !== undefined) {
-            Logger.info("Reading pre-treatment manifest tree")
-            let premanifestRoot = currentConfig.pre;
-            initPromise.then(() => readRules(premanifestRoot).then(premanifest => {
-                Logger.info("Pre-treatment manifest tree read")
-                return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, premanifest, true).then(() => {
-                    Logger.info("Pre treatment ends");
-                })
-            })).finally(() => {
-                if (resilience !== undefined && resilience) {
-                    return writeIndex(preTmpIndexSaveFilename)
-                } else {
-                    return;
-                }
+        return initPromise.then(() => {
+            Logger.info("Pre-treatment manifest tree read")
+            return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, preManifest, true).then(() => {
+                Logger.info("Pre treatment ends");
+                return;
             })
-        }
-        return initPromise;
+        }).finally(() => {
+            if (resilience !== undefined && resilience) {
+                return writeIndex(preTmpIndexSaveFilename)
+            } else {
+                return;
+            }
+        })
     }
 
-    function postProcess(): Promise<void> {
-        if (post !== undefined && post !== "") {
-            return readRules(post).then(postManifest => {
-                Logger.info("Post manifest tree read.");
-                if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
-                    Logger.info("Writing post manifest tree to file", postManifestTreeFile)
-                    GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
-                }
-                Logger.info("Post treatment starts");
-                return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
-                    Logger.info("Post treatment ends");
-                })
-            })
-        } else {
-            Logger.info("No post treatment specified");
-            return;
+    function postProcess(postManifest: Manifest): Promise<void> {
+        let saveManifestFile = Promise.resolve();
+        if (postManifestTreeFile !== undefined && postManifestTreeFile !== "") {
+            Logger.info("Writing post manifest tree to file", postManifestTreeFile)
+            saveManifestFile = GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
         }
+        Logger.info("Post treatment starts");
+        return saveManifestFile.then(() => RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
+            Logger.info("Post treatment ends");
+            return;
+        }))
     }
 
     function process(endpointObjectList: EndpointObject[], manifest: Manifest, recursive = false): Promise<void> {
@@ -256,7 +245,7 @@ function indegxProcess(): Promise<void> {
         }).finally(() => {
             if ((resilience !== undefined && resilience) || recursive) {
                 let tmpIndexFilename = mainTmpIndexSaveFilename;
-                if(recursive) {
+                if (recursive) {
                     let endpointListId = md5(endpointObjectList.map(endpointObject => endpointObject.endpoint).toString());
                     tmpIndexFilename = mainTmpIndexSaveFilenamePrefix + endpointListId + mainTmpIndexSaveFilenameSuffix;
                 }
@@ -267,25 +256,43 @@ function indegxProcess(): Promise<void> {
         })
     }
 
-    let preProcessPromise = preProcess();
-
-    Logger.info("Reading manifest tree ", rootManifestFilename)
-    return preProcessPromise.then(() => readRules(rootManifestFilename).then(manifest => {
+    return Promise.resolve().then(() => {
+        if (currentConfig.pre !== undefined && currentConfig.pre !== "") {
+            Logger.info("Reading pre-treatment manifest tree")
+            let premanifestFile = currentConfig.pre;
+            return readRules(premanifestFile).then(preManifest => {
+                return preProcess(preManifest)
+            });
+        } else {
+            Logger.info("No pre-treatment specified")
+            return;
+        }
+    }).then(() => readRules(rootManifestFilename).then(manifest => {
         Logger.info("Manifest tree read")
+        let saveManifestFile = Promise.resolve();
         if (manifestTreeFile !== undefined && manifestTreeFile !== "") {
             Logger.info("Writing manifest tree to file", manifestTreeFile)
-            GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifest))
+            saveManifestFile = GlobalUtils.writeFile(manifestTreeFile, JSON.stringify(manifest))
         }
 
         Logger.info("Reading catalog", catalog)
-        return readCatalog(catalog).then(endpointObjectList => {
+        return saveManifestFile.then(() => readCatalog(catalog).then(endpointObjectList => {
             Logger.info("Catalog read")
             let processPromise = process(endpointObjectList, manifest);
             return processPromise;
-        })
+        }))
     }).then(() => {
-        let postProcessPromise = postProcess();
-        return postProcessPromise;
+        let postManifestFile: string = currentConfig.post;
+
+        if (postManifestFile !== undefined && postManifestFile !== "") {
+            return readRules(postManifestFile).then(postManifest => {
+                Logger.info("Post manifest tree read.");
+                return postProcess(postManifest);
+            })
+        } else {
+            Logger.info("No post treatment specified");
+            return;
+        }
     }).finally(() => {
         return writeIndex(outputFile)
     }).catch(error => {

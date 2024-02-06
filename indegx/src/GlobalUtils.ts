@@ -53,8 +53,8 @@ export function appendToFile(filename, content) {
     });
 }
 
-export function writeFile(filename, content) {
-    fs.writeFile(filename, content, { flag: "w+" }).catch(error => {
+export function writeFile(filename, content): Promise<void> {
+    return fs.writeFile(filename, content, { flag: "w+" }).catch(error => {
         Logger.error("Error writing to file", filename, error)
     });
 }
