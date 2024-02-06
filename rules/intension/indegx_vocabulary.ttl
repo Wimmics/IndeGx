@@ -339,3 +339,10 @@ kgi:AvailableEndpoint a owl:Class ;
     rdfs:subClassOf kgi:Endpoint ;
 
 earl:subject(?a, ?x) ^ earl:result(?a, ?r) ^ earl:outcome(?r, earl:passed) -> kgi:AvailableEndpoint(?x)
+
+kgi:UnavailableEndpoint a owl:Class ;
+    rdfs:label "Unavailable endpoint"@en ;
+    rdfs:comment "Annotation to indicate the unavailability of an endpoint."@en ;
+    rdfs:isDefinedBy kgi: .
+    rdfs:subClassOf kgi:Endpoint ;
+    owl:complementOf kgi:AvailableEndpoint .
