@@ -11,19 +11,8 @@
 <load.ttl>  a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            mf:action """LOAD <file:///input/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl> ;
-            LOAD <file:///input/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
-            LOAD <file:///input/spin.ttl> INTO GRAPH <http://spinrdf.org/spin#> ;
-            LOAD <file:///input/lov.27072023.aa.nq> ;
-            LOAD <file:///input/lov.27072023.ab.nq> ;
-            LOAD <file:///input/lov.27072023.ac.nq> ;
-            LOAD <file:///input/lov.27072023.ad.nq> ;
-            LOAD <file:///input/lov.27072023.ae.nq> ;
-            LOAD <file:///input/lov.27072023.af.nq> ;
-            LOAD <file:///input/lov.27072023.ag.nq> ;
-            LOAD <file:///input/lov.27072023.ah.nq> ;
-            LOAD <file:///input/lov.27072023.ai.nq> ;
-            LOAD <file:///input/lov.27072023.aj.nq> ;
-            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/indegx_vocabulary.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#>"""
+            mf:action """
+            LOAD <file:///rules/intension/indegx_vocabulary.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#>
+            """
         ]
     ) .

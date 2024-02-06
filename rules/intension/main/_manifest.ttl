@@ -5,13 +5,56 @@
 
 <> a mf:Manifest ;
     mf:entries (
-        <online.ttl>
+        <init.ttl>
+        # <online.ttl>
+    ) .
+
+<init.ttl>  a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT DATA {
+                $rawEndpointUrl a kgi:Endpoint .
+            }
+            """
+        ]
     ) .
 
 <online.ttl>  a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            INSERT DATA {
+                [
+                    earl:subject $rawEndpointUrl ;
+                    earl:test <http://ns.inria.fr/kg/index#online> ;
+                    a earl:Assertion ;
+                    earl:result [ 
+                        earl:outcome earl:passed ;
+                        a earl:TestResult 
+                    ]
+                ]
+            }
+            """
+        ]
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            INSERT DATA {
+                [ 
+                    earl:subject $rawEndpointUrl ;
+                    earl:test <http://ns.inria.fr/kg/index#online> ;
+                    a earl:Assertion ;
+                    earl:result [ 
+                        earl:outcome earl:failed ;
+                        a earl:TestResult 
+                    ]
+                ]
+            }
             """
         ]
     ) .
