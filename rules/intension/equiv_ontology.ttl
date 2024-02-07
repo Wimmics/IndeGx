@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dce: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
+@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix sto: <https://w3id.org/i40/sto#> .
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix equiv: <https://ns.inria.fr/kg/equivalence#> .
+
+
+###### Equivalences ontology ######
+
+equiv: rdf:type owl:Ontology ;
+    dct:title "Equivalences used in Metadatamatic" ;
+    dct:description "This ontology is used to describe the equivalences used in Metadatamatic. It is not intended to be used elsewhere. The equivalences defined with this vocabulary are only valid in the context of a knowledge graph description, with the URI of the knowledge graph as the subject of the equivalence." ;
+    vann:preferredNamespacePrefix "equiv" ;
+    vann:preferredNamespaceUri "https://ns.inria.fr/kg/equivalence#" ;
+    dct:relation <https://wimmics.github.io/voidmatic/> .
+
+equiv:AllEquivalentClasses a owl:Class ;
+    rdfs:subClassOf equiv:AllEquivalent ;
+    rdfs:label "All equivalent classes" ;
+    rdfs:comment "This class is used to define that all the classes are equivalent pair-wise." .
+
+equiv:AllEquivalentProperties a owl:Class ;
+    rdfs:subClassOf equiv:AllEquivalent ;
+    rdfs:label "All equivalent classes" ;
+    rdfs:comment "This class is used to define that all the classes are equivalent." .
+
+equiv:AllEquivalent a owl:Class ;
+    rdfs:label "All equivalent classes and properties" ;
+    rdfs:comment "This class is used to define that all the classes and properties are equivalent." .
+

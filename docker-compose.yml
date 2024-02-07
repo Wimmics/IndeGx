@@ -4,7 +4,7 @@ services:
     image: wimmics/corese:4.5.1-nightly-20240202
     hostname: corese
     environment:
-      OPTIONS: "-o -e -su"
+      OPTIONS: "-o -su"
       JVM_XMX: "15g"
     expose: 
       - "8080"

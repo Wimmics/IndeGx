@@ -344,44 +344,79 @@ kgi:hostname rdf:type owl:ObjectProperty ;
 
 ## Availability
 
-kgi:Endpoint rdf:type owl:Class .
+kgi:Endpoint rdf:type owl:Class ;
+    rdfs:label "SPARQL endpoint"@en ;
+    rdf:subClassOf dcat:DataService ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:unionOf ([
+            a owl:Restriction ;
+            owl:onProperty void:sparqlEndpoint ;
+            owl:someValuesFrom owl:Thing
+        ] [
+            a owl:Restriction ;
+            owl:onProperty dcat:endpointURL ;
+            owl:someValuesFrom owl:Thing
+        ])
+    ] .
 
-kgi:AvailableEndpoint a owl:Class ;
+kgi:AvailableEndpoint rdf:type owl:Class ;
     rdfs:label "Available endpoint"@en ;
     rdfs:comment "Annotation to indicate the availability of an endpoint."@en ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:subClassOf kgi:Endpoint .
+    rdfs:subClassOf kgi:Endpoint ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:intersectionOf (       
+            kgi:Endpoint                                                             
+            [ 
+                rdf:type owl:Restriction ;
+                owl:onProperty [ 
+                    owl:inverseOf earl:subject
+                ] ;
+                owl:allValuesFrom [ 
+                    rdf:type owl:Restriction ;
+                    owl:onProperty earl:result ;
+                    owl:allValuesFrom [ 
+                        rdf:type owl:Restriction ;
+                        owl:onProperty earl:outcome ;
+                        owl:allValuesFrom [ 
+                            owl:oneOf ( earl:passed )
+                        ]
+                    ]
+                ]
+            ]
+        ) ;
+    ] .
 
-kgi:UnavailableEndpoint a owl:Class ;
-    rdfs:label "Unavailable endpoint"@en ;
+kgi:UnavailableEndpoint rdf:type owl:Class ;
+    rdfs:subClassOf kgi:Endpoint ;
     rdfs:comment "Annotation to indicate the unavailability of an endpoint."@en ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:subClassOf kgi:Endpoint ;
-    owl:complementOf kgi:AvailableEndpoint .
-
-[ rdf:type owl:Axiom ;
-  owl:annotatedSource [ rdf:type owl:Restriction ;
-                        owl:onProperty [ owl:inverseOf earl:subject
-                                       ] ;
-                        owl:someValuesFrom owl:Thing ;
-                        rdfs:subClassOf kgi:AvailableEndpoint
-                      ] ;
-  owl:annotatedProperty rdfs:subClassOf ;
-  owl:annotatedTarget kgi:AvailableEndpoint ;
-  rdfs:comment "SWRL: earl:subject(?a, ?x) ^ earl:result(?a, ?r) ^ earl:outcome(?r, earl:passed) -> kgi:AvailableEndpoint(?x)"
-] .
-
-[ rdf:type owl:Axiom ;
-  owl:annotatedSource [ rdf:type owl:Restriction ;
-                        owl:onProperty [ owl:inverseOf earl:subject
-                                       ] ;
-                        owl:someValuesFrom owl:Thing ;
-                        rdfs:subClassOf kgi:UnavailableEndpoint
-                      ] ;
-  owl:annotatedProperty rdfs:subClassOf ;
-  owl:annotatedTarget kgi:UnavailableEndpoint ;
-  rdfs:comment "SWRL: earl:subject(?a, ?x) ^ earl:result(?a, ?r) ^ earl:outcome(?r, earl:failed) -> kgi:UnavailableEndpoint(?x)"
-] .
+    rdfs:label "Unavailable endpoint"@en ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:intersectionOf (       
+            kgi:Endpoint                                                             
+            [ 
+                rdf:type owl:Restriction ;
+                owl:onProperty [ 
+                    owl:inverseOf earl:subject
+                ] ;
+                owl:allValuesFrom [ 
+                    rdf:type owl:Restriction ;
+                    owl:onProperty earl:result ;
+                    owl:allValuesFrom [ 
+                        rdf:type owl:Restriction ;
+                        owl:onProperty earl:outcome ;
+                        owl:allValuesFrom [ 
+                            owl:oneOf ( earl:failed )
+                        ]
+                    ]
+                ]
+            ]
+        ) ;
+    ] .
 
 ## Equivalences
 
@@ -597,6 +632,7 @@ kgi:UnavailableEndpoint a owl:Class ;
         dce:identifier
         dcterms:identifier
         adms:identifier
+        mod:URI
     ) .
 
 :alternativeTitle a equiv:AllEquivalentProperties ; 
@@ -693,5 +729,3 @@ kgi:UnavailableEndpoint a owl:Class ;
         schema:temporalCoverage
         dcterms:temporal
     ) .
-
-mod:URI equiv:impliedProperty :identifier .
