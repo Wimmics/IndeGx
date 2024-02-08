@@ -1,6 +1,6 @@
 {
-    "pre": "file:///rules/intension/pre/_manifest.ttl",
-    "manifest": "file:///rules/intension/main/_manifest.ttl",
+    "pre": "https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/pre/_manifest.ttl",
+    "manifest": "https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/_manifest.ttl",
     "post": "",
     "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
@@ -11,6 +11,6 @@
     "manifestJSON": "/output/rules.json",
     "logFile": "/output/indegx_debug.log",
     "outputFile": "/output/indegx_debug.trig",
-    "queryLog": false,
+    "queryLog": true,
     "resilience": false
 }

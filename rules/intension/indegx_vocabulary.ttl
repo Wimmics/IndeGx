@@ -44,7 +44,7 @@ kgi: rdf:type owl:Ontology, voaf:Vocabulary ;
     dcterms:identifier kgi: ;
     voaf:extends void: , mf: , earl: ;
     voaf:generalizes mf: , earl: ;
-    owl:imports earl: , mf: .
+    owl:imports earl: , mf: , dcat: .
 
 # Index structuration vocabulary
 
@@ -342,68 +342,88 @@ kgi:hostname rdf:type owl:ObjectProperty ;
 
 # Annotations
 
-## Availability
+kgi:passed rdf:type owl:AnnotationProperty ;
+    rdfs:label "passed"@en ;
+    rdfs:comment "Annotation to indicate the success of a test or action."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:range earl:ManifestEntry , earl:TestCase .
 
-kgi:Endpoint rdf:type owl:Class ;
-    rdfs:label "SPARQL endpoint"@en ;
-    rdf:subClassOf dcat:DataService ;
-    owl:equivalentClass [
-        a owl:Class ;
-        owl:unionOf ([
-            a owl:Restriction ;
-            owl:onProperty void:sparqlEndpoint ;
-            owl:someValuesFrom owl:Thing
-        ] [
-            a owl:Restriction ;
-            owl:onProperty dcat:endpointURL ;
-            owl:someValuesFrom owl:Thing
-        ])
-    ] .
+kgi:failed rdf:type owl:AnnotationProperty ;
+    rdfs:label "failed"@en ;
+    rdfs:comment "Annotation to indicate the failure of a test or action."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:range earl:ManifestEntry , earl:TestCase .
+
+## Availability of an endpoint
 
 kgi:AvailableEndpoint rdf:type owl:Class ;
     rdfs:label "Available endpoint"@en ;
     rdfs:comment "Annotation to indicate the availability of an endpoint."@en ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:subClassOf kgi:Endpoint ;
+    rdfs:subClassOf dcat:DataService ;
+# _:b2227 a earl:Assertion ;
+#   earl:subject <http://prod-dekalog.inria.fr/sparql> ;
+#   earl:test <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> ;
+#   earl:result [
+#       kgi:sentQuery "ASK { SERVICE <http://prod-dekalog.inria.fr/sparql> { ?s ?p ?o .  } }" ;
+#       earl:outcome earl:passed ;
+#       prov:wasGeneratedAtTime "2024-02-07T17:06:23.130Z"^^xsd:datetime .
+#   ] ;
+#   prov:endedAtTime "2024-02-07T17:06:23.130Z"^^xsd:datetime ;
+#   prov:startedAtTime "2024-02-07T17:06:22.711Z"^^xsd:datetime .
+#
     owl:equivalentClass [ 
         rdf:type owl:Class ;
-        owl:intersectionOf (       
-            kgi:Endpoint                                                             
+        owl:intersectionOf ( 
             [ 
                 rdf:type owl:Restriction ;
                 owl:onProperty [ 
                     owl:inverseOf earl:subject
                 ] ;
-                owl:allValuesFrom [ 
+                owl:someValuesFrom [ 
                     rdf:type owl:Restriction ;
                     owl:onProperty earl:result ;
-                    owl:allValuesFrom [ 
+                    owl:someValuesFrom [ 
                         rdf:type owl:Restriction ;
                         owl:onProperty earl:outcome ;
-                        owl:allValuesFrom [ 
-                            owl:oneOf ( earl:passed )
-                        ]
+                        owl:hasValue earl:passed
                     ]
                 ]
             ]
+            [ 
+                rdf:type owl:Restriction ;
+                owl:onProperty earl:test ;
+                owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
+            ]
         ) ;
+    ] ,
+# # <http://prod-dekalog.inria.fr/sparql> kgi:passed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> ;
+# #   a dcat:DataService ;
+# #   a prov:Entity ;
+# #   a earl:TestSubject ;
+# #   a sd:Service ;
+# #   sd:endpoint <http://prod-dekalog.inria.fr/sparql> .
+    [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty kgi:passed ;
+        owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
     ] .
 
 kgi:UnavailableEndpoint rdf:type owl:Class ;
-    rdfs:subClassOf kgi:Endpoint ;
+    rdfs:subClassOf dcat:DataService ;
     rdfs:comment "Annotation to indicate the unavailability of an endpoint."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:label "Unavailable endpoint"@en ;
     owl:equivalentClass [ 
         rdf:type owl:Class ;
-        owl:intersectionOf (       
-            kgi:Endpoint                                                             
+        owl:intersectionOf ( 
+            dcat:DataService
             [ 
                 rdf:type owl:Restriction ;
                 owl:onProperty [ 
                     owl:inverseOf earl:subject
                 ] ;
-                owl:allValuesFrom [ 
+                owl:someValuesFrom [ 
                     rdf:type owl:Restriction ;
                     owl:onProperty earl:result ;
                     owl:allValuesFrom [ 
@@ -415,8 +435,8 @@ kgi:UnavailableEndpoint rdf:type owl:Class ;
                     ]
                 ]
             ]
-        ) ;
-    ] .
+        )
+     ] .
 
 kgi:DescribedDataset a owl:Class ;
     rdfs:subClassOf dcat:Dataset ,

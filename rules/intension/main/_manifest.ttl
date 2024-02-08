@@ -35,11 +35,6 @@
         [
             mf:action """
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX earl: <http://www.w3.org/ns/earl#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX void: <http://rdfs.org/ns/void#>
             INSERT DATA {
                 $rawEndpointUrl kgi:passed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> .
             }
@@ -50,11 +45,6 @@
         [
             mf:action """
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX earl: <http://www.w3.org/ns/earl#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX void: <http://rdfs.org/ns/void#>
             INSERT DATA {
                 $rawEndpointUrl kgi:failed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> .
             }
