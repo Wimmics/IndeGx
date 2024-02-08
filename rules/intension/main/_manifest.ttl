@@ -6,7 +6,7 @@
 <> a mf:Manifest ;
     mf:entries (
         <init.ttl>
-        # <online.ttl>
+        <online.ttl>
     ) .
 
 <init.ttl>  a mf:ManifestEntry ;
@@ -14,28 +14,34 @@
         [
             mf:action """
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX void: <http://rdfs.org/ns/void#>
             INSERT DATA {
-                $rawEndpointUrl a kgi:Endpoint .
+                $rawEndpointUrl a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject ;
+                    sd:endpoint $rawEndpointUrl .
             }
             """
         ]
     ) .
 
 <online.ttl>  a mf:ManifestEntry ;
+    kgi:requiredAssets ( 
+        <init.ttl> 
+    ) ;
     kgi:onSuccess (
         [
             mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX void: <http://rdfs.org/ns/void#>
             INSERT DATA {
-                [
-                    earl:subject $rawEndpointUrl ;
-                    earl:test <http://ns.inria.fr/kg/index#online> ;
-                    a earl:Assertion ;
-                    earl:result [ 
-                        earl:outcome earl:passed ;
-                        a earl:TestResult 
-                    ]
-                ]
+                $rawEndpointUrl kgi:passed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> .
             }
             """
         ]
@@ -43,17 +49,14 @@
     kgi:onFailure (
         [
             mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX void: <http://rdfs.org/ns/void#>
             INSERT DATA {
-                [ 
-                    earl:subject $rawEndpointUrl ;
-                    earl:test <http://ns.inria.fr/kg/index#online> ;
-                    a earl:Assertion ;
-                    earl:result [ 
-                        earl:outcome earl:failed ;
-                        a earl:TestResult 
-                    ]
-                ]
+                $rawEndpointUrl kgi:failed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> .
             }
             """
         ]
