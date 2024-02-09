@@ -344,66 +344,63 @@ kgi:hostname rdf:type owl:ObjectProperty ;
 # Annotations
 
 kgi:passed rdf:type owl:AnnotationProperty ;
+    rdfs:subPropertyOf kgi:tested ;
     rdfs:label "passed"@en ;
     rdfs:comment "Annotation to indicate the success of a test or action."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:range earl:ManifestEntry , earl:TestCase .
 
 kgi:failed rdf:type owl:AnnotationProperty ;
+    rdfs:subPropertyOf kgi:tested ;
     rdfs:label "failed"@en ;
     rdfs:comment "Annotation to indicate the failure of a test or action."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:range earl:ManifestEntry , earl:TestCase .
 
+kgi:tested rdf:type owl:AnnotationProperty ;
+    rdfs:label "tested"@en ;
+    rdfs:comment "Annotation to indicate that a test or action has been executed."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:range earl:ManifestEntry , earl:TestCase .
+
+kgi:subjectOfAssertion rdf:type owl:AnnotationProperty ;
+    rdfs:label "subject of assertion"@en ;
+    rdfs:comment "Annotation to indicate the subject of an assertion."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:range earl:Assertion ;
+    rdfs:domain earl:TestSubject ;
+    owl:inverseOf earl:subject .
+
 ## Availability of an endpoint
 
 kgi:AvailableEndpoint rdf:type owl:Class ;
     rdfs:label "Available endpoint"@en ;
-    rdfs:comment "Annotation to indicate the availability of an endpoint."@en ;
+    rdfs:comment "Annotation to indicate the availability of an endpoint at the moment of the last indexing."@en ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:subClassOf dcat:DataService ;
-# _:b2227 a earl:Assertion ;
-#   earl:subject <http://prod-dekalog.inria.fr/sparql> ;
-#   earl:test <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> ;
-#   earl:result [
-#       kgi:sentQuery "ASK { SERVICE <http://prod-dekalog.inria.fr/sparql> { ?s ?p ?o .  } }" ;
-#       earl:outcome earl:passed ;
-#       prov:wasGeneratedAtTime "2024-02-07T17:06:23.130Z"^^xsd:datetime .
-#   ] ;
-#   prov:endedAtTime "2024-02-07T17:06:23.130Z"^^xsd:datetime ;
-#   prov:startedAtTime "2024-02-07T17:06:22.711Z"^^xsd:datetime .
-#
-    owl:equivalentClass [ 
-        rdf:type owl:Class ;
-        owl:intersectionOf ( 
-            [ 
-                rdf:type owl:Restriction ;
-                owl:onProperty [ 
-                    owl:inverseOf earl:subject
-                ] ;
-                owl:someValuesFrom [ 
+    rdfs:subClassOf dcat:DataService , sd:Service ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty kgi:subjectOfAssertion ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:intersectionOf ( 
+                [
                     rdf:type owl:Restriction ;
                     owl:onProperty earl:result ;
-                    owl:someValuesFrom [ 
+                    owl:someValuesFrom [
                         rdf:type owl:Restriction ;
                         owl:onProperty earl:outcome ;
                         owl:hasValue earl:passed
                     ]
                 ]
-            ]
-            [ 
-                rdf:type owl:Restriction ;
-                owl:onProperty earl:test ;
-                owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
-            ]
-        ) ;
+                [
+                    rdf:type owl:Restriction ;
+                    owl:onProperty earl:test ;
+                    owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
+                ]
+            )
+        ]
     ] ,
-# # <http://prod-dekalog.inria.fr/sparql> kgi:passed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> ;
-# #   a dcat:DataService ;
-# #   a prov:Entity ;
-# #   a earl:TestSubject ;
-# #   a sd:Service ;
-# #   sd:endpoint <http://prod-dekalog.inria.fr/sparql> .
     [ 
         rdf:type owl:Restriction ;
         owl:onProperty kgi:passed ;
@@ -415,36 +412,35 @@ kgi:UnavailableEndpoint rdf:type owl:Class ;
     rdfs:comment "Annotation to indicate the unavailability of an endpoint."@en ;
     rdfs:isDefinedBy kgi: ;
     rdfs:label "Unavailable endpoint"@en ;
-    owl:equivalentClass [ 
+    owl:equivalentClass [
         rdf:type owl:Restriction ;
-        owl:onProperty kgi:failed ;
-        owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
-    ] ;
-    owl:equivalentClass [ 
-        rdf:type owl:Class ;
-        owl:intersectionOf ( 
-            [ 
-                rdf:type owl:Restriction ;
-                owl:onProperty [ 
-                    owl:inverseOf earl:subject
-                ] ;
-                owl:someValuesFrom [ 
+        owl:onProperty kgi:subjectOfAssertion ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:intersectionOf ( 
+                [
                     rdf:type owl:Restriction ;
                     owl:onProperty earl:result ;
-                    owl:someValuesFrom [ 
+                    owl:someValuesFrom [
                         rdf:type owl:Restriction ;
                         owl:onProperty earl:outcome ;
                         owl:hasValue earl:failed
                     ]
                 ]
-            ]
-            [ 
-                rdf:type owl:Restriction ;
-                owl:onProperty earl:test ;
-                owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
-            ]
-        ) ;
+                [
+                    rdf:type owl:Restriction ;
+                    owl:onProperty earl:test ;
+                    owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
+                ]
+            )
+        ]
+    ] ,
+    [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty kgi:failed ;
+        owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
     ] .
+
 
 # Capacities of the endpoint
 
@@ -458,16 +454,11 @@ kgi:SPARQL10Compliant rdf:type owl:Class ;
     rdfs:isDefinedBy kgi: ;
     rdfs:subClassOf sd:Service , dcat:DataService ;
     owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty sd:feature ;
-                owl:hasValue sd:SPARQL10Query
-            ]
-        )
-    ] ;
-    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty sd:feature ;
+        owl:hasValue sd:SPARQL10Query
+    ] ,
+    [
         rdf:type owl:Class ;
         owl:intersectionOf (
             [
@@ -606,8 +597,8 @@ kgi:SPARQL11Compliant rdf:type owl:Class ;
         rdf:type owl:Restriction ;
         owl:onProperty sd:feature ;
         owl:hasValue sd:SPARQL11Query
-    ] ;
-    owl:equivalentClass [
+    ] ,
+    [
         rdf:type owl:Class ;
         owl:intersectionOf (
             [
@@ -704,6 +695,101 @@ kgi:SPARQL11Compliant rdf:type owl:Class ;
     ] .
 
 # TODO: new kgi:SPARQL11QueryWithoutFederation class with the same equivalence as sd:SPARQL11Query but without the federation tests
+kgi:SPARQL11QueryWithoutFederation rdf:type owl:Class ;
+    rdfs:label "SPARQL 1.1 compliant endpoint without federation"@en ;
+    rdfs:comment "Annotation to indicate that an endpoint is compliant with SPARQL 1.1 without the federation features."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:subClassOf sd:Service , dcat:DataService ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:ASKFILNOTIN
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELAVG
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELBIND
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILNOTEXISTS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILABS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILCONTAINS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILNOTEXISTS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILSTART
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELMAX
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELMIN
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELCOUNT
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELMINUS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELPATHS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELSUBQGRAPH
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELSUBQ
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELSUM
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELVALUES 
+            ]
+        )
+    ] .
 
 # Description of the dataset
 
