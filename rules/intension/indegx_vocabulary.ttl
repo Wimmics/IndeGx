@@ -25,6 +25,7 @@
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sparqles: <https://sparqles.ai.wu.ac.at/#> .
 @prefix sto: <https://w3id.org/i40/sto#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix voaf: <http://purl.org/vocommons/voaf#>.
@@ -415,9 +416,13 @@ kgi:UnavailableEndpoint rdf:type owl:Class ;
     rdfs:isDefinedBy kgi: ;
     rdfs:label "Unavailable endpoint"@en ;
     owl:equivalentClass [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty kgi:failed ;
+        owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
+    ] ;
+    owl:equivalentClass [ 
         rdf:type owl:Class ;
         owl:intersectionOf ( 
-            dcat:DataService
             [ 
                 rdf:type owl:Restriction ;
                 owl:onProperty [ 
@@ -426,17 +431,281 @@ kgi:UnavailableEndpoint rdf:type owl:Class ;
                 owl:someValuesFrom [ 
                     rdf:type owl:Restriction ;
                     owl:onProperty earl:result ;
-                    owl:allValuesFrom [ 
+                    owl:someValuesFrom [ 
                         rdf:type owl:Restriction ;
                         owl:onProperty earl:outcome ;
-                        owl:allValuesFrom [ 
-                            owl:oneOf ( earl:failed )
-                        ]
+                        owl:hasValue earl:failed
                     ]
                 ]
             ]
+            [ 
+                rdf:type owl:Restriction ;
+                owl:onProperty earl:test ;
+                owl:hasValue <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl>
+            ]
+        ) ;
+    ] .
+
+# Capacities of the endpoint
+
+# TODO: equivalence between sd:SPARQL10Query and passing all SPARQL10 tests
+# TODO: Create kgi:SPARQL10Compliant endpoint class
+# Replaces https://github.com/Wimmics/IndeGx/blob/main/rules/IndeGx_original_rules/sparqles/SPARQL10/manifest.ttl#L759
+
+kgi:SPARQL10Compliant rdf:type owl:Class ;
+    rdfs:label "SPARQL 1.0 compliant endpoint"@en ;
+    rdfs:comment "Annotation to indicate that an endpoint is compliant with SPARQL 1.0."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:subClassOf sd:Service , dcat:DataService ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sd:SPARQL10Query
+            ]
         )
-     ] .
+    ] ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:ASK
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:CON
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:CONJOIN
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:CONOPT
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SEL-DISTINCT
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SEL-REDUCED
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SEL
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELBNODE
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELEMPTY
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILBLANK
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILBOOL
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILIRI
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILNOTBOUND
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILNUM
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILREGEX-i
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILREGEX
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILSTR
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFROM
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELGRAPH
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELGRAPHJOIN
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELGRAPHUNION
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELJOIN
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELOPT
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELUNION 
+            ]
+        )
+    ] .
+
+# TODO: equivalence between sd:SPARQL11Query and passing all SPARQL11 tests
+# TODO: Create kgi:SPARQL11Compliant endpoint class
+# Replaces https://github.com/Wimmics/IndeGx/blob/main/rules/IndeGx_original_rules/sparqles/SPARQL11/manifest.ttl#L578
+
+kgi:SPARQL11Compliant rdf:type owl:Class ;
+    rdfs:label "SPARQL 1.1 compliant endpoint"@en ;
+    rdfs:comment "Annotation to indicate that an endpoint is compliant with SPARQL 1.1."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:subClassOf sd:Service , dcat:DataService ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty sd:feature ;
+        owl:hasValue sd:SPARQL11Query
+    ] ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:ASKFILNOTIN
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELAVG
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELBIND
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILNOTEXISTS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILABS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILCONTAINS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILNOTEXISTS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELFILSTART
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELMAX
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELMIN
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELCOUNT
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELMINUS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELPATHS
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELSERVICE
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELSUBQGRAPH
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELSUBQ
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELSUM
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty sd:feature ;
+                owl:hasValue sparqles:SELVALUES 
+            ]
+        )
+    ] .
+
+# TODO: new kgi:SPARQL11QueryWithoutFederation class with the same equivalence as sd:SPARQL11Query but without the federation tests
+
+# Description of the dataset
 
 kgi:DescribedDataset a owl:Class ;
     rdfs:subClassOf dcat:Dataset ,

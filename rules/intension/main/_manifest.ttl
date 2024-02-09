@@ -4,6 +4,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 <> a mf:Manifest ;
+    mf:include (
+        <SPARQLFeatures/_manifest.ttl>
+    ) ;
     mf:entries (
         <init.ttl>
         <online.ttl>
