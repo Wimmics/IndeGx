@@ -791,6 +791,131 @@ kgi:SPARQL11QueryWithoutFederation rdf:type owl:Class ;
         )
     ] .
 
+## Equivalences
+
+dcat:Dataset owl:equivalentClass schema:Dataset ,
+    dcmitype:Dataset ,
+    void:Dataset ,        
+    sd:Dataset .
+
+dcterms:creator owl:equivalentProperty schema:creator ,
+    schema:author ,
+    foaf:maker ,
+    dce:creator ,
+    pav:authoredBy ,
+    pav:createdBy .
+
+dcterms:contributor owl:equivalentProperty schema:editor ,
+    schema:contributor ,
+    dce:contributor ,
+    pav:contributedBy .
+
+dcterms:issued owl:equivalentProperty dcterms:available ,
+    schema:datePublished ,
+    schema:sdDatePublished ,
+    pav:authoredOn ,
+    pav:createdOn  .
+
+dcterms:publisher owl:equivalentProperty dce:publisher ,
+    schema:publisher ,
+    schema:sdPublisher ,
+    pav:providedBy .
+
+dcterms:created owl:equivalentProperty schema:dateCreated ,
+    pav:createdOn ,
+    prov:generatedAtTime .
+
+schema:locationCreated owl:equivalentProperty pav:createdAt .
+
+pav:createdWith owl:equivalentProperty pav:retrievedBy ,
+    pav:importedBy  .
+
+dcterms:modified owl:equivalentProperty schema:dateModified ,
+    pav:lastUpdateOn ,
+    pav:contributedOn .
+
+prov:invalidatedAtTime owl:equivalentProperty schema:expires .
+
+dcterms:valid owl:equivalentProperty schema:expires .
+
+void:vocabulary owl:equivalentProperty dcterms:conformsTo .
+
+dcterms:subject owl:equivalentProperty dcat:theme ,
+    schema:about ,
+    foaf:topic ,
+    foaf:primaryTopic ,
+    skos:subject .
+
+dcat:keyword owl:equivalentProperty schema:keywords .
+
+foaf:depiction owl:equivalentProperty schema:image .
+
+dcat:endpointURL owl:equivalentProperty sd:endpoint .
+
+dcat:distribution owl:equivalentProperty schema:distribution .
+
+dcterms:format owl:equivalentProperty dce:format ,
+    schema:encodingFormat .
+
+dcat:version owl:equivalentProperty pav:version ,
+    dcterms:hasVersion ,
+    pav:hasCurrentVersion ,
+    schema:version .
+
+adms:versionNotes owl:equivalentProperty owl:versionInfo .
+
+dcterms:isVersionOf owl:equivalentProperty pav:previousVersion ,
+    owl:priorVersion .
+
+dcterms:language owl:equivalentProperty dce:language ,
+    schema:inLanguage .
+
+dcterms:identifier owl:equivalentProperty schema:identifier ,
+    dce:identifier ,
+    dcterms:identifier ,
+    adms:identifier .
+
+schema:termCode owl:equivalentProperty <http://qudt.org/schema/qudt/acronym> .
+
+dcat:landingPage owl:equivalentProperty foaf:homepage ,
+    schema:url .
+
+
+rdfs:seeAlso owl:equivalentProperty schema:relatedLink ,
+    rdfs:seeAlso .
+
+dcterms:references owl:equivalentProperty schema:publication .
+
+void:exampleResource owl:equivalentProperty schema:workExample ,
+    skos:example .
+
+dcterms:license owl:equivalentProperty schema:license ,
+    doap:license ,
+    dbpo:license ,
+    cc:license ,
+    xhv:license ,
+    sto:license ,
+    nie:license .
+
+dqv:hasQualityAnnotation owl:equivalentProperty schema:review .
+
+dcterms:rights owl:equivalentProperty dcterms:accessRights ,
+    dce:rights .
+
+dcterms:source owl:equivalentProperty schema:isBasedOn ,
+    dcterms:source ,
+    dce:source ,
+    dcterms:provenance ,
+    prov:hadPrimarySource ,
+    prov:wasDerivedFrom ,
+    pav:derivedFrom ,
+    pav:importedFrom ,
+    pav:retrievedFrom .
+
+dcterms:spatial owl:equivalentProperty schema:spatialCoverage .
+
+dcterms:temporal owl:equivalentProperty schema:temporalCoverage .
+
 # Description of the dataset
 
 kgi:DescribedDataset a owl:Class ;
