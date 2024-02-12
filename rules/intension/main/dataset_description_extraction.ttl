@@ -1,0 +1,21 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of a Dataset related to the endpoint URL." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for a Dataset related to the endpoint URL." ;
+    kgi:query """
+        ASK {
+            SERVICE $rawEndpointUrl {
+                {
+                    ?kg ?endpointLink $rawEndpointUrl . 
+                }
+                UNION {
+                    GRAPH ?graph {
+                        ?kg ?endpointLink $rawEndpointUrl
+                    }
+                }
+            }
+        }
+""" .
