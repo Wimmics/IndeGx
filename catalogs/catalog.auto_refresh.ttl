@@ -355,9 +355,9 @@
 @prefix ns337: <https://api.cooperationdatabank.org/datasets/coda/databank/services/databank/> .
 @prefix ns579: <http://ja.dbpedia.org/> .
 @prefix ns336: <https://integbio.jp/rdf/kero/> .
-@prefix ns578: <http://services.data.gov.uk/statistics/> .
+@prefix ns578: <http://156.35.82.103/> .
 @prefix ns335: <https://api.parliament.uk/> .
-@prefix ns577: <http://156.35.82.103/> .
+@prefix ns577: <http://services.data.gov.uk/statistics/> .
 @prefix ns339: <https://druid.datalegend.net/AdamNet/Heritage/sparql/> .
 @prefix ns781: <http://kaunas.rkbexplorer.com/> .
 @prefix ns780: <http://ldf.fi/warsa/> .
@@ -405,9 +405,9 @@
 @prefix ns551: <http://taxref-graphdb.i3s.unice.fr/repositories/> .
 @prefix ns793: <http://virtuoso.plateforme.dipso.inrae.fr/> .
 @prefix ns316: <https://ontology.irstea.fr/weather/> .
-@prefix ns558: <http://collection.britishart.yale.edu/openrdf-sesame/repositories/> .
+@prefix ns558: <http://nomisma.org/> .
 @prefix ns315: <http://serendipity.utpl.edu.ec/lod/> .
-@prefix ns557: <http://nomisma.org/> .
+@prefix ns557: <http://collection.britishart.yale.edu/openrdf-sesame/repositories/> .
 @prefix ns799: <http://ariadne-registry.dcu.gr:8890/> .
 @prefix ns314: <http://sparql.cwrc.ca/> .
 @prefix ns556: <http://sparql.archives-ouvertes.fr/> .
@@ -480,7 +480,7 @@
 @prefix ns467: <https://id.ndl.go.jp/auth/> .
 @prefix ns229: <http://api.kasabi.com/dataset/foodista/apis/> .
 @prefix ns231: <http://services.data.gov.uk/transport/> .
-@prefix ns473: <http://issa.i3s.unice.fr/> .
+@prefix ns473: <http://156.35.31.156/> .
 @prefix ns230: <https://lingualibre.org/bigdata/#> .
 @prefix ns472: <http://webscience.rkbexplorer.com/> .
 @prefix ns471: <http://www4.wiwiss.fu-berlin.de/eurostat/> .
@@ -492,7 +492,7 @@
 @prefix ns233: <https://digits2.mainzed.org/covid19/> .
 @prefix ns475: <http://ndc.bio2rdf.org/> .
 @prefix ns232: <http://pubmed.bio2rdf.org/> .
-@prefix ns474: <http://156.35.31.156/> .
+@prefix ns474: <http://issa.i3s.unice.fr/> .
 @prefix ns239: <https://sparql-noipa.mef.gov.it/> .
 @prefix ns238: <https://digital-agenda-data.eu/data/> .
 @prefix ns237: <https://forum.semantic-metabolomics.fr/> .
@@ -544,10 +544,10 @@
 @prefix ns803: <http://ldf.fi/ww1lod/> .
 @prefix ns802: <http://quantum.agroparistech.fr/graphdb/repositories/> .
 @prefix ns801: <https://joinup.ec.europa.eu/> .
-@prefix ns808: <http://helheim.deusto.es/hedatuz/> .
-@prefix ns807: <https://eagle-i.ea.vanderbilt.edu/sparqler/> .
-@prefix ns806: <https://linkedart.ascdc.tw/> .
-@prefix ns805: <https://query.wikidata.org/bigdata/namespace/dcatap/> .
+@prefix ns808: <https://eagle-i.ea.vanderbilt.edu/sparqler/> .
+@prefix ns807: <http://helheim.deusto.es/hedatuz/> .
+@prefix ns806: <https://query.wikidata.org/bigdata/namespace/dcatap/> .
+@prefix ns805: <https://linkedart.ascdc.tw/> .
 @prefix ns809: <https://fuseki.gwascentral.org/gc/> .
 @prefix ns811: <https://sparql.geo.admin.ch/> .
 @prefix ns810: <https://hawaii.eagle-i.net/sparqler/> .
@@ -581,7 +581,7 @@
 @prefix ns845: <http://citeseer.rkbexplorer.com/> .
 @prefix ns17: <http://bioportal.bio2rdf.org/> .
 @prefix ns16: <http://ieee.rkbexplorer.com/> .
-@prefix ns609: <http://prelex.publicdata.eu/> .
+@prefix ns609: <http://eculture2.cs.vu.nl:8890/> .
 @prefix ns15: <http://digital-agenda-data.eu/data/> .
 @prefix ns608: <http://rdf.geneontology.org/blazegraph/> .
 @prefix ns14: <https://api.aucklandmuseum.com/> .
@@ -597,20 +597,20 @@
 @prefix ns854: <http://eu.dbpedia.org/> .
 @prefix ns611: <https://opendata1.opendata.u-psud.fr/> .
 @prefix ns853: <http://opendata.aragon.es/> .
-@prefix ns610: <http://eculture2.cs.vu.nl:8890/> .
+@prefix ns610: <http://prelex.publicdata.eu/> .
 @prefix ns852: <http://factforge.net/repositories/> .
 @prefix ns617: <https://publications.europa.eu/webapi/rdf/> .
 @prefix ns859: <https://semanticweb.cs.vu.nl/dss/> .
-@prefix ns616: <http://data.rism.info/> .
+@prefix ns616: <http://fr.dbpedia.org/> .
 @prefix ns858: <http://eurostat.linked-statistics.org/> .
-@prefix ns615: <http://fr.dbpedia.org/> .
+@prefix ns615: <http://data.rism.info/> .
 @prefix ns857: <https://www.genome.jp/sparql/> .
 @prefix ns614: <http://biosoda.expasy.org:8080/rdf4j-server/repositories/> .
 @prefix ns856: <http://data.lenka.no/> .
-@prefix ns619: <http://vocabulary.semantic-web.at/PoolParty/sparql/> .
-@prefix ns618: <http://www.rdfabout.com/> .
+@prefix ns619: <http://www.rdfabout.com/> .
+@prefix ns618: <http://vocabulary.semantic-web.at/PoolParty/sparql/> .
 @prefix ns31: <http://rdf.pathwaycommons.org/> .
-@prefix ns822: <http://commons.dbpedia.org/> .
+@prefix ns822: <http://n-lex.publicdata.eu/> .
 @prefix ns30: <http://extbi.lab.aau.dk/> .
 @prefix ns821: <http://ma-graph.org/> .
 @prefix ns820: <https://mmisw.org/> .
@@ -621,7 +621,7 @@
 @prefix ns33: <http://clara.univ-nantes.fr/> .
 @prefix ns824: <http://es.dbpedia.org/> .
 @prefix ns32: <http://lsd.dbcls.jp/> .
-@prefix ns823: <http://n-lex.publicdata.eu/> .
+@prefix ns823: <http://commons.dbpedia.org/> .
 @prefix ns39: <http://www4.wiwiss.fu-berlin.de/medicare/> .
 @prefix ns38: <http://data.szepmuveszeti.hu/> .
 @prefix ns829: <https://api.kunstmuseum.nl/query/proxy/wdqs/bigdata/namespace/wdq/> .
@@ -645,9 +645,9 @@
 @prefix ns28: <http://frb.270a.info/> .
 @prefix ns27: <https://lsd.dbcls.jp/> .
 @prefix ns26: <http://data.bibsys.no/data/> .
-@prefix ns839: <http://purl.org/twc/hub/> .
+@prefix ns839: <https://knowledge.brc.riken.jp/> .
 @prefix ns25: <http://wiktionary.dbpedia.org/> .
-@prefix ns838: <https://knowledge.brc.riken.jp/> .
+@prefix ns838: <http://purl.org/twc/hub/> .
 @prefix ns29: <https://fuseki.kupferdigital.org/demonstrator/> .
 @prefix ns880: <http://photos.rkbexplorer.com/> .
 @prefix ns60: <http://vocabulary.curriculum.edu.au/PoolParty/sparql/> .
@@ -752,10 +752,10 @@
 @prefix ns79: <https://mb2.ddbj.nig.ac.jp/> .
 @prefix ns628: <https://opendatacommunities.org/> .
 @prefix ns78: <https://relate.racai.ro/datasets/rolex/> .
-@prefix ns627: <http://services.data.gov.uk/reference/> .
+@prefix ns627: <https://test-svu/> .
 @prefix ns869: <http://heritagedata.org/live/> .
 @prefix ns77: <http://linkeddata.uriburner.com/> .
-@prefix ns626: <https://test-svu/> .
+@prefix ns626: <http://services.data.gov.uk/reference/> .
 @prefix ns868: <http://data.americanartcollaborative.org/> .
 @prefix ns76: <https://data.legilux.public.lu/> .
 @prefix ns625: <https://weakg.i3s.unice.fr/> .
@@ -771,15 +771,15 @@
 @prefix ns870: <http://integbio.jp/rdf/> .
 @prefix ns64: <https://ldf.fi/kirjasampo/> .
 @prefix ns635: <https://colil.dbcls.jp/> .
-@prefix ns877: <http://api.talis.com/stores/moseley/services/> .
+@prefix ns877: <http://lab.environment.data.gov.au/> .
 @prefix ns63: <https://api.druid.datalegend.net/datasets/HistoryOfWork/jobHoard-latest/> .
 @prefix ns634: <http://ncbigene.bio2rdf.org/> .
-@prefix ns876: <http://lab.environment.data.gov.au/> .
+@prefix ns876: <http://api.talis.com/stores/moseley/services/> .
 @prefix ns62: <https://druid.datalegend.net/_api/facets/> .
-@prefix ns633: <http://ichoose.tw.rpi.edu/> .
+@prefix ns633: <http://psm.eagle-i.net/sparqler/> .
 @prefix ns875: <https://hu.dbpedia.org/> .
 @prefix ns61: <https://sparql.crssnky.xyz/spql/imas/> .
-@prefix ns632: <http://psm.eagle-i.net/sparqler/> .
+@prefix ns632: <http://ichoose.tw.rpi.edu/> .
 @prefix ns874: <http://geoname.linkedopendata.tw/> .
 @prefix ns68: <https://sparql.archives-ouvertes.fr/> .
 @prefix ns639: <http://api.talis.com/stores/massobservation/services/> .
@@ -4377,28 +4377,28 @@
   a ns10:Dataset ;
   ns10:endpointURL ns470:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww4.wiwiss.fu-berlin.de%2Feurostat%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns471:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns471:sparql .
-
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fcommons-query.wikimedia.org%2F> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <https://commons-query.wikimedia.org/> ;
   a ns10:Dataset ;
   ns10:endpointURL <https://commons-query.wikimedia.org/> .
 
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww4.wiwiss.fu-berlin.de%2Feurostat%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns471:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns471:sparql .
+
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fwebscience.rkbexplorer.com%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns472:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns472:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fissa.i3s.unice.fr%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2F156.35.31.156%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns473:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns473:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2F156.35.31.156%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fissa.i3s.unice.fr%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns474:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns474:sparql .
@@ -4613,15 +4613,15 @@
   a ns10:Dataset ;
   ns10:endpointURL ns502:data .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fhunter-cuny.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns503:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns503:sparql .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fwiki.rkbexplorer.com%2Fsparql%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <http://wiki.rkbexplorer.com/sparql/> ;
   a ns10:Dataset ;
   ns10:endpointURL <http://wiki.rkbexplorer.com/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fhunter-cuny.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns503:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns503:sparql .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.data.muziekweb.nl%2Fdatasets%2Fmuziekweborganization%2FMuziekweb%2Fservices%2FMuziekweb%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
@@ -5058,17 +5058,17 @@
   a ns10:Dataset ;
   ns10:endpointURL ns556:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fnomisma.org%2Fquery> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns557:query ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns557:query .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fcollection.britishart.yale.edu%2Fopenrdf-sesame%2Frepositories%2Fycba> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns558:ycba ;
+  ns8:sparqlEndpoint ns557:ycba ;
   a ns10:Dataset ;
-  ns10:endpointURL ns558:ycba .
+  ns10:endpointURL ns557:ycba .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fnomisma.org%2Fquery> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns558:query ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns558:query .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Ffolklore%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
@@ -5206,12 +5206,12 @@
   a ns10:Dataset ;
   ns10:endpointURL ns576:jita .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2F156.35.82.103%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Fstatistics%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns577:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns577:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Fstatistics%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2F156.35.82.103%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns578:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns578:sparql .
@@ -5415,12 +5415,12 @@
   a ns10:Dataset ;
   ns10:endpointURL ns608:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fprelex.publicdata.eu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Feculture2.cs.vu.nl%3A8890%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns609:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns609:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Feculture2.cs.vu.nl%3A8890%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fprelex.publicdata.eu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns610:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns610:sparql .
@@ -5451,13 +5451,13 @@
   a ns10:Dataset ;
   ns10:endpointURL ns614:bgeelight .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Ffr.dbpedia.org%2Fsparql> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.rism.info%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns615:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns615:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.rism.info%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ffr.dbpedia.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns616:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns616:sparql .
@@ -5474,15 +5474,15 @@
   a ns10:Dataset ;
   ns10:endpointURL ns617:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.rdfabout.com%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns618:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns618:sparql .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2Fsemweb> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns619:semweb ;
+  ns8:sparqlEndpoint ns618:semweb ;
   a ns10:Dataset ;
-  ns10:endpointURL ns619:semweb .
+  ns10:endpointURL ns618:semweb .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.rdfabout.com%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns619:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns619:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fagalpha.mathbiol.org%2Frepositories%2Ftcga> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns620:tcga ;
@@ -5531,12 +5531,12 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://live.dbpedia.org/sparql/> .
 
-ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Freference%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns626:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns626:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Freference%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns627:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns627:sparql .
@@ -5569,12 +5569,12 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL <http://rdf.myexperiment.org/sparql/> .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fpsm.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fichoose.tw.rpi.edu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns632:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns632:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fichoose.tw.rpi.edu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpsm.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns633:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns633:sparql .
@@ -5704,15 +5704,15 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns647:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Freactome%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns648:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns648:sparql .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2Ftcga.deri.ie> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <http://tcga.deri.ie> ;
   a ns10:Dataset ;
   ns10:endpointURL <http://tcga.deri.ie> .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Freactome%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns648:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns648:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fsouthampton.rkbexplorer.com%2Fsparql%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <http://southampton.rkbexplorer.com/sparql/> ;
@@ -5858,16 +5858,16 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns668:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fsemantic.ckan.net%2Fsparql%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint <http://semantic.ckan.net/sparql/> ;
-  a ns10:Dataset ;
-  ns10:endpointURL <http://semantic.ckan.net/sparql/> .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fwikiba.se%2Fontology%23aroundmwapi> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns22:aroundmwapi ;
   a ns10:Dataset ;
   ns10:endpointURL ns22:aroundmwapi .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsemantic.ckan.net%2Fsparql%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint <http://semantic.ckan.net/sparql/> ;
+  a ns10:Dataset ;
+  ns10:endpointURL <http://semantic.ckan.net/sparql/> .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fiproclass.bio2rdf.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns669:sparql ;
@@ -5909,16 +5909,16 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns674:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fiserve.kmi.open.ac.uk%2Fiserve%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns675:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns675:sparql .
-
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom ns7:search ;
   ns8:sparqlEndpoint <https://hamap.expasy.org/sparql/> ;
   a ns10:Dataset ;
   ns10:endpointURL <https://hamap.expasy.org/sparql/> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fiserve.kmi.open.ac.uk%2Fiserve%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns675:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns675:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.artium.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns676:sparql ;
@@ -5976,9 +5976,9 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   ns10:endpointURL ns683:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2FAustrianSkiTeam> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns619:AustrianSkiTeam ;
+  ns8:sparqlEndpoint ns618:AustrianSkiTeam ;
   a ns10:Dataset ;
-  ns10:endpointURL ns619:AustrianSkiTeam .
+  ns10:endpointURL ns618:AustrianSkiTeam .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fabs.270a.info%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns684:sparql ;
@@ -6223,7 +6223,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns718:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-02-12T07:38:43.999Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
@@ -6808,12 +6808,12 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2Fdeaths-1910-1920%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fintegbio.jp%2Frdf%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.ox.ac.uk%2Fsparql%2F> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fcommons-query.wikimedia.org%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww4.wiwiss.fu-berlin.de%2Feurostat%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fcommons-query.wikimedia.org%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Feprints.rkbexplorer.com%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwebscience.rkbexplorer.com%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2F156.35.31.156%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fissa.i3s.unice.fr%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2F156.35.31.156%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fld.panlex.org%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.odw.tw> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fndc.bio2rdf.org%2Fsparql> ;
@@ -6850,8 +6850,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhgnc.bio2rdf.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.europa.eu%2Feuodp%2Fsparqlep> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cervantesvirtual.com%2Fbvmc-lod%2Frepositories%2Fdata> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwiki.rkbexplorer.com%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhunter-cuny.eagle-i.net%2Fsparqler%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwiki.rkbexplorer.com%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.data.muziekweb.nl%2Fdatasets%2Fmuziekweborganization%2FMuziekweb%2Fservices%2FMuziekweb%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvisualdataweb.infor.uva.es%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdarmstadt.rkbexplorer.com%2Fsparql> ;
@@ -6926,8 +6926,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flibris.kb.se%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.aalto.fi%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.archives-ouvertes.fr%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcollection.britishart.yale.edu%2Fopenrdf-sesame%2Frepositories%2Fycba> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fnomisma.org%2Fquery> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcollection.britishart.yale.edu%2Fopenrdf-sesame%2Frepositories%2Fycba> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Ffolklore%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdbtune.org%2Fbbc%2Fpeel%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdoc.metalex.eu%3A8000%2Fsparql%2F> ;
@@ -6951,8 +6951,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fmsm.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fagrold.southgreen.fr%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2F202.73.13.50%3A55824%2Fcatalogs%2Fperformance%2Frepositories%2Fjita> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Fstatistics%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2F156.35.82.103%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Fstatistics%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ss-framework.com%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fja.dbpedia.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.linkededucation.org%2Frequest%2Flak-conference%2Fsparql> ;
@@ -6986,18 +6986,18 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsmt.esante.gouv.fr%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.geneontology.org%2Fblazegraph%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fforeign.rkbexplorer.com%2Fsparql%2F> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Feculture2.cs.vu.nl%3A8890%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fprelex.publicdata.eu%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Feculture2.cs.vu.nl%3A8890%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata1.opendata.u-psud.fr%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fmakg.org%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.rism.info%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ffr.dbpedia.org%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.rism.info%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fbiosoda.expasy.org%3A8080%2Frdf4j-server%2Frepositories%2Fbgeelight> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Fbsv%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fpublications.europa.eu%2Fwebapi%2Frdf%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bne.es%2Fsparql%2F> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2Fsemweb> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.rdfabout.com%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2Fsemweb> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fagalpha.mathbiol.org%2Frepositories%2Ftcga> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fontology.inrae.fr%2Fppdo%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fnavi.first.lifesciencedb.jp%2Ffanavi%2Fsparql> ;
@@ -7006,15 +7006,15 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsmt.esante.gouv.fr%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fweakg.i3s.unice.fr%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flive.dbpedia.org%2Fsparql%2F> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Freference%2Fsparql> ;
   ns10:dataset ns1:https%3A%2F%2Ftest-svu%2Fsparql ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Freference%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdskg.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendatacommunities.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fchemdb.semweb.csdb.cn%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2Fandb-leerlingen%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Frdf.myexperiment.org%2Fsparql%2F> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fichoose.tw.rpi.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpsm.eagle-i.net%2Fsparqler%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fichoose.tw.rpi.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fcolil.dbcls.jp%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fncbigene.bio2rdf.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwordnet.okfn.gr%3A8890%2Fsparql%2F> ;
@@ -7036,8 +7036,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinkedspl.bio2rdf.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fbnb.data.bl.uk%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ftransparency.270a.info%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ftcga.deri.ie> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Freactome%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ftcga.deri.ie> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsouthampton.rkbexplorer.com%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fnotube.rkbexplorer.com%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fbmrbpub.pdbj.org%2Fsearch%2Frdf> ;
@@ -7061,8 +7061,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsemanticweb.cs.vu.nl%2Fverrijktkoninkrijk%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcollection.britishart.yale.edu%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwikiba.se%2Fontology%23aroundmwapi> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsemantic.ckan.net%2Fsparql%2F> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwikiba.se%2Fontology%23aroundmwapi> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fiproclass.bio2rdf.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flinkedspending.aksw.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fmsm.eagle-i.net%2Fsparqler%2Fsparql> ;
@@ -7070,8 +7070,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdblp.rkbexplorer.com%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flod.openaire.eu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.disgenet.org%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fiserve.kmi.open.ac.uk%2Fiserve%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.artium.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.gov.cz%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.lider-project.eu%2Fusage%2Fsparql> ;
@@ -7265,15 +7265,15 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fieeevis.tw.rpi.edu%2Fnosparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.linkedopendata.it%2Floc> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fckan.eurohelp.es%3A8890%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fpurl.org%2Fwhonto%2Fonto> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2F> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fpurl.org%2Fwhonto%2Fonto> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fnfdi4culture.de%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fstirdata-semantic.ails.ece.ntua.gr%2Fapi%2Fcontent%2Fcy%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.kasabi.com%2Fdataset%2Frenewable-energy-generators%2Fapis%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.bibbase.org%3A2020%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.openlifedata.org%2F> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Foecd.270a.info%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.europeana.eu%2F> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Foecd.270a.info%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2Flithology> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsibils.text-analytics.ch%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.talis.com%2Fstores%2Feutc-productions%2Fservices%2Fsparql> ;
@@ -7283,8 +7283,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Fenvironment%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_international-chronostratigraphic-chart> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flingualibre.org%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2F47.97.223.173%3A3030> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fupr.eagle-i.net%2Fsparqler%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2F47.97.223.173%3A3030> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.nobelprize.org%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocab.nerc.ac.uk%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.talis.com%2Fstores%2Feurobarometer%2Fservices%2Fsparql> ;
@@ -7307,10 +7307,10 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ardc.edu.au%2Frepository%2Fapi%2Fsparql%2Faas_the-unified-astronomy-thesaurus_4-0-1> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fldf.fi%2Fww1lod%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.dictionnairedesfrancophones.org%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flinkedart.ascdc.tw%2Flive_sparql.php> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fdcatap%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhelheim.deusto.es%2Fhedatuz%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flinkedart.ascdc.tw%2Flive_sparql.php> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Feagle-i.ea.vanderbilt.edu%2Fsparqler%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhelheim.deusto.es%2Fhedatuz%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fct-linkdata.aegean.gr%2Fgcam%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fchemblmirror.rdf.bigcat-bioinformatics.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frelate.racai.ro%2Fdatasets%2Fsimonero%2Fquery> ;
@@ -7318,8 +7318,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fmmisw.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhitontology.eu%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2Fendpoint%2Fchebi> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fn-lex.publicdata.eu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcommons.dbpedia.org%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fn-lex.publicdata.eu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frelate.racai.ro%2Fdatasets%2Fparseme%2Fquery> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdemo.spraakdata.gu.se%2Fltlod%2Ftest%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww4.wiwiss.fu-berlin.de%2Fdblp%2Fsparql> ;
@@ -7328,8 +7328,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsemanticweb.cs.vu.nl%2Fiati%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fusgs-stko.geog.ucsb.edu%3A8080%2Fsparql%2Fselect> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsensormeasurement.appspot.com%2Fdataset%2Fnaturopathy-dataset> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpurl.org%2Ftwc%2Fhub%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fknowledge.brc.riken.jp%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpurl.org%2Ftwc%2Fhub%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.kasabi.com%2Fdataset%2Fprelinger-archives%2Fapis%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww4.wiwiss.fu-berlin.de%2Ffactbook%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fccny-cuny.eagle-i.net%2Fsparqler%2Fsparql> ;
@@ -7349,8 +7349,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.library.sh.cn%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fuis.270a.info%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fgeoname.linkedopendata.tw%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.talis.com%2Fstores%2Fmoseley%2Fservices%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flab.environment.data.gov.au%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.talis.com%2Fstores%2Fmoseley%2Fservices%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fenipedia.tudelft.nl%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpomelo.iis.sinica.edu.tw%3A2020%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.linkedct.org%2Fsparql> ;
@@ -7365,8 +7365,8 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2FGeologicUnit> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fhdt.lod.labs.vu.nl%2F%3Fg%3DLOD-a-lot> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fnextprot.bio2rdf.org%2Fsparql> ;
-  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.odw.tw%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fid.ndl.go.jp%2Fauth%2Fndla%2F> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.odw.tw%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.kasabi.com%2Fdataset%2Fsanskrit-english-lexicon%2Fapis%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Fatlas%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.finto.fi%2Frest%2Fv1%2Fyso-places%2Fdata> .
@@ -7452,16 +7452,16 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns728:sparql .
 
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fpurl.org%2Fwhonto%2Fonto> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns729:onto ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns729:onto .
+
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2F> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <https://idsm.elixir-czech.cz/sparql/> ;
   a ns10:Dataset ;
   ns10:endpointURL <https://idsm.elixir-czech.cz/sparql/> .
-
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fpurl.org%2Fwhonto%2Fonto> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns729:onto ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns729:onto .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Flinkedspending.aksw.org%2Fsparql%2F> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
@@ -7566,16 +7566,16 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns740:sparql .
 
+<http://ns.inria.fr/kg/index#http%3A%2F%2Foecd.270a.info%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns741:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns741:sparql .
+
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.europeana.eu%2F> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <http://sparql.europeana.eu/> ;
   a ns10:Dataset ;
   ns10:endpointURL <http://sparql.europeana.eu/> .
-
-<http://ns.inria.fr/kg/index#http%3A%2F%2Foecd.270a.info%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns741:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns741:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fresource.geolba.ac.at%2FPoolParty%2Fsparql%2Flithology> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns133:lithology ;
@@ -7678,15 +7678,15 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns754:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fupr.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns755:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns755:sparql .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2F47.97.223.173%3A3030> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <http://47.97.223.173:3030> ;
   a ns10:Dataset ;
   ns10:endpointURL <http://47.97.223.173:3030> .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fupr.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns755:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns755:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.nobelprize.org%2F> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
@@ -7760,9 +7760,9 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   ns10:endpointURL ns762:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabulary.semantic-web.at%2FPoolParty%2Fsparql%2FOpenData> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns619:OpenData ;
+  ns8:sparqlEndpoint ns618:OpenData ;
   a ns10:Dataset ;
-  ns10:endpointURL ns619:OpenData .
+  ns10:endpointURL ns618:OpenData .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FdataLegend%2FCEDAR-S%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom ns62:datasets ;
@@ -8043,23 +8043,23 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns804:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fdcatap%2Fsparql> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint ns805:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns805:sparql .
-
 <http://ns.inria.fr/kg/index#https%3A%2F%2Flinkedart.ascdc.tw%2Flive_sparql.php> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <https://linkedart.ascdc.tw/live_sparql.php> ;
   a ns10:Dataset ;
   ns10:endpointURL <https://linkedart.ascdc.tw/live_sparql.php> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Feagle-i.ea.vanderbilt.edu%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fdcatap%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint ns806:sparql ;
+  a ns10:Dataset ;
+  ns10:endpointURL ns806:sparql .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fhelheim.deusto.es%2Fhedatuz%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns807:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns807:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fhelheim.deusto.es%2Fhedatuz%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Feagle-i.ea.vanderbilt.edu%2Fsparqler%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns808:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns808:sparql .
@@ -8179,12 +8179,12 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns298:chebi .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fcommons.dbpedia.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fn-lex.publicdata.eu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns822:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns822:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fn-lex.publicdata.eu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fcommons.dbpedia.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns823:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns823:sparql .
@@ -8316,13 +8316,13 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL <http://lsr.bio2rdf.org/sparql/> .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fknowledge.brc.riken.jp%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns2:importedFrom ns7:search ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpurl.org%2Ftwc%2Fhub%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns838:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns838:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fpurl.org%2Ftwc%2Fhub%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fknowledge.brc.riken.jp%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns7:search ;
   ns8:sparqlEndpoint ns839:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns839:sparql .
@@ -8572,13 +8572,13 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns875:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Flab.environment.data.gov.au%2Fsparql> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.talis.com%2Fstores%2Fmoseley%2Fservices%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns876:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns876:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.talis.com%2Fstores%2Fmoseley%2Fservices%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Flab.environment.data.gov.au%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns877:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns877:sparql .
@@ -8777,16 +8777,16 @@ ns1:Catalog ns2:lastRefreshedOn "2024-02-11T07:38:42.722Z"^^xsd:dateTime ;
   a ns10:Dataset ;
   ns10:endpointURL ns901:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fid.ndl.go.jp%2Fauth%2Fndla%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns8:sparqlEndpoint <http://id.ndl.go.jp/auth/ndla/> ;
-  a ns10:Dataset ;
-  ns10:endpointURL <http://id.ndl.go.jp/auth/ndla/> .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.odw.tw%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns902:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns902:sparql .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fid.ndl.go.jp%2Fauth%2Fndla%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns8:sparqlEndpoint <http://id.ndl.go.jp/auth/ndla/> ;
+  a ns10:Dataset ;
+  ns10:endpointURL <http://id.ndl.go.jp/auth/ndla/> .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fio.datascience-paris-saclay.fr%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
