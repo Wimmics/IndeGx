@@ -128,7 +128,7 @@ export function fetchPromise(url: string, header: Record<string, string> = {}, m
                         Logger.error("Too many retries", error);
                     }
                 } else {
-                    Logger.error("Error during fetch", error);
+                    Logger.error("Error during fetch", method, url, query ,error);
                 }
             }).finally(() => {
                 countConcurrentQueries--;
