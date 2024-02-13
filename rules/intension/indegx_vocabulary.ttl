@@ -45,7 +45,7 @@ kgi: rdf:type owl:Ontology, voaf:Vocabulary ;
     dcterms:identifier kgi: ;
     voaf:extends void: , mf: , earl: ;
     voaf:generalizes mf: , earl: ;
-    owl:imports earl: , mf: , dcat: .
+    owl:imports earl: , mf: , dcat: , void: , sd: .
 
 # Index structuration vocabulary
 
