@@ -361,7 +361,8 @@ kgi:tested rdf:type owl:AnnotationProperty ;
     rdfs:label "tested"@en ;
     rdfs:comment "Annotation to indicate that a test or action has been executed."@en ;
     rdfs:isDefinedBy kgi: ;
-    rdfs:range earl:ManifestEntry , earl:TestCase .
+    rdfs:range earl:ManifestEntry , earl:TestCase ;
+    owl:propertyChainAxiom ( kgi:subjectOfAssertion earl:test ) .
 
 kgi:subjectOfAssertion rdf:type owl:AnnotationProperty ;
     rdfs:label "subject of assertion"@en ;
