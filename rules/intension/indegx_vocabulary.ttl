@@ -919,368 +919,401 @@ dcterms:temporal owl:equivalentProperty schema:temporalCoverage .
 
 # Description of the dataset
 
+kgi:DatasetDescriptionLinkedTemporally rdf:type owl:Class ;
+    rdfs:label "Dataset linked temporally"@en ;
+    rdfs:comment "Annotation to indicate that a dataset is linked to another dataset through a temporal relation."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:subClassOf dcat:Dataset ,
+        schema:Dataset ,
+        dcmitype:Dataset , 
+        void:Dataset ,
+        sd:Dataset ;
+    owl:equivalentClass [ # Any time-related information
+        a owl:Class ;
+        owl:unionOf (
+            # dcterms:issued
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:issued ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # dcterms:available
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:available ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # schema:datePublished
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:datePublished ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # schema:sdDatePublished
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:sdDatePublished ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # pav:authoredOn
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:authoredOn ;
+            owl:someValuesFrom xsd:dateTime
+            ]
+            # pav:createdOn 
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:createdOn ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # schema:dateCreated
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:dateCreated ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # dcterms:created
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:created ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # pav:createdOn
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:createdOn ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # prov:generatedAtTime 
+            [
+                a owl:Restriction ;
+                owl:onProperty prov:generatedAtTime ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # schema:dateModified
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:dateModified ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # dcterms:modified
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:modified ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # pav:lastUpdateOn
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:lastUpdateOn ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+            # pav:contributedOn 
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:contributedOn ;
+                owl:someValuesFrom xsd:dateTime
+            ]
+        )
+    ] .
+
+kgi:HumanReadableDatasetDescription rdf:type owl:Class ;
+    rdfs:label "Human readable dataset description"@en ;
+    rdfs:comment "Annotation to indicate that a dataset is described by a human-readable description."@en ;
+    rdfs:isDefinedBy kgi: ;
+    rdfs:subClassOf dcat:Dataset ,
+        schema:Dataset ,
+        dcmitype:Dataset , 
+        void:Dataset ,
+        sd:Dataset ;
+    owl:equivalentClass [ # Human readable description
+        a owl:Class ;
+        owl:unionOf (
+            # rdfs:label
+            [
+                a owl:Restriction ;
+                owl:onProperty rdfs:label ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # skos:prefLabel
+            [
+                a owl:Restriction ;
+                owl:onProperty skos:prefLabel ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # cc:attributionName
+            [
+                a owl:Restriction ;
+                owl:onProperty cc:attributionName ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # dcterms:title
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:title ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # dce:title
+            [
+                a owl:Restriction ;
+                owl:onProperty dce:title ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # schema:name
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:name ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # foaf:name
+            [
+                a owl:Restriction ;
+                owl:onProperty foaf:name ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # dcterms:description
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:description ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # dce:description
+            [
+                a owl:Restriction ;
+                owl:onProperty dce:description ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # schema:description
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:description ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # owl:comment
+            [
+                a owl:Restriction ;
+                owl:onProperty owl:comment ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # rdf:comment
+            [
+                a owl:Restriction ;
+                owl:onProperty rdf:comment ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            # skos:note 
+            [
+                a owl:Restriction ;
+                owl:onProperty skos:note ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+        )
+    ] .
+
+kgi:DatasetLinkedToAgent a owl:Class ;
+    rdfs:label "Dataset linked to an agent"@en ;
+    rdfs:comment "Annotation to indicate that a dataset is linked to an agent."@en ;
+    rdfs:subClassOf dcat:Dataset ,
+        schema:Dataset ,
+        dcmitype:Dataset , 
+        void:Dataset ,
+        sd:Dataset ;
+    owl:equivalentClass [ # Agent linked to the dataset
+        a owl:Class ;
+        owl:unionOf (
+            # dcterms:creator
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:creator ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # schema:creator
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:creator ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # schema:author
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:author ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # foaf:maker
+            [
+                a owl:Restriction ;
+                owl:onProperty foaf:maker ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dce:creator
+            [
+                a owl:Restriction ;
+                owl:onProperty dce:creator ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # pav:authoredBy
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:authoredBy ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # pav:createdBy 
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:createdBy ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # schema:editor
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:editor ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # schema:contributor
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:contributor ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dcterms:contributor
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:contributor ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dce:contributor
+            [
+                a owl:Restriction ;
+                owl:onProperty dce:contributor ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # pav:contributedBy 
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:contributedBy ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dcterms:publisher
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:publisher ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dce:publisher
+            [
+                a owl:Restriction ;
+                owl:onProperty dce:publisher ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # schema:publisher
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:publisher ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # schema:sdPublisher
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:sdPublisher ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # pav:providedBy 
+            [
+                a owl:Restriction ;
+                owl:onProperty pav:providedBy ;
+                owl:someValuesFrom owl:Thing
+            ]
+        )
+    ] .
+
+kgi:DatasetLicensed a owl:Class ;
+    rdfs:label "Dataset licensed"@en ;
+    rdfs:comment "Annotation to indicate that a dataset is licensed."@en ;
+    rdfs:subClassOf dcat:Dataset ,
+        schema:Dataset ,
+        dcmitype:Dataset , 
+        void:Dataset ,
+        sd:Dataset ;
+    owl:equivalentClass [ # Licensing or access rights information
+        a owl:Class ;
+        owl:unionOf (
+            # schema:license
+            [
+                a owl:Restriction ;
+                owl:onProperty schema:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dcterms:license
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # doap:license
+            [
+                a owl:Restriction ;
+                owl:onProperty doap:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dbpo:license
+            [
+                a owl:Restriction ;
+                owl:onProperty dbpo:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # cc:license
+            [
+                a owl:Restriction ;
+                owl:onProperty cc:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # xhv:license
+            [
+                a owl:Restriction ;
+                owl:onProperty xhv:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # sto:license
+            [
+                a owl:Restriction ;
+                owl:onProperty sto:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # nie:license
+            [
+                a owl:Restriction ;
+                owl:onProperty nie:license ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dce:rights
+            [
+                a owl:Restriction ;
+                owl:onProperty dce:rights ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dcterms:rights 
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:rights ;
+                owl:someValuesFrom owl:Thing
+            ]
+            # dcterms:accessRights
+            [
+                a owl:Restriction ;
+                owl:onProperty dcterms:accessRights ;
+                owl:someValuesFrom owl:Thing
+            ]
+        )
+    ] .
+
 kgi:DescribedDataset a owl:Class ;
     rdfs:subClassOf dcat:Dataset ,
         schema:Dataset ,
         dcmitype:Dataset , 
         void:Dataset ,
         sd:Dataset ;
-    owl:equivalentClass [
-        a owl:Class ;
-        owl:intersectionOf (
-            # Human readable description
-            [
-                a owl:Class ;
-                owl:unionOf (
-                    # rdfs:label
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty rdfs:label ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # skos:prefLabel
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty skos:prefLabel ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # cc:attributionName
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty cc:attributionName ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # dcterms:title
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:title ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # dce:title
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dce:title ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # schema:name
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:name ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # foaf:name
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty foaf:name ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # dcterms:description
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:description ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # dce:description
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dce:description ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # schema:description
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:description ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # owl:comment
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty owl:comment ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # rdf:comment
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty rdf:comment ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    # skos:note 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty skos:note ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                )
-            ] 
-            # Agent linked to the dataset
-            [
-                a owl:Class ;
-                owl:unionOf (
-                    # dcterms:creator
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:creator ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # schema:creator
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:creator ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # schema:author
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:author ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # foaf:maker
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty foaf:maker ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dce:creator
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dce:creator ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # pav:authoredBy
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:authoredBy ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # pav:createdBy 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:createdBy ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # schema:editor
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:editor ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # schema:contributor
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:contributor ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dcterms:contributor
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:contributor ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dce:contributor
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dce:contributor ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # pav:contributedBy 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:contributedBy ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dcterms:publisher
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:publisher ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dce:publisher
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dce:publisher ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # schema:publisher
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:publisher ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # schema:sdPublisher
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:sdPublisher ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # pav:providedBy 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:providedBy ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                )
-            ]
-            # Any time-related information
-            [
-                a owl:Class ;
-                owl:unionOf (
-                    # dcterms:issued
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:issued ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # dcterms:available
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:available ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # schema:datePublished
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:datePublished ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # schema:sdDatePublished
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:sdDatePublished ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # pav:authoredOn
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:authoredOn ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # pav:createdOn 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:createdOn ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # schema:dateCreated
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:dateCreated ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # dcterms:created
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:created ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # pav:createdOn
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:createdOn ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # prov:generatedAtTime 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty prov:generatedAtTime ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # schema:dateModified
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:dateModified ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # dcterms:modified
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:modified ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # pav:lastUpdateOn
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:lastUpdateOn ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                    # pav:contributedOn 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty pav:contributedOn ;
-                        owl:someValuesFrom xsd:dateTime
-                    ]
-                )
-            ]
-            # Licensing or access rights information
-            [
-                a owl:Class ;
-                owl:unionOf (
-                    # schema:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty schema:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dcterms:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # doap:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty doap:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dbpo:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dbpo:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # cc:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty cc:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # xhv:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty xhv:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # sto:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty sto:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # nie:license
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty nie:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dce:rights
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dce:rights ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dcterms:rights 
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:rights ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    # dcterms:accessRights
-                    [
-                        a owl:Restriction ;
-                        owl:onProperty dcterms:accessRights ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                )
-            ]
-        )
-    ] .
+    owl:equivalentClass kgi:HumanReadableDatasetDescription ,
+        kgi:DatasetDescriptionLinkedTemporally ,
+        kgi:DatasetLinkedToAgent ,
+        kgi:DatasetLicensed .
