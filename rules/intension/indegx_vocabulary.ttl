@@ -909,437 +909,474 @@ dcterms:spatial owl:equivalentProperty schema:spatialCoverage .
 
 dcterms:temporal owl:equivalentProperty schema:temporalCoverage .
 
-# Description of the dataset
+## Accountability
+# https://github.com/Jendersen/KG_accountability
 
-kgi:DatasetDescriptionLinkedTemporally rdf:type owl:Class ;
-    rdfs:label "Dataset linked temporally"@en ;
-    rdfs:comment "Annotation to indicate that a dataset is linked to another dataset through a temporal relation."@en ;
-    rdfs:isDefinedBy kgi: ;
+
+kgi:Accountability rdf:type dqv:Category ;
+    rdfs:label "Accountability Category"@en .
+
+kgi:datasetCreationAccountablity rdf:type dqv:Dimension ;
+    rdfs:label "Dataset creation accountability dimension"@en ;
+    rdf:comment "Annotation to indicate that the information related to the creation of a dataset are given in the dataset description."@en ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetCreationAccountablity_Who rdf:type dqv:Dimension ;
+    rdfs:label "Dataset creation accountable: who"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the creators of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetCreationAccountablity .
+
+kgi:datasetCreationAccountablity_Who_Contributor rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetCreationAccountablity_Who ;
+    dcterms:title "Creation contributor" ;
+    dcterms:description "Who are the creators and contributors of the dataset? What is their role in the data creation process?" .
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetCreationAccountablity_When rdf:type dqv:Dimension ;
+    rdfs:label "Dataset creation accountable: when"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the time of the creation of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetCreationAccountablity .
+
+kgi:datasetCreationAccountablity_When_Date rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetCreationAccountablity_When ;
+    dcterms:title "Creation date" ;
+    dcterms:description "When was the dataset created?" .
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetCreationAccountablity_Where rdf:type dqv:Dimension ;
+    rdfs:label "Dataset creation accountable: where"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the location of the creation of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetCreationAccountablity .
+
+kgi:datasetCreationAccountablity_Where_source rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetCreationAccountablity_Where ;
+    dcterms:title "Creation source, source" ;
+    dcterms:description "Where does the dataset comes from ?" .
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetCreationAccountablity_Where_location rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetCreationAccountablity_Where ;
+    dcterms:title "Creation source, location" ;
+    dcterms:description "Where was the dataset created?" .
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetCreationAccountablity_How rdf:type dqv:Dimension ;
+    rdfs:label "Dataset creation accountable: how"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the creation process of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetCreationAccountablity .
+
+kgi:datasetCreationAccountablity_How_Methodology rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetCreationAccountablity_How ;
+    dcterms:title "Creation methodology" ;
+    dcterms:description "How was the dataset created?" .
+    dqv:inCategory kgi:AccountabilityDimension .
+
+## Type of datasets according to the elements in their descriptions
+
+kgi:AccountableDataset rdf:type owl:Class ;
+    rdfs:label "Accountable dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset is accountable."@en ;
     rdfs:subClassOf dcat:Dataset ,
         schema:Dataset ,
         dcmitype:Dataset , 
         void:Dataset ,
         sd:Dataset ;
-    owl:equivalentClass [ # Any time-related information
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:DatasetWithCreationAccountability
+            # kgi:DatasetWithMaintenanceAccountability
+            # kgi:DatasetWithUsageAccountability
+        )
+    ] .
+
+kgi:DatasetWithCreationAccountability rdf:type owl:Class ;
+    rdfs:label "Dataset with creation accountability"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains information related to its creation."@en ;
+    rdfs:subClassOf dcat:Dataset ,
+        schema:Dataset ,
+        dcmitype:Dataset , 
+        void:Dataset ,
+        sd:Dataset ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:DatasetWithCreationAccountability_Who_Contributor
+            kgi:DatasetWithCreationAccountability_When
+            kgi:DatasetWithCreationAccountability_Where
+            kgi:DatasetWithCreationAccountability_How
+        )
+    ] .
+
+kgi:DatasetWithCreationAccountability_Who_Contributor rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the contributors to the creation of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the contributors to the creation of the dataset."@en ;
+    # Equivalence to the IndeGx query rule version: 
+    # { ?kg dcterms:creator ?contributor . }
+    # UNION { ?kg dcterms:contributor ?contributor . }
+    # UNION { ?kg pav:curatedBy ?contributor . }
+    # UNION { ?kg pav:authoredBy ?contributor . }
+    owl:equivalentClass [
         rdf:type owl:Class ;
         owl:unionOf (
-            # dcterms:issued
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty dcterms:issued ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty dcterms:creator ;
+                owl:someValuesFrom owl:Thing
             ]
-            # dcterms:available
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty dcterms:available ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty dcterms:creator ;
+                owl:someValuesFrom rdfs:Literal
             ]
-            # schema:datePublished
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty schema:datePublished ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty dcterms:contributor ;
+                owl:someValuesFrom owl:Thing
             ]
-            # schema:sdDatePublished
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty schema:sdDatePublished ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty dcterms:contributor ;
+                owl:someValuesFrom rdfs:Literal
             ]
-            # pav:authoredOn
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty pav:authoredOn ;
-            owl:someValuesFrom xsd:dateTime
+                owl:onProperty pav:curatedBy ;
+                owl:someValuesFrom owl:Thing
             ]
-            # pav:createdOn 
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty pav:createdOn ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty pav:curatedBy ;
+                owl:someValuesFrom rdfs:Literal
             ]
-            # schema:dateCreated
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty schema:dateCreated ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty pav:authoredBy ;
+                owl:someValuesFrom owl:Thing
             ]
-            # dcterms:created
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty dcterms:created ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty pav:authoredBy ;
+                owl:someValuesFrom rdfs:Literal
             ]
-            # pav:createdOn
+        )
+    ] ,
+    # Equivalence with having a successful quality measurement of the creation/Who/contributor metric
+    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementContributor .
+    # ?qualityMeasurementContributor a dqv:QualityMeasurement ;
+    #     rdfs:label "Creation contributor measurement" ;
+    #     dqv:isMeasurementOf kgi:datasetCreationAccountablity_Who_Contributor ;
+    #     dqv:value "true"^^xsd:boolean .
+    [ 
+        rdf:type owl:Class ;
+        owl:intersectionOf (
             [
-                rdf:type owl:Restriction ;
-                owl:onProperty pav:createdOn ;
-                owl:someValuesFrom xsd:dateTime
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
             ]
-            # prov:generatedAtTime 
             [
                 rdf:type owl:Restriction ;
-                owl:onProperty prov:generatedAtTime ;
-                owl:someValuesFrom xsd:dateTime
-            ]
-            # schema:dateModified
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty schema:dateModified ;
-                owl:someValuesFrom xsd:dateTime
-            ]
-            # dcterms:modified
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty dcterms:modified ;
-                owl:someValuesFrom xsd:dateTime
-            ]
-            # pav:lastUpdateOn
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty pav:lastUpdateOn ;
-                owl:someValuesFrom xsd:dateTime
-            ]
-            # pav:contributedOn 
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty pav:contributedOn ;
-                owl:someValuesFrom xsd:dateTime
+                owl:onProperty dqv:hasQualityMeasurement ;
+                owl:someValuesFrom [
+                    rdf:type owl:Class ;
+                    owl:intersectionOf (
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:isMeasurementOf ;
+                            owl:hasValue kgi:datasetCreationAccountablity_Who_Contributor
+                        ]
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:value ;
+                            owl:hasValue "true"^^xsd:boolean
+                        ]
+                    )
+                
+                ]
             ]
         )
     ] .
 
-kgi:EndpointContainsHumanReadableDatasetDescription rdf:type owl:Class ;
-    rdfs:label "Endpoint contains human readable dataset description"@en ;
-    rdfs:comment "Annotation to indicate that an endpoint contains at least one dataset described by a human-readable description."@en ;
-    rdfs:isDefinedBy kgi: ;
-    rdfs:subClassOf dcat:Dataset ,
-        schema:Dataset ,
-        dcmitype:Dataset , 
-        void:Dataset ,
-        sd:Dataset ;
-    owl:equivalentClass [ # Human readable description
-        rdf:type owl:Restriction ;
-        owl:onProperty dcat:servesDataset ;
-        owl:someValuesFrom kgi:DatasetWithHumanReadableDescription 
-    ] .
-
-kgi:DatasetWithHumanReadableDescription rdf:type owl:Class ;
-    rdfs:label "Human readable dataset description"@en ;
-    rdfs:comment "Annotation to indicate that a dataset is described by a human-readable description."@en ;
-    owl:equivalentClass [
-            rdf:type owl:Class ;
-            owl:unionOf (
-                # adms:versionNotes
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty adms:versionNotes ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # rdfs:label
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty rdfs:label ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # skos:prefLabel
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty skos:prefLabel ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # cc:attributionName
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty cc:attributionName ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # dcterms:title
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:title ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # dce:title
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dce:title ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # schema:name
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:name ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # foaf:name
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty foaf:name ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # dcterms:description
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:description ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # dce:description
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dce:description ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # schema:description
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:description ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # schema:about
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:about ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # owl:comment
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty owl:comment ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # rdf:comment
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty rdf:comment ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-                # skos:note 
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty skos:note ;
-                    owl:someValuesFrom rdfs:Literal
-                ]
-            )
-        ] .
-
-kgi:EndpointContainsDatasetLinkedToAgent rdf:type owl:Class ;
-    rdfs:label "Endpoint contains dataset linked to an agent"@en ;
-    rdfs:comment "Annotation to indicate that an endpoint contains at least one dataset linked to an agent."@en ;
-    rdfs:subClassOf dcat:Dataset ,
-        schema:Dataset ,
-        dcmitype:Dataset , 
-        void:Dataset ,
-        sd:Dataset ;
-    owl:equivalentClass [ # Agent linked to the dataset
-        rdf:type owl:Restriction ;
-        owl:onProperty dcat:servesDataset ;
-        owl:someValuesFrom kgi:DatasetLinkedToAgent 
-    ] .
-        
-kgi:DatasetLinkedToAgent rdf:type owl:Class ;
-    rdfs:label "Dataset linked to an agent"@en ;
-    rdfs:comment "Annotation to indicate that a dataset is linked to an agent."@en ;
+kgi:DatasetWithCreationAccountability_When rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the time of the creation of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the time of the creation of the dataset."@en ;
+    # Equivalence to the IndeGx query rule version: 
+    # { ?kg dcterms:created ?date .}
+    # UNION {?kg pav:curatedOn ?date .}
     owl:equivalentClass [
         rdf:type owl:Class ;
-            owl:unionOf (
-                # dcterms:creator
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:creator ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # schema:creator
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:creator ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # schema:author
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:author ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # foaf:maker
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty foaf:maker ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dce:creator
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dce:creator ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # pav:authoredBy
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty pav:authoredBy ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # pav:createdBy 
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty pav:createdBy ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # schema:editor
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:editor ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # schema:contributor
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:contributor ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dcterms:contributor
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:contributor ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dce:contributor
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dce:contributor ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # pav:contributedBy 
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty pav:contributedBy ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dcterms:publisher
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:publisher ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dce:publisher
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dce:publisher ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # schema:publisher
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:publisher ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # schema:sdPublisher
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:sdPublisher ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # pav:providedBy 
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty pav:providedBy ;
-                    owl:someValuesFrom owl:Thing
-                ]
-            ) 
-    ] .
-
-kgi:EndpointContainsLicensedDataset rdf:type owl:Class ;
-    rdfs:label "Endpoint contains licensed dataset"@en ;
-    rdfs:comment "Annotation to indicate that an endpoint contains at least one licensed dataset."@en ;
-    rdfs:subClassOf dcat:Dataset ,
-        schema:Dataset ,
-        dcmitype:Dataset , 
-        void:Dataset ,
-        sd:Dataset ;
-    owl:equivalentClass [ # Licensing or access rights information
-        rdf:type owl:Restriction ;
-        owl:onProperty dcat:servesDataset ;
-        owl:someValuesFrom kgi:LicensedDataset
-    ].
-
-kgi:LicensedDataset rdf:type owl:Class ;
-            owl:unionOf (
-                # schema:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty schema:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dcterms:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # doap:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty doap:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dbpo:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dbpo:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # cc:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty cc:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # xhv:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty xhv:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # sto:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty sto:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # nie:license
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty nie:license ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dce:rights
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dce:rights ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dcterms:rights 
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:rights ;
-                    owl:someValuesFrom owl:Thing
-                ]
-                # dcterms:accessRights
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dcterms:accessRights ;
-                    owl:someValuesFrom owl:Thing
-                ]
-            ) .
-
-kgi:DescribedDataset rdf:type owl:Class ;
-    owl:equivalentClass [
+        owl:unionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dcterms:created ;
+                owl:someValuesFrom owl:Thing
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dcterms:created ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty pav:curatedOn ;
+                owl:someValuesFrom owl:Thing
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty pav:curatedOn ;
+                owl:someValuesFrom rdfs:Literal
+            ]
+        )
+    ] ,
+    # Equivalence with having a successful quality measurement of the creation/When metric
+    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementDate .
+    # ?qualityMeasurementDate a dqv:QualityMeasurement ;
+    #     rdfs:label "Creation date measurement" ;
+    #     dqv:isMeasurementOf kgi:datasetCreationAccountablity_When_Date ;
+    #     dqv:value "true"^^xsd:boolean .
+    [ 
         rdf:type owl:Class ;
         owl:intersectionOf (
-            kgi:HumanReadableDatasetDescription
-            kgi:DatasetDescriptionLinkedTemporally
-            kgi:DatasetLinkedToAgent
-            kgi:DatasetLicensed 
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dqv:hasQualityMeasurement ;
+                owl:someValuesFrom [
+                    rdf:type owl:Class ;
+                    owl:intersectionOf (
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:isMeasurementOf ;
+                            owl:hasValue kgi:datasetCreationAccountablity_When_Date
+                        ]
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:value ;
+                            owl:hasValue "true"^^xsd:boolean
+                        ]
+                    )
+                
+                ]
+            ]
+        )
+    ] .
+
+kgi:DatasetWithCreationAccountability_Where rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            kgi:DatasetWithCreationAccountability_Where_Source
+            kgi:DatasetWithCreationAccountability_Where_Location
+        )
+    ] .
+
+kgi:DatasetWithCreationAccountability_Where_Source rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the source of the creation of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the source of the creation of the dataset."@en ;
+    # Equivalence to the IndeGx query rule version: 
+    # { ?kg dcterms:source ?source .}
+    # UNION {?kg pav:importedFrom ?source .}
+    # UNION {?kg pav:retrievedFrom ?source .}
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dcterms:source ;
+                owl:someValuesFrom owl:Thing
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty pav:importedFrom ;
+                owl:someValuesFrom owl:Thing
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty pav:retrievedFrom ;
+                owl:someValuesFrom owl:Thing
+            ]
+        )
+    ] ,
+    # Equivalence with having a successful quality measurement of the creation/Where/source metric
+    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementSource .
+    # ?qualityMeasurementSource a dqv:QualityMeasurement ;
+    #     rdfs:label "Creation source measurement" ;
+    #     dqv:isMeasurementOf kgi:datasetCreationAccountablity_Where_Source ;
+    #     dqv:value "true"^^xsd:boolean .
+    [ 
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dqv:hasQualityMeasurement ;
+                owl:someValuesFrom [
+                    rdf:type owl:Class ;
+                    owl:intersectionOf (
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:isMeasurementOf ;
+                            owl:hasValue kgi:datasetCreationAccountablity_Where_Source
+                        ]
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:value ;
+                            owl:hasValue "true"^^xsd:boolean
+                        ]
+                    )
+                ]
+            ]
+        )
+    ] .
+
+kgi:DatasetWithCreationAccountability_Where_Location rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the location of the creation of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the location of the creation of the dataset."@en ;
+    # Equivalence to the IndeGx query rule version: 
+    # { ?kg schema:locationCreated ?location .}
+    # UNION {?kg pav:createdAt ?location .}
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty schema:locationCreated ;
+                owl:someValuesFrom owl:Thing
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty pav:createdAt ;
+                owl:someValuesFrom owl:Thing
+            ]
+        )
+    ] ,
+    # Equivalence with having a successful quality measurement of the creation/Where/location metric
+    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementLocation .
+    # ?qualityMeasurementLocation a dqv:QualityMeasurement ;
+    #     rdfs:label "Creation location measurement" ;
+    #     dqv:isMeasurementOf kgi:datasetCreationAccountablity_Where_location ;
+    #     dqv:value "true"^^xsd:boolean .
+    [ 
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dqv:hasQualityMeasurement ;
+                owl:someValuesFrom [
+                    rdf:type owl:Class ;
+                    owl:intersectionOf (
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:isMeasurementOf ;
+                            owl:hasValue kgi:datasetCreationAccountablity_Where_location
+                        ]
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:value ;
+                            owl:hasValue "true"^^xsd:boolean
+                        ]
+                    )
+                ]
+            ]
+        )
+    ] .
+
+kgi:DatasetWithCreationAccountability_How rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the method of the creation of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the method of the creation of the dataset."@en ;
+    # Equivalence to the IndeGx query rule version:
+    # { ?kg dcterms:accrualMethod ?meth . }
+    # UNION { ?kg pav:createdWith ?agent . }
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dcterms:accrualMethod ;
+                owl:someValuesFrom owl:Thing
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty pav:createdWith ;
+                owl:someValuesFrom owl:Thing
+            ]
+        )
+    ] ,
+    # Equivalence with having a successful quality measurement of the creation/How metric:
+    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementMethodology .
+    # ?qualityMeasurementMethodology a dqv:QualityMeasurement ;
+    #     dqv:isMeasurementOf kgi:datasetCreationAccountablity_How_Methodology ;
+    #     dqv:value "true"^^xsd:boolean .
+    [ 
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dqv:hasQualityMeasurement ;
+                owl:someValuesFrom [
+                    rdf:type owl:Class ;
+                    owl:intersectionOf (
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:isMeasurementOf ;
+                            owl:hasValue kgi:datasetCreationAccountablity_How_Methodology
+                        ]
+                        [
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dqv:value ;
+                            owl:hasValue "true"^^xsd:boolean
+                        ]
+                    )
+                ]
+            ]
         )
     ] .

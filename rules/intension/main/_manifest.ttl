@@ -227,24 +227,6 @@
         <init.ttl> 
     ) ;
     kgi:onSuccess (
-        [
-            mf:action """
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT DATA {
-                $rawEndpointUrl kgi:passed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> .
-            }
-            """
-        ]
         <SPARQLFeatures/_manifest.ttl>
         <dataset_description_extraction.ttl>
-    ) ;
-    kgi:onFailure (
-        [
-            mf:action """
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT DATA {
-                $rawEndpointUrl kgi:failed <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/online.ttl> .
-            }
-            """
-        ]
     ) .
