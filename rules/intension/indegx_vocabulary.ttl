@@ -915,6 +915,8 @@ dcterms:temporal owl:equivalentProperty schema:temporalCoverage .
 kgi:Accountability rdf:type dqv:Category ;
     rdfs:label "Accountability Category"@en .
 
+### Creation metrics
+
 kgi:datasetCreationAccountablity rdf:type dqv:Dimension ;
     rdfs:label "Dataset creation accountability dimension"@en ;
     rdf:comment "Annotation to indicate that the information related to the creation of a dataset are given in the dataset description."@en ;
@@ -974,6 +976,261 @@ kgi:datasetCreationAccountablity_How_Methodology rdf:type dqv:Metric ;
     dcterms:title "Creation methodology" ;
     dcterms:description "How was the dataset created?" ;
     dqv:inCategory kgi:AccountabilityDimension .
+
+### Maintenance metrics
+
+kgi:datasetMaintenanceAccountablity rdf:type dqv:Dimension ;
+    rdfs:label "Dataset maintenance accountability dimension"@en ;
+    rdf:comment "Annotation to indicate that the information related to the maintenance of a dataset are given in the dataset description."@en ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetMaintenanceAccountablity_Who rdf:type dqv:Dimension ;
+    rdfs:label "Dataset maintenance accountable: who"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the maintainers of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetMaintenanceAccountablity .
+
+kgi:datasetMaintenanceAccountablity_Who_Contributor rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetMaintenanceAccountablity_Who ;
+    dcterms:title "Maintenance contributor" ;
+    dcterms:description "Who are the maintainers and contributors of the dataset? What is their role in the data maintenance process?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetMaintenanceAccountablity_When rdf:type dqv:Dimension ;
+    rdfs:label "Dataset maintenance accountable: when"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the time of the maintenance of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetMaintenanceAccountablity .
+
+kgi:datasetMaintenanceAccountablity_When_Date rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetMaintenanceAccountablity_When ;
+    dcterms:title "Maintenance date" ;
+    dcterms:description "When was the dataset maintained?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetMaintenanceAccountablity_When_Frequency rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetMaintenanceAccountablity_When ;
+    dcterms:title "Maintenance frequency" ;
+    dcterms:description "How often is the dataset maintained?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetMaintenanceAccountablity_Where rdf:type dqv:Dimension ;
+    rdfs:label "Dataset maintenance accountable: where"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the location of the maintenance of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetMaintenanceAccountablity .
+
+kgi:datasetMaintenanceAccountablity_Where_location rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetMaintenanceAccountablity_Where ;
+    dcterms:title "Maintenance location" ;
+    dcterms:description "Where was the dataset maintained?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetMaintenanceAccountablity_How rdf:type dqv:Dimension ;
+    rdfs:label "Dataset maintenance accountable: how"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the maintenance process of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetMaintenanceAccountablity .
+
+kgi:datasetMaintenanceAccountablity_How_Methodology rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetMaintenanceAccountablity_How ;
+    dcterms:title "Maintenance methodology" ;
+    dcterms:description "How was the dataset maintained?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+### Usage metrics
+
+kgi:datasetUsageAccountablity rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountability dimension"@en ;
+    rdf:comment "Annotation to indicate that the information related to the usage of a dataset are given in the dataset description."@en ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_Who rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: who"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the users of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity .
+
+kgi:datasetUsageAccountablity_Who_publisher rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_Who ;
+    dcterms:title "Usage publisher" ;
+    dcterms:description "Who are the publishers of the dataset? What is their role in the data usage process?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_Who_target rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: target"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the target of the usage of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity_Who .
+
+kgi:datasetUsageAccountablity_Who_rights rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_Who_target ;
+    dcterms:title "Usage rights" ;
+    dcterms:description "Who are the rights holders of the dataset? What is their role in the data usage process?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_Who_audience rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_Who_target ;
+    dcterms:title "Usage audience" ;
+    dcterms:description "Who are the audience of the dataset? What is their role in the data usage process?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_When rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: when"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the time of the usage of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity .
+
+kgi:datasetUsageAccountablity_When_startAvailability rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_When ;
+    dcterms:title "Usage start availability" ;
+    dcterms:description "When was the dataset made available for usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_When_endAvailability rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_When ;
+    dcterms:title "Usage end availability" ;
+    dcterms:description "When will the dataset be no longer available for usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_When_endValidity rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_When ;
+    dcterms:title "Usage end validity" ;
+    dcterms:description "When will the dataset be no longer valid for usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_Where rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: where"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the location of the usage of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity .
+
+kgi:datasetUsageAccountablity_Where_contact rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: contact"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the contact of the usage of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity_Where .
+
+kgi:datasetUsageAccountablity_Where_contact_address rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_Where_contact ;
+    dcterms:title "Usage contact address" ;
+    dcterms:description "Where can the dataset be contacted for usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_Where_contact_webpage rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_Where_contact ;
+    dcterms:title "Usage contact webpage" ;
+    dcterms:description "Where can the dataset be contacted for usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_Where_location rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_Where ;
+    dcterms:title "Usage location" ;
+    dcterms:description "Where was the dataset used?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_How rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: how"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the usage process of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity .
+
+kgi:datasetUsageAccountablity_How_requirements rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_How ;
+    dcterms:title "Usage requirements" ;
+    dcterms:description "What are the requirements for the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_How_Access rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: access"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the access process of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity_How .
+
+kgi:datasetUsageAccountablity_How_Access_license rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_How_Access ;
+    dcterms:title "Usage access license" ;
+    dcterms:description "What are the license terms for the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_How_Access_endpoint rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_How_Access ;
+    dcterms:title "Usage access endpoint" ;
+    dcterms:description "What is the endpoint for the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_How_Access_reuse rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_How_Access ;
+    dcterms:title "Usage access reuse" ;
+    dcterms:description "What are the reuse terms for the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_What rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: what"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the usage of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity .
+
+kgi:datasetUsageAccountablity_What_Stats rdf:type dqv:Dimension ;
+    rdfs:label "Dataset usage accountable: stats"@en ;
+    rdfs:comment "Annotation to indicate that the information related to the statistics of the usage of a dataset are given in the dataset description."@en ;
+    dqv:inDimension kgi:datasetUsageAccountablity_What .
+
+kgi:datasetUsageAccountablity_What_triples rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_What_Stats ;
+    dcterms:title "Usage triples" ;
+    dcterms:description "Are the number of triples used in the dataset usage available?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_What_entitiesPropertiesClasses rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_What_Stats ;
+    dcterms:title "Usage entities, properties, classes" ;
+    dcterms:description "Are the number of entities, properties and classes used in the dataset usage available?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_What_serialization rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_What_Stats ;
+    dcterms:title "Usage serialization" ;
+    dcterms:description "Is the serialization used in the dataset usage available?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_What_example rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_What ;
+    dcterms:title "Usage example" ;
+    dcterms:description "What are the examples of the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_What_concepts rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_What ;
+    dcterms:title "Usage concepts" ;
+    dcterms:description "What are the concepts used in the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_What_description rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_What ;
+    dcterms:title "Usage description" ;
+    dcterms:description "What is the description of the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
+kgi:datasetUsageAccountablity_What_quality rdf:type dqv:Metric ;
+    dqv:expectedDataType xsd:boolean ;    
+    dqv:inDimension kgi:datasetUsageAccountablity_What ;
+    dcterms:title "Usage quality" ;
+    dcterms:description "What is the quality of the dataset usage?" ;
+    dqv:inCategory kgi:AccountabilityDimension .
+
 
 ## Type of datasets according to the elements in their descriptions
 
