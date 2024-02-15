@@ -27,13 +27,7 @@ export function readCatalog(filename: string): Promise<Array<EndpointObject>> {
         let store = createStore()
         let result = [];
         $rdf.parse(fileContent, store, KGI("").value);
-        const catalogList = store.statementsMatching(null, rdfTypeProperty, DCAT("Catalog")).map(statement => statement.subject) // List of catalog objects 
-        catalogList.forEach(catalog => {
-            store.statementsMatching(catalog, DCAT("dataset"), null).forEach(statement => {
-                const datasetURI = statement.object;
-                if (!$rdf.isLiteral(datasetURI)) {
-                    const datasetURIReTyped = datasetURI as $rdf.NamedNode | $rdf.BlankNode | $rdf.Variable;
-                    store.statementsMatching(datasetURIReTyped, voidSparqlEndpointProperty, null).forEach(endpointStatement => {
+                    store.statementsMatching(null, voidSparqlEndpointProperty, null).forEach(endpointStatement => {
                         let endpointObject: EndpointObject = {
                             endpoint: endpointStatement.object.value
                         }
@@ -41,18 +35,15 @@ export function readCatalog(filename: string): Promise<Array<EndpointObject>> {
                         endpointObject.endpoint = endpointObject.endpoint.replace("http://localhost:", "http://host.docker.internal:")
                         endpointObject.endpoint = endpointObject.endpoint.replace("http://localhost/", "http://host.docker.internal/")
                         // Extracting named graphs
-                        store.statementsMatching(datasetURIReTyped, sdNamedGraphProperty, null).forEach(graphStatement => {
-                            if (!endpointObject.graphs) {
-                                endpointObject.graphs = [];
-                            }
-                            endpointObject.graphs.push(graphStatement.object.value);
-                        });
+                        // store.statementsMatching(datasetURIReTyped, sdNamedGraphProperty, null).forEach(graphStatement => {
+                        //     if (!endpointObject.graphs) {
+                        //         endpointObject.graphs = [];
+                        //     }
+                        //     endpointObject.graphs.push(graphStatement.object.value);
+                        // });
                         result.push(endpointObject);
                     });
-                }
-            })
-        })
-        store.close();
-        return result;
-    });
-}
+                    store.close();
+                    return result;
+                });
+            }
