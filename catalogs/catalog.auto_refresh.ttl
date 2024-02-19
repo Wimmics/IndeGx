@@ -754,7 +754,6 @@
 @prefix ns627: <http://services.data.gov.uk/reference/> .
 @prefix ns869: <http://data.americanartcollaborative.org/> .
 @prefix ns77: <https://data.legilux.public.lu/> .
-@prefix ns626: <https://test-svu/> .
 @prefix ns868: <http://id.eaufrance.fr/> .
 @prefix ns76: <https://ldf.fi/ww1lod/> .
 @prefix ns625: <https://weakg.i3s.unice.fr/> .
@@ -5840,12 +5839,6 @@
   a ns10:Dataset ;
   ns10:endpointURL <http://live.dbpedia.org/sparql/> .
 
-ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
-  ns8:sparqlEndpoint ns626:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns626:sparql .
-
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Freference%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
   ns8:sparqlEndpoint ns627:sparql ;
@@ -7365,7 +7358,6 @@ ns1:Catalog ns2:lastRefreshedOn "2024-01-30T17:42:20.498+01:00"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fweakg.i3s.unice.fr%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Flive.dbpedia.org%2Fsparql%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Freference%2Fsparql> ;
-  ns10:dataset ns1:https%3A%2F%2Ftest-svu%2Fsparql ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdskg.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendatacommunities.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fchemdb.semweb.csdb.cn%2Fsparql> ;
