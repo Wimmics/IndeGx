@@ -3310,27 +3310,12 @@ kgi:DatasetWithEntitiesPropertyClassesStats rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty void:entities ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty void:entities ;
                         owl:someValuesFrom rdfs:Literal
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty void:properties ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty void:properties ;
                         owl:someValuesFrom rdfs:Literal
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty void:classes ;
-                        owl:someValuesFrom owl:Thing
                     ]
                     [
                         rdf:type owl:Restriction ;
@@ -3379,8 +3364,133 @@ kgi:DatasetWithEntitiesPropertyClassesStats rdf:type owl:Class ;
                 ]
             ]
         )
+    ] ,
+    # Equivalence with lowest level Dataset class
+    [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:DatasetWithEntityCount
+            kgi:DatasetWithPropertyCount
+            kgi:DatasetWithClassCount
+        )
+    ]    
+    .
+
+kgi:DatasetWithTripleCount rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the number of triples of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the number of triples of the dataset."@en ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty void:triples ;
+                        owl:someValuesFrom rdfs:Literal
+                    ]
+                )
+            ] 
+        )
     ] .
 
+kgi:DatasetWithEntityCount rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the number of entities of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the number of entities of the dataset."@en ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty void:entities ;
+                        owl:someValuesFrom rdfs:Literal
+                    ]
+                )
+            ] 
+        )
+    ] .
+
+kgi:DatasetWithPropertyCount rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the number of properties of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the number of properties of the dataset."@en ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty void:properties ;
+                        owl:someValuesFrom rdfs:Literal
+                    ]
+                )
+            ] 
+        )
+    ] .
+
+kgi:DatasetWithClassCount rdf:type owl:Class ;
+    rdfs:label "Dataset that contains a description of the number of classes of the dataset"@en ;
+    rdfs:comment "Annotation to indicate that a dataset contains a description of the number of classes of the dataset."@en ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty void:classes ;
+                        owl:someValuesFrom rdfs:Literal
+                    ]
+                )
+            ] 
+        )
+    ] .
 
 kgi:DatasetWithSerialization rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the serialization of the dataset"@en ;
@@ -3689,3 +3799,6 @@ kgi:DatasetWithQualityAnnotations rdf:type owl:Class ;
             ]
         )
     ] .
+
+# FAIR
+## FAIR-Checker
