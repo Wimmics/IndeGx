@@ -3211,7 +3211,7 @@ kgi:DatasetWithUsageAccountability_What rdf:type owl:Class ;
             kgi:DatasetWithStats
             kgi:DatasetWithExample
             kgi:DatasetWithDescription
-            kgi:DatasetWithQuality
+            kgi:DatasetWithQualityAnnotations
         )
     ] .
 
@@ -3594,7 +3594,7 @@ kgi:DatasetWithDescription rdf:type owl:Class ;
         )
     ] .
 
-kgi:DatasetWithQuality rdf:type owl:Class ;
+kgi:DatasetWithQualityAnnotations rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the quality of the dataset"@en ;
     rdfs:comment "Annotation to indicate that a dataset contains a description of the quality of the dataset."@en ;
     # { ?kg dqv:hasQualityAnnotation ?qualityAnnotation . }
