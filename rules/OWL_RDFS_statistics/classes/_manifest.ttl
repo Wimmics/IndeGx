@@ -45,8 +45,13 @@
             WHERE {
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl )
                 kgi: sd:namedGraph $rawEndpointUrl .
+
+                { ?elem a owl:Class }
+                UNION { ?elem a rdfs:Class }
+                FILTER( isIRI(?elem))
                 
                 SERVICE ?editedEndpointUrl {
+                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     {
                         SELECT DISTINCT ?elem {
                             {
@@ -78,11 +83,6 @@
 
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-
-                { ?elem a owl:Class }
-                UNION
-                { ?elem a rdfs:Class }
-                FILTER( isIRI(?elem))
             }"""
         ]
     ) .
@@ -120,8 +120,7 @@
                 })
                 
                 { ?elem a owl:Class }
-                UNION
-                { ?elem a rdfs:Class }
+                UNION { ?elem a rdfs:Class }
                 FILTER( isIRI(?elem))
 
                 {

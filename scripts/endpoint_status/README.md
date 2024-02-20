@@ -21,7 +21,7 @@ According to this answer to the question: [Yes](https://github.community/t5/GitH
 #### ... New Endpoints?
 
 This project uses
-[OpenLink's SPARQL endpoint dataset](https://raw.githubusercontent.com/Wimmics/IndeGx/catalog_auto_refresh/catalogs/catalog.auto_refresh.trig) as the source, which itself retrieve endpoints from different sources. In this repository, the "[`crawling_catalog.ttl`](https://github.com/Wimmics/IndeGx/blob/main/catalogs/crawling_catalog.ttl)" is used to manually add new endpoints. Please make pull requests to modify this file if you wish to add new endpoints.
+[IndeGx's SPARQL endpoint dataset](https://raw.githubusercontent.com/Wimmics/IndeGx/catalog_auto_refresh/catalogs/catalog.auto_refresh.trig) as the source, which itself retrieve endpoints from different sources. In this repository, the "[`crawling_catalog.ttl`](https://github.com/Wimmics/IndeGx/blob/main/catalogs/crawling_catalog.ttl)" is used to manually add new endpoints. Please make pull requests to modify this file if you wish to add new endpoints.
 
 #### ... Additional Service Information?
 

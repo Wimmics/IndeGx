@@ -76,14 +76,10 @@
             }
             WHERE {
                 { ?elem a rdf:Property }
-                UNION
-                { ?elem a owl:ObjectProperty }
-                UNION
-                { ?elem a owl:DatatypeProperty }
-                UNION
-                { ?elem a owl:AnnotationProperty }
-                UNION
-                { ?elem a owl:OntologyProperty }
+                UNION { ?elem a owl:ObjectProperty }
+                UNION { ?elem a owl:DatatypeProperty }
+                UNION { ?elem a owl:AnnotationProperty }
+                UNION { ?elem a owl:OntologyProperty }
 
                 FILTER( isIRI(?elem) )
             }"""

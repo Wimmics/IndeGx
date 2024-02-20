@@ -2,9 +2,20 @@
 
 This folder contains the generation assets used to extract statistics on the usage of known vocabularies in datasets
 
+## Number of active endpoints during indexing
+
+```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
+SELECT (COUNT(DISTINCT ?url) AS ?endpointCount) {
+  GRAPH ?url {
+  	?url void:sparqlEndpoint ?url .
+  }
+}
+```
+
 ## Results
 
-### Classes
+### Classes and number of endpoints where they are used
 
 ```sparql
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -35,7 +46,7 @@ SELECT DISTINCT ?vocab ?class ?endpointUrl {
 } GROUP BY ?class
 ```
 
-### Properties
+### Properties and number of endpoints where they are used
 
 ```sparql
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
