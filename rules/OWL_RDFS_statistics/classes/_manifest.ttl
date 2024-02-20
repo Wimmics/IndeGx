@@ -1,0 +1,152 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<> a mf:Manifest ;
+    mf:entries (
+        <datasetOccurence.ttl>
+        # <datasetOccurenceCount.ttl>
+    ) .
+
+<datasetOccurence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <../init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences object of each property in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                ?elem voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class ?elem .
+                }
+            }
+            WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl )
+                kgi: sd:namedGraph $rawEndpointUrl .
+                
+                SERVICE ?editedEndpointUrl {
+                    {
+                        SELECT DISTINCT ?elem {
+                            {
+                                {
+                                    ?elem a ?type .
+                                    VALUES ?type {
+                                        owl:Class
+                                        rdfs:Class
+                                    }
+                                } UNION {
+                                    ?whatever a ?elem .
+                                }
+                            } UNION {
+                                GRAPH ?g {
+                                    {
+                                        ?elem a ?type .
+                                        VALUES ?type {
+                                            owl:Class
+                                            rdfs:Class
+                                        }
+                                    } UNION {
+                                        ?whatever a ?elem .
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+
+                { ?elem a owl:Class }
+                UNION
+                { ?elem a rdfs:Class }
+                FILTER( isIRI(?elem))
+            }"""
+        ]
+    ) .
+
+<datasetOccurenceCount.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <datasetOccurence.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Counting the number of appearances of each class in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                ?elem voaf:usageInDataset ?elemDatasetOccurence ;
+                    voaf:occurrencesInDatasets ?nbDatasetOccurences .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:occurrences ?nbEntities .
+            }
+            WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?binding=filter&focus=elem&skip=occurences&slice=10&limit=100&method=get" ) AS ?editedEndpointUrl)
+
+                FILTER( EXISTS {
+                    kgi: sd:namedGraph $rawEndpointUrl .
+                })
+                
+                { ?elem a owl:Class }
+                UNION
+                { ?elem a rdfs:Class }
+                FILTER( isIRI(?elem))
+
+                {
+                    SELECT ?elem (count(DISTINCT ?instance) AS ?nbEntities) {
+                        SERVICE ?editedEndpointUrl {
+                            VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
+                            {
+                                SELECT DISTINCT ?elem ?instance {
+                                    {
+                                        ?instance a ?elem
+                                    } UNION {
+                                        GRAPH ?g {
+                                            ?instance a ?elem
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } GROUP BY ?elem
+                }
+
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+                BIND( IF( EXISTS {
+                    ?elem voaf:occurrencesInDatasets ?datasetOccurences .
+                }, ?datasetOccurences + ?nbEntities, ?nbEntities) AS ?nbDatasetOccurences )
+            }"""
+        ]
+    ) .
