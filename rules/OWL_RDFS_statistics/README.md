@@ -40,10 +40,10 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?vocab ?class ?endpointUrl {
     { ?class a owl:Class }
     UNION { ?class a rdfs:Class }
-    ?classrdfs:isDefinedBy ?vocab ;
+    ?class rdfs:isDefinedBy ?vocab ;
         voaf:usageInDataset ?occurence .
     ?occurence voaf:inDataset ?endpointUrl .
-} GROUP BY ?class
+} GROUP BY ?vocab ?class ?endpointUrl
 ```
 
 ### Properties and number of endpoints where they are used
