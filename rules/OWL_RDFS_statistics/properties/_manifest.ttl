@@ -43,7 +43,15 @@
 
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl)
 
+                { ?elem a rdf:Property }
+                UNION { ?elem a owl:ObjectProperty }
+                UNION { ?elem a owl:DatatypeProperty }
+                UNION { ?elem a owl:AnnotationProperty }
+                UNION { ?elem a owl:OntologyProperty }
+                FILTER( isIRI(?elem))
+
                 SERVICE ?editedEndpointUrl {
+                    VALUES ?elem { undef } # Fix for better binding by Corese (Magic ?)
                     {
                         SELECT DISTINCT ?elem {
                             {
@@ -59,17 +67,6 @@
 
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?elem))), "PropertyPartition")) AS ?propertyPartition)
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?elem) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-
-                { ?elem a rdf:Property }
-                UNION
-                { ?elem a owl:ObjectProperty }
-                UNION
-                { ?elem a owl:DatatypeProperty }
-                UNION
-                { ?elem a owl:AnnotationProperty }
-                UNION
-                { ?elem a owl:OntologyProperty }
-                FILTER( isIRI(?elem))
             }"""
         ]
     ) .
@@ -106,14 +103,10 @@
 
                 FILTER( isIRI(?elem))
                 { ?elem a rdf:Property }
-                UNION
-                { ?elem a owl:ObjectProperty }
-                UNION
-                { ?elem a owl:DatatypeProperty }
-                UNION
-                { ?elem a owl:AnnotationProperty }
-                UNION
-                { ?elem a owl:OntologyProperty }
+                UNION { ?elem a owl:ObjectProperty }
+                UNION { ?elem a owl:DatatypeProperty }
+                UNION { ?elem a owl:AnnotationProperty }
+                UNION { ?elem a owl:OntologyProperty }
 
                 {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {

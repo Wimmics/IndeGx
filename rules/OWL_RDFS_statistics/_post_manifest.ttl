@@ -31,7 +31,7 @@
             WHERE {
                 
                 {
-                    SELECT ?elem (COUNT(?endpointUrl) AS ?occurences) {
+                    SELECT ?elem (COUNT(DISTINCT ?endpointUrl) AS ?occurences) {
                         ?elem voaf:usageInDataset ?elemDatasetOccurence .
                         ?elemDatasetOccurence a voaf:DatasetOccurences ;
                             voaf:inDataset ?endpointUrl .

@@ -751,7 +751,6 @@
 @prefix ns621: <http://vocabulary.semantic-web.at/PoolParty/sparql/> .
 @prefix ns863: <https://data.gov.uz/uz/docs/do/view/> .
 @prefix ns79: <http://linkeddata.uriburner.com/> .
-@prefix ns628: <https://test-svu/> .
 @prefix ns78: <https://data.legilux.public.lu/> .
 @prefix ns627: <https://weakg.i3s.unice.fr/> .
 @prefix ns869: <http://id.eaufrance.fr/> .
@@ -5235,12 +5234,6 @@
   ns8:sparqlEndpoint ns627:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns627:sparql .
-
-ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
-  ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
-  ns8:sparqlEndpoint ns628:sparql ;
-  a ns10:Dataset ;
-  ns10:endpointURL ns628:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fservices.data.gov.uk%2Freference%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
