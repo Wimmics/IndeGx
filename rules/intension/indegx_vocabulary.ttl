@@ -1242,7 +1242,9 @@ kgi:AccountableDataset rdf:type owl:Class ;
         dcmitype:Dataset , 
         void:Dataset ,
         sd:Dataset ;
-    owl:equivalentClass [
+    owl:equivalentClass 
+    # Straightforward definition of accountable dataset according to its 3 dimensions
+    [
         rdf:type owl:Class ;
         owl:intersectionOf (
             kgi:DatasetWithCreationAccountability
@@ -1250,6 +1252,7 @@ kgi:AccountableDataset rdf:type owl:Class ;
             kgi:DatasetWithUsageAccountability
         )
     ] ,
+    # Definition of accountable dataset according to the 5 questions
     [
         rdf:type owl:Class ;
         owl:intersectionOf (
