@@ -1256,11 +1256,11 @@ kgi:AccountableDataset rdf:type owl:Class ;
     [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            kgi:DatasetWithWhoQuestionAccountable
-            kgi:DatasetWithWhenQuestionAccountable
-            kgi:DatasetWithWhereQuestionAccountable
-            kgi:DatasetWithHowQuestionAccountable
-            kgi:DatasetWithWhatQuestionAccountable
+            kgi:DatasetWithWhoQuestionAccountability
+            kgi:DatasetWithWhenQuestionAccountability
+            kgi:DatasetWithWhereQuestionAccountability
+            kgi:DatasetWithHowQuestionAccountability
+            kgi:DatasetWithWhatQuestionAccountability
         )
     ] .
 
@@ -1301,7 +1301,7 @@ kgi:DatasetWithUsageAccountability rdf:type owl:Class ;
         )
     ] .
 
-kgi:DatasetWithWhoQuestionAccountable rdf:type owl:Class ;
+kgi:DatasetWithWhoQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with who question accountable"@en ;
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1312,7 +1312,7 @@ kgi:DatasetWithWhoQuestionAccountable rdf:type owl:Class ;
         )
     ] .
 
-kgi:DatasetWithWhenQuestionAccountable rdf:type owl:Class ;
+kgi:DatasetWithWhenQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with when question accountable"@en ;
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1323,7 +1323,7 @@ kgi:DatasetWithWhenQuestionAccountable rdf:type owl:Class ;
         )
     ] .
 
-kgi:DatasetWithWhereQuestionAccountable rdf:type owl:Class ;
+kgi:DatasetWithWhereQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with where question accountable"@en ;
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1334,7 +1334,7 @@ kgi:DatasetWithWhereQuestionAccountable rdf:type owl:Class ;
         )
     ] .
 
-kgi:DatasetWithHowQuestionAccountable rdf:type owl:Class ;
+kgi:DatasetWithHowQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with how question accountable"@en ;
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1345,7 +1345,7 @@ kgi:DatasetWithHowQuestionAccountable rdf:type owl:Class ;
         )
     ] .
 
-kgi:DatasetWithWhatQuestionAccountable rdf:type owl:Class ;
+kgi:DatasetWithWhatQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with what question accountable"@en ;
     owl:equivalentClass [
         rdf:type owl:Class ;
