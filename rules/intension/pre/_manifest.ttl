@@ -3,6 +3,40 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dataid: <http://dataid.dbpedia.org/ns/core#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dce: <http://purl.org/dc/elements/1.1/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sparqles: <https://sparqles.ai.wu.ac.at/#> .
+@prefix sto: <https://w3id.org/i40/sto#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 <> a mf:Manifest ;
     mf:entries (
         <load.ttl>
@@ -12,7 +46,36 @@
     kgi:onSuccess (
         [
             mf:action """
-            LOAD <file:///rules/intension/indegx_vocabulary.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#>
-            """
+            LOAD <file:///rules/intension/indegx_vocabulary.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#> ;
+            LOAD <file:///input/adms.ttl> INTO GRAPH <http://www.w3.org/ns/adms#> ;
+            LOAD <file:///input/cc.ttl> INTO GRAPH <http://creativecommons.org/ns#> ;
+            LOAD <file:///input/dataid.ttl> INTO GRAPH <http://dataid.dbpedia.org/ns/core#> ;
+            LOAD <file:///input/dbo.ttl> INTO GRAPH <http://dbpedia.org/ontology/> ;
+            LOAD <file:///input/dcat2.ttl> INTO GRAPH <http://www.w3.org/ns/dcat#> ;
+            LOAD <file:///input/dce.ttl> INTO GRAPH <http://purl.org/dc/elements/1.1/> ;
+            LOAD <file:///input/dcterms.ttl> INTO GRAPH <http://purl.org/dc/terms/> ;
+            LOAD <file:///input/dctype.ttl> INTO GRAPH <http://purl.org/dc/dcmitype/> ;
+            LOAD <file:///input/doap.ttl> INTO GRAPH <http://usefulinc.com/ns/doap#> ;
+            LOAD <file:///input/dqv.ttl> INTO GRAPH <http://www.w3.org/ns/dqv#> ;
+            LOAD <file:///input/earl.ttl> INTO GRAPH <http://www.w3.org/ns/earl#> ;
+            LOAD <file:///input/fabio.ttl> INTO GRAPH <http://purl.org/spar/fabio/> ;
+            LOAD <file:///input/foaf.ttl> INTO GRAPH <http://xmlns.com/foaf/0.1/> ;
+            LOAD <file:///input/hydra.ttl> INTO GRAPH <http://www.w3.org/ns/hydra/core#> ;
+            LOAD <file:///input/manifest.ttl> INTO GRAPH <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> ;
+            LOAD <file:///input/mod.ttl> INTO GRAPH <https://w3id.org/mod#> ;
+            LOAD <file:///input/nie.ttl> INTO GRAPH <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> ;
+            LOAD <file:///input/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl#> ;
+            LOAD <file:///input/pav.ttl> INTO GRAPH <http://purl.org/pav/> ;
+            LOAD <file:///input/prov.ttl> INTO GRAPH <http://www.w3.org/ns/prov#> ;
+            LOAD <file:///input/rdf.ttl> INTO GRAPH <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ;
+            LOAD <file:///input/rdfs.ttl> INTO GRAPH <http://www.w3.org/2000/01/rdf-schema#> ;
+            LOAD <file:///input/schema.ttl> INTO GRAPH <http://schema.org/> ;
+            LOAD <file:///input/sd.ttl> INTO GRAPH <http://www.w3.org/ns/sparql-service-description#> ;
+            LOAD <file:///input/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
+            LOAD <file:///input/sto.ttl> INTO GRAPH <https://w3id.org/i40/sto#> ;
+            LOAD <file:///input/vann.ttl> INTO GRAPH <http://purl.org/vocab/vann/> ;
+            LOAD <file:///input/voaf.ttl> INTO GRAPH <http://purl.org/vocommons/voaf#> ;
+            LOAD <file:///input/void.ttl> INTO GRAPH <http://rdfs.org/ns/void#> ;
+            LOAD <file:///input/xhv.ttl> INTO GRAPH <http://www.w3.org/1999/xhtml/vocab#>"""
         ]
     ) .
