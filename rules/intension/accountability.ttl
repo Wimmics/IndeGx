@@ -36,326 +36,6 @@
 ## Accountability
 # https://github.com/Jendersen/KG_accountability
 
-kgi:Accountability rdf:type dqv:Category ;
-    rdfs:label "Accountability Category"@en .
-
-## Definition of metrics using DQV
-### Creation metrics
-
-kgi:datasetCreationAccountablity rdf:type dqv:Dimension ;
-    rdfs:label "Dataset creation accountability dimension"@en ;
-    rdf:comment "Annotation to indicate that the information related to the creation of a dataset are given in the dataset description."@en ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetCreationAccountablity_Who rdf:type dqv:Dimension ;
-    rdfs:label "Dataset creation accountable: who"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the creators of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetCreationAccountablity .
-
-kgi:datasetCreationContributor rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetCreationAccountablity_Who ;
-    dcterms:title "Creation contributor" ;
-    dcterms:description "Who are the creators and contributors of the dataset? What is their role in the data creation process?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetCreationAccountablity_When rdf:type dqv:Dimension ;
-    rdfs:label "Dataset creation accountable: when"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the time of the creation of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetCreationAccountablity .
-
-kgi:datasetCreationDate rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetCreationAccountablity_When ;
-    dcterms:title "Creation date" ;
-    dcterms:description "When was the dataset created?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetCreationAccountablity_Where rdf:type dqv:Dimension ;
-    rdfs:label "Dataset creation accountable: where"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the location of the creation of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetCreationAccountablity .
-
-kgi:datasetCreationSource rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetCreationAccountablity_Where ;
-    dcterms:title "Creation source" ;
-    dcterms:description "Where does the dataset comes from ?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetCreationLocation rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetCreationAccountablity_Where ;
-    dcterms:title "Creation source, location" ;
-    dcterms:description "Where was the dataset created?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetCreationAccountablity_How rdf:type dqv:Dimension ;
-    rdfs:label "Dataset creation accountable: how"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the creation process of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetCreationAccountablity .
-
-kgi:datasetCreationMethodology rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetCreationAccountablity_How ;
-    dcterms:title "Creation methodology" ;
-    dcterms:description "How was the dataset created?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-### Maintenance metrics
-
-kgi:datasetMaintenanceAccountablity rdf:type dqv:Dimension ;
-    rdfs:label "Dataset maintenance accountability dimension"@en ;
-    rdf:comment "Annotation to indicate that the information related to the maintenance of a dataset are given in the dataset description."@en ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetMaintenanceAccountablity_Who rdf:type dqv:Dimension ;
-    rdfs:label "Dataset maintenance accountable: who"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the maintainers of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetMaintenanceAccountablity .
-
-kgi:datasetMaintenanceContributor rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetMaintenanceAccountablity_Who ;
-    dcterms:title "Maintenance contributor" ;
-    dcterms:description "Who are the maintainers and contributors of the dataset? What is their role in the data maintenance process?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetMaintenanceAccountablity_When rdf:type dqv:Dimension ;
-    rdfs:label "Dataset maintenance accountable: when"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the time of the maintenance of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetMaintenanceAccountablity .
-
-kgi:datasetMaintenanceDate rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetMaintenanceAccountablity_When ;
-    dcterms:title "Maintenance date" ;
-    dcterms:description "When was the dataset maintained?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetMaintenanceFrequency rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetMaintenanceAccountablity_When ;
-    dcterms:title "Maintenance frequency" ;
-    dcterms:description "How often is the dataset maintained?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetMaintenanceAccountablity_Where rdf:type dqv:Dimension ;
-    rdfs:label "Dataset maintenance accountable: where"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the location of the maintenance of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetMaintenanceAccountablity .
-
-kgi:datasetMaintenanceLocation rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetMaintenanceAccountablity_Where ;
-    dcterms:title "Maintenance location" ;
-    dcterms:description "Where was the dataset maintained?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetMaintenanceAccountablity_How rdf:type dqv:Dimension ;
-    rdfs:label "Dataset maintenance accountable: how"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the maintenance process of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetMaintenanceAccountablity .
-
-kgi:datasetMaintenanceMethodology rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetMaintenanceAccountablity_How ;
-    dcterms:title "Maintenance methodology" ;
-    dcterms:description "How was the dataset maintained?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-### Usage metrics
-
-kgi:datasetUsageAccountablity rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountability dimension"@en ;
-    rdf:comment "Annotation to indicate that the information related to the usage of a dataset are given in the dataset description."@en ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccountablity_Who rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: who"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the users of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity .
-
-kgi:datasetUsagePublisher rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_Who ;
-    dcterms:title "Usage publisher" ;
-    dcterms:description "Who are the publishers of the dataset? What is their role in the data usage process?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageTarget rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: target"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the target of the usage of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity_Who .
-
-kgi:datasetUsageRights rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageTarget ;
-    dcterms:title "Usage rights" ;
-    dcterms:description "Who are the rights holders of the dataset? What is their role in the data usage process?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAudience rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageTarget ;
-    dcterms:title "Usage audience" ;
-    dcterms:description "Who are the audience of the dataset? What is their role in the data usage process?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccountablity_When rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: when"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the time of the usage of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity .
-
-kgi:datasetUsageStartAvailability rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_When ;
-    dcterms:title "Usage start availability" ;
-    dcterms:description "When was the dataset made available for usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageEndAvailability rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_When ;
-    dcterms:title "Usage end availability" ;
-    dcterms:description "When will the dataset be no longer available for usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageEndValidity rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_When ;
-    dcterms:title "Usage end validity" ;
-    dcterms:description "When will the dataset be no longer valid for usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccountablity_Where rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: where"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the location of the usage of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity .
-
-kgi:datasetUsageContact rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: contact"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the contact of the usage of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity_Where .
-
-kgi:datasetUsageContact_address rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageContact ;
-    dcterms:title "Usage contact address" ;
-    dcterms:description "Where can the dataset be contacted for usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageContact_webpage rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageContact ;
-    dcterms:title "Usage contact webpage" ;
-    dcterms:description "Where can the dataset be contacted for usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageLocation rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_Where ;
-    dcterms:title "Usage location" ;
-    dcterms:description "Where is the dataset used?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccountablity_How rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: how"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the usage process of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity .
-
-kgi:datasetUsageRequirements rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_How ;
-    dcterms:title "Usage requirements" ;
-    dcterms:description "What are the requirements for the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccess rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: access"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the access process of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity_How .
-
-kgi:datasetUsageAccess_license rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccess ;
-    dcterms:title "Usage access license" ;
-    dcterms:description "What are the license terms for the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccess_endpoint rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccess ;
-    dcterms:title "Usage access endpoint" ;
-    dcterms:description "What is the endpoint for the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccess_reuse rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccess ;
-    dcterms:title "Usage access reuse" ;
-    dcterms:description "What are the reuse terms for the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageAccountablity_What rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: what"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the usage of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity .
-
-kgi:datasetUsageStats rdf:type dqv:Dimension ;
-    rdfs:label "Dataset usage accountable: stats"@en ;
-    rdfs:comment "Annotation to indicate that the information related to the statistics of the usage of a dataset are given in the dataset description."@en ;
-    dqv:inDimension kgi:datasetUsageAccountablity_What .
-
-kgi:datasetUsageStats_triples rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageStats ;
-    dcterms:title "Usage triples" ;
-    dcterms:description "Are the number of triples used in the dataset usage available?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageStats_entitiesPropertiesClasses rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageStats ;
-    dcterms:title "Usage entities, properties, classes" ;
-    dcterms:description "Are the number of entities, properties and classes used in the dataset usage available?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageSerialization rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageStats ;
-    dcterms:title "Usage serialization" ;
-    dcterms:description "Is the serialization used in the dataset usage available?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageExample rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_What ;
-    dcterms:title "Usage example" ;
-    dcterms:description "What are the examples of the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageConcepts rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_What ;
-    dcterms:title "Usage concepts" ;
-    dcterms:description "What are the concepts used in the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageDescription rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_What ;
-    dcterms:title "Usage description" ;
-    dcterms:description "What is the description of the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
-kgi:datasetUsageQuality rdf:type dqv:Metric ;
-    dqv:expectedDataType xsd:boolean ;    
-    dqv:inDimension kgi:datasetUsageAccountablity_What ;
-    dcterms:title "Usage quality" ;
-    dcterms:description "What is the quality of the dataset usage?" ;
-    dqv:inCategory kgi:AccountabilityDimension .
-
 
 ## Type of datasets according to the elements in their descriptions
 
@@ -486,61 +166,11 @@ kgi:DatasetWithCreationWhoAccountability rdf:type owl:Class ;
             kgi:DatasetWithContributorAnnotation
             kgi:DatasetWithAuthorAnnotation
         )
-    ] ,
-    # Equivalence with having a successful quality measurement of the creation/Who/contributor metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementContributor .
-    # ?qualityMeasurementContributor a dqv:QualityMeasurement ;
-    #     rdfs:label "Creation contributor measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetCreationContributor ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetCreationContributor
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            ) 
-        ]
     ] .
 
 kgi:DatasetWithCreationWhenAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with creation accountability - When ?"@en ;
-    owl:equivalentClass kgi:DatasetWithCreationDateAnnotation ,
-    # Equivalence with having a successful quality measurement of the creation/When metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementDate .
-    # ?qualityMeasurementDate a dqv:QualityMeasurement ;
-    #     rdfs:label "Creation date measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetCreationDate ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetCreationDate
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithCreationDateAnnotation .
 
 kgi:DatasetWithCreationWhereAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with creation accountability - Where ?"@en ;
@@ -568,58 +198,6 @@ kgi:DatasetWithMaintenanceWhenAccountability rdf:type owl:Class ;
             kgi:DatasetWithModificationAnnotation
             kgi:DatasetWithCurationAnnotation
             kgi:DatasetWithAccrualFrequencyAnnotation
-        )
-    ] ,
-    # Equivalence with having a successful quality measurement of the maintenance/When metric
-    [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            # ?kg dqv:hasQualityMeasurement ?qualityMeasurementDate .
-            # ?qualityMeasurementDate a dqv:QualityMeasurement ;
-            #     dqv:isMeasurementOf kgi:datasetMaintenanceDate ;
-            #     dqv:value "true"^^xsd:boolean .
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty dqv:hasQualityMeasurement ;
-                owl:someValuesFrom [
-                    rdf:type owl:Class ;
-                    owl:intersectionOf (
-                        [
-                            rdf:type owl:Restriction ;
-                            owl:onProperty dqv:isMeasurementOf ;
-                            owl:hasValue kgi:datasetMaintenanceDate
-                        ]
-                        [
-                            rdf:type owl:Restriction ;
-                            owl:onProperty dqv:value ;
-                            owl:hasValue "true"^^xsd:boolean
-                        ]
-                    )
-                ]
-            ]
-            [
-            # ?kg dqv:hasQualityMeasurement ?qualityMeasurementFrequency .
-            # ?qualityMeasurementFrequency a dqv:QualityMeasurement ;
-            #     dqv:isMeasurementOf kgi:datasetMaintenanceFrequency ;
-            #     dqv:value "true"^^xsd:boolean .
-                rdf:type owl:Restriction ;
-                owl:onProperty dqv:hasQualityMeasurement ;
-                owl:someValuesFrom [
-                    rdf:type owl:Class ;
-                    owl:intersectionOf (
-                        [
-                            rdf:type owl:Restriction ;
-                            owl:onProperty dqv:isMeasurementOf ;
-                            owl:hasValue kgi:datasetMaintenanceFrequency
-                        ]
-                        [
-                            rdf:type owl:Restriction ;
-                            owl:onProperty dqv:value ;
-                            owl:hasValue "true"^^xsd:boolean
-                        ]
-                    )
-                ]
-            ]
         )
     ] .
 
@@ -685,87 +263,13 @@ kgi:DatasetWithUsageWhatAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithCreationSourceAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithSourceAnnotation ,
-    # Equivalence with having a successful quality measurement of the creation/Where/source metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementSource .
-    # ?qualityMeasurementSource a dqv:QualityMeasurement ;
-    #     rdfs:label "Creation source measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetCreationSource ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetCreationSource
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithSourceAnnotation .
 
 kgi:DatasetWithCreationLocationAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithCreationLocationAnnotation ,
-    # Equivalence with having a successful quality measurement of the creation/Where/location metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementLocation .
-    # ?qualityMeasurementLocation a dqv:QualityMeasurement ;
-    #     rdfs:label "Creation location measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetCreationLocation ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetCreationLocation
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithCreationLocationAnnotation .
 
 kgi:DatasetWithCreationMethodologyAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithCreationMethodAnnotation ,
-    # Equivalence with having a successful quality measurement of the creation/How metric:
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementMethodology .
-    # ?qualityMeasurementMethodology a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetCreationMethodology ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetCreationMethodology
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithCreationMethodAnnotation .
 
 kgi:DatasetWithMaintenanceContributorAccountability rdf:type owl:Class ;
     owl:equivalentClass [
@@ -774,114 +278,16 @@ kgi:DatasetWithMaintenanceContributorAccountability rdf:type owl:Class ;
             kgi:DatasetWithContributorAnnotation
             kgi:DatasetWithMaintainerAnnotation
         )
-    ] ,
-    # Equivalence with having a successful quality measurement of the maintenance/Who/contributor metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementContributor .
-    # ?qualityMeasurementContributor a dqv:QualityMeasurement ;
-    #     rdfs:label "Maintenance contributor measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetMaintenanceContributor ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetMaintenanceContributor
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )    
-        ]
     ] .
 
 kgi:DatasetWithMaintenanceLocationAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithCreationLocationAnnotation ,
-    # Equivalence with having a successful quality measurement of the maintenance/Where/location metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementLocation .
-    # ?qualityMeasurementLocation a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetMaintenanceLocation ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetMaintenanceLocation
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithCreationLocationAnnotation .
 
 kgi:DatasetWithMaintenanceMethodologyAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithCreationMethodAnnotation ,
-    # Equivalence with having a successful quality measurement of the maintenance/How metric:
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementMethodology .
-    # ?qualityMeasurementMethodology a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetMaintenanceMethodology ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetMaintenanceMethodology
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithCreationMethodAnnotation .
 
 kgi:DatasetWithPublisherAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithPublisherAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/Who/publisher metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementPublisher .
-    # ?qualityMeasurementPublisher a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage publisher measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsagePublisher ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsagePublisher
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )        
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithPublisherAnnotation .
 
 kgi:DatasetWithUsageAgentRightsAccountability rdf:type owl:Class ;
     owl:equivalentClass [
@@ -899,144 +305,19 @@ kgi:DatasetWithUsageRightsAccountability rdf:type owl:Class ;
             kgi:DatasetWithLicenseAnnotation
             kgi:DatasetWithAccessRightsAnnotation
         )
-    ] ,
-    # Equivalence with having a successful quality measurement of the usage/Who/rights metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementRights .
-    # ?qualityMeasurementRights a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage rights measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsageRights ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageRights
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
     ] .
 
 kgi:DatasetWithUsageAudienceAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithAudienceAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/Who/access metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementAccess .
-    # ?qualityMeasurementAccess a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage access measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsageAudience ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageAudience
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithAudienceAnnotation .
 
 kgi:DatasetWithStartAvailabilityAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithAvailabilityStartAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/When/start metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementStart .
-    # ?qualityMeasurementStart a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage start measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsageStartAvailability ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageStartAvailability
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithAvailabilityStartAnnotation .
 
 kgi:DatasetWithEndAvailabilityAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithAvailabilityEndAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/When/end metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementEnd .
-    # ?qualityMeasurementEnd a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage end measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsageEndAvailability ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageEndAvailability
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithAvailabilityEndAnnotation .
 
 kgi:DatasetWithEndValidityAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithValidityEndAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/When/validity metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementValidity .
-    # ?qualityMeasurementValidity a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage validity measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsageEndValidity ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageEndValidity
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithValidityEndAnnotation .
 
 kgi:DatasetWithUsageLocationAccountability rdf:type owl:Class ;
     owl:equivalentClass [
@@ -1045,30 +326,6 @@ kgi:DatasetWithUsageLocationAccountability rdf:type owl:Class ;
             kgi:DatasetWithLicenseAnnotation
             kgi:DatasetWithAccessRightsAnnotation
         )
-    ] ,
-    # Equivalence with having a successful quality measurement of the usage/Where/location metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementLocation .
-    # ?qualityMeasurementLocation a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageLocation ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageLocation
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
     ] .
 
 kgi:DatasetWithUsageURLAccountability rdf:type owl:Class ;
@@ -1081,31 +338,7 @@ kgi:DatasetWithUsageURLAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithContactWebpageAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithWebpageAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/Where/contact/webpage metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementWebpage .
-    # ?qualityMeasurementWebpage a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageContact_webpage ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageContact_webpage
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithWebpageAnnotation .
 
 kgi:DatasetWithEndpointAddressAccountability rdf:type owl:Class ;
     owl:equivalentClass [
@@ -1114,58 +347,10 @@ kgi:DatasetWithEndpointAddressAccountability rdf:type owl:Class ;
             kgi:DatasetWithSparqlEndpointAnnotation
             kgi:DatasetWithDumpAnnotation
         )
-    ],
-    # Equivalence with having a successful quality measurement of the usage/Where/contact/address metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementAddress .
-    # ?qualityMeasurementAddress a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageContact_address ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageContact_address
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
     ] .
 
 kgi:DatasetWithUsageRequirementsAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithRequirementAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/How/requirements metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementRequirements .
-    # ?qualityMeasurementRequirements a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageRequirements ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageRequirements
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithRequirementAnnotation .
 
 
 kgi:DatasetWithUsageAccessRightsAccountability rdf:type owl:Class ;
@@ -1179,87 +364,13 @@ kgi:DatasetWithUsageAccessRightsAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithLicenseAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithLicenseAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/How/license metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementLicense .
-    # ?qualityMeasurementLicense a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage license measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsageLicense ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageAccess_license
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithLicenseAnnotation .
 
 kgi:DatasetWithReuseAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithReuseAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/How/reuse metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementReuse .
-    # ?qualityMeasurementReuse a dqv:QualityMeasurement ;
-    #     rdfs:label "Usage reuse measurement" ;
-    #     dqv:isMeasurementOf kgi:datasetUsageAccess_reuse ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageAccess_reuse
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithReuseAnnotation .
 
 kgi:DatasetWithAccessMeansAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithAccessMeansAnnotations ,
-    # Equivalence with having a successful quality measurement of the usage/How/access/url metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementURL .
-    # ?qualityMeasurementURL a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageAccess_endpoint ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageAccess_endpoint
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithAccessMeansAnnotations .
 
 kgi:DatasetWithStatsAccountability rdf:type owl:Class ;
     owl:equivalentClass [
@@ -1273,31 +384,7 @@ kgi:DatasetWithStatsAccountability rdf:type owl:Class ;
 
 
 kgi:DatasetWithTriplesStatsAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithTriplesCountAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/What/triples metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementTriples .
-    # ?qualityMeasurementTriples a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageStats_triples ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageStats_triples
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithTriplesCountAnnotation .
 
 kgi:DatasetWithEntitiesPropertyClassesStatsAccountability rdf:type owl:Class ;
     owl:equivalentClass [
@@ -1307,139 +394,19 @@ kgi:DatasetWithEntitiesPropertyClassesStatsAccountability rdf:type owl:Class ;
             kgi:DatasetWithPropertyCountAnnotation
             kgi:DatasetWithClassCountAnnotation
         )
-    ] ,
-    # Equivalence with having a successful quality measurement of the usage/What/entities/properties/classes metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementEntitiesPropertiesClasses .
-    # ?qualityMeasurementEntitiesPropertiesClasses a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageStats_entitiesPropertiesClasses ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageStats_entitiesPropertiesClasses
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
     ] .
 
 kgi:DatasetWithSerializationAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithFormatAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/What/serialization metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementSerialization .
-    # ?qualityMeasurementSerialization a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageSerialization ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageSerialization
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithFormatAnnotation .
 
 kgi:DatasetWithExampleAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithExampleAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/What/example metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementExample .
-    # ?qualityMeasurementExample a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageExample ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageExample
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithExampleAnnotation .
 
 kgi:DatasetWithDescriptionAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithDescriptionAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/What/description metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementDescription .
-    # ?qualityMeasurementDescription a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageDescription ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageDescription
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithDescriptionAnnotation .
 
 kgi:DatasetWithQualityAccountability rdf:type owl:Class ;
-    owl:equivalentClass kgi:DatasetWithQualityAnnotation ,
-    # Equivalence with having a successful quality measurement of the usage/What/quality metric
-    # ?kg dqv:hasQualityMeasurement ?qualityMeasurementQuality .
-    # ?qualityMeasurementQuality a dqv:QualityMeasurement ;
-    #     dqv:isMeasurementOf kgi:datasetUsageQuality ;
-    #     dqv:value "true"^^xsd:boolean .
-    [
-        rdf:type owl:Restriction ;
-        owl:onProperty dqv:hasQualityMeasurement ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:intersectionOf (
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:isMeasurementOf ;
-                    owl:hasValue kgi:datasetUsageQuality
-                ]
-                [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty dqv:value ;
-                    owl:hasValue "true"^^xsd:boolean
-                ]
-            )
-        ]
-    ] .
+    owl:equivalentClass kgi:DatasetWithQualityAnnotation .
 
 ## Annotation classes of the lowest level (without direct correspondance with concepts from Accountability)
 
