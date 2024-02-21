@@ -1,0 +1,166 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+<http://creativecommons.org/ns#Attribution> a <http://creativecommons.org/ns#Requirement> ;
+  rdfs:comment "credit be given to\n\t\t    copyright holder and/or author"@en-us ;
+  rdfs:label "Attribution"@en-us .
+
+<http://creativecommons.org/ns#CommercialUse> a <http://creativecommons.org/ns#Prohibition> ;
+  rdfs:comment "exercising rights for\n\t\t    commercial purposes"@en-us ;
+  rdfs:label "Commercial Use"@en-us .
+
+<http://creativecommons.org/ns#Copyleft> a <http://creativecommons.org/ns#Requirement> ;
+  rdfs:comment "derivative and\n\t\t    combined works must be licensed under specified\n\t\t    terms, similar to those on the original\n\t\t    work"@en-us ;
+  rdfs:label "Copyleft"@en-us .
+
+<http://creativecommons.org/ns#DerivativeWorks> a <http://creativecommons.org/ns#Permission> ;
+  rdfs:comment "distribution of\n\t\t    derivative works"@en-us ;
+  rdfs:label "Derivative Works"@en-us .
+
+<http://creativecommons.org/ns#Distribution> a <http://creativecommons.org/ns#Permission> ;
+  rdfs:comment "distribution, public\n\t\t    display, and publicly performance"@en-us ;
+  rdfs:label "Distribution"@en-us .
+
+<http://creativecommons.org/ns#HighIncomeNationUse> a <http://creativecommons.org/ns#Prohibition> ;
+  rdfs:comment "use in a\n\t\t    non-developing country"@en-us ;
+  rdfs:label "High Income Nation Use"@en-us .
+
+<http://creativecommons.org/ns#Jurisdiction> a rdfs:Class ;
+  rdfs:comment "the legal jurisdiction\n\t\t    of a license"@en-us ;
+  rdfs:label "Jurisdiction"@en-us .
+
+<http://creativecommons.org/ns#LesserCopyleft> a <http://creativecommons.org/ns#Requirement> ;
+  rdfs:comment "derivative works must\n\t\t    be licensed under specified terms, with at least\n\t\t    the same conditions as the original work;\n\t\t    combinations with the work may be licensed under\n\t\t    different terms"@en-us ;
+  rdfs:label "Lesser Copyleft"@en-us .
+
+<http://creativecommons.org/ns#License> a rdfs:Class ;
+  rdfs:comment "a set of\n\t\t    requests/permissions to users of a Work, e.g. a\n\t\t    copyright license, the public domain, information\n\t\t    for distributors"@en-us ;
+  rdfs:label "License"@en-us ;
+  rdfs:subClassOf dc:LicenseDocument .
+
+<http://creativecommons.org/ns#Notice> a <http://creativecommons.org/ns#Requirement> ;
+  rdfs:comment "copyright and license\n\t\t    notices be kept intact"@en-us ;
+  rdfs:label "Notice"@en-us .
+
+<http://creativecommons.org/ns#Permission> a rdfs:Class ;
+  rdfs:comment "an action that may or\n\t\t    may not be allowed or desired"@en-us ;
+  rdfs:label "Permission"@en-us .
+
+<http://creativecommons.org/ns#Prohibition> a rdfs:Class ;
+  rdfs:comment "something you may be\n\t\t    asked not to do"@en-us ;
+  rdfs:label "Prohibition"@en-us .
+
+<http://creativecommons.org/ns#Reproduction> a <http://creativecommons.org/ns#Permission> ;
+  rdfs:comment "making multiple\n\t\t    copies"@en-us ;
+  rdfs:label "Reproduction"@en-us .
+
+<http://creativecommons.org/ns#Requirement> a rdfs:Class ;
+  rdfs:comment "an action that may or\n\t\t    may not be requested of you"@en-us ;
+  rdfs:label "Requirement"@en-us .
+
+<http://creativecommons.org/ns#ShareAlike> a <http://creativecommons.org/ns#Requirement> ;
+  rdfs:comment "derivative works be\n\t\t    licensed under the same terms or compatible terms\n\t\t    as the original work"@en-us ;
+  rdfs:label "Share Alike"@en-us .
+
+<http://creativecommons.org/ns#Sharing> a <http://creativecommons.org/ns#Permission> ;
+  rdfs:comment "permits commercial\n\t\t    derivatives, but only non-commercial\n\t\t    distribution"@en-us ;
+  rdfs:label "Sharing"@en-us .
+
+<http://creativecommons.org/ns#SourceCode> a <http://creativecommons.org/ns#Requirement> ;
+  rdfs:comment "source code (the\n\t\t    preferred form for making modifications) must be\n\t\t    provided when exercising some rights granted by\n\t\t    the license."@en-us ;
+  rdfs:label "Source Code"@en-us .
+
+<http://creativecommons.org/ns#Work> a rdfs:Class ;
+  rdfs:comment "a potentially\n\t\t    copyrightable work"@en-us ;
+  rdfs:label "Work"@en-us .
+
+<http://creativecommons.org/ns#attributionName> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#Work> ;
+  rdfs:range rdfs:Literal .
+
+<http://creativecommons.org/ns#attributionURL> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#Work> ;
+  rdfs:range rdfs:Resource .
+
+<http://creativecommons.org/ns#deprecatedOn> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#License> ;
+  rdfs:label "deprecated\n\t\t  on"@en-us ;
+  rdfs:range <http://www.w3.org/2001/XMLSchema-datatypes#date> .
+
+<http://creativecommons.org/ns#jurisdiction> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#License> ;
+  rdfs:label "jurisdiction"@en-us ;
+  rdfs:range <http://creativecommons.org/ns#Jurisdiction> .
+
+<http://creativecommons.org/ns#legalcode> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#License> ;
+  rdfs:range rdfs:Resource .
+
+<http://creativecommons.org/ns#license> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#Work> ;
+  rdfs:label "has\n\t\t  license"@en-us ;
+  rdfs:range <http://creativecommons.org/ns#License> ;
+  rdfs:subPropertyOf dc:license ;
+  owl:sameAs <http://www.w3.org/1999/xhtml/vocab#license> .
+
+<http://creativecommons.org/ns#morePermissions> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#Work> ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf dc:relation .
+
+<http://creativecommons.org/ns#permits> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#License> ;
+  rdfs:label "permits"@en-us ;
+  rdfs:range <http://creativecommons.org/ns#Permission> .
+
+<http://creativecommons.org/ns#prohibits> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#License> ;
+  rdfs:label "prohibits"@en-us ;
+  rdfs:range <http://creativecommons.org/ns#Prohibition> .
+
+<http://creativecommons.org/ns#requires> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#License> ;
+  rdfs:label "requires"@en-us ;
+  rdfs:range <http://creativecommons.org/ns#Requirement> .
+
+<http://creativecommons.org/ns#useGuidelines> a rdf:Property ;
+  rdfs:domain <http://creativecommons.org/ns#Work> ;
+  rdfs:range rdfs:Resource ;
+  rdfs:subPropertyOf dc:relation .
+
+<http://web.resource.org/cc/Attribution> owl:equivalentClass <http://creativecommons.org/ns#Attribution> .
+
+<http://web.resource.org/cc/CommercialUse> owl:equivalentClass <http://creativecommons.org/ns#CommercialUse> .
+
+<http://web.resource.org/cc/DerivativeWorks> owl:equivalentClass <http://creativecommons.org/ns#DerivativeWorks> .
+
+<http://web.resource.org/cc/Distribution> owl:equivalentClass <http://creativecommons.org/ns#Distribution> .
+
+<http://web.resource.org/cc/License> owl:equivalentClass <http://creativecommons.org/ns#License> .
+
+<http://web.resource.org/cc/Notice> owl:equivalentClass <http://creativecommons.org/ns#Notice> .
+
+<http://web.resource.org/cc/Permission> owl:equivalentClass <http://creativecommons.org/ns#Permission> .
+
+<http://web.resource.org/cc/Prohibition> owl:equivalentClass <http://creativecommons.org/ns#Prohibition> .
+
+<http://web.resource.org/cc/Reproduction> owl:equivalentClass <http://creativecommons.org/ns#Reproduction> .
+
+<http://web.resource.org/cc/Requirement> owl:equivalentClass <http://creativecommons.org/ns#Requirement> .
+
+<http://web.resource.org/cc/ShareAlike> owl:equivalentClass <http://creativecommons.org/ns#ShareAlike> .
+
+<http://web.resource.org/cc/SourceCode> owl:equivalentClass <http://creativecommons.org/ns#SourceCode> .
+
+<http://web.resource.org/cc/Work> owl:equivalentClass <http://creativecommons.org/ns#Work> .
+
+<http://web.resource.org/cc/license> owl:equivalentProperty <http://creativecommons.org/ns#license> .
+
+<http://web.resource.org/cc/permits> owl:equivalentProperty <http://creativecommons.org/ns#permits> .
+
+<http://web.resource.org/cc/prohibits> owl:equivalentProperty <http://creativecommons.org/ns#prohibits> .
+
+<http://web.resource.org/cc/requires> owl:equivalentProperty <http://creativecommons.org/ns#requires> .
+

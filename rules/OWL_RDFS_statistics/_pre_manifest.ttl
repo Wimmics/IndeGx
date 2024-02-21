@@ -17,8 +17,36 @@
     kgi:onSuccess (
         [
             mf:action """
+            LOAD <file:///input/adms.ttl> ;
+            LOAD <file:///input/cc.ttl> ;
+            LOAD <file:///input/dataid.ttl> ;
+            LOAD <file:///input/dbo.ttl> ;
+            LOAD <file:///input/dcat2.ttl> ;
+            LOAD <file:///input/dce.ttl> ;
+            LOAD <file:///input/dcterms.ttl> ;
+            LOAD <file:///input/dctype.ttl> ;
+            LOAD <file:///input/doap.ttl> ;
+            LOAD <file:///input/dqv.ttl> ;
+            LOAD <file:///input/earl.ttl> ;
+            LOAD <file:///input/fabio.ttl> ;
+            LOAD <file:///input/foaf.ttl> ;
+            LOAD <file:///input/hydra.ttl> ;
+            LOAD <file:///input/manifest.ttl> ;
+            LOAD <file:///input/mod.ttl> ;
+            LOAD <file:///input/nie.ttl> ;
             LOAD <file:///input/owl.ttl> ;
-            LOAD <file:///input/rdf-schema.ttl> 
+            LOAD <file:///input/pav.ttl> ;
+            LOAD <file:///input/prov.ttl> ;
+            LOAD <file:///input/rdf.ttl> ;
+            LOAD <file:///input/rdfs.ttl> ;
+            LOAD <file:///input/schema.ttl> ;
+            LOAD <file:///input/sd.ttl> ;
+            LOAD <file:///input/skos.ttl> ;
+            LOAD <file:///input/sto.ttl> ;
+            LOAD <file:///input/vann.ttl> ;
+            LOAD <file:///input/voaf.ttl> ;
+            LOAD <file:///input/void.ttl> ;
+            LOAD <file:///input/xhv.ttl>
             """
         ]
     ) .
