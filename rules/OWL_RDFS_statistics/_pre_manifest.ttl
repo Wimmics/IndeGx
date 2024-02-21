@@ -17,8 +17,7 @@
     kgi:onSuccess (
         [
             mf:action """
-            LOAD <file:///input/owl.ttl> ;
-            LOAD <file:///input/rdf-schema.ttl> 
+            LOAD <file:///input/schemaorg.ttl> 
             """
         ]
     ) .
