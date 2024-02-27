@@ -1,7 +1,7 @@
 import { fetchGETPromise, fetchJSONPromise, fetchPOSTPromise } from "./GlobalUtils.js";
 import * as RDFUtils from "./RDFUtils.js";
 import * as Logger from "./LogUtils.js"
-import sparqljs, { AskQuery, ConstructQuery, DescribeQuery, Query, SelectQuery, SparqlQuery, Update } from "sparqljs";
+import * as sparqljs from "sparqljs";
 import * as $rdf from "rdflib";
 
 export type JSONValue =
@@ -54,7 +54,7 @@ export interface ASKJSONResult extends SPARQLJSONResult {
 export let defaultQueryTimeout = 60000;
 
 export function setDefaultQueryTimeout(timeout: number) {
-    if(timeout != undefined && timeout != null && timeout >= 0) {
+    if (timeout != undefined && timeout != null && timeout >= 0) {
         defaultQueryTimeout = timeout;
     } else {
         throw new Error("Timeout must be a positive number")
@@ -69,16 +69,16 @@ export type sparqlQueryPromiseConfig = {
 export function sparqlQueryPromise(endpoint: string, query: string, baseURI: string, config: sparqlQueryPromiseConfig = {}): Promise<void | $rdf.Store | SPARQLJSONResult | string> {
     let httpHeaders = {};
 
-    if(config.accept != undefined) {
+    if (config.accept != undefined) {
         httpHeaders["accept"] = config.accept;
     } else {
-        if(isSparqlSelect(query) || isSparqlAsk(query)) {
+        if (isSparqlSelect(query) || isSparqlAsk(query)) {
             httpHeaders["accept"] = "application/sparql-results+json, application/json";
-        } else if(isSparqlConstruct(query)) {
+        } else if (isSparqlConstruct(query)) {
             httpHeaders["accept"] = "text/turtle";
         }
     }
-    if(config.timeout == undefined) {
+    if (config.timeout == undefined) {
         config.timeout = defaultQueryTimeout;
     }
 
@@ -86,15 +86,15 @@ export function sparqlQueryPromise(endpoint: string, query: string, baseURI: str
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + config.timeout;
         return fetchJSONPromise(queryUrl, httpHeaders).then(result => {
             return (result as SELECTJSONResult)
-        }).catch(error => { 
-            Logger.error(endpoint, query, error); 
-            throw error 
+        }).catch(error => {
+            Logger.error(endpoint, query, error);
+            throw error
         })
     } else if (isSparqlAsk(query)) {
         const queryUrl = endpoint + '?query=' + encodeURIComponent(query) + '&format=json&timeout=' + config.timeout;
         return fetchJSONPromise(queryUrl, httpHeaders).then(result => {
             return (result as ASKJSONResult)
-        }).catch(() => { 
+        }).catch(() => {
             return { head: {}, boolean: false } as ASKJSONResult
         })
     } else if (isSparqlConstruct(query)) {
@@ -122,19 +122,19 @@ export function sendUpdateQuery(endpoint, updateQuery) {
     return fetchPOSTPromise(endpoint, updateQuery, updateHeader).then(response => {
         return response;
     }).catch(error => {
-        Logger.error("Error send update query",  error);
+        Logger.error("Error send update query", error);
     })
 }
 
-function checkSparqlType(queryString: string, queryType: "CONSTRUCT" | "SELECT" | "ASK" | "DESCRIBE" | "update") {
-    let parser = new sparqljs.Parser();
+function checkSparqlType(queryString: string, queryType: "CONSTRUCT" | "SELECT" | "ASK" | "DESCRIBE" | "update"): boolean {
+    let parser = new sparqljs.Parser({ sparqlStar: false });
     try {
         let parsedQuery;
         try {
             parsedQuery = parser.parse(queryString);
-        } catch(parsingError) {
+        } catch (parsingError) {
             // This is a strange parsing error on INSERT DATA generated from pagination
-            if((parsingError as Error).message.includes("Parse error on line 1") && queryString.startsWith("INSERT DATA")) {
+            if ((parsingError as Error).message.includes("Parse error on line 1") && queryString.startsWith("INSERT DATA")) {
                 return true;
             }
             Logger.error("Query parsing error", queryString, parsingError)
@@ -171,28 +171,28 @@ export function isSparqlUpdate(queryString: string): boolean {
     return checkSparqlType(queryString, "update");
 }
 
-export function isQuery(query: SparqlQuery): query is Query {
-    return (query as Query).queryType !== undefined;
+export function isQuery(query: sparqljs.SparqlQuery): query is sparqljs.Query {
+    return (query as sparqljs.Query).queryType !== undefined;
 }
 
-export function isSelect(query: SparqlQuery): query is SelectQuery {
-    return isQuery(query) && (query as SelectQuery).queryType === 'SELECT';
+export function isSelect(query: sparqljs.SparqlQuery): query is sparqljs.SelectQuery {
+    return isQuery(query) && (query as sparqljs.SelectQuery).queryType === 'SELECT';
 }
 
-export function isAsk(query: SparqlQuery): query is AskQuery {
-    return isQuery(query) && (query as AskQuery).queryType === 'ASK';
+export function isAsk(query: sparqljs.SparqlQuery): query is sparqljs.AskQuery {
+    return isQuery(query) && (query as sparqljs.AskQuery).queryType === 'ASK';
 }
 
-export function isConstruct(query: SparqlQuery): query is ConstructQuery {
-    return isQuery(query) && (query as ConstructQuery).queryType === 'CONSTRUCT';
+export function isConstruct(query: sparqljs.SparqlQuery): query is sparqljs.ConstructQuery {
+    return isQuery(query) && (query as sparqljs.ConstructQuery).queryType === 'CONSTRUCT';
 }
 
-export function isDescribe(query: SparqlQuery): query is DescribeQuery {
-    return isQuery(query) && (query as DescribeQuery).queryType === 'DESCRIBE';
+export function isDescribe(query: sparqljs.SparqlQuery): query is sparqljs.DescribeQuery {
+    return isQuery(query) && (query as sparqljs.DescribeQuery).queryType === 'DESCRIBE';
 }
 
-export function isUpdate(query: SparqlQuery): query is Update {
-    return (query as Update).type !== undefined && (query as Update).type === 'update';
+export function isUpdate(query: sparqljs.SparqlQuery): query is sparqljs.Update {
+    return (query as sparqljs.Update).type !== undefined && (query as sparqljs.Update).type === 'update';
 }
 
 export function queryContainsService(queryString: string): boolean {
@@ -213,10 +213,10 @@ export function addServiceClause(queryString: string, endpoint: string): string 
     let parser = new sparqljs.Parser();
     try {
         const parsedQuery = parser.parse(queryString);
-        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString) ) {
+        if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString)) {
             let serviceClause = {
                 type: "service",
-                name: {termType:"NamedNode",value: endpoint},
+                name: { termType: "NamedNode", value: endpoint },
                 silent: false,
                 patterns: parsedQuery.where
             }
