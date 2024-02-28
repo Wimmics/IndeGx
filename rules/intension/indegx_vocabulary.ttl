@@ -236,6 +236,11 @@ kgi:graph rdf:type owl:ObjectProperty ;
     rdfs:domain void:Dataset ;
     rdfs:range sd:NamedGraph .
 
+kgi:endpointURLextension rdf:type owl:DatatypeProperty ;
+    rdfs:label "Domain extension of the endpoint's URL"
+    rdfs:domain dcat:DataService , sd:Service ;
+    rdfs:range xsd:string .
+
 # Description of the common elements between datasets
 
 kgi:CommonalityDescription rdf:type rdfs:Class ;

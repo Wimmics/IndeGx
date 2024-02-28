@@ -7,6 +7,8 @@
 <> a mf:Manifest ;
     mf:entries (
         <moveReasonerGraph.ttl>
+        <extractEndpointExtension.ttl>
+        <annotateEndpointWithLocation.ttl>
     ) .
 
 <moveReasonerGraph.ttl> a mf:ManifestEntry ;
@@ -15,7 +17,106 @@
             a mf:Action ;
             mf:action """
             PREFIX kg: <http://ns.inria.fr/corese/kgram/>
-            MOVE kg:rule TO DEFAULT
+            ADD GRAPH kg:rule TO DEFAULT ;
+            DROP GRAPH kg:rule ;
+            """
+        ]
+    ) .
+
+<extractEndpointExtension.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            a mf:Action ;
+            mf:action """PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT {
+                ?endpointUrl kgi:endpointURLextension ?extension
+            } WHERE {
+                VALUES ?endpointProperty { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                {
+                    ?s ?endpointProperty ?endpointUrl .
+                } UNION {
+                    GRAPH ?graph {
+                        ?s ?endpointProperty ?endpointUrl .
+                    }
+                }
+                BIND(STRBEFORE(STRAFTER(STR(?endpointUrl), "://"), "/") AS ?domain)
+                BIND(REPLACE(?domain, ".*\\\\.", "") AS ?extensionAndPort)
+                BIND(REPLACE(?extensionAndPort, "([^:]):.*", "$1") AS ?extension)
+                FILTER(STRLEN(?extension) > 0)
+            }"""
+        ]
+    ) .
+
+# dcterms:spatial dcterms:Location
+<annotateEndpointWithLocation.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <extractEndpointExtension.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            a mf:Action ;
+            mf:action """PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dbo: <http://dbpedia.org/ontology/>
+            PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+            PREFIX wikibase: <http://wikiba.se/ontology#>
+            PREFIX bd: <http://www.bigdata.com/rdf#>
+
+            INSERT {
+                ?endpointUrl dcterms:spatial ?location
+            } WHERE {
+                ?endpointUrl kgi:endpointURLextension ?extension .
+                BIND( IRI( CONCAT( "http://dbpedia.org/resource/.", ?extension ) ) AS ?extensionDbpedia )
+
+                # DBpedia
+                SERVICE <http://dbpedia.org/sparql> {
+                    VALUES ?extensionDbpedia { UNDEF }
+                    ?location dbo:topLevelDomain ?extensionDbpedia .
+                }
+            }
+            """
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dbo: <http://dbpedia.org/ontology/>
+            PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+            PREFIX wikibase: <http://wikiba.se/ontology#>
+            PREFIX bd: <http://www.bigdata.com/rdf#>
+
+            INSERT {
+                ?endpointUrl dcterms:spatial ?location
+            } WHERE {
+                ?endpointUrl kgi:endpointURLextension ?extension .
+
+                # Wikidata
+                SERVICE <https://query.wikidata.org/sparql> {
+                    VALUES ?extension { UNDEF }
+                    BIND( CONCAT(".", ?extension) AS ?prefixedExtension)
+                    {
+                        SELECT DISTINCT ?location WHERE {
+                            ?location wdt:P78 ?WDextension.
+                            ?WDextension rdfs:label ?rdfsLabel.
+                            FILTER(CONTAINS(?rdfsLabel, ?prefixedExtension))
+                        }
+                    }
+                }
+            }
             """
         ]
     ) .

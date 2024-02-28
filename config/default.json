@@ -1,8 +1,8 @@
 {
-    "pre": "file:///rules/OWL_RDFS_statistics/_pre_manifest.ttl",
-    "manifest": "file:///rules/OWL_RDFS_statistics/_manifest.ttl",
-    "post": "file:///rules/OWL_RDFS_statistics/_post_manifest.ttl",
-    "catalog": "file:///catalogs/catalog.auto_refresh.ttl",
+    "pre": "file:///rules/intension/pre/_manifest.ttl",
+    "manifest": "file:///rules/intension/main/_manifest.ttl",
+    "post": "file:///rules/intension/post/_manifest.ttl",
+    "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,

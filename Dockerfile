@@ -9,7 +9,7 @@ RUN set -eux; \
        bash sudo curl software-properties-common ca-certificates findutils coreutils gettext pwgen procps tini wget \
     ;
 
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
     apt-get install -f -y nodejs
 RUN apt-get install -y aptitude
 RUN aptitude install -y npm

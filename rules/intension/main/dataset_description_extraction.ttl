@@ -6,16 +6,43 @@
     dcterms:isReferencedBy <_manifest.ttl> ;
     dcterms:description "Look for a Dataset related to the endpoint URL." ;
     kgi:query """
-        ASK {
-            SERVICE $rawEndpointUrl {
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+ASK {
+    SERVICE $rawEndpointUrl {
+        VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+        BIND(
+            IF(
+            STRSTARTS(STR($rawEndpointUrl), "http://") , 
+            IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+            $rawEndpointUrl  ) 
+            AS ?httpsEndpointUrl )
+        BIND(
+            IF(
+            STRSTARTS(STR($rawEndpointUrl), "https://") , 
+            IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+            $rawEndpointUrl ) 
+            AS ?httpEndpointUrl )
+            {
                 {
-                    ?kg ?endpointLink $rawEndpointUrl . 
+                    ?kg ?endpointLink ?httpsEndpointUrl . 
                 }
                 UNION {
                     GRAPH ?graph {
-                        ?kg ?endpointLink $rawEndpointUrl
+                        ?kg ?endpointLink ?httpsEndpointUrl
+                    }
+                }
+            } UNION {
+                {
+                    ?kg ?endpointLink ?httpEndpointUrl . 
+                }
+                UNION {
+                    GRAPH ?graph {
+                        ?kg ?endpointLink ?httpEndpointUrl
                     }
                 }
             }
-        }
+    }
+}
 """ .

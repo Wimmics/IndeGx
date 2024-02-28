@@ -1,5 +1,5 @@
 import { Manifest, ManifestEntry, Test, Action, Asset } from "./RuleTree.js"
-import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI, uriIsWellFormed, sanitizeURI } from "./RDFUtils.js";
+import { createStore, loadRDFFiles, RDF, MANIFEST, KGI, DCT, loadRDFFile, collectionToArray, urlToBaseURI, uriIsWellFormed, sanitizeURI, rdfTypeProperty } from "./RDFUtils.js";
 import * as $rdf from "rdflib";
 import dayjs from "dayjs";
 import duration from 'dayjs/plugin/duration.js';
@@ -12,7 +12,6 @@ const manifestEntryType = MANIFEST("ManifestEntry")
 const manifestIncludeProperty = MANIFEST("include")
 const manifestEntriesProperty = MANIFEST("entries")
 const manifestActionProperty = MANIFEST("action")
-const rdfTypeProperty = RDF("type");
 const kgiOnSuccessProperty = KGI("onSuccess");
 const kgiOnFailureProperty = KGI("onFailure");
 const kgiRequiredAssetsProperty = KGI("requiredAssets");
@@ -123,12 +122,12 @@ function readManifest(manifestFilename: string, store: $rdf.Store, postPromiseCr
                                 manifestObject.requiredAssets.push(requiredAsset.value);
                                 postPromiseCreationPool.push(loadRDFFile(requiredAsset.value, store)
                                     .then(() => {
-                                        if (store.holds(requiredAsset, RDF("type"), manifestEntryType)) {
+                                        if (store.holds(requiredAsset, rdfTypeProperty, manifestEntryType)) {
                                             return (readManifestEntry(requiredAsset.value, store, postPromiseCreationPool) as Promise<Asset>).then(asset => {
                                                 AssetTracker.getInstance().addAsset(asset);
                                                 return Promise.resolve();
                                             })
-                                        } else if (store.holds(requiredAsset, RDF("type"), manifestType)) {
+                                        } else if (store.holds(requiredAsset, rdfTypeProperty, manifestType)) {
                                             return (readManifest(requiredAsset.value, store, postPromiseCreationPool) as Promise<Asset>).then(asset => {
                                                 AssetTracker.getInstance().addAsset(asset);
                                                 return Promise.resolve();
@@ -249,12 +248,12 @@ function readManifestEntry(uri: string, store: $rdf.Store, postPromiseCreationPo
                             resultGenerationAsset.requiredAssets.push(requiredAsset.value);
                             postPromiseCreationPool.push(loadRDFFile(requiredAsset.value, store)
                                 .then(() => {
-                                    if (store.holds(requiredAsset, RDF("type"), manifestEntryType)) {
+                                    if (store.holds(requiredAsset, rdfTypeProperty, manifestEntryType)) {
                                         return (readManifestEntry(requiredAsset.value, store, postPromiseCreationPool) as Promise<Asset>).then(asset => {
                                             AssetTracker.getInstance().addAsset(asset);
                                             return Promise.resolve();
                                         })
-                                    } else if (store.holds(requiredAsset, RDF("type"), manifestType)) {
+                                    } else if (store.holds(requiredAsset, rdfTypeProperty, manifestType)) {
                                         return (readManifest(requiredAsset.value, store, postPromiseCreationPool) as Promise<Asset>).then(asset => {
                                             AssetTracker.getInstance().addAsset(asset);
                                             return Promise.resolve();
@@ -364,9 +363,9 @@ function actionFromCollection(collection: $rdf.BlankNode | $rdf.NamedNode, store
                 } else {
                     let actionPromise: Promise<void> = loadRDFFile(node.value, store)
                         .then(() => {
-                            if (store.holds(node, RDF("type"), manifestEntryType)) {
+                            if (store.holds(node, rdfTypeProperty, manifestEntryType)) {
                                 return readManifestEntry(node.value, store, postPromiseCreationPool) as Promise<Asset>
-                            } else if (store.holds(node, RDF("type"), manifestType)) {
+                            } else if (store.holds(node, rdfTypeProperty, manifestType)) {
                                 return readManifest(node.value, store, postPromiseCreationPool) as Promise<Asset>
                             } else {
                                 throw new Error("Unexpected node type: " + node.value);
