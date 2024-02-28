@@ -56,22 +56,18 @@
                         SELECT DISTINCT ?elem {
                             {
                                 {
-                                    ?elem a ?type .
-                                    VALUES ?type {
-                                        owl:Class
-                                        rdfs:Class
-                                    }
+                                    ?whatever rdfs:subClassOf ?elem .
+                                } UNION {
+                                    ?whatever owl:equivalentClass ?elem .
                                 } UNION {
                                     ?whatever a ?elem .
                                 }
                             } UNION {
                                 GRAPH ?g {
                                     {
-                                        ?elem a ?type .
-                                        VALUES ?type {
-                                            owl:Class
-                                            rdfs:Class
-                                        }
+                                        ?whatever rdfs:subClassOf ?elem .
+                                    } UNION {
+                                        ?whatever owl:equivalentClass ?elem .
                                     } UNION {
                                         ?whatever a ?elem .
                                     }

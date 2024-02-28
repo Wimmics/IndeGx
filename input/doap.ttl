@@ -1,0 +1,1495 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+<http://purl.org/dc/elements/1.1/date> a owl:AnnotationProperty .
+
+<http://purl.org/dc/elements/1.1/description> a owl:AnnotationProperty .
+
+<http://purl.org/dc/elements/1.1/title> a owl:AnnotationProperty .
+
+<http://usefulinc.com/ns/doap#> a owl:Ontology ;
+  <http://purl.org/dc/elements/1.1/creator> "Edd Wilder-James" ;
+  <http://purl.org/dc/elements/1.1/description> "Das Vokabular \"Description of a Project (DOAP)\", beschrieben durch W3C RDF Schema and the Web Ontology Language."@de ;
+  <http://purl.org/dc/elements/1.1/description> "El vocabulario Description of a Project (DOAP, Descripción de un Proyecto), descrito usando RDF Schema de W3C\n\t\ty Web Ontology Language."@es ;
+  <http://purl.org/dc/elements/1.1/description> "Le vocabulaire Description Of A Project (DOAP, Description D'Un Projet),\n\t\tdécrit en utilisant RDF Schema du W3C et OWL."@fr ;
+  <http://purl.org/dc/elements/1.1/description> "Slovník Description of a Project (DOAP, Popis projektu), popsaný použitím W3C RDF Schema a Web Ontology Language."@cs ;
+  <http://purl.org/dc/elements/1.1/description> "The Description of a Project (DOAP) vocabulary, described using W3C RDF Schema and the Web Ontology Language." ;
+  <http://purl.org/dc/elements/1.1/description> "Vocabulário de descrição de um Projeto (DOAP - Description of a Project), descrito no esquema (schema) W3C RDF e na Web Ontology Language."@pt ;
+  <http://purl.org/dc/elements/1.1/format> "application/rdf+xml" ;
+  <http://purl.org/dc/elements/1.1/rights> "Copyright © 2004-2018 Edd Dumbill, Edd Wilder-James" ;
+  <http://purl.org/dc/elements/1.1/title> "Description of a Project (DOAP) vocabulary" ;
+  owl:imports <http://xmlns.com/foaf/0.1/index.rdf> ;
+  foaf:maker [a foaf:Person ;
+    foaf:mbox <mailto:edd@usefulinc.com> ;
+    foaf:name "Edd Wilder-James"] .
+
+<http://usefulinc.com/ns/doap#ArchRepository> a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "Dépôt GNU Arch du code source."@fr ;
+  rdfs:comment "GNU Arch Quellcode-Versionierungssystem."@de ;
+  rdfs:comment "GNU Arch source code repository."@en ;
+  rdfs:comment "Repositorio GNU Arch del código fuente."@es ;
+  rdfs:comment "Repositório GNU Arch do código fonte."@pt ;
+  rdfs:comment "Úložiště zdrojových kódů GNU Arch."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Dépôt GNU Arch"@fr ;
+  rdfs:label "GNU Arch repository"@de ;
+  rdfs:label "GNU Arch repository"@en ;
+  rdfs:label "Repositorio GNU Arch"@es ;
+  rdfs:label "Repositório GNU Arch"@pt ;
+  rdfs:label "Úložiště GNU Arch"@cs ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#BKRepository> a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "BitKeeper Quellcode-Versionierungssystem."@de ;
+  rdfs:comment "BitKeeper source code repository."@en ;
+  rdfs:comment "Dépôt BitKeeper du code source."@fr ;
+  rdfs:comment "Repositorio BitKeeper del código fuente."@es ;
+  rdfs:comment "Repositório BitKeeper do código fonte."@pt ;
+  rdfs:comment "Úložiště zdrojových kódů BitKeeper."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "BitKeeper Repository"@de ;
+  rdfs:label "BitKeeper Repository"@en ;
+  rdfs:label "Dépôt BitKeeper"@fr ;
+  rdfs:label "Repositorio BitKeeper"@es ;
+  rdfs:label "Repositório Bitkeeper"@pt ;
+  rdfs:label "Úložiště BitKeeper"@cs ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#BazaarBranch> a rdfs:Class ;
+  rdfs:comment "Bazaar source code branch."@en ;
+  rdfs:comment "Código fonte da ramificação Bazaar."@pt ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Bazaar Branch"@en ;
+  rdfs:label "Ramificação Bazaar"@pt ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#CVSRepository> a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "CVS Quellcode-Versionierungssystem."@de ;
+  rdfs:comment "CVS source code repository."@en ;
+  rdfs:comment "Dépôt CVS du code source."@fr ;
+  rdfs:comment "Repositorio CVS del código fuente."@es ;
+  rdfs:comment "Repositório CVS do código fonte."@pt ;
+  rdfs:comment "Úložiště zdrojových kódů CVS."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "CVS Repository"@de ;
+  rdfs:label "CVS Repository"@en ;
+  rdfs:label "Dépôt CVS"@fr ;
+  rdfs:label "Repositorio CVS"@es ;
+  rdfs:label "Repositório CVS"@pt ;
+  rdfs:label "Úložiště CVS"@cs ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#DarcsRepository> a rdfs:Class ;
+  rdfs:comment "Dépôt darcs du code source."@fr ;
+  rdfs:comment "Repositorio darcs del código fuente."@es ;
+  rdfs:comment "Repositório darcs do código fonte."@pt ;
+  rdfs:comment "darcs source code repository."@en ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Dépôt darcs"@fr ;
+  rdfs:label "Repositorio darcs"@es ;
+  rdfs:label "Repositório darcs"@pt ;
+  rdfs:label "darcs Repository"@en ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#GitBranch> a rdfs:Class ;
+  rdfs:comment "Código fonte da ramificação Git."@pt ;
+  rdfs:comment "Git source code branch."@en ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Git Branch"@en ;
+  rdfs:label "Ramificação Git"@pt ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#GitRepository> a rdfs:Class ;
+  rdfs:comment "Dépôt Git du code source."@fr ;
+  rdfs:comment "Git Quellcode-Versionierungssystem."@de ;
+  rdfs:comment "Git source code repository."@en ;
+  rdfs:comment "Repositorio Git del código fuente."@es ;
+  rdfs:comment "Repositório Git do código fonte."@pt ;
+  rdfs:comment "Úložiště zdrojových kódů Git."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Dépôt Git"@fr ;
+  rdfs:label "Git Repository"@de ;
+  rdfs:label "Git Repository"@en ;
+  rdfs:label "Repositorio Git"@es ;
+  rdfs:label "Repositório Git"@pt ;
+  rdfs:label "Úložiště Git"@cs ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#HgRepository> a rdfs:Class ;
+  rdfs:comment "Mercurial source code repository."@en ;
+  rdfs:comment "Repositório Mercurial do código fonte."@pt ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Mercurial Repository"@en ;
+  rdfs:label "Repositório Mercurial"@pt ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#Project> a rdfs:Class ;
+  rdfs:comment "A project."@en ;
+  rdfs:comment "Ein Projekt."@de ;
+  rdfs:comment "Projekt."@cs ;
+  rdfs:comment "Projeto."@pt ;
+  rdfs:comment "Un projet."@fr ;
+  rdfs:comment "Un proyecto."@es ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Project"@en ;
+  rdfs:label "Projekt"@cs ;
+  rdfs:label "Projekt"@de ;
+  rdfs:label "Projet"@fr ;
+  rdfs:label "Projeto"@pt ;
+  rdfs:label "Proyecto"@es ;
+  rdfs:subClassOf foaf:Project ;
+  rdfs:subClassOf <http://xmlns.com/wordnet/1.6/Project> .
+
+<http://usefulinc.com/ns/doap#Repository> a rdfs:Class ;
+  rdfs:comment "Dépôt du code source."@fr ;
+  rdfs:comment "Quellcode-Versionierungssystem."@de ;
+  rdfs:comment "Repositorio del código fuente."@es ;
+  rdfs:comment "Repositório do código fonte."@pt ;
+  rdfs:comment "Source code repository."@en ;
+  rdfs:comment "Úložiště zdrojových kódů."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Dépôt"@fr ;
+  rdfs:label "Repositorio"@es ;
+  rdfs:label "Repository"@de ;
+  rdfs:label "Repository"@en ;
+  rdfs:label "Repositório"@pt ;
+  rdfs:label "Úložiště"@cs .
+
+<http://usefulinc.com/ns/doap#SVNRepository> a rdfs:Class ;
+  rdfs:comment "Dépôt Subversion du code source."@fr ;
+  rdfs:comment "Repositorio Subversion del código fuente."@es ;
+  rdfs:comment "Repositório Subversion do código fonte."@pt ;
+  rdfs:comment "Subversion Quellcode-Versionierungssystem."@de ;
+  rdfs:comment "Subversion source code repository."@en ;
+  rdfs:comment "Úložiště zdrojových kódů Subversion."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Dépôt Subversion"@fr ;
+  rdfs:label "Repositorio Subversion"@es ;
+  rdfs:label "Repositório Subversion"@pt ;
+  rdfs:label "Subversion Repository"@de ;
+  rdfs:label "Subversion Repository"@en ;
+  rdfs:label "Úložiště Subversion"@cs ;
+  rdfs:subClassOf <http://usefulinc.com/ns/doap#Repository> .
+
+<http://usefulinc.com/ns/doap#Specification> a rdfs:Class ;
+  rdfs:comment "A especificação de aspetos, técnicas ou outros do sistema."@pt ;
+  rdfs:comment "A specification of a system's aspects, technical or otherwise."@en ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Especificação"@pt ;
+  rdfs:label "Specification"@en ;
+  rdfs:subClassOf rdfs:Resource .
+
+<http://usefulinc.com/ns/doap#Version> a rdfs:Class ;
+  rdfs:comment "Détails sur une version d'une release d'un projet."@fr ;
+  rdfs:comment "Informace o uvolněné verzi projektu."@cs ;
+  rdfs:comment "Información sobre la versión de un release del proyecto."@es ;
+  rdfs:comment "Informação sobre a versão do projeto lançado."@pt ;
+  rdfs:comment "Version information of a project release."@en ;
+  rdfs:comment "Versionsinformation eines Projekt Releases."@de ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Version"@de ;
+  rdfs:label "Version"@en ;
+  rdfs:label "Version"@fr ;
+  rdfs:label "Versión"@es ;
+  rdfs:label "Versão"@pt ;
+  rdfs:label "Verze"@cs .
+
+<http://usefulinc.com/ns/doap#anon-root> a rdf:Property ;
+  rdfs:comment "Dépôt pour accès anonyme."@fr ;
+  rdfs:comment "Repositorio para acceso anónimo."@es ;
+  rdfs:comment "Repository for anonymous access."@en ;
+  rdfs:comment "Repository für anonymen Zugriff"@de ;
+  rdfs:comment "Repositório para acesso anónimo."@pt ;
+  rdfs:comment "Úložiště pro anonymní přístup."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Repository> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Anonymes Root"@de ;
+  rdfs:label "anonymní kořen"@cs ;
+  rdfs:label "anonymous root"@en ;
+  rdfs:label "racine anonyme"@fr ;
+  rdfs:label "raíz anónima"@es ;
+  rdfs:label "raíz anónima"@pt ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#audience> a rdf:Property ;
+  rdfs:comment "Description of target user base"@en ;
+  rdfs:comment "Descrição do utilizador base alvo"@pt ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "audience"@en ;
+  rdfs:label "audiência"@pt ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#blog> a rdf:Property ;
+  rdfs:comment "URI de um blog relacionado com um projeto"@pt ;
+  rdfs:comment "URI of a blog related to a project"@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "blog"@en ;
+  rdfs:label "blog"@pt ;
+  rdfs:range <http://rdfs.org/sioc/types#Weblog> ;
+  rdfs:range rdfs:Resource .
+
+<http://usefulinc.com/ns/doap#browse> a rdf:Property ;
+  rdfs:comment "Interface web au dépôt."@fr ;
+  rdfs:comment "Interface web del repositorio."@es ;
+  rdfs:comment "Interface web do repositório."@pt ;
+  rdfs:comment "Web browser interface to repository."@en ;
+  rdfs:comment "Web-Browser Interface für das Repository."@de ;
+  rdfs:comment "Webové rozhraní pro prohlížení úložiště."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Repository> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "browse"@de ;
+  rdfs:label "browse"@en ;
+  rdfs:label "navegar"@es ;
+  rdfs:label "navegar"@pt ;
+  rdfs:label "prohlížeč"@cs ;
+  rdfs:label "visualiser"@fr .
+
+<http://usefulinc.com/ns/doap#bug-database> a rdf:Property ;
+  rdfs:comment "Bug tracker for a project."@en ;
+  rdfs:comment "Bug tracker para um projeto."@pt ;
+  rdfs:comment "Bug tracker para un proyecto."@es ;
+  rdfs:comment "Fehlerdatenbank eines Projektes."@de ;
+  rdfs:comment "Správa chyb projektu."@cs ;
+  rdfs:comment "Suivi des bugs pour un projet."@fr ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Fehlerdatenbank"@de ;
+  rdfs:label "base de dados de bugs"@pt ;
+  rdfs:label "base de datos de bugs"@es ;
+  rdfs:label "bug database"@en ;
+  rdfs:label "databáze chyb"@cs ;
+  rdfs:label "suivi des bugs"@fr .
+
+<http://usefulinc.com/ns/doap#category> a rdf:Property ;
+  rdfs:comment "A category of project."@en ;
+  rdfs:comment "Eine Kategorie eines Projektes."@de ;
+  rdfs:comment "Kategorie projektu."@cs ;
+  rdfs:comment "Uma categoría de projeto."@pt ;
+  rdfs:comment "Una categoría de proyecto."@es ;
+  rdfs:comment "Une catégorie de projet."@fr ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Kategorie"@de ;
+  rdfs:label "categoria"@pt ;
+  rdfs:label "category"@en ;
+  rdfs:label "categoría"@es ;
+  rdfs:label "catégorie"@fr ;
+  rdfs:label "kategorie"@cs .
+
+<http://usefulinc.com/ns/doap#created> a rdf:Property ;
+  rdfs:comment "Data em que algo foi criado, no formato AAAA-MM-DD. e.g. 2004-04-05"@pt ;
+  rdfs:comment "Date when something was created, in YYYY-MM-DD form. e.g. 2004-04-05"@en ;
+  rdfs:comment "Date à laquelle a été créé quelque chose, au format AAAA-MM-JJ (par ex. 2004-04-05)"@fr ;
+  rdfs:comment "Datum, kdy bylo něco vytvořeno ve formátu RRRR-MM-DD, např. 2004-04-05"@cs ;
+  rdfs:comment "Erstellungsdatum von Irgendwas, angegeben im YYYY-MM-DD Format, z.B. 2004-04-05."@de ;
+  rdfs:comment "Fecha en la que algo fue creado, en formato AAAA-MM-DD. e.g. 2004-04-05"@es ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "creado"@es ;
+  rdfs:label "created"@en ;
+  rdfs:label "criado"@pt ;
+  rdfs:label "créé"@fr ;
+  rdfs:label "erstellt"@de ;
+  rdfs:label "vytvořeno"@cs ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#description> a rdf:Property ;
+  rdfs:comment "Beschreibung eines Projekts als einfacher Text mit der Länge von 2 bis 4 Sätzen."@de ;
+  rdfs:comment "Descripción en texto plano de un proyecto, de 2 a 4 enunciados de longitud."@es ;
+  rdfs:comment "Descrição de um projeto em texto apenas, com 2 a 4 frases de comprimento."@pt ;
+  rdfs:comment "Plain text description of a project, of 2-4 sentences in length."@en ;
+  rdfs:comment "Texte descriptif d'un projet, long de 2 à 4 phrases."@fr ;
+  rdfs:comment "Čistě textový, 2 až 4 věty dlouhý popis projektu."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Beschreibung"@de ;
+  rdfs:label "descripción"@es ;
+  rdfs:label "description"@en ;
+  rdfs:label "description"@fr ;
+  rdfs:label "descrição"@pt ;
+  rdfs:label "popis"@cs ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#developer> a rdf:Property ;
+  rdfs:comment "Desarrollador de software para el proyecto."@es ;
+  rdfs:comment "Developer of software for the project."@en ;
+  rdfs:comment "Développeur pour le projet."@fr ;
+  rdfs:comment "Programador de software para o projeto."@pt ;
+  rdfs:comment "Software-Entwickler für eine Projekt."@de ;
+  rdfs:comment "Vývojář softwaru projektu."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Entwickler"@de ;
+  rdfs:label "desarrollador"@es ;
+  rdfs:label "developer"@en ;
+  rdfs:label "développeur"@fr ;
+  rdfs:label "programador"@pt ;
+  rdfs:label "vývojář"@cs ;
+  rdfs:range foaf:Person .
+
+<http://usefulinc.com/ns/doap#developer-forum> a rdf:Property ;
+  rdfs:comment "A forum or community for developers of this project."@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "developer forum"@en ;
+  rdfs:range <http://rdfs.org/sioc/ns#Container> .
+
+<http://usefulinc.com/ns/doap#documenter> a rdf:Property ;
+  rdfs:comment "Collaborateur à la documentation du projet."@fr ;
+  rdfs:comment "Contribuidor para a documentação do projeto."@pt ;
+  rdfs:comment "Contributor of documentation to the project."@en ;
+  rdfs:comment "Mitarbeiter an der Dokumentation eines Projektes."@de ;
+  rdfs:comment "Proveedor de documentación para el proyecto."@es ;
+  rdfs:comment "Spoluautor dokumentace projektu."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Dokumentator"@de ;
+  rdfs:label "documentador"@pt ;
+  rdfs:label "documenter"@en ;
+  rdfs:label "dokumentarista"@cs ;
+  rdfs:label "escritor de ayuda"@es ;
+  rdfs:label "rédacteur de l'aide"@fr ;
+  rdfs:range foaf:Person .
+
+<http://usefulinc.com/ns/doap#download-mirror> a rdf:Property ;
+  rdfs:comment "Miroir de la page de téléchargement du programme."@fr ;
+  rdfs:comment "Mirror da página web para fazer download."@pt ;
+  rdfs:comment "Mirror de la página web de descarga."@es ;
+  rdfs:comment "Mirror of software download web page."@en ;
+  rdfs:comment "Spiegel der Seite von die Projekt-Software heruntergeladen werden kann."@de ;
+  rdfs:comment "Zrcadlo stránky pro stažení softwaru."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Spiegel der Seite zum Herunterladen"@de ;
+  rdfs:label "download mirror"@en ;
+  rdfs:label "miroir pour le téléchargement"@fr ;
+  rdfs:label "mirror de descarga"@es ;
+  rdfs:label "mirror para download"@pt ;
+  rdfs:label "zrcadlo stránky pro stažení"@cs .
+
+<http://usefulinc.com/ns/doap#download-page> a rdf:Property ;
+  rdfs:comment "Page web à partir de laquelle on peut télécharger le programme."@fr ;
+  rdfs:comment "Página web da qual o projeto de software pode ser descarregado."@pt ;
+  rdfs:comment "Página web de la cuál se puede bajar el software."@es ;
+  rdfs:comment "Web page from which the project software can be downloaded."@en ;
+  rdfs:comment "Web-Seite von der die Projekt-Software heruntergeladen werden kann."@de ;
+  rdfs:comment "Webová stránka, na které lze stáhnout projektový software."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Seite zum Herunterladen"@de ;
+  rdfs:label "download page"@en ;
+  rdfs:label "page de téléchargement"@fr ;
+  rdfs:label "página de descarga"@es ;
+  rdfs:label "página para download"@pt ;
+  rdfs:label "stránka pro stažení"@cs .
+
+<http://usefulinc.com/ns/doap#file-release> a rdf:Property ;
+  rdfs:comment "URI adresa stažení asociované s revizí."@cs ;
+  rdfs:comment "URI of download associated with this release."@en ;
+  rdfs:comment "URI para download associado com a publicação."@pt ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Version> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "file-release"@en ;
+  rdfs:label "publicação do ficheiro"@pt ;
+  rdfs:label "soubor revize"@cs .
+
+<http://usefulinc.com/ns/doap#helper> a rdf:Property ;
+  rdfs:comment "Ajudante ou colaborador do projeto."@pt ;
+  rdfs:comment "Colaborador del proyecto."@es ;
+  rdfs:comment "Collaborateur au projet."@fr ;
+  rdfs:comment "Project contributor."@en ;
+  rdfs:comment "Projekt-Mitarbeiter."@de ;
+  rdfs:comment "Spoluautor projektu."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Helfer"@de ;
+  rdfs:label "colaborador"@es ;
+  rdfs:label "colaborador"@pt ;
+  rdfs:label "collaborateur"@fr ;
+  rdfs:label "helper"@en ;
+  rdfs:label "spoluautor"@cs ;
+  rdfs:range foaf:Person .
+
+<http://usefulinc.com/ns/doap#homepage> a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "El URL de la página de un proyecto,\n\t\tasociada con exactamente un proyecto."@es ;
+  rdfs:comment "L'URL de la page web d'un projet,\n\t\tassociée avec un unique projet."@fr ;
+  rdfs:comment "O URL da página de um projeto,\n\t\tasociada com exactamente um projeto."@pt ;
+  rdfs:comment "URL adresa domovské stránky projektu asociované s právě jedním projektem."@cs ;
+  rdfs:comment "URL der Projekt-Homepage,\n\t\tverbunden mit genau einem Projekt."@de ;
+  rdfs:comment "URL of a project's homepage,\n\t\tassociated with exactly one project."@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Homepage"@de ;
+  rdfs:label "domovská stránka"@cs ;
+  rdfs:label "homepage"@en ;
+  rdfs:label "page web"@fr ;
+  rdfs:label "página web"@es ;
+  rdfs:label "página web"@pt ;
+  rdfs:subPropertyOf foaf:homepage .
+
+<http://usefulinc.com/ns/doap#implements> a rdf:Property ;
+  rdfs:comment "A specification that a project implements. Could be a standard, API or legally defined level of conformance."@en ;
+  rdfs:comment "Uma especificação que um projeto implementa. Pode ser uma padrão, API ou um nível de conformidade definida legalmente."@pt ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Especificações para implementação"@pt ;
+  rdfs:label "Implements specification"@en ;
+  rdfs:range <http://usefulinc.com/ns/doap#Specification> .
+
+<http://usefulinc.com/ns/doap#language> a rdf:Property ;
+  rdfs:comment "Código de idioma ISO do projeto para o qual foi traduzido"@pt ;
+  rdfs:comment "ISO language code a project has been translated into"@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "idioma"@pt ;
+  rdfs:label "language"@en ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#license> a rdf:Property ;
+  rdfs:comment "Die URI einer RDF-Beschreibung einer Lizenz unter der die Software herausgegeben wird. z.B. eine SPDX Referenz"@de ;
+  rdfs:comment "El URI de una descripción RDF de la licencia bajo la cuál se distribuye el software."@es ;
+  rdfs:comment "L'URI d'une description RDF de la licence sous laquelle le programme est distribué."@fr ;
+  rdfs:comment "O URI de uma descrição RDF da licença do software sob a qual é distribuída. Ex.: referência SPDX"@pt ;
+  rdfs:comment "The URI of an RDF description of the license the software is distributed under. E.g. a SPDX reference"@en ;
+  rdfs:comment "URI adresa RDF popisu licence, pod kterou je software distribuován."@cs ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Lizenz"@de ;
+  rdfs:label "licence"@cs ;
+  rdfs:label "licence"@fr ;
+  rdfs:label "licencia"@es ;
+  rdfs:label "license"@en ;
+  rdfs:label "licença"@pt .
+
+<http://usefulinc.com/ns/doap#location> a rdf:Property ;
+  rdfs:comment "Emplacement d'un dépôt."@fr ;
+  rdfs:comment "Localização de um repositório."@pt ;
+  rdfs:comment "Location of a repository."@en ;
+  rdfs:comment "Lokation eines Repositorys."@de ;
+  rdfs:comment "Umístění úložiště."@cs ;
+  rdfs:comment "lugar de un repositorio."@es ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Repository> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Repository Lokation"@de ;
+  rdfs:label "emplacement du dépôt"@fr ;
+  rdfs:label "localização do respositório"@pt ;
+  rdfs:label "lugar del respositorio"@es ;
+  rdfs:label "repository location"@en ;
+  rdfs:label "umístění úložiště"@cs .
+
+<http://usefulinc.com/ns/doap#mailing-list> a rdf:Property ;
+  rdfs:comment "Domovská stránka nebo e–mailová adresa e–mailové diskuse."@cs ;
+  rdfs:comment "Homepage der Mailing Liste oder E-Mail Adresse."@de ;
+  rdfs:comment "Mailing list home page or email address."@en ;
+  rdfs:comment "Page web de la liste de diffusion, ou adresse de courriel."@fr ;
+  rdfs:comment "Página web da lista de distribuição de e-mail ou dos endereços."@pt ;
+  rdfs:comment "Página web de la lista de correo o dirección de correo."@es ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Mailing Liste"@de ;
+  rdfs:label "e–mailová diskuse"@cs ;
+  rdfs:label "lista de correo"@es ;
+  rdfs:label "lista de distribuição de e-mail"@pt ;
+  rdfs:label "liste de diffusion"@fr ;
+  rdfs:label "mailing list"@en ;
+  rdfs:range <http://rdfs.org/sioc/types#MailingList> .
+
+<http://usefulinc.com/ns/doap#maintainer> a rdf:Property ;
+  rdfs:comment "Desarrollador principal de un proyecto, un líder de proyecto."@es ;
+  rdfs:comment "Développeur principal d'un projet, un meneur du projet."@fr ;
+  rdfs:comment "Hauptentwickler eines Projektes, der Projektleiter"@de ;
+  rdfs:comment "Maintainer of a project, a project leader."@en ;
+  rdfs:comment "Programador principal de um projeto, um líder de projeto."@pt ;
+  rdfs:comment "Správce projektu, vedoucí projektu."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Projektverantwortlicher"@de ;
+  rdfs:label "desarrollador principal"@es ;
+  rdfs:label "développeur principal"@fr ;
+  rdfs:label "maintainer"@en ;
+  rdfs:label "programador principal"@pt ;
+  rdfs:label "správce"@cs ;
+  rdfs:range foaf:Person .
+
+<http://usefulinc.com/ns/doap#module> a rdf:Property ;
+  rdfs:comment "Jméno modulu v CVS, BitKeeper nebo Arch úložišti."@cs ;
+  rdfs:comment "Modul-Name eines Subversion, CVS, BitKeeper oder Arch Repositorys."@de ;
+  rdfs:comment "Module name of a Subversion, CVS, BitKeeper or Arch repository."@en ;
+  rdfs:comment "Nom du module d'un dépôt Subversion, CVS, BitKeeper ou Arch."@fr ;
+  rdfs:comment "Nombre del módulo de un repositorio Subversion, CVS, BitKeeper o Arch."@es ;
+  rdfs:comment "Nome do módulo de um repositório Subversion, CVS, BitKeeper ou Arch."@pt ;
+  rdfs:domain [a owl:Class ;
+    owl:unionOf (<http://usefulinc.com/ns/doap#CVSRepository>
+    <http://usefulinc.com/ns/doap#ArchRepository>
+    <http://usefulinc.com/ns/doap#BKRepository>)] ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Modul"@de ;
+  rdfs:label "modul"@cs ;
+  rdfs:label "module"@en ;
+  rdfs:label "module"@fr ;
+  rdfs:label "módulo"@es ;
+  rdfs:label "módulo"@pt .
+
+<http://usefulinc.com/ns/doap#name> a rdf:Property ;
+  rdfs:comment "A name of something."@en ;
+  rdfs:comment "Der Name von Irgendwas"@de ;
+  rdfs:comment "El nombre de algo."@es ;
+  rdfs:comment "Jméno něčeho."@cs ;
+  rdfs:comment "Le nom de quelque chose."@fr ;
+  rdfs:comment "O nome de alguma coisa."@pt ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Name"@de ;
+  rdfs:label "jméno"@cs ;
+  rdfs:label "name"@en ;
+  rdfs:label "nom"@fr ;
+  rdfs:label "nombre"@es ;
+  rdfs:label "nome"@pt ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf rdfs:label .
+
+<http://usefulinc.com/ns/doap#old-homepage> a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "El URL de la antigua página de un proyecto,\n\t\tasociada con exactamente un proyecto."@es ;
+  rdfs:comment "L'URL d'une ancienne page web d'un\n\t\tprojet, associée avec un unique projet."@fr ;
+  rdfs:comment "O URL antigo da página de um projeto,\n\t\tassociada com exactamente um projeto."@pt ;
+  rdfs:comment "URL adresa předešlé domovské stránky projektu asociované s právě jedním projektem."@cs ;
+  rdfs:comment "URL der letzten Projekt-Homepage,\n\t\tverbunden mit genau einem Projekt."@de ;
+  rdfs:comment "URL of a project's past homepage,\n\t\tassociated with exactly one project."@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Alte Homepage"@de ;
+  rdfs:label "ancienne page web"@fr ;
+  rdfs:label "old homepage"@en ;
+  rdfs:label "página web antiga"@pt ;
+  rdfs:label "página web antigua"@es ;
+  rdfs:label "stará domovská stránka"@cs ;
+  rdfs:subPropertyOf foaf:homepage .
+
+<http://usefulinc.com/ns/doap#os> a rdf:Property ;
+  rdfs:comment "Betriebssystem auf dem das Projekt eingesetzt werden kann. Diese Eigenschaft kann ausgelassen werden, wenn das Projekt nicht BS-spezifisch ist."@de ;
+  rdfs:comment "Operating system that a project is limited to.  Omit this property if the project is not OS-specific."@en ;
+  rdfs:comment "Operační systém, na jehož použití je projekt limitován. Vynechejte tuto vlastnost, pokud je projekt nezávislý na operačním systému."@cs ;
+  rdfs:comment "Sistema operativo a que o projeto está limitado. Omita esta propriedade se o projeto não é condicionado pelo SO usado."@en ;
+  rdfs:comment "Sistema opertivo al cuál está limitado el proyecto.  Omita esta propiedad si el proyecto no es específico\n\t\tde un sistema opertaivo en particular."@es ;
+  rdfs:comment "Système d'exploitation auquel est limité le projet. Omettez cette propriété si le\n\t\tprojet n'est pas limité à un système d'exploitation."@fr ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Version> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Betriebssystem"@de ;
+  rdfs:label "operating system"@en ;
+  rdfs:label "operační systém"@cs ;
+  rdfs:label "sistema operativo"@es ;
+  rdfs:label "sistema operativo"@pt ;
+  rdfs:label "système d'exploitation"@fr ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#platform> a rdf:Property ;
+  rdfs:comment "Indicador da plataforma do software (não específico a nenhum SO), ex.: Java, Firefox, ECMA CLR"@pt ;
+  rdfs:comment "Indicator of software platform (non-OS specific), e.g. Java, Firefox, ECMA CLR"@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Version> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "plataforma"@pt ;
+  rdfs:label "platform"@en ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#programming-language> a rdf:Property ;
+  rdfs:comment "Langage de programmation avec lequel un projet est implémenté,\n\t\tou avec lequel il est prévu de l'utiliser."@fr ;
+  rdfs:comment "Lenguaje de programación en el que un proyecto es implementado o con el cuál pretende usarse."@es ;
+  rdfs:comment "Linguagem de programação que o projeto usa ou é para ser utilizada."@pt ;
+  rdfs:comment "Programmiersprache in der ein Projekt implementiert ist oder intendiert wird zu benutzen."@de ;
+  rdfs:comment "Programming language a project is implemented in or intended for use with."@en ;
+  rdfs:comment "Programovací jazyk, ve kterém je projekt implementován nebo pro který je zamýšlen k použití."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Programmiersprache"@de ;
+  rdfs:label "langage de programmation"@fr ;
+  rdfs:label "lenguaje de programación"@es ;
+  rdfs:label "linguagem de programação"@pt ;
+  rdfs:label "programming language"@en ;
+  rdfs:label "programovací jazyk"@cs ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#release> a rdf:Property ;
+  rdfs:comment "A project release."@en ;
+  rdfs:comment "A publicação de um projeto."@pt ;
+  rdfs:comment "Ein Release (Version) eines Projekts."@de ;
+  rdfs:comment "Relase (verze) projektu."@cs ;
+  rdfs:comment "Un release (versión) de un proyecto."@es ;
+  rdfs:comment "Une release (révision) d'un projet."@fr ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Release"@de ;
+  rdfs:label "publicação"@pt ;
+  rdfs:label "release"@cs ;
+  rdfs:label "release"@en ;
+  rdfs:label "release"@es ;
+  rdfs:label "release"@fr ;
+  rdfs:range <http://usefulinc.com/ns/doap#Version> .
+
+<http://usefulinc.com/ns/doap#repository> a rdf:Property ;
+  rdfs:comment "Dépôt du code source."@fr ;
+  rdfs:comment "Quellcode-Versionierungssystem."@de ;
+  rdfs:comment "Repositorio del código fuente."@es ;
+  rdfs:comment "Repositório do código fonte."@pt ;
+  rdfs:comment "Source code repository."@en ;
+  rdfs:comment "Úložiště zdrojových kódů."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Repository"@de ;
+  rdfs:label "dépôt"@fr ;
+  rdfs:label "repositorio"@es ;
+  rdfs:label "repository"@en ;
+  rdfs:label "repositório"@pt ;
+  rdfs:label "úložiště"@cs ;
+  rdfs:range <http://usefulinc.com/ns/doap#Repository> ;
+  owl:inverseOf <http://usefulinc.com/ns/doap#repositoryOf> .
+
+<http://usefulinc.com/ns/doap#repositoryOf> a rdf:Property ;
+  rdfs:comment "The project that uses a repository."@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Repository> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "repository of"@en ;
+  rdfs:range <http://usefulinc.com/ns/doap#Project> ;
+  owl:inverseOf <http://usefulinc.com/ns/doap#repository> .
+
+<http://usefulinc.com/ns/doap#revision> a rdf:Property ;
+  rdfs:comment "Identifiant de révision d'une release du programme."@fr ;
+  rdfs:comment "Identificador do lançamento da revisão do software."@pt ;
+  rdfs:comment "Identifikátor zpřístupněné revize softwaru."@cs ;
+  rdfs:comment "Indentificador de la versión de un release de software."@es ;
+  rdfs:comment "Revision identifier of a software release."@en ;
+  rdfs:comment "Versionsidentifikator eines Software-Releases."@de ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Version> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Version"@de ;
+  rdfs:label "revision"@en ;
+  rdfs:label "revisão"@pt ;
+  rdfs:label "révision"@fr ;
+  rdfs:label "versión"@es ;
+  rdfs:label "verze"@cs ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#screenshots> a rdf:Property ;
+  rdfs:comment "Page web avec des captures d'écran du projet."@fr ;
+  rdfs:comment "Página web com as capturas de ecrãn do projeto."@pt ;
+  rdfs:comment "Página web con capturas de pantalla del proyecto."@es ;
+  rdfs:comment "Web page with screenshots of project."@en ;
+  rdfs:comment "Web-Seite mit Screenshots eines Projektes."@de ;
+  rdfs:comment "Webová stránka projektu se snímky obrazovky."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Screenshots"@de ;
+  rdfs:label "capturas de ecrãs"@pt ;
+  rdfs:label "capturas de pantalla"@es ;
+  rdfs:label "captures d'écran"@fr ;
+  rdfs:label "screenshots"@en ;
+  rdfs:label "snímek obrazovky"@cs .
+
+<http://usefulinc.com/ns/doap#service-endpoint> a rdf:Property ;
+  rdfs:comment "The URI of a web service endpoint where software as a service may be accessed"@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "service endpoint"@en ;
+  rdfs:range rdfs:Resource .
+
+<http://usefulinc.com/ns/doap#shortdesc> a rdf:Property ;
+  rdfs:comment "Descripción corta (8 o 9 palabras) en texto plano de un proyecto."@es ;
+  rdfs:comment "Descrição curta (com 8 ou 9 palavras) de um projeto em texto apenas."@pt ;
+  rdfs:comment "Krátký (8 nebo 9 slov) čistě textový popis projektu."@cs ;
+  rdfs:comment "Kurzbeschreibung (8 oder 9 Wörter) eines Projects als einfacher Text."@de ;
+  rdfs:comment "Short (8 or 9 words) plain text description of a project."@en ;
+  rdfs:comment "Texte descriptif concis (8 ou 9 mots) d'un projet."@fr ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Kurzbeschreibung"@de ;
+  rdfs:label "descripción corta"@es ;
+  rdfs:label "description courte"@fr ;
+  rdfs:label "descrição curta"@pt ;
+  rdfs:label "krátký popis"@cs ;
+  rdfs:label "short description"@en ;
+  rdfs:range rdfs:Literal .
+
+<http://usefulinc.com/ns/doap#support-forum> a rdf:Property ;
+  rdfs:comment "A forum or community that supports this project."@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "supporting forum"@en ;
+  rdfs:range <http://rdfs.org/sioc/ns#Container> .
+
+<http://usefulinc.com/ns/doap#tester> a rdf:Property ;
+  rdfs:comment "A tester or other quality control contributor."@en ;
+  rdfs:comment "Ein Tester oder anderer Mitarbeiter der Qualitätskontrolle."@de ;
+  rdfs:comment "Tester nebo jiný spoluautor kontrolující kvalitu."@cs ;
+  rdfs:comment "Um controlador ou outro contribuidor para o controlo de qualidade."@pt ;
+  rdfs:comment "Un tester u otro proveedor de control de calidad."@es ;
+  rdfs:comment "Un testeur ou un collaborateur au contrôle qualité."@fr ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Tester"@de ;
+  rdfs:label "controlador"@pt ;
+  rdfs:label "tester"@cs ;
+  rdfs:label "tester"@en ;
+  rdfs:label "tester"@es ;
+  rdfs:label "testeur"@fr ;
+  rdfs:range foaf:Person .
+
+<http://usefulinc.com/ns/doap#translator> a rdf:Property ;
+  rdfs:comment "Collaborateur à la traduction du projet."@fr ;
+  rdfs:comment "Contribuidor das traduções para o projeto."@pt ;
+  rdfs:comment "Contributor of translations to the project."@en ;
+  rdfs:comment "Mitarbeiter an den Übersetzungen eines Projektes."@de ;
+  rdfs:comment "Proveedor de traducciones al proyecto."@es ;
+  rdfs:comment "Spoluautor překladu projektu."@cs ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "překladatel"@cs ;
+  rdfs:label "traducteur"@fr ;
+  rdfs:label "traductor"@es ;
+  rdfs:label "tradutor"@pt ;
+  rdfs:label "translator"@en ;
+  rdfs:label "Übersetzer"@de ;
+  rdfs:range foaf:Person .
+
+<http://usefulinc.com/ns/doap#vendor> a rdf:Property ;
+  rdfs:comment "Vendor organization: commercial, free or otherwise"@en ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "vendor"@en ;
+  rdfs:range foaf:Organization .
+
+<http://usefulinc.com/ns/doap#wiki> a rdf:Property ;
+  rdfs:comment "L'URL du Wiki pour la discussion collaborative sur le projet."@fr ;
+  rdfs:comment "URL adresa wiki projektu pro společné diskuse."@cs ;
+  rdfs:comment "URL da Wiki para discussão em grupo do projeto."@pt ;
+  rdfs:comment "URL del Wiki para discusión colaborativa del proyecto."@es ;
+  rdfs:comment "URL of Wiki for collaborative discussion of project."@en ;
+  rdfs:comment "Wiki-URL für die kollaborative Dikussion eines Projektes."@de ;
+  rdfs:domain <http://usefulinc.com/ns/doap#Project> ;
+  rdfs:isDefinedBy <http://usefulinc.com/ns/doap#> ;
+  rdfs:label "Wiki"@de ;
+  rdfs:label "wiki"@cs ;
+  rdfs:label "wiki"@en ;
+  rdfs:label "wiki"@es ;
+  rdfs:label "wiki"@fr ;
+  rdfs:label "wiki"@pt ;
+  rdfs:range <http://rdfs.org/sioc/types#Wiki> .
+
+rdfs:Class a owl:Class .
+
+owl:Thing rdfs:label "Thing" .
+
+geo:SpatialThing a owl:Class ;
+  rdfs:label "Spatial Thing" .
+
+<http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> a owl:AnnotationProperty .
+
+skos:Concept rdfs:label "Concept" .
+
+<http://xmlns.com/foaf/0.1/> a owl:Ontology ;
+  <http://purl.org/dc/elements/1.1/description> "The Friend of a Friend (FOAF) RDF vocabulary, described using W3C RDF Schema and the Web Ontology Language." ;
+  <http://purl.org/dc/elements/1.1/title> "Friend of a Friend (FOAF) vocabulary" .
+
+foaf:Agent a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "An agent (eg. person, group, software or physical artifact)." ;
+  rdfs:label "Agent" ;
+  owl:equivalentClass dc:Agent ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:Document a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "A document." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Document" ;
+  owl:disjointWith foaf:Organization ;
+  owl:disjointWith foaf:Project ;
+  owl:equivalentClass <http://schema.org/CreativeWork> ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:Group a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "A class of Agents." ;
+  rdfs:label "Group" ;
+  rdfs:subClassOf foaf:Agent ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:Image a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "An image." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Image" ;
+  rdfs:subClassOf foaf:Document ;
+  owl:equivalentClass <http://schema.org/ImageObject> ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:LabelProperty a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "A foaf:LabelProperty is any RDF property with texual values that serve as labels." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Label Property" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:OnlineAccount a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "An online account." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Online Account" ;
+  rdfs:subClassOf owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:OnlineChatAccount a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "An online chat account." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Online Chat Account" ;
+  rdfs:subClassOf foaf:OnlineAccount ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:OnlineEcommerceAccount a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "An online e-commerce account." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Online E-commerce Account" ;
+  rdfs:subClassOf foaf:OnlineAccount ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:OnlineGamingAccount a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "An online gaming account." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Online Gaming Account" ;
+  rdfs:subClassOf foaf:OnlineAccount ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:Organization a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "An organization." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Organization" ;
+  rdfs:subClassOf foaf:Agent ;
+  owl:disjointWith foaf:Document ;
+  owl:disjointWith foaf:Person ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:Person a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "A person." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Person" ;
+  rdfs:subClassOf geo:SpatialThing ;
+  rdfs:subClassOf foaf:Agent ;
+  owl:disjointWith foaf:Organization ;
+  owl:disjointWith foaf:Project ;
+  owl:equivalentClass <http://schema.org/Person> ;
+  owl:equivalentClass <http://www.w3.org/2000/10/swap/pim/contact#Person> ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:PersonalProfileDocument a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "A personal profile RDF document." ;
+  rdfs:label "PersonalProfileDocument" ;
+  rdfs:subClassOf foaf:Document ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:Project a rdfs:Class ;
+  a owl:Class ;
+  rdfs:comment "A project (a collective endeavour of some kind)." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Project" ;
+  owl:disjointWith foaf:Document ;
+  owl:disjointWith foaf:Person ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:account a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "Indicates an account held by this agent." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "account" ;
+  rdfs:range foaf:OnlineAccount ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:accountName a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "Indicates the name (identifier) associated with this online account." ;
+  rdfs:domain foaf:OnlineAccount ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "account name" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:accountServiceHomepage a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "Indicates a homepage of the service provide for this online account." ;
+  rdfs:domain foaf:OnlineAccount ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "account service homepage" ;
+  rdfs:range foaf:Document ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:age a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "The age in years of some agent." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "age" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:aimChatID a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "An AIM chat ID" ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "AIM chat ID" ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf foaf:nick ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:based_near a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A location that something is based near, for some broadly human notion of near." ;
+  rdfs:domain geo:SpatialThing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "based near" ;
+  rdfs:range geo:SpatialThing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:birthday a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "The birthday of this Agent, represented in mm-dd string form, eg. '12-31'." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "birthday" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:currentProject a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A current project this person works on." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "current project" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:depiction a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A depiction of some thing." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "depiction" ;
+  rdfs:range foaf:Image ;
+  owl:inverseOf foaf:depicts ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:depicts a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A thing depicted in this representation." ;
+  rdfs:domain foaf:Image ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "depicts" ;
+  rdfs:range owl:Thing ;
+  owl:inverseOf foaf:depiction ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:dnaChecksum a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A checksum for the DNA of some thing. Joke." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "DNA checksum" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:familyName a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "The family name of some person." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "familyName" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:family_name a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "The family name of some person." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "family_name" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:firstName a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "The first name of a person." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "firstName" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:focus a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "The underlying or 'focal' entity associated with some SKOS-described concept." ;
+  rdfs:domain skos:Concept ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "focus" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:fundedBy a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "An organization funding a project or person." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "funded by" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:geekcode a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A textual geekcode for this person, see http://www.geekcode.com/geek.html" ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "geekcode" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:gender a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "The gender of this Agent (typically but not necessarily 'male' or 'female')." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "gender" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:givenName a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "The given name of some person." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Given name" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:givenname a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "The given name of some person." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Given name" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:holdsAccount a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "Indicates an account held by this agent." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "account" ;
+  rdfs:range foaf:OnlineAccount ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:homepage a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A homepage for some thing." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "homepage" ;
+  rdfs:range foaf:Document ;
+  rdfs:subPropertyOf foaf:isPrimaryTopicOf ;
+  rdfs:subPropertyOf foaf:page ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:icqChatID a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "An ICQ chat ID" ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "ICQ chat ID" ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf foaf:nick ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:img a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "An image that can be used to represent some thing (ie. those depictions which are particularly representative of something, eg. one's photo on a homepage)." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "image" ;
+  rdfs:range foaf:Image ;
+  rdfs:subPropertyOf foaf:depiction ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:interest a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A page about a topic of interest to this person." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "interest" ;
+  rdfs:range foaf:Document ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:isPrimaryTopicOf a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "A document that this thing is the primary topic of." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "is primary topic of" ;
+  rdfs:range foaf:Document ;
+  rdfs:subPropertyOf foaf:page ;
+  owl:inverseOf foaf:primaryTopic ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:jabberID a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "A jabber ID for something." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "jabber ID" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:knows a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A person known by this person (indicating some level of reciprocated interaction between the parties)." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "knows" ;
+  rdfs:range foaf:Person ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:lastName a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "The last name of a person." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "lastName" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:logo a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A logo representing some thing." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "logo" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:made a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "Something that was made by this agent." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "made" ;
+  rdfs:range owl:Thing ;
+  owl:inverseOf foaf:maker ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:maker a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "An agent that  made this thing." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "maker" ;
+  rdfs:range foaf:Agent ;
+  owl:equivalentProperty dc:creator ;
+  owl:inverseOf foaf:made ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:mbox a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A  personal mailbox, ie. an Internet mailbox associated with exactly one owner, the first owner of this mailbox. This is a 'static inverse functional property', in that  there is (across time and change) at most one individual that ever has any particular value for foaf:mbox." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "personal mailbox" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:mbox_sha1sum a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "The sha1sum of the URI of an Internet mailbox associated with exactly one owner, the  first owner of the mailbox." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "sha1sum of a personal mailbox URI name" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:member a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "Indicates a member of a Group" ;
+  rdfs:domain foaf:Group ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "member" ;
+  rdfs:range foaf:Agent ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:membershipClass a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:comment "Indicates the class of individuals that are a member of a Group" ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "membershipClass" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:msnChatID a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "An MSN chat ID" ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "MSN chat ID" ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf foaf:nick ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:myersBriggs a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A Myers Briggs (MBTI) personality classification." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "myersBriggs" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:name a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A name for some thing." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "name" ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf rdfs:label ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:nick a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A short informal nickname characterising an agent (includes login identifiers, IRC and other chat nicknames)." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "nickname" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:openid a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "An OpenID for an Agent." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "openid" ;
+  rdfs:range foaf:Document ;
+  rdfs:subPropertyOf foaf:isPrimaryTopicOf ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:page a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A page or document about this thing." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "page" ;
+  rdfs:range foaf:Document ;
+  owl:inverseOf foaf:topic ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:pastProject a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A project this person has previously worked on." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "past project" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:phone a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A phone,  specified using fully qualified tel: URI scheme (refs: http://www.w3.org/Addressing/schemes.html#tel)." ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "phone" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:plan a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A .plan comment, in the tradition of finger and '.plan' files." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "plan" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:primaryTopic a rdf:Property ;
+  a owl:FunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "The primary topic of some page or document." ;
+  rdfs:domain foaf:Document ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "primary topic" ;
+  rdfs:range owl:Thing ;
+  owl:inverseOf foaf:isPrimaryTopicOf ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:publications a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A link to the publications of this person." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "publications" ;
+  rdfs:range foaf:Document ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:schoolHomepage a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A homepage of a school attended by the person." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "schoolHomepage" ;
+  rdfs:range foaf:Document ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:sha1 a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A sha1sum hash, in hex." ;
+  rdfs:domain foaf:Document ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "sha1sum (hex)" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:skypeID a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A Skype ID" ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Skype ID" ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf foaf:nick ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:status a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "A string expressing what the user is happy for the general public (normally) to know about their current activity." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "status" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+foaf:surname a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "The surname of some person." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Surname" ;
+  rdfs:range rdfs:Literal ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:theme a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A theme." ;
+  rdfs:domain owl:Thing ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "theme" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "archaic" .
+
+foaf:thumbnail a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A derived thumbnail image." ;
+  rdfs:domain foaf:Image ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "thumbnail" ;
+  rdfs:range foaf:Image ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:tipjar a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A tipjar document for this agent, describing means for payment and reward." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "tipjar" ;
+  rdfs:range foaf:Document ;
+  rdfs:subPropertyOf foaf:page ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:title a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "Title (Mr, Mrs, Ms, Dr. etc)" ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "title" ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:topic a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A topic of some page or document." ;
+  rdfs:domain foaf:Document ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "topic" ;
+  rdfs:range owl:Thing ;
+  owl:inverseOf foaf:page ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:topic_interest a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A thing of interest to this person." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "topic_interest" ;
+  rdfs:range owl:Thing ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:weblog a rdf:Property ;
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A weblog of some thing (whether person, group, company etc.)." ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "weblog" ;
+  rdfs:range foaf:Document ;
+  rdfs:subPropertyOf foaf:page ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "stable" .
+
+foaf:workInfoHomepage a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A work info homepage of some person; a page about their work for some organization." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "work info homepage" ;
+  rdfs:range foaf:Document ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:workplaceHomepage a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "A workplace homepage of some person; the homepage of an organization they work for." ;
+  rdfs:domain foaf:Person ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "workplace homepage" ;
+  rdfs:range foaf:Document ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+foaf:yahooChatID a rdf:Property ;
+  a owl:DatatypeProperty ;
+  a owl:InverseFunctionalProperty ;
+  rdfs:comment "A Yahoo chat ID" ;
+  rdfs:domain foaf:Agent ;
+  rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+  rdfs:label "Yahoo chat ID" ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf foaf:nick ;
+  <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+<http://xmlns.com/wot/0.1/assurance> a owl:AnnotationProperty .
+
+<http://xmlns.com/wot/0.1/src_assurance> a owl:AnnotationProperty .
+
