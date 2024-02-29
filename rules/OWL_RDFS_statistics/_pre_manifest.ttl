@@ -9,8 +9,8 @@
     ) ;
     mf:entries (
         <loadVocabulary.ttl>
-        <classes/classUsage.ttl>
-        <properties/propertyUsage.ttl>
+        <classes/classInit.ttl>
+        <properties/propertyInit.ttl>
     ) .
 
 <loadVocabulary.ttl> a mf:ManifestEntry ;
@@ -49,9 +49,12 @@
             LOAD <file:///input/xhv.ttl> INTO GRAPH <http://www.w3.org/1999/xhtml/vocab#>
             """
         ]
+        [
+            mf:action """LOAD <file:///input/prefixcc.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#Vocabularies>"""
+        ]
     ) .
 
-<classes/classUsage.ttl> a mf:ManifestEntry ;
+<classes/classInit.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
         <loadVocabulary.ttl>
     ) ;
@@ -69,20 +72,23 @@
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
             INSERT {
-                ?elem voaf:reusedByDatasets 0 .
+                ?elem voaf:reusedByDatasets 0 ;
+                    rdfs:isDefinedBy ?vocab .
             }
             WHERE {
-                { ?elem a owl:Class }
-                UNION
-                { ?elem a rdfs:Class }
+                GRAPH ?vocab {
+                    { ?elem a owl:Class }
+                    UNION { ?elem a rdfs:Class }
+                }
                 FILTER(isIRI(?elem))
             }"""
         ]
     ) .
 
-<properties/propertyUsage.ttl> a mf:ManifestEntry ;
+<properties/propertyInit.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
         <loadVocabulary.ttl>
     ) ;
@@ -98,18 +104,51 @@
             prefix owl: <http://www.w3.org/2002/07/owl#>
             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
             INSERT {
-                ?elem voaf:reusedByDatasets 0 .
+                ?elem voaf:reusedByDatasets 0 ;
+                    rdfs:isDefinedBy ?vocab .
             }
             WHERE {
-                { ?elem a rdf:Property }
-                UNION { ?elem a owl:ObjectProperty }
-                UNION { ?elem a owl:DatatypeProperty }
-                UNION { ?elem a owl:AnnotationProperty }
-                UNION { ?elem a owl:OntologyProperty }
+                GRAPH ?vocab {
+                    { ?elem a rdf:Property }
+                    UNION { ?elem a owl:ObjectProperty }
+                    UNION { ?elem a owl:DatatypeProperty }
+                    UNION { ?elem a owl:AnnotationProperty }
+                    UNION { ?elem a owl:OntologyProperty }
+                }
 
                 FILTER( isIRI(?elem) )
             }"""
+        ]
+    ) .
+
+<vocabularies/vocablaryInit.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+            INSERT {
+                ?elem voaf:reusedByDatasets 0 ;
+                    rdfs:isDefinedBy ?elem .
+            }
+            WHERE {
+                GRAPH kgi:Vocabularies {
+                    ?elem vann:preferredNamespaceUri ?vocabURI .
+                }
+
+                FILTER( isIRI(?elem) )
+            }
+            """
         ]
     ) .

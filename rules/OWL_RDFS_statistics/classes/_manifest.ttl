@@ -46,8 +46,10 @@
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl )
                 kgi: sd:namedGraph $rawEndpointUrl .
 
-                { ?elem a owl:Class }
-                UNION { ?elem a rdfs:Class }
+                GRAPH kgi:Vocabularies {
+                    { ?elem a owl:Class }
+                    UNION { ?elem a rdfs:Class }
+                }
                 FILTER( isIRI(?elem))
                 
                 SERVICE ?editedEndpointUrl {
@@ -115,8 +117,10 @@
                     kgi: sd:namedGraph $rawEndpointUrl .
                 })
                 
-                { ?elem a owl:Class }
-                UNION { ?elem a rdfs:Class }
+                GRAPH kgi:Vocabularies {
+                    { ?elem a owl:Class }
+                    UNION { ?elem a rdfs:Class }
+                }
                 FILTER( isIRI(?elem))
 
                 {

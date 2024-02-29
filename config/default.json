@@ -2,7 +2,7 @@
     "pre": "file:///rules/OWL_RDFS_statistics/_pre_manifest.ttl",
     "manifest": "file:///rules/OWL_RDFS_statistics/_manifest.ttl",
     "post": "file:///rules/OWL_RDFS_statistics/_post_manifest.ttl",
-    "catalog": "file:///catalogs/catalog.auto_refresh.ttl",
+    "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
@@ -10,7 +10,7 @@
     "delayMillisecondsTimeForConccurentQuery": 1000,
     "manifestJSON": "/output/rules.json",
     "logFile": "/output/indegx_debug.log",
-    "outputFile": "/output/Vocabulary_Experiment_28022024.trig",
+    "outputFile": "/output/debug.trig",
     "queryLog": false,
     "resilience": false
 }

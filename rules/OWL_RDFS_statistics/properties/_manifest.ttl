@@ -43,11 +43,13 @@
 
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl)
 
-                { ?elem a rdf:Property }
-                UNION { ?elem a owl:ObjectProperty }
-                UNION { ?elem a owl:DatatypeProperty }
-                UNION { ?elem a owl:AnnotationProperty }
-                UNION { ?elem a owl:OntologyProperty }
+                GRAPH kgi:Vocabularies {
+                    { ?elem a rdf:Property }
+                    UNION { ?elem a owl:ObjectProperty }
+                    UNION { ?elem a owl:DatatypeProperty }
+                    UNION { ?elem a owl:AnnotationProperty }
+                    UNION { ?elem a owl:OntologyProperty }
+                }
                 FILTER( isIRI(?elem))
 
                 SERVICE ?editedEndpointUrl {
@@ -102,11 +104,13 @@
                 })
 
                 FILTER( isIRI(?elem))
-                { ?elem a rdf:Property }
-                UNION { ?elem a owl:ObjectProperty }
-                UNION { ?elem a owl:DatatypeProperty }
-                UNION { ?elem a owl:AnnotationProperty }
-                UNION { ?elem a owl:OntologyProperty }
+                GRAPH kgi:Vocabularies {
+                    { ?elem a rdf:Property }
+                    UNION { ?elem a owl:ObjectProperty }
+                    UNION { ?elem a owl:DatatypeProperty }
+                    UNION { ?elem a owl:AnnotationProperty }
+                    UNION { ?elem a owl:OntologyProperty }
+                }
 
                 {
                     SELECT ?elem (COUNT(*) AS ?nbTriples) WHERE {

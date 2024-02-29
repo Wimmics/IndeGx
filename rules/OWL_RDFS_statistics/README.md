@@ -82,3 +82,31 @@ SELECT DISTINCT ?vocab ?property ?endpointUrl {
     ?occurence voaf:inDataset ?endpointUrl .
 } GROUP BY ?vocab ?property ?endpointUrl
 ```
+
+### Vocabularies and number of endpoints where they are used
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?vocab ?count {
+    ?vocab vann:preferredNamespaceUri ?vocabURI ;
+        voaf:reusedByDatasets ?count.
+} GROUP BY ?vocab ?count
+```
+
+#### List of endpoints where each property is used
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?vocab ?endpointUrl {
+    ?vocab vann:preferredNamespaceUri ?vocabURI ;
+    ?vocab rdfs:isDefinedBy ?vocab ;
+        voaf:usageInDataset ?occurence .
+    ?occurence voaf:inDataset ?endpointUrl .
+} GROUP BY ?vocab ?endpointUrl
+```
