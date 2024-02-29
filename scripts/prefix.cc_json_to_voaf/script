@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+var fs = require('fs')
+
+// Parse arguments
+var args = process.argv.slice(2);
+if (args.length != 1) {
+    console.error('usage: script prefixcc.jsonld');
+    return process.exit(1);
+}
+
+
+// Parse and display the query
+var fileContentString = '', source = args[0] ? fs.createReadStream(args[0]) : process.stdin;
+source.setEncoding('utf8');
+source.on('data', function (data) { fileContentString += data; });
+source.on('end', function () {
+    const fileContentJSON = JSON.parse(fileContentString);
+    let vocabularySet = new Set();
+    let vocabularyPrefixesMap = new Map();
+    Object.keys(fileContentJSON["@context"]).forEach(vocabPrefix => {
+        const vocabURI = fileContentJSON["@context"][vocabPrefix];
+        vocabularySet.add(vocabURI);
+        if(! vocabularyPrefixesMap.has(vocabURI)) {
+            vocabularyPrefixesMap.set(vocabURI, []);
+        }
+        vocabularyPrefixesMap.get(vocabURI).push(vocabPrefix);
+    })
+
+    console.log(vocabularySet.size, "vocabularies")
+
+    const resultFilename = "prefixcc.ttl";
+    let resultFileContent = "";
+    vocabularySet.forEach(vocabularyUri => {
+        resultFileContent += "<" + vocabularyUri + "> <http://purl.org/vocab/vann/preferredNamespaceUri> <" + vocabularyUri + "> . \n" ;
+        vocabularyPrefixesMap.get(vocabularyUri).forEach(vocabularyprefix => {
+            resultFileContent += "<" + vocabularyUri + "> <http://purl.org/vocab/vann/preferredNamespacePrefix> \"" + vocabularyprefix + "\" . \n";
+        })
+    });
+    fs.writeFile(resultFilename, resultFileContent, { flag: "w+" }, (error) => { if(error) { console.error(error) } });
+});
+
