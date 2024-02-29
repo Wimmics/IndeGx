@@ -2497,6 +2497,7 @@
   ns10:endpointURL ns235:sparql .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.bgee.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns236:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns236:sparql .
@@ -5915,7 +5916,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns720:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-02-28T07:36:32.104Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-02-29T07:36:58.445Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
