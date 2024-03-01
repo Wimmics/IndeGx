@@ -11,47 +11,53 @@
         <loadVocabulary.ttl>
         <classes/classInit.ttl>
         <properties/propertyInit.ttl>
+        # <vocabularies/vocablaryInit.ttl>
     ) .
 
 <loadVocabulary.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            mf:action """LOAD <file:///rules/intension/indegx_vocabulary.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#> ;
-            LOAD <file:///input/adms.ttl> INTO GRAPH <http://www.w3.org/ns/adms#> ;
-            LOAD <file:///input/cc.ttl> INTO GRAPH <http://creativecommons.org/ns#> ;
-            LOAD <file:///input/dataid.ttl> INTO GRAPH <http://dataid.dbpedia.org/ns/core#> ;
-            LOAD <file:///input/dbo.ttl> INTO GRAPH <http://dbpedia.org/ontology/> ;
-            LOAD <file:///input/dcat2.ttl> INTO GRAPH <http://www.w3.org/ns/dcat#> ;
-            LOAD <file:///input/dce.ttl> INTO GRAPH <http://purl.org/dc/elements/1.1/> ;
-            LOAD <file:///input/dcterms.ttl> INTO GRAPH <http://purl.org/dc/terms/> ;
-            LOAD <file:///input/dctype.ttl> INTO GRAPH <http://purl.org/dc/dcmitype/> ;
-            LOAD <file:///input/doap.ttl> INTO GRAPH <http://usefulinc.com/ns/doap#> ;
-            LOAD <file:///input/dqv.ttl> INTO GRAPH <http://www.w3.org/ns/dqv#> ;
-            LOAD <file:///input/earl.ttl> INTO GRAPH <http://www.w3.org/ns/earl#> ;
-            LOAD <file:///input/fabio.ttl> INTO GRAPH <http://purl.org/spar/fabio/> ;
-            LOAD <file:///input/foaf.ttl> INTO GRAPH <http://xmlns.com/foaf/0.1/> ;
-            LOAD <file:///input/hydra.ttl> INTO GRAPH <http://www.w3.org/ns/hydra/core#> ;
-            LOAD <file:///input/manifest.ttl> INTO GRAPH <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> ;
-            LOAD <file:///input/mod.ttl> INTO GRAPH <https://w3id.org/mod#> ;
-            LOAD <file:///input/nie.ttl> INTO GRAPH <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> ;
+            mf:action """# LOAD <file:///rules/intension/indegx_vocabulary.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#> ;
+            # LOAD <file:///input/adms.ttl> INTO GRAPH <http://www.w3.org/ns/adms#> ;
+            # LOAD <file:///input/cc.ttl> INTO GRAPH <http://creativecommons.org/ns#> ;
+            # LOAD <file:///input/dataid.ttl> INTO GRAPH <http://dataid.dbpedia.org/ns/core#> ;
+            # LOAD <file:///input/dbo.ttl> INTO GRAPH <http://dbpedia.org/ontology/> ;
+            # LOAD <file:///input/dcat2.ttl> INTO GRAPH <http://www.w3.org/ns/dcat#> ;
+            # LOAD <file:///input/dce.ttl> INTO GRAPH <http://purl.org/dc/elements/1.1/> ;
+            # LOAD <file:///input/dcterms.ttl> INTO GRAPH <http://purl.org/dc/terms/> ;
+            # LOAD <file:///input/dctype.ttl> INTO GRAPH <http://purl.org/dc/dcmitype/> ;
+            # LOAD <file:///input/doap.ttl> INTO GRAPH <http://usefulinc.com/ns/doap#> ;
+            # LOAD <file:///input/dqv.ttl> INTO GRAPH <http://www.w3.org/ns/dqv#> ;
+            # LOAD <file:///input/earl.ttl> INTO GRAPH <http://www.w3.org/ns/earl#> ;
+            # LOAD <file:///input/fabio.ttl> INTO GRAPH <http://purl.org/spar/fabio/> ;
+            # LOAD <file:///input/foaf.ttl> INTO GRAPH <http://xmlns.com/foaf/0.1/> ;
+            # LOAD <file:///input/hydra.ttl> INTO GRAPH <http://www.w3.org/ns/hydra/core#> ;
+            # LOAD <file:///input/manifest.ttl> INTO GRAPH <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> ;
+            # LOAD <file:///input/mod.ttl> INTO GRAPH <https://w3id.org/mod#> ;
+            # LOAD <file:///input/nie.ttl> INTO GRAPH <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> ;
             LOAD <file:///input/owl.ttl> INTO GRAPH <http://www.w3.org/2002/07/owl#> ;
-            LOAD <file:///input/pav.ttl> INTO GRAPH <http://purl.org/pav/> ;
-            LOAD <file:///input/prov.ttl> INTO GRAPH <http://www.w3.org/ns/prov#> ;
+            # LOAD <file:///input/pav.ttl> INTO GRAPH <http://purl.org/pav/> ;
+            # LOAD <file:///input/prov.ttl> INTO GRAPH <http://www.w3.org/ns/prov#> ;
             LOAD <file:///input/rdf.ttl> INTO GRAPH <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ;
             LOAD <file:///input/rdfs.ttl> INTO GRAPH <http://www.w3.org/2000/01/rdf-schema#> ;
-            LOAD <file:///input/schema.ttl> INTO GRAPH <http://schema.org/> ;
-            LOAD <file:///input/sd.ttl> INTO GRAPH <http://www.w3.org/ns/sparql-service-description#> ;
+            # LOAD <file:///input/schema.ttl> INTO GRAPH <http://schema.org/> ;
+            # LOAD <file:///input/sd.ttl> INTO GRAPH <http://www.w3.org/ns/sparql-service-description#> ;
+            LOAD <file:///input/shacl.ttl> INTO GRAPH <http://www.w3.org/ns/shacl#> ;
             LOAD <file:///input/skos.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
-            LOAD <file:///input/sto.ttl> INTO GRAPH <https://w3id.org/i40/sto#> ;
-            LOAD <file:///input/vann.ttl> INTO GRAPH <http://purl.org/vocab/vann/> ;
-            LOAD <file:///input/voaf.ttl> INTO GRAPH <http://purl.org/vocommons/voaf#> ;
-            LOAD <file:///input/void.ttl> INTO GRAPH <http://rdfs.org/ns/void#> ;
-            LOAD <file:///input/xhv.ttl> INTO GRAPH <http://www.w3.org/1999/xhtml/vocab#>
+            LOAD <file:///input/skos-owl1-dl.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
+            LOAD <file:///input/skos-xl.ttl> INTO GRAPH <http://www.w3.org/2004/02/skos/core#> ;
+            LOAD <file:///input/spin.ttl> INTO GRAPH <http://spinrdf.org/spin#> ;
+            # LOAD <file:///input/sto.ttl> INTO GRAPH <https://w3id.org/i40/sto#> ;
+            LOAD <file:///input/swrl.ttl> INTO GRAPH <http://www.w3.org/2003/11/swrl#> ;
+            # LOAD <file:///input/vann.ttl> INTO GRAPH <http://purl.org/vocab/vann/> ;
+            # LOAD <file:///input/voaf.ttl> INTO GRAPH <http://purl.org/vocommons/voaf#> ;
+            # LOAD <file:///input/void.ttl> INTO GRAPH <http://rdfs.org/ns/void#> ;
+            # LOAD <file:///input/xhv.ttl> INTO GRAPH <http://www.w3.org/1999/xhtml/vocab#>
             """
         ]
-        [
-            mf:action """LOAD <file:///input/prefixcc.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#Vocabularies>"""
-        ]
+        # [
+        #     mf:action """LOAD <file:///input/prefixcc.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#Vocabularies>"""
+        # ]
     ) .
 
 <classes/classInit.ttl> a mf:ManifestEntry ;
@@ -124,31 +130,31 @@
         ]
     ) .
 
-<vocabularies/vocablaryInit.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
-            prefix kgi: <http://ns.inria.fr/kg/index#>
-            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-            prefix prov: <http://www.w3.org/ns/prov#>
-            prefix dcat: <http://www.w3.org/ns/dcat#>
-            prefix void: <http://rdfs.org/ns/void#>
-            prefix owl: <http://www.w3.org/2002/07/owl#>
-            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+# <vocabularies/vocablaryInit.ttl> a mf:ManifestEntry ;
+#     kgi:onSuccess (
+#         [
+#             mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+#             prefix kgi: <http://ns.inria.fr/kg/index#>
+#             prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+#             prefix prov: <http://www.w3.org/ns/prov#>
+#             prefix dcat: <http://www.w3.org/ns/dcat#>
+#             prefix void: <http://rdfs.org/ns/void#>
+#             prefix owl: <http://www.w3.org/2002/07/owl#>
+#             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+#             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+#             prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-            INSERT {
-                ?elem voaf:reusedByDatasets 0 ;
-                    rdfs:isDefinedBy ?elem .
-            }
-            WHERE {
-                GRAPH kgi:Vocabularies {
-                    ?elem vann:preferredNamespaceUri ?vocabURI .
-                }
+#             INSERT {
+#                 ?elem voaf:reusedByDatasets 0 ;
+#                     rdfs:isDefinedBy ?elem .
+#             }
+#             WHERE {
+#                 GRAPH kgi:Vocabularies {
+#                     ?elem vann:preferredNamespaceUri ?vocabURI .
+#                 }
 
-                FILTER( isIRI(?elem) )
-            }
-            """
-        ]
-    ) .
+#                 FILTER( isIRI(?elem) )
+#             }
+#             """
+#         ]
+#     ) .

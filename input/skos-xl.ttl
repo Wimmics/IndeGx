@@ -285,3 +285,69 @@ skos:topConceptOf a rdf:Property ;
   owl:inverseOf skos:hasTopConcept ;
   skos:definition "Relates a concept to the concept scheme that it is a top level concept of."@en .
 
+<http://www.w3.org/2008/05/skos-xl> a owl:Ontology ;
+  dc:contributor "Participants in W3C's Semantic Web Deployment Working Group." ;
+  dc:creator "Alistair Miles" ;
+  dc:creator "Sean Bechhofer" ;
+  dc:description "An RDF vocabulary extending SKOS and allowing the description and linking of lexical entities."@en ;
+  dc:title "SKOS XL Vocabulary"@en ;
+  rdfs:seeAlso <http://www.w3.org/2008/05/skos> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> .
+
+<http://www.w3.org/2008/05/skos-xl#Label> a owl:Class ;
+  rdfs:isDefinedBy <http://www.w3.org/2008/05/skos-xl> ;
+  rdfs:label "Label"@en ;
+  rdfs:subClassOf [a owl:Restriction ;
+    owl:cardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onProperty <http://www.w3.org/2008/05/skos-xl#literalForm>] ;
+  owl:disjointWith skos:Collection ;
+  owl:disjointWith skos:Concept ;
+  owl:disjointWith skos:ConceptScheme ;
+  skos:definition "A special class of lexical entities."@en .
+
+<http://www.w3.org/2008/05/skos-xl#altLabel> a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "If C skosxl:altLabel L and L skosxl:literalForm V, then X skos:altLabel V."@en ;
+  rdfs:isDefinedBy <http://www.w3.org/2008/05/skos-xl> ;
+  rdfs:label "alternative label"@en ;
+  rdfs:range <http://www.w3.org/2008/05/skos-xl#Label> ;
+  rdfs:seeAlso skos:altLabel ;
+  skos:definition "The property skosxl:altLabel is used to associate an skosxl:Label with a skos:Concept. The property is analogous to skos:altLabel."@en .
+
+<http://www.w3.org/2008/05/skos-xl#hiddenLabel> a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "If C skosxl:hiddenLabel L and L skosxl:literalForm V, then C skos:hiddenLabel V."@en ;
+  rdfs:isDefinedBy <http://www.w3.org/2008/05/skos-xl> ;
+  rdfs:label "hidden label"@en ;
+  rdfs:range <http://www.w3.org/2008/05/skos-xl#Label> ;
+  rdfs:seeAlso skos:hiddenLabel ;
+  skos:definition "The property skosxl:hiddenLabel is used to associate an skosxl:Label with a skos:Concept. The property is analogous to skos:hiddenLabel."@en .
+
+<http://www.w3.org/2008/05/skos-xl#labelRelation> a rdf:Property ;
+  a owl:ObjectProperty ;
+  a owl:SymmetricProperty ;
+  rdfs:domain <http://www.w3.org/2008/05/skos-xl#Label> ;
+  rdfs:isDefinedBy <http://www.w3.org/2008/05/skos-xl> ;
+  rdfs:label "label relation"@en ;
+  rdfs:range <http://www.w3.org/2008/05/skos-xl#Label> ;
+  skos:definition "The property skosxl:labelRelation is used for representing binary ('direct') relations between instances of the class skosxl:Label."@en ;
+  skos:scopeNote "skosxl:labelRelation is not intended to be used directly, but rather as the basis for a design pattern which can be refined for more specific labeling scenarios."@en .
+
+<http://www.w3.org/2008/05/skos-xl#literalForm> a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:comment "If two instances of the class skosxl:Label have the same literal form, they are not necessarily the same resource."@en ;
+  rdfs:comment "The range of skosxl:literalForm is the class of RDF plain literals."@en ;
+  rdfs:domain <http://www.w3.org/2008/05/skos-xl#Label> ;
+  rdfs:isDefinedBy <http://www.w3.org/2008/05/skos-xl> ;
+  rdfs:label "literal form"@en ;
+  skos:definition "The property skosxl:literalForm is used to give the literal form of an skosxl:Label."@en .
+
+<http://www.w3.org/2008/05/skos-xl#prefLabel> a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:comment "If C skosxl:prefLabel L and L skosxl:literalForm V, then X skos:prefLabel V."@en ;
+  rdfs:isDefinedBy <http://www.w3.org/2008/05/skos-xl> ;
+  rdfs:label "preferred label"@en ;
+  rdfs:range <http://www.w3.org/2008/05/skos-xl#Label> ;
+  rdfs:seeAlso skos:prefLabel ;
+  skos:definition "The property skosxl:prefLabel is used to associate an skosxl:Label with a skos:Concept. The property is analogous to skos:prefLabel."@en .
+

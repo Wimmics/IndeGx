@@ -2,17 +2,10 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dc: <http://purl.org/dc/terms/> .
 
 <http://www.w3.org/2004/02/skos/core> a owl:Ontology ;
-  dc:contributor "Dave Beckett" ;
-  dc:contributor "Nikki Rogers" ;
-  dc:contributor "Participants in W3C's Semantic Web Deployment Working Group." ;
-  dc:creator "Alistair Miles" ;
-  dc:creator "Sean Bechhofer" ;
-  dc:description "An RDF vocabulary for describing the basic structure and content of concept schemes such as thesauri, classification schemes, subject heading lists, taxonomies, 'folksonomies', other types of controlled vocabulary, and also concept schemes embedded in glossaries and terminologies."@en ;
-  dc:title "SKOS Vocabulary"@en ;
-  rdfs:seeAlso <http://www.w3.org/TR/skos-reference/> .
+  rdfs:seeAlso <http://www.w3.org/TR/skos-reference/> ;
+  owl:versionIRI <http://www.w3.org/TR/skos-reference/skos-owl1-dl.rdf> .
 
 skos:Collection a owl:Class ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
@@ -48,7 +41,6 @@ skos:altLabel a rdf:Property ;
   rdfs:comment "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise disjoint properties."@en ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "alternative label"@en ;
-  rdfs:subPropertyOf rdfs:label ;
   skos:definition "An alternative lexical label for a resource."@en ;
   skos:example "Acronyms, abbreviations, spelling variants, and irregular plural/singular forms may be included among the alternative labels for a concept. Mis-spelled terms are normally included as hidden labels (see skos:hiddenLabel)."@en .
 
@@ -85,7 +77,6 @@ skos:changeNote a rdf:Property ;
   a owl:AnnotationProperty ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "change note"@en ;
-  rdfs:subPropertyOf skos:note ;
   skos:definition "A note about a modification to a concept."@en .
 
 skos:closeMatch a rdf:Property ;
@@ -100,14 +91,12 @@ skos:definition a rdf:Property ;
   a owl:AnnotationProperty ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "definition"@en ;
-  rdfs:subPropertyOf skos:note ;
   skos:definition "A statement or formal explanation of the meaning of a concept."@en .
 
 skos:editorialNote a rdf:Property ;
   a owl:AnnotationProperty ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "editorial note"@en ;
-  rdfs:subPropertyOf skos:note ;
   skos:definition "A note for an editor, translator or maintainer of the vocabulary."@en .
 
 skos:exactMatch a rdf:Property ;
@@ -124,7 +113,6 @@ skos:example a rdf:Property ;
   a owl:AnnotationProperty ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "example"@en ;
-  rdfs:subPropertyOf skos:note ;
   skos:definition "An example of the use of a concept."@en .
 
 skos:hasTopConcept a rdf:Property ;
@@ -142,14 +130,12 @@ skos:hiddenLabel a rdf:Property ;
   rdfs:comment "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise disjoint properties."@en ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "hidden label"@en ;
-  rdfs:subPropertyOf rdfs:label ;
   skos:definition "A lexical label for a resource that should be hidden when generating visual displays of the resource, but should still be accessible to free text search operations."@en .
 
 skos:historyNote a rdf:Property ;
   a owl:AnnotationProperty ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "history note"@en ;
-  rdfs:subPropertyOf skos:note ;
   skos:definition "A note about the past state/use/meaning of a concept."@en .
 
 skos:inScheme a rdf:Property ;
@@ -185,7 +171,6 @@ skos:memberList a rdf:Property ;
   rdfs:domain skos:OrderedCollection ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "has member list"@en ;
-  rdfs:range rdf:List ;
   skos:definition "Relates an ordered collection to the RDF list containing its members."@en .
 
 skos:narrowMatch a rdf:Property ;
@@ -238,7 +223,6 @@ skos:prefLabel a rdf:Property ;
   rdfs:comment "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise\n      disjoint properties."@en ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "preferred label"@en ;
-  rdfs:subPropertyOf rdfs:label ;
   skos:definition "The preferred lexical label for a resource, in a given language."@en .
 
 skos:related a rdf:Property ;
@@ -263,7 +247,6 @@ skos:scopeNote a rdf:Property ;
   a owl:AnnotationProperty ;
   rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
   rdfs:label "scope note"@en ;
-  rdfs:subPropertyOf skos:note ;
   skos:definition "A note that helps to clarify the meaning and/or the use of a concept."@en .
 
 skos:semanticRelation a rdf:Property ;

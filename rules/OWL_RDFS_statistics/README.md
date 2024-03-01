@@ -22,12 +22,23 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-SELECT DISTINCT ?vocab ?class ?count {
-    { ?class a owl:Class }
-    UNION { ?class a rdfs:Class }
+SELECT DISTINCT ?vocab ?class (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+    {
+        { ?class a owl:Class }
+        UNION { ?class a rdfs:Class }
+    } UNION {
+        GRAPH ?graph {
+            { ?class a owl:Class }
+            UNION { ?class a rdfs:Class }
+        }
+    }
+  OPTIONAL {
     ?class rdfs:isDefinedBy ?vocab ;
-        voaf:reusedByDatasets ?count .
-} GROUP BY ?vocab ?class ?count
+        voaf:usageInDataset ?occurence .
+    ?occurence voaf:inDataset ?endpointUrl .
+  }
+  FILTER(isIRI(?class))
+} GROUP BY ?vocab ?class
 ```
 
 #### List of endpoints where each class is used
@@ -38,8 +49,15 @@ PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?vocab ?class ?endpointUrl {
-    { ?class a owl:Class }
-    UNION { ?class a rdfs:Class }
+    {
+        { ?class a owl:Class }
+        UNION { ?class a rdfs:Class }
+    } UNION {
+        GRAPH ?graph {
+            { ?class a owl:Class }
+            UNION { ?class a rdfs:Class }
+        }
+    }
     ?class rdfs:isDefinedBy ?vocab ;
         voaf:usageInDataset ?occurence .
     ?occurence voaf:inDataset ?endpointUrl .
@@ -54,14 +72,14 @@ PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?vocab ?property ?count {
-  { ?property a rdf:Property }
-  UNION { ?property a owl:ObjectProperty }
-  UNION { ?property a owl:DatatypeProperty }
-  UNION { ?property a owl:AnnotationProperty }
-  UNION{ ?property a owl:OntologyProperty }
-    ?property voaf:reusedByDatasets ?count ;
-    	rdfs:isDefinedBy ?vocab .
-} GROUP BY ?vocab ?property ?count
+    { ?property a rdf:Property }
+    UNION { ?property a owl:ObjectProperty }
+    UNION { ?property a owl:DatatypeProperty }
+    UNION { ?property a owl:AnnotationProperty }
+    UNION{ ?property a owl:OntologyProperty }
+    ?property rdfs:isDefinedBy ?vocab ;
+        voaf:reusedByDatasets ?count .
+} GROUP BY ?property ?count
 ```
 
 #### List of endpoints where each property is used
@@ -71,21 +89,35 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-SELECT DISTINCT ?vocab ?property ?endpointUrl {
-    { ?property a rdf:Property }
-    UNION { ?property a owl:ObjectProperty }
-    UNION { ?property a owl:DatatypeProperty }
-    UNION { ?property a owl:AnnotationProperty }
-    UNION{ ?property a owl:OntologyProperty }
-    ?property rdfs:isDefinedBy ?vocab ;
-        voaf:usageInDataset ?occurence .
-    ?occurence voaf:inDataset ?endpointUrl .
-} GROUP BY ?vocab ?property ?endpointUrl
+SELECT DISTINCT ?vocab ?property (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+    {
+        { ?property a rdf:Property }
+        UNION { ?property a owl:ObjectProperty }
+        UNION { ?property a owl:DatatypeProperty }
+        UNION { ?property a owl:AnnotationProperty }
+        UNION{ ?property a owl:OntologyProperty }
+    } UNION {
+        GRAPH ?graph {
+            { ?property a rdf:Property }
+            UNION { ?property a owl:ObjectProperty }
+            UNION { ?property a owl:DatatypeProperty }
+            UNION { ?property a owl:AnnotationProperty }
+            UNION{ ?property a owl:OntologyProperty }
+        }
+    }
+    OPTIONAL {
+        ?property rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
+    FILTER(isIRI(?property))
+} GROUP BY ?vocab ?property
 ```
 
 ### Vocabularies and number of endpoints where they are used
 
 ```sparql
+PREFIX vann: <http://purl.org/vocab/vann/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -99,6 +131,7 @@ SELECT DISTINCT ?vocab ?count {
 #### List of endpoints where each property is used
 
 ```sparql
+PREFIX vann: <http://purl.org/vocab/vann/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

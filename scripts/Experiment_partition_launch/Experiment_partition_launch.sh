@@ -27,9 +27,9 @@ cd ../..
 for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     echo "Treating $catalog"
     partition_config='{
-    "pre": "file:///rules/Dataset_summary/_pre_manifest.ttl",
-    "manifest": "file:///rules/Dataset_summary/_manifest.ttl",
-    "post": "file:///rules/Dataset_summary/_post_manifest.ttl",
+    "pre": "file:///rules/OWL_RDFS_statistics/_pre_manifest.ttl",
+    "manifest": "file:///rules/OWL_RDFS_statistics/_manifest.ttl",
+    "post": "file:///rules/OWL_RDFS_statistics/_post_manifest.ttl",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
