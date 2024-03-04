@@ -39,13 +39,38 @@
 
 ## Type of datasets according to the elements in their descriptions
 
-kgi:AccountableDataset rdf:type owl:Class ;
-    rdfs:label "Accountable dataset"@en ;
+kgi:PartiallyAccountable rdf:type owl:Class ;
+    rdfs:label "Partially accountable dataset"@en ;
     rdfs:subClassOf dcat:Dataset ,
         schema:Dataset ,
         dcmitype:Dataset , 
         void:Dataset ,
         sd:Dataset ;
+    owl:equivalentClass 
+    # Straightforward definition of partially accountable dataset according to its 3 dimensions
+    [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            kgi:DatasetWithCreationAccountability
+            kgi:DatasetWithMaintenanceAccountability
+            kgi:DatasetWithUsageAccountability
+        )
+    ] ,
+    # Definition of partially accountable dataset according to the 5 questions
+    [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            kgi:DatasetWithWhoQuestionAccountability
+            kgi:DatasetWithWhenQuestionAccountability
+            kgi:DatasetWithWhereQuestionAccountability
+            kgi:DatasetWithHowQuestionAccountability
+            kgi:DatasetWithWhatQuestionAccountability
+        )
+    ] .
+
+kgi:AccountableDataset rdf:type owl:Class ;
+    rdfs:label "Accountable dataset"@en ;
+    rdfs:subClassOf kgi:PartiallyAccountable ;
     owl:equivalentClass 
     # Straightforward definition of accountable dataset according to its 3 dimensions
     [
