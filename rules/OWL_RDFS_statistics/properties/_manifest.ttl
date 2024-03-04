@@ -43,7 +43,7 @@
 
                 BIND( CONCAT( STR($rawEndpointUrl), "?limit=100&method=get" ) AS ?editedEndpointUrl)
 
-                GRAPH kgi:Vocabularies {
+                GRAPH ?vocabGraph {
                     { ?elem a rdf:Property }
                     UNION { ?elem a owl:ObjectProperty }
                     UNION { ?elem a owl:DatatypeProperty }
@@ -104,7 +104,7 @@
                 })
 
                 FILTER( isIRI(?elem))
-                GRAPH kgi:Vocabularies {
+                GRAPH ?vocabGraph {
                     { ?elem a rdf:Property }
                     UNION { ?elem a owl:ObjectProperty }
                     UNION { ?elem a owl:DatatypeProperty }
