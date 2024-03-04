@@ -65,7 +65,7 @@ source.on('end', function () {
             console.log("Prefix", prefix, "is used by", prefixVocabulariesMap.get(prefix).size, "vocabularies");
         }
     })
-    console.log(prefixDuplicates.size, "prefix duplicates");
+    console.log(prefixDuplicates.size, "prefix with overlap");
 
     // Writing the result
     const resultFilename = "prefixcc.ttl";
