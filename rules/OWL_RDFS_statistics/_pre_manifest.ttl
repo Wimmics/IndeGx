@@ -11,7 +11,7 @@
         <loadVocabulary.ttl>
         <classes/classInit.ttl>
         <properties/propertyInit.ttl>
-        # <vocabularies/vocablaryInit.ttl>
+        <vocabularies/vocabularyInit.ttl>
     ) .
 
 <loadVocabulary.ttl> a mf:ManifestEntry ;
@@ -55,9 +55,9 @@
             # LOAD <file:///input/xhv.ttl> INTO GRAPH <http://www.w3.org/1999/xhtml/vocab#>
             """
         ]
-        # [
-        #     mf:action """LOAD <file:///input/prefixcc.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#Vocabularies>"""
-        # ]
+        [
+            mf:action """LOAD <file:///input/prefixcc.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#Vocabularies>"""
+        ]
     ) .
 
 <classes/classInit.ttl> a mf:ManifestEntry ;
@@ -130,31 +130,31 @@
         ]
     ) .
 
-# <vocabularies/vocablaryInit.ttl> a mf:ManifestEntry ;
-#     kgi:onSuccess (
-#         [
-#             mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
-#             prefix kgi: <http://ns.inria.fr/kg/index#>
-#             prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-#             prefix prov: <http://www.w3.org/ns/prov#>
-#             prefix dcat: <http://www.w3.org/ns/dcat#>
-#             prefix void: <http://rdfs.org/ns/void#>
-#             prefix owl: <http://www.w3.org/2002/07/owl#>
-#             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-#             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-#             prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+<vocabularies/vocabularyInit.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-#             INSERT {
-#                 ?elem voaf:reusedByDatasets 0 ;
-#                     rdfs:isDefinedBy ?elem .
-#             }
-#             WHERE {
-#                 GRAPH kgi:Vocabularies {
-#                     ?elem vann:preferredNamespaceUri ?vocabURI .
-#                 }
+            INSERT {
+                ?elem voaf:reusedByDatasets 0 ;
+                    rdfs:isDefinedBy ?elem .
+            }
+            WHERE {
+                GRAPH kgi:Vocabularies {
+                    ?elem vann:preferredNamespaceUri ?vocabURI .
+                }
 
-#                 FILTER( isIRI(?elem) )
-#             }
-#             """
-#         ]
-#     ) .
+                FILTER( isIRI(?elem) )
+            }
+            """
+        ]
+    ) .

@@ -29,7 +29,6 @@
                 ?elem voaf:reusedByDatasets ?occurences .
             }
             WHERE {
-                
                 {
                     SELECT ?elem (COUNT(DISTINCT ?endpointUrl) AS ?occurences) {
                         ?elem voaf:usageInDataset ?elemDatasetOccurence .
@@ -60,8 +59,10 @@
                 ?elem voaf:reusedByDatasets ?occurencesLow .
             } 
             WHERE {
-                { ?elem a owl:Class }
-                UNION { ?elem a rdfs:Class }
+                GRAPH ?vocabGraph {
+                    { ?elem a owl:Class }
+                    UNION { ?elem a rdfs:Class }
+                }
                 ?elem voaf:reusedByDatasets ?occurencesLow ;
                     voaf:reusedByDatasets ?occurencesHigh .
                 FILTER( ?occurencesLow < ?occurencesHigh )
@@ -83,8 +84,10 @@
                 ?elemDatasetOccurence voaf:occurrences ?occurencesLow .
             } 
             WHERE {
-                { ?elem a owl:Class }
-                UNION { ?elem a rdfs:Class }
+                GRAPH ?vocabGraph {
+                    { ?elem a owl:Class }
+                    UNION { ?elem a rdfs:Class }
+                }
                 FILTER( isIRI(?elem))
 
                 ?elem voaf:usageInDataset ?elemDatasetOccurence .
@@ -110,11 +113,13 @@
                 ?elemDatasetOccurence voaf:occurrences ?occurencesLow .
             } 
             WHERE {
-                { ?elem a rdf:Property }
-                UNION { ?elem a owl:ObjectProperty }
-                UNION { ?elem a owl:DatatypeProperty }
-                UNION { ?elem a owl:AnnotationProperty }
-                UNION{ ?elem a owl:OntologyProperty }
+                GRAPH ?vocabGraph {
+                    { ?elem a rdf:Property }
+                    UNION { ?elem a owl:ObjectProperty }
+                    UNION { ?elem a owl:DatatypeProperty }
+                    UNION { ?elem a owl:AnnotationProperty }
+                    UNION{ ?elem a owl:OntologyProperty }
+                }
                 FILTER( isIRI(?elem) )
 
                 ?elem voaf:usageInDataset ?elemDatasetOccurence .
@@ -138,12 +143,14 @@
             DELETE {
                 ?elem voaf:reusedByDatasets ?occurencesLow .
             } 
-            WHERE {                
-                { ?elem a rdf:Property }
-                UNION { ?elem a owl:ObjectProperty }
-                UNION { ?elem a owl:DatatypeProperty }
-                UNION { ?elem a owl:AnnotationProperty }
-                UNION{ ?elem a owl:OntologyProperty }
+            WHERE {     
+                GRAPH ?vocabGraph {           
+                    { ?elem a rdf:Property }
+                    UNION { ?elem a owl:ObjectProperty }
+                    UNION { ?elem a owl:DatatypeProperty }
+                    UNION { ?elem a owl:AnnotationProperty }
+                    UNION{ ?elem a owl:OntologyProperty }
+                }
                 FILTER( isIRI(?elem) )
                 
                 ?elem voaf:reusedByDatasets ?occurencesLow ;
