@@ -58,9 +58,11 @@ SELECT DISTINCT ?vocab ?class ?endpointUrl {
             UNION { ?class a rdfs:Class }
         }
     }
-    ?class rdfs:isDefinedBy ?vocab ;
-        voaf:usageInDataset ?occurence .
-    ?occurence voaf:inDataset ?endpointUrl .
+    OPTIONAL {
+        ?class rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
 } GROUP BY ?vocab ?class ?endpointUrl
 ```
 
@@ -71,14 +73,27 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-SELECT DISTINCT ?vocab ?property ?count {
-    { ?property a rdf:Property }
-    UNION { ?property a owl:ObjectProperty }
-    UNION { ?property a owl:DatatypeProperty }
-    UNION { ?property a owl:AnnotationProperty }
-    UNION{ ?property a owl:OntologyProperty }
-    ?property rdfs:isDefinedBy ?vocab ;
-        voaf:reusedByDatasets ?count .
+SELECT DISTINCT ?vocab ?property (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+    {
+        { ?property a rdf:Property }
+        UNION { ?property a owl:ObjectProperty }
+        UNION { ?property a owl:DatatypeProperty }
+        UNION { ?property a owl:AnnotationProperty }
+        UNION{ ?property a owl:OntologyProperty }
+    } UNION {
+        GRAPH ?vocab {
+            { ?property a rdf:Property }
+            UNION { ?property a owl:ObjectProperty }
+            UNION { ?property a owl:DatatypeProperty }
+            UNION { ?property a owl:AnnotationProperty }
+            UNION{ ?property a owl:OntologyProperty }
+        }
+    }
+    OPTIONAL {
+        ?property rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
 } GROUP BY ?property ?count
 ```
 
