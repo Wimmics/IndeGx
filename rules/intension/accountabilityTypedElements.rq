@@ -1,0 +1,11 @@
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?dataset {
+    {
+        ?dataset a kgi:PartiallyAccountable
+    } UNION {
+        ?dataset a ?class .
+        ?class rdfs:isDefinedBy kgi: .
+    }
+}

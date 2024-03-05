@@ -41,6 +41,7 @@
 
 kgi:PartiallyAccountable rdf:type owl:Class ;
     rdfs:label "Partially accountable dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     rdfs:subClassOf dcat:Dataset ,
         schema:Dataset ,
         dcmitype:Dataset , 
@@ -70,6 +71,7 @@ kgi:PartiallyAccountable rdf:type owl:Class ;
 
 kgi:AccountableDataset rdf:type owl:Class ;
     rdfs:label "Accountable dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     rdfs:subClassOf kgi:PartiallyAccountable ;
     owl:equivalentClass 
     # Straightforward definition of accountable dataset according to its 3 dimensions
@@ -95,6 +97,7 @@ kgi:AccountableDataset rdf:type owl:Class ;
 
 kgi:DatasetWithCreationAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with creation accountability"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -107,6 +110,7 @@ kgi:DatasetWithCreationAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithMaintenanceAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with maintenance accountability"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -119,6 +123,7 @@ kgi:DatasetWithMaintenanceAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithUsageAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with usage accountability"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -132,6 +137,7 @@ kgi:DatasetWithUsageAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithWhoQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with who question accountable"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -143,6 +149,7 @@ kgi:DatasetWithWhoQuestionAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithWhenQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with when question accountable"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -154,6 +161,7 @@ kgi:DatasetWithWhenQuestionAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithWhereQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with where question accountable"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -165,6 +173,7 @@ kgi:DatasetWithWhereQuestionAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithHowQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with how question accountable"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -176,6 +185,7 @@ kgi:DatasetWithHowQuestionAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithWhatQuestionAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with what question accountable"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -185,6 +195,7 @@ kgi:DatasetWithWhatQuestionAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithCreationWhoAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with creation accountability - Who ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -195,10 +206,12 @@ kgi:DatasetWithCreationWhoAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithCreationWhenAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with creation accountability - When ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithCreationDateAnnotation .
 
 kgi:DatasetWithCreationWhereAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with creation accountability - Where ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:unionOf (
@@ -209,14 +222,17 @@ kgi:DatasetWithCreationWhereAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithCreationHowAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with creation accountability - How ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithCreationMethodologyAccountability .
 
 kgi:DatasetWithMaintenanceWhoAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with maintenance accountability - Who ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithMaintenanceContributorAccountability .
 
 kgi:DatasetWithMaintenanceWhenAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with maintenance accountability - When ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -228,14 +244,17 @@ kgi:DatasetWithMaintenanceWhenAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithMaintenanceWhereAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with maintenance accountability - Where ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithMaintenanceLocationAccountability .
 
 kgi:DatasetWithMaintenanceHowAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with maintenance accountability - How ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithMaintenanceMethodologyAccountability .
 
 kgi:DatasetWithUsageWhoAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with usage accountability - Who ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -246,6 +265,7 @@ kgi:DatasetWithUsageWhoAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithUsageWhenAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with usage accountability - When ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -257,6 +277,7 @@ kgi:DatasetWithUsageWhenAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithUsageWhereAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with usage accountability - Where ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -267,6 +288,7 @@ kgi:DatasetWithUsageWhereAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithUsageHowAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with usage accountability - How ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -277,6 +299,7 @@ kgi:DatasetWithUsageHowAccountability rdf:type owl:Class ;
 
 kgi:DatasetWithUsageWhatAccountability rdf:type owl:Class ;
     rdfs:label "Dataset with usage accountability - What ?"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -288,15 +311,19 @@ kgi:DatasetWithUsageWhatAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithCreationSourceAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithSourceAnnotation .
 
 kgi:DatasetWithCreationLocationAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithCreationLocationAnnotation .
 
 kgi:DatasetWithCreationMethodologyAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithCreationMethodAnnotation .
 
 kgi:DatasetWithMaintenanceContributorAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -306,15 +333,19 @@ kgi:DatasetWithMaintenanceContributorAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithMaintenanceLocationAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithCreationLocationAnnotation .
 
 kgi:DatasetWithMaintenanceMethodologyAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithCreationMethodAnnotation .
 
 kgi:DatasetWithPublisherAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithPublisherAnnotation .
 
 kgi:DatasetWithUsageAgentRightsAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -324,6 +355,7 @@ kgi:DatasetWithUsageAgentRightsAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithUsageRightsAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:unionOf (
@@ -333,18 +365,23 @@ kgi:DatasetWithUsageRightsAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithUsageAudienceAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithAudienceAnnotation .
 
 kgi:DatasetWithStartAvailabilityAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithAvailabilityStartAnnotation .
 
 kgi:DatasetWithEndAvailabilityAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithAvailabilityEndAnnotation .
 
 kgi:DatasetWithEndValidityAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithValidityEndAnnotation .
 
 kgi:DatasetWithUsageLocationAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -354,6 +391,7 @@ kgi:DatasetWithUsageLocationAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithUsageURLAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -363,9 +401,11 @@ kgi:DatasetWithUsageURLAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithContactWebpageAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithWebpageAnnotation .
 
 kgi:DatasetWithEndpointAddressAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:unionOf (
@@ -375,10 +415,12 @@ kgi:DatasetWithEndpointAddressAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithUsageRequirementsAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithRequirementAnnotation .
 
 
 kgi:DatasetWithUsageAccessRightsAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -389,15 +431,19 @@ kgi:DatasetWithUsageAccessRightsAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithLicenseAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithLicenseAnnotation .
 
 kgi:DatasetWithReuseAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithReuseAnnotation .
 
 kgi:DatasetWithAccessMeansAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithAccessMeansAnnotations .
 
 kgi:DatasetWithStatsAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -409,9 +455,11 @@ kgi:DatasetWithStatsAccountability rdf:type owl:Class ;
 
 
 kgi:DatasetWithTriplesStatsAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithTriplesCountAnnotation .
 
 kgi:DatasetWithEntitiesPropertyClassesStatsAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -422,21 +470,26 @@ kgi:DatasetWithEntitiesPropertyClassesStatsAccountability rdf:type owl:Class ;
     ] .
 
 kgi:DatasetWithSerializationAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithFormatAnnotation .
 
 kgi:DatasetWithExampleAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithExampleAnnotation .
 
 kgi:DatasetWithDescriptionAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithDescriptionAnnotation .
 
 kgi:DatasetWithQualityAccountability rdf:type owl:Class ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:DatasetWithQualityAnnotation .
 
 ## Annotation classes of the lowest level (without direct correspondance with concepts from Accountability)
 
 kgi:DatasetWithDescriptionAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the description of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg dcterms:description ?desc .
     owl:equivalentClass [ 
         rdf:type owl:Class ;
@@ -471,6 +524,7 @@ kgi:DatasetWithDescriptionAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithAuthorAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the author of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg dcterms:creator ?creator . }
     # UNION { ?kg pav:authoredBy ?creator . }
     owl:equivalentClass [
@@ -516,6 +570,7 @@ kgi:DatasetWithAuthorAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithPublisherAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the publisher of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg dcterms:publisher ?publisher . }
     # UNION { ?kg schema:publisher ?publisher . }
     # UNION { ?kg pav:publishedBy ?publisher . }
@@ -572,6 +627,7 @@ kgi:DatasetWithPublisherAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithContributorAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the contributor of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg dcterms:contributor ?contributor . }
     # UNION { ?kg pav:curatedBy ?contributor . }
     owl:equivalentClass [
@@ -617,6 +673,7 @@ kgi:DatasetWithContributorAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithMaintainerAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the maintainer of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg schema:maintainer ?contributor . }
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -651,6 +708,7 @@ kgi:DatasetWithMaintainerAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithCreationMethodAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the method of the creation of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # Equivalence to the IndeGx query rule version:
     # { ?kg dcterms:accrualMethod ?meth . }
     # UNION { ?kg pav:createdWith ?agent . }
@@ -697,6 +755,7 @@ kgi:DatasetWithCreationMethodAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithSourceAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the source of the creation of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # Equivalence to the IndeGx query rule version: 
     # { ?kg dcterms:source ?source .}
     # UNION {?kg pav:importedFrom ?source .}
@@ -754,6 +813,7 @@ kgi:DatasetWithSourceAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithAccrualFrequencyAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the frequency of the accrual of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg dcterms:accrualPeriodicity ?frequency
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -788,6 +848,7 @@ kgi:DatasetWithAccrualFrequencyAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithCreationLocationAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the location of the maintenance of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg schema:locationCreated ?location }
     # UNION { ?kg pav:createdAt ?location }
     # UNION { prov:wasGeneratedBy ?act .
@@ -853,6 +914,7 @@ kgi:DatasetWithCreationLocationAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithCreationDateAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the time of the creation of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # Equivalence to the IndeGx query rule version: 
     # { ?kg dcterms:created ?date .}
     # UNION {?kg pav:curatedOn ?date .}
@@ -899,6 +961,7 @@ kgi:DatasetWithCreationDateAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithCurationAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the time of the last curation of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # Equivalence to the IndeGx query rule version:
     # { ?kg pav:lastCuratedOn ?date .}
     owl:equivalentClass [
@@ -929,6 +992,7 @@ kgi:DatasetWithCurationAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithModificationAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the time of the last modification of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # Equivalence to the IndeGx query rule version:
     # { ?kg dcterms:modified ?date .}
     owl:equivalentClass [
@@ -959,6 +1023,7 @@ kgi:DatasetWithModificationAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithTriplesCountAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the number of triples of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg void:triples ?triples .
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -983,6 +1048,7 @@ kgi:DatasetWithTriplesCountAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithEntityCountAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the number of entities of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -1011,6 +1077,7 @@ kgi:DatasetWithEntityCountAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithClassCountAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the number of classes of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -1039,6 +1106,7 @@ kgi:DatasetWithClassCountAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithPropertyCountAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the number of properties of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -1067,6 +1135,7 @@ kgi:DatasetWithPropertyCountAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithLicenseAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the license of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg dcterms:license ?license . }
     # UNION { ?kg schema:license ?license . }
     # UNION { ?kg pav:hasLicense ?license . }
@@ -1123,6 +1192,7 @@ kgi:DatasetWithLicenseAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithWebpageAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the webpage of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg foaf:homepage ?source . }
     # UNION { ?kg schema:url ?source . }
     owl:equivalentClass [
@@ -1168,6 +1238,7 @@ kgi:DatasetWithWebpageAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithAccessMeansAnnotations rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the means of access of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg void:sparqlEndpoint ?endpoint . }
     # UNION { ?kg void:dataDump ?dataDump . }
     # UNION { ?kg dcat:distribution ?dist .
@@ -1228,6 +1299,7 @@ kgi:DatasetWithAccessMeansAnnotations rdf:type owl:Class ;
 
 kgi:DatasetWithSparqlEndpointAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the address of the endpoint of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg void:sparqlEndpoint ?endpoint . }
     # UNION { ?kg dcat:distribution ?dist .
     #     ?dist dcterms:format "application/sparql-query" .
@@ -1295,6 +1367,7 @@ kgi:DatasetWithSparqlEndpointAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithDumpAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the address of the dump of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg void:dataDump ?url . }
     # UNION { ?kg dcat:distribution ?dist .
     #     ?dist dcat:downloadURL ?url . }
@@ -1350,6 +1423,7 @@ kgi:DatasetWithDumpAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithFormatAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the serialization of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg dcterms:format ?format .}
     # UNION { ?kg dcat:distribution ?dist .
     #     ?dist dcterms:format ?format .
@@ -1426,6 +1500,7 @@ kgi:DatasetWithFormatAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithAvailabilityStartAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the start of the availability of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg dcterms:available ?date .
     # UNION { ?kg schema:datePublished ?date . }
     # UNION { ?kg pav:publishedOn ?date . }
@@ -1502,6 +1577,7 @@ kgi:DatasetWithAvailabilityStartAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithAvailabilityEndAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the end of the availability of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg prov:invalidatedAtTime ?pubEndDate 
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1531,6 +1607,7 @@ kgi:DatasetWithAvailabilityEndAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithValidityEndAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the end of the validity of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg dcterms:valid ?date .
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1565,6 +1642,7 @@ kgi:DatasetWithValidityEndAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithAccessRightsAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the rights of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     #  {?kg dcterms:rights ?rights .}
     # UNION { ?kg dataid:openness ?openness .}
     owl:equivalentClass [
@@ -1610,6 +1688,7 @@ kgi:DatasetWithAccessRightsAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithReuseAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the reuse of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg dataid:reuseAndIntegration ?info .
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1644,6 +1723,7 @@ kgi:DatasetWithReuseAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithRequirementAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the requirements of the usage of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg dcat:distribution ?dist .
     # ?dist dataid:softwareRequirement ?requirements .
     owl:equivalentClass [
@@ -1689,6 +1769,7 @@ kgi:DatasetWithRequirementAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithAudienceAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the audience of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg dcterms:audience ?audience .
     # UNION { ?kg schema:audience ?audience . }
     owl:equivalentClass [
@@ -1734,6 +1815,7 @@ kgi:DatasetWithAudienceAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithCreationMethodAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the creation method of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg dcterms:accrualMethod ?method . }
     # UNION { ?kg pav:createdWith ?tool . }
     # UNION { ?kg prov:wasGeneratedBy ?act .
@@ -1786,6 +1868,7 @@ kgi:DatasetWithCreationMethodAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithExampleAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the example of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # ?kg void:exampleResource ?ex .
     owl:equivalentClass [ 
         rdf:type owl:Class ;
@@ -1815,6 +1898,7 @@ kgi:DatasetWithExampleAnnotation rdf:type owl:Class ;
 
 kgi:DatasetWithQualityAnnotation rdf:type owl:Class ;
     rdfs:label "Dataset that contains a description of the quality of the dataset"@en ;
+    rdfs:isDefinedBy kgi: ;
     # { ?kg dqv:hasQualityAnnotation ?qualityAnnotation . }
     # UNION { ?kg dqv:hasQualityMeasurement ?qualityMeasure . }
     # UNION { ?kg schema:award ?award . }

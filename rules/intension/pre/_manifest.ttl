@@ -47,6 +47,7 @@
         [
             mf:action """
             LOAD <file:///rules/intension/indegx_vocabulary.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#> ;
+            LOAD <file:///rules/intension/accountability.ttl> INTO GRAPH <http://ns.inria.fr/kg/index#> ;
             LOAD <file:///input/adms.ttl> INTO GRAPH <http://www.w3.org/ns/adms#> ;
             LOAD <file:///input/cc.ttl> INTO GRAPH <http://creativecommons.org/ns#> ;
             LOAD <file:///input/dataid.ttl> INTO GRAPH <http://dataid.dbpedia.org/ns/core#> ;

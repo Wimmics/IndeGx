@@ -36,7 +36,7 @@
     ) ;
     kgi:onSuccess (
         # <SPARQLFeatures/_manifest.ttl>
-        # <dataset_description_extraction.ttl>
+        <dataset_description_extraction.ttl>
     ) .
 
 <dataset_description_extraction.ttl> a mf:ManifestEntry ;
