@@ -8,18 +8,21 @@
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Text of the presence of property <http://www.w3.org/ns/shacl#construct>" ;
-    kgi:query """ASK { 
-            SERVICE $rawEndpointUrl { 
-                {
-                    SELECT ?s ?o WHERE { 
-                        {
+    kgi:query """PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+    ASK { 
+        kgi: sd:namedGraph $rawEndpointUrl .
+        SERVICE $rawEndpointUrl { 
+            {
+                SELECT ?s ?o WHERE { 
+                    {
+                        ?s <http://www.w3.org/ns/shacl#construct> ?o .
+                    } UNION {
+                        GRAPH ?g {
                             ?s <http://www.w3.org/ns/shacl#construct> ?o .
-                        } UNION {
-                            GRAPH ?g {
-                                ?s <http://www.w3.org/ns/shacl#construct> ?o .
-                            }
                         }
-                    } LIMIT 1
-                }
-            } 
-        }"""  .
+                    }
+                } LIMIT 1
+            }
+        } 
+    }"""  .

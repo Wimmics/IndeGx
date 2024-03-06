@@ -9,21 +9,31 @@
     dcterms:isReferencedBy <manifest.ttl> ;
     dcterms:title "Text of the presence of class <http://www.w3.org/ns/shacl#SPARQLConstraint>" ;
     kgi:query """PREFIX voaf: <http://purl.org/vocommons/voaf#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX prov: <http://www.w3.org/ns/prov#>
+    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     ASK { 
-            SERVICE $rawEndpointUrl { 
-                {
-                    SELECT ?whatever WHERE { 
+        kgi: sd:namedGraph $rawEndpointUrl .
+        SERVICE $rawEndpointUrl { 
+            {
+                SELECT ?whatever WHERE { 
+                    {
                         {
+                            ?whatever rdfs:subClassOf <http://www.w3.org/ns/shacl#SPARQLConstraint> .
+                        } UNION {
+                            ?whatever owl:equivalentClass <http://www.w3.org/ns/shacl#SPARQLConstraint> .
+                        } UNION {
+                            ?whatever a <http://www.w3.org/ns/shacl#SPARQLConstraint> .
+                        }
+                    } UNION {
+                        GRAPH ?g {
                             {
                                 ?whatever rdfs:subClassOf <http://www.w3.org/ns/shacl#SPARQLConstraint> .
                             } UNION {
@@ -31,18 +41,9 @@
                             } UNION {
                                 ?whatever a <http://www.w3.org/ns/shacl#SPARQLConstraint> .
                             }
-                        } UNION {
-                            GRAPH ?g {
-                                {
-                                    ?whatever rdfs:subClassOf <http://www.w3.org/ns/shacl#SPARQLConstraint> .
-                                } UNION {
-                                    ?whatever owl:equivalentClass <http://www.w3.org/ns/shacl#SPARQLConstraint> .
-                                } UNION {
-                                    ?whatever a <http://www.w3.org/ns/shacl#SPARQLConstraint> .
-                                }
-                            }
                         }
-                    } LIMIT 1
-                }
+                    }
+                } LIMIT 1
             }
-        }"""  .
+        }
+    }"""  .
