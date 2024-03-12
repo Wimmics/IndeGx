@@ -20,12 +20,33 @@
             mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX void: <http://rdfs.org/ns/void#>
-            INSERT DATA {
+            INSERT {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
                 }
+            } WHERE {
+                FILTER( # There is not an online HTTP version of this endpoint already detected
+                    NOT EXISTS {
+                        BIND( IF( CONTAINS( STR($rawEndpointUrl), "https://" ), IRI( REPLACE( STR($rawEndpointUrl), "https://", "http://" ) ) , $rawEndpointUrl ) AS ?urlHttp )
+                        kgi: sd:namedGraph ?urlHttp .
+                        GRAPH ?urlHttp {
+                            ?urlHttp void:sparqlEndpoint ?urlHttp .
+                        }
+                    }
+                )
+                FILTER( # There is not an online HTTPS version of this endpoint already detected
+                    NOT EXISTS {
+                        BIND( IF( CONTAINS( STR($rawEndpointUrl), "http://" ), IRI( REPLACE( STR($rawEndpointUrl), "http://", "https://" ) ) , $rawEndpointUrl ) AS ?urlHttps )
+                        kgi: sd:namedGraph ?urlHttps .
+                        GRAPH ?urlHttps {
+                            ?urlHttps void:sparqlEndpoint ?urlHttps .
+                        }
+                    }
+                )
             }"""
         ]
     ) .
+
+# Entry definitions follow below this line
 

@@ -7,9 +7,9 @@ This folder contains the generation assets used to extract statistics on the usa
 ```sparql
 PREFIX void: <http://rdfs.org/ns/void#>
 SELECT (COUNT(DISTINCT ?url) AS ?endpointCount) {
-  GRAPH ?url {
-  	?url void:sparqlEndpoint ?url .
-  }
+    GRAPH ?url {
+        ?url void:sparqlEndpoint ?url .
+    }
 }
 ```
 
@@ -18,6 +18,7 @@ SELECT (COUNT(DISTINCT ?url) AS ?endpointCount) {
 ### Classes and number of endpoints where they are used
 
 ```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -32,18 +33,19 @@ SELECT DISTINCT ?vocab ?class (COUNT(DISTINCT ?endpointUrl) AS ?count) {
             UNION { ?class a rdfs:Class }
         }
     }
-  OPTIONAL {
-    ?class rdfs:isDefinedBy ?vocab ;
-        voaf:usageInDataset ?occurence .
-    ?occurence voaf:inDataset ?endpointUrl .
-  }
-  FILTER(isIRI(?class))
+    OPTIONAL {
+        ?class rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
+    FILTER(isIRI(?class))
 } GROUP BY ?vocab ?class
 ```
 
 #### List of endpoints where each class is used
 
 ```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -69,6 +71,7 @@ SELECT DISTINCT ?vocab ?class ?endpointUrl {
 ### Properties and number of endpoints where they are used
 
 ```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -101,6 +104,7 @@ SELECT DISTINCT ?vocab ?property (COUNT(DISTINCT ?endpointUrl) AS ?count) {
 #### List of endpoints where each property is used
 
 ```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -133,29 +137,79 @@ SELECT DISTINCT ?vocab ?property (COUNT(DISTINCT ?endpointUrl) AS ?count) {
 ### Vocabularies and number of endpoints where they are used
 
 ```sparql
-PREFIX vann: <http://purl.org/vocab/vann/>
+PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-SELECT DISTINCT ?vocab ?count {
-    ?vocab vann:preferredNamespaceUri ?vocabURI ;
-        voaf:reusedByDatasets ?count.
-} GROUP BY ?vocab ?count
+SELECT DISTINCT ?vocab (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+    GRAPH ?endpointUrl {
+        ?endpointUrl void:sparqlEndpoint ?endpointUrl
+    }
+    OPTIONAL {
+        ?elem rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
+} GROUP BY ?vocab
 ```
 
-#### List of endpoints where each property is used
+#### List of endpoints where each vocabularies is used
 
 ```sparql
-PREFIX vann: <http://purl.org/vocab/vann/>
+PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?vocab ?endpointUrl {
-    ?vocab vann:preferredNamespaceUri ?vocabURI ;
-    ?vocab rdfs:isDefinedBy ?vocab ;
-        voaf:usageInDataset ?occurence .
-    ?occurence voaf:inDataset ?endpointUrl .
+    GRAPH ?endpointUrl {
+        ?endpointUrl void:sparqlEndpoint ?endpointUrl
+    }
+    OPTIONAL {
+        ?elem rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
 } GROUP BY ?vocab ?endpointUrl
+```
+
+### Endpoints and the number of vocabularies they use
+
+```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?endpointUrl (COUNT(DISTINCT ?vocab) AS ?count) {
+    GRAPH ?endpointUrl {
+        ?endpointUrl void:sparqlEndpoint ?endpointUrl
+    }
+    OPTIONAL {
+        ?elem rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
+} GROUP BY ?endpointUrl
+```
+
+### Endpoints and the vocabularies they use
+
+```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?endpointUrl ?vocab {
+    GRAPH ?endpointUrl {
+        ?endpointUrl void:sparqlEndpoint ?endpointUrl
+    }
+    OPTIONAL {
+        ?elem rdfs:isDefinedBy ?vocab ;
+            voaf:usageInDataset ?occurence .
+        ?occurence voaf:inDataset ?endpointUrl .
+    }
+} GROUP BY ?endpointUrl ?vocab
 ```
