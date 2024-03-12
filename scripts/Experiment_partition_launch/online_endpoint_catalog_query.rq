@@ -14,4 +14,16 @@ CONSTRUCT {
 } {
     ?dataset dcat:endpointURL ?endpoint ;
         schema:serverStatus schema:Online .
+    FILTER( # There is not an online HTTP version of this endpoint already detected
+        NOT EXISTS {
+            BIND( IF( CONTAINS( STR(?endpoint), "https://" ), IRI( REPLACE( STR(?endpoint), "https://", "http://" ) ) , ?endpoint ) AS ?urlHttp )
+            ?urlHttp void:sparqlEndpoint ?urlHttp .
+        }
+    )
+    FILTER( # There is not an online HTTPS version of this endpoint already detected
+        NOT EXISTS {
+            BIND( IF( CONTAINS( STR(?endpoint), "http://" ), IRI( REPLACE( STR(?endpoint), "http://", "https://" ) ) , ?endpoint ) AS ?urlHttps )
+            ?urlHttps void:sparqlEndpoint ?urlHttps .
+        }
+    )
 }
