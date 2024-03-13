@@ -15,12 +15,20 @@
         SERVICE $rawEndpointUrl { 
             {
                 SELECT ?s ?o WHERE { 
-                    {
+                    ?s <http://www.w3.org/ns/shacl#select> ?o .
+                } LIMIT 1
+            }
+        } 
+    }""" ,
+    """PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+    ASK { 
+        kgi: sd:namedGraph $rawEndpointUrl .
+        SERVICE $rawEndpointUrl { 
+            {
+                SELECT ?s ?o WHERE { 
+                    GRAPH ?g {
                         ?s <http://www.w3.org/ns/shacl#select> ?o .
-                    } UNION {
-                        GRAPH ?g {
-                            ?s <http://www.w3.org/ns/shacl#select> ?o .
-                        }
                     }
                 } LIMIT 1
             }

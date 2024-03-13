@@ -20,14 +20,35 @@
             mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX void: <http://rdfs.org/ns/void#>
-            INSERT DATA {
+            INSERT {
                 kgi: sd:namedGraph $rawEndpointUrl .
                 GRAPH $rawEndpointUrl {
                     $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
                 }
+            } WHERE {
+                FILTER( # There is not an online HTTP version of this endpoint already detected
+                    NOT EXISTS {
+                        BIND( IF( CONTAINS( STR($rawEndpointUrl), "https://" ), IRI( REPLACE( STR($rawEndpointUrl), "https://", "http://" ) ) , $rawEndpointUrl ) AS ?urlHttp )
+                        kgi: sd:namedGraph ?urlHttp .
+                        GRAPH ?urlHttp {
+                            ?urlHttp void:sparqlEndpoint ?urlHttp .
+                        }
+                    }
+                )
+                FILTER( # There is not an online HTTPS version of this endpoint already detected
+                    NOT EXISTS {
+                        BIND( IF( CONTAINS( STR($rawEndpointUrl), "http://" ), IRI( REPLACE( STR($rawEndpointUrl), "http://", "https://" ) ) , $rawEndpointUrl ) AS ?urlHttps )
+                        kgi: sd:namedGraph ?urlHttps .
+                        GRAPH ?urlHttps {
+                            ?urlHttps void:sparqlEndpoint ?urlHttps .
+                        }
+                    }
+                )
             }"""
         ]
-    ) .  
+    ) .
+
+# Entry definitions follow below this line  
 <classTest1.ttl> a mf:ManifestEntry ;
     kgi:requiredAssets (
         <init.ttl> 
@@ -59,7 +80,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#Thing>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest2.ttl> a mf:ManifestEntry ;
@@ -93,7 +114,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#Nothing>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest3.ttl> a mf:ManifestEntry ;
@@ -127,7 +148,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#Collection>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest4.ttl> a mf:ManifestEntry ;
@@ -161,7 +182,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#Concept>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest5.ttl> a mf:ManifestEntry ;
@@ -195,7 +216,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#ConceptScheme>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest6.ttl> a mf:ManifestEntry ;
@@ -229,7 +250,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#OrderedCollection>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest7.ttl> a mf:ManifestEntry ;
@@ -263,7 +284,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2008/05/skos-xl#Label>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest8.ttl> a mf:ManifestEntry ;
@@ -297,7 +318,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#Ontology>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest9.ttl> a mf:ManifestEntry ;
@@ -331,7 +352,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#Resource>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest10.ttl> a mf:ManifestEntry ;
@@ -365,7 +386,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#Class>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest11.ttl> a mf:ManifestEntry ;
@@ -399,7 +420,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#Property>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest12.ttl> a mf:ManifestEntry ;
@@ -433,7 +454,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#Literal>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest13.ttl> a mf:ManifestEntry ;
@@ -467,7 +488,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#Container>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest14.ttl> a mf:ManifestEntry ;
@@ -501,7 +522,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest15.ttl> a mf:ManifestEntry ;
@@ -535,7 +556,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#Datatype>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest16.ttl> a mf:ManifestEntry ;
@@ -569,7 +590,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#AllDifferent>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest17.ttl> a mf:ManifestEntry ;
@@ -603,7 +624,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#AllDisjointClasses>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest18.ttl> a mf:ManifestEntry ;
@@ -637,7 +658,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#AllDisjointProperties>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest19.ttl> a mf:ManifestEntry ;
@@ -671,7 +692,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#Annotation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest20.ttl> a mf:ManifestEntry ;
@@ -705,7 +726,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#AnnotationProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest21.ttl> a mf:ManifestEntry ;
@@ -739,7 +760,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#AsymmetricProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest22.ttl> a mf:ManifestEntry ;
@@ -773,7 +794,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#ObjectProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest23.ttl> a mf:ManifestEntry ;
@@ -807,7 +828,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#Axiom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest24.ttl> a mf:ManifestEntry ;
@@ -841,7 +862,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#Class>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest25.ttl> a mf:ManifestEntry ;
@@ -875,7 +896,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#DataRange>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest26.ttl> a mf:ManifestEntry ;
@@ -909,7 +930,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#DatatypeProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest27.ttl> a mf:ManifestEntry ;
@@ -943,7 +964,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#DeprecatedClass>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest28.ttl> a mf:ManifestEntry ;
@@ -977,7 +998,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#DeprecatedProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest29.ttl> a mf:ManifestEntry ;
@@ -1011,7 +1032,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#FunctionalProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest30.ttl> a mf:ManifestEntry ;
@@ -1045,7 +1066,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#InverseFunctionalProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest31.ttl> a mf:ManifestEntry ;
@@ -1079,7 +1100,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#IrreflexiveProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest32.ttl> a mf:ManifestEntry ;
@@ -1113,7 +1134,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#NamedIndividual>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest33.ttl> a mf:ManifestEntry ;
@@ -1147,7 +1168,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#NegativePropertyAssertion>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest34.ttl> a mf:ManifestEntry ;
@@ -1181,7 +1202,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#OntologyProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest35.ttl> a mf:ManifestEntry ;
@@ -1215,7 +1236,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#ReflexiveProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest36.ttl> a mf:ManifestEntry ;
@@ -1249,7 +1270,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#Restriction>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest37.ttl> a mf:ManifestEntry ;
@@ -1283,7 +1304,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#SymmetricProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest38.ttl> a mf:ManifestEntry ;
@@ -1317,7 +1338,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#TransitiveProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest39.ttl> a mf:ManifestEntry ;
@@ -1351,7 +1372,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#List>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest40.ttl> a mf:ManifestEntry ;
@@ -1385,7 +1406,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest41.ttl> a mf:ManifestEntry ;
@@ -1419,7 +1440,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest42.ttl> a mf:ManifestEntry ;
@@ -1453,7 +1474,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest43.ttl> a mf:ManifestEntry ;
@@ -1487,7 +1508,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest44.ttl> a mf:ManifestEntry ;
@@ -1521,7 +1542,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#CompoundLiteral>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest45.ttl> a mf:ManifestEntry ;
@@ -1555,7 +1576,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Shape>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest46.ttl> a mf:ManifestEntry ;
@@ -1589,7 +1610,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#NodeShape>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest47.ttl> a mf:ManifestEntry ;
@@ -1623,7 +1644,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#PropertyShape>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest48.ttl> a mf:ManifestEntry ;
@@ -1657,7 +1678,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Severity>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest49.ttl> a mf:ManifestEntry ;
@@ -1691,7 +1712,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#NodeKind>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest50.ttl> a mf:ManifestEntry ;
@@ -1725,7 +1746,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#ValidationReport>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest51.ttl> a mf:ManifestEntry ;
@@ -1759,7 +1780,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#ValidationResult>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest52.ttl> a mf:ManifestEntry ;
@@ -1793,7 +1814,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#AbstractResult>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest53.ttl> a mf:ManifestEntry ;
@@ -1827,7 +1848,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#ConstraintComponent>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest54.ttl> a mf:ManifestEntry ;
@@ -1861,7 +1882,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Parameterizable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest55.ttl> a mf:ManifestEntry ;
@@ -1895,7 +1916,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Parameter>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest56.ttl> a mf:ManifestEntry ;
@@ -1929,7 +1950,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Validator>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest57.ttl> a mf:ManifestEntry ;
@@ -1963,7 +1984,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLAskValidator>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest58.ttl> a mf:ManifestEntry ;
@@ -1997,7 +2018,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLAskExecutable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest59.ttl> a mf:ManifestEntry ;
@@ -2031,7 +2052,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLSelectValidator>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest60.ttl> a mf:ManifestEntry ;
@@ -2065,7 +2086,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLSelectExecutable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest61.ttl> a mf:ManifestEntry ;
@@ -2099,7 +2120,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLExecutable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest62.ttl> a mf:ManifestEntry ;
@@ -2133,7 +2154,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLConstructExecutable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest63.ttl> a mf:ManifestEntry ;
@@ -2167,7 +2188,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLUpdateExecutable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest64.ttl> a mf:ManifestEntry ;
@@ -2201,7 +2222,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#PrefixDeclaration>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest65.ttl> a mf:ManifestEntry ;
@@ -2235,7 +2256,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLConstraint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest66.ttl> a mf:ManifestEntry ;
@@ -2269,7 +2290,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#PropertyGroup>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest67.ttl> a mf:ManifestEntry ;
@@ -2303,7 +2324,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Target>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest68.ttl> a mf:ManifestEntry ;
@@ -2337,7 +2358,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#TargetType>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest69.ttl> a mf:ManifestEntry ;
@@ -2371,7 +2392,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLTarget>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest70.ttl> a mf:ManifestEntry ;
@@ -2405,7 +2426,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLTargetType>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest71.ttl> a mf:ManifestEntry ;
@@ -2439,7 +2460,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Function>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest72.ttl> a mf:ManifestEntry ;
@@ -2473,7 +2494,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLFunction>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest73.ttl> a mf:ManifestEntry ;
@@ -2507,7 +2528,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#ResultAnnotation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest74.ttl> a mf:ManifestEntry ;
@@ -2541,7 +2562,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#Rule>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest75.ttl> a mf:ManifestEntry ;
@@ -2575,7 +2596,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#TripleRule>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest76.ttl> a mf:ManifestEntry ;
@@ -2609,7 +2630,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#SPARQLRule>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest77.ttl> a mf:ManifestEntry ;
@@ -2643,7 +2664,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSExecutable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest78.ttl> a mf:ManifestEntry ;
@@ -2677,7 +2698,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSTarget>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest79.ttl> a mf:ManifestEntry ;
@@ -2711,7 +2732,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSTargetType>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest80.ttl> a mf:ManifestEntry ;
@@ -2745,7 +2766,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSConstraint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest81.ttl> a mf:ManifestEntry ;
@@ -2779,7 +2800,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSLibrary>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest82.ttl> a mf:ManifestEntry ;
@@ -2813,7 +2834,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSFunction>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest83.ttl> a mf:ManifestEntry ;
@@ -2847,7 +2868,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSRule>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest84.ttl> a mf:ManifestEntry ;
@@ -2881,7 +2902,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#JSValidator>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest85.ttl> a mf:ManifestEntry ;
@@ -2915,7 +2936,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#Rule>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest86.ttl> a mf:ManifestEntry ;
@@ -2949,7 +2970,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#AskTemplate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest87.ttl> a mf:ManifestEntry ;
@@ -2983,7 +3004,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#Template>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest88.ttl> a mf:ManifestEntry ;
@@ -3017,7 +3038,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#Column>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest89.ttl> a mf:ManifestEntry ;
@@ -3051,7 +3072,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#ConstraintViolation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest90.ttl> a mf:ManifestEntry ;
@@ -3085,7 +3106,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#ConstraintViolationLevel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest91.ttl> a mf:ManifestEntry ;
@@ -3119,7 +3140,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#ConstructTemplate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest92.ttl> a mf:ManifestEntry ;
@@ -3153,7 +3174,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#Function>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest93.ttl> a mf:ManifestEntry ;
@@ -3187,7 +3208,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#Module>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest94.ttl> a mf:ManifestEntry ;
@@ -3221,7 +3242,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#Modules>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest95.ttl> a mf:ManifestEntry ;
@@ -3255,7 +3276,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#LibraryOntology>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest96.ttl> a mf:ManifestEntry ;
@@ -3289,7 +3310,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#MagicProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest97.ttl> a mf:ManifestEntry ;
@@ -3323,7 +3344,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#RuleProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest98.ttl> a mf:ManifestEntry ;
@@ -3357,7 +3378,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#SelectTemplate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest99.ttl> a mf:ManifestEntry ;
@@ -3391,7 +3412,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#TableDataProvider>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest100.ttl> a mf:ManifestEntry ;
@@ -3425,7 +3446,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#UpdateTemplate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest101.ttl> a mf:ManifestEntry ;
@@ -3459,7 +3480,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#Atom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest102.ttl> a mf:ManifestEntry ;
@@ -3493,7 +3514,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#Builtin>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest103.ttl> a mf:ManifestEntry ;
@@ -3527,7 +3548,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#BuiltinAtom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest104.ttl> a mf:ManifestEntry ;
@@ -3561,7 +3582,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#ClassAtom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest105.ttl> a mf:ManifestEntry ;
@@ -3595,7 +3616,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#DataRangeAtom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest106.ttl> a mf:ManifestEntry ;
@@ -3629,7 +3650,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest107.ttl> a mf:ManifestEntry ;
@@ -3663,7 +3684,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest108.ttl> a mf:ManifestEntry ;
@@ -3697,7 +3718,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#Imp>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest109.ttl> a mf:ManifestEntry ;
@@ -3731,7 +3752,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#IndividualPropertyAtom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest110.ttl> a mf:ManifestEntry ;
@@ -3765,7 +3786,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#SameIndividualAtom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <classTest111.ttl> a mf:ManifestEntry ;
@@ -3799,7 +3820,7 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#Variable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) .  
 <propertyTest112.ttl> a mf:ManifestEntry ;
@@ -3830,7 +3851,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#subClassOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#subClassOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest113.ttl> a mf:ManifestEntry ;
@@ -3861,7 +3882,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#label>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#label>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest114.ttl> a mf:ManifestEntry ;
@@ -3892,7 +3913,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest115.ttl> a mf:ManifestEntry ;
@@ -3923,7 +3944,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#first>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#first>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest116.ttl> a mf:ManifestEntry ;
@@ -3954,7 +3975,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#rest>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#rest>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest117.ttl> a mf:ManifestEntry ;
@@ -3985,7 +4006,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#comment>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#comment>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest118.ttl> a mf:ManifestEntry ;
@@ -4016,7 +4037,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#isDefinedBy>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#isDefinedBy>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest119.ttl> a mf:ManifestEntry ;
@@ -4047,7 +4068,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#seeAlso>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#seeAlso>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest120.ttl> a mf:ManifestEntry ;
@@ -4078,7 +4099,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#range>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#range>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest121.ttl> a mf:ManifestEntry ;
@@ -4109,7 +4130,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#domain>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#domain>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest122.ttl> a mf:ManifestEntry ;
@@ -4140,7 +4161,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#subPropertyOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#subPropertyOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest123.ttl> a mf:ManifestEntry ;
@@ -4171,7 +4192,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2000/01/rdf-schema#member>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2000/01/rdf-schema#member>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest124.ttl> a mf:ManifestEntry ;
@@ -4202,7 +4223,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#allValuesFrom>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#allValuesFrom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest125.ttl> a mf:ManifestEntry ;
@@ -4233,7 +4254,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#annotatedProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#annotatedProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest126.ttl> a mf:ManifestEntry ;
@@ -4264,7 +4285,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#annotatedSource>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#annotatedSource>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest127.ttl> a mf:ManifestEntry ;
@@ -4295,7 +4316,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#annotatedTarget>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#annotatedTarget>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest128.ttl> a mf:ManifestEntry ;
@@ -4326,7 +4347,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#assertionProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#assertionProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest129.ttl> a mf:ManifestEntry ;
@@ -4357,7 +4378,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#cardinality>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#cardinality>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest130.ttl> a mf:ManifestEntry ;
@@ -4388,7 +4409,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#complementOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#complementOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest131.ttl> a mf:ManifestEntry ;
@@ -4419,7 +4440,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#datatypeComplementOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#datatypeComplementOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest132.ttl> a mf:ManifestEntry ;
@@ -4450,7 +4471,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#differentFrom>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#differentFrom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest133.ttl> a mf:ManifestEntry ;
@@ -4481,7 +4502,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#disjointUnionOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#disjointUnionOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest134.ttl> a mf:ManifestEntry ;
@@ -4512,7 +4533,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#disjointWith>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#disjointWith>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest135.ttl> a mf:ManifestEntry ;
@@ -4543,7 +4564,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#distinctMembers>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#distinctMembers>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest136.ttl> a mf:ManifestEntry ;
@@ -4574,7 +4595,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#equivalentClass>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#equivalentClass>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest137.ttl> a mf:ManifestEntry ;
@@ -4605,7 +4626,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#equivalentProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#equivalentProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest138.ttl> a mf:ManifestEntry ;
@@ -4636,7 +4657,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#hasKey>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#hasKey>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest139.ttl> a mf:ManifestEntry ;
@@ -4667,7 +4688,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#hasSelf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#hasSelf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest140.ttl> a mf:ManifestEntry ;
@@ -4698,7 +4719,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#hasValue>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#hasValue>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest141.ttl> a mf:ManifestEntry ;
@@ -4729,7 +4750,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#intersectionOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#intersectionOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest142.ttl> a mf:ManifestEntry ;
@@ -4760,7 +4781,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#inverseOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#inverseOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest143.ttl> a mf:ManifestEntry ;
@@ -4791,7 +4812,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#maxCardinality>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#maxCardinality>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest144.ttl> a mf:ManifestEntry ;
@@ -4822,7 +4843,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#maxQualifiedCardinality>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#maxQualifiedCardinality>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest145.ttl> a mf:ManifestEntry ;
@@ -4853,7 +4874,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#members>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#members>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest146.ttl> a mf:ManifestEntry ;
@@ -4884,7 +4905,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#minCardinality>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#minCardinality>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest147.ttl> a mf:ManifestEntry ;
@@ -4915,7 +4936,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#minQualifiedCardinality>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#minQualifiedCardinality>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest148.ttl> a mf:ManifestEntry ;
@@ -4946,7 +4967,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#onClass>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#onClass>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest149.ttl> a mf:ManifestEntry ;
@@ -4977,7 +4998,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#onDataRange>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#onDataRange>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest150.ttl> a mf:ManifestEntry ;
@@ -5008,7 +5029,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#onDatatype>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#onDatatype>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest151.ttl> a mf:ManifestEntry ;
@@ -5039,7 +5060,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#oneOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#oneOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest152.ttl> a mf:ManifestEntry ;
@@ -5070,7 +5091,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#onProperties>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#onProperties>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest153.ttl> a mf:ManifestEntry ;
@@ -5101,7 +5122,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#onProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#onProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest154.ttl> a mf:ManifestEntry ;
@@ -5132,7 +5153,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#propertyChainAxiom>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#propertyChainAxiom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest155.ttl> a mf:ManifestEntry ;
@@ -5163,7 +5184,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#propertyDisjointWith>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#propertyDisjointWith>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest156.ttl> a mf:ManifestEntry ;
@@ -5194,7 +5215,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#qualifiedCardinality>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#qualifiedCardinality>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest157.ttl> a mf:ManifestEntry ;
@@ -5225,7 +5246,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#sameAs>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#sameAs>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest158.ttl> a mf:ManifestEntry ;
@@ -5256,7 +5277,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#someValuesFrom>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#someValuesFrom>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest159.ttl> a mf:ManifestEntry ;
@@ -5287,7 +5308,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#sourceIndividual>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#sourceIndividual>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest160.ttl> a mf:ManifestEntry ;
@@ -5318,7 +5339,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#targetIndividual>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#targetIndividual>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest161.ttl> a mf:ManifestEntry ;
@@ -5349,7 +5370,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#targetValue>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#targetValue>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest162.ttl> a mf:ManifestEntry ;
@@ -5380,7 +5401,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#unionOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#unionOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest163.ttl> a mf:ManifestEntry ;
@@ -5411,7 +5432,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#withRestrictions>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#withRestrictions>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest164.ttl> a mf:ManifestEntry ;
@@ -5442,7 +5463,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#subject>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#subject>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest165.ttl> a mf:ManifestEntry ;
@@ -5473,7 +5494,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest166.ttl> a mf:ManifestEntry ;
@@ -5504,7 +5525,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#object>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#object>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest167.ttl> a mf:ManifestEntry ;
@@ -5535,7 +5556,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#value>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#value>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest168.ttl> a mf:ManifestEntry ;
@@ -5566,7 +5587,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#language>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#language>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest169.ttl> a mf:ManifestEntry ;
@@ -5597,7 +5618,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/1999/02/22-rdf-syntax-ns#direction>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/1999/02/22-rdf-syntax-ns#direction>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest170.ttl> a mf:ManifestEntry ;
@@ -5628,7 +5649,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#prefix>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#prefix>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest171.ttl> a mf:ManifestEntry ;
@@ -5659,7 +5680,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#namespace>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#namespace>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest172.ttl> a mf:ManifestEntry ;
@@ -5690,7 +5711,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#declare>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#declare>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest173.ttl> a mf:ManifestEntry ;
@@ -5721,7 +5742,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#suggestedShapesGraph>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#suggestedShapesGraph>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest174.ttl> a mf:ManifestEntry ;
@@ -5752,7 +5773,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#deactivated>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#deactivated>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest175.ttl> a mf:ManifestEntry ;
@@ -5783,7 +5804,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#targetClass>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#targetClass>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest176.ttl> a mf:ManifestEntry ;
@@ -5814,7 +5835,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#targetNode>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#targetNode>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest177.ttl> a mf:ManifestEntry ;
@@ -5845,7 +5866,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#targetObjectsOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#targetObjectsOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest178.ttl> a mf:ManifestEntry ;
@@ -5876,7 +5897,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#targetSubjectsOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#targetSubjectsOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest179.ttl> a mf:ManifestEntry ;
@@ -5907,7 +5928,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#message>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#message>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest180.ttl> a mf:ManifestEntry ;
@@ -5938,7 +5959,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#severity>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#severity>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest181.ttl> a mf:ManifestEntry ;
@@ -5969,7 +5990,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#conforms>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#conforms>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest182.ttl> a mf:ManifestEntry ;
@@ -6000,7 +6021,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#result>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#result>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest183.ttl> a mf:ManifestEntry ;
@@ -6031,7 +6052,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#shapesGraphWellFormed>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#shapesGraphWellFormed>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest184.ttl> a mf:ManifestEntry ;
@@ -6062,7 +6083,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#detail>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#detail>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest185.ttl> a mf:ManifestEntry ;
@@ -6093,7 +6114,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#focusNode>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#focusNode>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest186.ttl> a mf:ManifestEntry ;
@@ -6124,7 +6145,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#resultMessage>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#resultMessage>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest187.ttl> a mf:ManifestEntry ;
@@ -6155,7 +6176,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#resultPath>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#resultPath>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest188.ttl> a mf:ManifestEntry ;
@@ -6186,7 +6207,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#resultSeverity>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#resultSeverity>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest189.ttl> a mf:ManifestEntry ;
@@ -6217,7 +6238,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#sourceConstraint>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#sourceConstraint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest190.ttl> a mf:ManifestEntry ;
@@ -6248,7 +6269,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#sourceShape>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#sourceShape>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest191.ttl> a mf:ManifestEntry ;
@@ -6279,7 +6300,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#sourceConstraintComponent>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#sourceConstraintComponent>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest192.ttl> a mf:ManifestEntry ;
@@ -6310,7 +6331,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#value>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#value>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest193.ttl> a mf:ManifestEntry ;
@@ -6341,7 +6362,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#shapesGraph>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#shapesGraph>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest194.ttl> a mf:ManifestEntry ;
@@ -6372,7 +6393,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#entailment>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#entailment>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest195.ttl> a mf:ManifestEntry ;
@@ -6403,7 +6424,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#path>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#path>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest196.ttl> a mf:ManifestEntry ;
@@ -6434,7 +6455,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#inversePath>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#inversePath>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest197.ttl> a mf:ManifestEntry ;
@@ -6465,7 +6486,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#alternativePath>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#alternativePath>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest198.ttl> a mf:ManifestEntry ;
@@ -6496,7 +6517,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#zeroOrMorePath>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#zeroOrMorePath>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest199.ttl> a mf:ManifestEntry ;
@@ -6527,7 +6548,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#oneOrMorePath>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#oneOrMorePath>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest200.ttl> a mf:ManifestEntry ;
@@ -6558,7 +6579,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#zeroOrOnePath>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#zeroOrOnePath>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest201.ttl> a mf:ManifestEntry ;
@@ -6589,7 +6610,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#parameter>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#parameter>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest202.ttl> a mf:ManifestEntry ;
@@ -6620,7 +6641,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#labelTemplate>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#labelTemplate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest203.ttl> a mf:ManifestEntry ;
@@ -6651,7 +6672,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#optional>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#optional>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest204.ttl> a mf:ManifestEntry ;
@@ -6682,7 +6703,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#validator>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#validator>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest205.ttl> a mf:ManifestEntry ;
@@ -6713,7 +6734,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#nodeValidator>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#nodeValidator>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest206.ttl> a mf:ManifestEntry ;
@@ -6744,7 +6765,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#propertyValidator>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#propertyValidator>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest207.ttl> a mf:ManifestEntry ;
@@ -6775,7 +6796,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#and>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#and>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest208.ttl> a mf:ManifestEntry ;
@@ -6806,7 +6827,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#class>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#class>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest209.ttl> a mf:ManifestEntry ;
@@ -6837,7 +6858,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#nodeKind>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#nodeKind>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest210.ttl> a mf:ManifestEntry ;
@@ -6868,7 +6889,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#closed>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#closed>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest211.ttl> a mf:ManifestEntry ;
@@ -6899,7 +6920,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#datatype>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#datatype>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest212.ttl> a mf:ManifestEntry ;
@@ -6930,7 +6951,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#ignoredProperties>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#ignoredProperties>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest213.ttl> a mf:ManifestEntry ;
@@ -6961,7 +6982,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#maxCount>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#maxCount>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest214.ttl> a mf:ManifestEntry ;
@@ -6992,7 +7013,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#disjoint>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#disjoint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest215.ttl> a mf:ManifestEntry ;
@@ -7023,7 +7044,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#equals>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#equals>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest216.ttl> a mf:ManifestEntry ;
@@ -7054,7 +7075,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#hasValue>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#hasValue>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest217.ttl> a mf:ManifestEntry ;
@@ -7085,7 +7106,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#in>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#in>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest218.ttl> a mf:ManifestEntry ;
@@ -7116,7 +7137,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#languageIn>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#languageIn>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest219.ttl> a mf:ManifestEntry ;
@@ -7147,7 +7168,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#lessThan>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#lessThan>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest220.ttl> a mf:ManifestEntry ;
@@ -7178,7 +7199,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#lessThanOrEquals>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#lessThanOrEquals>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest221.ttl> a mf:ManifestEntry ;
@@ -7209,7 +7230,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#maxExclusive>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#maxExclusive>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest222.ttl> a mf:ManifestEntry ;
@@ -7240,7 +7261,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#maxInclusive>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#maxInclusive>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest223.ttl> a mf:ManifestEntry ;
@@ -7271,7 +7292,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#maxLength>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#maxLength>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest224.ttl> a mf:ManifestEntry ;
@@ -7302,7 +7323,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#minCount>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#minCount>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest225.ttl> a mf:ManifestEntry ;
@@ -7333,7 +7354,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#minExclusive>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#minExclusive>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest226.ttl> a mf:ManifestEntry ;
@@ -7364,7 +7385,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#minInclusive>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#minInclusive>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest227.ttl> a mf:ManifestEntry ;
@@ -7395,7 +7416,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#minLength>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#minLength>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest228.ttl> a mf:ManifestEntry ;
@@ -7426,7 +7447,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#node>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#node>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest229.ttl> a mf:ManifestEntry ;
@@ -7457,7 +7478,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#not>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#not>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest230.ttl> a mf:ManifestEntry ;
@@ -7488,7 +7509,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#or>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#or>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest231.ttl> a mf:ManifestEntry ;
@@ -7519,7 +7540,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#pattern>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#pattern>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest232.ttl> a mf:ManifestEntry ;
@@ -7550,7 +7571,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#flags>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#flags>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest233.ttl> a mf:ManifestEntry ;
@@ -7581,7 +7602,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#property>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#property>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest234.ttl> a mf:ManifestEntry ;
@@ -7612,7 +7633,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#qualifiedMaxCount>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#qualifiedMaxCount>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest235.ttl> a mf:ManifestEntry ;
@@ -7643,7 +7664,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#qualifiedValueShape>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#qualifiedValueShape>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest236.ttl> a mf:ManifestEntry ;
@@ -7674,7 +7695,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#qualifiedValueShapesDisjoint>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#qualifiedValueShapesDisjoint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest237.ttl> a mf:ManifestEntry ;
@@ -7705,7 +7726,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#qualifiedMinCount>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#qualifiedMinCount>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest238.ttl> a mf:ManifestEntry ;
@@ -7736,7 +7757,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#uniqueLang>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#uniqueLang>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest239.ttl> a mf:ManifestEntry ;
@@ -7767,7 +7788,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#xone>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#xone>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest240.ttl> a mf:ManifestEntry ;
@@ -7798,7 +7819,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#ask>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#ask>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest241.ttl> a mf:ManifestEntry ;
@@ -7829,7 +7850,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#construct>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#construct>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest242.ttl> a mf:ManifestEntry ;
@@ -7860,7 +7881,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#select>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#select>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest243.ttl> a mf:ManifestEntry ;
@@ -7891,7 +7912,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#update>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#update>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest244.ttl> a mf:ManifestEntry ;
@@ -7922,7 +7943,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#prefixes>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#prefixes>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest245.ttl> a mf:ManifestEntry ;
@@ -7953,7 +7974,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#sparql>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#sparql>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest246.ttl> a mf:ManifestEntry ;
@@ -7984,7 +8005,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#defaultValue>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#defaultValue>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest247.ttl> a mf:ManifestEntry ;
@@ -8015,7 +8036,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#description>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#description>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest248.ttl> a mf:ManifestEntry ;
@@ -8046,7 +8067,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#group>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#group>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest249.ttl> a mf:ManifestEntry ;
@@ -8077,7 +8098,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#name>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#name>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest250.ttl> a mf:ManifestEntry ;
@@ -8108,7 +8129,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#order>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#order>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest251.ttl> a mf:ManifestEntry ;
@@ -8139,7 +8160,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#target>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#target>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest252.ttl> a mf:ManifestEntry ;
@@ -8170,7 +8191,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#returnType>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#returnType>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest253.ttl> a mf:ManifestEntry ;
@@ -8201,7 +8222,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#resultAnnotation>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#resultAnnotation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest254.ttl> a mf:ManifestEntry ;
@@ -8232,7 +8253,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#annotationProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#annotationProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest255.ttl> a mf:ManifestEntry ;
@@ -8263,7 +8284,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#annotationValue>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#annotationValue>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest256.ttl> a mf:ManifestEntry ;
@@ -8294,7 +8315,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#annotationVarName>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#annotationVarName>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest257.ttl> a mf:ManifestEntry ;
@@ -8325,7 +8346,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#filterShape>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#filterShape>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest258.ttl> a mf:ManifestEntry ;
@@ -8356,7 +8377,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#nodes>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#nodes>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest259.ttl> a mf:ManifestEntry ;
@@ -8387,7 +8408,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#intersection>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#intersection>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest260.ttl> a mf:ManifestEntry ;
@@ -8418,7 +8439,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#union>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#union>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest261.ttl> a mf:ManifestEntry ;
@@ -8449,7 +8470,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#expression>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#expression>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest262.ttl> a mf:ManifestEntry ;
@@ -8480,7 +8501,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#rule>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#rule>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest263.ttl> a mf:ManifestEntry ;
@@ -8511,7 +8532,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#condition>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#condition>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest264.ttl> a mf:ManifestEntry ;
@@ -8542,7 +8563,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#subject>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#subject>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest265.ttl> a mf:ManifestEntry ;
@@ -8573,7 +8594,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#predicate>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#predicate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest266.ttl> a mf:ManifestEntry ;
@@ -8604,7 +8625,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#object>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#object>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest267.ttl> a mf:ManifestEntry ;
@@ -8635,7 +8656,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#js>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#js>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest268.ttl> a mf:ManifestEntry ;
@@ -8666,7 +8687,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#jsFunctionName>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#jsFunctionName>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest269.ttl> a mf:ManifestEntry ;
@@ -8697,7 +8718,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#jsLibrary>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#jsLibrary>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest270.ttl> a mf:ManifestEntry ;
@@ -8728,7 +8749,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/shacl#jsLibraryURL>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/shacl#jsLibraryURL>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest271.ttl> a mf:ManifestEntry ;
@@ -8759,7 +8780,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#definition>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#definition>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest272.ttl> a mf:ManifestEntry ;
@@ -8790,7 +8811,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#scopeNote>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#scopeNote>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest273.ttl> a mf:ManifestEntry ;
@@ -8821,7 +8842,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#example>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#example>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest274.ttl> a mf:ManifestEntry ;
@@ -8852,7 +8873,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#altLabel>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#altLabel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest275.ttl> a mf:ManifestEntry ;
@@ -8883,7 +8904,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#broadMatch>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#broadMatch>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest276.ttl> a mf:ManifestEntry ;
@@ -8914,7 +8935,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#broader>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#broader>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest277.ttl> a mf:ManifestEntry ;
@@ -8945,7 +8966,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#mappingRelation>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#mappingRelation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest278.ttl> a mf:ManifestEntry ;
@@ -8976,7 +8997,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#narrowMatch>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#narrowMatch>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest279.ttl> a mf:ManifestEntry ;
@@ -9007,7 +9028,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#broaderTransitive>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#broaderTransitive>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest280.ttl> a mf:ManifestEntry ;
@@ -9038,7 +9059,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#narrower>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#narrower>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest281.ttl> a mf:ManifestEntry ;
@@ -9069,7 +9090,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#semanticRelation>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#semanticRelation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest282.ttl> a mf:ManifestEntry ;
@@ -9100,7 +9121,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#narrowerTransitive>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#narrowerTransitive>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest283.ttl> a mf:ManifestEntry ;
@@ -9131,7 +9152,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#changeNote>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#changeNote>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest284.ttl> a mf:ManifestEntry ;
@@ -9162,7 +9183,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#closeMatch>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#closeMatch>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest285.ttl> a mf:ManifestEntry ;
@@ -9193,7 +9214,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#editorialNote>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#editorialNote>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest286.ttl> a mf:ManifestEntry ;
@@ -9224,7 +9245,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#exactMatch>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#exactMatch>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest287.ttl> a mf:ManifestEntry ;
@@ -9255,7 +9276,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#hasTopConcept>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#hasTopConcept>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest288.ttl> a mf:ManifestEntry ;
@@ -9286,7 +9307,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#topConceptOf>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#topConceptOf>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest289.ttl> a mf:ManifestEntry ;
@@ -9317,7 +9338,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#hiddenLabel>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#hiddenLabel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest290.ttl> a mf:ManifestEntry ;
@@ -9348,7 +9369,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#historyNote>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#historyNote>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest291.ttl> a mf:ManifestEntry ;
@@ -9379,7 +9400,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#inScheme>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#inScheme>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest292.ttl> a mf:ManifestEntry ;
@@ -9410,7 +9431,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#member>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#member>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest293.ttl> a mf:ManifestEntry ;
@@ -9441,7 +9462,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#memberList>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#memberList>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest294.ttl> a mf:ManifestEntry ;
@@ -9472,7 +9493,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#notation>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#notation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest295.ttl> a mf:ManifestEntry ;
@@ -9503,7 +9524,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#note>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#note>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest296.ttl> a mf:ManifestEntry ;
@@ -9534,7 +9555,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#prefLabel>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#prefLabel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest297.ttl> a mf:ManifestEntry ;
@@ -9565,7 +9586,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#related>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#related>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest298.ttl> a mf:ManifestEntry ;
@@ -9596,7 +9617,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2004/02/skos/core#relatedMatch>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2004/02/skos/core#relatedMatch>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest299.ttl> a mf:ManifestEntry ;
@@ -9627,7 +9648,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2008/05/skos-xl#literalForm>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2008/05/skos-xl#literalForm>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest300.ttl> a mf:ManifestEntry ;
@@ -9658,7 +9679,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2008/05/skos-xl#altLabel>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2008/05/skos-xl#altLabel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest301.ttl> a mf:ManifestEntry ;
@@ -9689,7 +9710,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2008/05/skos-xl#hiddenLabel>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2008/05/skos-xl#hiddenLabel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest302.ttl> a mf:ManifestEntry ;
@@ -9720,7 +9741,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2008/05/skos-xl#labelRelation>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2008/05/skos-xl#labelRelation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest303.ttl> a mf:ManifestEntry ;
@@ -9751,7 +9772,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2008/05/skos-xl#prefLabel>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2008/05/skos-xl#prefLabel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest304.ttl> a mf:ManifestEntry ;
@@ -9782,7 +9803,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#body>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#body>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest305.ttl> a mf:ManifestEntry ;
@@ -9813,7 +9834,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#constraint>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#constraint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest306.ttl> a mf:ManifestEntry ;
@@ -9844,7 +9865,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#abstract>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#abstract>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest307.ttl> a mf:ManifestEntry ;
@@ -9875,7 +9896,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#systemProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#systemProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest308.ttl> a mf:ManifestEntry ;
@@ -9906,7 +9927,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#constructor>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#constructor>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest309.ttl> a mf:ManifestEntry ;
@@ -9937,7 +9958,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#cachable>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#cachable>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest310.ttl> a mf:ManifestEntry ;
@@ -9968,7 +9989,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#column>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#column>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest311.ttl> a mf:ManifestEntry ;
@@ -9999,7 +10020,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#columnIndex>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#columnIndex>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest312.ttl> a mf:ManifestEntry ;
@@ -10030,7 +10051,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#columnType>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#columnType>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest313.ttl> a mf:ManifestEntry ;
@@ -10061,7 +10082,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#columnWidth>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#columnWidth>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest314.ttl> a mf:ManifestEntry ;
@@ -10092,7 +10113,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#command>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#command>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest315.ttl> a mf:ManifestEntry ;
@@ -10123,7 +10144,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#query>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#query>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest316.ttl> a mf:ManifestEntry ;
@@ -10154,7 +10175,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#fix>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#fix>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest317.ttl> a mf:ManifestEntry ;
@@ -10185,7 +10206,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#labelTemplate>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#labelTemplate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest318.ttl> a mf:ManifestEntry ;
@@ -10216,7 +10237,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#nextRuleProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#nextRuleProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest319.ttl> a mf:ManifestEntry ;
@@ -10247,7 +10268,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#private>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#private>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest320.ttl> a mf:ManifestEntry ;
@@ -10278,7 +10299,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#returnType>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#returnType>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest321.ttl> a mf:ManifestEntry ;
@@ -10309,7 +10330,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#rulePropertyMaxIterationCount>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#rulePropertyMaxIterationCount>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest322.ttl> a mf:ManifestEntry ;
@@ -10340,7 +10361,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#symbol>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#symbol>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest323.ttl> a mf:ManifestEntry ;
@@ -10371,7 +10392,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#thisUnbound>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#thisUnbound>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest324.ttl> a mf:ManifestEntry ;
@@ -10402,7 +10423,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#update>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#update>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest325.ttl> a mf:ManifestEntry ;
@@ -10433,7 +10454,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#violationDetail>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#violationDetail>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest326.ttl> a mf:ManifestEntry ;
@@ -10464,7 +10485,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#violationLevel>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#violationLevel>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest327.ttl> a mf:ManifestEntry ;
@@ -10495,7 +10516,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#violationPath>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#violationPath>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest328.ttl> a mf:ManifestEntry ;
@@ -10526,7 +10547,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#violationRoot>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#violationRoot>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest329.ttl> a mf:ManifestEntry ;
@@ -10557,7 +10578,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#violationSource>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#violationSource>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest330.ttl> a mf:ManifestEntry ;
@@ -10588,7 +10609,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#violationValue>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#violationValue>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest331.ttl> a mf:ManifestEntry ;
@@ -10619,7 +10640,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#argument1>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#argument1>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest332.ttl> a mf:ManifestEntry ;
@@ -10650,7 +10671,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#argument2>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#argument2>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest333.ttl> a mf:ManifestEntry ;
@@ -10681,7 +10702,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#arguments>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#arguments>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest334.ttl> a mf:ManifestEntry ;
@@ -10712,7 +10733,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#body>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#body>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest335.ttl> a mf:ManifestEntry ;
@@ -10743,7 +10764,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#builtin>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#builtin>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest336.ttl> a mf:ManifestEntry ;
@@ -10774,7 +10795,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#classPredicate>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#classPredicate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest337.ttl> a mf:ManifestEntry ;
@@ -10805,7 +10826,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#dataRange>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#dataRange>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest338.ttl> a mf:ManifestEntry ;
@@ -10836,7 +10857,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#head>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#head>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest339.ttl> a mf:ManifestEntry ;
@@ -10867,7 +10888,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2003/11/swrl#propertyPredicate>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2003/11/swrl#propertyPredicate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest340.ttl> a mf:ManifestEntry ;
@@ -10898,7 +10919,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#bottomObjectProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#bottomObjectProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest341.ttl> a mf:ManifestEntry ;
@@ -10929,7 +10950,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#topObjectProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#topObjectProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest342.ttl> a mf:ManifestEntry ;
@@ -10960,7 +10981,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#bottomDataProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#bottomDataProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest343.ttl> a mf:ManifestEntry ;
@@ -10991,7 +11012,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#topDataProperty>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#topDataProperty>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest344.ttl> a mf:ManifestEntry ;
@@ -11022,7 +11043,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#versionInfo>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#versionInfo>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest345.ttl> a mf:ManifestEntry ;
@@ -11053,7 +11074,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#backwardCompatibleWith>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#backwardCompatibleWith>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest346.ttl> a mf:ManifestEntry ;
@@ -11084,7 +11105,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#deprecated>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#deprecated>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest347.ttl> a mf:ManifestEntry ;
@@ -11115,7 +11136,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#incompatibleWith>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#incompatibleWith>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest348.ttl> a mf:ManifestEntry ;
@@ -11146,7 +11167,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#priorVersion>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#priorVersion>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest349.ttl> a mf:ManifestEntry ;
@@ -11177,7 +11198,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#imports>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#imports>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest350.ttl> a mf:ManifestEntry ;
@@ -11208,7 +11229,7 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/2002/07/owl#versionIRI>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/2002/07/owl#versionIRI>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) . 
 <propertyTest351.ttl> a mf:ManifestEntry ;
@@ -11239,6 +11260,6 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://spinrdf.org/spin#imports>))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://spinrdf.org/spin#imports>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) .

@@ -23,24 +23,41 @@
         kgi: sd:namedGraph $rawEndpointUrl .
         SERVICE $rawEndpointUrl { 
             {
-                SELECT ?whatever WHERE { 
+                SELECT ?whatever WHERE {
                     {
+                        ?whatever rdfs:subClassOf <http://www.w3.org/ns/shacl#NodeShape> .
+                    } UNION {
+                        ?whatever owl:equivalentClass <http://www.w3.org/ns/shacl#NodeShape> .
+                    } UNION {
+                        ?whatever a <http://www.w3.org/ns/shacl#NodeShape> .
+                    }
+                } LIMIT 1
+            }
+        }
+    }""" ,
+    """PREFIX voaf: <http://purl.org/vocommons/voaf#>
+    PREFIX kgi: <http://ns.inria.fr/kg/index#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX prov: <http://www.w3.org/ns/prov#>
+    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    ASK { 
+        kgi: sd:namedGraph $rawEndpointUrl .
+        SERVICE $rawEndpointUrl { 
+            {
+                SELECT ?whatever WHERE { 
+                    GRAPH ?g {
                         {
                             ?whatever rdfs:subClassOf <http://www.w3.org/ns/shacl#NodeShape> .
                         } UNION {
                             ?whatever owl:equivalentClass <http://www.w3.org/ns/shacl#NodeShape> .
                         } UNION {
                             ?whatever a <http://www.w3.org/ns/shacl#NodeShape> .
-                        }
-                    } UNION {
-                        GRAPH ?g {
-                            {
-                                ?whatever rdfs:subClassOf <http://www.w3.org/ns/shacl#NodeShape> .
-                            } UNION {
-                                ?whatever owl:equivalentClass <http://www.w3.org/ns/shacl#NodeShape> .
-                            } UNION {
-                                ?whatever a <http://www.w3.org/ns/shacl#NodeShape> .
-                            }
                         }
                     }
                 } LIMIT 1

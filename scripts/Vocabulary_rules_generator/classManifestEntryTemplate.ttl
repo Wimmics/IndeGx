@@ -30,6 +30,6 @@
             } WHERE {
                 BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(%%%CLASS%%%) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) .

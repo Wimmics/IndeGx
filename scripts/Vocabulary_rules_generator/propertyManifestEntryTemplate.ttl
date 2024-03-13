@@ -27,6 +27,6 @@
             } WHERE {
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(%%%PROPERTY%%%))), "PropertyPartition" )) AS ?propertyPartition )
                 BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(%%%PROPERTY%%%) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
-            }""" ;
+            }"""
         ]
     ) .
