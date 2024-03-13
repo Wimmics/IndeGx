@@ -109,7 +109,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX voaf: <http://purl.org/vocommons/voaf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-SELECT DISTINCT ?vocab ?property (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+SELECT DISTINCT ?vocab ?property ?endpointUrl {
     {
         { ?property a rdf:Property }
         UNION { ?property a owl:ObjectProperty }
@@ -212,4 +212,25 @@ SELECT DISTINCT ?endpointUrl ?vocab {
         ?occurence voaf:inDataset ?endpointUrl .
     }
 } GROUP BY ?endpointUrl ?vocab
+```
+
+### Cooccurence of vocabularies
+
+```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?vocab1 ?vocab2 (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+    ?elem1 rdfs:isDefinedBy ?vocab1 ;
+        voaf:usageInDataset ?occurence1 .
+    ?occurence1 voaf:inDataset ?endpointUrl .
+  OPTIONAL {
+    ?elem2 rdfs:isDefinedBy ?vocab2 ;
+        voaf:usageInDataset ?occurence2 .
+    ?occurence2 voaf:inDataset ?endpointUrl .
+  	FILTER(STR(?vocab1) < STR(?vocab2))
+  }
+} GROUP BY ?vocab1 ?vocab2
 ```
