@@ -1,0 +1,20 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT ?property {
+    { ?property a rdf:Property }
+    UNION { ?property a owl:ObjectProperty }
+    UNION { ?property a owl:DatatypeProperty }
+    UNION { ?property a owl:AnnotationProperty }
+    UNION { ?property a owl:OntologyProperty }
+    UNION { ?property a owl:SymmetricProperty }
+    UNION { ?property a owl:TransitiveProperty }
+    UNION { ?property a owl:FunctionalProperty }
+    UNION { ?property a owl:InverseFunctionalProperty }
+    UNION { ?property a owl:AsymmetricProperty }
+    UNION { ?property a owl:ReflexiveProperty }
+    UNION { ?property a owl:IrreflexiveProperty }
+    UNION { ?property a owl:DeprecatedProperty }
+
+    FILTER(ISIRI(?property))
+}

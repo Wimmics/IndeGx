@@ -1,0 +1,32 @@
+
+%%%ENTRY%%% a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of %%%PROPERTY%%% in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                %%%PROPERTY%%% voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property %%%PROPERTY%%% ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(%%%PROPERTY%%%))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(%%%PROPERTY%%%) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) .

@@ -13,5 +13,5 @@
 
 kgi:catalogResource  a dcat:Catalog ;
     dcat:dataset [ 
-        void:sparqlEndpoint <https://fr.dbpedia.org/sparql> , <http://rdf.muninn-project.org/sparql> , <https://taxref/mnhn.fr/sparql> , <http://weakg.i3s.unice.fr/sparql>
+        void:sparqlEndpoint <http://taxref.mnhn.fr/sparql>
     ] .

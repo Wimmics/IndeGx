@@ -1,0 +1,84 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://www.w3.org/2003/11/swrl> rdfs:comment "RDF Schema definition of the RDF Concrete Syntax for the Semantic Web Rule Language" ;
+  owl:versionInfo "$Id: swrl.rdf,v 1.1 2004/05/21 18:46:39 vivien Exp $" .
+
+<http://www.w3.org/2003/11/swrl#Atom> a rdfs:Class ;
+  rdfs:comment "common superclass" .
+
+<http://www.w3.org/2003/11/swrl#Builtin> a rdfs:Class .
+
+<http://www.w3.org/2003/11/swrl#BuiltinAtom> a rdfs:Class ;
+  rdfs:comment "consists of a builtin and a List of arguments" ;
+  rdfs:subClassOf <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#ClassAtom> a rdfs:Class ;
+  rdfs:comment "consists of a classPredicate and argument1" ;
+  rdfs:subClassOf <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#DataRangeAtom> a rdfs:Class ;
+  rdfs:comment "consists of a dataRange and argument1" ;
+  rdfs:subClassOf <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> a rdfs:Class ;
+  rdfs:comment "consists of a propertyPredicate (owl:DatatypeProperty), argument1 (owl:Thing), and argument2 (rdfs:Literal)" ;
+  rdfs:subClassOf <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom> a rdfs:Class ;
+  rdfs:comment "consists of argument1 (owl:Thing) and argument2 (owl:Thing)" ;
+  rdfs:subClassOf <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#Imp> a rdfs:Class ;
+  rdfs:comment "implication (rule)" .
+
+<http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> a rdfs:Class ;
+  rdfs:comment "consists of a propertyPredicate (owl:ObjectProperty), argument1 (owl:Thing), and argument2 (owl:Thing)" ;
+  rdfs:subClassOf <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#SameIndividualAtom> a rdfs:Class ;
+  rdfs:comment "consists of argument1 (owl:Thing) and argument2 (owl:Thing)" ;
+  rdfs:subClassOf <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#Variable> a rdfs:Class ;
+  rdfs:comment "indicate that a URI is being used as a variable" .
+
+<http://www.w3.org/2003/11/swrl#argument1> a rdf:Property ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#Atom> ;
+  rdfs:range rdfs:Resource .
+
+<http://www.w3.org/2003/11/swrl#argument2> a rdf:Property ;
+  rdfs:comment "can be a Literal or Resource" ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#Atom> .
+
+<http://www.w3.org/2003/11/swrl#arguments> a rdf:Property ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+  rdfs:range rdf:List .
+
+<http://www.w3.org/2003/11/swrl#body> a rdf:Property ;
+  rdfs:comment "rule body (antecedent):  List of Atom" ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#Imp> ;
+  rdfs:range rdf:List .
+
+<http://www.w3.org/2003/11/swrl#builtin> a rdf:Property ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+  rdfs:range <http://www.w3.org/2003/11/swrl#Builtin> .
+
+<http://www.w3.org/2003/11/swrl#classPredicate> a rdf:Property ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+  rdfs:range rdfs:Class .
+
+<http://www.w3.org/2003/11/swrl#dataRange> a rdf:Property ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#DataRangeAtom> ;
+  rdfs:range owl:DataRange .
+
+<http://www.w3.org/2003/11/swrl#head> a rdf:Property ;
+  rdfs:comment "rule head (consequent):  List of Atom" ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#Imp> ;
+  rdfs:range rdf:List .
+
+<http://www.w3.org/2003/11/swrl#propertyPredicate> a rdf:Property ;
+  rdfs:domain <http://www.w3.org/2003/11/swrl#Atom> ;
+  rdfs:range rdf:Property .
+

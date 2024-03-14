@@ -1,0 +1,22 @@
+CONSTRUCT {
+    ?elem  rdf:type ?type ;
+        rdfs:isDefinedBy ?ontology .    
+} {
+    {
+        ?elem  rdf:type ?type ;
+            rdfs:isDefinedBy ?ontology .
+    } UNION {
+        GRAPH ?ontology {
+            {
+                ?elem a ?type .
+            } UNION {
+                ?elem rdfs:subClassOf ?type .
+            }
+            FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
+            FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
+        }
+    }
+    FILTER(isIRI(?elem))
+    FILTER(isIRI(?ontology))
+    FILTER(STRSTARTS(STR(?elem), STR(?ontology)))
+}
