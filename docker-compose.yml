@@ -11,6 +11,7 @@ services:
     volumes:
       - ./output:/usr/local/corese/log
       - ./config:/usr/local/corese/config
+      - ./rules:/rules
     extra_hosts:
       - host.docker.internal:host-gateway
   indegx:
