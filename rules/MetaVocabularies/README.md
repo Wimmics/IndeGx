@@ -234,3 +234,24 @@ SELECT DISTINCT ?vocab1 ?vocab2 (COUNT(DISTINCT ?endpointUrl) AS ?count) {
   }
 } GROUP BY ?vocab1 ?vocab2
 ```
+
+### Vocabularies used alone
+
+```sparql
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?vocab1 (COUNT(DISTINCT ?endpointUrl) AS ?count) {
+    ?elem1 rdfs:isDefinedBy ?vocab1 ;
+        voaf:usageInDataset ?occurence1 .
+    ?occurence1 voaf:inDataset ?endpointUrl .
+  FILTER NOT EXISTS {
+    ?elem2 rdfs:isDefinedBy ?vocab2 ;
+        voaf:usageInDataset ?occurence2 .
+    ?occurence2 voaf:inDataset ?endpointUrl .
+  	FILTER(STR(?vocab1) != STR(?vocab2))
+  }
+} GROUP BY ?vocab1
+```
