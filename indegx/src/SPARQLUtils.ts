@@ -212,8 +212,8 @@ export function queryContainsService(queryString: string): boolean {
 export function addServiceClause(queryString: string, endpoint: string): string {
     let parser = new sparqljs.Parser();
     try {
-        const parsedQuery = parser.parse(queryString);
         if (isSparqlConstruct(queryString) || isSparqlSelect(queryString) || isSparqlAsk(queryString) || isSparqlDescribe(queryString)) {
+            const parsedQuery = parser.parse(queryString);
             let serviceClause = {
                 type: "service",
                 name: { termType: "NamedNode", value: endpoint },
