@@ -11,9 +11,10 @@
     kgi:query """ASK {
         SERVICE $rawEndpointUrl {
             {
-                SELECT ( (NOW()!=NOW()) AS ?r) 
+                SELECT ( NOW() AS ?t1) (NOW() AS ?t2) 
                 WHERE {
                 } LIMIT 1
             }
         }
+        FILTER(?t1 != ?t2)
     }"""  .

@@ -11,9 +11,10 @@
     kgi:query """ASK {
         SERVICE $rawEndpointUrl {
             {
-                SELECT ( (RAND()=RAND()) AS ?r) 
+                SELECT ( RAND() AS ?r1) (RAND() AS ?r2) 
                 WHERE {
                 } LIMIT 1
             }
         }
+        FILTER(?r1 = ?r2)
     }"""  .

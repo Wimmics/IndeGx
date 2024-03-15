@@ -22,12 +22,73 @@
                 $rawEndpointUrl a dcat:DataService , sd:Service .
             }"""
         ]
+        [
+            mf:action """PREFIX js: <function://fr.inria.corese.core.extension.Report>
+            PREFIX xt: <http://ns.inria.fr/sparql-extension/>
+            PREFIX dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT {
+                $rawEndpointUrl kgi:report ?encodedReport , ?encodedFunctionReport .
+            } WHERE {
+                BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
+                SERVICE ?reportModeEndpointUrl {
+                        ?s rdfs:label 'Banana'@en . 
+                }
+                values (?_service_report_0 ){
+                    (UNDEF )
+                }
+                BIND( ENCODE_FOR_URI( STR(js:report()) ) AS ?encodedFunctionReport)
+                BIND( ENCODE_FOR_URI( STR(?_service_report_0) ) AS ?encodedReport)
+            }"""
+        ]
+        [
+            mf:action """PREFIX js: <function://fr.inria.corese.core.extension.Report>
+            PREFIX xt: <http://ns.inria.fr/sparql-extension/>
+            PREFIX dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT {
+                $rawEndpointUrl kgi:server ?server, ?serverGet .
+            } WHERE {
+                BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
+                SERVICE ?reportModeEndpointUrl {
+                        ?s rdfs:label 'Banana'@en . 
+                }
+                values (?_service_report_0 ){
+                    (UNDEF )
+                }
+                BIND( xt:get(?_service_report_0, "server") AS ?serverGet)
+                BIND( js:server() AS ?server)
+            }"""
+        ]
         <differentRANDsameValue.ttl>
         <differentNOWdifferentValue.ttl>
     ) .
 
 <differentRANDsameValue.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentRANDsameValue.ttl> ;
+                        dqv:value ?r1 ;
+                        dqv:value ?r2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( RAND() AS ?r1) 
+                    BIND( RAND() AS ?r2) 
+                }
+            }"""
+        ]
         [
             mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
@@ -36,16 +97,65 @@
                 $rawEndpointUrl sd:feature kgi:BadRandomNumber .
             }"""
         ]
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentRANDsameValue.ttl> ;
+                        dqv:value ?r1 ;
+                        dqv:value ?r2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( RAND() AS ?r1) 
+                    BIND( RAND() AS ?r2) 
+                }
+            }"""
+        ]
     ) .
 
 <differentNOWdifferentValue.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentNOWdifferentValue.ttl> ;
+                        dqv:value ?t1 ;
+                        dqv:value ?t2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( NOW() AS ?t1) 
+                    BIND( NOW() AS ?t2)
+                }
+            }"""
+        ]
         [
             mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX void: <http://rdfs.org/ns/void#>
             INSERT DATA {
                 $rawEndpointUrl sd:feature kgi:BadNOWtime .
+            }"""
+        ]
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentNOWdifferentValue.ttl> ;
+                        dqv:value ?t1 ;
+                        dqv:value ?t2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( NOW() AS ?t1) 
+                    BIND( NOW() AS ?t2) 
+                }
             }"""
         ]
     ) .

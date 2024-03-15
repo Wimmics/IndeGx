@@ -1,5 +1,18 @@
 # Set of rules for the test of well known implementation mistakes in SPARQL servers
 
+
+
+## Number of endpoints
+
+```sparql
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+SELECT DISTINCT (COUNT(DISTINCT ?endpoint) AS ?count) {
+  ?endpoint a dcat:DataService , sd:Service .
+}
+```
+
 ## Differend RAND() calls, same results
 
 Some endpoints return the same random number for two different calls of the RAND function in the same query.
@@ -9,7 +22,7 @@ Query to obtain the list of endpoints making this mistake:
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-SELECT ?endpoint {
+SELECT DISTINCT (COUNT(DISTINCT ?endpoint) AS ?count) {
   ?endpoint sd:feature kgi:BadRandomNumber ;
   	a dcat:DataService , sd:Service .
 }
@@ -21,10 +34,28 @@ Some endpoints return the different values for two different calls of the NOW fu
 Query to obtain the list of endpoints making this mistake:
 
 ```sparql
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX kgi: <http://ns.inria.fr/kg/index#>
 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-SELECT DISTINCT ?endpoint {
+SELECT DISTINCT (COUNT(DISTINCT ?endpoint) AS ?count) {
     ?endpoint sd:feature kgi:BadNOWtime ;
   	    a dcat:DataService , sd:Service .
 }
 ```
+
+## List of endpoints and their detected errors
+
+```sparql
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+SELECT DISTINCT ?endpoint ?badRandom ?badTimeNow {
+  	?endpoint a dcat:DataService , sd:Service .
+  BIND( EXISTS { ?endpoint sd:feature kgi:BadRandomNumber . } AS ?badRandom )
+    BIND( EXISTS { ?endpoint sd:feature kgi:BadNOWtime . } AS ?badTimeNow )
+}
+```
+
+## TODO list
+
+- https://github.com/w3c/sparql-dev/issues/195
