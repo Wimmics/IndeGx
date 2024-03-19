@@ -28,7 +28,7 @@ for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     echo "Treating $catalog"
     partition_config='{
     "pre": "",
-    "manifest": "file:///rules/CommonSPARQLServerErrors/_manifest.ttl",
+    "manifest": "file:///rules/CommonPitfalls/_manifest.ttl",
     "post": "",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,

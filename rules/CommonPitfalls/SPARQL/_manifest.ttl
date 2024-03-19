@@ -7,67 +7,6 @@
 
 <> a mf:Manifest ;
     mf:entries (
-        <init.ttl>
-    ) .
-
-
-<init.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            mf:action """PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            INSERT DATA {
-                $rawEndpointUrl a dcat:DataService , sd:Service .
-            }"""
-        ]
-        [
-            mf:action """PREFIX js: <function://fr.inria.corese.core.extension.Report>
-            PREFIX xt: <http://ns.inria.fr/sparql-extension/>
-            PREFIX dt: <http://ns.inria.fr/sparql-datatype/>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            INSERT {
-                $rawEndpointUrl kgi:report ?encodedReport , ?encodedFunctionReport .
-            } WHERE {
-                BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
-                SERVICE ?reportModeEndpointUrl {
-                        ?s rdfs:label 'Banana'@en . 
-                }
-                values (?_service_report_0 ){
-                    (UNDEF )
-                }
-                BIND( ENCODE_FOR_URI( STR(js:report()) ) AS ?encodedFunctionReport)
-                BIND( ENCODE_FOR_URI( STR(?_service_report_0) ) AS ?encodedReport)
-            }"""
-        ]
-        [
-            mf:action """PREFIX js: <function://fr.inria.corese.core.extension.Report>
-            PREFIX xt: <http://ns.inria.fr/sparql-extension/>
-            PREFIX dt: <http://ns.inria.fr/sparql-datatype/>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX dcat: <http://www.w3.org/ns/dcat#>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-            PREFIX void: <http://rdfs.org/ns/void#>
-            INSERT {
-                $rawEndpointUrl kgi:server ?server, ?serverGet .
-            } WHERE {
-                BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
-                SERVICE ?reportModeEndpointUrl {
-                        ?s rdfs:label 'Banana'@en . 
-                }
-                values (?_service_report_0 ){
-                    (UNDEF )
-                }
-                BIND( xt:get(?_service_report_0, "server") AS ?serverGet)
-                BIND( js:server() AS ?server)
-            }"""
-        ]
         <differentRANDsameValue.ttl>
         <differentNOWdifferentValue.ttl>
     ) .
@@ -77,10 +16,9 @@
         [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             INSERT {
-                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                $rawEndpointUrl dqv:hasQualityMeasurement [
                         dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentRANDsameValue.ttl> ;
-                        dqv:value ?r1 ;
-                        dqv:value ?r2 
+                        dqv:value ?r1 , ?r2 
                     ]
             } WHERE {
                 SERVICE $rawEndpointUrl {
@@ -102,10 +40,9 @@
         [
             mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
             INSERT {
-                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                $rawEndpointUrl dqv:hasQualityMeasurement [
                         dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentRANDsameValue.ttl> ;
-                        dqv:value ?r1 ;
-                        dqv:value ?r2 
+                        dqv:value ?r1 , ?r2 
                     ]
             } WHERE {
                 SERVICE $rawEndpointUrl {
