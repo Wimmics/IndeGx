@@ -1,0 +1,65 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix kg: <http://ns.inria.fr/corese/kgram/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+<http://creativecommons.org/licenses/by/1.0/> a <http://web.resource.org/cc/License> ;
+  <http://web.resource.org/cc/permits> <http://web.resource.org/cc/DerivativeWorks> ;
+  <http://web.resource.org/cc/permits> <http://web.resource.org/cc/Distribution> ;
+  <http://web.resource.org/cc/permits> <http://web.resource.org/cc/Reproduction> ;
+  <http://web.resource.org/cc/requires> <http://web.resource.org/cc/Attribution> ;
+  <http://web.resource.org/cc/requires> <http://web.resource.org/cc/Notice> .
+
+<http://iandavis.com/id/me> a foaf:Person ;
+  foaf:name "Ian Davis" .
+
+kg:default a <http://web.resource.org/cc/Work> ;
+  dc:type <http://purl.org/dc/dcmitype/Text> ;
+  <http://web.resource.org/cc/license> <http://creativecommons.org/licenses/by/1.0/> .
+
+<http://purl.org/vocab/vann/> a owl:Ontology ;
+  dc:creator <http://iandavis.com/id/me> ;
+  dc:date "2010-06-07" ;
+  dc:description "This document describes a vocabulary for annotating descriptions of vocabularies with examples and usage notes."@en ;
+  dc:identifier "http://purl.org/vocab/vann/vann-vocab-20050401" ;
+  dc:isVersionOf <http://purl.org/vocab/vann/> ;
+  dc:replaces <http://purl.org/vocab/vann/vann-vocab-20040305> ;
+  dc:rights "Copyright © 2005 Ian Davis" ;
+  dc:title "VANN: A vocabulary for annotating vocabulary descriptions"@en ;
+  <http://purl.org/vocab/vann/preferredNamespacePrefix> "vann" ;
+  <http://purl.org/vocab/vann/preferredNamespaceUri> "http://purl.org/vocab/vann/" .
+
+<http://purl.org/vocab/vann/changes> a owl:AnnotationProperty ;
+  rdfs:comment "A reference to a resource that describes changes between this version of a vocabulary and the previous."@en ;
+  rdfs:isDefinedBy <http://purl.org/vocab/vann/> ;
+  rdfs:label "Changes"@en ;
+  rdfs:subPropertyOf rdfs:seeAlso .
+
+<http://purl.org/vocab/vann/example> a owl:AnnotationProperty ;
+  rdfs:comment "A reference to a resource that provides an example of how this resource can be used."@en ;
+  rdfs:isDefinedBy <http://purl.org/vocab/vann/> ;
+  rdfs:label "Example"@en ;
+  rdfs:subPropertyOf rdfs:seeAlso .
+
+<http://purl.org/vocab/vann/preferredNamespacePrefix> a owl:AnnotationProperty ;
+  rdfs:comment "The preferred namespace prefix to use when using terms from this vocabulary in an XML document."@en ;
+  rdfs:isDefinedBy <http://purl.org/vocab/vann/> ;
+  rdfs:label "Preferred Namespace Prefix"@en .
+
+<http://purl.org/vocab/vann/preferredNamespaceUri> a owl:AnnotationProperty ;
+  rdfs:comment "The preferred namespace URI to use when using terms from this vocabulary in an XML document."@en ;
+  rdfs:isDefinedBy <http://purl.org/vocab/vann/> ;
+  rdfs:label "Preferred Namespace Uri"@en .
+
+<http://purl.org/vocab/vann/termGroup> a owl:AnnotationProperty ;
+  rdfs:comment "A group of related terms in a vocabulary."@en ;
+  rdfs:isDefinedBy <http://purl.org/vocab/vann/> ;
+  rdfs:label "Term Group"@en .
+
+<http://purl.org/vocab/vann/usageNote> a owl:AnnotationProperty ;
+  rdfs:comment "A reference to a resource that provides information on how this resource is to be used."@en ;
+  rdfs:isDefinedBy <http://purl.org/vocab/vann/> ;
+  rdfs:label "Usage Note"@en ;
+  rdfs:subPropertyOf rdfs:seeAlso .
+

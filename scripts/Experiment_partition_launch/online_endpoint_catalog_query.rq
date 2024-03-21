@@ -1,0 +1,29 @@
+PREFIX schema: <https://schema.org/> 
+PREFIX dcat: <http://www.w3.org/ns/dcat#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX pav: <http://purl.org/pav/>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+
+CONSTRUCT {
+    kgi:catalog a dcat:Catalog ;
+        dcat:dataset ?dataset .
+    ?dataset dcat:endpointURL ?endpoint ;
+        void:sparqlEndpoint ?endpoint .
+} {
+    ?dataset dcat:endpointURL ?endpoint ;
+        schema:serverStatus schema:Online .
+    FILTER( # There is not an online HTTP version of this endpoint already detected
+        NOT EXISTS {
+            BIND( IF( CONTAINS( STR(?endpoint), "https://" ), IRI( REPLACE( STR(?endpoint), "https://", "http://" ) ) , ?endpoint ) AS ?urlHttp )
+            ?otherDataset dcat:endpointURL ?urlHttp .
+        }
+    )
+    FILTER( # There is not an online HTTPS version of this endpoint already detected
+        NOT EXISTS {
+            BIND( IF( CONTAINS( STR(?endpoint), "http://" ), IRI( REPLACE( STR(?endpoint), "http://", "https://" ) ) , ?endpoint ) AS ?urlHttps )
+            ?otherDataset dcat:endpointURL ?urlHttps .
+        }
+    )
+}

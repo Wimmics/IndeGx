@@ -36,7 +36,11 @@ CONSTRUCT {
 } WHERE {
     GRAPH ?vocabGraph {
         {
+            {
             ?elem a ?type .
+            } UNION {
+                ?elem rdfs:subClassOf ?type .
+            }
             FILTER( ?type IN ( owl:Class, rdfs:Class, skos:Concept ) )
             FILTER( ?elem NOT IN ( owl:Class, rdfs:Class, skos:Concept ) )
         }
