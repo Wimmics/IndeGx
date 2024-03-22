@@ -1,0 +1,32 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of a date of modification." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for a date of modification of the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dce: <http://purl.org/dc/elements/1.1/>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        ASK {
+            # Find a date of modification
+            {?kg dcterms:modified ?date .}
+            UNION {?kg schema:dateModified ?date .}
+            UNION {?kg pav:lastUpdateOn ?date .}
+            UNION {?kg pav:contributedOn ?date .}
+            # With PROV
+            UNION {
+                ?kg prov:wasGeneratedBy ?act .
+                # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                {?act prov:startedAtTime ?date .} UNION {?act prov:endedAtTime ?date .}
+            }
+        }
+""" .

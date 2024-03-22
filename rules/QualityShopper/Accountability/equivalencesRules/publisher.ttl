@@ -1,0 +1,35 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of a publisher." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for a publisher of the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dce: <http://purl.org/dc/elements/1.1/>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        ASK {
+            # Find a publisher
+            {?kg dce:publisher ?publisher .}
+            UNION {?kg dcterms:publisher ?publisher .}
+            UNION {?kg schema:publisher ?publisher .}
+            UNION {?kg schema:sdPublisher ?publisher .}
+            UNION {?kg pav:providedBy ?publisher .}
+            # With PROV
+            UNION {
+                  ?kg prov:wasGeneratedBy ?act .
+                  ?act a prov:Publish .
+                  ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?publisher .
+                  ?publisher a ?type .
+                  VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+            }
+        }
+""" .

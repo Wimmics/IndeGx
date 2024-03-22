@@ -1,0 +1,209 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix : <http://www.exemple.com/sin#> .
+
+@prefix sin: <http://www.exemple.com/sin#> .
+
+:InformationNeedShape a sh:NodeShape ;
+    sh:targetClass :InformationNeed ;
+    # Ontology
+    sh:property [
+        sh:path [ sh:inversePath :belongsTo ] ;
+        sh:class :Tag ;
+        sh:name "InformationNeed 1/(belongTo) Tag" ;
+        sh:minCount 1 ;
+        sh:message "At least one Tag should be associated with the InformationNeed through the property belongTo." ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath :structures ] ;
+        sh:class :Labeling ;
+        sh:name "InformationNeed 1/(structures) Labeling" ;
+        sh:minCount 1 ;
+        sh:message "At least one Labeling should be associated with the InformationNeed through the property structures." ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath :requiredBy ] ;
+        sh:class :Question ;
+        sh:name "InformationNeed 1/(requiredBy) Question" ;
+        sh:minCount 1 ;
+        sh:message "At least one Question should be associated with the InformationNeed through the property requiredBy." ;
+    ] ;
+    # Accountability
+    sh:property [
+        sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
+        sh:name "InformationNeed label";
+        sh:minCount 1 ;
+        sh:message "A InformationNeed should have at least one label."
+    ] ;
+    sh:property [
+        sh:path dcterms:creator ;
+        sh:name "InformationNeed creator";
+        sh:minCount 1 ;
+        sh:message "A InformationNeed should have at least one creator."
+    ] ;
+    sh:property [
+        sh:path dcterms:created ;
+        sh:name "InformationNeed creation date";
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A InformationNeed should have exactly one creation date."
+    ] .
+
+
+:QuestionShape a sh:NodeShape ;
+    sh:targetClass :Question ;
+    # Ontology
+    sh:property [
+        sh:path :isImplementedBy ;
+        sh:class :Query ;
+        sh:name "Question isImplementedBy Query" ;
+        sh:maxCount 1 ;
+        sh:message "A Question should be implemented with at most one Query." ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
+        sh:name "Question label";
+        sh:minCount 1 ;
+        sh:message "A Question should have at least one label, expressing the question itself."
+    ] ;
+    sh:property [
+       sh:path :requiredBy ;
+       sh:class :InformationNeed ;
+       sh:name "Question requiredBy InformationNeed" ;
+       sh:minCount 1 ;
+       sh:maxCount 1 ;
+       sh:message "Exactly one InformationNeed should be associated with a Question through the property requiredBy." ;
+    ] ;
+    # Tagging constraints
+    # At least one tagging
+    sh:property [
+       sh:path [ sh:inversePath :questionTagged ] ;
+       sh:class :Labeling ;
+       sh:name "Question is tagged through a labeling" ;
+       sh:minCount 1 ;
+       sh:maxCount 1 ;
+       sh:message "A Question should be tagged by exactly one labeling." ;
+    ] .
+
+
+:LabelingShape a sh:NodeShape ;
+    # Ontology
+    sh:targetClass :Labeling ;
+    sh:property [
+        sh:path :tagWith ;
+        sh:class :Tag ;
+        sh:name "Labeling tagWith Tag" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A Labeling should be associated with exactly one Tag." ;
+    ] ;
+    sh:property [
+        sh:path :questionTagged ;
+        sh:class :Question ;
+        sh:name "Labeling questionTagged Question" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A Labeling should be associated with exactly one Question." ;
+    ] ;
+    sh:property [
+       sh:path :structures ;
+       sh:class :InformationNeed ;
+       sh:name "Labeling 1/(structures) InformationNeed" ;
+       sh:minCount 1 ;
+       sh:maxCount 1 ;
+       sh:message "Exactly one InformationNeed should be associated with a Labeling through the property structures." ;
+    ] ;
+    # Ontology and tagging constraint
+    sh:property [
+        sh:path :weight ;
+        sh:or ( [ sh:datatype xsd:integer ] [ sh:datatype xsd:float ] [ sh:datatype xsd:double ] [ sh:datatype xsd:decimal ] ) ;
+        sh:name "Labeling weight" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minExclusive 0 ;
+        sh:message "A Labeling should be associated with exactly one weight, and should be a strictly positive number with one of the following xsd type: integer, float, double or decimal." ;
+    ] .
+
+:TagShape a sh:NodeShape ;
+    sh:targetClass :Tag ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
+        sh:name "Tag label";
+        sh:minCount 1 ;
+        sh:message "A Tag should have at least one label." ;
+    ] ;
+    sh:property [
+       sh:path :belongsTo ;
+       sh:class :InformationNeed ;
+       sh:name "Tag belongsTo InformationNeed" ;
+       sh:minCount 1 ;
+       sh:maxCount 1 ;
+       sh:message "Exactly one InformationNeed should be associated with a Tag through the property belongsTo." ;
+    ] ;
+    # Ontology and tagging constraint
+    sh:property [
+        sh:path :weight ;
+        sh:or ( [ sh:datatype xsd:integer ] [ sh:datatype xsd:float ] [ sh:datatype xsd:double ] [ sh:datatype xsd:decimal ] ) ;
+        sh:name "Tag weight" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:minExclusive 0 ;
+        sh:message "A Tag should be associated with exactly one weight, and should be striclty positive number with one of the following xsd type: integer, float, double or decimal." ;
+    ] ;
+    # Ontology and Hierarchy constraint
+    # Each tag should be a child
+    sh:property [
+        sh:path :isChildOf ;
+        sh:class :Tag ;
+        sh:name "Tag isChildOf Tag" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "In the hierarchy of tags, a Tag should be the child of exactly one Tag, except for the root." ;
+    ] ;
+    # Each should should have root as an ancestor
+    sh:property [
+       sh:path [ sh:oneOrMorePath :isChildOf ] ;
+       sh:hasValue :root ;
+       sh:name "Tag isChildOf* root" ;
+       sh:message "In the hierarchy of tags, a Tag should have the root as an ancestor." ;
+    ] ;
+    # Tagging constraint
+    # Only a leaf tag can be used in a tagging
+    # If a tag has no child, then it must be used in at least one tagging.
+    # If a tag has a child, it cannot be used in a tagging.
+    sh:xone (
+      [
+        sh:property [
+            sh:path [ sh:inversePath :isChildOf ] ;
+            sh:minCount 1 ;
+            sh:name "Tag either object in tagWith or in isChildOf" ;
+            sh:message "A Tag should either have a child Tag, or be used in one Tagging." ;
+        ]
+      ]
+      [
+        sh:property [
+            sh:path [ sh:inversePath :tagWith ] ;
+            sh:minCount 1 ;
+            sh:name "Tag either object in tagWith or in isChildOf" ;
+            sh:message "A Tag should either have a child Tag, or be used in one Tagging." ;
+        ]
+      ]
+    ) .
+
+:QueryShape a sh:NodeShape ;
+    sh:targetClass :Query ;
+    # Ontology
+    sh:property [
+       sh:path [ sh:inversePath :isImplementedBy ] ;
+       sh:class :Question ;
+       sh:name "Query 1/(isImplementedBy) Question" ;
+       sh:minCount 1 ;
+       sh:message "At least one Question should be associated with a Query through the property isImplementedBy." ;
+    ] .
