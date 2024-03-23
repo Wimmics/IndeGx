@@ -4904,7 +4904,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns575:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fliliana%2Flippische-ziegler-folia-interpretations%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fliliana%2Flippische-ziegler-folia-interpretations%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns576:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns576:sparql .
@@ -5929,7 +5930,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns722:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-03-22T07:36:07.606Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-03-23T07:38:01.395Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
