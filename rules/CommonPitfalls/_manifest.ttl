@@ -36,11 +36,16 @@
             } WHERE {
                 BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
                 SERVICE ?reportModeEndpointUrl {
-                        ?s rdfs:label 'Banana'@en . 
+                    {
+                        SELECT * {
+                            ?s ?p ?o
+                        } LIMIT 1
+                    }
                 }
                 values (?_service_report_0 ){
                     (UNDEF )
                 }
+                BIND( js:server() AS ?server)
                 BIND( ENCODE_FOR_URI( STR(js:report()) ) AS ?encodedFunctionReport)
                 BIND( ENCODE_FOR_URI( STR(?_service_report_0) ) AS ?encodedReport)
             }"""
@@ -59,13 +64,17 @@
             } WHERE {
                 BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
                 SERVICE ?reportModeEndpointUrl {
-                        ?s rdfs:label 'Banana'@en . 
+                    {
+                        SELECT * {
+                            ?s ?p ?o
+                        } LIMIT 1
+                    }
                 }
                 values (?_service_report_0 ){
                     (UNDEF )
                 }
-                BIND( xt:get(?_service_report_0, "server") AS ?serverGet)
                 BIND( js:server() AS ?server)
+                BIND( xt:get(?_service_report_0, "server") AS ?serverGet)
             }"""
         ]
         <SPARQL/_manifest.ttl>
