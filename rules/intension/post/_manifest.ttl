@@ -6,9 +6,867 @@
 
 <> a mf:Manifest ;
     mf:entries (
-        # <moveReasonerGraph.ttl>
+        <moveReasonerGraph.ttl>
         <extractEndpointExtension.ttl>
         <annotateEndpointWithLocation.ttl>
+    ) .
+
+<applyEquivalencesOfType.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            a mf:Action ;
+            mf:action """PREFIX pav: <http://purl.org/pav/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o 
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:creator
+                    schema:creator
+                    schema:author
+                    foaf:maker
+                    dce:creator
+                    pav:authoredBy
+                    pav:createdBy
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX pav: <http://purl.org/pav/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:contributor
+                    schema:editor
+                    schema:contributor
+                    dce:contributor
+                    pav:contributedBy
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX pav: <http://purl.org/pav/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:issued
+                    dcterms:available
+                    schema:datePublished
+                    schema:sdDatePublished
+                    pav:authoredOn
+                    pav:createdOn
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX pav: <http://purl.org/pav/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:publisher
+                    dce:publisher
+                    schema:publisher
+                    schema:sdPublisher
+                    pav:providedBy
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:created
+                    schema:dateCreated
+                    pav:createdOn
+                    prov:generatedAtTime
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    schema:locationCreated
+                    pav:createdAt
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    pav:createdWith
+                    pav:retrievedBy
+                    pav:importedBy
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:modified
+                    schema:dateModified
+                    pav:lastUpdateOn
+                    pav:contributedOn
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    prov:invalidatedAtTime
+                    schema:expires
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:valid
+                    schema:expires
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    void:vocabulary
+                    dcterms:conformsTo
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:subject
+                    dcat:theme
+                    schema:about
+                    foaf:topic
+                    foaf:primaryTopic
+                    skos:subject
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcat:keyword
+                    schema:keywords
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    foaf:depiction
+                    schema:image
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcat:endpointURL
+                    sd:endpoint
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcat:distribution
+                    schema:distribution
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:format
+                    dce:format
+                    schema:encodingFormat
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcat:version
+                    pav:version
+                    dcterms:hasVersion
+                    pav:hasCurrentVersion
+                    schema:version
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    adms:versionNotes
+                    owl:versionInfo
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:isVersionOf
+                    pav:previousVersion
+                    owl:priorVersion
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:language
+                    dce:language
+                    schema:inLanguage
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX adms: <http://www.w3.org/ns/adms#>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:identifier
+                    schema:identifier
+                    dce:identifier
+                    dcterms:identifier
+                    adms:identifier
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    schema:termCode
+                    <http://qudt.org/schema/qudt/acronym>
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcat:landingPage
+                    foaf:homepage
+                    schema:url
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    rdfs:seeAlso
+                    schema:relatedLink
+                    rdfs:seeAlso
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:references
+                    schema:publication
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            PREFIX schema: <http://schema.org/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    void:exampleResource
+                    schema:workExample
+                    skos:example
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+            PREFIX sto: <https://w3id.org/i40/sto#>
+            PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+            PREFIX cc: <http://creativecommons.org/ns#>
+            PREFIX dbpo: <http://dbpedia.org/ontology/>
+            PREFIX doap: <http://usefulinc.com/ns/doap#>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:license
+                    schema:license
+                    doap:license
+                    dbpo:license
+                    cc:license
+                    xhv:license
+                    sto:license
+                    nie:license
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dqv:hasQualityAnnotation
+                    schema:review
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:rights
+                    dcterms:accessRights
+                    dce:rights
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX pav: <http://purl.org/pav/>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:source
+                    schema:isBasedOn
+                    dcterms:source
+                    dce:source
+                    dcterms:provenance
+                    prov:hadPrimarySource
+                    prov:wasDerivedFrom
+                    pav:derivedFrom
+                    pav:importedFrom
+                    pav:retrievedFrom
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:spatial
+                    schema:spatialCoverage
+                }
+            }"""
+        ]
+        [
+            a mf:Action ;
+            mf:action """PREFIX schema: <http://schema.org/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            INSERT {
+                ?kg ?p ?o
+            } WHERE {
+                {
+                    ?kg a dcat:Dataset .
+                    ?kg ?p ?o
+                } UNION {
+                    GRAPH ?graph {
+                        ?kg a dcat:Dataset .
+                        ?kg ?p ?o
+                    }
+                }
+                VALUES ?p {
+                    dcterms:temporal
+                    schema:temporalCoverage .
+                }
+            }
+            """
+        ]
     ) .
 
 <moveReasonerGraph.ttl> a mf:ManifestEntry ;
