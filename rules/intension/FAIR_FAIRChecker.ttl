@@ -1,0 +1,657 @@
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dataid: <http://dataid.dbpedia.org/ns/core#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dce: <http://purl.org/dc/elements/1.1/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix equiv: <https://ns.inria.fr/kg/equivalence#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sparqles: <https://sparqles.ai.wu.ac.at/#> .
+@prefix sto: <https://w3id.org/i40/sto#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#>.
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+kgi:FAIRDataset a rdf:Class ;
+    rdfs:label "FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles" .
+
+kgi:F1AFAIRDataset a rdf:Class ;
+    rdfs:label "F1A FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Unique IDs" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+        )
+    ] .
+
+# F1B weak
+kgi:F1BweakFAIRDataset a rdf:Class ;
+    rdfs:label "F1B weak FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Persistent IDs" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+        )
+    ] .
+
+# F1B strong
+# ?kg a dcat:Dataset .
+# dcterms:identifier schema:identifier
+kgi:F1BstrongFAIRDataset a rdf:Class ;
+    rdfs:label "F1B strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Persistent IDs" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:identifier ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:identifier ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                )
+            ]
+        )
+    ] .
+
+# F2A weak
+# ?kg a dcat:Dataset .
+# ?kg ?p ?o .
+kgi:F2AweakFAIRDataset a rdf:Class ;
+    rdfs:label "F2B weak FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Structured metadata" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+        )
+    ] .
+
+# F2A strong
+# ?kg a dcat:Dataset .
+# dct:title
+# dct:description
+# dcat:accessURL
+# dcat:downloadURL
+# dcat:endpointDescription
+# dcat:endpointURL
+kgi:F2AstrongFAIRDataset a rdf:Class ;
+    rdfs:label "F2B strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Structured metadata" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:title ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:description ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcat:accessURL ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcat:downloadURL ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcat:endpointDescription ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcat:endpointURL ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                )
+            ]
+        )
+    ] .
+
+# F2B
+kgi:F2BFAIRDataset a rdf:Class ;
+    rdfs:label "F2B FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Shared vocabularies for metadata" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+        )
+    ] .
+
+# A1.1
+kgi:A11FAIRDataset a rdf:Class ;
+    rdfs:label "A1.1 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Open resolution protocol" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+        )
+    ] .
+
+# A1.2 weak
+kgi:A12FAIRDataset a rdf:Class ;
+    rdfs:label "A1.2 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Authorisation procedure or access rights" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+        )
+    ] .
+
+# A1.2 strong
+# odrl:hasPolicy
+# dct:rights
+# dct:accessRights
+# dct:license
+# schema:license
+kgi:A12strongFAIRDataset a rdf:Class ;
+    rdfs:label "A12 strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Authorisation procedure or access rights" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty odrl:hasPolicy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:rights ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:accessRights ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                )
+            ]
+        )
+    ] .
+
+# I1 see F2A
+kgi:I1weakFAIRDataset a rdf:Class ;
+    rdfs:label "I1 weak FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Machine readable format" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass kgi:F2AweakFAIRDataset .
+
+kgi:I1strongFAIRDataset a rdf:Class ;
+    rdfs:label "I1 strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Machine readable format" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass kgi:F2AstrongFAIRDataset .
+
+# I2 see F2B
+kgi:I2FAIRDataset a rdf:Class ;
+    rdfs:label "I2 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Use shared ontologies" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass kgi:F2BFAIRDataset .
+
+# I3
+kgi:I3FAIRDataset a rdf:Class ;
+    rdfs:label "I3 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses External links" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+        )
+    ] .
+
+# R1.1
+# schema:license
+# dct:license
+# doap:license
+# dbpedia-owl:license
+# cc:license
+# xhv:license
+# sto:license
+# nie:license
+kgi:R11FAIRDataset a rdf:Class ;
+    rdfs:label "R1.1 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Metadata includes license" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty doap:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dbpo:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty cc:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty xhv:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty sto:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty nie:license ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                )
+            ]
+        )
+    ] .
+
+# R1.2
+# prov:wasGeneratedBy
+# prov:wasDerivedFrom
+# prov:wasAttributedTo
+# prov:used
+# prov:wasInformedBy
+# prov:wasAssociatedWith
+# prov:startedAtTime
+# prov:endedAtTime
+# dct:hasVersion
+# dct:isVersionOf
+# dct:creator
+# dct:contributor
+# dct:publisher
+# pav:hasVersion
+# pav:version
+# pav:hasCurrentVersion
+# pav:createdBy
+# pav:authoredBy
+# pav:retrievedFrom
+# pav:importedFrom
+# pav:createdWith
+# pav:retrievedBy
+# pav:importedBy
+# pav:curatedBy
+# pav:createdAt
+# pav:previousVersion
+# schema:creator
+# schema:author
+# schema:publisher
+# schema:provider
+# schema:funder
+kgi:R12FAIRDataset a rdf:Class ;
+    rdfs:label "R1.2 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Metadata includes provenance" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    dcat:Dataset
+                    schema:Dataset
+                    dcmitype:Dataset
+                    void:Dataset
+                    sd:Dataset
+                )
+            ]
+            [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:wasGeneratedBy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:wasDerivedFrom ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:wasAttributedTo ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:used ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:wasInformedBy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:wasAssociatedWith ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:startedAtTime ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty prov:endedAtTime ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:hasVersion ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:isVersionOf ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:creator ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:contributor ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty dcterms:publisher ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:hasVersion ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:version ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:hasCurrentVersion ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:createdBy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:authoredBy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:retrievedFrom ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:importedFrom ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:createdWith ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:retrievedBy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:importedBy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:curatedBy ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:createdAt ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty pav:previousVersion ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:creator ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:author ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:publisher ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:provider ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                    [
+                        rdf:type owl:Restriction ;
+                        owl:onProperty schema:funder ;
+                        owl:someValuesFrom rdfs:Resource
+                    ]
+                )
+            ]
+        )
+    ] .
+
+# R1.3 see F2B
+kgi:RI3FAIRDataset a rdf:Class ;
+    rdfs:label "RI3 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Community standards" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass kgi:F2BFAIRDataset .
