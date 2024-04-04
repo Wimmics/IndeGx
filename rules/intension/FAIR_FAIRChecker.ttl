@@ -45,16 +45,7 @@ kgi:F1AFAIRDataset a rdf:Class ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            [
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    dcat:Dataset
-                    schema:Dataset
-                    dcmitype:Dataset
-                    void:Dataset
-                    sd:Dataset
-                )
-            ]
+            kgi:Dataset
         )
     ] .
 
@@ -66,16 +57,7 @@ kgi:F1BweakFAIRDataset a rdf:Class ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            [
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    dcat:Dataset
-                    schema:Dataset
-                    dcmitype:Dataset
-                    void:Dataset
-                    sd:Dataset
-                )
-            ]
+            kgi:Dataset
         )
     ] .
 
@@ -98,16 +80,7 @@ kgi:F2AweakFAIRDataset a rdf:Class ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            [
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    dcat:Dataset
-                    schema:Dataset
-                    dcmitype:Dataset
-                    void:Dataset
-                    sd:Dataset
-                )
-            ]
+            kgi:Dataset
         )
     ] .
 
@@ -130,45 +103,7 @@ kgi:F2AstrongFAIRDataset a rdf:Class ;
             kgi:DatasetWithDumpAnnotation
             kgi:DatasetWithSparqlEndpointAnnotation
             kgi:DatasetWithTitleAnnotation
-            [
-                owl:intersectionOf (
-                    [
-                        rdf:type owl:Class ;
-                        owl:unionOf (
-                            dcat:Dataset
-                            schema:Dataset
-                            dcmitype:Dataset
-                            void:Dataset
-                            sd:Dataset
-                        )
-                    ]
-                    [
-                        rdf:type owl:Class ;
-                        owl:unionOf (
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty dcat:accessURL ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty dcat:downloadURL ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty dcat:endpointDescription ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty dcat:endpointURL ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                        )
-                    ]
-                )
-            ]
+            kgi:DatasetWithURLAnnotation
         )
     ] .
 
@@ -180,16 +115,7 @@ kgi:F2BFAIRDataset a rdf:Class ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            [
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    dcat:Dataset
-                    schema:Dataset
-                    dcmitype:Dataset
-                    void:Dataset
-                    sd:Dataset
-                )
-            ]
+            kgi:Dataset
         )
     ] .
 
@@ -201,16 +127,7 @@ kgi:A11FAIRDataset a rdf:Class ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            [
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    dcat:Dataset
-                    schema:Dataset
-                    dcmitype:Dataset
-                    void:Dataset
-                    sd:Dataset
-                )
-            ]
+            kgi:Dataset
         )
     ] .
 
@@ -222,16 +139,7 @@ kgi:A12FAIRDataset a rdf:Class ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            [
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    dcat:Dataset
-                    schema:Dataset
-                    dcmitype:Dataset
-                    void:Dataset
-                    sd:Dataset
-                )
-            ]
+            kgi:Dataset
         )
     ] .
 
@@ -248,32 +156,8 @@ kgi:A12strongFAIRDataset a rdf:Class ;
     owl:equivalentClass [
         owl:unionOf (
             kgi:DatasetWithAccessRightsAnnotation
-            kgi:DatasetWithLicenseAnnotation
-            [
-                rdf:type owl:Class ;
-                owl:intersectionOf (
-                    [
-                        rdf:type owl:Class ;
-                        owl:unionOf (
-                            dcat:Dataset
-                            schema:Dataset
-                            dcmitype:Dataset
-                            void:Dataset
-                            sd:Dataset
-                        )
-                    ]
-                    [
-                        rdf:type owl:Class ;
-                        owl:unionOf (
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty odrl:hasPolicy ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                        )
-                    ]
-                )
-            ]
+            kgi:DatasetWithLicenseAnnotation 
+            kgi:DatasetWithPolicyAnnotation
         ) 
     ].
 
@@ -305,16 +189,7 @@ kgi:I3FAIRDataset a rdf:Class ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
-            [
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    dcat:Dataset
-                    schema:Dataset
-                    dcmitype:Dataset
-                    void:Dataset
-                    sd:Dataset
-                )
-            ]
+            kgi:Dataset
         )
     ] .
 
@@ -376,115 +251,18 @@ kgi:R12FAIRDataset a rdf:Class ;
             kgi:DatasetWithAuthorAnnotation
             kgi:DatasetWithContributorAnnotation
             kgi:DatasetWithPublisherAnnotation
+            kgi:DatasetWithPROVAnnotation
+            kgi:DatasetWithPAVAnnotation
             [
                 rdf:type owl:Class ;
                 owl:intersectionOf (
+                    kgi:Dataset
                     [
                         rdf:type owl:Class ;
                         owl:unionOf (
-                            dcat:Dataset
-                            schema:Dataset
-                            dcmitype:Dataset
-                            void:Dataset
-                            sd:Dataset
-                        )
-                    ]
-                    [
-                        rdf:type owl:Class ;
-                        owl:unionOf (
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:wasGeneratedBy ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:wasDerivedFrom ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:wasAttributedTo ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:used ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:wasInformedBy ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:wasAssociatedWith ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:startedAtTime ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty prov:endedAtTime ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
                             [
                                 rdf:type owl:Restriction ;
                                 owl:onProperty dcterms:isVersionOf ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:hasVersion ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:createdBy ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:authoredBy ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:retrievedFrom ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:importedFrom ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:createdWith ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:retrievedBy ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:importedBy ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:createdAt ;
-                                owl:someValuesFrom rdfs:Resource
-                            ]
-                            [
-                                rdf:type owl:Restriction ;
-                                owl:onProperty pav:previousVersion ;
                                 owl:someValuesFrom rdfs:Resource
                             ]
                             [
