@@ -10,26 +10,26 @@ fi
 
 online_status_source_catalog_url=https://raw.githubusercontent.com/Wimmics/IndeGx/endpoint_status/catalogs/catalog.latest-status.ttl
 online_endpoint_catalog_query=online_endpoint_catalog_query.rq
-online_endpoint_catalog_file=online_endpoint_catalog.trig
+online_endpoint_catalog_filename=online_endpoint_catalog.trig
+online_endpoint_catalog_file=${pwd}../../catalogs/$online_endpoint_catalog_filename
 
 # Extract a catalog of the endpoint that have been online in the last hour
 java -jar $corese_jar sparql -i $online_status_source_catalog_url -o $online_endpoint_catalog_file -q $online_endpoint_catalog_query -of trig
 
-cp $online_endpoint_catalog_file ../../catalogs/$online_endpoint_catalog_file
-
 # Partitioning the online catalog to bit size
 cd ../catalog_partitioner
-./script.sh ../../catalogs/$online_endpoint_catalog_file 20
-rm ../../catalogs/$online_endpoint_catalog_file
+./script.sh $online_endpoint_catalog_file 20
+
+rm $online_endpoint_catalog_file
 
 cd ../..
 
-for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
+for catalog in `ls catalogs/ | grep $online_endpoint_catalog_filename*`; do
     echo "Treating $catalog"
     partition_config='{
-    "pre": "file:///rules/MetaVocabularies/_pre_manifest.ttl",
-    "manifest": "file:///input/generated_metavocabulary_rules/_manifest.ttl",
-    "post": "file:///rules/MetaVocabularies/_post_manifest.ttl",
+    "pre": "file:///rules/intension/pre/_manifest.ttl",
+    "manifest": "file:///rules/intension/main/_manifest.ttl",
+    "post": "file:///rules/intension/post/_manifest.ttl",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
@@ -46,7 +46,5 @@ for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     ./run.sh -c /$partition_config_filename
 
     rm $partition_config_filename
-    rm $catalog
+    rm catalogs/$catalog
 done
-
-rm catalogs/$online_endpoint_catalog_file
