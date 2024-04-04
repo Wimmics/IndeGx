@@ -22,7 +22,8 @@ fi
 online_status_source_catalog_url=https://raw.githubusercontent.com/Wimmics/IndeGx/endpoint_status/catalogs/catalog.latest-status.ttl
 local_status_source_catalog=../../catalogs/catalog.latest-status.ttl
 online_endpoint_catalog_query=online_endpoint_catalog_query.rq
-online_endpoint_catalog_file=online_endpoint_catalog.trig
+online_endpoint_catalog_filename=online_endpoint_catalog.trig
+online_endpoint_catalog_file=${pwd}../../catalogs/$online_endpoint_catalog_filename
 
 # Downloading the online endpoint catalog
 curl -s $online_status_source_catalog_url > $local_status_source_catalog
@@ -36,12 +37,13 @@ cp $online_endpoint_catalog_file ../../catalogs/$online_endpoint_catalog_file
 
 # Partitioning the online catalog to bit size
 cd ../catalog_partitioner
-./script.sh ../../catalogs/$online_endpoint_catalog_file 20
-rm ../../catalogs/$online_endpoint_catalog_file
+./script.sh $online_endpoint_catalog_file 20
+
+rm $online_endpoint_catalog_file
 
 cd ../..
 
-for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
+for catalog in `ls catalogs/ | grep $online_endpoint_catalog_filename*`; do
     echo "Treating $catalog"
     partition_config='{
     "pre": "file:///rules/KRInTheWild/_pre_manifest.ttl",
@@ -65,5 +67,5 @@ for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     ./run.sh -c /$partition_config_filename
 
     rm $partition_config_filename
-    rm $catalog
+    rm catalogs/$catalog
 done
