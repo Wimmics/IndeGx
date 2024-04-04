@@ -34,81 +34,102 @@
 @prefix xhv: <http://www.w3.org/1999/xhtml/vocab#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-kgi:FAIRDataset a rdf:Class ;
-    rdfs:label "FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles" .
-
-kgi:F1AFAIRDataset a rdf:Class ;
-    rdfs:label "F1A FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Unique IDs" ;
-    rdfs:isDefinedBy kgi: ;
-    owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            kgi:Dataset
-        )
-    ] .
-
-# F1B weak
-kgi:F1BweakFAIRDataset a rdf:Class ;
-    rdfs:label "F1B weak FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Persistent IDs" ;
-    rdfs:isDefinedBy kgi: ;
-    owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            kgi:Dataset
-        )
-    ] .
-
-# F1B strong
-# ?kg a dcat:Dataset .
-# dcterms:identifier schema:identifier
-kgi:F1BstrongFAIRDataset a rdf:Class ;
-    rdfs:label "F1B strong FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Persistent IDs" ;
-    rdfs:isDefinedBy kgi: ;
-    owl:equivalentClass kgi:DatasetWithIdentifierAnnotation .
-
-# F2A weak
-# ?kg a dcat:Dataset .
-# ?kg ?p ?o .
-kgi:F2AweakFAIRDataset a rdf:Class ;
-    rdfs:label "F2B weak FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Structured metadata" ;
-    rdfs:isDefinedBy kgi: ;
-    owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            kgi:Dataset
-        )
-    ] .
-
-# F2A strong
-# ?kg a dcat:Dataset .
-# dct:title
-# dct:description
-# dcat:accessURL
-# dcat:downloadURL
-# dcat:endpointDescription
-# dcat:endpointURL
-kgi:F2AstrongFAIRDataset a rdf:Class ;
-    rdfs:label "F2B strong FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Structured metadata" ;
-    rdfs:isDefinedBy kgi: ;
+kgi:PartiallyFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "Partially FAIR dataset" ;
+    rdfs:comment "Dataset that follows rdf:type part of the FAIR principles." ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:unionOf (
-            kgi:DatasetWithDescriptionAnnotation
-            kgi:DatasetWithDumpAnnotation
-            kgi:DatasetWithSparqlEndpointAnnotation
-            kgi:DatasetWithTitleAnnotation
-            kgi:DatasetWithURLAnnotation
+            kgi:FindableFAIRDataset
+            kgi:AccessibleFAIRDataset
+            kgi:InteroperableFAIRDataset
+            kgi:ReusableFAIRDataset
+        )
+    ] .
+
+kgi:FAIRDataset rdf:type rdf:Class ;
+    rdfs:subClassOf kgi:PartiallyFAIRDataset ;
+    rdfs:label "FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles" ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:FindableFAIRDataset
+            kgi:AccessibleFAIRDataset
+            kgi:InteroperableFAIRDataset
+            kgi:ReusableFAIRDataset
+        )
+    ] .
+
+kgi:FindableFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "Findable dataset"@en ;
+    rdfs:comment "Dataset that follows the principle of Findability of the FAIR principles"@en ;
+    owl:intersectionOf (
+        kgi:F1AFAIRDataset
+        kgi:F1BFAIRDataset
+        kgi:F2AFAIRDataset
+        kgi:F2BFAIRDataset
+    ) .
+
+kgi:AccessibleFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "Accessible dataset"@en ;
+    rdfs:comment "Dataset that follows the principle of Accessibility of the FAIR principles"@en ;
+    owl:intersectionOf (
+        kgi:A11FAIRDataset
+        kgi:A12FAIRDataset
+    ) .
+
+kgi:InteroperableFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "Interoperable dataset"@en ;
+    rdfs:comment "Dataset that follows the principle of Interoperability of the FAIR principles"@en ;
+    owl:intersectionOf (
+        kgi:I1FAIRDataset
+        kgi:I2FAIRDataset
+        kgi:I3FAIRDataset
+    ) .
+
+kgi:ReusableFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "Reusable dataset"@en ;
+    rdfs:comment "Dataset that follows the principle of Reusability of the FAIR principles"@en ;
+    owl:intersectionOf (
+        kgi:R11FAIRDataset
+        kgi:R12FAIRDataset
+        kgi:RI3FAIRDataset
+    ) .
+
+kgi:F1AFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "F1A FAIR Dataset"@en ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Unique IDs"@en ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:Dataset
+        )
+    ] .
+
+kgi:F1BFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "F1B FAIR Dataset"@en ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            kgi:F1BweakFAIRDataset
+            kgi:F1BstrongFAIRDataset
+        )
+    ] .
+
+kgi:F2AFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "F2A FAIR Dataset"@en ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            kgi:F2AweakFAIRDataset
+            kgi:F2AstrongFAIRDataset
         )
     ] .
 
 # F2B
-kgi:F2BFAIRDataset a rdf:Class ;
+kgi:F2BFAIRDataset rdf:type rdf:Class ;
     rdfs:label "F2B FAIR Dataset" ;
     rdfs:comment "A dataset that is follows the FAIR principles and uses Shared vocabularies for metadata" ;
     rdfs:isDefinedBy kgi: ;
@@ -120,7 +141,7 @@ kgi:F2BFAIRDataset a rdf:Class ;
     ] .
 
 # A1.1
-kgi:A11FAIRDataset a rdf:Class ;
+kgi:A11FAIRDataset rdf:type rdf:Class ;
     rdfs:label "A1.1 FAIR Dataset" ;
     rdfs:comment "A dataset that is follows the FAIR principles and uses Open resolution protocol" ;
     rdfs:isDefinedBy kgi: ;
@@ -131,58 +152,35 @@ kgi:A11FAIRDataset a rdf:Class ;
         )
     ] .
 
-# A1.2 weak
-kgi:A12FAIRDataset a rdf:Class ;
-    rdfs:label "A1.2 FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Authorisation procedure or access rights" ;
-    rdfs:isDefinedBy kgi: ;
+kgi:A12FAIRDataset rdf:type rdf:Class ;
+    rdfs:label "A12 FAIR Dataset" ;
     owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            kgi:Dataset
+        rdf:type rdf:Class ;
+        owl:unionOf (
+            kgi:A12weakFAIRDataset
+            kgi:A12strongFAIRDataset
         )
     ] .
 
-# A1.2 strong
-# odrl:hasPolicy
-# dct:rights
-# dct:accessRights
-# dct:license
-# schema:license
-kgi:A12strongFAIRDataset a rdf:Class ;
-    rdfs:label "A12 strong FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Authorisation procedure or access rights" ;
-    rdfs:isDefinedBy kgi: ;
+kgi:I1FAIRDataset rdf:type rdf:Class ;
+    rdfs:label "I1 FAIR Dataset" ;
     owl:equivalentClass [
+        rdf:type rdf:Class ;
         owl:unionOf (
-            kgi:DatasetWithAccessRightsAnnotation
-            kgi:DatasetWithLicenseAnnotation 
-            kgi:DatasetWithPolicyAnnotation
-        ) 
-    ].
-
-# I1 see F2A
-kgi:I1weakFAIRDataset a rdf:Class ;
-    rdfs:label "I1 weak FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Machine readable format" ;
-    rdfs:isDefinedBy kgi: ;
-    owl:equivalentClass kgi:F2AweakFAIRDataset .
-
-kgi:I1strongFAIRDataset a rdf:Class ;
-    rdfs:label "I1 strong FAIR Dataset" ;
-    rdfs:comment "A dataset that is follows the FAIR principles and uses Machine readable format" ;
-    rdfs:isDefinedBy kgi: ;
-    owl:equivalentClass kgi:F2AstrongFAIRDataset .
+            kgi:I1weakFAIRDataset
+            kgi:I1strongFAIRDataset
+        )
+    ] .
 
 # I2 see F2B
-kgi:I2FAIRDataset a rdf:Class ;
+kgi:I2FAIRDataset rdf:type rdf:Class ;
     rdfs:label "I2 FAIR Dataset" ;
     rdfs:comment "A dataset that is follows the FAIR principles and uses Use shared ontologies" ;
     rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:F2BFAIRDataset .
 
 # I3
-kgi:I3FAIRDataset a rdf:Class ;
+kgi:I3FAIRDataset rdf:type rdf:Class ;
     rdfs:label "I3 FAIR Dataset" ;
     rdfs:comment "A dataset that is follows the FAIR principles and uses External links" ;
     rdfs:isDefinedBy kgi: ;
@@ -202,7 +200,7 @@ kgi:I3FAIRDataset a rdf:Class ;
 # xhv:license
 # sto:license
 # nie:license
-kgi:R11FAIRDataset a rdf:Class ;
+kgi:R11FAIRDataset rdf:type rdf:Class ;
     rdfs:label "R1.1 FAIR Dataset" ;
     rdfs:comment "A dataset that is follows the FAIR principles and uses Metadata includes license" ;
     rdfs:isDefinedBy kgi: ;
@@ -240,7 +238,7 @@ kgi:R11FAIRDataset a rdf:Class ;
 # schema:publisher
 # schema:provider
 # schema:funder
-kgi:R12FAIRDataset a rdf:Class ;
+kgi:R12FAIRDataset rdf:type rdf:Class ;
     rdfs:label "R1.2 FAIR Dataset" ;
     rdfs:comment "A dataset that is follows the FAIR principles and uses Metadata includes provenance" ;
     rdfs:isDefinedBy kgi: ;
@@ -283,8 +281,110 @@ kgi:R12FAIRDataset a rdf:Class ;
     ] .
 
 # R1.3 see F2B
-kgi:RI3FAIRDataset a rdf:Class ;
+kgi:RI3FAIRDataset rdf:type rdf:Class ;
     rdfs:label "RI3 FAIR Dataset" ;
     rdfs:comment "A dataset that is follows the FAIR principles and uses Community standards" ;
     rdfs:isDefinedBy kgi: ;
     owl:equivalentClass kgi:F2BFAIRDataset .
+
+# F1B weak
+kgi:F1BweakFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "F1B weak FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Persistent IDs" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:Dataset
+        )
+    ] .
+
+# F1B strong
+# ?kg rdf:type dcat:Dataset .
+# dcterms:identifier schema:identifier
+kgi:F1BstrongFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "F1B strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Persistent IDs" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass kgi:DatasetWithIdentifierAnnotation .
+
+# F2A weak
+# ?kg rdf:type dcat:Dataset .
+# ?kg ?p ?o .
+kgi:F2AweakFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "F2A weak FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Structured metadata" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:Dataset
+        )
+    ] .
+
+# F2A strong
+# ?kg rdf:type dcat:Dataset .
+# dct:title
+# dct:description
+# dcat:accessURL
+# dcat:downloadURL
+# dcat:endpointDescription
+# dcat:endpointURL
+kgi:F2AstrongFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "F2A strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Structured metadata" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            kgi:DatasetWithDescriptionAnnotation
+            kgi:DatasetWithDumpAnnotation
+            kgi:DatasetWithSparqlEndpointAnnotation
+            kgi:DatasetWithTitleAnnotation
+            kgi:DatasetWithURLAnnotation
+        )
+    ] .
+
+# A1.2 weak
+kgi:A12weakFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "A1.2 FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Authorisation procedure or access rights" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            kgi:Dataset
+        )
+    ] .
+
+# A1.2 strong
+# odrl:hasPolicy
+# dct:rights
+# dct:accessRights
+# dct:license
+# schema:license
+kgi:A12strongFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "A12 strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Authorisation procedure or access rights" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass [
+        rdf:type rdf:Class ;
+        owl:unionOf (
+            kgi:DatasetWithAccessRightsAnnotation
+            kgi:DatasetWithLicenseAnnotation 
+            kgi:DatasetWithPolicyAnnotation
+        ) 
+    ].
+
+# I1 see F2A
+kgi:I1weakFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "I1 weak FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Machine readable format" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass kgi:F2AweakFAIRDataset .
+
+kgi:I1strongFAIRDataset rdf:type rdf:Class ;
+    rdfs:label "I1 strong FAIR Dataset" ;
+    rdfs:comment "A dataset that is follows the FAIR principles and uses Machine readable format" ;
+    rdfs:isDefinedBy kgi: ;
+    owl:equivalentClass kgi:F2AstrongFAIRDataset .
