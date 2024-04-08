@@ -1,5 +1,7 @@
 # IndeGx application
 
+[![DOI](https://zenodo.org/badge/571952703.svg)](https://zenodo.org/doi/10.5281/zenodo.10794311)
+
 ## Description
 
 This repository hosts the new version of the IndeGx application. This new version will be a Typescript application interfaced with a Corese server instance, both encapsulated in a Docker image. The generation rules are rewritten to be more consistent in the form of SPARQL Update queries sent to the Corese server.

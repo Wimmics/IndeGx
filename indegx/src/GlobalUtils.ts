@@ -63,10 +63,11 @@ export function readFile(filename: string): Promise<string> {
     let readFilePromise = null;
     if (filename.startsWith("http://") || filename.startsWith("https://")) {
         readFilePromise = fetchGETPromise(filename)
-    } else if (filename.startsWith("file://")) {
-        readFilePromise = fs.readFile(filename.replace("file://", "")).then(buffer => buffer.toString())
     } else {
-        readFilePromise = fs.readFile(filename).then(buffer => buffer.toString())
+        if (filename.startsWith("file://")) {
+            filename = filename.replace("file://", "");
+        }
+        readFilePromise = fs.readFile(filename, { encoding: 'utf8' }).then(buffer => buffer.toString())
     }
     return readFilePromise;
 }
@@ -128,7 +129,7 @@ export function fetchPromise(url: string, header: Record<string, string> = {}, m
                         Logger.error("Too many retries", error);
                     }
                 } else {
-                    Logger.error("Error during fetch", method, url, query ,error);
+                    Logger.error("Error during fetch", method, url, query, error);
                 }
             }).finally(() => {
                 countConcurrentQueries--;
