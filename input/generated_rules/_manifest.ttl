@@ -1,0 +1,2226 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<> a mf:Manifest ;
+    mf:entries (
+        <init.ttl>
+         <classTest1.ttl> <classTest2.ttl> <classTest3.ttl> <classTest4.ttl> <classTest5.ttl> <classTest6.ttl> <classTest7.ttl> <classTest8.ttl> <classTest9.ttl> <classTest10.ttl> <classTest11.ttl> <classTest12.ttl> <propertyTest13.ttl> <propertyTest14.ttl> <propertyTest15.ttl> <propertyTest16.ttl> <propertyTest17.ttl> <propertyTest18.ttl> <propertyTest19.ttl> <propertyTest20.ttl> <propertyTest21.ttl> <propertyTest22.ttl> <propertyTest23.ttl> <propertyTest24.ttl> <propertyTest25.ttl> <propertyTest26.ttl> <propertyTest27.ttl> <propertyTest28.ttl> <propertyTest29.ttl> <propertyTest30.ttl> <propertyTest31.ttl> <propertyTest32.ttl> <propertyTest33.ttl> <propertyTest34.ttl> <propertyTest35.ttl> <propertyTest36.ttl> <propertyTest37.ttl> <propertyTest38.ttl> <propertyTest39.ttl> <propertyTest40.ttl> <propertyTest41.ttl> <propertyTest42.ttl> <propertyTest43.ttl> <propertyTest44.ttl> <propertyTest45.ttl> <propertyTest46.ttl> <propertyTest47.ttl> <propertyTest48.ttl> <propertyTest49.ttl> <propertyTest50.ttl> <propertyTest51.ttl> <propertyTest52.ttl> <propertyTest53.ttl> <propertyTest54.ttl> <propertyTest55.ttl> <propertyTest56.ttl> <propertyTest57.ttl> <propertyTest58.ttl> <propertyTest59.ttl> <propertyTest60.ttl> <propertyTest61.ttl> <propertyTest62.ttl> <propertyTest63.ttl> <propertyTest64.ttl> <propertyTest65.ttl> <propertyTest66.ttl> <propertyTest67.ttl> <propertyTest68.ttl> <propertyTest69.ttl>
+    ) .
+
+
+<init.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT {
+                kgi: sd:namedGraph $rawEndpointUrl .
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:sparqlEndpoint $rawEndpointUrl .
+                }
+            } WHERE {
+                FILTER( # There is not an online HTTP version of this endpoint already detected
+                    NOT EXISTS {
+                        BIND( IF( CONTAINS( STR($rawEndpointUrl), "https://" ), IRI( REPLACE( STR($rawEndpointUrl), "https://", "http://" ) ) , $rawEndpointUrl ) AS ?urlHttp )
+                        kgi: sd:namedGraph ?urlHttp .
+                        GRAPH ?urlHttp {
+                            ?urlHttp void:sparqlEndpoint ?urlHttp .
+                        }
+                    }
+                )
+                FILTER( # There is not an online HTTPS version of this endpoint already detected
+                    NOT EXISTS {
+                        BIND( IF( CONTAINS( STR($rawEndpointUrl), "http://" ), IRI( REPLACE( STR($rawEndpointUrl), "http://", "https://" ) ) , $rawEndpointUrl ) AS ?urlHttps )
+                        kgi: sd:namedGraph ?urlHttps .
+                        GRAPH ?urlHttps {
+                            ?urlHttps void:sparqlEndpoint ?urlHttps .
+                        }
+                    }
+                )
+            }"""
+        ]
+    ) .
+
+# Entry definitions follow below this line  
+<classTest1.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#Catalog> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#Catalog> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#Catalog> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#Catalog>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest2.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#Dataset> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#Dataset> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#Dataset> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#Dataset>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest3.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#CatalogRecord> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#CatalogRecord> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#CatalogRecord> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#CatalogRecord>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest4.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#Resource> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#Resource> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#Resource> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#Resource>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest5.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#DataService> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#DataService> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#DataService> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#DataService>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest6.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#Distribution> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#Distribution> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#Distribution> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#Distribution>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest7.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#Relationship> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#Relationship> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#Relationship> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#Relationship>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest8.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#Role> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://www.w3.org/ns/dcat#Role> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://www.w3.org/ns/dcat#Role> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#Role>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest9.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#Dataset> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://rdfs.org/ns/void#Dataset> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://rdfs.org/ns/void#Dataset> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#Dataset>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest10.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#Linkset> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://rdfs.org/ns/void#Linkset> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://rdfs.org/ns/void#Linkset> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#Linkset>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest11.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#DatasetDescription> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://rdfs.org/ns/void#DatasetDescription> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://rdfs.org/ns/void#DatasetDescription> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#DatasetDescription>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<classTest12.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#TechnicalFeature> in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                <http://rdfs.org/ns/void#TechnicalFeature> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class <http://rdfs.org/ns/void#TechnicalFeature> .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#TechnicalFeature>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) .  
+<propertyTest13.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#accessURL> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#accessURL> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#accessURL> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#accessURL>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#accessURL>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest14.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#bbox> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#bbox> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#bbox> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#bbox>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#bbox>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest15.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#byteSize> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#byteSize> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#byteSize> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#byteSize>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#byteSize>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest16.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#centroid> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#centroid> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#centroid> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#centroid>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#centroid>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest17.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#compressFormat> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#compressFormat> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#compressFormat> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#compressFormat>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#compressFormat>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest18.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#contactPoint> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#contactPoint> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#contactPoint> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#contactPoint>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#contactPoint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest19.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#dataset> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#dataset> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#dataset> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#dataset>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#dataset>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest20.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#distribution> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#distribution> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#distribution> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#distribution>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#distribution>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest21.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#downloadURL> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#downloadURL> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#downloadURL> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#downloadURL>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#downloadURL>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest22.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#endDate> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#endDate> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#endDate> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#endDate>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#endDate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest23.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#keyword> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#keyword> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#keyword> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#keyword>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#keyword>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest24.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#landingPage> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#landingPage> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#landingPage> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#landingPage>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#landingPage>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest25.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#mediaType> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#mediaType> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#mediaType> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#mediaType>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#mediaType>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest26.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#packageFormat> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#packageFormat> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#packageFormat> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#packageFormat>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#packageFormat>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest27.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#record> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#record> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#record> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#record>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#record>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest28.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#startDate> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#startDate> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#startDate> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#startDate>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#startDate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest29.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#theme> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#theme> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#theme> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#theme>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#theme>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest30.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#themeTaxonomy> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#themeTaxonomy> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#themeTaxonomy> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#themeTaxonomy>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#themeTaxonomy>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest31.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#entities> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#entities> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#entities> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#entities>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#entities>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest32.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#sparqlEndpoint> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#sparqlEndpoint> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#sparqlEndpoint> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#sparqlEndpoint>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#sparqlEndpoint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest33.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#subjectsTarget> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#subjectsTarget> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#subjectsTarget> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#subjectsTarget>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#subjectsTarget>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest34.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#target> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#target> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#target> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#target>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#target>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest35.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#openSearchDescription> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#openSearchDescription> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#openSearchDescription> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#openSearchDescription>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#openSearchDescription>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest36.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#dataDump> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#dataDump> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#dataDump> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#dataDump>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#dataDump>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest37.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#subset> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#subset> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#subset> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#subset>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#subset>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest38.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#vocabulary> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#vocabulary> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#vocabulary> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#vocabulary>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#vocabulary>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest39.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#documents> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#documents> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#documents> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#documents>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#documents>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest40.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#property> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#property> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#property> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#property>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#property>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest41.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#uriLookupEndpoint> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#uriLookupEndpoint> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#uriLookupEndpoint> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#uriLookupEndpoint>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#uriLookupEndpoint>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest42.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#distinctSubjects> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#distinctSubjects> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#distinctSubjects> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#distinctSubjects>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#distinctSubjects>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest43.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#inDataset> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#inDataset> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#inDataset> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#inDataset>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#inDataset>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest44.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#exampleResource> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#exampleResource> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#exampleResource> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#exampleResource>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#exampleResource>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest45.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#linkPredicate> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#linkPredicate> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#linkPredicate> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#linkPredicate>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#linkPredicate>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest46.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#propertyPartition> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#propertyPartition> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#propertyPartition> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#propertyPartition>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#propertyPartition>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest47.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#class> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#class> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#class> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#class>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#class>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest48.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#properties> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#properties> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#properties> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#properties>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#properties>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest49.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#rootResource> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#rootResource> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#rootResource> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#rootResource>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#rootResource>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest50.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#classPartition> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#classPartition> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#classPartition> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#classPartition>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#classPartition>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest51.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#objectsTarget> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#objectsTarget> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#objectsTarget> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#objectsTarget>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#objectsTarget>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest52.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#uriRegexPattern> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#uriRegexPattern> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#uriRegexPattern> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#uriRegexPattern>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#uriRegexPattern>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest53.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#uriSpace> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#uriSpace> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#uriSpace> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#uriSpace>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#uriSpace>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest54.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#feature> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#feature> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#feature> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#feature>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#feature>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest55.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#classes> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#classes> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#classes> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#classes>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#classes>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest56.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#triples> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#triples> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#triples> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#triples>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#triples>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest57.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://rdfs.org/ns/void#distinctObjects> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://rdfs.org/ns/void#distinctObjects> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://rdfs.org/ns/void#distinctObjects> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://rdfs.org/ns/void#distinctObjects>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://rdfs.org/ns/void#distinctObjects>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest58.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://xmlns.com/foaf/0.1/homepage> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://xmlns.com/foaf/0.1/homepage> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://xmlns.com/foaf/0.1/homepage> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://xmlns.com/foaf/0.1/homepage>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://xmlns.com/foaf/0.1/homepage>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest59.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://xmlns.com/foaf/0.1/primaryTopic> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://xmlns.com/foaf/0.1/primaryTopic> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://xmlns.com/foaf/0.1/primaryTopic> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://xmlns.com/foaf/0.1/primaryTopic>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://xmlns.com/foaf/0.1/primaryTopic>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest60.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#hadRole> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#hadRole> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#hadRole> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#hadRole>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#hadRole>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest61.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#accessService> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#accessService> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#accessService> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#accessService>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#accessService>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest62.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#endpointURL> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#endpointURL> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#endpointURL> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#endpointURL>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#endpointURL>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest63.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#catalog> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#catalog> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#catalog> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#catalog>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#catalog>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest64.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#endpointDescription> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#endpointDescription> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#endpointDescription> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#endpointDescription>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#endpointDescription>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest65.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#qualifiedRelation> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#qualifiedRelation> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#qualifiedRelation> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#qualifiedRelation>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#qualifiedRelation>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest66.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#servesDataset> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#servesDataset> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#servesDataset> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#servesDataset>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#servesDataset>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest67.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#service> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#service> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#service> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#service>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#service>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest68.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#spatialResolutionInMeters> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#spatialResolutionInMeters> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#spatialResolutionInMeters> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#spatialResolutionInMeters>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#spatialResolutionInMeters>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) . 
+<propertyTest69.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of <http://www.w3.org/ns/dcat#temporalResolution> in each dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            INSERT {
+                <http://www.w3.org/ns/dcat#temporalResolution> voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property <http://www.w3.org/ns/dcat#temporalResolution> ;
+                }
+            } WHERE {
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(<http://www.w3.org/ns/dcat#temporalResolution>))), "PropertyPartition" )) AS ?propertyPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(<http://www.w3.org/ns/dcat#temporalResolution>) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) .
