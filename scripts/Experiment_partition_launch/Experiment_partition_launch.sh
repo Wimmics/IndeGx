@@ -27,9 +27,9 @@ cd ../..
 for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     echo "Treating $catalog"
     partition_config='{
-    "pre": "file:///rules/MetaVocabularies/_pre_manifest.ttl",
+    "pre": "",
     "manifest": "file:///input/generated_rules/_manifest.ttl",
-    "post": "file:///rules/MetaVocabularies/_post_manifest.ttl",
+    "post": "",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
