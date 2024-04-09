@@ -18,4 +18,8 @@ CONSTRUCT {
     BIND( IRI( STR(?URL) ) as ?sparql)
     BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( STR( ?sparql ) ) ) ) AS ?dataset )
     FILTER ( ?p IN (void:sparqlEndpoint, dcat:endpointURL, sd:endpoint) )
+    FILTER ( NOT EXISTS {
+        ?s ?p ?shortURL .
+        FILTER( STR(?URL) = CONCAT( STR( ?shortURL ), "/" ) )
+     } )
 }

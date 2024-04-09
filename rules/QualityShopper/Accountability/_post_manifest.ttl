@@ -1,0 +1,19 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        <equivalencesRules/_manifest.ttl>
+    ) ;
+    mf:entries (
+        <load_ontology.ttl>
+    ) .
+
+<load_ontology.ttl> a mf:Manifest ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            LOAD <file:///rules/QualityShopper/Accountability/accountability_QualityShopper.ttl>
+            """
+        ]
+    )

@@ -1,0 +1,30 @@
+{
+    "name": "cleanerscript",
+    "author": "Pierre Maillot <pierre.maillot@inria.fr>",
+    "keywords": [],
+    "license": "Apache 2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Wimmics/IndeGx.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Wimmics/IndeGx/issues"
+    },
+    "source": "src/script.ts",
+    "main": "src/script.js",
+    "types": "src/script.d.ts",
+    "type": "module",
+    "dependencies": {
+        "@types/node": "^20.11.5",
+        "@types/node-fetch": "^2.6.11",
+        "node-fetch": "^3.3.2",
+        "typescript": "^5.3.3"
+    },
+    "scripts": {
+        "build": "npx tsc",
+        "run": "node src/script.js",
+        "devrun": "npm run build && npm run run",
+        "clean": "rm -rf src/*.js src/*.js.map src/*.d.ts *.log",
+        "deepclean": "npm run clean && rm -rf node_modules package-lock.json"
+    }
+}

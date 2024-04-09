@@ -1,0 +1,532 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <SPARQLES_ASK.ttl>
+        <SPARQLES_CON.ttl>
+        <SPARQLES_CONOPT.ttl>
+        <SPARQLES_CONJOIN.ttl>
+        <SPARQLES_SEL.ttl>
+        <SPARQLES_SELEMPTY.ttl>
+        <SPARQLES_SELJOIN.ttl>
+        <SPARQLES_SELOPT.ttl>
+        <SPARQLES_SELFROM.ttl>
+        <SPARQLES_SELGRAPHJOIN.ttl>
+        <SPARQLES_SELBNODE.ttl>
+        <SPARQLES_SELGRAPH.ttl>
+        <SPARQLES_SELFILIRI.ttl>
+        <SPARQLES_SELFILBLANK.ttl>
+        <SPARQLES_SELFILBOOL.ttl>
+        <SPARQLES_SELFILNUM.ttl>
+        <SPARQLES_SELFILSTR.ttl>
+        <SPARQLES_SELFILREGEX-i.ttl>
+        <SPARQLES_SELFILREGEX.ttl>
+        <SPARQLES_SELFILNOTBOUND.ttl>
+        <SPARQLES_SEL-DISTINCT.ttl>
+        <SPARQLES_SELGRAPHUNION.ttl>
+        <SPARQLES_SEL-REDUCED.ttl>
+        <SPARQLES_SELUNION.ttl>
+        # <SPARQLES_SPARQL10.ttl>
+        ) .
+
+<SPARQLES_ASK.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX lsq: <http://lsq.aksw.org/vocab#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+            INSERT DATA {
+                $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                    sd:feature sparqles:ASK .
+            }
+            """
+        ]
+    ) .
+
+<SPARQLES_CON.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:CON .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_CONOPT.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:CONOPT .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_CONJOIN.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:CONJOIN .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SEL-DISTINCT.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SEL-DISTINCT .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SEL-REDUCED.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SEL-REDUCED .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SEL.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SEL .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELBNODE.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELBNODE .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELEMPTY.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELEMPTY .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILNOTBOUND.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELFILNOTBOUND .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILBLANK.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELFILBLANK .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILBOOL.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELFILBOOL .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILIRI.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELFILIRI .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILNUM.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                        $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                            sd:feature sparqles:SELFILNUM .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILREGEX-i.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELFILREGEX-i .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILREGEX.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                        $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                            sd:feature sparqles:SELFILREGEX .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFILSTR.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELFILSTR .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELFROM.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA{
+                        $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                            sd:feature sparqles:SELFROM .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELGRAPHJOIN.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELGRAPHJOIN .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELGRAPHUNION.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELGRAPHUNION .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELGRAPH.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELGRAPH .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELJOIN.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELJOIN .
+                }
+                """
+            ]
+        ) .
+
+<SPARQLES_SELOPT.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELOPT .
+                } 
+                """
+            ]
+        ) .
+
+<SPARQLES_SELUNION.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+            [
+                mf:action """
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX lsq: <http://lsq.aksw.org/vocab#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+                INSERT DATA {
+                    $rawEndpointUrl sd:endpoint $rawEndpointUrl ;
+                        sd:feature sparqles:SELUNION .
+                }
+                """
+            ]
+        ) .
+
+# <SPARQLES_SPARQL10.ttl> a mf:ManifestEntry ;
+#     kgi:requiredAssets (
+#         <SPARQLES_ASK.ttl>
+#         <SPARQLES_CON.ttl>
+#         <SPARQLES_CONOPT.ttl>
+#         <SPARQLES_CONJOIN.ttl>
+#         <SPARQLES_SEL.ttl>
+#         <SPARQLES_SELEMPTY.ttl>
+#         <SPARQLES_SELJOIN.ttl>
+#         <SPARQLES_SELOPT.ttl>
+#         <SPARQLES_SELFROM.ttl>
+#         <SPARQLES_SELGRAPHJOIN.ttl>
+#         <SPARQLES_SELBNODE.ttl>
+#         <SPARQLES_SELGRAPH.ttl>
+#         <SPARQLES_SELFILIRI.ttl>
+#         <SPARQLES_SELFILBLANK.ttl>
+#         <SPARQLES_SELFILBOOL.ttl>
+#         <SPARQLES_SELFILNUM.ttl>
+#         <SPARQLES_SELFILSTR.ttl>
+#         <SPARQLES_SELFILREGEX-i.ttl>
+#         <SPARQLES_SELFILREGEX.ttl>
+#         <SPARQLES_SELFILNOTBOUND.ttl>
+#         <SPARQLES_SEL-DISTINCT.ttl>
+#         <SPARQLES_SELGRAPHUNION.ttl>
+#         <SPARQLES_SEL-REDUCED.ttl>
+#         <SPARQLES_SELUNION.ttl>
+#     ) ;
+#     kgi:onSuccess (
+#             [
+#                 mf:action """
+#                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
+#                 PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+#                 PREFIX lsq: <http://lsq.aksw.org/vocab#>
+#                 PREFIX dcterms: <http://purl.org/dc/terms/>
+#                 PREFIX prov: <http://www.w3.org/ns/prov#>
+#                 PREFIX sparqles: <https://sparqles.ai.wu.ac.at/#>
+#                 INSERT {
+#                     $rawEndpointUrl sd:feature sd:SPARQL10Query .
+#                 } WHERE {
+#                     $rawEndpointUrl sd:feature
+#                         sparqles:ASK ,
+#                         sparqles:CON ,
+#                         sparqles:CONJOIN ,
+#                         sparqles:CONOPT ,
+#                         sparqles:SEL-DISTINCT ,
+#                         sparqles:SEL-REDUCED ,
+#                         sparqles:SEL ,
+#                         sparqles:SELBNODE ,
+#                         sparqles:SELEMPTY ,
+#                         sparqles:SELFILBLANK ,
+#                         sparqles:SELFILBOOL ,
+#                         sparqles:SELFILIRI ,
+#                         sparqles:SELFILNOTBOUND ,
+#                         sparqles:SELFILNUM ,
+#                         sparqles:SELFILREGEX-i ,
+#                         sparqles:SELFILREGEX ,
+#                         sparqles:SELFILSTR ,
+#                         sparqles:SELFROM ,
+#                         sparqles:SELGRAPH ,
+#                         sparqles:SELGRAPHJOIN ,
+#                         sparqles:SELGRAPHUNION ,
+#                         sparqles:SELJOIN ,
+#                         sparqles:SELOPT ,
+#                         sparqles:SELUNION .
+#                 }
+#                 """
+#             ]
+#         ) .

@@ -1,0 +1,1200 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <simpleExtraction.ttl>
+    ) .
+
+<simpleExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 500 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg a bsbm:Vendor .
+                    ?kg ?p ?o .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor }
+
+                    ?kg ?p ?o .
+                }
+            }
+            """
+        ]
+        <provCreationDateExtraction.ttl>
+        <provCreationLocationExtraction.ttl>
+        <provCreationMethodExtraction.ttl>
+        <provCreatorExtraction.ttl>
+        <creatorPropertiesExtraction.ttl>
+        <dcatDumpExtraction.ttl>
+        <provEditorExtraction.ttl>
+        <provModificationDateExtraction.ttl>
+        <provModificationLocationExtraction.ttl>
+        <provPublicationDateExtraction.ttl>
+        <provPublisherExtraction.ttl>
+        <dcatEndpointExtraction.ttl>
+        <endpointPropertiesExtraction.ttl>
+        <dcatWebpageExtraction.ttl>
+        <dcatRequirements.ttl>
+    ) .
+
+<provCreationDateExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Create .
+                    ?act prov:startedAtTime ?date .
+                    ?act a ?type .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Create .
+                    ?act prov:startedAtTime ?date .
+                    OPTIONAL {
+                        ?act a ?type .
+                    }
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Create .
+                    ?act prov:endedAtTime ?date .
+                    ?act a ?type .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Create .
+                    ?act prov:endedAtTime ?date .
+                    OPTIONAL {
+                        ?act a ?type .
+                    }
+                }
+            }
+            """
+        ]
+    ) .
+
+
+<provCreationLocationExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Create .
+                    ?act prov:atLocation ?location .
+                    ?act a ?type .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor }
+
+                     ?kg prov:wasGeneratedBy ?act .
+                     # ?act a prov:Create .
+                     ?act prov:atLocation ?location .
+                    OPTIONAL {
+                        ?act a ?type .
+                    }
+                }
+            }
+            """
+        ]
+    ) .
+
+
+<provCreationMethodExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Create .
+                    ?act prov:wasAssociatedWith ?agent .
+                    ?agent a prov:SoftwareAgent .
+                    ?act a ?type .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor }
+
+                   ?kg prov:wasGeneratedBy ?act .
+                   # ?act a prov:Create .
+                   ?act prov:wasAssociatedWith ?agent .
+                   ?agent a prov:SoftwareAgent .
+                    OPTIONAL {
+                        ?act a ?type .
+                    }
+                }
+            }
+            """
+        ]
+    ) .
+
+
+<provCreatorExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Create .
+                    ?act prov:wasAssociatedWith ?creator .
+                    ?creator a ?type .
+                    ?act a ?actType .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor }
+
+                   ?kg prov:wasGeneratedBy ?act .
+                   # ?act a prov:Create .
+                   ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?creator .
+                   ?creator a ?type .
+                   VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    OPTIONAL {
+                        ?act a ?actType .
+                    }
+                }
+            }
+            """
+        ]
+    ) .
+
+<creatorPropertiesExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?contributor a ?creatorType .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor }
+
+                    # Find a contributor
+                    {
+                        ?kg ?contribProp ?contributor .
+                        VALUES ?contribProp { dcterms:creator dce:creator foaf:maker schema:creator pav:createdBy schema:author pav:authoredBy dcterms:contributor dce:contributor schema:contributor pav:contributedBy schema:editor pav:curatedBy schema:maintainer }
+                    } UNION {
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                        ?contributor a ?type .
+                        VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    }
+
+                    # Properties: type
+                    ?contributor a ?creatorType .
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?contributor ?nameProp ?name .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a contributor
+                    {
+                        ?kg ?contribProp ?contributor .
+                        VALUES ?contribProp { dcterms:creator dce:creator foaf:maker schema:creator pav:createdBy schema:author pav:authoredBy dcterms:contributor dce:contributor schema:contributor pav:contributedBy schema:editor pav:curatedBy schema:maintainer }
+                    } UNION {
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                        ?contributor a ?type .
+                        VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    }
+
+                    # Properties: name
+                    ?contributor ?nameProp ?name .
+                    VALUES ?nameProp { rdfs:label schema:name foaf:name schema:legalName schema:givenName schema:familyName foaf:givenName foaf:familyName foaf:firstName foaf:lastName }
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?contributor ?contactProp ?contact .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a contributor
+                    {
+                        ?kg ?contribProp ?contributor .
+                        VALUES ?contribProp { dcterms:creator dce:creator foaf:maker schema:creator pav:createdBy schema:author pav:authoredBy dcterms:contributor dce:contributor schema:contributor pav:contributedBy schema:editor pav:curatedBy schema:maintainer }
+                    } UNION {
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                        ?contributor a ?type .
+                        VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    }
+
+                    # Properties: contact
+                    ?contributor ?contactProp ?contact .
+                    VALUES ?contactProp {foaf:mbox foaf:phone schema:contactPoint schema:email schema:telephone schema:address foaf:homepage}
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?contributor ?prop ?influence .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a contributor
+                    {
+                        ?kg ?contribProp ?contributor .
+                        VALUES ?contribProp { dcterms:creator dce:creator foaf:maker schema:creator pav:createdBy schema:author pav:authoredBy dcterms:contributor dce:contributor schema:contributor pav:contributedBy schema:editor pav:curatedBy schema:maintainer }
+                    } UNION {
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                        ?contributor a ?type .
+                        VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    }
+
+                    # Properties: inlfuences
+                    ?contributor ?prop ?influence .
+                    VALUES ?prop { schema:worksFor foaf:workplaceHomepage schema:sponsor schema:funder foaf:fundedBy schema:funding schema:nonprofitStatus schema:ownershipFundingInfo schema:parentOrganization schema:founder schema:ethicsPolicy schema:publishingPrinciples schema:correctionsPolicy schema:areaServed schema:memberOf schema:affiliation }
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?group foaf:member ?contributor .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a contributor
+                    {
+                        ?kg ?contribProp ?contributor .
+                        VALUES ?contribProp { dcterms:creator dce:creator foaf:maker schema:creator pav:createdBy schema:author pav:authoredBy dcterms:contributor dce:contributor schema:contributor pav:contributedBy schema:editor pav:curatedBy schema:maintainer }
+                    } UNION {
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                        ?contributor a ?type .
+                        VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    }
+
+                    # Properties: influences
+                    ?group foaf:member ?contributor .
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?contributor ?prop ?qualifications .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a contributor
+                    {
+                        ?kg ?contribProp ?contributor .
+                        VALUES ?contribProp { dcterms:creator dce:creator foaf:maker schema:creator pav:createdBy schema:author pav:authoredBy dcterms:contributor dce:contributor schema:contributor pav:contributedBy schema:editor pav:curatedBy schema:maintainer }
+                    } UNION {
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                        ?contributor a ?type .
+                        VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    }
+
+                    # Properties: qualifications
+                    ?contributor ?prop ?qualifications .
+                    VALUES ?prop { foaf:workInfoHomepage schema:hasOccupation schema:jobTitle schema:award schema:knowsAbout foaf:publications foaf:schoolHomepage schema:alumniOf }
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?contributor schema:hasCredential ?credential .
+                    ?credential schema:competencyRequired ?skills .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a contributor
+                    {
+                        ?kg ?contribProp ?contributor .
+                        VALUES ?contribProp { dcterms:creator dce:creator foaf:maker schema:creator pav:createdBy schema:author pav:authoredBy dcterms:contributor dce:contributor schema:contributor pav:contributedBy schema:editor pav:curatedBy schema:maintainer }
+                    } UNION {
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                        ?contributor a ?type .
+                        VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    }
+
+                    # Properties: qualifications
+                    ?contributor schema:hasCredential ?credential .
+                    ?credential schema:competencyRequired ?skills .
+                }
+            }
+            """
+        ]
+    ) .
+
+<dcatDumpExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                   ?kg dcat:distribution ?dist .
+                   ?dist dcat:downloadURL ?url .
+               }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                   ?kg dcat:distribution ?dist .
+                   ?dist dcat:downloadURL ?url .
+               }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg schema:distribution ?dist .
+                    ?dist schema:contentUrl ?url
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg schema:distribution ?dist .
+                    ?dist schema:contentUrl ?url .
+                }
+            }
+            """
+        ]
+    ) .
+
+<provEditorExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Contribute .
+                    ?act prov:wasAssociatedWith ?contributor .
+                    ?contributor a ?type .
+                    ?act a ?actType .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    # ?act a prov:Contribute .
+                    ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                    ?contributor a ?type .
+                    VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                    OPTIONAL {
+                        ?act a ?actType .
+                    }
+                }
+            }
+            """
+        ]
+    ) .
+
+<provModificationDateExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                    ?act prov:startedAtTime ?date .
+                    ?act a ?actType .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                    ?act prov:startedAtTime ?date .
+                    OPTIONAL {
+                        ?act a ?actType .
+                    }
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                    ?act prov:endedAtTime ?date .
+                    ?act a ?actType .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                    ?act prov:endedAtTime ?date .
+                    OPTIONAL {
+                        ?act a ?actType .
+                    }
+                }
+            }
+            """
+        ]
+    ) .
+
+<provCreationLocationExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                    ?act prov:atLocation ?location .
+                    ?act a ?type .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                    ?act prov:atLocation ?location .
+                    OPTIONAL {
+                        ?act a ?type .
+                    }
+                }
+            }
+            """
+        ]
+    ) .
+
+<provPublicationDateExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    ?act a prov:Publish .
+                    ?act prov:startedAtTime ?date .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    ?act a prov:Publish .
+                    ?act prov:startedAtTime ?date .
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    ?act a prov:Publish .
+                    ?act prov:endedAtTime ?date .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    ?act a prov:Publish .
+                    ?act prov:endedAtTime ?date .
+                 }
+            }
+            """
+        ]
+    ) .
+
+<provPublisherExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy ?act .
+                    ?act a prov:Publish .
+                    ?act prov:wasAssociatedWith ?publisher .
+                    ?publisher a ?type .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg prov:wasGeneratedBy ?act .
+                    ?act a prov:Publish .
+                    ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?publisher .
+                    ?publisher a ?type .
+                    VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                }
+            }
+            """
+        ]
+    ) .
+
+<dcatEndpointExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg dcat:accessService ?service .
+                    ?service dcat:endpointURL ?endpoint .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a SPARQL endpoint
+                    ?kg dcat:accessService ?service .
+                    ?service dcat:endpointURL ?endpoint .
+                 }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg dcat:accessService ?service .
+                    ?service sd:endpoint ?endpoint .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a SPARQL endpoint
+                    ?kg dcat:accessService ?service .
+                    ?service sd:endpoint ?endpoint .
+                 }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?service dcat:servesDataset ?kg .
+                    ?service dcat:endpointURL ?endpoint .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a SPARQL endpoint
+                    ?service dcat:servesDataset ?kg .
+                    ?service dcat:endpointURL ?endpoint .
+                 }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?service dcat:servesDataset ?kg .
+                    ?service sd:endpoint ?endpoint .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                     # Find a SPARQL endpoint
+                     ?service dcat:servesDataset ?kg .
+                     ?service sd:endpoint ?endpoint .
+                 }
+            }
+            """
+        ]
+    ) .
+
+<endpointPropertiesExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?endpoint sd:supportedLanguage ?language .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a SPARQL endpoint
+                    { ?kg schema:contentUrl ?endpoint }
+                    UNION { ?kg void:sparqlEndpoint ?endpoint . }
+                    UNION {?kg dcat:accessService ?service .
+                            ?service dcat:endpointURL ?endpoint .  }
+                    UNION {?kg dcat:accessService ?service .
+                            ?service sd:endpoint ?endpoint . }
+                    UNION {?service dcat:servesDataset ?kg .
+                            ?service dcat:endpointURL ?endpoint . }
+                    UNION {?service dcat:servesDataset ?kg .
+                            ?service sd:endpoint ?endpoint . }
+
+                    ?endpoint sd:supportedLanguage ?language .
+                }
+            }
+            """
+        ]
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?endpoint sd:resultFormat ?format .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    # Find a SPARQL endpoint
+                    { ?kg schema:contentUrl ?endpoint }
+                    UNION { ?kg void:sparqlEndpoint ?endpoint . }
+                    UNION {?kg dcat:accessService ?service .
+                            ?service dcat:endpointURL ?endpoint .  }
+                    UNION {?kg dcat:accessService ?service .
+                            ?service sd:endpoint ?endpoint . }
+                    UNION {?service dcat:servesDataset ?kg .
+                            ?service dcat:endpointURL ?endpoint . }
+                    UNION {?service dcat:servesDataset ?kg .
+                            ?service sd:endpoint ?endpoint . }
+
+                    ?endpoint sd:resultFormat ?format .
+                }
+            }
+            """
+        ]
+    ) .
+
+<dcatWebpageExtraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg dcat:distribution ?dist .
+                    ?dist dcat:accessURL ?url .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg dcat:distribution ?dist .
+                    ?dist dcat:accessURL ?url .
+                }
+            }
+            """
+        ]
+    ) .
+
+<dcatRequirements.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg dcat:distribution ?dist .
+                    ?dist dataid:softwareRequirement ?requirements .
+                }
+            } WHERE {
+                GRAPH ?vendorGraph {
+                    # Find the KG : is a Dataset
+                    { ?kg a bsbm:Vendor . }
+
+                    ?kg dcat:distribution ?dist .
+                    ?dist dataid:softwareRequirement ?requirements .
+                }
+            }
+            """
+        ]
+    ) .

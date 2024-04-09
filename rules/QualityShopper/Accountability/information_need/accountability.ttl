@@ -1,0 +1,517 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix schema: <http://schema.org/> .
+
+@prefix sin: <http://www.exemple.com/sin#> .
+@prefix : <http://www.exemple.com/acc_need#> .
+
+#################################
+#          Top element          #
+#################################
+
+:accountabilityNeed a sin:InformationNeed ;
+    rdfs:label "Accountability Information Need" ;
+    dcterms:creator <https://orcid.org/0000-0001-6907-0136> ;
+    dcterms:created "2022-26-08"^^xsd:date ;
+    dcterms:modified "2022-01-12"^^xsd:date ;
+    rdfs:seeAlso "https://ceur-ws.org/Vol-2716/paper5.pdf" , "https://www.ipvs.uni-stuttgart.de/departments/de/resources/mds/Information_Overview.pdf" .
+
+<https://orcid.org/0000-0001-6907-0136> a foaf:Person ;
+    foaf:name "Jennie Andersen" ;
+    schema:name "Jennie Andersen" ;
+    schema:email "jennie.andersen@insa-lyon.fr" .
+
+#################################
+#             Tags              #
+#################################
+
+# Lifecycle Level Tags
+:collection a sin:Tag ;
+    rdfs:label "Data Collection" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf sin:root .
+:usage a sin:Tag ;
+    rdfs:label "Data Usage" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf sin:root .
+:maintenance a sin:Tag ;
+    rdfs:label "Data Maintenance" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf sin:root .
+
+# Question Level Tags
+:collection_who a sin:Tag ;
+    rdfs:label "Data Collection - Who" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :collection.
+:collection_when a sin:Tag ;
+    rdfs:label "Data Collection - When" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :collection.
+:collection_where a sin:Tag ;
+    rdfs:label "Data Collection - Where" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :collection.
+:collection_how a sin:Tag ;
+    rdfs:label "Data Collection - How" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :collection.
+#
+:usage_who a sin:Tag ;
+    rdfs:label "Data Usage - Who" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :usage.
+:usage_when a sin:Tag ;
+    rdfs:label "Data Usage - When" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :usage.
+:usage_where a sin:Tag ;
+    rdfs:label "Data Usage - Where" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :usage.
+:usage_how a sin:Tag ;
+    rdfs:label "Data Usage - How" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :usage.
+:usage_what a sin:Tag ;
+    rdfs:label "Data Usage - What" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :usage.
+#
+:maintenance_who a sin:Tag ;
+    rdfs:label "Data Maintenance - Who" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :maintenance.
+:maintenance_when a sin:Tag ;
+    rdfs:label "Data Maintenance - When" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :maintenance.
+:maintenance_where a sin:Tag ;
+    rdfs:label "Data Maintenance - Where" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :maintenance.
+:maintenance_how a sin:Tag ;
+    rdfs:label "Data Maintenance - How" ;
+    sin:belongsTo :accountabilityNeed ;
+    sin:weight "1"^^xsd:decimal ;
+    sin:isChildOf :maintenance.
+
+#################################
+#           Question            #
+#################################
+
+# Collection
+:q1 a sin:Question ;
+    rdfs:label "Who are the creators of the KG and their role in this process? For all creators, indicates whether they are a person or an organization, provide information to identify them (name and point of contact such as email, or phone number, or address, or homepage), provide their qualifications, provide all characteristics which could have an influence on the KG."@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl> .
+:q101 a sin:Question ;
+    rdfs:label "Who are the creators and contributors of the kg? What is her/his/its role in the data creation process?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributor.ttl> .
+:q102 a sin:Question ;
+    rdfs:label "What are all information relevant to the identification of the contributor: what is the name of the contributor and a point of contact (email, or phone number, homepage, or address)?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorID.ttl> .
+:q103 a sin:Question ;
+    rdfs:label "Is the contributor (of the data creation process) a person or an organization?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorType.ttl> .
+:q104 a sin:Question ;
+    rdfs:label "What are the qualifications of the contributor (of the data creation process)?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorQualification.ttl> .
+:q105 a sin:Question ;
+    rdfs:label "Concerning the contributor (of the data creation process), provide all characteristics which could have an influence on the KG."@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorInfluences.ttl> .
+:q2 a sin:Question ;
+    rdfs:label "What is/are the creation date(s) of the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> .
+:q3 a sin:Question ;
+    rdfs:label "From what original source(s) were the data collected or derived?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> .
+:q4 a sin:Question ;
+    rdfs:label "From what physical location (state, country, continent, ...) was the KG created?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> .
+:q5 a sin:Question ;
+    rdfs:label "Which methods or tools were used for data creation?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> .
+
+# Maintenance
+:q6 a sin:Question ;
+    rdfs:label "Who are the maintainers of the KG and their role in this process? For all maintainers, indicates whether they are a person or an organization, provide information to identify them (name and point of contact such as email, or phone number, or address, or homepage), provide their qualifications, provide all characteristics which could have an influence on the KG."@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_maintenance_who.ttl> .
+:q601 a sin:Question ;
+    rdfs:label "Who are the maintainers of the dataset? What is her/his/its role in this process?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> .
+:q602 a sin:Question ;
+    rdfs:label "What are all information relevant to the identification of the maintainer: what is the name of the contributor and a point of contact (email, or phone number, or address, or homepage)?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> .
+:q603 a sin:Question ;
+    rdfs:label "Is the maintainer a person or an organization?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> .
+:q604 a sin:Question ;
+    rdfs:label "What are the qualifications of the maintainer?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> .
+:q605 a sin:Question ;
+    rdfs:label "Concerning the maintainer, provide all characteristics which could have an influence on the KG."@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> .
+:q7 a sin:Question ;
+    rdfs:label "When was the KG last maintained/modified?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> .
+:q8 a sin:Question ;
+    rdfs:label "With which frequency is the KG maintained?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> .
+:q9 a sin:Question ;
+    rdfs:label "From what physical location (state, country, continent, ...) is or will the KG be maintained?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> .
+:q10 a sin:Question ;
+    rdfs:label "What will be the methodology/ procedure for data maintenance?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> .
+
+# Usage
+#Who
+:q11 a sin:Question ;
+    rdfs:label "Who publishes this KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/who/usage_publisher.ttl> .
+:q12 a sin:Question ;
+    rdfs:label "Who has the right to use the published KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/who/usage_rights.ttl> .
+:q13 a sin:Question ;
+    rdfs:label "Who is intended to use the published KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/who/usage_audience.ttl> .
+#When
+:q14 a sin:Question ;
+    rdfs:label "Since when was the KG available?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/when/usage_dateStartAvailability.ttl> .
+:q15 a sin:Question ;
+    rdfs:label "Until when is the KG available?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/when/usage_dateEndAvailability.ttl> .
+:q16 a sin:Question ;
+    rdfs:label "Until when is the KG valid?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/when/usage_dateEndValidity.ttl> .
+#Where
+:q17 a sin:Question ;
+    rdfs:label "What is the webpage presenting the KG and/or allowing to gain access to it?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/where/usage_webpage.ttl> .
+:q18 a sin:Question ;
+    rdfs:label "Where to access the KG (either through a dump or a SPARQL endpoint)?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/where/usage_address.ttl> .
+:q19 a sin:Question ;
+    rdfs:label "In what physical location can the KG be used?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/where/usage_location.ttl> .
+#How
+:q20 a sin:Question ;
+    rdfs:label "What is the license of the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> .
+:q21 a sin:Question ;
+    rdfs:label "How to access the KG? Provide a SPARQL endpoint or a dump if they are freely accessible, or the procedure of access, and the characteristics of the endpoint if provided."@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_usage_how.ttl> .
+:q211 a sin:Question ;
+    rdfs:label "How to access the dataset? Provide a SPARQL endpoint or a dump if they are freely accessible, or the procedure of access."@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> .
+:q212 a sin:Question ;
+    rdfs:label "If an endpoint is provided, what are its characteristics?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> .
+:q22 a sin:Question ;
+    rdfs:label "How to use, reuse or integrate the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> .
+:q23 a sin:Question ;
+    rdfs:label "What are the requirements to use the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> .
+#What
+:q24 a sin:Question ;
+    rdfs:label "What are examples of the published data?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_examples.ttl> .
+:q25 a sin:Question ;
+    rdfs:label "What concepts, topics or subjects does the KG cover?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_concepts.ttl> .
+:q26 a sin:Question ;
+    rdfs:label "What is a general description of the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_description.ttl> .
+:q27 a sin:Question ;
+    rdfs:label "How many triples are there in the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_triples.ttl> .
+:q28 a sin:Question ;
+    rdfs:label "How many entities, properties and classes are there in the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_entitiesPropertiesClasses.ttl> .
+:q29 a sin:Question ;
+    rdfs:label "What RDF serialization formats does the KG support?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_serialization.ttl> .
+:q30 a sin:Question ;
+    rdfs:label "What is the quality of the KG?"@en ;
+    sin:requiredBy :accountabilityNeed ;
+    sin:isImplementedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_quality.ttl> .
+
+
+#################################
+#           Labeling            #
+#################################
+# Collection
+:t1 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q1 ;
+    sin:tagWith :collection_who ;
+    sin:weight "1"^^xsd:decimal .
+:t2 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q2 ;
+    sin:tagWith :collection_when ;
+    sin:weight "1"^^xsd:decimal .
+:t3 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q3 ;
+    sin:tagWith :collection_where ;
+    sin:weight "0.5"^^xsd:decimal .
+:t4 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q4 ;
+    sin:tagWith :collection_where ;
+    sin:weight "0.5"^^xsd:decimal .
+:t5 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q5 ;
+    sin:tagWith :collection_how ;
+    sin:weight "1"^^xsd:decimal .
+
+# Maintenance
+:t6 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q6 ;
+    sin:tagWith :maintenance_who ;
+    sin:weight "1"^^xsd:decimal .
+:t7 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q7 ;
+    sin:tagWith :maintenance_when ;
+    sin:weight "1"^^xsd:decimal .
+:t8 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q8 ;
+    sin:tagWith :maintenance_when ;
+    sin:weight "1"^^xsd:decimal .
+:t9 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q9 ;
+    sin:tagWith :maintenance_where ;
+    sin:weight "1"^^xsd:decimal .
+:t10 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q10 ;
+    sin:tagWith :maintenance_how ;
+    sin:weight "1"^^xsd:decimal .
+
+# Usage
+#Who
+:t11 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q11 ;
+    sin:tagWith :usage_who ;
+    sin:weight "1"^^xsd:decimal .
+:t12 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q12 ;
+    sin:tagWith :usage_who ;
+    sin:weight "0.5"^^xsd:decimal .
+:t13 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q13 ;
+    sin:tagWith :usage_who ;
+    sin:weight "0.5"^^xsd:decimal .
+#When
+:t14 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q14 ;
+    sin:tagWith :usage_when ;
+    sin:weight "1"^^xsd:decimal .
+:t15 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q15 ;
+    sin:tagWith :usage_when ;
+    sin:weight "1"^^xsd:decimal .
+:t16 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q16 ;
+    sin:tagWith :usage_when ;
+    sin:weight "1"^^xsd:decimal .
+#Where
+:t17 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q17 ;
+    sin:tagWith :usage_where ;
+    sin:weight "0.5"^^xsd:decimal .
+:t18 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q18 ;
+    sin:tagWith :usage_where ;
+    sin:weight "0.5"^^xsd:decimal .
+:t19 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q19 ;
+    sin:tagWith :usage_where ;
+    sin:weight "1"^^xsd:decimal .
+#How
+:t20 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q20 ;
+    sin:tagWith :usage_how ;
+    sin:weight "1"^^xsd:decimal .
+:t21 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q21 ;
+    sin:tagWith :usage_how ;
+    sin:weight "1"^^xsd:decimal .
+:t22 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q22 ;
+    sin:tagWith :usage_how ;
+    sin:weight "3"^^xsd:decimal .
+:t23 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q23 ;
+    sin:tagWith :usage_how ;
+    sin:weight "3"^^xsd:decimal .
+#What
+:t24 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q24 ;
+    sin:tagWith :usage_what ;
+    sin:weight "3"^^xsd:decimal .
+:t25 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q25 ;
+    sin:tagWith :usage_what ;
+    sin:weight "3"^^xsd:decimal .
+:t26 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q26 ;
+    sin:tagWith :usage_what ;
+    sin:weight "3"^^xsd:decimal .
+:t27 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q27 ;
+    sin:tagWith :usage_what ;
+    sin:weight "1"^^xsd:decimal .
+:t28 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q28 ;
+    sin:tagWith :usage_what ;
+    sin:weight "1"^^xsd:decimal .
+:t29 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q29 ;
+    sin:tagWith :usage_what ;
+    sin:weight "1"^^xsd:decimal .
+:t30 a sin:Labeling ;
+    sin:structures :accountabilityNeed ;
+    sin:questionTagged :q30 ;
+    sin:tagWith :usage_what ;
+    sin:weight "3"^^xsd:decimal .
+
+#################################
+#            Queries            #
+#################################
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributor.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorID.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorType.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorQualification.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorInfluences.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/who/usage_publisher.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/who/usage_rights.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/who/usage_audience.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/when/usage_dateStartAvailability.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/when/usage_dateEndAvailability.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/when/usage_dateEndValidity.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/where/usage_webpage.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/where/usage_address.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/where/usage_location.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_examples.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_concepts.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_description.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_triples.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_entitiesPropertiesClasses.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_serialization.ttl> a sin:Query .
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/what/usage_quality.ttl> a sin:Query .
+
+
+##########################################
+# Succession of queries
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributor.ttl> sin:isFollowedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorID.ttl> , <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorInfluences.ttl> , <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorQualification.ttl> , <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorType.ttl> .
+
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> sin:isFollowedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> , <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> , <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> , <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> .
+
+<https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> sin:isFollowedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> .

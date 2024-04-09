@@ -29,7 +29,6 @@
                 ?elem voaf:reusedByDatasets ?occurences .
             }
             WHERE {
-                
                 {
                     SELECT ?elem (COUNT(?endpointUrl) AS ?occurences) {
                         ?elem voaf:usageInDataset ?elemDatasetOccurence .
@@ -82,7 +81,6 @@
                 ?elemDatasetOccurence voaf:occurrences ?occurencesLow .
             } 
             WHERE {
-
                 ?elem a owl:Class .
                 FILTER( isIRI(?elem))
 

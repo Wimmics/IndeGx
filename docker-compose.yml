@@ -1,14 +1,15 @@
 version: '3.8'
 services:
   corese:
-    image: wimmics/corese:latest
+    image: wimmics/corese:4.5.1-nightly-20240202
     hostname: corese
     environment:
-      OPTIONS: "-su"
+      OPTIONS: "-o -su"
       JVM_XMX: "15g"
     expose: 
       - "8080"
     volumes:
+      - ./input:/input
       - ./output:/usr/local/corese/log
       - ./config:/usr/local/corese/config
       - ./rules:/rules

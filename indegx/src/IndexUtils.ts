@@ -13,7 +13,7 @@ import * as SPARQLUtils from "./SPARQLUtils.js";
     */
 export function writeIndex(filename: string): Promise<void> {
     let trigHeader = { "accept": "application/trig" } as Record<string, string>;
-    return Global.fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g { ?s ?p ?o } } WHERE { GRAPH ?g { ?s ?p ?o } }"), trigHeader).then(trig => {
+    return Global.fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g { ?sg ?pg ?og } ?s ?p ?o } WHERE { { GRAPH ?g { ?sg ?pg ?og } } UNION { ?s ?p ?o } }"), trigHeader).then(trig => {
         Global.writeFile(filename, RDFUtils.fixCommonTurtleStringErrors(trig))
         Logger.info("IndeGx treatment done")
         return ;

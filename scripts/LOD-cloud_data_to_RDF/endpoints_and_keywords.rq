@@ -1,0 +1,16 @@
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+
+CONSTRUCT {
+    ?dataset a void:Dataset ;
+        void:sparqlEndpoint ?endpointUrl ;
+        dct:subject ?subject ;
+        dcat:keyword ?keyword .
+
+} WHERE {
+    ?dataset a void:Dataset ;
+        void:sparqlEndpoint ?endpointUrl ;
+        dct:subject ?subject ;
+        dcat:keyword ?keyword .
+}

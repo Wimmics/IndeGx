@@ -1,0 +1,78 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<> a mf:Manifest ;
+    mf:entries (
+        <vocabularyOccurence.ttl>
+    ) .
+
+<vocabularyOccurence.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <../init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "" ;
+            mf:action """PREFIX voaf: <http://purl.org/vocommons/voaf#>
+            PREFIX vann: <http://purl.org/vocab/vann/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT  {
+                ?ontology voaf:usageInDataset ?ontologyDatasetOccurence .
+                ?ontologyDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+            } WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?limit=10&method=get" ) AS ?editedEndpointUrl )
+
+                # Select a vocabulary
+                GRAPH kgi:Vocabularies {
+                    ?ontology vann:preferredNamespaceUri ?vocabURI .
+                }
+
+                # Check if any property from this vocabulary is used
+                SERVICE ?editedEndpointUrl {
+                    VALUES ?vocabURI { UNDEF }
+                    FILTER(EXISTS {
+                        ?s ?p ?o .
+                        FILTER( STRSTARTS( STR(?p), STR(?vocabURI) ) )
+                    })
+                }
+
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?ontology) , STR($rawEndpointUrl) ) ) ) ) AS ?ontologyDatasetOccurence )
+            }"""
+        ]
+        [
+            rdfs:label "" ;
+            mf:action """PREFIX voaf: <http://purl.org/vocommons/voaf#>
+            PREFIX vann: <http://purl.org/vocab/vann/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT  {
+                ?ontology voaf:usageInDataset ?ontologyDatasetOccurence .
+                ?ontologyDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+            } WHERE {
+                BIND( CONCAT( STR($rawEndpointUrl), "?limit=10&method=get" ) AS ?editedEndpointUrl )
+
+                # Select a vocabulary
+                GRAPH kgi:Vocabularies {
+                    ?ontology vann:preferredNamespaceUri ?vocabURI .
+                }
+
+                # Check if any property from this vocabulary is used
+                SERVICE ?editedEndpointUrl {
+                    VALUES ?vocabURI { UNDEF }
+                    FILTER(EXISTS {
+                        ?s a ?c .
+                        FILTER( STRSTARTS( STR(?c), STR(?vocabURI) ) )
+                    })
+                }
+
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(?ontology) , STR($rawEndpointUrl) ) ) ) ) AS ?ontologyDatasetOccurence )
+            }"""
+        ]
+    ) .
