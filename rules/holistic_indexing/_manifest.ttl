@@ -1,0 +1,22 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        # Common pitfalls
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonPitfalls/rules/CommonPitfalls/_manifest.ttl>
+        # Dataset summary
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/Dataset_summary/_manifest.ttl>
+        # FAIRness
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/QualityShopper/rules/Fairness/_manifest.ttl>
+        # Original rules
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/IndeGx_original_rules/manifest.ttl>
+        # Accountability
+        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/_rootManifest.ttl>
+        # Intention declaration
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/_manifest.ttl>
+    ) .

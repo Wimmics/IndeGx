@@ -1,0 +1,20 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        # Dataset summary
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/Dataset_summary/_post_manifest.ttl>
+        # FAIRness
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/QualityShopper/rules/Fairness/_post_manifest.ttl>
+        # Original
+        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/IndeGx_original_rules/post/manifest.ttl>
+        # Accountability
+        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/_postRootManifest.ttl>
+        # Intention declaration
+        <https://github.com/Wimmics/IndeGx/blob/intentionDeclaration/rules/intension/post/_manifest.ttl>
+    ) .

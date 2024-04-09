@@ -1,7 +1,7 @@
 {
-    "pre": "",
-    "manifest": "file:///input/generated_rules/_manifest.ttl",
-    "post": "",
+    "pre": "file:///rules/holistic_indexing/_pre_manifest.ttl",
+    "manifest": "file:///rules/holistic_indexing/_manifest.ttl",
+    "post": "file:///rules/holistic_indexing/_post_manifest.ttl",
     "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
