@@ -1,16 +1,16 @@
 {
-    "pre": "file:///rules/intension/pre/_manifest.ttl",
-    "manifest": "file:///rules/intension/main/_manifest.ttl",
-    "post": "file:///rules/intension/post/_manifest.ttl",
-    "catalog": "file:///catalogs/debug_catalog.ttl",
+    "pre": "",
+    "manifest": "file:///rules/CommonPitfalls/_manifest.ttl",
+    "post": "",
+    "catalog": "file:///catalogs/catalog.auto_refresh.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
     "maxConccurentQueries": 300,
     "delayMillisecondsTimeForConccurentQuery": 1000,
     "manifestJSON": "/output/rules.json",
-    "logFile": "/output/indegx_debug.log",
-    "outputFile": "/output/indegx_debug.trig",
+    "logFile": "/output/indegx.log",
+    "outputFile": "/output/indegx.trig",
     "queryLog": true,
     "resilience": false
 }

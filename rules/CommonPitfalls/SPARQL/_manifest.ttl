@@ -1,0 +1,98 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <differentRANDsameValue.ttl>
+        <differentNOWdifferentValue.ttl>
+    ) .
+
+<differentRANDsameValue.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentRANDsameValue.ttl> ;
+                        dqv:value ?r1 , ?r2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( RAND() AS ?r1) 
+                    BIND( RAND() AS ?r2) 
+                }
+            }"""
+        ]
+        [
+            mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT DATA {
+                $rawEndpointUrl sd:feature kgi:BadRandomNumber .
+            }"""
+        ]
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentRANDsameValue.ttl> ;
+                        dqv:value ?r1 , ?r2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( RAND() AS ?r1) 
+                    BIND( RAND() AS ?r2) 
+                }
+            }"""
+        ]
+    ) .
+
+<differentNOWdifferentValue.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentNOWdifferentValue.ttl> ;
+                        dqv:value ?t1 ;
+                        dqv:value ?t2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( NOW() AS ?t1) 
+                    BIND( NOW() AS ?t2)
+                }
+            }"""
+        ]
+        [
+            mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT DATA {
+                $rawEndpointUrl sd:feature kgi:BadNOWtime .
+            }"""
+        ]
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            INSERT {
+                    $rawEndpointUrl dqv:hasQualityMeasurement [
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonSPARQLErrors/rules/CommonSPARQLServerErrors/differentNOWdifferentValue.ttl> ;
+                        dqv:value ?t1 ;
+                        dqv:value ?t2 
+                    ]
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    BIND( NOW() AS ?t1) 
+                    BIND( NOW() AS ?t2) 
+                }
+            }"""
+        ]
+    ) .

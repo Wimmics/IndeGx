@@ -1,0 +1,82 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <init.ttl>
+    ) .
+
+
+<init.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT DATA {
+                $rawEndpointUrl a dcat:DataService , sd:Service .
+            }"""
+        ]
+        [
+            mf:action """PREFIX js: <function://fr.inria.corese.core.extension.Report>
+            PREFIX xt: <http://ns.inria.fr/sparql-extension/>
+            PREFIX dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT {
+                $rawEndpointUrl kgi:report ?encodedReport , ?encodedFunctionReport .
+            } WHERE {
+                BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
+                SERVICE ?reportModeEndpointUrl {
+                    {
+                        SELECT * {
+                            ?s ?p ?o
+                        } LIMIT 1
+                    }
+                }
+                values (?_service_report_0 ){
+                    (UNDEF )
+                }
+                BIND( js:server() AS ?server)
+                BIND( ENCODE_FOR_URI( STR(js:report()) ) AS ?encodedFunctionReport)
+                BIND( ENCODE_FOR_URI( STR(?_service_report_0) ) AS ?encodedReport)
+            }"""
+        ]
+        [
+            mf:action """PREFIX js: <function://fr.inria.corese.core.extension.Report>
+            PREFIX xt: <http://ns.inria.fr/sparql-extension/>
+            PREFIX dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT {
+                $rawEndpointUrl kgi:server ?server, ?serverGet .
+            } WHERE {
+                BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
+                SERVICE ?reportModeEndpointUrl {
+                    {
+                        SELECT * {
+                            ?s ?p ?o
+                        } LIMIT 1
+                    }
+                }
+                values (?_service_report_0 ){
+                    (UNDEF )
+                }
+                BIND( js:server() AS ?server)
+                BIND( xt:get(?_service_report_0, "server") AS ?serverGet)
+            }"""
+        ]
+        <SPARQL/_manifest.ttl>
+        <RDFS/_manifest.ttl>
+    ) .
