@@ -1,8 +1,8 @@
 {
     "pre": "",
-    "manifest": "file:///rules/CommonPitfalls/_manifest.ttl",
+    "manifest": "file:///input/generated_rules/_manifest.ttl",
     "post": "",
-    "catalog": "file:///catalogs/catalog.auto_refresh.ttl",
+    "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
