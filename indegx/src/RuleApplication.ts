@@ -210,25 +210,6 @@ function applyTest(endpointObject: EndpointObject, testObject: RuleTree.Test, en
         let testsPool = [];
         testQueries.forEach(testQuery => {
             testQuery = replacePlaceholders(testQuery, { endpointUrlString: endpointObject.endpoint })
-            if (!postMode) {
-                // We check if there is a service clause in the query
-                if (!SPARQLUtils.queryContainsService(testQuery)) {
-                    let endpointUrl = endpointObject.endpoint;
-
-                    // ASK queries are given a CORESE SPARQL service extension parameter for a limit of 1, other wise Corese will send a SELECT LIMIT 1000 or something too high
-                    if(SPARQLUtils.isSparqlAsk(testQuery)) {
-                        let endpointUrlObject = new URL(endpointUrl);
-                        let params = new URLSearchParams(endpointUrlObject.search);
-                        
-                        //Add a limit of 1 to the ASK query
-                        params.append("limit", "1");
-                        endpointUrl = endpointUrlObject.toString() + "?" + params.toString();
-                    }
-
-                    // If not, we add the service clause
-                    testQuery = SPARQLUtils.addServiceClause(testQuery, endpointUrl)
-                }
-            }
             if (endpointObject.graphs !== undefined) {
                 const parsedQuery = parser.parse(testQuery);
                 parsedQuery.where = addGraphToInnerQueries(endpointObject, parsedQuery.where);
