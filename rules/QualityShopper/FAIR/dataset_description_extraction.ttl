@@ -18,28 +18,30 @@
         PREFIX dcterms: <http://purl.org/dc/terms/>
         PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
         ASK {
-              {
-                     # Find the KG : is a Dataset
-                     { ?kg a dcat:Dataset }
-                     UNION { ?kg a void:Dataset }
-                     UNION { ?kg a dcmitype:Dataset }
-                     UNION { ?kg a schema:Dataset }
-                     UNION { ?kg a sd:Dataset }
-                     UNION { ?kg a dataid:Dataset }
+            SERVICE $rawEndpointUrl {
+                SELECT * {
+                    {
+                        # Find the KG : is a Dataset
+                        { ?kg a dcat:Dataset }
+                        UNION { ?kg a void:Dataset }
+                        UNION { ?kg a dcmitype:Dataset }
+                        UNION { ?kg a schema:Dataset }
+                        UNION { ?kg a sd:Dataset }
+                        UNION { ?kg a dataid:Dataset }
 
-                     # is linked directly or not to the endpoint
-                     { ?kg ?endpointLink $rawEndpointUrl . }
-                     UNION {?kg dcat:accessService ?service .
-                            ?service dcat:endpointURL $rawEndpointUrl .  }
-                     UNION {?kg dcat:accessService ?service .
-                            ?service sd:endpoint $rawEndpointUrl . }
-                     UNION {?service dcat:servesDataset ?kg .
-                            ?service dcat:endpointURL $rawEndpointUrl . }
-                     UNION {?service dcat:servesDataset ?kg .
-                            ?service sd:endpoint $rawEndpointUrl . }
-              }
-              UNION {
-                     GRAPH ?graph {
+                        # is linked directly or not to the endpoint
+                        { ?kg ?endpointLink $rawEndpointUrl . }
+                        UNION {?kg dcat:accessService ?service .
+                                ?service dcat:endpointURL $rawEndpointUrl .  }
+                        UNION {?kg dcat:accessService ?service .
+                                ?service sd:endpoint $rawEndpointUrl . }
+                        UNION {?service dcat:servesDataset ?kg .
+                                ?service dcat:endpointURL $rawEndpointUrl . }
+                        UNION {?service dcat:servesDataset ?kg .
+                                ?service sd:endpoint $rawEndpointUrl . }
+                    }
+                    UNION {
+                        GRAPH ?graph {
                             # Find the KG : is a Dataset
                             { ?kg a dcat:Dataset }
                             UNION { ?kg a void:Dataset }
@@ -51,14 +53,15 @@
                             # is linked directly or not to the endpoint
                             { ?kg ?endpointLink $rawEndpointUrl . }
                             UNION {?kg dcat:accessService ?service .
-                                   ?service dcat:endpointURL $rawEndpointUrl .  }
+                                ?service dcat:endpointURL $rawEndpointUrl .  }
                             UNION {?kg dcat:accessService ?service .
-                                   ?service sd:endpoint $rawEndpointUrl . }
+                                ?service sd:endpoint $rawEndpointUrl . }
                             UNION {?service dcat:servesDataset ?kg .
-                                   ?service dcat:endpointURL $rawEndpointUrl . }
+                                ?service dcat:endpointURL $rawEndpointUrl . }
                             UNION {?service dcat:servesDataset ?kg .
-                                   ?service sd:endpoint $rawEndpointUrl . }
-                     }
-              }
-        }
-""" .
+                                ?service sd:endpoint $rawEndpointUrl . }
+                        }
+                    }
+                }
+            }
+        }""" .

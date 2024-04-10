@@ -8,15 +8,15 @@
 <> a mf:Manifest ;
     mf:include (
         # Common pitfalls
-        <https://raw.githubusercontent.com/Wimmics/IndeGx/CommonPitfalls/rules/CommonPitfalls/_manifest.ttl>
+        <file:///rules/CommonPitfalls/_manifest.ttl>
         # Dataset summary
-        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/Dataset_summary/_manifest.ttl>
+        <file:///rules/Dataset_summary/_manifest.ttl>
         # FAIRness
-        <https://raw.githubusercontent.com/Wimmics/IndeGx/QualityShopper/rules/Fairness/_manifest.ttl>
+        <file:///rules/rules/Fairness/_manifest.ttl>
         # Original rules
-        <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/IndeGx_original_rules/manifest.ttl>
+        <file:///rules/IndeGx_original_rules/manifest.ttl>
         # Accountability
         <file:///rules/Accountability/_rootManifest.ttl>
         # Intention declaration
-        <https://raw.githubusercontent.com/Wimmics/IndeGx/intentionDeclaration/rules/intension/main/_manifest.ttl>
+        <file:///rules/intension/main/_manifest.ttl>
     ) .
