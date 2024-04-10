@@ -1,0 +1,23 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Indication of the current version." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for the current version of the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX pav: <http://purl.org/pav/>
+        ASK {
+            { ?res schema:version ?id }
+            UNION { ?res dcterms:hasVersion ?id }
+            UNION { ?res dcat:version ?id }
+            UNION { ?res pav:version ?id }
+            UNION { ?res pav:hasCurrentVersion ?id }
+        }
+""" .

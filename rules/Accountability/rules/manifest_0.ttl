@@ -1,0 +1,123 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <KGreferenced.ttl>
+    ) .
+
+<KGreferenced.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    # Creation of the description
+                    ?datasetDescription a dcat:Dataset , void:Dataset ;
+                        # $rawEndpointUrl is a keyword used by IndeGx. It is replaced by the endpointURL currently indexed
+                        ?endpointLink $rawEndpointUrl .
+                    ##
+                    ?datasetDescription a prov:Entity , earl:TestSubject ;
+                        dcat:service ?endpointDescription ;
+                        dcat:distribution ?datasetDistribution .
+                    ?datasetDistribution a dcat:Distribution ;
+                        dcat:accessUrl $rawEndpointUrl ;
+                        dcat:mediaType "application/sparql-query" .
+                    ?endpointDescription sd:endpoint $rawEndpointUrl ;
+                        dcat:servesDataset ?datasetDescription ;
+                        dcat:endpointURL $rawEndpointUrl ;
+                        a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject .
+                    ?metadataDescription a prov:Entity , earl:TestSubject ;
+                        prov:wasDerivedFrom $rawEndpointUrl ;
+                        kgi:curated ?datasetDescription , ?endpointDescription .
+
+                    # Measurement
+                    ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl#activity> ;
+                        dqv:hasQualityMeasurement ?qualityMeasurement .
+                    ?qualityMeasurement a dqv:QualityMeasurement ;
+                        rdfs:label "KG is referenced measurement";
+                        rdfs:comment "Find the dataset associated with the endpoint URL."@en ;
+                        dqv:computedOn ?endpointDescription ;
+                        dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl> ;
+                        dqv:value "true"^^xsd:boolean ;
+                        prov:generatedAtTime $dateLiteral .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl> a dqv:Metric ;
+                        rdfs:comment "Is the dataset referenced within its data?" ;
+                        rdfs:label "KG is referenced" .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                } WHERE {
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Distribution")) AS ?datasetDistribution)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl")), "Measure")) AS ?qualityMeasurement)
+                }
+            """
+        ]
+    ) ;
+    kgi:onFailure (
+        [
+            mf:action """
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                # Creation of the description
+                ?datasetDescription a dcat:Dataset , void:Dataset ;
+                    # $rawEndpointUrl is a keyword used by IndeGx. It is replaced by the endpointURL currently indexed
+                    ?endpointLink $rawEndpointUrl .
+                ##
+                ?datasetDescription a prov:Entity , earl:TestSubject ;
+                    dcat:service ?endpointDescription ;
+                    dcat:distribution ?datasetDistribution .
+                ?datasetDistribution a dcat:Distribution ;
+                    dcat:accessUrl $rawEndpointUrl ;
+                    dcat:mediaType "application/sparql-query" .
+                ?endpointDescription sd:endpoint $rawEndpointUrl ;
+                    dcat:servesDataset ?datasetDescription ;
+                    dcat:endpointURL $rawEndpointUrl ;
+                    a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject .
+                ?metadataDescription a prov:Entity , earl:TestSubject ;
+                    prov:wasDerivedFrom $rawEndpointUrl ;
+                    kgi:curated ?datasetDescription , ?endpointDescription .
+
+                # Measurement
+                ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl#activity> ;
+                    dqv:hasQualityMeasurement ?qualityMeasurement .
+                ?qualityMeasurement a dqv:QualityMeasurement ;
+                    rdfs:label "KG is referenced measurement";
+                    rdfs:comment "Find the dataset associated with the endpoint URL."@en ;
+                    dqv:computedOn ?endpointDescription ;
+                    dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl> ;
+                    dqv:value "false"^^xsd:boolean ;
+                    prov:generatedAtTime $dateLiteral .
+                <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl> a dqv:Metric ;
+                    rdfs:comment "Is the dataset referenced within its data?" ;
+                    rdfs:label "KG is referenced" .
+                <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl> ;
+                    prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+            } WHERE {
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Endpoint")) AS ?endpointDescription)
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str($rawEndpointUrl)), "Distribution")) AS ?datasetDistribution)
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str($rawEndpointUrl), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/KGreferenced.ttl")), "Measure")) AS ?qualityMeasurement)
+            }
+            """
+        ]
+    ) .

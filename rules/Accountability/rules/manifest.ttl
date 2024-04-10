@@ -1,0 +1,49 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <initialization.ttl>
+    ) ;
+    mf:include (
+        <../score_computing_rules/_manifest.ttl>
+    ) .
+
+# For endpoint URL without associated Dataset, see nonTrivialExtractionRules/simpleExtraction.ttl
+<initialization.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        # Creation of the description
+                        ?endpointDescription sd:endpoint ?endpointUrl ;
+                            dcat:servesDataset ?kg ;
+                            dcat:endpointURL ?endpointUrl ;
+                            a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject .
+                        ?metadataDescription a prov:Entity , earl:TestSubject ;
+                            prov:wasDerivedFrom ?kg .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset ;
+                            void:sparqlEndpoint ?endpointUrl .
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                }
+            """
+        ]
+        <creation/manifest.ttl>
+        <maintenance/manifest.ttl>
+        <usage/manifest.ttl>
+    ) .
