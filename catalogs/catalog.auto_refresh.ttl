@@ -2029,7 +2029,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns171:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.omabrowser.org%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.omabrowser.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns2:importedFrom ns7:search ;
@@ -3132,8 +3133,7 @@
   a ns10:Dataset ;
   ns10:endpointURL ns323:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fwifo5-04.informatik.uni-mannheim.de%2Fdrugbank%2Fsnorql%2F> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwifo5-04.informatik.uni-mannheim.de%2Fdrugbank%2Fsnorql%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <http://wifo5-04.informatik.uni-mannheim.de/drugbank/snorql/> ;
   a ns10:Dataset ;
   ns10:endpointURL <http://wifo5-04.informatik.uni-mannheim.de/drugbank/snorql/> .
@@ -3273,7 +3273,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns342:Heritage .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fglyconnect.expasy.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fglyconnect.expasy.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns2:importedFrom ns7:search ;
   ns8:sparqlEndpoint ns343:sparql ;
@@ -5929,7 +5930,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns722:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-04-12T07:36:58.193Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-04-13T07:38:21.639Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
