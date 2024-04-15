@@ -16,18 +16,56 @@ source.on('data', function (data) { fileContentString += data; });
 source.on('end', function () {
     const fileContentJSON = JSON.parse(fileContentString);
     let vocabularySet = new Set();
+    let prefixSet = new Set();
     let vocabularyPrefixesMap = new Map();
     Object.keys(fileContentJSON["@context"]).forEach(vocabPrefix => {
         const vocabURI = fileContentJSON["@context"][vocabPrefix];
         vocabularySet.add(vocabURI);
         if(! vocabularyPrefixesMap.has(vocabURI)) {
-            vocabularyPrefixesMap.set(vocabURI, []);
+            vocabularyPrefixesMap.set(vocabURI, new Set());
         }
-        vocabularyPrefixesMap.get(vocabURI).push(vocabPrefix);
+        vocabularyPrefixesMap.get(vocabURI).add(vocabPrefix);
+        if(! prefixVocabulariesMap.has(vocabPrefix)) {
+            prefixVocabulariesMap.set(vocabPrefix, new Set());
+        }
+        prefixVocabulariesMap.get(vocabPrefix).add(vocabURI);
     })
 
     console.log(vocabularySet.size, "vocabularies")
 
+    // Looking for duplicate vocabularies
+    let vocabularyArray = Array.from(vocabularySet);
+    let vocabularyDuplicates = new Set();
+    vocabularyArray.sort();
+    for(let i = 0; i < vocabularyArray.length; i++) {
+        for(let j = 0; j < vocabularyArray.length; j++) {
+            if(i != j 
+                && vocabularyArray[i].includes(vocabularyArray[j]) 
+                && vocabularyArray[i].length != vocabularyArray[j].length 
+                && setIntersection(vocabularyPrefixesMap.get(vocabularyArray[i]), vocabularyPrefixesMap.get(vocabularyArray[j])).size != 0) {
+                vocabularyDuplicates.add(vocabularyArray[i]);
+            }
+        }
+    }
+
+    console.log(vocabularyDuplicates.size, "vocabulary duplicates");
+
+    vocabularyDuplicates.forEach(vocabularyUri => {
+        vocabularySet.delete(vocabularyUri);
+    });
+
+    // Looking for overlap in prefixes
+    console.log(prefixSet.size, "prefixes");
+    let prefixDuplicates = new Set();
+    prefixSet.forEach(prefix => {
+        if(prefixVocabulariesMap.get(prefix).size > 1) {
+            prefixDuplicates.add(prefix);
+            console.log("Prefix", prefix, "is used by", prefixVocabulariesMap.get(prefix).size, "vocabularies");
+        }
+    })
+    console.log(prefixDuplicates.size, "prefix with overlap");
+
+    // Writing the result
     const resultFilename = "prefixcc.ttl";
     let resultFileContent = "";
     vocabularySet.forEach(vocabularyUri => {
@@ -38,4 +76,14 @@ source.on('end', function () {
     });
     fs.writeFile(resultFilename, resultFileContent, { flag: "w+" }, (error) => { if(error) { console.error(error) } });
 });
+
+function setIntersection(setA, setB) {
+    let _intersection = new Set();
+    for (let elem of setB) {
+        if (setA.has(elem)) {
+            _intersection.add(elem);
+        }
+    }
+    return _intersection;
+}
 

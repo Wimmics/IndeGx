@@ -1,0 +1,23 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of an identifier." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for an identifier of the KG." ;
+    kgi:query """
+    PREFIX void: <http://rdfs.org/ns/void#>
+    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+    PREFIX dce: <http://purl.org/dc/elements/1.1/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX adms: <http://www.w3.org/ns/adms#>
+    ASK {
+        { ?res schema:identifier ?id }
+        UNION { ?res dce:identifier ?id }
+        UNION { ?res dcterms:identifier ?id }
+        UNION { ?res adms:identifier ?id }
+    }
+""" .

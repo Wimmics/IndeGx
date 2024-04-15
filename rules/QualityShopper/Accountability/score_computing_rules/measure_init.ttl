@@ -1,0 +1,5 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:DummyTest ;
+    dcterms:isReferencedBy <manifest.ttl> .

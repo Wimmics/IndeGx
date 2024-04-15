@@ -1,0 +1,119 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+<http://www.exemple.com/sin#> a owl:Ontology ;
+    rdfs:label "Structured Information Need Ontology"@en ;
+    skos:altLabel "SIN-O" ;
+    rdfs:comment "This document is an ontology to describe an information need as a structured set of questions that require answers."@en ;
+    owl:versionInfo "Second attempt" ;
+    dcterms:creator <https://orcid.org/0000-0001-6907-0136> ;
+    dcterms:created "2022-25-08"^^xsd:date ;
+    dcterms:modified "2022-01-12"^^xsd:date ;
+    dcterms:contributor [foaf:name "Sylvie Cazalens"] , [foaf:name "Philippe Lamarre"] ;
+    rdfs:seeAlso "https://dekalog.univ-nantes.fr/" .
+
+
+#################################
+#            Classes            #
+#################################
+
+# Information Need
+:InformationNeed rdf:type rdfs:Class ;
+    rdfs:label "Information Need"@en ;
+    rdfs:comment "Defines a set of questions that must be answered as well as a structuration of these questions through the use of tags."@en .
+
+# Question
+:Question rdf:type rdfs:Class ;
+    rdfs:label "Question"@en ;
+    rdfs:comment "A sentence in natural language used to find out information."@en .
+
+# Query
+:Query rdf:type rdfs:Class ;
+    rdfs:label "Query"@en ;
+    rdfs:comment "A query expressed in a query language, for instance a SPARQL query."@en .
+
+# Labeling
+:Labeling rdf:type rdfs:Class ;
+    rdfs:label "Labeling"@en ;
+    rdfs:comment "A labeling is an associating between a question and a tag. The question is also given a weight which correspond to its relative importance regarding the tag."@en .
+
+# Tag
+:Tag rdf:type rdfs:Class ;
+    rdfs:label "Tag"@en ;
+    rdfs:comment "Word or sentence used to classify questions."@en .
+
+
+#################################
+#           Properties          #
+#################################
+
+# belongs To
+:belongsTo rdf:type rdf:Property ;
+    rdfs:label "belongs to"@en ;
+    rdfs:comment "The tag belongs to an Information Need."@en ;
+    rdfs:domain :Tag ;
+    rdfs:range :InformationNeed .
+
+# structures
+:structures rdf:type rdf:Property ;
+    rdfs:label "structures"@en ;
+    rdfs:comment "Associate a Labeling to an Information Need in order to structure its questions."@en ;
+    rdfs:domain :Labeling ;
+    rdfs:range :InformationNeed .
+
+# required By
+:requiredBy rdf:type rdf:Property ;
+    rdfs:label "required by"@en ;
+    rdfs:comment "Associate a question with an Information Need that requires answers to it."@en ;
+    rdfs:domain :Question ;
+    rdfs:range :InformationNeed .
+
+# tag With
+:tagWith rdf:type rdf:Property ;
+    rdfs:label "tag with"@en ;
+    rdfs:comment "The tag used in the labeling."@en ;
+    rdfs:domain :Labeling ;
+    rdfs:range :Tag .
+
+# question Tagged
+:questionTagged rdf:type rdf:Property ;
+    rdfs:label "question tagged"@en ;
+    rdfs:comment "The question tagged with the labeling."@en ;
+    rdfs:domain :Labeling ;
+    rdfs:range :Question .
+
+# is Child Of
+:isChildOf rdf:type rdf:Property ;
+    rdfs:label "is child of"@en ;
+    rdfs:comment "Relation between a tag and another tag in order to provide a hierarchical structure to the tags. Means that the first tag is the child node of the second tag in the hierarchy."@en ;
+    rdfs:domain :Tag ;
+    rdfs:range :Tag .
+
+# weight
+:weight rdf:type rdf:Property ;
+    rdfs:label "weight"@en ;
+    rdfs:comment "Number representing the relative importance of the element compared to the similar elements. Should be use for a tagging to give the relative importance of the question compared to the questions with the same tag ; and for a tag to give its relative importance compared to its siblings."@en .
+
+###########################
+:isFollowedBy rdf:type rdf:Property ;
+    rdfs:label "is followed by"@en ;
+    rdfs:comment "A query is followed by another query if the the second complement the first one."@en ;
+    rdfs:domain :Query ;
+    rdfs:range :Query .
+
+
+#################################
+#            Entities           #
+#################################
+
+# root
+:root rdf:type :Tag ;
+    rdfs:label "root of trees"@en ;
+    rdfs:comment "The root of all trees of tags."@en ;
+    :weight "1"^^xsd:decimal .
+    # :isChildOf :root .

@@ -1,0 +1,43 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of requirements in DCAT/DataID." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for of requirements in DCAT/DataID on the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dce: <http://purl.org/dc/elements/1.1/>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+        ASK {
+              # Find the KG : is a Dataset
+              { ?kg a dcat:Dataset }
+              UNION { ?kg a void:Dataset }
+              UNION { ?kg a dcmitype:Dataset }
+              UNION { ?kg a schema:Dataset }
+              UNION { ?kg a sd:Dataset }
+              UNION { ?kg a dataid:Dataset }
+
+              # is linked directly or not to the endpoint
+              { ?kg ?endpointLink $rawEndpointUrl . }
+              UNION {?kg dcat:accessService ?service .
+                     ?service dcat:endpointURL $rawEndpointUrl .  }
+              UNION {?kg dcat:accessService ?service .
+                     ?service sd:endpoint $rawEndpointUrl . }
+              UNION {?service dcat:servesDataset ?kg .
+                     ?service dcat:endpointURL $rawEndpointUrl . }
+              UNION {?service dcat:servesDataset ?kg .
+                     ?service sd:endpoint $rawEndpointUrl . }
+
+              ?kg dcat:distribution ?dist .
+              ?dist dataid:softwareRequirement ?requirements .
+        }
+""" .

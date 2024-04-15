@@ -1,0 +1,370 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        <contributor/manifest.ttl>
+    ) ;
+    mf:entries (
+        <creation_date.ttl>
+        <creation_location.ttl>
+        <creation_source.ttl>
+        <creation_methodology.ttl>
+    ) .
+
+<creation_date.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementDate .
+                        ?qualityMeasurementDate a dqv:QualityMeasurement ;
+                            rdfs:label "Creation date measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> a dqv:Metric ;
+                            rdfs:comment "What is/are the creation date(s) of the dataset?" ;
+                            rdfs:label "Creation date" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                        {?kg dcterms:created ?date .}
+                        UNION {?kg pav:curatedOn ?date .}
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl")), "Measure")) AS ?qualityMeasurementDate)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementDate .
+                        ?qualityMeasurementDate a dqv:QualityMeasurement ;
+                            rdfs:label "Creation date measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A creation date of the Dataset must be provided (e.g. dct:created)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/creationDate.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> a dqv:Metric ;
+                            rdfs:comment "What is/are the creation date(s) of the dataset?" ;
+                            rdfs:label "Creation date" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                    }
+                    FILTER ( NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                {?kg dcterms:created ?date .}
+                                UNION {?kg pav:curatedOn ?date .}
+                            }
+                        })
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_date.ttl")), "Measure")) AS ?qualityMeasurementDate)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+    ) .
+
+<creation_location.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementLocation .
+                        ?qualityMeasurementLocation a dqv:QualityMeasurement ;
+                            rdfs:label "Creation location measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> a dqv:Metric ;
+                            rdfs:comment "From what physical location (state, country, continent, ...) was the dataset created?" ;
+                            rdfs:label "Creation location" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                        ?kg schema:locationCreated ?loc .
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl")), "Measure")) AS ?qualityMeasurementLocation)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementLocation .
+                        ?qualityMeasurementLocation a dqv:QualityMeasurement ;
+                            rdfs:label "Creation location measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A location of creation of the Dataset must be provided (e.g. pav:createdAt, schema:locationCreated)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/creationLocation.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> a dqv:Metric ;
+                            rdfs:comment "From what physical location (state, country, continent, ...) was the dataset created?" ;
+                            rdfs:label "Creation location" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                    }
+                    FILTER ( NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                ?kg schema:locationCreated ?loc .
+                            }
+                        } )
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_location.ttl")), "Measure")) AS ?qualityMeasurementLocation)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<creation_source.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementSource .
+                        ?qualityMeasurementSource a dqv:QualityMeasurement ;
+                            rdfs:label "Creation source measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> a dqv:Metric ;
+                            rdfs:comment "From what original source(s) were the data collected or derived?" ;
+                            rdfs:label "Creation source" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                        ?kg dcterms:source ?source .
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl")), "Measure")) AS ?qualityMeasurementSource)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementSource .
+                        ?qualityMeasurementSource a dqv:QualityMeasurement ;
+                            rdfs:label "Creation source measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "The source from which the data was collected or derived must be provided (e.g. dct:source, schema:isBasedOn, pav:derivedFrom)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/source.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> a dqv:Metric ;
+                            rdfs:comment "From what original source(s) were the data collected or derived?" ;
+                            rdfs:label "Creation source" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                    }
+                    FILTER ( NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                ?kg dcterms:source ?source .
+                            }
+                        })
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_source.ttl")), "Measure")) AS ?qualityMeasurementSource)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<creation_methodology.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementMethodology .
+                        ?qualityMeasurementMethodology a dqv:QualityMeasurement ;
+                            rdfs:label "Creation methodology measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> a dqv:Metric ;
+                            rdfs:comment "Which methods or tools were used for data creation?" ;
+                            rdfs:label "Creation methodology" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                        { ?kg dcterms:accrualMethod ?meth . }
+                        UNION { ?kg pav:createdWith ?agent . }
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl")), "Measure")) AS ?qualityMeasurementMethodology)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementMethodology .
+                        ?qualityMeasurementMethodology a dqv:QualityMeasurement ;
+                            rdfs:label "Creation methodology measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "The methodology or software of creation of the Dataset must be provided (e.g. dct:accrualMethod, pav:createdWith)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/creationMethod.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> a dqv:Metric ;
+                            rdfs:comment "Which methods or tools were used for data creation?" ;
+                            rdfs:label "Creation methodology" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a void:Dataset .
+                    }
+                    FILTER ( NOT EXISTS {
+                            GRAPH ?kgGraph {
+                                { ?kg dcterms:accrualMethod ?meth . }
+                                UNION { ?kg pav:createdWith ?agent . }
+                            }
+                        } )
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/creation_methodology.ttl")), "Measure")) AS ?qualityMeasurementMethodology)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .

@@ -1,0 +1,615 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <usage_license.ttl>
+        <usage_access.ttl>
+        <usage_reuse.ttl>
+        <usage_requirements.ttl>
+    ) .
+
+
+<usage_license.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage license measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> a dqv:Metric ;
+                            rdfs:comment "What is the license of the dataset?" ;
+                            rdfs:label "Usage license" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+
+                        ?kg dcterms:license ?license .
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage license measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A license of the Dataset must be provided (e.g. dct:license, schema:license)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/license.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> a dqv:Metric ;
+                            rdfs:comment "What is the license of the dataset?" ;
+                            rdfs:label "Usage license" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+                    }
+
+                    FILTER (NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dcterms:license ?license .
+                            }
+                        })
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_license.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<usage_access.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage access procedure measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> a dqv:Metric ;
+                            rdfs:comment "How to access the dataset? Provide a SPARQL endpoint or a dump if they are freely accessible, or the procedure of access." ;
+                            rdfs:label "Usage access procedure" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+
+                        { ?kg void:sparqlEndpoint ?endpoint . }
+                        UNION { ?kg dcat:distribution ?dist .
+                               ?dist dataid:accessProcedure ?procedure . }
+                        UNION { ?kg void:dataDump ?dataDump . }
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage access procedure measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A link to the endpoint or a dump of the Dataset must be provided (e.g. void:sparqlEndpoint, void:dataDump)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/dump.ttl> , <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/sparqlEndpoint.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> a dqv:Metric ;
+                            rdfs:comment "How to access the dataset? Provide a SPARQL endpoint or a dump if they are freely accessible, or the procedure of access." ;
+                            rdfs:label "Usage access procedure" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+                    }
+
+                    FILTER ( NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                { ?kg void:sparqlEndpoint ?endpoint . }
+                                UNION { ?kg dcat:distribution ?dist .
+                                       ?dist dataid:accessProcedure ?procedure . }
+                                UNION { ?kg void:dataDump ?dataDump . }
+                            }
+                        })
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        <usage_endpoint.ttl>
+     ) .
+
+<usage_endpoint.ttl> a mf:ManifestEntry ;
+   kgi:onSuccess (
+       [
+           mf:action """
+               PREFIX prov: <http://www.w3.org/ns/prov#>
+               PREFIX dqv: <http://www.w3.org/ns/dqv#>
+               PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+               PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+               PREFIX void: <http://rdfs.org/ns/void#>
+               PREFIX dcat: <http://www.w3.org/ns/dcat#>
+               PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+               PREFIX schema: <http://schema.org/>
+               PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+               PREFIX pav: <http://purl.org/pav/>
+               PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+               PREFIX dce: <http://purl.org/dc/elements/1.1/>
+               PREFIX dcterms: <http://purl.org/dc/terms/>
+               PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+               PREFIX doap: <http://usefulinc.com/ns/doap#>
+               PREFIX cc: <http://creativecommons.org/ns#>
+               PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+               PREFIX sto: <https://w3id.org/i40/sto#>
+               PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+               PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+               INSERT {
+                   GRAPH kgi:Metadata {
+                       ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl#activity> ;
+                           dqv:hasQualityMeasurement ?qualityMeasurement .
+                       ?qualityMeasurement a dqv:QualityMeasurement ;
+                           rdfs:label "Usage endpoints characteristics measurement" ;
+                           dqv:computedOn ?endpointDescription, ?endpoint ;
+                           dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> ;
+                           dqv:value "true"^^xsd:boolean ;
+                           prov:generatedAtTime ?time .
+                       <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> a dqv:Metric ;
+                           rdfs:comment "If an endpoint is provided, what are its characteristics?" ;
+                           rdfs:label "Usage endpoints characteristics" .
+                       <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> ;
+                           prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                   }
+               } WHERE {
+                   GRAPH kgi:Metadata {
+                       # Find the KG
+                       ?kg a bsbm:Vendor .
+
+                       ?kg void:sparqlEndpoint ?endpoint .
+
+                       { ?endpoint sd:supportedLanguage ?language . }
+                       UNION { ?endpoint sd:resultFormat ?format . }
+                   }
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl", str(?endpoint))), "Measure")) AS ?qualityMeasurement)
+                   BIND(NOW() AS ?time)
+               }
+           """
+       ]
+       [
+           mf:action """
+               PREFIX prov: <http://www.w3.org/ns/prov#>
+               PREFIX dqv: <http://www.w3.org/ns/dqv#>
+               PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+               PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+               PREFIX void: <http://rdfs.org/ns/void#>
+               PREFIX dcat: <http://www.w3.org/ns/dcat#>
+               PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+               PREFIX schema: <http://schema.org/>
+               PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+               PREFIX pav: <http://purl.org/pav/>
+               PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+               PREFIX dce: <http://purl.org/dc/elements/1.1/>
+               PREFIX dcterms: <http://purl.org/dc/terms/>
+               PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+               PREFIX doap: <http://usefulinc.com/ns/doap#>
+               PREFIX cc: <http://creativecommons.org/ns#>
+               PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+               PREFIX sto: <https://w3id.org/i40/sto#>
+               PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+               PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+               INSERT {
+                   GRAPH kgi:Metadata {
+                       ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl#activity> ;
+                           dqv:hasQualityMeasurement ?qualityMeasurement .
+                       ?qualityMeasurement a dqv:QualityMeasurement ;
+                           rdfs:label "Usage endpoints characteristics measurement" ;
+                           dqv:computedOn ?endpointDescription, ?endpoint ;
+                           dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> ;
+                           dqv:value "false"^^xsd:boolean ;
+                           rdfs:comment "Information about the endpoint must be provided, either the SPARQL query language (sd:supportedLanguage) or the result format (sd:resultFormat)."@en ;
+                           prov:generatedAtTime ?time .
+                       <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> a dqv:Metric ;
+                           rdfs:comment "If an endpoint is provided, what are its characteristics?" ;
+                           rdfs:label "Usage endpoints characteristics" .
+                       <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> ;
+                           prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                   }
+               } WHERE {
+                   GRAPH kgi:Metadata {
+                       # Find the KG
+                       ?kg a bsbm:Vendor .
+
+                       ?kg void:sparqlEndpoint ?endpoint .
+                   }
+
+                   FILTER (NOT EXISTS {
+                         GRAPH kgi:Metadata {
+                             { ?endpoint sd:supportedLanguage ?language . }
+                             UNION { ?endpoint sd:resultFormat ?format . }
+                         }
+                   })
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                   BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl", str(?endpoint))), "Measure")) AS ?qualityMeasurement)
+                   BIND(NOW() AS ?time)
+               }
+           """
+       ]
+    ) .
+
+<usage_reuse.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage reuse measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> a dqv:Metric ;
+                            rdfs:comment "How to use, reuse or integrate the dataset?" ;
+                            rdfs:label "Usage reuse" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+
+                        ?kg dataid:reuseAndIntegration ?info .
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage reuse measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "Information about how to use or reuse the Dataset must be provided (dataid:reuseAndIntegration)"@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> a dqv:Metric ;
+                            rdfs:comment "How to use, reuse or integrate the dataset?" ;
+                            rdfs:label "Usage reuse" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                    }
+
+                    FILTER (NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dataid:reuseAndIntegration ?info .
+                            }
+                        })
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_reuse.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<usage_requirements.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage requirements measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> a dqv:Metric ;
+                            rdfs:comment "What are the requirements to use the dataset?" ;
+                            rdfs:label "Usage requirements" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+
+                        ?kg dcat:distribution ?dist .
+                        ?dist dataid:softwareRequirement ?requirements .
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage requirements measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "Information about the requirements to use the Dataset must be provided (dcat:distribution/dataid:softwareRequirement)."@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> a dqv:Metric ;
+                            rdfs:comment "What are the requirements to use the dataset?" ;
+                            rdfs:label "Usage requirements" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+                    }
+
+                    FILTER (NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dcat:distribution ?dist .
+                                ?dist dataid:softwareRequirement ?requirements .
+                            }
+                        })
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_requirements.ttl")), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .

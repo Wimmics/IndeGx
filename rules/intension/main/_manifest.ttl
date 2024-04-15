@@ -1,0 +1,344 @@
+@prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <init.ttl>
+        <online.ttl>
+    ) .
+
+<init.ttl>  a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            INSERT DATA {
+                $rawEndpointUrl a sd:Service, dcat:DataService , prov:Entity , earl:TestSubject ;
+                    sd:endpoint $rawEndpointUrl .
+            }
+            """
+        ]
+    ) .
+
+<online.ttl>  a mf:ManifestEntry ;
+    kgi:requiredAssets ( 
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        # <SPARQLFeatures/_manifest.ttl>
+        <dataset_description_extraction.ttl>
+    ) .
+
+<dataset_description_extraction.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                $rawEndpointUrl dcat:servesDataset ?kgEdited ;
+                    sd:defaultDataset ?kgEdited .
+                ?kgEdited ?p ?o .
+            } WHERE {
+                VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "http://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+                    $rawEndpointUrl  ) 
+                    AS ?httpsEndpointUrl )
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "https://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+                    $rawEndpointUrl ) 
+                    AS ?httpEndpointUrl )
+                SERVICE $rawEndpointUrl {
+                    VALUES ?httpEndpointUrl { UNDEF }
+                    VALUES ?httpsEndpointUrl { UNDEF }
+                    {
+                        ?kg ?endpointLink ?endpointUrl .
+                        ?kg ?p ?o .
+                    }
+                    UNION {
+                        GRAPH ?graph {
+                            ?kg ?endpointLink ?endpointUrl .
+                            ?kg ?p ?o .
+                        }
+                    }
+                    FILTER(?endpointUrl = ?httpEndpointUrl || ?endpointUrl = ?httpsEndpointUrl)
+                }
+                BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( CONCAT( str($rawEndpointUrl),  str(?kg) ) ) ) ) AS ?kgEdited)
+            }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX pav: <http://purl.org/pav/>
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                $rawEndpointUrl sd:defaultDataset ?kgEdited ; 
+                    dcat:servesDataset ?kgEdited .
+                ?s ?p ?kgEdited .
+            } WHERE {
+                VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "http://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+                    $rawEndpointUrl  ) 
+                    AS ?httpsEndpointUrl )
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "https://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+                    $rawEndpointUrl ) 
+                    AS ?httpEndpointUrl )
+                SERVICE $rawEndpointUrl {
+                    VALUES ?httpEndpointUrl { UNDEF }
+                    VALUES ?httpsEndpointUrl { UNDEF }
+                    {
+                        ?kg ?endpointLink ?endpointUrl .
+                        ?s ?p ?kg .
+                    }
+                    UNION {
+                        GRAPH ?graph {
+                            ?kg ?endpointLink ?endpointUrl .
+                            ?s ?p ?kg .
+                        }
+                    }
+                    FILTER(?endpointUrl = ?httpEndpointUrl || ?endpointUrl = ?httpsEndpointUrl)
+                }
+                BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( CONCAT( str($rawEndpointUrl),  str(?kg) ) ) ) ) AS ?kgEdited)
+            }
+            """
+        ]
+        [
+            dcterms:title "Retrieval of dereferenced description" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            prefix xt: <http://ns.inria.fr/sparql-extension/>
+            prefix us: <http://ns.inria.fr/sparql-extension/user/>
+            prefix rq: <http://ns.inria.fr/sparql-function/>
+            prefix dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                $rawEndpointUrl dcat:servesDataset ?kgEdited ;
+                    sd:defaultDataset ?kgEdited .
+                ?kgEdited ?p ?o .
+            }
+            WHERE {
+                VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "http://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+                    $rawEndpointUrl  ) 
+                    AS ?httpsEndpointUrl )
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "https://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+                    $rawEndpointUrl ) 
+                    AS ?httpEndpointUrl )
+                SERVICE $rawEndpointUrl {
+                    VALUES ?httpEndpointUrl { UNDEF }
+                    VALUES ?httpsEndpointUrl { UNDEF }
+                    ?kg ?endpointLink ?endpointUrl
+                    FILTER(?endpointUrl = ?httpEndpointUrl || ?endpointUrl = ?httpsEndpointUrl)
+                }
+                FILTER(isIRI(?kg))
+                bind (xt:load(?kg) as ?g)
+                GRAPH ?g { 
+                    ?kg ?p ?o .
+                }
+                BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( CONCAT( str($rawEndpointUrl),  str(?kg) ) ) ) ) AS ?kgEdited)
+            };
+            INSERT {
+                $rawEndpointUrl dcat:servesDataset ?kgEdited ;
+                    sd:defaultDataset ?kgEdited .
+                ?s ?p ?kgEdited .
+            }
+            WHERE {
+                VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "http://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+                    $rawEndpointUrl  ) 
+                    AS ?httpsEndpointUrl )
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "https://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+                    $rawEndpointUrl ) 
+                    AS ?httpEndpointUrl )
+                SERVICE $rawEndpointUrl {
+                    VALUES ?httpEndpointUrl { UNDEF }
+                    VALUES ?httpsEndpointUrl { UNDEF }
+                    ?kg ?endpointLink ?endpointUrl
+                    FILTER(?endpointUrl = ?httpEndpointUrl || ?endpointUrl = ?httpsEndpointUrl)
+                }
+                FILTER(isIRI(?kg))
+                bind (xt:load(?kg) as ?g)
+                GRAPH ?g { 
+                    ?s ?p ?kg .
+                }
+                BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( CONCAT( str($rawEndpointUrl),  str(?kg) ) ) ) ) AS ?kgEdited)
+            };
+            DELETE {
+                GRAPH ?kg {
+                    ?s ?p ?o .
+                }
+            } WHERE {
+                VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "http://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+                    $rawEndpointUrl  ) 
+                    AS ?httpsEndpointUrl )
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "https://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+                    $rawEndpointUrl ) 
+                    AS ?httpEndpointUrl )
+                GRAPH ?kg {
+                    ?kg ?endpointLink ?endpointUrl .
+                    FILTER(?endpointUrl = ?httpEndpointUrl || ?endpointUrl = ?httpsEndpointUrl)
+                    ?s ?p ?o .
+                }
+                FILTER(isIRI(?kg))
+            }
+            """
+        ]
+        [
+            dcterms:title "Retrieval of .well-known/void description" ;
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX schema: <http://schema.org/>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            prefix xt: <http://ns.inria.fr/sparql-extension/>
+            prefix us: <http://ns.inria.fr/sparql-extension/user/>
+            prefix rq: <http://ns.inria.fr/sparql-function/>
+            prefix dt: <http://ns.inria.fr/sparql-datatype/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                $rawEndpointUrl dcat:servesDataset ?kgEdited ;
+                    sd:defaultDataset ?kgEdited .
+                ?kgEdited ?p ?o .
+            }
+            WHERE {
+                VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "http://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+                    $rawEndpointUrl  ) 
+                    AS ?httpsEndpointUrl )
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "https://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+                    $rawEndpointUrl ) 
+                    AS ?httpEndpointUrl )
+                SERVICE $rawEndpointUrl {
+                    ?kg ?endpointLink ?endpointUrl .
+                    FILTER(?endpointUrl = ?httpEndpointUrl || ?endpointUrl = ?httpsEndpointUrl)
+                }
+                FILTER(REGEX(STR($rawEndpointUrl), "sparql/?$", "i"))
+                BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
+                FILTER(isIRI(?wellknown))
+                bind (xt:load(?wellknown) as ?g)
+                GRAPH ?g { 
+                    ?kg ?p ?o .
+                }
+                BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( CONCAT( str($rawEndpointUrl),  str(?kg) ) ) ) ) AS ?kgEdited)
+            };
+            INSERT {
+                $rawEndpointUrl dcat:servesDataset ?kgEdited ;
+                    sd:defaultDataset ?kgEdited .
+                ?s ?p ?kgEdited .
+            }
+            WHERE {
+                VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "http://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+                    $rawEndpointUrl  ) 
+                    AS ?httpsEndpointUrl )
+                BIND(
+                    IF(
+                    STRSTARTS(STR($rawEndpointUrl), "https://") , 
+                    IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+                    $rawEndpointUrl ) 
+                    AS ?httpEndpointUrl )
+                SERVICE $rawEndpointUrl {
+                    ?kg ?endpointLink ?endpointUrl .
+                    FILTER(?endpointUrl = ?httpEndpointUrl || ?endpointUrl = ?httpsEndpointUrl)
+                }
+                FILTER(REGEX(STR($rawEndpointUrl), "sparql/?$", "i"))
+                BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
+                FILTER(isIRI(?wellknown))
+                bind (xt:load(?wellknown) as ?g)
+                GRAPH ?g { 
+                    ?s ?p ?kg .
+                }
+                BIND( IRI( CONCAT( STR(kgi:), ENCODE_FOR_URI( CONCAT( str($rawEndpointUrl),  str(?kg) ) ) ) ) AS ?kgEdited)
+            };
+            DELETE {
+                GRAPH ?wellknown {
+                    ?s ?p ?o .
+                }
+            } WHERE {
+                FILTER(REGEX(STR($rawEndpointUrl), "sparql/?$", "i"))
+                BIND(IRI(REPLACE(STR($rawEndpointUrl), "^([a-zA-Z0-9-]+://)((([a-zA-Z0-9-]+.)?[a-zA-Z0-9-]+)+(.[a-zA-Z0-9-]+)/)([a-zA-Z0-9-]?[a-zA-Z0-9]+/)?sparql/?$" , "$1$2.well-known/void", "i")) AS ?wellknown)
+                FILTER(isIRI(?wellknown))
+            }
+            """
+        ]
+    ) .

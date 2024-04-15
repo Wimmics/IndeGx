@@ -1,0 +1,22 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        <equivalences/_manifest.ttl>
+        <inclusion/_manifest.ttl>
+        <redundancy/_manifest.ttl>
+        # <vocabularies/_manifest.ttl>
+    ) ;
+    mf:entries (
+        <initialization.ttl>
+    ) .
+
+<initialization.ttl>  a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            LOAD <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/indegx_metadata_description.ttl>
+            """
+        ]
+    ) .

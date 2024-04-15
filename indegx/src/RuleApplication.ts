@@ -45,7 +45,6 @@ export function applyRuleTree(endpointObject: EndpointObject, manifestObject: Ru
                     throw new Error("AssetTracker has no asset " + requiredAssetURI);
                 } else {
                     let requiredAsset = AssetTracker.getInstance().getAsset(requiredAssetURI);
-                    // Logger.log("Applying required asset", requiredAsset.uri, "of", manifestObject.uri, "for endpoint", endpointObject.endpoint)
                     if (RuleTree.isManifestEntry(requiredAsset)) {
                         requiredAssetsPool.push(applyManifestEntry(endpointObject, requiredAsset as RuleTree.ManifestEntry, postMode))
                     } else if (RuleTree.isAction(requiredAsset)) {
@@ -391,7 +390,7 @@ function applyAction(endpointObject: EndpointObject, actionObject: RuleTree.Acti
         AssetTracker.getInstance().setAssetStateToOngoing(actionObject.uri, endpointObject.endpoint);
 
         let generator = new sparqljs.Generator();
-        let parser = new sparqljs.Parser();
+        let parser = new sparqljs.Parser({ sparqlStar: false });
         let actionPool = [];
         const startTime = dayjs();
         if (actionObject.endpoint != undefined) {

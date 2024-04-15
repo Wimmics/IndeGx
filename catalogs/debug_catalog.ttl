@@ -13,5 +13,5 @@
 
 kgi:catalogResource  a dcat:Catalog ;
     dcat:dataset [ 
-        void:sparqlEndpoint <http://prod-dekalog.inria.fr/sparql>
+        void:sparqlEndpoint <http://taxref.mnhn.fr/sparql> , <http://fr.dbpedia.org/sparql> , <https://api.druid.datalegend.net/datasets/IISG/Images/sparql>
     ] .

@@ -1,0 +1,48 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of a Dataset related to the endpoint URL." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for a Dataset related to the endpoint URL." ;
+    kgi:query """
+PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+ASK {
+    SERVICE $rawEndpointUrl {
+        VALUES ?endpointLink { sd:endpoint void:sparqlEndpoint dcat:endpointURL }
+        BIND(
+            IF(
+            STRSTARTS(STR($rawEndpointUrl), "http://") , 
+            IRI(REPLACE(STR($rawEndpointUrl), "http://", "https://")) , 
+            $rawEndpointUrl  ) 
+            AS ?httpsEndpointUrl )
+        BIND(
+            IF(
+            STRSTARTS(STR($rawEndpointUrl), "https://") , 
+            IRI(REPLACE(STR($rawEndpointUrl), "https://", "http://")) , 
+            $rawEndpointUrl ) 
+            AS ?httpEndpointUrl )
+            {
+                {
+                    ?kg ?endpointLink ?httpsEndpointUrl . 
+                }
+                UNION {
+                    GRAPH ?graph {
+                        ?kg ?endpointLink ?httpsEndpointUrl
+                    }
+                }
+            } UNION {
+                {
+                    ?kg ?endpointLink ?httpEndpointUrl . 
+                }
+                UNION {
+                    GRAPH ?graph {
+                        ?kg ?endpointLink ?httpEndpointUrl
+                    }
+                }
+            }
+    }
+}
+""" .

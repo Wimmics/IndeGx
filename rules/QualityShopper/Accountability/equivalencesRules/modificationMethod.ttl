@@ -1,0 +1,7 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:DummyTest ;
+    dcterms:title "Presence of a method or a software for the modification." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for a method or a software for the maintenance or modification of the KG." .

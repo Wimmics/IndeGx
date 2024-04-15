@@ -1,0 +1,35 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of a description." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for a description of the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dce: <http://purl.org/dc/elements/1.1/>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+        PREFIX powder-s: <http://www.w3.org/2007/05/powder-s#>
+        ASK {
+            # Find a description
+            {?kg rdfs:comment ?desc .}
+            UNION {?kg dce:description ?desc . }
+            UNION {?kg dcterms:description ?desc .}
+            UNION {?kg schema:description ?desc .}
+            UNION {?kg dataid:dataDescription ?desc .}
+            UNION {?kg owl:comment ?desc .}
+            UNION {?kg skos:note ?desc .}
+            UNION { ?kg powder-s:text ?desc }
+        }
+""" .

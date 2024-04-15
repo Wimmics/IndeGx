@@ -1,0 +1,129 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+<http://purl.org/dc/dcmitype/> dc:modified "2012-06-14"^^xsd:date ;
+  dc:publisher <http://purl.org/dc/aboutdcmi#DCMI> ;
+  dc:title "DCMI Type Vocabulary"@en .
+
+<http://purl.org/dc/dcmitype/Collection> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "A collection is described as a group; its parts may also be separately described."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Collection-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "An aggregation of resources."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Collection"@en .
+
+<http://purl.org/dc/dcmitype/Dataset> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include lists, tables, and databases.  A dataset may be useful for direct machine processing."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Dataset-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "Data encoded in a defined structure."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Dataset"@en .
+
+<http://purl.org/dc/dcmitype/Event> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Metadata for an event provides descriptive information that is the basis for discovery of the purpose, location, duration, and responsible agents associated with an event. Examples include an exhibition, webcast, conference, workshop, open day, performance, battle, trial, wedding, tea party, conflagration."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Event-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A non-persistent, time-based occurrence."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Event"@en .
+
+<http://purl.org/dc/dcmitype/Image> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include images and photographs of physical objects, paintings, prints, drawings, other images and graphics, animations and moving pictures, film, diagrams, maps, musical notation.  Note that Image may include both electronic and physical representations."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Image-004> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A visual representation other than text."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Image"@en .
+
+<http://purl.org/dc/dcmitype/InteractiveResource> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include forms on Web pages, applets, multimedia learning objects, chat services, or virtual reality environments."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#InteractiveResource-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A resource requiring interaction from the user to be understood, executed, or experienced."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Interactive Resource"@en .
+
+<http://purl.org/dc/dcmitype/MovingImage> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include animations, movies, television programs, videos, zoetropes, or visual output from a simulation.  Instances of the type Moving Image must also be describable as instances of the broader type Image."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#MovingImage-003> ;
+  dc:issued "2003-11-18"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A series of visual representations imparting an impression of motion when shown in succession."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Moving Image"@en ;
+  rdfs:subClassOf <http://purl.org/dc/dcmitype/Image> .
+
+<http://purl.org/dc/dcmitype/PhysicalObject> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Note that digital representations of, or surrogates for, these objects should use Image, Text or one of the other types."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#PhysicalObject-003> ;
+  dc:issued "2002-07-13"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "An inanimate, three-dimensional object or substance."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Physical Object"@en .
+
+<http://purl.org/dc/dcmitype/Service> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include a photocopying service, a banking service, an authentication service, interlibrary loans, a Z39.50 or Web server."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Service-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A system that provides one or more functions."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Service"@en .
+
+<http://purl.org/dc/dcmitype/Software> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include a C source file, MS-Windows .exe executable, or Perl script."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Software-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A computer program in source or compiled form."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Software"@en .
+
+<http://purl.org/dc/dcmitype/Sound> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include a music playback file format, an audio compact disc, and recorded speech or sounds."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Sound-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A resource primarily intended to be heard."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Sound"@en .
+
+<http://purl.org/dc/dcmitype/StillImage> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include paintings, drawings, graphic designs, plans and maps. Recommended best practice is to assign the type Text to images of textual materials. Instances of the type Still Image must also be describable as instances of the broader type Image."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#StillImage-003> ;
+  dc:issued "2003-11-18"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A static visual representation."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Still Image"@en ;
+  rdfs:subClassOf <http://purl.org/dc/dcmitype/Image> .
+
+<http://purl.org/dc/dcmitype/Text> a rdfs:Class ;
+  <http://purl.org/dc/dcam/memberOf> dc:DCMIType ;
+  dc:description "Examples include books, letters, dissertations, poems, newspapers, articles, archives of mailing lists. Note that facsimiles or images of texts are still of the genre Text."@en ;
+  dc:hasVersion <http://dublincore.org/usage/terms/history/#Text-003> ;
+  dc:issued "2000-07-11"^^xsd:date ;
+  dc:modified "2008-01-14"^^xsd:date ;
+  rdfs:comment "A resource consisting primarily of words for reading."@en ;
+  rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> ;
+  rdfs:label "Text"@en .
+

@@ -1,4 +1,4 @@
-import { Asset } from "./RuleTree";
+import { Asset } from "./RuleTree.js";
 import * as Logger from "./LogUtils.js"
 
 

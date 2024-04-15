@@ -1,0 +1,7 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:DummyTest ;
+    dcterms:title "Usage rights" ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:description "Who has the right to use the published dataset?" .

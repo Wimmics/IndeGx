@@ -1,0 +1,35 @@
+
+%%%ENTRY%%% a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <init.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            rdfs:label "Creating the occurences resource of %%%CLASS%%% in the dataset" ;
+            mf:action """prefix voaf: <http://purl.org/vocommons/voaf#>
+            prefix kgi: <http://ns.inria.fr/kg/index#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+            prefix prov: <http://www.w3.org/ns/prov#>
+            prefix dcat: <http://www.w3.org/ns/dcat#>
+            prefix void: <http://rdfs.org/ns/void#>
+            prefix owl: <http://www.w3.org/2002/07/owl#>
+            prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+            INSERT {
+                %%%CLASS%%% voaf:usageInDataset ?elemDatasetOccurence .
+                ?elemDatasetOccurence a voaf:DatasetOccurences ;
+                    voaf:inDataset $rawEndpointUrl .
+
+                GRAPH $rawEndpointUrl {
+                    $rawEndpointUrl void:classPartition ?classPartition .
+                    ?classPartition void:class %%%CLASS%%% .
+                }
+            } WHERE {
+                BIND( Iri( CONCAT(str(kgi:), MD5( CONCAT( str($rawEndpointUrl), str(?elem))), "ClassPartition" )) AS ?classPartition )
+                BIND( Iri( CONCAT( str(kgi:), MD5( CONCAT( STR(%%%CLASS%%%) , STR($rawEndpointUrl) ) ) ) ) AS ?elemDatasetOccurence )
+            }"""
+        ]
+    ) .

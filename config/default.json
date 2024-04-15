@@ -1,7 +1,7 @@
 {
-    "pre": "file:///rules/FedShop_data/_pre_manifest.ttl",
-    "manifest": "file:///rules/FedShop_data/_manifest.ttl",
-    "post": "file:///rules/FedShop_data/_post_manifest.ttl",
+    "pre": "file:///rules/holistic_indexing/_pre_manifest.ttl",
+    "manifest": "file:///rules/holistic_indexing/_manifest.ttl",
+    "post": "file:///rules/holistic_indexing/_post_manifest.ttl",
     "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
@@ -9,8 +9,8 @@
     "maxConccurentQueries": 300,
     "delayMillisecondsTimeForConccurentQuery": 1000,
     "manifestJSON": "/output/rules.json",
-    "logFile": "/output/indegx_debug.log",
-    "outputFile": "/output/indegx_debug.trig",
-    "queryLog": false,
+    "logFile": "/output/indegx.log",
+    "outputFile": "/output/indegx.trig",
+    "queryLog": true,
     "resilience": false
 }
