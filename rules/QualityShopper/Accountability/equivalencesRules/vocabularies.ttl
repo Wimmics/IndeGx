@@ -1,0 +1,19 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of the vocabulary used." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for the vocabulary used by the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        ASK {
+            { ?res dcterms:conformsTo ?id }
+            UNION { ?res void:vocabulary ?id }
+        }
+""" .

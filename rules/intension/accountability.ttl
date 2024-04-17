@@ -510,12 +510,7 @@ kgi:DatasetWithDescriptionAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:description ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:description ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -546,22 +541,12 @@ kgi:DatasetWithAuthorAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:creator ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:creator ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:authoredBy ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:authoredBy ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -593,32 +578,17 @@ kgi:DatasetWithPublisherAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:publisher ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:publisher ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:publisher ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:publisher ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:publishedBy ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:publishedBy ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -649,22 +619,7 @@ kgi:DatasetWithContributorAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:contributor ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:contributor ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:curatedBy ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:curatedBy ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -694,12 +649,7 @@ kgi:DatasetWithMaintainerAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:maintainer ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:maintainer ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -731,22 +681,12 @@ kgi:DatasetWithCreationMethodAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:accrualMethod ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:accrualMethod ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:createdWith ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:createdWith ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -779,32 +719,17 @@ kgi:DatasetWithSourceAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:source ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:source ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:importedFrom ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:importedFrom ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:retrievedFrom ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:retrievedFrom ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -834,12 +759,7 @@ kgi:DatasetWithAccrualFrequencyAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:accrualPeriodicity ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:accrualPeriodicity ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -872,22 +792,12 @@ kgi:DatasetWithCreationLocationAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:locationCreated ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:locationCreated ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:createdAt ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:createdAt ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
@@ -895,16 +805,7 @@ kgi:DatasetWithCreationLocationAnnotation rdf:type owl:Class ;
                         owl:someValuesFrom [
                             rdf:type owl:Restriction ;
                             owl:onProperty prov:atLocation ;
-                            owl:someValuesFrom owl:Thing
-                        ]
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty prov:wasGeneratedBy ;
-                        owl:someValuesFrom [
-                            rdf:type owl:Restriction ;
-                            owl:onProperty prov:atLocation ;
-                            owl:someValuesFrom rdfs:Literal
+                            owl:someValuesFrom rdfs:Resource
                         ]
                     ]
                 )
@@ -937,22 +838,12 @@ kgi:DatasetWithCreationDateAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:created ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:created ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:curatedOn ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:curatedOn ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -1158,32 +1049,17 @@ kgi:DatasetWithLicenseAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:license ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:license ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:license ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:hasLicense ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:hasLicense ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -1214,22 +1090,12 @@ kgi:DatasetWithWebpageAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty foaf:homepage ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty foaf:homepage ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:url ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:url ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ] 
@@ -1274,18 +1140,11 @@ kgi:DatasetWithAccessMeansAnnotations rdf:type owl:Class ;
                                 rdf:type owl:Restriction ;
                                 owl:onProperty dcat:distribution ;
                                 owl:someValuesFrom [
-                                    owl:unionOf (
-                                        [
-                                            rdf:type owl:Restriction ;
-                                            owl:onProperty dataid:accessProcedure ;
-                                            owl:someValuesFrom owl:Thing
-                                        ]
-                                        [
-                                            rdf:type owl:Restriction ;
-                                            owl:onProperty dataid:accessProcedure ;
-                                            owl:someValuesFrom rdfs:Literal
-                                        ]
-                                    )
+                                    [
+                                        rdf:type owl:Restriction ;
+                                        owl:onProperty dataid:accessProcedure ;
+                                        owl:someValuesFrom rdfs:Resource
+                                    ]
                                 ]
                             ]
                         )
@@ -1323,12 +1182,7 @@ kgi:DatasetWithSparqlEndpointAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty void:sparqlEndpoint ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty void:sparqlEndpoint ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
@@ -1342,21 +1196,10 @@ kgi:DatasetWithSparqlEndpointAnnotation rdf:type owl:Class ;
                                     owl:hasValue "application/sparql-query"
                                 ]
                                 [
-                                    rdf:type owl:Class ;
-                                    owl:unionOf (
-                                        [
-                                            rdf:type owl:Restriction ;
-                                            owl:onProperty dcat:accessURL ;
-                                            owl:someValuesFrom owl:Thing
-                                        ]
-                                        [
-                                            rdf:type owl:Restriction ;
-                                            owl:onProperty dcat:accessURL ;
-                                            owl:someValuesFrom rdfs:Literal
-                                        ]
-                                    )
+                                    rdf:type owl:Restriction ;
+                                    owl:onProperty dcat:accessURL ;
+                                    owl:someValuesFrom rdfs:Resource
                                 ]
-                                
                             )
                         ]
                     ]
@@ -1390,30 +1233,15 @@ kgi:DatasetWithDumpAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty void:dataDump ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty void:dataDump ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcat:distribution ;
                         owl:someValuesFrom  [
-                            rdf:type owl:Class ;
-                            owl:unionOf (
-                                [
-                                    rdf:type owl:Restriction ;
-                                    owl:onProperty dcat:downloadURL ;
-                                    owl:someValuesFrom owl:Thing
-                                ]
-                                [
-                                    rdf:type owl:Restriction ;
-                                    owl:onProperty dcat:downloadURL ;
-                                    owl:someValuesFrom rdfs:Literal
-                                ]                    
-                            )
+                                rdf:type owl:Restriction ;
+                                owl:onProperty dcat:downloadURL ;
+                                owl:someValuesFrom rdfs:Resource
                         ]
                     ]
                 )
@@ -1447,12 +1275,7 @@ kgi:DatasetWithFormatAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:format ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:format ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -1463,35 +1286,15 @@ kgi:DatasetWithFormatAnnotation rdf:type owl:Class ;
                     rdf:type owl:Class ;
                     owl:intersectionOf (
                         [
-                            rdf:type owl:Class ;
-                            owl:unionOf (
-                                [
-                                    rdf:type owl:Restriction ;
-                                    owl:onProperty dcterms:format ;
-                                    owl:someValuesFrom owl:Thing
-                                ]
-                                [
-                                    rdf:type owl:Restriction ;
-                                    owl:onProperty dcterms:format ;
-                                    owl:someValuesFrom rdfs:Literal
-                                ]
-                            )
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dcterms:format ;
+                            owl:someValuesFrom rdfs:Resource
                         ]
                         [
-                            rdf:type owl:Class ;
-                            owl:unionOf (
-                                [
-                                    rdf:type owl:Restriction ;
-                                    owl:onProperty dcat:downloadURL ;
-                                    owl:someValuesFrom owl:Thing
-                                ]
-                                [
-                                    rdf:type owl:Restriction ;
-                                    owl:onProperty dcat:downloadURL ;
-                                    owl:someValuesFrom rdfs:Literal
-                                ]                    
-                            )
-                        ]
+                            rdf:type owl:Restriction ;
+                            owl:onProperty dcat:downloadURL ;
+                            owl:someValuesFrom rdfs:Resource
+                        ]  
                     )
                 ]
             ]
@@ -1525,32 +1328,17 @@ kgi:DatasetWithAvailabilityStartAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:available ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:available ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:datePublished ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:datePublished ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:publishedOn ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:publishedOn ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
@@ -1558,16 +1346,7 @@ kgi:DatasetWithAvailabilityStartAnnotation rdf:type owl:Class ;
                         owl:someValuesFrom [
                             rdf:type owl:Restriction ;
                             owl:onProperty prov:startedAtTime ;
-                            owl:someValuesFrom owl:Thing
-                        ]
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty prov:wasGeneratedBy ;
-                        owl:someValuesFrom [
-                            rdf:type owl:Restriction ;
-                            owl:onProperty prov:startedAtTime ;
-                            owl:someValuesFrom rdfs:Literal
+                            owl:someValuesFrom rdfs:Resource
                         ]
                     ]
                 )
@@ -1595,12 +1374,7 @@ kgi:DatasetWithAvailabilityEndAnnotation rdf:type owl:Class ;
             [
                 rdf:type owl:Restriction ;
                 owl:onProperty prov:invalidatedAtTime ;
-                owl:someValuesFrom owl:Thing
-            ]
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty prov:invalidatedAtTime ;
-                owl:someValuesFrom rdfs:Literal
+                owl:someValuesFrom rdfs:Resource
             ]
         )
     ] .
@@ -1628,12 +1402,7 @@ kgi:DatasetWithValidityEndAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:valid ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:valid ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -1664,22 +1433,12 @@ kgi:DatasetWithAccessRightsAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:rights ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:rights ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dataid:openness ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dataid:openness ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -1703,20 +1462,10 @@ kgi:DatasetWithReuseAnnotation rdf:type owl:Class ;
                     sd:Dataset
                 )
             ]
-            [   
-                rdf:type owl:Class ;
-                owl:unionOf (
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dataid:reuseAndIntegration ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dataid:reuseAndIntegration ;
-                        owl:someValuesFrom rdfs:Literal
-                    ]
-                )
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty dataid:reuseAndIntegration ;
+                owl:someValuesFrom rdfs:Resource
             ]
         )
     ] .
@@ -1745,22 +1494,12 @@ kgi:DatasetWithRequirementAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcat:distribution ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcat:distribution ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dataid:softwareRequirement ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dataid:softwareRequirement ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ] 
@@ -1791,22 +1530,12 @@ kgi:DatasetWithAudienceAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:audience ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:audience ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:audience ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:audience ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ]
@@ -1839,22 +1568,12 @@ kgi:DatasetWithCreationMethodAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dcterms:accrualMethod ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dcterms:accrualMethod ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty pav:createdWith ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty pav:createdWith ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
@@ -1886,12 +1605,7 @@ kgi:DatasetWithExampleAnnotation rdf:type owl:Class ;
             [
                 rdf:type owl:Restriction ;
                 owl:onProperty void:exampleResource ;
-                owl:someValuesFrom owl:Thing
-            ]
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty void:exampleResource ;
-                owl:someValuesFrom rdfs:Literal
+                owl:someValuesFrom rdfs:Resource
             ]
         )
     ] .
@@ -1921,32 +1635,17 @@ kgi:DatasetWithQualityAnnotation rdf:type owl:Class ;
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dqv:hasQualityAnnotation ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dqv:hasQualityAnnotation ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty dqv:hasQualityMeasurement ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty dqv:hasQualityMeasurement ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                     [
                         rdf:type owl:Restriction ;
                         owl:onProperty schema:award ;
-                        owl:someValuesFrom owl:Thing
-                    ]
-                    [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty schema:award ;
-                        owl:someValuesFrom rdfs:Literal
+                        owl:someValuesFrom rdfs:Resource
                     ]
                 )
             ] 

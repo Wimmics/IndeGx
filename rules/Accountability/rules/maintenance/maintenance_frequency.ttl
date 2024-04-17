@@ -1,0 +1,7 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:DummyTest ;
+    dcterms:title "Maintenance frequency" ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:description "With which frequency is the dataset maintained?" .

@@ -1,0 +1,7 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:DummyTest ;
+    dcterms:title "Usage End availability" ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:description "Until when is the dataset available?" .

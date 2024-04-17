@@ -1,0 +1,155 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <measure_completeness.ttl>
+        <measure_leaf_tags.ttl>
+        <measure_parent_tags.ttl>
+    ) .
+
+<measure_completeness.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX sin: <http://www.exemple.com/sin#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+            # Here we assume there is only one need defined. Else, each Tag, Question and Labeling should be linked with the InformationNeed.
+
+            INSERT {
+                GRAPH ?kgGraph {
+                    ?kg prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_completeness.ttl#activity> ;
+                        dqv:hasQualityMeasurement [
+                            a dqv:QualityMeasurement ;
+                            rdfs:label "Completeness measurement"@en ;
+                            dqv:isMeasurementOf "Completeness"@en ;
+                            dqv:value ?completeness
+                        ] .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_completeness.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_completeness.ttl#activity> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                }
+            } WHERE {
+                { SELECT ?kg (SUM(?agg_parent_tag * ?w_parent_tag) / SUM(?w_parent_tag) AS ?completeness)
+                 WHERE {
+                    ?parent_tag sin:weight ?w_parent_tag .
+                    { SELECT ?kg ?parent_tag (SUM(?agg_leaf_tag * ?w_tag)  / SUM(?w_tag)  AS ?agg_parent_tag)
+                     WHERE  {
+                        ?leaf_tag sin:isChildOf ?parent_tag ;
+                            sin:weight ?w_tag .
+                        { SELECT  ?leaf_tag ?kg (SUM(?val * ?w_question) / SUM(?w_question) AS ?agg_leaf_tag) WHERE {
+                            { SELECT DISTINCT ?leaf_tag ?kg ?metric ?w_question (xsd:decimal(?value) AS ?val) WHERE {
+                                ?kg prov:wasDerivedFrom ?kge ;
+                                    dqv:hasQualityMeasurement ?measurement .
+                                ?measurement dqv:isMeasurementOf ?metric ;
+                                    dqv:value ?value .
+                                ?question sin:isImplementedBy ?metric .
+                                ?tagging sin:questionTagged ?question ;
+                                    sin:tagWith ?leaf_tag ;
+                                    sin:weight ?w_question .
+                            }  }
+                        } GROUP BY ?kg ?leaf_tag }
+                    } GROUP BY ?kg ?parent_tag }
+                } GROUP BY ?kg }
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+            }
+            """
+        ]
+    ) .
+
+<measure_leaf_tags.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX sin: <http://www.exemple.com/sin#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+            # Here we assume there is only one need defined. Else, each Tag, Question and Labeling should be linked with the InformationNeed.
+
+            INSERT {
+                GRAPH ?kgGraph {
+                    ?kg prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_leaf_tags.ttl#activity> ;
+                        dqv:hasQualityMeasurement [
+                            a dqv:QualityMeasurement ;
+                            rdfs:label ?label ;
+                            dqv:isMeasurementOf ?tag ;
+                            dqv:value ?agg
+                        ] .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_leaf_tags.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_leaf_tags.ttl#activity> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                }
+            } WHERE {
+                { SELECT ?tag ?taglab ?kg (SUM(?val * ?w) / SUM(?w) AS ?agg) WHERE {
+                    { SELECT DISTINCT ?tag ?taglab ?kg ?metric ?w (xsd:decimal(?value) AS ?val) WHERE {
+                        ?kg prov:wasDerivedFrom ?kge ;
+                            dqv:hasQualityMeasurement ?measurement .
+                        ?measurement dqv:isMeasurementOf ?metric ;
+                            dqv:value ?value .
+                        ?question sin:isImplementedBy ?metric .
+                        ?tagging sin:questionTagged ?question ;
+                            sin:tagWith ?tag ;
+                            sin:weight ?w .
+                        ?tag rdfs:label ?taglab
+                    }  }
+                } GROUP BY ?kg ?tag }
+                BIND ( CONCAT(?taglab, " measurement" )  AS ?label )
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+            }
+            """
+        ]
+    ) .
+
+<measure_parent_tags.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX sin: <http://www.exemple.com/sin#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+            # Here we assume there is only one need defined. Else, each Tag, Question and Labeling should be linked with the InformationNeed.
+
+            INSERT {
+                GRAPH ?kgGraph {
+                    ?kg prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_parent_tags.ttl#activity> ;
+                        dqv:hasQualityMeasurement [
+                            a dqv:QualityMeasurement ;
+                            rdfs:label ?label ;
+                            dqv:isMeasurementOf ?parent_tag ;
+                            dqv:value ?agg_parent_tag
+                        ] .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_parent_tags.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/final_step/measure_parent_tags.ttl#activity> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                }
+            } WHERE {
+                { SELECT ?kg ?parent_tag ?taglab (SUM(?agg_leaf_tag * ?w_tag)  / SUM(?w_tag)  AS ?agg_parent_tag) WHERE  {
+                    ?leaf_tag sin:isChildOf ?parent_tag ;
+                        sin:weight ?w_tag .
+                    ?parent_tag rdfs:label ?taglab .
+                    { SELECT  ?leaf_tag ?kg (SUM(?val * ?w_question) / SUM(?w_question) AS ?agg_leaf_tag) WHERE {
+                        { SELECT DISTINCT ?leaf_tag ?kg ?metric ?w_question (xsd:decimal(?value) AS ?val) WHERE {
+                            ?kg prov:wasDerivedFrom ?kge ;
+                                dqv:hasQualityMeasurement ?measurement .
+                            ?measurement dqv:isMeasurementOf ?metric ;
+                                dqv:value ?value .
+                            ?question sin:isImplementedBy ?metric .
+                            ?tagging sin:questionTagged ?question ;
+                                sin:tagWith ?leaf_tag ;
+                                sin:weight ?w_question .
+                        }  }
+                    } GROUP BY ?kg ?leaf_tag }
+                } GROUP BY ?kg ?parent_tag }
+                BIND ( CONCAT(?taglab, " measurement" )  AS ?label )
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Graph")) AS ?kgGraph)
+            }
+            """
+        ]
+    ) .

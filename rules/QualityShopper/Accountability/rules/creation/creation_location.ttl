@@ -1,0 +1,7 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:DummyTest ;
+    dcterms:title "Creation location" ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:description "From what physical location (state, country, continent, ...) was the dataset created?" .

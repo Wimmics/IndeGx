@@ -1,0 +1,30 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of a source." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for the source of the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dce: <http://purl.org/dc/elements/1.1/>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        ASK {
+            # Find a source
+            {?kg dce:source ?source .}
+            UNION {?kg dcterms:source ?source .}
+            UNION {?kg schema:isBasedOn ?source .}
+            UNION {?kg pav:derivedFrom ?source .}
+            UNION {?kg pav:importedFrom ?source .}
+            UNION {?kg pav:retrievedFrom ?source .}
+            UNION {?kg prov:wasDerivedFrom ?source .}
+            UNION {?kg prov:hadPrimarySource ?source .}
+        }
+""" .

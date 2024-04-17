@@ -10,8 +10,8 @@ fi
 rm -f rules/*
 
 # Extraction of the class and property list
-java -jar $corese_jar sparql -i vocabularies/* -o classList.csv -of csv -q ./classList.rq
-java -jar $corese_jar sparql -i vocabularies/* -o propertyList.csv -of csv -q ./propertyList.rq
+java -jar $corese_jar sparql -w -i vocabularies/* -o classList.csv -of csv -q ./classList.rq
+java -jar $corese_jar sparql -w -i vocabularies/* -o propertyList.csv -of csv -q ./propertyList.rq
 
 # Removing header from the csv files
 echo "$(tail -n +2 classList.csv)" > classList.csv

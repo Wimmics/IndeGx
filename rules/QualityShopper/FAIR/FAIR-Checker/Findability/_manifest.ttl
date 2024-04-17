@@ -1,0 +1,424 @@
+@prefix mf:      <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <loadLOV.ttl>
+        <F1A.ttl>
+        <F1B.ttl>
+        <F2A.ttl>
+        <F2B.ttl>
+        <cleanup.ttl>
+    ) .
+
+<loadLOV.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            LOAD <file:///rules/QualityShopper/FAIR/data/LOV_redux.22022024.trig> INTO GRAPH kgi:LOV_redux 
+            """
+        ]
+    ) .
+
+<F1A.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Unique IDs"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1A> ;
+                            dqv:value ?value .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a bsbm:Vendor }
+                    }
+                    BIND(EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?kg a bsbm:Vendor }
+                        }
+                        FILTER( isIRI( ?kg ) )
+                    } AS ?kgDescExists)
+                    BIND(IF(?kgDescExists, 2, 0) AS ?value)
+                    BIND(Iri(CONCAT(STR(?kg), "#F1A")) AS ?measurement)
+                }
+                """
+        ]
+    ) .
+
+<F1B.ttl> a mf:ManifestEntry ;
+    dcterms:description "Weak evaluation should check the dataset identifier namespace in identifiers.org. However, has identifier.org has no SPARQL endpoint, we cannot check this." ;
+    kgi:onSuccess (
+        [
+            dcterms:description "There is a schema of dcterms identifier." ;
+            mf:action """
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Persistent IDs"@en ;
+                            rdfs:comment ?comment ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F1#F1B> ;
+                            dqv:value ?value .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a bsbm:Vendor }
+                        OPTIONAL {
+                            {
+                                ?kg schema:identifier ?id .
+                            } UNION {
+                                ?kg dcterms:identifier ?id .
+                            }
+                            BIND( STRLANG( CONCAT( "There is a schema or dcterms identifier: ", STR(?id)), "en") AS ?comment)
+                        }
+                    }
+                    BIND( IF (EXISTS {
+                        GRAPH ?kgGraph {
+                            {
+                                ?kg schema:identifier ?id .
+                            }
+                            UNION {
+                                ?kg dcterms:identifier ?id .
+                            }
+                        }
+                    }, 2, 0) AS ?value)
+                    BIND(Iri(CONCAT(STR(?kg), "#F1B")) AS ?measurement)
+                }
+                """
+        ]
+    ) .
+
+<F2A.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Structured metadata"@en ;
+                            rdfs:comment ?comment ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2A> ;
+                            dqv:value ?value .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a bsbm:Vendor }
+                        OPTIONAL {
+                            ?kg ?p ?o . 
+                            VALUES ?p { 
+                                dcterms:title
+                                dcterms:description
+                                dcat:accessURL
+                                dcat:downloadURL
+                                dcat:endpointDescription
+                                dcat:endpointURL 
+                            }
+                            BIND( STRLANG( CONCAT( "Metadata properties found:", STR(?p)), "en") AS ?comment)
+                        }
+                    }
+                    BIND(EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?kg a dcat:Dataset }
+                            UNION { ?kg a void:Dataset }
+                            UNION { ?kg a dcmitype:Dataset }
+                            UNION { ?kg a schema:Dataset }
+                            UNION { ?kg a sd:Dataset }
+                            UNION { ?kg a dataid:Dataset }
+                        }
+                    } AS ?kgDescExists)
+                    BIND( IF (EXISTS {
+                            GRAPH ?kgGraph {
+                                ?kg ?p ?o . 
+                            }
+                            VALUES ?p { 
+                                dcterms:title
+                                dcterms:description
+                                dcat:accessURL
+                                dcat:downloadURL
+                                dcat:endpointDescription
+                                dcat:endpointURL 
+                            }
+                        }, 2, IF(?kgDescExists, 1, 0)
+                    ) AS ?value)
+                    BIND(Iri(CONCAT(STR(?kg), "#F2A")) AS ?measurement)
+                }
+                """
+        ]
+    ) .
+
+<F2B.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( 
+        <loadLOV.ttl> 
+    ) ;
+    kgi:onSuccess (
+        <F2B_All.ttl>
+        <F2B_AtLeastOne.ttl>
+        <F2B_None.ttl>
+    ) ;
+    kgi:onFailure (
+        <F2B_All.ttl>
+        <F2B_AtLeastOne.ttl>
+        <F2B_None.ttl>
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement rdfs:comment "Official Linked Open Vocabularies SPARQL endpoint is not available." .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a bsbm:Vendor }
+                    }
+                    BIND(Iri(CONCAT(STR(?kg), "#F2B")) AS ?measurement)
+                }
+
+            """
+        ]
+    ) .
+        
+<F2B_AtLeastOne.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( <F2B_All.ttl> ) ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Shared vocabularies for metadata"@en ;
+                            rdfs:comment ?comment ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                            dqv:value 1 .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a bsbm:Vendor }
+                    }
+
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dqv:hasQualityMeasurement ?measurement .
+                                ?measurement dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                                    dqv:value ?anyValue .
+                            }
+                        }
+                    )
+                    
+                    FILTER ( EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?s a ?elem . }
+                            UNION { ?s ?elem ?oGraph . }
+                        }
+                        GRAPH kgi:LOV_redux {
+                            ?elem a ?o .
+                        }
+                    } )
+                    BIND( STRLANG( "Class or property found in LOV:" , "en" ) AS ?comment )
+                    BIND( Iri( CONCAT( STR( ?kg ), "#F2B" ) ) AS ?measurement )
+                }
+            """
+        ]
+    ) .
+
+<F2B_All.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Shared vocabularies for metadata"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                            dqv:value 2 .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a bsbm:Vendor }
+                    }
+
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dqv:hasQualityMeasurement ?measurement .
+                                ?measurement dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                                    dqv:value ?anyValue .
+                            }
+                        }
+                    )
+
+                    FILTER ( NOT EXISTS {
+                        GRAPH ?kgGraph {
+                            { ?s a ?elem . }
+                            UNION { ?s ?elem ?oGraph . }
+                        }
+                        FILTER ( NOT EXISTS {
+                            GRAPH kgi:LOV_redux {
+                                ?elem a ?o .
+                            }
+                        } )
+                    } )
+                    BIND(Iri(CONCAT(STR(?kg), "#F2B")) AS ?measurement)
+                }
+            """
+        ]
+    ) .
+
+<F2B_None.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( <F2B_AtLeastOne.ttl> ) ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?kg dqv:hasQualityMeasurement ?measurement .
+                        ?measurement a dqv:QualityMeasurement ;
+                            rdfs:label "Shared vocabularies for metadata"@en ;
+                            dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                            dqv:value 0 .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a bsbm:Vendor }
+                    }
+                    FILTER (
+                        NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dqv:hasQualityMeasurement ?measurement .
+                                ?measurement dqv:isMeasurementOf <https://w3id.org/fair/principles/latest/F2#F2B> ;
+                                    dqv:value ?anyValue .
+                            }
+                        }
+                    )
+                    BIND(Iri(CONCAT(STR(?kg), "#F2B")) AS ?measurement)
+                }
+            """
+        ]
+    ) .
+
+<cleanup.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets ( 
+        <loadLOV.ttl> 
+        <F1A.ttl> 
+        <F1B.ttl> 
+        <F2A.ttl> 
+        <F2B.ttl> 
+    ) ;
+    kgi:onSuccess (
+        [
+            dcterms:description "Cleanup the LOD image from the generated data." ;
+            mf:action """PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            DROP GRAPH kgi:LOV_redux 
+            """
+        ]
+    ) ;

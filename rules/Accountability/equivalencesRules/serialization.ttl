@@ -1,0 +1,28 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:TestQuery ;
+    dcterms:title "Presence of serialization format." ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    dcterms:description "Look for the serialization formats of the KG." ;
+    kgi:query """
+        PREFIX void: <http://rdfs.org/ns/void#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+        PREFIX prov: <http://www.w3.org/ns/prov#>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX dce: <http://purl.org/dc/elements/1.1/>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+        ASK {
+            # Find a serialization format
+            {?kg dce:format ?format .}
+            UNION {?kg dcterms:format ?format .}
+            UNION {?kg schema:encodingFormat ?format .}
+            UNION {?kg void:feature ?feature .}
+        }
+""" .

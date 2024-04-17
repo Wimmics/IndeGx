@@ -1,0 +1,11 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        <who/_manifest.ttl>
+        <when/_manifest.ttl>
+        <where/_manifest.ttl>
+        <how/_manifest.ttl>
+        <what/_manifest.ttl>
+    ) .

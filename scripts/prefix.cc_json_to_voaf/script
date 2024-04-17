@@ -18,11 +18,9 @@ source.on('end', function () {
     let vocabularySet = new Set();
     let prefixSet = new Set();
     let vocabularyPrefixesMap = new Map();
-    let prefixVocabulariesMap = new Map();
     Object.keys(fileContentJSON["@context"]).forEach(vocabPrefix => {
         const vocabURI = fileContentJSON["@context"][vocabPrefix];
         vocabularySet.add(vocabURI);
-        prefixSet.add(vocabPrefix);
         if(! vocabularyPrefixesMap.has(vocabURI)) {
             vocabularyPrefixesMap.set(vocabURI, new Set());
         }

@@ -1,0 +1,1864 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <accessStatement.ttl>
+        <alternativeTitle.ttl>
+        <audience.ttl>
+        <creationDate.ttl>
+        <creationLocation.ttl>
+        <creationMethod.ttl>
+        <modificationMethod.ttl>
+        <creator.ttl>
+        <description.ttl>
+        <distribution.ttl>
+        <dump.ttl>
+        <editor.ttl>
+        <endAvailability.ttl>
+        <endValidity.ttl>
+        <examples.ttl>
+        <identifier.ttl>
+        <keyword.ttl>
+        <language.ttl>
+        <license.ttl>
+        <modificationDate.ttl>
+        <otherPages.ttl>
+        <otherVersion.ttl>
+        <publicationDate.ttl>
+        <publicationReferences.ttl>
+        <publisher.ttl>
+        <qualityAnnotation.ttl>
+        <serialization.ttl>
+        <source.ttl>
+        <sparqlEndpoint.ttl>
+        <spatialCoverage.ttl>
+        <temporalCoverage.ttl>
+        <title.ttl>
+        <topic.ttl>
+        <versionNotes.ttl>
+        <version.ttl>
+        <vocabularies.ttl>
+        <webpage.ttl>
+    ) ;
+    mf:include (
+        <../rules/manifest.ttl>
+    ) .
+
+<accessStatement.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:rights ?rights .
+                        ?kg dcterms:rights ?rights .
+                        ?kg dcterms:accessRights ?rights .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find an access statement
+                        {?kg dce:rights ?rights .}
+                        UNION {?kg dcterms:rights ?rights .}
+                        UNION {?kg dcterms:accessRights ?rights .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<examples.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:workExample ?ex .
+                        ?kg void:exampleResource ?ex .
+                        ?kg skos:example ?ex .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find an example
+                        {?kg schema:workExample ?ex .}
+                        UNION {?kg void:exampleResource ?ex .}
+                        UNION {?kg skos:example ?ex .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<qualityAnnotation.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:review ?quality .
+                        ?kg dqv:hasQualityAnnotation ?quality .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a quality statement
+                        {?kg schema:review ?quality .}
+                        UNION {?kg dqv:hasQualityAnnotation ?quality . }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<alternativeTitle.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res schema:alternateName ?id .
+                        ?res dcterms:alternative ?id .
+                        ?res skos:altLabel ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res schema:alternateName ?id }
+                        UNION { ?res dcterms:alternative ?id }
+                        UNION { ?res skos:altLabel ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<identifier.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
+            PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+            PREFIX schema: <http://schema.org/>
+            PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+            PREFIX dce: <http://purl.org/dc/elements/1.1/>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX adms: <http://www.w3.org/ns/adms#>
+            INSERT {
+                GRAPH ?kgGraph {
+                    ?res schema:identifier ?id .
+                    ?res dce:identifier ?id .
+                    ?res dcterms:identifier ?id .
+                    ?res adms:identifier ?id .
+                }
+            } WHERE {
+                GRAPH ?kgGraph {
+                    ?res a dcat:Dataset .
+                    { ?res schema:identifier ?id }
+                    UNION { ?res dce:identifier ?id }
+                    UNION { ?res dcterms:identifier ?id }
+                    UNION { ?res adms:identifier ?id }
+                }
+            }
+            """
+        ]
+    ) .
+
+<serialization.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:format ?format .
+                        ?kg dcterms:format ?format .
+                        ?kg schema:encodingFormat ?format .
+                        ?kg void:feature ?format .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a serialization format
+                        {?kg dce:format ?format .}
+                        UNION {?kg dcterms:format ?format .}
+                        UNION {?kg schema:encodingFormat ?format .}
+                        UNION {?kg void:feature ?format .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<audience.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:audience ?audience .
+                        ?kg schema:audience ?audience .
+                        ?kg dataid:usefulness ?audience .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find an audience
+                        {?kg dcterms:audience ?audience .}
+                        UNION {?kg schema:audience ?audience .}
+                        UNION {?kg dataid:usefulness ?audience .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<source.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:source ?source .
+                        ?kg dcterms:source ?source .
+                        ?kg schema:isBasedOn ?source .
+                        ?kg pav:derivedFrom ?source .
+                        ?kg pav:importedFrom ?source .
+                        ?kg pav:retrievedFrom ?source .
+                        ?kg prov:wasDerivedFrom ?source .
+                        ?kg prov:hadPrimarySource ?source .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a source
+                        {?kg dce:source ?source .}
+                        UNION {?kg dcterms:source ?source .}
+                        UNION {?kg schema:isBasedOn ?source .}
+                        UNION {?kg pav:derivedFrom ?source .}
+                        UNION {?kg pav:importedFrom ?source .}
+                        UNION {?kg pav:retrievedFrom ?source .}
+                        UNION {?kg prov:wasDerivedFrom ?source .}
+                        UNION {?kg prov:hadPrimarySource ?source .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<creationDate.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:created ?date .
+                        ?kg schema:dateCreated ?date .
+                        ?kg pav:createdOn ?date .
+                        ?kg prov:generatedAtTime ?date .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy [
+                            a prov:Create ;
+                            prov:endedAtTime ?date
+                        ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a date of creation
+                        {?kg dcterms:created ?date .}
+                        UNION {?kg schema:dateCreated ?date .}
+                        UNION {?kg pav:createdOn ?date .}
+                        UNION {?kg prov:generatedAtTime ?date .}
+                        FILTER ( NOT EXISTS {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # ?act a prov:Create .
+                            {?act prov:startedAtTime ?date .} UNION {?act prov:endedAtTime ?date .}
+                        })
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:created ?date .
+                        ?kg schema:dateCreated ?date .
+                        ?kg pav:createdOn ?date .
+                        ?kg prov:generatedAtTime ?date .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        {?act prov:startedAtTime ?date .} UNION {?act prov:endedAtTime ?date .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<keyword.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:keywords ?keyword .
+                        ?kg dcat:keyword ?keyword .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a keyword
+                        {?kg schema:keywords ?keyword .}
+                        UNION {?kg dcat:keyword ?keyword .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<sparqlEndpoint.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:contentURL ?endpoint .
+                        ?kg void:sparqlEndpoint ?endpoint .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a SPARQL endpoint
+                        {?kg schema:contentURL ?endpoint .}
+                        UNION {?kg void:sparqlEndpoint ?endpoint .}
+                        UNION {?kg dcat:accessService ?service .
+                            ?service dcat:endpointURL ?endpoint .  }
+                        UNION {?kg dcat:accessService ?service .
+                            ?service sd:endpoint ?endpoint . }
+                        UNION {?service dcat:servesDataset ?kg .
+                            ?service dcat:endpointURL ?endpoint . }
+                        UNION {?service dcat:servesDataset ?kg .
+                            ?service sd:endpoint ?endpoint . }
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcat:accessService ?service .
+                        ?service dcat:endpointURL ?endpoint .
+                        ?service sd:endpoint ?endpoint .
+                        ?service dcat:servesDataset ?kg .
+                        ?service dcat:endpointURL ?endpoint .
+                        ?service sd:endpoint ?endpoint .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a SPARQL endpoint
+                        {?kg dcat:accessService ?service .
+                            ?service dcat:endpointURL ?endpoint .  }
+                        UNION {?kg dcat:accessService ?service .
+                            ?service sd:endpoint ?endpoint . }
+                        UNION {?service dcat:servesDataset ?kg .
+                            ?service dcat:endpointURL ?endpoint . }
+                        UNION {?service dcat:servesDataset ?kg .
+                            ?service sd:endpoint ?endpoint . }
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcat:accessService ?serviceDescription .
+                        ?serviceDescription dcat:endpointURL ?endpoint .
+                        ?serviceDescription sd:endpoint ?endpoint .
+                        ?serviceDescription dcat:servesDataset ?kg .
+                        ?serviceDescription dcat:endpointURL ?endpoint .
+                        ?serviceDescription sd:endpoint ?endpoint .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        { ?kg schema:contentURL ?endpoint .}
+                        UNION {?kg void:sparqlEndpoint ?endpoint .}
+                        # Find a SPARQL endpoint
+                        FILTER (
+                            NOT EXISTS {
+                                {?kg dcat:accessService ?service .
+                                    ?service dcat:endpointURL ?endpoint .  }
+                                UNION {?kg dcat:accessService ?service .
+                                    ?service sd:endpoint ?endpoint . }
+                                UNION {?service dcat:servesDataset ?kg .
+                                    ?service dcat:endpointURL ?endpoint . }
+                                UNION {?service dcat:servesDataset ?kg .
+                                    ?service sd:endpoint ?endpoint . }
+                            }
+                        )
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Service")) AS ?serviceDescription)
+                }
+            """
+        ]
+    ) .
+
+<creationLocation.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:locationCreated ?location .
+                        ?kg pav:createdAt ?location .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy [
+                                a prov:Create ;
+                                prov:atLocation ?location
+                            ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a location of creation
+                        { ?kg schema:locationCreated ?location .}
+                        UNION { ?kg pav:createdAt ?location .}
+                        # With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # ?act a prov:Create .
+                            ?act prov:atLocation ?location .
+                        }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<language.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:inLanguage ?id .
+                        ?kg dcterms:language ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        { ?kg schema:inLanguage ?id }
+                        UNION { ?kg dcterms:language ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<spatialCoverage.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:spatialCoverage ?id .
+                        ?kg dcterms:spatial ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        { ?kg schema:spatialCoverage ?id }
+                        UNION { ?kg dcterms:spatial ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<creationMethod.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg pav:createdWith ?agent .
+                        ?kg pav:retrievedBy ?agent .
+                        ?kg pav:importedBy ?agent .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy  [
+                                a prov:Create ;
+                                prov:wasAssociatedWith [ a prov:SoftwareAgent ]
+                            ] .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a method or software
+                        {?kg pav:createdWith ?agent .}
+                        UNION {?kg pav:retrievedBy ?agent .}
+                        UNION {?kg pav:importedBy ?agent .}
+                        FILTER(isLiteral(?agent))
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg pav:createdWith ?agent .
+                        ?kg pav:retrievedBy ?agent .
+                        ?kg pav:importedBy ?agent .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy  [
+                                a prov:Create ;
+                                prov:wasAssociatedWith ?agent
+                            ] .
+                        ?agent a prov:SoftwareAgent .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a method or software
+                        {?kg pav:createdWith ?agent .}
+                        UNION {?kg pav:retrievedBy ?agent .}
+                        UNION {?kg pav:importedBy ?agent .}
+                        FILTER(! isLiteral(?agent))
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg pav:createdWith ?agent .
+                        ?kg pav:retrievedBy ?agent .
+                        ?kg pav:importedBy ?agent .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy  [
+                                a prov:Create ;
+                                prov:wasAssociatedWith ?agent
+                            ] .
+                        ?agent a prov:SoftwareAgent .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a method or software
+                        ?kg prov:wasGeneratedBy ?act .
+                        # ?act a prov:Create .
+                        ?act prov:wasAssociatedWith ?agent .
+                        ?agent a prov:SoftwareAgent .
+                        FILTER ( NOT EXISTS {
+                            { ?act a prov:Contribute . }
+                            UNION { ?act a prov:Accept . }
+                            UNION { ?act a prov:Copyright . }
+                            UNION { ?act a prov:Modify . }
+                            UNION { ?act a prov:Publish . }
+                            UNION { ?act a prov:Replace . }
+                            UNION { ?act a prov:RightsAssignment . }
+                            UNION { ?act a prov:Submit . }
+                        })
+                    }
+                }
+            """
+        ]
+    ) .
+
+<modificationMethod.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg prov:wasGeneratedBy ?act .
+                        ?act a prov:Contribute , prov:Modify ;
+                            prov:wasAssociatedWith ?agent .
+                        ?agent a prov:SoftwareAgent .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        { ?kg a dcat:Dataset . }
+                        # Find a method or software With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # ?act a prov:Contribute / Modify / Replace .
+                            ?act prov:wasAssociatedWith ?agent .
+                            ?agent a prov:SoftwareAgent .
+                            FILTER ( NOT EXISTS {
+                                { ?act a prov:Create . }
+                                UNION { ?act a prov:Publish . }
+                            })
+                        }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<license.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX doap: <http://usefulinc.com/ns/doap#>
+                PREFIX cc: <http://creativecommons.org/ns#>
+                PREFIX xhv: <http://www.w3.org/1999/xhtml/vocab#>
+                PREFIX sto: <https://w3id.org/i40/sto#>
+                PREFIX nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:license ?license .
+                        ?kg schema:license ?license .
+                        ?kg schema:sdLicense ?license .
+                        ?kg doap:license ?license .
+                        ?kg cc:license ?license .
+                        ?kg xhv:license ?license .
+                        ?kg sto:license ?license .
+                        ?kg nie:license ?license .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a license
+                        { ?kg dcterms:license ?license }
+                        UNION { ?kg schema:license ?license }
+                        UNION { ?kg schema:sdLicense ?license }
+                        UNION { ?kg doap:license ?license }
+                        UNION { ?kg cc:license ?license }
+                        UNION { ?kg xhv:license ?license }
+                        UNION { ?kg sto:license ?license }
+                        UNION { ?kg nie:license ?license }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<temporalCoverage.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:temporalCoverage ?id .
+                        ?kg dcterms:temporal ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        { ?kg schema:temporalCoverage ?id }
+                        UNION { ?kg dcterms:temporal ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<creator.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:creator ?creator .
+                        ?kg dcterms:creator ?creator .
+                        ?kg foaf:maker ?creator .
+                        ?kg schema:creator ?creator .
+                        ?kg pav:createdBy ?creator .
+                        ?kg schema:author ?creator .
+                        ?kg pav:authoredBy ?creator .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy [
+                            a prov:Create ;
+                            prov:wasAssociatedWith ?creator
+                        ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a creator
+                        {?kg dce:creator ?creator .}
+                        UNION {?kg dcterms:creator ?creator .}
+                        UNION {?kg foaf:maker ?creator .}
+                        UNION {?kg schema:creator ?creator .}
+                        UNION {?kg pav:createdBy ?creator .}
+                        # Find an auhtor
+                        UNION {?kg schema:author ?creator .}
+                        UNION {?kg pav:authoredBy ?creator .}
+                        # With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # ?act a prov:Create .
+                            ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?creator .
+                            ?creator a ?type .
+                            VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                            FILTER ( NOT EXISTS {
+                                { ?act a prov:Contribute . }
+                                UNION { ?act a prov:Accept . }
+                                UNION { ?act a prov:Copyright . }
+                                UNION { ?act a prov:Modify . }
+                                UNION { ?act a prov:Publish . }
+                                UNION { ?act a prov:Replace . }
+                                UNION { ?act a prov:RightsAssignment . }
+                                UNION { ?act a prov:Submit . }
+                            })
+                        }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<title.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res schema:name ?id .
+                        ?res dce:title ?id .
+                        ?res dcterms:title ?id .
+                        ?res rdfs:label ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res schema:name ?id }
+                        UNION { ?res dce:title ?id }
+                        UNION { ?res dcterms:title ?id }
+                        UNION { ?res rdfs:label ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<description.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                PREFIX dataid: <http://dataid.dbpedia.org/ns/core#>
+                PREFIX powder-s: <http://www.w3.org/2007/05/powder-s#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg rdfs:comment ?desc .
+                        ?kg dce:description ?desc .
+                        ?kg dcterms:description ?desc .
+                        ?kg schema:description ?desc .
+                        ?kg dataid:dataDescription ?desc .
+                        ?kg owl:comment ?desc .
+                        ?kg skos:note ?desc .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a description
+                        {?kg rdfs:comment ?desc .}
+                        UNION {?kg dce:description ?desc . }
+                        UNION {?kg dcterms:description ?desc .}
+                        UNION {?kg schema:description ?desc .}
+                        UNION {?kg dataid:dataDescription ?desc .}
+                        UNION {?kg owl:comment ?desc .}
+                        UNION {?kg skos:note ?desc .}
+                        UNION { ?kg powder-s:text ?desc }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<modificationDate.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:modified ?date .
+                        ?kg schema:dateModified ?date .
+                        ?kg pav:lastUpdateOn ?date .
+                        ?kg pav:contributedOn ?date .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy [
+                            a prov:Modify ;
+                            prov:startedAtTime ?date
+                        ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a date of modification
+                        {?kg dcterms:modified ?date .}
+                        UNION {?kg schema:dateModified ?date .}
+                        UNION {?kg pav:lastUpdateOn ?date .}
+                        UNION {?kg pav:contributedOn ?date .}
+                        # With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                            ?act prov:startedAtTime ?date .
+                        }
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:modified ?date .
+                        ?kg schema:dateModified ?date .
+                        ?kg pav:lastUpdateOn ?date .
+                        ?kg pav:contributedOn ?date .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy [
+                            a prov:Modify ;
+                            prov:endedAtTime ?date
+                        ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a date of modification
+                        {?kg dcterms:modified ?date .}
+                        UNION {?kg schema:dateModified ?date .}
+                        UNION {?kg pav:lastUpdateOn ?date .}
+                        UNION {?kg pav:contributedOn ?date .}
+                        # With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                            ?act prov:endedAtTime ?date .
+                        }
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:modified ?date .
+                        ?kg schema:dateModified ?date .
+                        ?kg pav:lastUpdateOn ?date .
+                        ?kg pav:contributedOn ?date .
+                        # With PROV
+                        ?kg prov:wasGeneratedBy [
+                            a ?activityType ;
+                            ?dateProperty ?date
+                        ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a date of modification
+                        {?kg dcterms:modified ?date .}
+                        UNION {?kg schema:dateModified ?date .}
+                        UNION {?kg pav:lastUpdateOn ?date .}
+                        UNION {?kg pav:contributedOn ?date .}
+                        # With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            ?act a ?activityType .
+                            ?act ?dateProperty ?date .
+                            VALUES ?activityType { prov:Contribute prov:Modify prov:Replace }
+                            VALUES ?dateProperty { prov:startedAtTime prov:endedAtTime }
+                        }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<topic.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:subject ?topic .
+                        ?kg dcterms:subject ?topic .
+                        ?kg foaf:topic ?topic .
+                        ?kg foaf:primaryTopic ?topic .
+                        ?kg schema:about ?topic .
+                        ?kg dcat:theme ?topic .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a topic
+                        {?kg dce:subject ?topic .}
+                        UNION {?kg dcterms:subject ?topic .}
+                        UNION {?kg foaf:topic ?topic .}
+                        UNION {?kg foaf:primaryTopic ?topic .}
+                        UNION {?kg schema:about ?topic .}
+                        UNION {?kg dcat:theme ?topic .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<distribution.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:distribution ?dist .
+                        ?kg dcat:distribution ?dist .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a distribution
+                        {?kg schema:distribution ?dist .}
+                        UNION {?kg dcat:distribution ?dist .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<otherPages.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res schema:relatedLink ?id .
+                        ?res rdfs:seeAlso ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res schema:relatedLink ?id }
+                        UNION { ?res rdfs:seeAlso ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<versionNotes.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX adms: <http://www.w3.org/ns/adms#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res adms:versionNotes ?id .
+                        ?res owl:versionInfo ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res adms:versionNotes ?id }
+                        UNION { ?res owl:versionInfo ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<dump.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg void:dataDump ?url .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a dump
+                        {
+                            ?kg dcat:distribution ?dist .
+                            ?dist dcat:downloadURL ?url .
+                        } UNION {
+                            ?kg schema:distribution ?dist .
+                            ?dist schema:contentUrl ?url
+                        }
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcat:distribution [
+                                dcat:downloadURL ?url
+                            ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a dump
+                        { ?kg void:dataDump ?url . }
+                        UNION {
+                            ?kg schema:distribution ?dist .
+                            ?dist schema:contentUrl ?url
+                        }
+                        FILTER ( NOT EXISTS {
+                            ?kg dcat:distribution ?dist .
+                            ?dist dcat:downloadURL ?url .
+                        })
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:distribution [
+                                schema:contentUrl ?url
+                            ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a dump
+                        { ?kg void:dataDump ?url . }
+                        UNION {
+                            ?kg dcat:distribution ?dist .
+                            ?dist dcat:downloadURL ?url .
+                        }
+                        FILTER ( NOT EXISTS {
+                            ?kg schema:distribution ?dist .
+                            ?dist schema:contentUrl ?url
+                        })
+                    }
+                }
+            """
+        ]
+    ) .
+
+<otherVersion.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res dcterms:isVersionOf ?id .
+                        ?res pav:previousVersion ?id .
+                        ?res owl:priorVersion ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res dcterms:isVersionOf ?id }
+                        UNION { ?res pav:previousVersion ?id }
+                        UNION { ?res owl:priorVersion ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<version.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res schema:version ?id .
+                        ?res dcterms:hasVersion ?id .
+                        ?res dcat:version ?id .
+                        ?res pav:version ?id .
+                        ?res pav:hasCurrentVersion ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res schema:version ?id }
+                        UNION { ?res dcterms:hasVersion ?id }
+                        UNION { ?res dcat:version ?id }
+                        UNION { ?res pav:version ?id }
+                        UNION { ?res pav:hasCurrentVersion ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<editor.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:contributor ?contributor .
+                        ?kg dcterms:contributor ?contributor .
+                        ?kg schema:contributor ?contributor .
+                        ?kg pav:contributedBy ?contributor .
+                        ?kg schema:editor ?contributor .
+                        ?kg prov:wasGeneratedBy [
+                                a prov:Contribute , prov:Modify ;
+                                prov:wasAssociatedWith ?contributor
+                            ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a contributor
+                        {?kg dce:contributor ?contributor .}
+                        UNION {?kg dcterms:contributor ?contributor .}
+                        UNION {?kg schema:contributor ?contributor .}
+                        UNION {?kg pav:contributedBy ?contributor .}
+                        # Find an editor
+                        UNION {?kg schema:editor ?contributor .}
+                        # With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # ?act a prov:Contribute .
+                            ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                            ?contributor a ?type .
+                            VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                            FILTER ( NOT EXISTS {
+                                { ?act a prov:Create . }
+                                UNION { ?act a prov:Publish . }
+                            })
+                        }
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:contributor ?contributor .
+                        ?kg dcterms:contributor ?contributor .
+                        ?kg schema:contributor ?contributor .
+                        ?kg pav:contributedBy ?contributor .
+                        ?kg schema:editor ?contributor .
+                        ?kg prov:wasGeneratedBy [
+                                a prov:Contribute , prov:Modify ;
+                                prov:wasAssociatedWith ?contributor
+                            ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a contributor
+                        {?kg dce:contributor ?contributor .}
+                        UNION {?kg dcterms:contributor ?contributor .}
+                        UNION {?kg schema:contributor ?contributor .}
+                        UNION {?kg pav:contributedBy ?contributor .}
+                        # Find an editor
+                        UNION {?kg schema:editor ?contributor .}
+                        # With PROV
+                        FILTER ( NOT EXISTS {
+                            ?kg prov:wasGeneratedBy ?act .
+                            # ?act a prov:Contribute .
+                            ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?contributor .
+                            ?contributor a ?type .
+                            VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                        } )
+                    }
+                }
+            """
+        ]
+    ) .
+
+<publicationDate.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:issued ?date .
+                        ?kg dcterms:available ?date .
+                        ?kg schema:datePublished ?date .
+                        ?kg schema:sdDatePublished ?date .
+                        ?kg prov:wasGeneratedBy [
+                            a prov:Publish ;
+                            prov:endedAtTime ?date
+                        ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a date of publication
+                        {?kg dcterms:issued ?date .}
+                        UNION {?kg dcterms:available ?date .}
+                        UNION {?kg schema:datePublished ?date .}
+                        UNION {?kg schema:sdDatePublished ?date .}
+                        FILTER ( NOT EXISTS {
+                            ?kg prov:wasGeneratedBy ?act .
+                            ?act a prov:Publish .
+                            { ?act prov:startedAtTime ?date . } UNION { ?act prov:endedAtTime ?date . }
+                        } )
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:issued ?date .
+                        ?kg dcterms:available ?date .
+                        ?kg schema:datePublished ?date .
+                        ?kg schema:sdDatePublished ?date .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        # With PROV
+                        ?kg prov:wasGeneratedBy ?act .
+                        ?act a prov:Publish .
+                        { ?act prov:startedAtTime ?date . } UNION { ?act prov:endedAtTime ?date . }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<vocabularies.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res dcterms:conformsTo ?id .
+                        ?res void:vocabulary ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res dcterms:conformsTo ?id }
+                        UNION { ?res void:vocabulary ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<endAvailability.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg schema:expires ?date .
+                        ?kg prov:invalidatedAtTime ?date .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a date of end of availability
+                        { ?kg schema:expires ?date . }
+                        UNION { ?kg prov:invalidatedAtTime ?date . }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<publicationReferences.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?res schema:publication ?id .
+                        ?res dcterms:references ?id .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?res a dcat:Dataset .
+                        { ?res schema:publication ?id }
+                        UNION { ?res dcterms:references ?id }
+                    }
+                }
+            """
+        ]
+    ) .
+
+<webpage.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg foaf:homepage ?url .
+                        ?kg schema:url ?url .
+                        ?kg dcat:landingPage ?url .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a webpage
+                        {?kg foaf:homepage ?url .}
+                        UNION {?kg schema:url ?url .}
+                        UNION {?kg dcat:landingPage ?url .}
+                        UNION {?kg dcat:distribution ?dist .
+                            ?dist dcat:accessURL ?url .}
+                    }
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg foaf:homepage ?url .
+                        ?kg schema:url ?url .
+                        ?kg dcat:landingPage ?url .
+                        ?kg dcat:distribution [
+                            dcat:accessURL ?url
+                        ]
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a webpage
+                        {?kg foaf:homepage ?url .}
+                        UNION {?kg schema:url ?url .}
+                        UNION {?kg dcat:landingPage ?url .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<endValidity.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dcterms:valid ?date .
+                        ?kg schema:expires ?date .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a date of end of validity
+                        {?kg dcterms:valid ?date .}
+                        UNION {?kg schema:expires ?date .}
+                    }
+                }
+            """
+        ]
+    ) .
+
+<publisher.ttl>
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+                PREFIX schema: <http://schema.org/>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                INSERT {
+                    GRAPH ?kgGraph {
+                        ?kg dce:publisher ?publisher .
+                        ?kg dcterms:publisher ?publisher .
+                        ?kg schema:publisher ?publisher .
+                        ?kg schema:sdPublisher ?publisher .
+                        ?kg pav:providedBy ?publisher .
+                        ?kg prov:wasGeneratedBy [
+                                a prov:Publish ;
+                                prov:wasAssociatedWith ?publisher
+                            ] .
+                    }
+                } WHERE {
+                    GRAPH ?kgGraph {
+                        ?kg a dcat:Dataset .
+                        # Find a publisher
+                        {?kg dce:publisher ?publisher .}
+                        UNION {?kg dcterms:publisher ?publisher .}
+                        UNION {?kg schema:publisher ?publisher .}
+                        UNION {?kg schema:sdPublisher ?publisher .}
+                        UNION {?kg pav:providedBy ?publisher .}
+                        # With PROV
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?act .
+                            ?act a prov:Publish .
+                            ?act prov:wasAssociatedWith/prov:actedOnBehalfOf* ?publisher .
+                            ?publisher a ?type .
+                            VALUES ?type { foaf:Person schema:Person prov:Person foaf:Organization schema:Organization prov:Organization }
+                        }
+                    }
+                }
+            """
+        ]
+    ) .

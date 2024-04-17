@@ -1,0 +1,17 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<> rdf:type kgi:TestQuery ;
+    dcterms:isReferencedBy <_manifest.ttl> ;
+    kgi:endpoint <https://lov.linkeddata.es/dataset/lov/sparql> ;
+    dcterms:description """Weak: FAIR-Checker verifies that at least one used ontology class or property are known in major ontology registries (OLS, BioPortal, LOV)
+Strong: FAIR-Checker verifies that all used ontology classes or properties are known in major ontology registries (OLS, BioPortal, LOV)""" ;
+    kgi:query """
+    ASK {
+        ?s ?p ?o .
+    }
+    """ .

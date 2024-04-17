@@ -1,0 +1,253 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <measure_init.ttl>
+        <measure_creator_who.ttl>
+        <measure_maintenance_who.ttl>
+        <measure_usage_how.ttl>
+    ) ;
+    mf:include (
+        <final_step/_manifest.ttl>
+    ) .
+
+<measure_init.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            LOAD <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/information_need/accountability.ttl>
+            """
+        ]
+    ) .
+
+<measure_creator_who.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <measure_init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX sin: <http://www.exemple.com/sin#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl#activity> ;
+                        dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Creator contributor measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl>;
+                            dqv:value ?val_contr ;
+                            prov:generatedAtTime ?time .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl> a dqv:Metric ;
+                        rdfs:comment "Who are the creators of the KG and their role in this process? For all creators, indicates whether they are a person or an organization, provide information to identify them (name and point of contact such as email, or phone number, or address, or homepage), provide their qualifications, provide all characteristics which could have an influence on the KG." ;
+                    rdfs:label "Aggregated creator contributor" .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl#activity> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                }
+            } WHERE {
+                GRAPH kgi:Metadata {
+                    # Main
+                    ?kg prov:wasDerivedFrom ?kge ;
+                        dqv:hasQualityMeasurement ?measurement .
+                    ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributor.ttl> ;
+                        dqv:computedOn  ?endpointDescription ;
+                        dqv:value ?v .
+                }
+                OPTIONAL {
+                    # ID
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valid ) WHERE {
+                        ?kg prov:wasDerivedFrom ?kge ;
+                            dqv:hasQualityMeasurement ?measurement .
+                        ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorID.ttl> ;
+                            dqv:value ?v .
+                    } GROUP BY ?kg }
+                    # Type
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valtype ) WHERE {
+                        ?kg prov:wasDerivedFrom ?kge ;
+                            dqv:hasQualityMeasurement ?measurement .
+                        ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorType.ttl> ;
+                            dqv:value ?v .
+                    } GROUP BY ?kg }
+                    # Qualification
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valqual ) WHERE {
+                        ?kg prov:wasDerivedFrom ?kge ;
+                            dqv:hasQualityMeasurement ?measurement .
+                        ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorQualification.ttl> ;
+                            dqv:value ?v .
+                    } GROUP BY ?kg }
+                    # Influences
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valinf ) WHERE {
+                        ?kg prov:wasDerivedFrom ?kge ;
+                            dqv:hasQualityMeasurement ?measurement .
+                        ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/creation/contributor/creation_contributorInfluences.ttl> ;
+                            dqv:value ?v .
+                    } GROUP BY ?kg }
+                }
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_creator_who.ttl")), "Measure")) AS ?qualityMeasurement)
+                BIND( IF (BOUND(?valid) , ?valid, 0) AS ?vvalid)
+                BIND( IF (BOUND(?valtype) , ?valtype, 0) AS ?vvaltype)
+                BIND( IF (BOUND(?valqual) , ?valqual, 0) AS ?vvalqual)
+                BIND( IF (BOUND(?valinf) , ?valinf, 0) AS ?vvalinf)
+                BIND( (xsd:decimal(?v) + ?vvalid + ?vvaltype + ?vvalqual + ?vvalinf ) /5 AS ?val_contr )
+                BIND(NOW() AS ?time)
+            }
+            """
+        ]
+    ) .
+
+<measure_maintenance_who.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <measure_init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX sin: <http://www.exemple.com/sin#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_maintenance_who.ttl#activity> ;
+                        dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_maintenance_who.ttl>;
+                            dqv:value ?val_contr ;
+                            prov:generatedAtTime ?time .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_maintenance_who.ttl> a dqv:Metric ;
+                        rdfs:comment "Who are the maintainers of the KG and their role in this process? For all maintainers, indicates whether they are a person or an organization, provide information to identify them (name and point of contact such as email, or phone number, or address, or homepage), provide their qualifications, provide all characteristics which could have an influence on the KG." ;
+                    rdfs:label "Aggregated Maintenance contributor" .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_maintenance_who.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_maintenance_who.ttl#activity> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                }
+            } WHERE {
+                GRAPH kgi:Metadata {
+                    # Main
+                    ?kg prov:wasDerivedFrom ?kge ;
+                        dqv:hasQualityMeasurement ?measurement .
+                    ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> ;
+                        dqv:computedOn  ?endpointDescription ;
+                        dqv:value ?v .
+                }
+                OPTIONAL {
+                    # ID
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valid ) WHERE {
+                        GRAPH kgi:Metadata {
+                            ?kg prov:wasDerivedFrom ?kge ;
+                                dqv:hasQualityMeasurement ?measurement .
+                            ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> ;
+                                dqv:value ?v .
+                        }
+                    } GROUP BY ?kg }
+                    # Type
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valtype ) WHERE {
+                        GRAPH kgi:Metadata {
+                            ?kg prov:wasDerivedFrom ?kge ;
+                                dqv:hasQualityMeasurement ?measurement .
+                            ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> ;
+                                dqv:value ?v .
+                        }
+                    } GROUP BY ?kg }
+                    # Qualification
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valqual ) WHERE {
+                        GRAPH kgi:Metadata {
+                            ?kg prov:wasDerivedFrom ?kge ;
+                                dqv:hasQualityMeasurement ?measurement .
+                            ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> ;
+                                dqv:value ?v .
+                        }
+                    } GROUP BY ?kg }
+                    # Influences
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valinf ) WHERE {
+                        GRAPH kgi:Metadata {
+                            ?kg prov:wasDerivedFrom ?kge ;
+                                dqv:hasQualityMeasurement ?measurement .
+                            ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> ;
+                                dqv:value ?v .
+                        }
+                    } GROUP BY ?kg }
+                }
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_maintenance_who.ttl")), "Measure")) AS ?qualityMeasurement)
+                BIND( IF (BOUND(?valid) , ?valid, 0) AS ?vvalid)
+                BIND( IF (BOUND(?valtype) , ?valtype, 0) AS ?vvaltype)
+                BIND( IF (BOUND(?valqual) , ?valqual, 0) AS ?vvalqual)
+                BIND( IF (BOUND(?valinf) , ?valinf, 0) AS ?vvalinf)
+                BIND( (xsd:decimal(?v) + ?vvalid + ?vvaltype + ?vvalqual + ?vvalinf ) /5 AS ?val_contr )
+                BIND(NOW() AS ?time)
+            }
+            """
+        ]
+    ) .
+
+<measure_usage_how.ttl> a mf:ManifestEntry ;
+    kgi:requiredAssets (
+        <measure_init.ttl>
+    ) ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX dqv: <http://www.w3.org/ns/dqv#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX sin: <http://www.exemple.com/sin#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+
+            INSERT {
+                GRAPH kgi:Metadata {
+                    ?kg prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_usage_how.ttl#activity> ;
+                        dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Usage access measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_usage_how.ttl>;
+                            dqv:value ?val_access ;
+                            prov:generatedAtTime ?time .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_usage_how.ttl> a dqv:Metric ;
+                        rdfs:comment "How to access the KG? Provide a SPARQL endpoint or a dump if they are freely accessible, or the procedure of access, and the characteristics of the endpoint if provided." ;
+                    rdfs:label "Aggregated Usage access" .
+                    <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_usage_how.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_usage_how.ttl#activity> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                }
+            } WHERE {
+                GRAPH kgi:Metadata {
+                    # Main
+                    ?kg prov:wasDerivedFrom ?kge ;
+                        dqv:hasQualityMeasurement ?measurement .
+                    ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_access.ttl> ;
+                        dqv:computedOn  ?endpointDescription ;
+                        dqv:value ?v .
+                }
+                OPTIONAL {
+                    # Endpoint
+                    { SELECT DISTINCT ?kg (AVG(xsd:decimal(?v)) AS ?valend ) WHERE {
+                        GRAPH kgi:Metadata {
+                            ?kg prov:wasDerivedFrom ?kge ;
+                                dqv:hasQualityMeasurement ?measurement .
+                            ?measurement dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/usage/how/usage_endpoint.ttl> ;
+                                dqv:value ?v .
+                        }
+                    } GROUP BY ?kg }
+                }
+                BIND( IF (BOUND(?valend), ( xsd:decimal(?v) + ?valend )/2 , xsd:decimal(?v) ) AS ?val_access)
+                BIND(NOW() AS ?time)
+                BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/score_computing_rules/measure_usage_how.ttl")), "Measure")) AS ?qualityMeasurement)
+            }
+            """
+        ]
+    ) .

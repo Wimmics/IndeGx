@@ -1,0 +1,7 @@
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a kgi:DummyTest ;
+    dcterms:title "Usage access address" ;
+    dcterms:isReferencedBy <manifest.ttl> ;
+    dcterms:description "Where to access the dataset (either through a dump or a sparql endpoint)?" .

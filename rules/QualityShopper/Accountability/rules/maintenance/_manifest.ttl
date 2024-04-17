@@ -1,0 +1,421 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:include (
+        <contributor/_manifest.ttl>
+    ) ;
+    mf:entries (
+        <modification_date.ttl>
+        <maintenance_frequency.ttl>
+        <maintenance_location.ttl>
+        <maintenance_methodology.ttl>
+    ) .
+
+
+<modification_date.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementDate .
+                        ?qualityMeasurementDate a dqv:QualityMeasurement ;
+                            rdfs:label "Modification date measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> a dqv:Metric ;
+                            rdfs:comment "When was the dataset last maintained/modified?" ;
+                            rdfs:label "Modification date" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                        ?kg dcterms:modified ?date .
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl")), "Measure")) AS ?qualityMeasurementDate)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementDate .
+                        ?qualityMeasurementDate a dqv:QualityMeasurement ;
+                            rdfs:label "Modification date measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A modification date of the Dataset must be provided (e.g. dct:modified, pav:contributedOn)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/ModificationDate.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> a dqv:Metric ;
+                            rdfs:comment "When was the dataset last maintained/modified?" ;
+                            rdfs:label "Modification date" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                    }
+                    FILTER ( NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dcterms:modified ?date .
+                            }
+                        } )
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/modification_date.ttl")), "Measure")) AS ?qualityMeasurementDate)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+    ) .
+
+<maintenance_frequency.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementFrequency .
+                        ?qualityMeasurementFrequency a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance frequency measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> a dqv:Metric ;
+                            rdfs:comment "With which frequency is the dataset maintained?" ;
+                            rdfs:label "Maintenance frequency" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                        ?kg dcterms:accrualPeriodicity ?frequency
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl")), "Measure")) AS ?qualityMeasurementFrequency)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementFrequency .
+                        ?qualityMeasurementFrequency a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance frequency measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A frequency of maintenance of the Dataset must be provided (e.g. dct:accrualPeriodicity)"@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> a dqv:Metric ;
+                            rdfs:comment "With which frequency is the dataset maintained?" ;
+                            rdfs:label "Maintenance frequency" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                    }
+                    FILTER ( NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg dcterms:accrualPeriodicity ?frequency
+                            }
+                        } )
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_frequency.ttl")), "Measure")) AS ?qualityMeasurementFrequency)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<maintenance_location.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementLocation .
+                        ?qualityMeasurementLocation a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance location measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> a dqv:Metric ;
+                            rdfs:comment "From what physical location (state, country, continent, ...) is or will the dataset be maintained?" ;
+                            rdfs:label "Maintenance location" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+
+                        ?kg prov:wasGeneratedBy ?act .
+                        # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                        ?act prov:atLocation ?location .
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl")), "Measure")) AS ?qualityMeasurementLocation)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementLocation .
+                        ?qualityMeasurementLocation a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance location measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A location of modification of the Dataset must be provided (e.g. prov:wasGeneratedBy/prov:atLocation)."@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> a dqv:Metric ;
+                            rdfs:comment "From what physical location (state, country, continent, ...) is or will the dataset be maintained?" ;
+                            rdfs:label "Maintenance location" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                    }
+
+                    FILTER ( NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                ?kg prov:wasGeneratedBy ?act .
+                                # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                                ?act prov:atLocation ?location .
+                            }
+                        } )
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_location.ttl")), "Measure")) AS ?qualityMeasurementLocation)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<maintenance_methodology.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementMethodology .
+                        ?qualityMeasurementMethodology a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance methodology measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> a dqv:Metric ;
+                            rdfs:comment "What will be the methodology/ procedure for data maintenance?" ;
+                            rdfs:label "Maintenance methodology" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+
+                        # method
+                        {?kg dcterms:accrualMethod ?method .}
+                        # activity
+                        UNION {
+                            ?kg prov:wasGeneratedBy ?activity .
+                            # {?act a prov:Contribute . } UNION {?act a prov:Modify . } UNION {?act a prov:Replace . }
+                            # {?activity dcterms:description ?desc .} UNION {?activity dce:description ?desc . } UNION {?activity schema:description ?desc .}
+                            ?agent a prov:SoftwareAgent .
+                        }
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl")), "Measure")) AS ?qualityMeasurementMethodology)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementMethodology .
+                        ?qualityMeasurementMethodology a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance methodology measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "The methodology or software of maintenance/modification of the Dataset must be provided (e.g. dct:accrualMethod, or use prov)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/modificationMethod.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> a dqv:Metric ;
+                            rdfs:comment "What will be the methodology/ procedure for data maintenance?" ;
+                            rdfs:label "Maintenance methodology" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                    }
+
+                    FILTER ( NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                # method
+                                {?kg dcterms:accrualMethod ?method .}
+                                # activity
+                                UNION {
+                                    ?kg prov:wasGeneratedBy ?act .
+                                    ?act a prov:Contribute ;
+                                        prov:wasAssociatedWith ?agent .
+                                    ?agent a prov:SoftwareAgent .
+                                    # {?act dcterms:description ?desc .} UNION {?activity dce:description ?desc . } UNION {?activity schema:description ?desc .}
+                                }
+                            }
+                        })
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/maintenance_methodology.ttl")), "Measure")) AS ?qualityMeasurementMethodology)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .

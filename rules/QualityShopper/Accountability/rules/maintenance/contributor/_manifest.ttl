@@ -1,0 +1,610 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    mf:entries (
+        <maintenance_contributor.ttl>
+    ) .
+
+<maintenance_contributor.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementContributor .
+                        ?qualityMeasurementContributor a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> a dqv:Metric ;
+                            rdfs:comment "Who are the maintainers of the dataset? What is her/his/its role in this process?" ;
+                            rdfs:label "Maintenance contributor" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+
+                        { ?kg dcterms:contributor ?contributor . }
+                        UNION { ?kg schema:maintainer ?contributor . }
+                    }
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl")), "Measure")) AS ?qualityMeasurementContributor)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurementContributor .
+                        ?qualityMeasurementContributor a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor measurement" ;
+                            dqv:computedOn ?endpointDescription ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "A contributor or a maintainer of the Dataset must be provided (e.g. dct:contributor or schema:maintainer)"@en ;
+                            rdfs:seeAlso <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/equivalencesRules/editor.ttl> ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> a dqv:Metric ;
+                            rdfs:comment "Who are the maintainers of the dataset? What is her/his/its role in this process?" ;
+                            rdfs:label "Maintenance contributor" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        ?kg a bsbm:Vendor .
+                    }
+
+                    FILTER ( NOT EXISTS {
+                            GRAPH kgi:Metadata {
+                                { ?kg dcterms:contributor ?contributor . }
+                                UNION { ?kg schema:maintainer ?contributor . }
+                            }
+                        } )
+
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributor.ttl")), "Measure")) AS ?qualityMeasurementContributor)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        <maintenance_contributorType.ttl>
+        <maintenance_contributorID.ttl>
+        <maintenance_contributorQualification.ttl>
+        <maintenance_contributorInfluences.ttl>
+     ) .
+
+
+<maintenance_contributorType.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor type measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> a dqv:Metric ;
+                            rdfs:comment "Is the maintainer a person or an organization ?" ;
+                            rdfs:label "Maintenance contributor type" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+                        # Find maintainer
+                        { ?kg dcterms:contributor ?maintainer . }
+                        UNION { ?kg schema:maintainer ?maintainer . }
+
+                        # Is it a person ?
+                        {?maintainer a foaf:Person .}
+                        UNION {?maintainer a schema:Person .}
+                        UNION {?maintainer a prov:Person .}
+                        # Or, is it an organization ?
+                        UNION {?maintainer a foaf:Organization .}
+                        UNION {?maintainer a schema:Organization .}
+                        UNION {?maintainer a prov:Organization .}
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [# Add contributor without type Organization or Person
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor type measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "Each contributor/maintainer of the Dataset must either be a Person or an Organization (from foaf, schema or prov)."@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> a dqv:Metric ;
+                            rdfs:comment "Is the maintainer a person or an organization ?" ;
+                            rdfs:label "Maintenance contributor type" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+                        # Find maintainer
+                        { ?kg dcterms:contributor ?maintainer . }
+                        UNION { ?kg schema:maintainer ?maintainer . }
+                    }
+                    FILTER NOT EXISTS {
+                        GRAPH kgi:Metadata {
+                            # Is it a person ?
+                            {?maintainer a foaf:Person .}
+                            UNION {?maintainer a schema:Person .}
+                            UNION {?maintainer a prov:Person .}
+                            # Or, is it an organization ?
+                            UNION {?maintainer a foaf:Organization .}
+                            UNION {?maintainer a schema:Organization .}
+                            UNION {?maintainer a prov:Organization .}
+                        }
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorType.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+
+<maintenance_contributorID.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor ID measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> a dqv:Metric ;
+                            rdfs:comment "What are all information relevant to the identification of the maintainer: what is the name of the contributor and a point of contact (email, or phone number, or address, or homepage) ?" ;
+                            rdfs:label "Maintenance contributor ID" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+                        # Find maintainer
+                        { ?kg dcterms:contributor ?maintainer . }
+                        UNION { ?kg schema:maintainer ?maintainer . }
+                        # name
+                        {?maintainer rdfs:label ?name .}
+                        UNION {?maintainer schema:name ?name .}
+                        UNION {?maintainer foaf:name ?name .}
+                        UNION {?maintainer schema:legalName ?name}
+                        UNION {?maintainer schema:givenName ?fname ;
+                                           schema:familyName ?name .}
+                        UNION {?maintainer foaf:givenName ?fname ;
+                                           foaf:familyName ?name .}
+                        UNION {?maintainer foaf:firstName ?fname ;
+                                           foaf:lastName ?name .}
+                        # contact
+                        ?maintainer ?contactProp ?contact .
+                    }
+                    VALUES ?contactProp {foaf:mbox foaf:phone schema:contactPoint schema:email schema:telephone schema:address foaf:homepage}
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [# Add contributor without ID
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor ID measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "For each contributor/maintainer of the Dataset, the identity (e.g. foaf:name or schema:name) and contact information must be provided (e.g. foaf:mbox, schema:contactPoint)"@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> a dqv:Metric ;
+                            rdfs:comment "What are all information relevant to the identification of the maintainer: what is the name of the contributor and a point of contact (email, or phone number, or address, or homepage) ?" ;
+                            rdfs:label "Maintenance contributor ID" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                        # Find the KG
+                        # Find the KG
+                        ?kg a bsbm:Vendor .
+                        # Find maintainer
+                        { ?kg dcterms:contributor ?maintainer . }
+                        UNION { ?kg schema:maintainer ?maintainer . }
+                    }
+                    FILTER NOT EXISTS {
+                        GRAPH kgi:Metadata {
+                            # name
+                            {?maintainer rdfs:label ?name .}
+                            UNION {?maintainer schema:name ?name .}
+                            UNION {?maintainer foaf:name ?name .}
+                            UNION {?maintainer schema:legalName ?name}
+                            UNION {?maintainer schema:givenName ?fname ;
+                                                schema:familyName ?name .}
+                            UNION {?maintainer foaf:givenName ?fname ;
+                                             foaf:familyName ?name .}
+                            UNION {?maintainer foaf:firstName ?fname ;
+                                             foaf:lastName ?name .}
+                            # contact
+                            ?maintainer ?contactProp ?contact .
+                        }
+                        VALUES ?contactProp {foaf:mbox foaf:phone schema:contactPoint schema:email schema:telephone schema:address foaf:homepage}
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorID.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<maintenance_contributorQualification.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor qualification measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> a dqv:Metric ;
+                            rdfs:comment "What are the qualifications of the maintainer?" ;
+                            rdfs:label "Maintenance contributor qualification" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                      # Find the KG
+                      ?kg a bsbm:Vendor .
+                      # Find maintainer
+                      { ?kg dcterms:contributor ?maintainer . }
+                      UNION { ?kg schema:maintainer ?maintainer . }
+                      # Work
+                      {?maintainer foaf:workInfoHomepage ?work .}
+                      UNION {?maintainer schema:hasOccupation ?work .}
+                      UNION {?maintainer schema:jobTitle ?work .}
+                      # Skills
+                      UNION {?maintainer schema:award ?award .}
+                      UNION {?maintainer schema:hasCredential ?credential .
+                             ?credential schema:competencyRequired ?skills .}
+                      UNION {?maintainer schema:knowsAbout ?topic .}
+                      # Optional
+                      # Publication
+                      UNION {?maintainer foaf:publications ?publi . }
+                      # School
+                      UNION {?maintainer foaf:schoolHomepage ?school . }
+                      UNION {?maintainer schema:alumniOf ?school .}
+                  }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor qualification measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "Each contributor/maintainer of the Dataset must be related with qualifications information (e.g. schema:knowsAbout, schema:jobTitle or foaf:publications)."@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> a dqv:Metric ;
+                            rdfs:comment "What are the qualifications of the maintainer?" ;
+                            rdfs:label "Maintenance contributor qualification" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                          # Find the KG
+                          ?kg a bsbm:Vendor .
+                          # Find maintainer
+                          { ?kg dcterms:contributor ?maintainer . }
+                          UNION { ?kg schema:maintainer ?maintainer . }
+                      }
+                      FILTER NOT EXISTS {
+                          GRAPH kgi:Metadata {
+                              # Work
+                              {?maintainer foaf:workInfoHomepage ?work .}
+                              UNION {?maintainer schema:hasOccupation ?work .}
+                              UNION {?maintainer schema:jobTitle ?work .}
+                              # Skills
+                              UNION {?maintainer schema:award ?award .}
+                              UNION {?maintainer schema:hasCredential ?credential .
+                                     ?credential schema:competencyRequired ?skills .}
+                              UNION {?maintainer schema:knowsAbout ?topic .}
+                              # Publication
+                              UNION {?maintainer foaf:publications ?publi . }
+                              # School
+                              UNION {?maintainer foaf:schoolHomepage ?school . }
+                              UNION {?maintainer schema:alumniOf ?school .}
+                          }
+                    }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorQualification.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
+
+<maintenance_contributorInfluences.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor influences measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> ;
+                            dqv:value "true"^^xsd:boolean ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> a dqv:Metric ;
+                            rdfs:comment "Concerning the maintainer, provide all characteristics which could have an influence on the data set." ;
+                            rdfs:label "Maintenance contributor influences" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                      # Find the KG
+                      ?kg a bsbm:Vendor .
+                      # Find maintainer
+                      { ?kg dcterms:contributor ?maintainer . }
+                      UNION { ?kg schema:maintainer ?maintainer . }
+                      {?maintainer ?prop ?influence .
+                      VALUES ?prop { schema:worksFor foaf:workplaceHomepage schema:sponsor schema:funder foaf:fundedBy schema:funding schema:nonprofitStatus schema:ownershipFundingInfo schema:parentOrganization schema:founder schema:ethicsPolicy schema:publishingPrinciples schema:correctionsPolicy schema:areaServed schema:memberOf schema:affiliation }}
+                      UNION {?group foaf:member ?maintainer . }
+                  }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+        [
+            mf:action """
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX dqv: <http://www.w3.org/ns/dqv#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX dce: <http://purl.org/dc/elements/1.1/>
+                PREFIX pav: <http://purl.org/pav/>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX schema: <http://schema.org/>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/>
+                INSERT {
+                    GRAPH kgi:Metadata {
+                        ?metadataDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl#activity> ;
+                            dqv:hasQualityMeasurement ?qualityMeasurement .
+                        ?qualityMeasurement a dqv:QualityMeasurement ;
+                            rdfs:label "Maintenance contributor influences measurement" ;
+                            dqv:computedOn ?endpointDescription, ?maintainer ;
+                            dqv:isMeasurementOf <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> ;
+                            dqv:value "false"^^xsd:boolean ;
+                            rdfs:comment "Each contributor/maintainer of the Dataset must have information about her/his influences (e.g. schema:worksFor, foaf:fundedBy or schema:sponsor)."@en ;
+                            prov:generatedAtTime ?time .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> a dqv:Metric ;
+                            rdfs:comment "Concerning the maintainer, provide all characteristics which could have an influence on the data set." ;
+                            rdfs:label "Maintenance contributor influences" .
+                        <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl#activity> prov:used <https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl> ;
+                            prov:wasAssociatedWith <https://orcid.org/0000-0001-6907-0136> .
+                    }
+                } WHERE {
+                    GRAPH kgi:Metadata {
+                      # Find the KG
+                      ?kg a bsbm:Vendor .
+                      # Find maintainer
+                      { ?kg dcterms:contributor ?maintainer . }
+                      UNION { ?kg schema:maintainer ?maintainer . }
+                  }
+                  FILTER NOT EXISTS {
+                      GRAPH kgi:Metadata {
+                          {?maintainer ?prop ?influence .
+                          VALUES ?prop { schema:worksFor foaf:workplaceHomepage schema:sponsor schema:funder foaf:fundedBy schema:funding schema:nonprofitStatus schema:ownershipFundingInfo schema:parentOrganization schema:founder schema:ethicsPolicy schema:publishingPrinciples schema:correctionsPolicy schema:areaServed schema:memberOf schema:affiliation }}
+                          UNION {?group foaf:member ?maintainer . }
+                      }
+                  }
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Endpoint")) AS ?endpointDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(str(?kg)), "Metadata")) AS ?metadataDescription)
+                    BIND(Iri(CONCAT("http://ns.inria.fr/kg/index#", MD5(CONCAT( str(?kg), "https://raw.githubusercontent.com/Jendersen/KG_accountability/main/rules/maintenance/contributor/maintenance_contributorInfluences.ttl", str(?maintainer))), "Measure")) AS ?qualityMeasurement)
+                    BIND(NOW() AS ?time)
+                }
+            """
+        ]
+     ) .
