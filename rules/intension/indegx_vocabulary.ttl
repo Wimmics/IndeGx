@@ -237,7 +237,7 @@ kgi:graph rdf:type owl:ObjectProperty ;
     rdfs:range sd:NamedGraph .
 
 kgi:endpointURLextension rdf:type owl:DatatypeProperty ;
-    rdfs:label "Domain extension of the endpoint's URL"
+    rdfs:label "Domain extension of the endpoint's URL" ;
     rdfs:domain dcat:DataService , sd:Service ;
     rdfs:range xsd:string .
 
