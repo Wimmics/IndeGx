@@ -81,8 +81,3 @@ SELECT DISTINCT ?endpoint ?badRandom ?badTimeNow ?noRDFSEntailment {
 - Load endpoint description, check for features and RDFSEntailment
 - https://github.com/w3c/sparql-dev/issues/195
 
-## Notes:
-
-19/03/2024:
-154 endpoints with bad random
-21 with bad NOW

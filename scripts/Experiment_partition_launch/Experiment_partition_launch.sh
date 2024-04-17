@@ -9,11 +9,17 @@ if [ ! -e $corese_jar ]; then
 fi
 
 online_status_source_catalog_url=https://raw.githubusercontent.com/Wimmics/IndeGx/endpoint_status/catalogs/catalog.latest-status.ttl
+local_status_source_catalog=../../catalogs/catalog.latest-status.ttl
 online_endpoint_catalog_query=online_endpoint_catalog_query.rq
 online_endpoint_catalog_file=online_endpoint_catalog.trig
 
+# Downloading the online endpoint catalog
+curl -s $online_status_source_catalog_url > $local_status_source_catalog
+
 # Extract a catalog of the endpoint that have been online in the last hour
-java -jar $corese_jar sparql -i $online_status_source_catalog_url -o $online_endpoint_catalog_file -q $online_endpoint_catalog_query -of trig
+java -jar $corese_jar sparql -i $local_status_source_catalog -o $online_endpoint_catalog_file -q $online_endpoint_catalog_query -of trig
+
+rm $local_status_source_catalog
 
 cp $online_endpoint_catalog_file ../../catalogs/$online_endpoint_catalog_file
 
@@ -27,9 +33,9 @@ cd ../..
 for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     echo "Treating $catalog"
     partition_config='{
-    "pre": "file:///rules/holistic_indexing/_pre_manifest.ttl",
-    "manifest": "file:///rules/holistic_indexing/_manifest.ttl",
-    "post": "file:///rules/holistic_indexing/_post_manifest.ttl",
+    "pre": "",
+    "manifest": "file:///rules/CommonPitfalls/_manifest.ttl",
+    "post": "",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
