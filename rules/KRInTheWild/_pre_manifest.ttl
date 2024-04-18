@@ -1,0 +1,32 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <listVocabulariesNamespaces.ttl>
+    ) .
+
+<listVocabulariesNamespaces.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX vann: <http://purl.org/vocab/vann/>
+            LOAD <file:///input/lov_namespaces_18042024.ttl> ;
+            INSERT {
+                ?vocab vann:preferredNamespaceUri ?namespace_string .
+            } WHERE {
+                ?vocab a owl:Ontology .
+                OPTIONAL {
+                    ?vocab vann:preferredNamespaceUri ?namespace .
+                }
+                FILTER( isIRI(?vocab))
+                BIND( REPLACE( REPLACE( IF( BOUND(?namespace), STR(?namespace), STR(?vocab)), "#$", ""), "/$", "") AS ?namespace_string)
+            }
+            """
+        ]
+    ) .
