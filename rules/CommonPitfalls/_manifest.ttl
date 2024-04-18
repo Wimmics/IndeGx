@@ -22,6 +22,13 @@
                 $rawEndpointUrl a dcat:DataService , sd:Service .
             }"""
         ]
+        <server.ttl>
+        <SPARQL/_manifest.ttl>
+        <RDFS/_manifest.ttl>
+    ) .
+
+<server.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
         [
             mf:action """PREFIX js: <function://fr.inria.corese.core.extension.Report>
             PREFIX xt: <http://ns.inria.fr/sparql-extension/>
@@ -60,7 +67,8 @@
             PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
             PREFIX void: <http://rdfs.org/ns/void#>
             INSERT {
-                $rawEndpointUrl kgi:server ?server, ?serverGet .
+                $rawEndpointUrl kgi:server ?server ;
+                    kgi:serverGet ?serverGet .
             } WHERE {
                 BIND( URI( CONCAT( STR($rawEndpointUrl), "?mode=report" ) ) AS ?reportModeEndpointUrl)
                 SERVICE ?reportModeEndpointUrl {
@@ -77,6 +85,5 @@
                 BIND( xt:get(?_service_report_0, "server") AS ?serverGet)
             }"""
         ]
-        <SPARQL/_manifest.ttl>
-        <RDFS/_manifest.ttl>
     ) .
+
