@@ -44,9 +44,9 @@ cd ../..
 for catalog in `ls catalogs/ | grep $online_endpoint_catalog_file*`; do
     echo "Treating $catalog"
     partition_config='{
-    "pre": "",
-    "manifest": "file:///rules/CommonPitfalls/_manifest.ttl",
-    "post": "",
+    "pre": "file:///rules/KRInTheWild/_pre_manifest.ttl",
+    "manifest": "file:///rules/KRInTheWild/_manifest.ttl",
+    "post": "file:///rules/KRInTheWild/_post_manifest.ttl",
     "catalog": "file:///catalogs/CATALOG",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
