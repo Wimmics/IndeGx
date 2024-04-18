@@ -1,0 +1,90 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<> a mf:Manifest ;
+    kgi:requiredAssets (
+    ) ;
+    mf:include (
+    ) ;
+    mf:entries (
+        <vocabularyUsage.ttl>
+    ) .
+
+<vocabularyUsage.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX vann: <http://purl.org/vocab/vann/>
+            PREFIX voaf: <http://purl.org/vocommons/voaf#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
+                ?vocab voaf:usageInDataset ?occurrence .
+                ?occurrence voaf:inDataset $rawEndpointUrl .
+            } WHERE {
+                {
+                    SELECT * {
+                        {
+                            SELECT * {
+                                {
+                                    SELECT * {
+                                        ?vocab vann:preferredNamespaceUri ?namespace .
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR($rawEndpointUrl), "?focus=namespace&slice=20&binding=filter") ) AS ?editedEndpointUrl)
+                SERVICE ?editedEndpointUrl {
+                    VALUES ?namespace { UNDEF }
+                    {
+                        SELECT DISTINCT ?namespace {
+                            ?s ?p ?o .
+                            FILTER( STRSTARTS( STR(?p), STR(?namespace) ) )
+                        }
+                    }
+                }
+                BIND(CONCAT( STR(kgi:), MD5( STR(?vocab) ) ) AS ?occurrence)
+            } """
+        ]
+        [
+            mf:action """ PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX vann: <http://purl.org/vocab/vann/>
+            PREFIX voaf: <http://purl.org/vocommons/voaf#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            INSERT {
+                ?vocab voaf:usageInDataset ?occurrence .
+                ?occurrence voaf:inDataset $rawEndpointUrl .
+            } WHERE {
+                {
+                    SELECT * {
+                        {
+                            SELECT * {
+                                {
+                                    SELECT * {
+                                        ?vocab vann:preferredNamespaceUri ?namespace .
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                BIND( IRI( CONCAT( STR($rawEndpointUrl), "?focus=namespace&slice=20&binding=filter") ) AS ?editedEndpointUrl)
+                SERVICE ?editedEndpointUrl {
+                    VALUES ?namespace { UNDEF }
+                    {
+                        SELECT DISTINCT ?namespace {
+                            ?s a ?c .
+                            FILTER( STRSTARTS( STR(?c), STR(?namespace) ) )
+                        }
+                    }
+                }
+                BIND(CONCAT( STR(kgi:), MD5( STR(?vocab) ) ) AS ?occurrence)
+            } """
+        ]
+    ) .

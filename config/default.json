@@ -1,8 +1,8 @@
 {
-    "pre": "file:///rules/holistic_indexing/_pre_manifest.ttl",
-    "manifest": "file:///rules/holistic_indexing/_manifest.ttl",
-    "post": "file:///rules/holistic_indexing/_post_manifest.ttl",
-    "catalog": "file:///catalogs/debug_catalog.ttl",
+    "pre": "file:///rules/KRInTheWild/_pre_manifest.ttl",
+    "manifest": "file:///rules/KRInTheWild/_manifest.ttl",
+    "post": "file:///rules/KRInTheWild/_post_manifest.ttl",
+    "catalog": "file:///catalogs/catalog.auto_refresh.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,

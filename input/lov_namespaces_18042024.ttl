@@ -1,0 +1,2660 @@
+@prefix ns121: <http://advene.org/ns/cinelab/> .
+@prefix ns242: <http://owlrep.eu01.aws.af.cm/> .
+@prefix ns120: <http://w3id.org/> .
+@prefix ns241: <http://opendata.aragon.es/def/> .
+@prefix ns240: <http://vocab.org/participation/> .
+@prefix ns125: <http://vocab.getty.edu/> .
+@prefix ns246: <http://code-research.eu/ontology/> .
+@prefix ns124: <http://www.ontologydesignpatterns.org/ont/dul/> .
+@prefix ns245: <http://vocab.sti2.at/> .
+@prefix ns123: <https://w3id.org/okn/o/> .
+@prefix ns244: <http://openprovenance.org/model/> .
+@prefix ns122: <http://vcharpenay.github.io/hto/> .
+@prefix ns243: <http://purl.org/healthcarevocab/> .
+@prefix ns129: <http://vocab.org/whisky/> .
+@prefix ns128: <http://purl.org/LiMo/> .
+@prefix ns249: <https://w3id.org/opentrafficlights#> .
+@prefix ns127: <http://www.opengis.net/ont/> .
+@prefix ns248: <http://purl.org/vocommons/> .
+@prefix ns126: <http://purl.org/iso25964/> .
+@prefix ns247: <http://data.vlaanderen.be/ns/> .
+@prefix ns132: <http://lsq.aksw.org/> .
+@prefix ns253: <http://bag.basisregistraties.overheid.nl/def/> .
+@prefix ns131: <http://purl.org/net/vocab/2004/03/> .
+@prefix ns252: <http://kmi.open.ac.uk/projects/smartproducts/ontologies/> .
+@prefix ns130: <http://sparql.cwrc.ca/ontologies/> .
+@prefix ns251: <http://mex.aksw.org/> .
+@prefix ns250: <http://www.tele.pw.edu.pl/~sims-onto/> .
+@prefix ns136: <http://purl.org/net/> .
+@prefix ns257: <http://swrc.ontoware.org/> .
+@prefix ns135: <http://guava.iis.sinica.edu.tw/> .
+@prefix ns256: <http://purl.org/vso/> .
+@prefix ns134: <http://www.w3.org/2004/09/> .
+@prefix ns255: <http://geovocab.org/> .
+@prefix ns133: <http://www.ivoa.net/rdf/> .
+@prefix ns254: <http://www.ics.forth.gr/isl/VoIDWarehouse/> .
+@prefix ns139: <https://w3id.org/nen2660/rdfs/> .
+@prefix ns138: <http://rdf-vocabulary.ddialliance.org/> .
+@prefix ns259: <http://www.loa-cnr.it/ontologies/> .
+@prefix ns137: <http://ontology.cybershare.utep.edu/ELSEWeb/mappings/> .
+@prefix ns258: <http://def.seegrid.csiro.au/isotc211/iso19109/2005/> .
+@prefix ns220: <http://www.ebu.ch/metadata/ontologies/ebucore/> .
+@prefix ns103: <http://purl.oclc.org/NET/> .
+@prefix ns224: <http://www.w3.org/2007/uwa/context/> .
+@prefix ns102: <http://data.semanticweb.org/ns/swc/> .
+@prefix ns223: <https://w3id.org/ifc/> .
+@prefix ns101: <http://rdfs.co/juso/kr/> .
+@prefix ns222: <http://www.essepuntato.it/2008/12/> .
+@prefix ns100: <http://www.geonames.org/> .
+@prefix ns221: <http://brk.basisregistraties.overheid.nl/def/> .
+@prefix ns107: <http://sw-portal.deri.org/ontologies/> .
+@prefix ns228: <http://purl.org/umu/> .
+@prefix ns106: <http://www.rkbexplorer.com/ontologies/> .
+@prefix ns227: <http://purl.org/lobid/> .
+@prefix ns105: <http://purl.org/linked-data/> .
+@prefix ns226: <http://www.lexinfo.net/ontology/2.0/> .
+@prefix ns104: <http://purl.org/twc/ontologies/> .
+@prefix ns225: <http://linkeddata.center/kees/> .
+@prefix ns109: <http://neologism.ecs.soton.ac.uk/> .
+@prefix ns108: <http://www.ics.forth.gr/isl/oae/> .
+@prefix ns229: <http://purl.org/ipo/> .
+@prefix ns110: <http://lemon-model.net/> .
+@prefix ns231: <http://www.w3.org/1999/02/> .
+@prefix ns230: <https://purl.org/edifact/> .
+@prefix ns114: <https://w3id.org/stax/> .
+@prefix ns235: <http://def.seegrid.csiro.au/isotc211/iso19150/-2/2012/> .
+@prefix ns113: <http://www.ontologydesignpatterns.org/schemas/> .
+@prefix ns234: <http://www.identity.org/ontologies/> .
+@prefix ns112: <https://schema.edu.ee/> .
+@prefix ns233: <http://www.mindswap.org/2003/owl/geo/> .
+@prefix ns111: <http://delicias.dia.fi.upm.es/ontologies/> .
+@prefix ns232: <http://www.gsi.dit.upm.es/ontologies/onyx/> .
+@prefix ns118: <http://www.purl.org/> .
+@prefix ns239: <http://purl.org/oslo/ns/> .
+@prefix ns117: <http://aims.fao.org/aos/> .
+@prefix ns238: <http://www.w3.org/2007/05/> .
+@prefix ns116: <http://purl.org/procurement/> .
+@prefix ns237: <http://www.w3.org/TR/2003/PR-owl-guide-20031209/> .
+@prefix ns115: <http://def.seegrid.csiro.au/isotc211/iso19156/2011/> .
+@prefix ns236: <https://w3id.org/multidimensional-interface/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns119: <http://w3id.org/charta77/> .
+@prefix ns161: <http://purl.org/dqm-vocabulary/v1/> .
+@prefix ns160: <http://www.molmod.info/semantics/> .
+@prefix ns165: <http://semweb.mmlab.be/ns/> .
+@prefix ns164: <http://www.eurocris.org/ontologies/cerif/> .
+@prefix ns163: <http://cef.uv.es/lodroadtran18/def/transporte/> .
+@prefix ns162: <http://www.gsi.dit.upm.es/ontologies/marl/> .
+@prefix ns169: <http://www.w3.org/2011/> .
+@prefix ns168: <http://rdf.geospecies.org/methods/> .
+@prefix ns167: <http://www.essepuntato.it/2012/04/> .
+@prefix ns166: <http://www.disit.org/km4city/> .
+@prefix ns13: <https://w3id.org/seas/> .
+@prefix ns12: <http://www.bbc.co.uk/ontologies/> .
+@prefix ns11: <http://purl.org/> .
+@prefix ns10: <http://reference.data.gov.au/def/ont/> .
+@prefix ns17: <http://www.ontologydesignpatterns.org/cp/owl/> .
+@prefix ns16: <http://purl.oclc.org/NET/ssnx/> .
+@prefix ns15: <http://semanticturkey.uniroma2.it/ns/> .
+@prefix ns14: <http://www.essepuntato.it/2013/10/> .
+@prefix ns19: <http://def.seegrid.csiro.au/isotc211/iso19108/2002/> .
+@prefix ns18: <http://swa.cefriel.it/ontologies/> .
+@prefix ns172: <http://ns.inria.fr/s4ac/> .
+@prefix ns171: <https://w3id.org/cocoon/> .
+@prefix ns170: <http://www.ebusiness-unibw.org/ontologies/consumerelectronics/> .
+@prefix ns176: <http://purl.org/wf4ever/> .
+@prefix ns175: <http://www.w3id.org/def/> .
+@prefix ns174: <http://resource.geosciml.org/ontology/timescale/> .
+@prefix ns173: <http://www.w3.org/ns/hydra/> .
+@prefix ns179: <http://www.ics.forth.gr/isl/MarineTLO/v4/> .
+@prefix ns178: <http://rdfs.co/juso/> .
+@prefix ns177: <http://ns.inria.fr/semed/eduprogression/> .
+@prefix ns260: <http://ontology.ethereal.cz/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ns143: <http://umbel.org/> .
+@prefix ns264: <https://w3id.org/nen2660/owl/> .
+@prefix ns142: <http://www.demcare.eu/ontologies/> .
+@prefix ns263: <http://www.nanopub.org/> .
+@prefix ns141: <http://www.essepuntato.it/2013/03/> .
+@prefix ns262: <http://ontology.cybershare.utep.edu/dbowl/> .
+@prefix ns140: <http://www.w3id.org/urban-iot/> .
+@prefix ns261: <http://www.w3.org/2006/vcard/> .
+@prefix ns147: <https://w3id.org/idsa/> .
+@prefix ns268: <http://betalinkeddata.cbs.nl/def/> .
+@prefix ns146: <http://purl.org/net/nknouf/ns/> .
+@prefix ns267: <https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/> .
+@prefix ns145: <http://w3id.org/amlo/> .
+@prefix ns266: <http://rdf.geospecies.org/ont/> .
+@prefix ns144: <https://w3id.org/riverbench/schema/> .
+@prefix ns265: <http://ns.bergnet.org/tac/0.1/> .
+@prefix ns31: <http://www.ordnancesurvey.co.uk/ontology/Topography/v0.1/> .
+@prefix ns30: <http://def.seegrid.csiro.au/ontology/om/> .
+@prefix ns149: <http://courseware.rkbexplorer.com/ontologies/> .
+@prefix ns148: <http://modellen.geostandaarden.nl/def/nen3610/> .
+@prefix ns269: <http://labs.mondeca.com/vocab/> .
+@prefix ns35: <http://rdf.insee.fr/def/> .
+@prefix ns34: <http://www.w3.org/TR/2003/CR-owl-guide-20030818/> .
+@prefix ns33: <http://purl.org/ctic/sector-publico/> .
+@prefix ns32: <http://promsns.org/def/> .
+@prefix ns39: <http://www.w3.org/ns/solid/> .
+@prefix ns38: <https://www.ica.org/standards/RiC/> .
+@prefix ns37: <http://rdfs.co/bevon/> .
+@prefix ns36: <http://www.w3.org/2004/02/skos/> .
+@prefix ns150: <http://contsem.unizar.es/def/sector-publico/> .
+@prefix ns271: <http://www.loted.eu/> .
+@prefix ns270: <http://def.seegrid.csiro.au/isotc211/iso19103/2005/> .
+@prefix ns154: <http://gov.genealogy.net/> .
+@prefix ns275: <http://w3id.org/rml/> .
+@prefix ns153: <http://qudt.org/2.1/vocab/> .
+@prefix ns274: <http://lexvo.org/> .
+@prefix ns152: <http://spitfire-project.eu/ontology/> .
+@prefix ns273: <http://semwebquality.org/ontologies/> .
+@prefix ns151: <http://ns.inria.fr/nicetag/2010/09/09/> .
+@prefix ns272: <https://rhizomik.net/ontologies/> .
+@prefix ns158: <http://archivi.ibc.regione.emilia-romagna.it/ontology/eac-cpf/> .
+@prefix ns157: <http://def.seegrid.csiro.au/isotc211/iso19107/2003/> .
+@prefix ns156: <http://schema.theodi.org/> .
+@prefix ns155: <https://w3id.org/semsys/ns/> .
+@prefix ns276: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/> .
+@prefix ns20: <https://w3id.org/iadopt/> .
+@prefix ns159: <http://purl.org/imbi/> .
+@prefix ns24: <http://spi-fm.uca.es/spdef/models/deployment/spcm/> .
+@prefix ns23: <http://ns.inria.fr/> .
+@prefix ns22: <http://www.lingvoj.org/> .
+@prefix ns21: <http://data.ign.fr/def/> .
+@prefix ns28: <https://w3id.org/vocab/> .
+@prefix ns27: <http://www.linkedmodel.org/schema/> .
+@prefix ns26: <http://open-multinet.info/ontology/> .
+@prefix ns25: <http://elite.polito.it/ontologies/> .
+@prefix ns29: <http://tour-pedia.org/download/> .
+@prefix ns2: <http://vocab.data.gov/> .
+@prefix ns60: <http://spi-fm.uca.es/spdef/models/genericTools/wikim/> .
+@prefix ns1: <https://w3id.org/> .
+@prefix ns4: <http://vocab.deri.ie/> .
+@prefix ns3: <http://purl.org/spar/> .
+@prefix ns6: <http://www.linklion.org/> .
+@prefix ns53: <http://purl.oclc.org/NET/ssnx/qu/> .
+@prefix ns5: <http://purl.org/vocab/frbr/> .
+@prefix ns52: <http://decision-ontology.googlecode.com/svn/trunk/> .
+@prefix ns8: <http://vocab.datex.org/terms#> .
+@prefix ns51: <https://w3id.org/arco/ontology/> .
+@prefix ns7: <http://vocab.lenka.no/> .
+@prefix ns50: <http://www.w3.org/ns/> .
+@prefix ns57: <http://inference-web.org/2.0/> .
+@prefix ns9: <http://vocab.resc.info/> .
+@prefix ns56: <http://www.samos.gr/ontologies/> .
+@prefix ns55: <https://w3id.org/todo/> .
+@prefix ns54: <http://reference.data.gov.uk/def/> .
+@prefix ns59: <https://purl.org/cm/onto/> .
+@prefix ns58: <http://premon.fbk.eu/ontology/> .
+@prefix ns42: <http://data.lirmm.fr/ontologies/> .
+@prefix ns41: <http://purl.org/ctic/empleo/> .
+@prefix ns40: <http://def.seegrid.csiro.au/isotc211/iso19115/2003/> .
+@prefix ns46: <https://w3id.org/tribont/> .
+@prefix ns45: <http://ontology.cybershare.utep.edu/ELSEWeb/> .
+@prefix ns44: <http://purl.org/ontology/> .
+@prefix ns43: <http://softeng.polito.it/> .
+@prefix ns49: <http://spinrdf.org/> .
+@prefix ns48: <http://vocab.data.gov/def/> .
+@prefix ns47: <http://www.ontologydesignpatterns.org/ont/lmm/> .
+@prefix ns183: <http://w3id.org/um/cbcm/> .
+@prefix ns182: <http://www.w3.org/2003/12/exif/> .
+@prefix ns181: <http://taxref.mnhn.fr/lod/> .
+@prefix ns180: <http://purl.org/vocab/lifecycle/> .
+@prefix ns187: <http://spi-fm.uca.es/spdef/models/deployment/swpm/> .
+@prefix ns186: <http://purl.oclc.org/NET/ssnx/meteo/> .
+@prefix ns185: <http://www.w3.org/ns/dx/> .
+@prefix ns184: <http://www.arpenteur.org/ontology/> .
+@prefix ns82: <http://brt.basisregistraties.overheid.nl/def/> .
+@prefix ns81: <https://www.w3.org/ns/> .
+@prefix ns80: <http://www.w3.org/2008/05/> .
+@prefix ns189: <https://w3id.org/ontouml-models/> .
+@prefix ns188: <http://ontology.it/itsmo/> .
+@prefix ns75: <http://www.aktors.org/ontology/> .
+@prefix ns74: <http://data.europa.eu/esco/> .
+@prefix ns73: <http://spi-fm.uca.es/spdef/models/genericTools/itm/> .
+@prefix ns72: <http://www.oegov.org/core/owl/> .
+@prefix ns79: <http://semweb.mmlab.be/ns/linkedconnections#> .
+@prefix ns78: <http://kgc.knowledge-graph.jp/ontology/> .
+@prefix ns77: <http://onto.dm2e.eu/schemas/> .
+@prefix ns76: <http://biohackathon.org/resource/> .
+@prefix ns190: <http://purl.org/query/> .
+@prefix ns194: <http://www.w3.org/2001/sw/hcls/ns/transmed/> .
+@prefix ns193: <http://www.ontotext.com/proton/> .
+@prefix ns192: <http://dev.poderopedia.com/vocab/> .
+@prefix ns191: <http://reegle.info/> .
+@prefix ns198: <http://nr.inria.fr/ludo/> .
+@prefix ns197: <https://w3id.org/nen2660/shacl/> .
+@prefix ns196: <http://ns.cerise-project.nl/energy/def/> .
+@prefix ns195: <http://purl.org/biotop/> .
+@prefix ns71: <https://w3id.org/ibp/> .
+@prefix ns70: <https://data.nasa.gov/ontologies/atmonto/> .
+@prefix ns199: <http://purl.org/saws/> .
+@prefix ns64: <http://ontology.eil.utoronto.ca/> .
+@prefix ns63: <http://purl.org/net/ns/> .
+@prefix ns62: <http://caressesrobot.org/> .
+@prefix ns61: <http://www.purl.org/net/> .
+@prefix ns68: <http://iserve.kmi.open.ac.uk/ns/> .
+@prefix ns67: <http://www.w3.org/2002/07/> .
+@prefix ns66: <http://lod.taxonconcept.org/ontology/> .
+@prefix ns65: <http://purl.org/ctic/infraestructuras/> .
+@prefix ns69: <https://w3id.org/nno/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ns202: <http://purl.org/qb4olap/> .
+@prefix ns201: <http://purl.oclc.org/NET/ssnx/cf/> .
+@prefix ns200: <http://ns.inria.fr/ludo/v1/> .
+@prefix ns97: <http://vivoweb.org/ontology/> .
+@prefix ns206: <http://www.w3.org/2003/06/sw-vocab-status/> .
+@prefix ns96: <http://purl.org/goodrelations/> .
+@prefix ns205: <http://purl.org/innovation/> .
+@prefix ns95: <http://purl.org/olia/> .
+@prefix ns204: <http://spi-fm.uca.es/spdef/models/genericTools/vmm/> .
+@prefix ns94: <http://purl.obolibrary.org/obo/> .
+@prefix ns203: <http://purl.org/vocab/aiiso/> .
+@prefix ns209: <https://w3id.org/legalhtml/> .
+@prefix ns99: <http://purl.org/archival/vocab/> .
+@prefix ns208: <http://purl.org/muto/> .
+@prefix ns98: <http://voag.linkedmodel.org/schema/> .
+@prefix ns207: <http://modellen.geostandaarden.nl/def/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix ns93: <http://semweb.mmlab.be/ns/stoptimes#> .
+@prefix ns213: <http://purl.org/vocab/changeset/> .
+@prefix ns92: <http://www.irit.fr/recherches/MELODI/ontologies/> .
+@prefix ns212: <http://environment.data.gov.au/def/> .
+@prefix ns91: <http://www.bl.uk/schemas/bibliographic/> .
+@prefix ns211: <http://idi.fundacionctic.org/cruzar/> .
+@prefix ns90: <http://www.semanticweb.org/ontologies/2008/11/> .
+@prefix ns210: <http://www.ontologydesignpatterns.org/ont/web/> .
+@prefix ns86: <http://purl.org/NET/c4dm/> .
+@prefix ns217: <http://semanticscience.org/ontology/> .
+@prefix ns85: <http://www.w3.org/ns/lemon/> .
+@prefix ns216: <http://www.biopax.org/release/> .
+@prefix ns84: <http://www.kanzaki.com/ns/> .
+@prefix ns215: <http://www.loc.gov/standards/mads/rdf/> .
+@prefix ns83: <http://qudt.org/schema/> .
+@prefix ns214: <https://w3id.org/env/> .
+@prefix ns89: <http://rdf.muninn-project.org/ontologies/> .
+@prefix ns88: <http://purl.org/twc/dpo/ont/> .
+@prefix ns219: <http://www.ics.forth.gr/isl/oncm/> .
+@prefix ns87: <http://www.w3.org/2006/> .
+@prefix ns218: <https://w3id.org/tree#> .
+
+<http://www.w3.org/ns/odrl/2/> vann:preferredNamespaceUri "http://www.w3.org/ns/odrl/2/" ;
+  a owl:Ontology .
+
+<http://www.europeana.eu/schemas/edm/> vann:preferredNamespaceUri "http://www.europeana.eu/schemas/edm/" ;
+  a owl:Ontology .
+
+ns1:dsd vann:preferredNamespaceUri "https://w3id.org/dsd#" ;
+  a owl:Ontology .
+
+<http://data.press.net/ontology/tag/> vann:preferredNamespaceUri "http://data.press.net/ontology/tag/" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/prov-links#> a owl:Ontology .
+
+<http://www.w3.org/ns/r2rml#> vann:preferredNamespaceUri "http://www.w3.org/ns/r2rml#" ;
+  a owl:Ontology .
+
+ns2:gd vann:preferredNamespaceUri "http://reference.data.gov/def/govdata/" ;
+  a owl:Ontology .
+
+<https://w3id.org/i40/aml#> vann:preferredNamespaceUri "https://w3id.org/i40/aml/" ;
+  a owl:Ontology .
+
+ns3:pso vann:preferredNamespaceUri "http://purl.org/spar/pso/" ;
+  a owl:Ontology .
+
+ns2:hosp vann:preferredNamespaceUri "http://health.data.gov/def/hospital/" ;
+  a owl:Ontology .
+
+<http://purl.org/NET/biol/ns#> vann:preferredNamespaceUri "http://purl.org/NET/biol/ns#" ;
+  a owl:Ontology .
+
+ns4:odapp vann:preferredNamespaceUri "http://vocab.deri.ie/odapp#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/org#> vann:preferredNamespaceUri "http://www.w3.org/ns/org#" ;
+  a owl:Ontology .
+
+ns5:core vann:preferredNamespaceUri "http://purl.org/vocab/frbr/core#" ;
+  a owl:Ontology .
+
+<http://dati.camera.it/ocd/> vann:preferredNamespaceUri "http://dati.camera.it/ocd/" ;
+  a owl:Ontology .
+
+<https://liidr.org/trust-recommendation-in-social-internet-of-things/> vann:preferredNamespaceUri "https://liidr.org/trust-recommendation-in-social-internet-of-things/" ;
+  a owl:Ontology .
+
+ns6:ontology vann:preferredNamespaceUri "http://www.linklion.org/ontology#" ;
+  a owl:Ontology .
+
+ns7:geo-deling vann:preferredNamespaceUri "http://vocab.lenka.no/geo-deling#" ;
+  a owl:Ontology .
+
+ns8:ontology vann:preferredNamespaceUri "http://vocab.datex.org/terms#" ;
+  a owl:Ontology .
+
+ns9:communication vann:preferredNamespaceUri "http://vocab.resc.info/communication#" ;
+  a owl:Ontology .
+
+ns10:iso19160-1-address vann:preferredNamespaceUri "http://reference.data.gov.au/def/ont/iso19160-1-address#" ;
+  a owl:Ontology .
+
+ns11:media vann:preferredNamespaceUri "http://purl.org/media#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/stories/> vann:preferredNamespaceUri "http://purl.org/ontology/stories/" ;
+  a owl:Ontology .
+
+ns12:coreconcepts vann:preferredNamespaceUri "http://www.bbc.co.uk/ontologies/coreconcepts/" ;
+  a owl:Ontology .
+
+ns13:TradingOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns14:vagueness vann:preferredNamespaceUri "http://www.essepuntato.it/2013/10/vagueness/" ;
+  a owl:Ontology .
+
+ns1:hpont vann:preferredNamespaceUri <https://w3id.org/hpont#> ;
+  vann:preferredNamespaceUri "https://w3id.org/hpont#" ;
+  a owl:Ontology .
+
+ns1:GDPRov vann:preferredNamespaceUri "https://w3id.org/GDPRov#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "https://w3id.org/GDPRov#" ;
+  a owl:Ontology .
+
+<http://www.observedchange.com/moac/ns#> vann:preferredNamespaceUri "http://observedchange.com/moac/ns#" ;
+  a owl:Ontology .
+
+ns15:mdr vann:preferredNamespaceUri "http://semanticturkey.uniroma2.it/ns/mdr#" ;
+  a owl:Ontology .
+
+<https://www.w3.org/2019/wot/json-schema#> vann:preferredNamespaceUri "https://www.w3.org/2019/wot/json-schema#" ;
+  a owl:Ontology .
+
+ns16:ssn a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/cp/owl/informationrealization.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/cp/owl/informationrealization.owl#" ;
+  a owl:Ontology .
+
+ns18:botdcat-ap vann:preferredNamespaceUri "http://swa.cefriel.it/ontologies/botdcat-ap#" ;
+  a owl:Ontology .
+
+ns19:temporal vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19108/2002/temporal#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19108/2002/temporal#" ;
+  a owl:Ontology .
+
+ns20:ont vann:preferredNamespaceUri "https://w3id.org/iadopt/ont/" ;
+  a owl:Ontology .
+
+ns21:geometrie vann:preferredNamespaceUri <http://data.ign.fr/def/geometrie#> ;
+  vann:preferredNamespaceUri "http://data.ign.fr/def/geometrie#" ;
+  a owl:Ontology .
+
+<http://www.lingvoj.org/semio.rdf> vann:preferredNamespaceUri "http://www.lingvoj.org/semio#" ;
+  a owl:Ontology .
+
+ns4:ppo vann:preferredNamespaceUri "http://vocab.deri.ie/ppo#" ;
+  a owl:Ontology .
+
+<https://www.w3.org/2019/wot/td#> vann:preferredNamespaceUri "https://www.w3.org/2019/wot/td#" ;
+  a owl:Ontology .
+
+<https://www.gleif.org/ontology/RegistrationAuthority/> vann:preferredNamespaceUri "https://www.gleif.org/ontology/RegistrationAuthority/" ;
+  a owl:Ontology .
+
+<http://erlangen-crm.org/current/> vann:preferredNamespaceUri "http://erlangen-crm.org/current/" ;
+  a owl:Ontology .
+
+<http://data.ign.fr/def/topo#> vann:preferredNamespaceUri <http://data.ign.fr/def/topo#> ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4syst/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4syst/" ;
+  a owl:Ontology .
+
+ns23:emoca vann:preferredNamespaceUri <http://ns.inria.fr/emoca#> ;
+  vann:preferredNamespaceUri "http://ns.inria.fr/emoca#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/cp/owl/participation.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/cp/owl/participation.owl#" ;
+  a owl:Ontology .
+
+<http://xmlns.com/foaf/0.1/> vann:preferredNamespaceUri "http://xmlns.com/foaf/0.1/" ;
+  a owl:Ontology .
+
+ns3:fabio vann:preferredNamespaceUri "http://purl.org/spar/fabio/"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "http://purl.org/spar/fabio/" ;
+  a owl:Ontology .
+
+<http://spi-fm.uca.es/spdef/models/deployment/spcm/1.0> vann:preferredNamespaceUri "http://spi-fm.uca.es/spdef/models/deployment/spcm/1.0#" ;
+  a owl:Ontology .
+
+<http://elite.polito.it/ontologies/dogont.owl> vann:preferredNamespaceUri "http://elite.polito.it/ontologies/dogont" ;
+  a owl:Ontology .
+
+ns26:omn-federation vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-federation#> ;
+  vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-federation#" ;
+  a owl:Ontology .
+
+<https://w3id.org/bot#> vann:preferredNamespaceUri <https://w3id.org/bot#> ;
+  a owl:Ontology .
+
+<http://purl.org/iot/ontology/fiesta-iot#> vann:preferredNamespaceUri "http://purl.org/iot/ontology/fiesta-iot#" ;
+  a owl:Ontology .
+
+<http://moat-project.org/ns#> vann:preferredNamespaceUri "http://moat-project.org/ns#" ;
+  a owl:Ontology .
+
+ns27:dtype vann:preferredNamespaceUri "http://www.linkedmodel.org/schema/dtype#" ;
+  a owl:Ontology .
+
+<http://dati.isprambiente.it/ontology/core#> vann:preferredNamespaceUri "http://dati.isprambiente.it/ontology/core#" ;
+  a owl:Ontology .
+
+ns28:olca vann:preferredNamespaceUri <https://w3id.org/vocab/olca#> ;
+  vann:preferredNamespaceUri "https://w3id.org/vocab/olca#" ;
+  a owl:Ontology .
+
+<http://tour-pedia.org/download/tp.owl> vann:preferredNamespaceUri "http://tour-pedia.org/download/tp.owl#" ;
+  a owl:Ontology .
+
+ns1:react vann:preferredNamespaceUri <https://w3id.org/react#> ;
+  vann:preferredNamespaceUri "https://w3id.org/react#" ;
+  a owl:Ontology .
+
+<https://w3id.org/dba/ontology/> vann:preferredNamespaceUri "https://w3id.org/dba/ontology/" ;
+  a owl:Ontology .
+
+ns30:sam-lite vann:preferredNamespaceUri <http://def.seegrid.csiro.au/ontology/om/sam-lite#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/ontology/om/sam-lite#" ;
+  a owl:Ontology .
+
+<http://www.ordnancesurvey.co.uk/ontology/Topography/v0.1/Topography.owl> vann:preferredNamespaceUri "http://www.ordnancesurvey.co.uk/ontology/Topography/v0.1/Topography.owl#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/co/core#> vann:preferredNamespaceUri "http://purl.org/ontology/co/core#" ;
+  a owl:Ontology .
+
+ns32:decprov vann:preferredNamespaceUri "http://promsns.org/def/do#" ;
+  a owl:Ontology .
+
+<http://eprints.org/ontology/> vann:preferredNamespaceUri "http://eprints.org/ontology/" ;
+  a owl:Ontology .
+
+ns13:OperatingOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns33:elecciones vann:preferredNamespaceUri "http://purl.org/ctic/sector-publico/elecciones#" ;
+  a owl:Ontology .
+
+<https://data.istex.fr/ontology/istex#> vann:preferredNamespaceUri "https://data.istex.fr/ontology/istex#" ;
+  a owl:Ontology .
+
+ns12:bbc vann:preferredNamespaceUri "http://www.bbc.co.uk/ontologies/bbc/" ;
+  a owl:Ontology .
+
+ns34:wine a owl:Ontology .
+
+<https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#> vann:preferredNamespaceUri "https://raw.githubusercontent.com/airs-linked-data/lov/latest/src/airs_vocabulary.ttl#" ;
+  a owl:Ontology .
+
+<http://purl.org/essglobal/vocab/> vann:preferredNamespaceUri "http://purl.org/essglobal/vocab/" ;
+  a owl:Ontology .
+
+ns35:geo vann:preferredNamespaceUri <http://rdf.insee.fr/def/geo#> ;
+  vann:preferredNamespaceUri "http://rdf.insee.fr/def/geo#" ;
+  a owl:Ontology .
+
+<http://lod.nl.go.kr/ontology/> vann:preferredNamespaceUri "http://lod.nl.go.kr/ontology/" ;
+  a owl:Ontology .
+
+<http://vocab.org/transit/terms/> vann:preferredNamespaceUri "http://vocab.org/transit/terms/" ;
+  a owl:Ontology .
+
+<http://purl.org/vsearch/> vann:preferredNamespaceUri "http://purl.org/vsearch/" ;
+  a owl:Ontology .
+
+ns36:core vann:preferredNamespaceUri "http://www.w3.org/2004/02/skos/core#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4inma/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4inma/" ;
+  a owl:Ontology .
+
+ns12:provenance vann:preferredNamespaceUri "http://www.bbc.co.uk/ontologies/provenance/" ;
+  a owl:Ontology .
+
+<http://rdfs.co/bevon/0.8> vann:preferredNamespaceUri "http://rdfs.co/bevon/" ;
+  a owl:Ontology .
+
+<http://purl.org/vvo/ns#> vann:preferredNamespaceUri "http://purl.org/vvo/ns#" ;
+  a owl:Ontology .
+
+<http://uri4uri.net/vocab#> a owl:Ontology .
+
+<https://w3id.org/dio#> a owl:Ontology .
+
+ns3:doco vann:preferredNamespaceUri "http://purl.org/spar/doco/" ;
+  a owl:Ontology .
+
+ns38:ontology vann:preferredNamespaceUri "https://www.ica.org/standards/RiC/ontology#" ;
+  a owl:Ontology .
+
+ns39:terms vann:preferredNamespaceUri "http://www.w3.org/ns/solid/terms#" ;
+  a owl:Ontology .
+
+ns40:extent vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19115/2003/extent#" ;
+  a owl:Ontology .
+
+ns1:con-tax vann:preferredNamespaceUri "https://w3id.org/con-tax#" ;
+  a owl:Ontology .
+
+ns1:timebank vann:preferredNamespaceUri "https://w3id.org/timebank" ;
+  vann:preferredNamespaceUri "https://w3id.org/timebank#" ;
+  a owl:Ontology .
+
+ns41:oferta vann:preferredNamespaceUri "http://purl.org/ctic/empleo/oferta#" ;
+  a owl:Ontology .
+
+ns42:vdpp vann:preferredNamespaceUri "http://data.lirmm.fr/ontologies/vdpp#" ;
+  a owl:Ontology .
+
+ns43:rsctx vann:preferredNamespaceUri "http://softeng.polito.it/rsctx#" ;
+  a owl:Ontology .
+
+ns44:dso vann:preferredNamespaceUri "http://purl.org/ontology/dso#" ;
+  a owl:Ontology .
+
+ns4:csp vann:preferredNamespaceUri "http://vocab.deri.ie/csp#" ;
+  a owl:Ontology .
+
+<http://purl.org/poso/common/> vann:preferredNamespaceUri "http://purl.org/poso/common/"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "http://purl.org/poso/common/" ;
+  a owl:Ontology .
+
+<http://contextus.net/ontology/ontomedia/core/expression#> vann:preferredNamespaceUri "http://contextus.net/ontology/ontomedia/core/expression#" ;
+  a owl:Ontology .
+
+ns44:dvia vann:preferredNamespaceUri "http://purl.org/ontology/dvia#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4city/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4city/" ;
+  a owl:Ontology .
+
+<http://purl.org/acco/ns#> a owl:Ontology .
+
+ns4:br vann:preferredNamespaceUri "http://vocab.deri.ie/br#" ;
+  a owl:Ontology .
+
+<http://ontology.cybershare.utep.edu/ELSEWeb/elseweb-data.owl> vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/" ;
+  vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/elseweb-data.owl#" ;
+  a owl:Ontology .
+
+ns13:EvaluationOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+<http://linkedscience.org/lsc/ns#> vann:preferredNamespaceUri "http://linkedscience.org/lsc/ns#" ;
+  a owl:Ontology .
+
+ns1:usability vann:preferredNamespaceUri "https://w3id.org/usability#" ;
+  a owl:Ontology .
+
+ns46:material vann:preferredNamespaceUri "https://w3id.org/tribont/material" ;
+  vann:preferredNamespaceUri "https://w3id.org/tribont/material#" ;
+  a owl:Ontology .
+
+<http://purl.org/spar/pro/> a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/ont/lmm/LMM_L2.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/ont/lmm/LMM_L2.owl#" ;
+  a owl:Ontology .
+
+<https://w3id.org/rdfp/> vann:preferredNamespaceUri <https://w3id.org/rdfp/> ;
+  vann:preferredNamespaceUri "https://w3id.org/rdfp/" ;
+  a owl:Ontology .
+
+ns48:drm vann:preferredNamespaceUri "http://vocab.data.gov/def/drm#" ;
+  a owl:Ontology .
+
+<http://data.press.net/ontology/event/> vann:preferredNamespaceUri "http://data.press.net/ontology/event/" ;
+  a owl:Ontology .
+
+<http://contextus.net/ontology/ontomedia/ext/common/trait#> vann:preferredNamespaceUri "http://contextus.net/ontology/ontomedia/ext/common/trait#" ;
+  a owl:Ontology .
+
+<http://data.businessgraph.io/ontology#> vann:preferredNamespaceUri "http://data.businessgraph.io/ontology#" ;
+  a owl:Ontology .
+
+ns44:storyline vann:preferredNamespaceUri "http://purl.org/ontology/storyline/" ;
+  a owl:Ontology .
+
+ns49:sp vann:preferredNamespaceUri "http://spinrdf.org/sp#" ;
+  a owl:Ontology .
+
+ns50:locn vann:preferredNamespaceUri "http://www.w3.org/ns/locn#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "http://www.w3.org/ns/locn#" ;
+  a owl:Ontology .
+
+ns51:location vann:preferredNamespaceUri "https://w3id.org/arco/ontology/location/" ;
+  a owl:Ontology .
+
+ns42:osp vann:preferredNamespaceUri "http://data.lirmm.fr/ontologies/osp#" ;
+  a owl:Ontology .
+
+<http://w3id.org/rml/cc/> vann:preferredNamespaceUri "http://w3id.org/rml/" ;
+  a owl:Ontology .
+
+<http://decision-ontology.googlecode.com/svn/trunk/decision.owl> a owl:Ontology .
+
+<http://w3id.org/rml/io/> vann:preferredNamespaceUri "http://w3id.org/rml/" ;
+  a owl:Ontology .
+
+ns53:qu vann:preferredNamespaceUri "http://purl.oclc.org/NET/ssnx/qu/qu#" ;
+  a owl:Ontology .
+
+ns54:organogram vann:preferredNamespaceUri "http://reference.data.gov.uk/def/organogram/" ;
+  a owl:Ontology .
+
+ns51:core vann:preferredNamespaceUri "https://w3id.org/arco/ontology/core/" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/cp/owl/sequence.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/cp/owl/sequence.owl#" ;
+  a owl:Ontology .
+
+ns55:tododial vann:preferredNamespaceUri "https://w3id.org/todo/tododial#" ;
+  vann:preferredNamespaceUri "https://w3id.org/todo/tododial" ;
+  a owl:Ontology .
+
+<http://www.samos.gr/ontologies/helpdeskOnto.owl> vann:preferredNamespaceUri "http://www.samos.gr/ontologies/helpdeskOnto.owl#" ;
+  a owl:Ontology .
+
+<http://purl.oclc.org/NET/UNIS/fiware/iot-lite#> vann:preferredNamespaceUri "http://purl.oclc.org/NET/UNIS/fiware/iot-lite#" ;
+  a owl:Ontology .
+
+ns48:fea vann:preferredNamespaceUri "http://vocab.data.gov/def/fea#" ;
+  a owl:Ontology .
+
+<http://inference-web.org/2.0/pml-provenance.owl> vann:preferredNamespaceUri "http://inference-web.org/2.0/pml-provenance.owl#" ;
+  a owl:Ontology .
+
+<https://w3id.org/seas/> vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns58:vn vann:preferredNamespaceUri "http://premon.fbk.eu/ontology/vn#" ;
+  a owl:Ontology .
+
+<http://culturalis.org/oad#> vann:preferredNamespaceUri "http://culturalis.org/oad/" ;
+  vann:preferredNamespaceUri "http://culturalis.org/oad#" ;
+  a owl:Ontology .
+
+<http://www.opmw.org/ontology/> vann:preferredNamespaceUri "http://www.opmw.org/ontology/" ;
+  a owl:Ontology .
+
+ns1:GConsent vann:preferredNamespaceUri "https://w3id.org/GConsent"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "https://w3id.org/GConsent#" ;
+  a owl:Ontology .
+
+ns59:apco vann:preferredNamespaceUri "https://purl.org/cm/onto/apco#" ;
+  a owl:Ontology .
+
+<http://rdfs.org/sioc/ns#> vann:preferredNamespaceUri "http://rdfs.org/sioc/ns#" ;
+  a owl:Ontology .
+
+<http://spi-fm.uca.es/spdef/models/genericTools/wikim/1.0> vann:preferredNamespaceUri "http://spi-fm.uca.es/spdef/models/genericTools/wikim/1.0#" ;
+  a owl:Ontology .
+
+ns61:remetca vann:preferredNamespaceUri "http://www.purl.org/net/remetca#" ;
+  a owl:Ontology .
+
+ns62:ontology vann:preferredNamespaceUri "http://caressesrobot.org/ontology#" ;
+  a owl:Ontology .
+
+<http://purl.org/eis/vocab/daq#> vann:preferredNamespaceUri "http://purl.org/eis/vocab/daq#" ;
+  a owl:Ontology .
+
+ns63:ex vann:preferredNamespaceUri "http://purl.org/net/ns/ex#" ;
+  a owl:Ontology .
+
+ns50:ma-ont vann:preferredNamespaceUri "http://www.w3.org/ns/ma-ont#" ;
+  a owl:Ontology .
+
+<http://ontology.eil.utoronto.ca/ISO37120.owl> vann:preferredNamespaceUri "http://ontology.eil.utoronto.ca/ISO37120.owl#" ;
+  a owl:Ontology .
+
+ns40:lineage vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19115/2003/lineage#" ;
+  a owl:Ontology .
+
+<http://securitytoolbox.appspot.com/securityAlgorithms#> vann:preferredNamespaceUri "http://securitytoolbox.appspot.com/securityAlgorithms#" ;
+  a owl:Ontology .
+
+ns65:localizacion vann:preferredNamespaceUri "http://purl.org/ctic/infraestructuras/localizacion#" ;
+  a owl:Ontology .
+
+<http://lod.taxonconcept.org/ontology/txn.owl> vann:preferredNamespaceUri "http://lod.taxonconcept.org/ontology/txn.owl#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4ehaw/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4ehaw/" ;
+  a owl:Ontology .
+
+ns67:owl vann:preferredNamespaceUri "http://www.w3.org/2002/07/owl#" ;
+  a owl:Ontology .
+
+ns68:msm vann:preferredNamespaceUri "http://iserve.kmi.open.ac.uk/ns/msm#" ;
+  a owl:Ontology .
+
+ns69:ontology vann:preferredNamespaceUri "https://w3id.org/nno/ontology#" ;
+  a owl:Ontology .
+
+ns4:cogs vann:preferredNamespaceUri "http://vocab.deri.ie/cogs#" ;
+  a owl:Ontology .
+
+ns70:data a owl:Ontology .
+
+<http://ontologi.es/doap-bugs#> vann:preferredNamespaceUri "http://ontologi.es/doap-bugs#" ;
+  a owl:Ontology .
+
+<http://purl.org/wai#> vann:preferredNamespaceUri "http://purl.org/wai#" ;
+  a owl:Ontology .
+
+ns1:gom vann:preferredNamespaceUri "https://w3id.org/gom#" ;
+  a owl:Ontology .
+
+ns71:CTRLont vann:preferredNamespaceUri <https://w3id.org/ibp/CTRLont#> ;
+  vann:preferredNamespaceUri "https://w3id.org/ibp/CTRLont#" ;
+  a owl:Ontology .
+
+<http://data.ordnancesurvey.co.uk/ontology/postcode/> vann:preferredNamespaceUri "http://data.ordnancesurvey.co.uk/ontology/postcode/" ;
+  a owl:Ontology .
+
+ns72:gc vann:preferredNamespaceUri "http://www.oegov.org/core/owl/gc#" ;
+  a owl:Ontology .
+
+<http://w3id.org/rml/fnml/> vann:preferredNamespaceUri "http://w3id.org/rml/" ;
+  a owl:Ontology .
+
+ns42:poste vann:preferredNamespaceUri "http://data.lirmm.fr/ontologies/poste#" ;
+  a owl:Ontology .
+
+ns1:ep-plan vann:preferredNamespaceUri "https://w3id.org/ep-plan" ;
+  vann:preferredNamespaceUri "https://w3id.org/ep-plan#" ;
+  a owl:Ontology .
+
+<http://spi-fm.uca.es/spdef/models/genericTools/itm/1.0> vann:preferredNamespaceUri "http://spi-fm.uca.es/spdef/models/genericTools/itm/1.0#" ;
+  a owl:Ontology .
+
+ns50:person vann:preferredNamespaceUri "http://www.w3.org/ns/person#" ;
+  a owl:Ontology .
+
+ns74:model vann:preferredNamespaceUri "http://data.europa.eu/esco/model#" ;
+  a owl:Ontology .
+
+<https://bmake.th-brandenburg.de/spv#> vann:preferredNamespaceUri "https://bmake.th-brandenburg.de/spv#" ;
+  a owl:Ontology .
+
+ns4:search vann:preferredNamespaceUri "http://sindice.com/vocab/search#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/prov#> vann:preferredNamespaceUri "http://www.w3.org/ns/prov#" ;
+  a owl:Ontology .
+
+ns75:support vann:preferredNamespaceUri "http://www.aktors.org/ontology/support#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/oa#> vann:preferredNamespaceUri "http://www.w3.org/ns/oa#" ;
+  a owl:Ontology .
+
+<https://www.gleif.org/ontology/ReportingException/> vann:preferredNamespaceUri "https://www.gleif.org/ontology/ReportingException/" ;
+  a owl:Ontology .
+
+ns76:faldo vann:preferredNamespaceUri "http://biohackathon.org/resource/faldo#" ;
+  a owl:Ontology .
+
+<https://w3id.org/i40/sto#> vann:preferredNamespaceUri "https://w3id.org/i40/sto#" ;
+  a owl:Ontology .
+
+ns77:dm2e vann:preferredNamespaceUri "http://onto.dm2e.eu/schemas/dm2e/" ;
+  a owl:Ontology .
+
+<http://kgc.knowledge-graph.jp/ontology/kgc.owl> vann:preferredNamespaceUri "http://kgc.knowledge-graph.jp/ontology/kgc.owl#" ;
+  a owl:Ontology .
+
+<http://sparql.sstu.ru:3030/speciality/> vann:preferredNamespaceUri "http://sparql.sstu.ru:3030/speciality/" ;
+  a owl:Ontology .
+
+<http://ns.inria.fr/ludo/v1/gamemodel#> vann:preferredNamespaceUri "http://ns.inria.fr/ludo/v1/gamemodel#" ;
+  a owl:Ontology .
+
+ns12:cms vann:preferredNamespaceUri "http://www.bbc.co.uk/ontologies/cms/" ;
+  a owl:Ontology .
+
+<https://w3id.org/noria/ontology/> vann:preferredNamespaceUri "https://w3id.org/noria/ontology/" ;
+  a owl:Ontology .
+
+<http://commontag.org/ns#> vann:preferredNamespaceUri "http://commontag.org/ns#" ;
+  a owl:Ontology .
+
+ns1:omg vann:preferredNamespaceUri ns1:omg ;
+  vann:preferredNamespaceUri "https://w3id.org/omg#" ;
+  a owl:Ontology .
+
+<http://purl.org/net/dbm/ontology#> vann:preferredNamespaceUri "http://purl.org/net/dbm/ontology#" ;
+  a owl:Ontology .
+
+<http://purl.uniprot.org/core/> vann:preferredNamespaceUri "http://purl.uniprot.org/core/" ;
+  a owl:Ontology .
+
+ns79:Ontology vann:preferredNamespaceUri "http://semweb.mmlab.be/ns/linkedconnections#" ;
+  a owl:Ontology .
+
+ns1:GDPRtEXT vann:preferredNamespaceUri "https://w3id.org/GDPRtEXT" ;
+  vann:preferredNamespaceUri "https://w3id.org/GDPRtEXT#" ;
+  a owl:Ontology .
+
+<http://purl.org/linkingyou/> vann:preferredNamespaceUri "http://purl.org/linkingyou/" ;
+  a owl:Ontology .
+
+<https://w3id.org/dot#> vann:preferredNamespaceUri "https://w3id.org/dot#" ;
+  a owl:Ontology .
+
+ns80:skos-xl vann:preferredNamespaceUri "http://www.w3.org/2008/05/skos-xl#" ;
+  a owl:Ontology .
+
+ns21:ignf vann:preferredNamespaceUri <http://data.ign.fr/def/ignf#> ;
+  vann:preferredNamespaceUri "http://data.ign.fr/def/ignf#" ;
+  a owl:Ontology .
+
+ns81:ssn vann:preferredNamespaceUri "https://www.w3.org/ns/ssn/" ;
+  a owl:Ontology .
+
+<http://rdfs.org/ns/void#> a owl:Ontology .
+
+ns82:top10nl vann:preferredNamespaceUri "http://brt.basisregistraties.overheid.nl/def/top10nl#" ;
+  a owl:Ontology .
+
+ns83:qudt vann:preferredNamespaceUri "http://qudt.org/schema/qudt/" ;
+  a owl:Ontology .
+
+ns84:music vann:preferredNamespaceUri "http://www.kanzaki.com/ns/music#" ;
+  a owl:Ontology .
+
+ns85:lime vann:preferredNamespaceUri "http://www.w3.org/ns/lemon/lime#" ;
+  a owl:Ontology .
+
+<http://rdfunit.aksw.org/ns/core#> vann:preferredNamespaceUri "http://rdfunit.aksw.org/ns/core#" ;
+  a owl:Ontology .
+
+ns70:ATM a owl:Ontology .
+
+<http://purl.org/NET/c4dm/timeline.owl> vann:preferredNamespaceUri "http://purl.org/NET/c4dm/timeline.owl#" ;
+  a owl:Ontology .
+
+<http://ns.inria.fr/prissma/v2#> vann:preferredNamespaceUri "http://ns.inria.fr/prissma/v2#" ;
+  a owl:Ontology .
+
+ns70:equipment a owl:Ontology .
+
+ns87:time vann:preferredNamespaceUri "http://www.w3.org/2006/time#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/wi/core#> vann:preferredNamespaceUri "http://purl.org/ontology/wi/core#" ;
+  a owl:Ontology .
+
+<http://wikiba.se/ontology#> a owl:Ontology .
+
+<http://purl.org/net/tsnchange#> vann:preferredNamespaceUri <http://purl.org/net/tsnchange#> ;
+  vann:preferredNamespaceUri "http://purl.org/net/tsnchange#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/2000/01/rdf-schema#> vann:preferredNamespaceUri "http://www.w3.org/2000/01/rdf-schema#" ;
+  a owl:Ontology .
+
+<http://purl.org/vocab/vann/> vann:preferredNamespaceUri "http://purl.org/vocab/vann/" ;
+  a owl:Ontology .
+
+<http://purl.org/twc/dpo/ont/diabetes_pharmacology_ontology.ttl> vann:preferredNamespaceUri "http://purl.org/twc/dpo/ont/" ;
+  a owl:Ontology .
+
+ns89:appearances vann:preferredNamespaceUri "http://rdf.muninn-project.org/ontologies/appearances#" ;
+  a owl:Ontology .
+
+<http://www.semanticweb.org/ontologies/2008/11/OntologySecurity.owl> vann:preferredNamespaceUri "http://www.semanticweb.org/ontologies/2008/11/OntologySecurity.owl#" ;
+  a owl:Ontology .
+
+ns91:blterms vann:preferredNamespaceUri "http://www.bl.uk/schemas/bibliographic/blterms#" ;
+  a owl:Ontology .
+
+<http://ontology.cybershare.utep.edu/ELSEWeb/elseweb-edac.owl> vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/" ;
+  vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/elseweb-edac.owl#" ;
+  a owl:Ontology .
+
+<http://w3id.org/nfdi4ing/metadata4ing#> vann:preferredNamespaceUri <http://w3id.org/nfdi4ing/metadata4ing#> ;
+  vann:preferredNamespaceUri "http://w3id.org/nfdi4ing/metadata4ing#" ;
+  a owl:Ontology .
+
+ns92:IoT-Lifecycle vann:preferredNamespaceUri "http://purl.org/vocab/lifecycle/schema#" ;
+  a owl:Ontology .
+
+ns46:equipment vann:preferredNamespaceUri "https://w3id.org/tribont/equipment" ;
+  vann:preferredNamespaceUri "https://w3id.org/tribont/equipment#" ;
+  a owl:Ontology .
+
+<http://meta.icos-cp.eu/ontologies/cpmeta/> vann:preferredNamespaceUri "http://meta.icos-cp.eu/ontologies/cpmeta/" ;
+  a owl:Ontology .
+
+ns72:cc vann:preferredNamespaceUri "http://www.oegov.org/core/owl/cc#" ;
+  a owl:Ontology .
+
+ns93:Ontology vann:preferredNamespaceUri "http://semweb.mmlab.be/ns/stoptimes#" ;
+  a owl:Ontology .
+
+<http://purl.obolibrary.org/obo/obi.owl> vann:preferredNamespaceUri "http://purl.obolibrary.org/obo/" ;
+  a owl:Ontology .
+
+<http://purl.org/NET/c4dm/event.owl> vann:preferredNamespaceUri "http://purl.org/NET/c4dm/event.owl#" ;
+  a owl:Ontology .
+
+ns4:pdo vann:preferredNamespaceUri "http://ontologies.smile.deri.ie/pdo#" ;
+  a owl:Ontology .
+
+<http://data.europa.eu/949/> vann:preferredNamespaceUri "http://data.europa.eu/949/" ;
+  a owl:Ontology .
+
+ns58:pb vann:preferredNamespaceUri "http://premon.fbk.eu/ontology/pb#" ;
+  a owl:Ontology .
+
+<http://purl.org/olia/ubyCat.owl> vann:preferredNamespaceUri "http://purl.org/olia/ubyCat.owl#" ;
+  a owl:Ontology .
+
+ns11:co vann:preferredNamespaceUri "http://purl.org/co/" ;
+  a owl:Ontology .
+
+ns96:v1 vann:preferredNamespaceUri "http://purl.org/goodrelations/v1#" ;
+  a owl:Ontology .
+
+<http://simile.mit.edu/2003/10/ontologies/vraCore3#> vann:preferredNamespaceUri "http://simile.mit.edu/2003/10/ontologies/vraCore3#" ;
+  a owl:Ontology .
+
+ns97:core vann:preferredNamespaceUri "http://vivoweb.org/ontology/core#" ;
+  a owl:Ontology .
+
+ns68:hrests vann:preferredNamespaceUri "http://iserve.kmi.open.ac.uk/ns/hrests#" ;
+  a owl:Ontology .
+
+<http://purl.org/ctic/dcat#> vann:preferredNamespaceUri "http://purl.org/ctic/dcat#" ;
+  a owl:Ontology .
+
+<http://data.ordnancesurvey.co.uk/ontology/spatialrelations/> vann:preferredNamespaceUri "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/" ;
+  a owl:Ontology .
+
+ns98:voag vann:preferredNamespaceUri "http://voag.linkedmodel.org/voag#" ;
+  a owl:Ontology .
+
+ns99:arch vann:preferredNamespaceUri "http://purl.org/archival/vocab/arch#" ;
+  a owl:Ontology .
+
+ns100:ontology vann:preferredNamespaceUri "http://www.geonames.org/ontology#" ;
+  a owl:Ontology .
+
+<http://ns.inria.fr/munc#> vann:preferredNamespaceUri "http://ns.inria.fr/munc/v1#" ;
+  a owl:Ontology .
+
+<http://www.kanzaki.com/ns/music-rdfs.rdf> a owl:Ontology .
+
+ns50:adms vann:preferredNamespaceUri "http://www.w3.org/ns/adms#" ;
+  a owl:Ontology .
+
+ns54:parliament vann:preferredNamespaceUri "http://reference.data.gov.uk/def/parliament/" ;
+  a owl:Ontology .
+
+<http://rdfs.co/juso/kr/0.1> vann:preferredNamespaceUri "http://rdfs.co/juso/kr/" ;
+  a owl:Ontology .
+
+<http://purl.org/holy/ns#> vann:preferredNamespaceUri "http://purl.org/holy/ns#" ;
+  a owl:Ontology .
+
+ns102:ontology vann:preferredNamespaceUri "http://data.semanticweb.org/ns/swc/ontology#" ;
+  a owl:Ontology .
+
+ns1:dco vann:preferredNamespaceUri "https://w3id.org/dco" ;
+  vann:preferredNamespaceUri "https://w3id.org/dco#" ;
+  a owl:Ontology .
+
+ns50:regorg vann:preferredNamespaceUri "http://www.w3.org/ns/regorg#" ;
+  a owl:Ontology .
+
+ns12:creativework vann:preferredNamespaceUri "http://www.bbc.co.uk/ontologies/creativework/" ;
+  a owl:Ontology .
+
+<http://purl.oclc.org/NET/mvco.owl> vann:preferredNamespaceUri "http://purl.oclc.org/NET/mvco.owl#" ;
+  a owl:Ontology .
+
+<http://linkeddata.finki.ukim.mk/lod/ontology/veo#> vann:preferredNamespaceUri "http://linkeddata.finki.ukim.mk/lod/ontology/veo#" ;
+  a owl:Ontology .
+
+<http://purl.org/twc/ontologies/cmo.owl> vann:preferredNamespaceUri "http://purl.org/twc/ontologies/cmo.owl#" ;
+  a owl:Ontology .
+
+ns58:nb vann:preferredNamespaceUri "http://premon.fbk.eu/ontology/nb#" ;
+  a owl:Ontology .
+
+ns28:lingvoj vann:preferredNamespaceUri "https://w3id.org/vocab/lingvoj#" ;
+  a owl:Ontology .
+
+ns105:sdmx vann:preferredNamespaceUri "http://purl.org/linked-data/sdmx#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4ener/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4ener/" ;
+  a owl:Ontology .
+
+ns106:acm vann:preferredNamespaceUri "http://acm.rkbexplorer.com/ontologies/acm#" ;
+  a owl:Ontology .
+
+ns107:swportal vann:preferredNamespaceUri "http://sw-portal.deri.org/ontologies/swportal#" ;
+  a owl:Ontology .
+
+<http://purl.org/dsnotify/vocab/eventset/> vann:preferredNamespaceUri <http://purl.org/dsnotify/vocab/eventset/> ;
+  vann:preferredNamespaceUri "http://purl.org/dsnotify/vocab/eventset/" ;
+  a owl:Ontology .
+
+ns87:timezone vann:preferredNamespaceUri "http://www.w3.org/2006/timezone#" ;
+  a owl:Ontology .
+
+ns40:dataquality vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19115/2003/dataquality#" ;
+  a owl:Ontology .
+
+ns92:IoT-O vann:preferredNamespaceUri "http://www.irit.fr/recherches/MELODI/ontologies/IoT-O#" ;
+  a owl:Ontology .
+
+ns11:dpn vann:preferredNamespaceUri "http://purl.org/dpn#" ;
+  a owl:Ontology .
+
+ns108:core vann:preferredNamespaceUri "http://www.ics.forth.gr/isl/oae/core#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/daia/> a owl:Ontology .
+
+ns109:oo vann:preferredNamespaceUri "http://purl.org/openorg/" ;
+  a owl:Ontology .
+
+<http://contextus.net/ontology/ontomedia/core/space#> vann:preferredNamespaceUri "http://contextus.net/ontology/ontomedia/core/space#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/mls#> a owl:Ontology .
+
+ns110:lemon vann:preferredNamespaceUri "http://lemon-model.net/lemon#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/cp/owl/situation.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/cp/owl/situation.owl#" ;
+  a owl:Ontology .
+
+ns85:ontolex vann:preferredNamespaceUri "http://www.w3.org/ns/lemon/ontolex#" ;
+  a owl:Ontology .
+
+<http://linkedevents.org/ontology/> vann:preferredNamespaceUri "http://linkedevents.org/ontology/" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/wo/> vann:preferredNamespaceUri "http://purl.org/ontology/wo/" ;
+  a owl:Ontology .
+
+<http://data.ordnancesurvey.co.uk/ontology/geometry/> vann:preferredNamespaceUri "http://data.ordnancesurvey.co.uk/ontology/geometry/" ;
+  a owl:Ontology .
+
+<http://delicias.dia.fi.upm.es/ontologies/ObjectWithStates.owl> vann:preferredNamespaceUri "http://delicias.dia.fi.upm.es/ontologies/ObjectWithStates.owl#" ;
+  a owl:Ontology .
+
+<https://schema.edu.ee/0.1> vann:preferredNamespaceUri "https://schema.edu.ee/0.1/" ;
+  a owl:Ontology .
+
+ns23:provoc vann:preferredNamespaceUri "http://ns.inria.fr/provoc#" ;
+  a owl:Ontology .
+
+ns44:places vann:preferredNamespaceUri "http://purl.org/ontology/places#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#" ;
+  a owl:Ontology .
+
+<http://purl.org/reco#> vann:preferredNamespaceUri "http://purl.org/reco#" ;
+  a owl:Ontology .
+
+ns114:ontology vann:preferredNamespaceUri <https://w3id.org/stax/ontology#> ;
+  vann:preferredNamespaceUri "https://w3id.org/stax/ontology#" ;
+  a owl:Ontology .
+
+ns115:observation vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19156/2011/observation#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19156/2011/observation#" ;
+  a owl:Ontology .
+
+ns30:om-lite vann:preferredNamespaceUri <http://def.seegrid.csiro.au/ontology/om/om-lite#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/ontology/om/om-lite#" ;
+  a owl:Ontology .
+
+ns1:iddo vann:preferredNamespaceUri ns1:iddo ;
+  vann:preferredNamespaceUri "https://w3id.org/iddo#" ;
+  a owl:Ontology .
+
+<http://data.cochrane.org/ontologies/core/> vann:preferredNamespaceUri "http://data.cochrane.org/ontologies/core/" ;
+  a owl:Ontology .
+
+ns116:public-contracts vann:preferredNamespaceUri "http://purl.org/procurement/public-contracts#" ;
+  a owl:Ontology .
+
+<http://aims.fao.org/aos/geopolitical.owl> vann:preferredNamespaceUri "http://aims.fao.org/aos/geopolitical.owl#" ;
+  a owl:Ontology .
+
+<http://ns.nature.com/terms/> vann:preferredNamespaceUri "http://ns.nature.com/terms/" ;
+  a owl:Ontology .
+
+ns3:biro vann:preferredNamespaceUri "http://purl.org/spar/biro/" ;
+  a owl:Ontology .
+
+ns118:drammar vann:preferredNamespaceUri <http://www.purl.org/drammar#> ;
+  vann:preferredNamespaceUri "http://www.purl.org/drammar#" ;
+  a owl:Ontology .
+
+<http://purl.oclc.org/NET/muo/muo#> a owl:Ontology .
+
+<http://iais.fraunhofer.de/vocabs/rami#> vann:preferredNamespaceUri "http://iais.fraunhofer.de/vocabs/rami#" ;
+  a owl:Ontology .
+
+ns119:jup vann:preferredNamespaceUri "http://w3id.org/charta77/jup/" ;
+  a owl:Ontology .
+
+<https://w3id.org/mdo/provenance/> vann:preferredNamespaceUri "https://w3id.org/mdo/provenance/1.0/" ;
+  vann:preferredNamespaceUri "https://w3id.org/mdo/provenance/" ;
+  a owl:Ontology .
+
+ns120:roh vann:preferredNamespaceUri "http://w3id.org/roh#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/prov-aq#> a owl:Ontology .
+
+<http://ns.inria.fr/probabilistic-shacl/> vann:preferredNamespaceUri "http://ns.inria.fr/probabilistic-shacl/" ;
+  a owl:Ontology .
+
+ns121:ld vann:preferredNamespaceUri "http://advene.org/ns/cinelab/ld#" ;
+  a owl:Ontology .
+
+<http://ontology.cybershare.utep.edu/ELSEWeb/elseweb-modelling.owl> vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/" ;
+  vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/elseweb-modelling.owl#" ;
+  a owl:Ontology .
+
+ns51:arco vann:preferredNamespaceUri "https://w3id.org/arco/ontology/arco/" ;
+  a owl:Ontology .
+
+<http://data.lirmm.fr/ontologies/poste#> a owl:Ontology .
+
+<http://vcharpenay.github.io/hto/hto.xml> vann:preferredNamespaceUri "http://vcharpenay.github.io/hto/hto.xml#" ;
+  a owl:Ontology .
+
+ns123:sd vann:preferredNamespaceUri ns123:sd ;
+  vann:preferredNamespaceUri "https://w3id.org/okn/o/sd#" ;
+  a owl:Ontology .
+
+<http://w3id.org/rsp/vocals#> vann:preferredNamespaceUri "http://w3id.org/rsp/vocals#" ;
+  a owl:Ontology .
+
+<http://usefulinc.com/ns/doap#> vann:preferredNamespaceUri "http://usefulinc.com/ns/doap#" ;
+  a owl:Ontology .
+
+ns4:c4n vann:preferredNamespaceUri "http://vocab.deri.ie/c4n#" ;
+  a owl:Ontology .
+
+<https://www.w3.org/2019/wot/security#> vann:preferredNamespaceUri "https://www.w3.org/2019/wot/security#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#" ;
+  a owl:Ontology .
+
+ns125:ontology vann:preferredNamespaceUri "http://vocab.getty.edu/ontology#" ;
+  a owl:Ontology .
+
+<https://w3id.org/mdo/calculation/> vann:preferredNamespaceUri "https://w3id.org/mdo/calculation/1.0/" ;
+  vann:preferredNamespaceUri "https://w3id.org/mdo/calculation/" ;
+  a owl:Ontology .
+
+ns44:holding vann:preferredNamespaceUri "http://purl.org/ontology/holding#" ;
+  a owl:Ontology .
+
+ns126:skos-thes vann:preferredNamespaceUri "http://purl.org/iso25964/skos-thes#" ;
+  a owl:Ontology .
+
+ns127:sf vann:preferredNamespaceUri "http://www.opengis.net/ont/sf#" ;
+  a owl:Ontology .
+
+<http://purl.org/LiMo/0.1> vann:preferredNamespaceUri "http://purl.org/LiMo/0.1/" ;
+  a owl:Ontology .
+
+ns129:terms vann:preferredNamespaceUri "http://vocab.org/whisky/terms/" ;
+  a owl:Ontology .
+
+ns130:cwrc vann:preferredNamespaceUri "http://sparql.cwrc.ca/ontologies/cwrc#" ;
+  a owl:Ontology .
+
+ns55:tododom vann:preferredNamespaceUri "https://w3id.org/todo/tododom#" ;
+  vann:preferredNamespaceUri "https://w3id.org/todo/tododom" ;
+  a owl:Ontology .
+
+ns4:void vann:preferredNamespaceUri "http://rdfs.org/ns/void#" ;
+  a owl:Ontology .
+
+<http://purl.org/tio/ns#> vann:preferredNamespaceUri "http://purl.org/tio/ns#" ;
+  a owl:Ontology .
+
+ns131:label vann:preferredNamespaceUri "http://purl.org/net/vocab/2004/03/label#" ;
+  a owl:Ontology .
+
+ns85:synsem vann:preferredNamespaceUri "http://www.w3.org/ns/lemon/synsem#" ;
+  a owl:Ontology .
+
+ns132:vocab vann:preferredNamespaceUri "http://lsq.aksw.org/vocab#" ;
+  a owl:Ontology .
+
+<https://www.gleif.org/ontology/L2/> vann:preferredNamespaceUri "https://www.gleif.org/ontology/L2/" ;
+  a owl:Ontology .
+
+<http://data.press.net/ontology/stuff/> vann:preferredNamespaceUri "http://data.press.net/ontology/stuff/" ;
+  a owl:Ontology .
+
+ns133:messenger vann:preferredNamespaceUri "http://www.ivoa.net/rdf/messenger#" ;
+  a owl:Ontology .
+
+ns134:fresnel vann:preferredNamespaceUri "http://www.w3.org/2004/09/fresnel#" ;
+  a owl:Ontology .
+
+<http://purl.org/stuff/rev#> vann:preferredNamespaceUri "http://purl.org/stuff/rev#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/sosa/> vann:preferredNamespaceUri "http://www.w3.org/ns/sosa/" ;
+  a owl:Ontology .
+
+ns135:r4r vann:preferredNamespaceUri "http://guava.iis.sinica.edu.tw/r4r/" ;
+  a owl:Ontology .
+
+ns123:sdm vann:preferredNamespaceUri <https://w3id.org/okn/o/sdm#> ;
+  vann:preferredNamespaceUri "https://w3id.org/okn/o/sdm#" ;
+  a owl:Ontology .
+
+ns3:c4o vann:preferredNamespaceUri "http://purl.org/spar/c4o/" ;
+  a owl:Ontology .
+
+ns136:step vann:preferredNamespaceUri "http://purl.org/net/step#" ;
+  a owl:Ontology .
+
+<http://ontology.cybershare.utep.edu/ELSEWeb/mappings/elseweb-mappings.owl> vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/" ;
+  vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/elseweb-data.owl#" ;
+  a owl:Ontology .
+
+ns138:xkos vann:preferredNamespaceUri <http://rdf-vocabulary.ddialliance.org/xkos#> ;
+  vann:preferredNamespaceUri "http://rdf-vocabulary.ddialliance.org/xkos#" ;
+  a owl:Ontology .
+
+<http://rdfs.org/sioc/types#> vann:preferredNamespaceUri "http://rdfs.org/sioc/types#" ;
+  a owl:Ontology .
+
+ns139:def a owl:Ontology .
+
+ns140:core vann:preferredNamespaceUri "http://www.w3id.org/urban-iot/core#" ;
+  a owl:Ontology .
+
+<http://dati.cdec.it/lod/shoah/> vann:preferredNamespaceUri "http://dati.cdec.it/lod/shoah/" ;
+  a owl:Ontology .
+
+ns141:cito-functions vann:preferredNamespaceUri "http://www.essepuntato.it/2013/03/cito-functions/" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/pbo/core#> vann:preferredNamespaceUri "http://purl.org/ontology/pbo/core#" ;
+  a owl:Ontology .
+
+ns115:sampling vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19156/2011/sampling#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19156/2011/sampling#" ;
+  a owl:Ontology .
+
+<http://contextus.net/ontology/ontomedia/misc/date#> vann:preferredNamespaceUri "http://contextus.net/ontology/ontomedia/misc/date#" ;
+  a owl:Ontology .
+
+<https://www.gleif.org/ontology/L1/> vann:preferredNamespaceUri "https://www.gleif.org/ontology/L1/" ;
+  a owl:Ontology .
+
+<http://www.demcare.eu/ontologies/contextdescriptor.owl> vann:preferredNamespaceUri "http://www.demcare.eu/ontologies/contextdescriptor.owl#" ;
+  a owl:Ontology .
+
+ns143:umbel vann:preferredNamespaceUri "http://umbel.org/umbel#" ;
+  a owl:Ontology .
+
+ns144:metadata vann:preferredNamespaceUri "https://w3id.org/riverbench/schema/metadata#" ;
+  a owl:Ontology .
+
+ns145:core vann:preferredNamespaceUri "http://w3id.org/amlo/core#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/core/> vann:preferredNamespaceUri "https://saref.etsi.org/core/" ;
+  a owl:Ontology .
+
+ns146:bibtex vann:preferredNamespaceUri "http://purl.org/net/nknouf/ns/bibtex#" ;
+  a owl:Ontology .
+
+ns147:core vann:preferredNamespaceUri "https://w3id.org/idsa/core/" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/ao/core#> vann:preferredNamespaceUri "http://purl.org/ontology/ao/core#" ;
+  a owl:Ontology .
+
+ns148:SemantischModel a owl:Ontology .
+
+<http://purl.org/hpi/patchr#> vann:preferredNamespaceUri "http://purl.org/hpi/patchr#" ;
+  a owl:Ontology .
+
+ns149:courseware vann:preferredNamespaceUri "http://courseware.rkbexplorer.com/ontologies/courseware#" ;
+  a owl:Ontology .
+
+ns105:cube vann:preferredNamespaceUri "http://purl.org/linked-data/cube#" ;
+  a owl:Ontology .
+
+ns1:mod vann:preferredNamespaceUri "https://w3id.org/mod#" ;
+  a owl:Ontology .
+
+<http://data.europa.eu/s66#> vann:preferredNamespaceUri "http://data.europa.eu/s66#" ;
+  a owl:Ontology .
+
+ns136:soron vann:preferredNamespaceUri "http://purl.org/net/soron" ;
+  vann:preferredNamespaceUri "http://purl.org/net/soron/" ;
+  a owl:Ontology .
+
+ns150:pproc vann:preferredNamespaceUri "http://contsem.unizar.es/def/sector-publico/pproc#" ;
+  a owl:Ontology .
+
+ns1:CPSWatch vann:preferredNamespaceUri "https://w3id.org/CPSWatch/1.0.1" ;
+  vann:preferredNamespaceUri "https://w3id.org/CPSWatch#" ;
+  a owl:Ontology .
+
+ns151:voc vann:preferredNamespaceUri "http://ns.inria.fr/nicetag/2010/09/09/voc#" ;
+  a owl:Ontology .
+
+<https://d-nb.info/standards/elementset/agrelon#> vann:preferredNamespaceUri "https://d-nb.info/standards/elementset/agrelon#" ;
+  a owl:Ontology .
+
+ns152:ns vann:preferredNamespaceUri "http://spitfire-project.eu/ontology/ns/" ;
+  a owl:Ontology .
+
+ns44:ecpo vann:preferredNamespaceUri "http://purl.org/ontology/ecpo#" ;
+  a owl:Ontology .
+
+ns153:sou vann:preferredNamespaceUri "http://qudt.org/2.1/vocab/sou/" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/bibo/> vann:preferredNamespaceUri "http://purl.org/ontology/bibo/" ;
+  a owl:Ontology .
+
+<http://gov.genealogy.net/ontology.owl> vann:preferredNamespaceUri "http://gov.genealogy.net/ontology.owl#" ;
+  a owl:Ontology .
+
+<http://cedric.cnam.fr/isid/ontologies/PersonLink.owl#> vann:preferredNamespaceUri <http://cedric.cnam.fr/isid/ontologies/PersonLink.owl#> ;
+  a owl:Ontology .
+
+<https://w3id.org/dingo#> a owl:Ontology .
+
+ns155:swemls vann:preferredNamespaceUri "https://w3id.org/semsys/ns/swemls#" ;
+  a owl:Ontology .
+
+ns156:odrs vann:preferredNamespaceUri "http://schema.theodi.org/odrs#" ;
+  a owl:Ontology .
+
+ns28:xbrll vann:preferredNamespaceUri "https://w3id.org/vocab/xbrll#" ;
+  a owl:Ontology .
+
+ns1:wfont vann:preferredNamespaceUri <https://w3id.org/wfont#> ;
+  vann:preferredNamespaceUri "https://w3id.org/wfont#" ;
+  a owl:Ontology .
+
+ns13:TimeOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns46:core vann:preferredNamespaceUri "https://w3id.org/tribont/core" ;
+  vann:preferredNamespaceUri "https://w3id.org/tribont/core#" ;
+  a owl:Ontology .
+
+ns1:rains vann:preferredNamespaceUri "https://w3id.org/rains#" ;
+  a owl:Ontology .
+
+<http://purl.org/net/provenance/ns#> vann:preferredNamespaceUri "http://purl.org/net/provenance/ns#" ;
+  a owl:Ontology .
+
+<http://cookingbigdata.com/linkeddata/ccinstances#> a owl:Ontology .
+
+ns58:fn vann:preferredNamespaceUri "http://premon.fbk.eu/ontology/fn#" ;
+  a owl:Ontology .
+
+<http://linkedscience.org/teach/ns#> vann:preferredNamespaceUri "http://linkedscience.org/teach/ns#" ;
+  a owl:Ontology .
+
+<http://www.eclap.eu/schema/eclap/> vann:preferredNamespaceUri "http://www.eclap.eu/schema/eclap/" ;
+  a owl:Ontology .
+
+ns157:geometry vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19107/2003/geometry#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19107/2003/geometry#" ;
+  a owl:Ontology .
+
+ns138:discovery vann:preferredNamespaceUri "http://rdf-vocabulary.ddialliance.org/discovery#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/cp/owl/timeinterval.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/cp/owl/timeinterval.owl#" ;
+  a owl:Ontology .
+
+<http://archivi.ibc.regione.emilia-romagna.it/ontology/eac-cpf/eac-cpf.rdf> a owl:Ontology .
+
+<https://w3id.org/seo#> vann:preferredNamespaceUri "http://purl.org/seo/"^^<http://purl.org/dc/terms/URI> ;
+  a owl:Ontology .
+
+<http://lawd.info/ontology/> vann:preferredNamespaceUri "http://lawd.info/ontology/" ;
+  a owl:Ontology .
+
+<http://njh.me/> vann:preferredNamespaceUri "http://imgpedia.dcc.uchile.cl/ontology#"^^xsd:anyURI ;
+  a owl:Ontology .
+
+<http://www.demcare.eu/ontologies/demlab.owl> vann:preferredNamespaceUri "http://www.demcare.eu/ontologies/demlab.owl#" ;
+  a owl:Ontology .
+
+ns102:swrc-topics a owl:Ontology .
+
+<http://purl.org/imbi/ru-meta.owl> vann:preferredNamespaceUri "http://purl.org/imbi/ru-meta.owl#" ;
+  a owl:Ontology .
+
+<https://w3id.org/ofo#> vann:preferredNamespaceUri "https://w3id.org/ofo#" ;
+  a owl:Ontology .
+
+<http://www.molmod.info/semantics/pims-ii.ttl> vann:preferredNamespaceUri "http://www.molmod.info/semantics/pims-ii.ttl#" ;
+  a owl:Ontology .
+
+ns70:NAS a owl:Ontology .
+
+ns161:dqm vann:preferredNamespaceUri "http://purl.org/dqm-vocabulary/v1/dqm#" ;
+  a owl:Ontology .
+
+<http://purl.org/net/opmv/ns#> vann:preferredNamespaceUri "http://purl.org/net/opmv/ns#" ;
+  a owl:Ontology .
+
+ns162:ns vann:preferredNamespaceUri "http://www.gsi.dit.upm.es/ontologies/marl/ns#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/ont/dul/ontopic.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/ont/dul/ontopic.owl#" ;
+  a owl:Ontology .
+
+ns4:orca vann:preferredNamespaceUri "http://vocab.deri.ie/orca#" ;
+  a owl:Ontology .
+
+<http://purl.org/net/tsn#> vann:preferredNamespaceUri <http://purl.org/net/tsn#> ;
+  vann:preferredNamespaceUri "http://purl.org/net/tsn#" ;
+  a owl:Ontology .
+
+<https://w3id.org/squap/> vann:preferredNamespaceUri "https://w3id.org/squap/SoftwareQuality/" ;
+  a owl:Ontology .
+
+ns163:dtx_srti vann:preferredNamespaceUri "http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#"@en ;
+  vann:preferredNamespaceUri "http://cef.uv.es/lodroadtran18/def/transporte/dtx_srti#" ;
+  a owl:Ontology .
+
+<http://purl.org/net/provenance/types#> vann:preferredNamespaceUri "http://purl.org/net/provenance/types#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#> vann:preferredNamespaceUri "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
+  a owl:Ontology .
+
+ns42:oan vann:preferredNamespaceUri "http://data.lirmm.fr/ontologies/oan/" ;
+  a owl:Ontology .
+
+<http://purl.org/xapi/ontology#> vann:preferredNamespaceUri "http://purl.org/xapi/ontology#" ;
+  a owl:Ontology .
+
+<http://persistence.uni-leipzig.org/nlp2rdf/ontologies/rlog#> vann:preferredNamespaceUri "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/rlog#" ;
+  a owl:Ontology .
+
+ns144:documentation vann:preferredNamespaceUri "https://w3id.org/riverbench/schema/documentation#" ;
+  a owl:Ontology .
+
+<http://www.eurocris.org/ontologies/cerif/1.3> vann:preferredNamespaceUri "http://www.eurocris.org/ontologies/cerif/1.3#" ;
+  a owl:Ontology .
+
+ns127:gml vann:preferredNamespaceUri "http://www.opengis.net/ont/gml#" ;
+  a owl:Ontology .
+
+ns1:sbeo vann:preferredNamespaceUri "https://w3id.org/sbeo#" ;
+  a owl:Ontology .
+
+ns28:sdm vann:preferredNamespaceUri "https://w3id.org/vocab/sdm#" ;
+  a owl:Ontology .
+
+<http://purl.org/library/> vann:preferredNamespaceUri "http://purl.org/library/" ;
+  a owl:Ontology .
+
+ns165:odapps vann:preferredNamespaceUri "http://semweb.mmlab.be/ns/odapps#" ;
+  a owl:Ontology .
+
+<https://w3id.org/citedcat-ap/> vann:preferredNamespaceUri "https://w3id.org/citedcat-ap/"^^xsd:anyURI ;
+  a owl:Ontology .
+
+ns166:schema vann:preferredNamespaceUri "http://www.disit.org/km4city/schema" ;
+  vann:preferredNamespaceUri "http://www.disit.org/km4city/schema#" ;
+  a owl:Ontology .
+
+<https://w3id.org/survey-ontology#> vann:preferredNamespaceUri "https://w3id.org/survey-ontology#" ;
+  a owl:Ontology .
+
+<http://purl.org/spar/datacite/> a owl:Ontology .
+
+<http://reference.data.gov.uk/def/payment#> vann:preferredNamespaceUri "http://reference.data.gov.uk/def/payment#" ;
+  a owl:Ontology .
+
+<http://www.observedchange.com/tisc/ns#> vann:preferredNamespaceUri "http://observedchange.com/tisc/ns#" ;
+  a owl:Ontology .
+
+ns167:tvc vann:preferredNamespaceUri "http://www.essepuntato.it/2012/04/tvc/" ;
+  a owl:Ontology .
+
+<http://rdf.geospecies.org/methods/observationMethod.rdf> vann:preferredNamespaceUri "http://rdf.geospecies.org/methods/observationMethod#" ;
+  a owl:Ontology .
+
+ns49:spin vann:preferredNamespaceUri "http://spinrdf.org/spin#" ;
+  a owl:Ontology .
+
+<http://www.wsmo.org/ns/wsmo-lite#> vann:preferredNamespaceUri "http://www.wsmo.org/ns/wsmo-lite#" ;
+  a owl:Ontology .
+
+ns169:http vann:preferredNamespaceUri "http://www.w3.org/2011/http#" ;
+  a owl:Ontology .
+
+<http://purl.org/gen/0.1#> vann:preferredNamespaceUri "http://purl.org/gen/0.1#"@en ;
+  vann:preferredNamespaceUri "http://purl.org/gen/0.1#" ;
+  a owl:Ontology .
+
+ns170:v1 vann:preferredNamespaceUri "http://www.ebusiness-unibw.org/ontologies/consumerelectronics/v1#" ;
+  a owl:Ontology .
+
+<http://ns.inria.fr/ast/sql#> vann:preferredNamespaceUri "http://ns.inria.fr/ast/sql#" ;
+  a owl:Ontology .
+
+<http://purl.org/linked-data/api/vocab#> vann:preferredNamespaceUri "http://purl.org/linked-data/api/vocab#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/prv/core#> vann:preferredNamespaceUri "http://purl.org/ontology/prv/core#" ;
+  a owl:Ontology .
+
+<https://w3id.org/cocoon/v1.0> vann:preferredNamespaceUri "https://w3id.org/cocoon/v1.0#" ;
+  a owl:Ontology .
+
+ns172:v2 vann:preferredNamespaceUri "http://ns.inria.fr/s4ac/v2#" ;
+  a owl:Ontology .
+
+<http://purl.org/poso/> vann:preferredNamespaceUri "http://purl.org/poso/"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "http://purl.org/poso/" ;
+  a owl:Ontology .
+
+ns173:core vann:preferredNamespaceUri "http://www.w3.org/ns/hydra/core#" ;
+  a owl:Ontology .
+
+ns174:gts vann:preferredNamespaceUri <http://resource.geosciml.org/ontology/timescale/gts#> ;
+  vann:preferredNamespaceUri "http://resource.geosciml.org/ontology/timescale/gts#" ;
+  a owl:Ontology .
+
+ns175:caso vann:preferredNamespaceUri "https://w3id.org/def/caso#" ;
+  a owl:Ontology .
+
+ns50:rdftest vann:preferredNamespaceUri "http://www.w3.org/ns/rdftest#" ;
+  a owl:Ontology .
+
+ns176:wfdesc vann:preferredNamespaceUri "http://purl.org/wf4ever/wfdesc#" ;
+  a owl:Ontology .
+
+<http://kdo.render-project.eu/kdo#> vann:preferredNamespaceUri "http://kdo.render-project.eu/kdo#" ;
+  a owl:Ontology .
+
+ns177:v1 vann:preferredNamespaceUri "http://ns.inria.fr/semed/eduprogression/v1#" ;
+  a owl:Ontology .
+
+<http://rdfs.co/juso/0.1> vann:preferredNamespaceUri "http://rdfs.co/juso/" ;
+  a owl:Ontology .
+
+ns140:electric vann:preferredNamespaceUri "http://www.w3id.org/urban-iot/electric#" ;
+  a owl:Ontology .
+
+ns4:raul vann:preferredNamespaceUri "http://purl.org/NET/raul#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/cp/owl/semiotics.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/cp/owl/semiotics.owl#" ;
+  a owl:Ontology .
+
+<http://www.ics.forth.gr/isl/MarineTLO/v4/marinetlo.owl> vann:preferredNamespaceUri "http://www.ics.forth.gr/isl/MarineTLO/v4/marinetlo.owl#" ;
+  a owl:Ontology .
+
+ns180:schema vann:preferredNamespaceUri "http://purl.org/vocab/lifecycle/schema#" ;
+  a owl:Ontology .
+
+<http://rdfs.org/scot/ns#> vann:preferredNamespaceUri "http://rdfs.org/scot/ns#" ;
+  a owl:Ontology .
+
+ns181:taxref-ld vann:preferredNamespaceUri "http://taxref.mnhn.fr/lod/" ;
+  a owl:Ontology .
+
+ns182:ns vann:preferredNamespaceUri "http://www.w3.org/2003/12/exif/ns#" ;
+  a owl:Ontology .
+
+ns3:scoro a owl:Ontology .
+
+ns136:lio vann:preferredNamespaceUri "http://purl.org/net/lio#"@en ;
+  vann:preferredNamespaceUri "http://purl.org/net/lio#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/prov-dictionary#> a owl:Ontology .
+
+ns183:eu-cm-ontology vann:preferredNamespaceUri "http://w3id.org/um/cbcm/eu-cm-ontology#" ;
+  a owl:Ontology .
+
+<http://d-nb.info/standards/elementset/gnd#> vann:preferredNamespaceUri "http://d-nb.info/standards/elementset/gnd#" ;
+  a owl:Ontology .
+
+<http://www.loc.gov/premis/rdf/v3/> a owl:Ontology .
+
+<http://www.arpenteur.org/ontology/Arpenteur.owl> vann:preferredNamespaceUri "http://www.arpenteur.org/ontology/Arpenteur.owl#" ;
+  a owl:Ontology .
+
+ns5:extended vann:preferredNamespaceUri "http://purl.org/vocab/frbr/extended#" ;
+  a owl:Ontology .
+
+ns185:prof vann:preferredNamespaceUri "http://www.w3.org/ns/dx/prof/" ;
+  a owl:Ontology .
+
+ns186:aws vann:preferredNamespaceUri "http://purl.oclc.org/NET/ssnx/meteo/aws#" ;
+  a owl:Ontology .
+
+ns51:denotative-description vann:preferredNamespaceUri "https://w3id.org/arco/ontology/denotative-description/" ;
+  a owl:Ontology .
+
+<http://spi-fm.uca.es/spdef/models/deployment/swpm/1.0> vann:preferredNamespaceUri "http://spi-fm.uca.es/spdef/models/deployment/swpm/1.0#" ;
+  a owl:Ontology .
+
+<http://purl.org/iot/vocab/iot-taxonomy-lite#> vann:preferredNamespaceUri "http://purl.org/iot/vocab/iot-taxonomy-lite#" ;
+  a owl:Ontology .
+
+ns35:demo vann:preferredNamespaceUri <http://rdf.insee.fr/def/demo#> ;
+  vann:preferredNamespaceUri "http://rdf.insee.fr/def/demo#" ;
+  a owl:Ontology .
+
+ns176:wfprov vann:preferredNamespaceUri "http://purl.org/wf4ever/wfprov#" ;
+  a owl:Ontology .
+
+<http://lsdis.cs.uga.edu/projects/semdis/opus#> vann:preferredNamespaceUri "http://lsdis.cs.uga.edu/projects/semdis/opus#" ;
+  a owl:Ontology .
+
+ns1:ecfo vann:preferredNamespaceUri "https://w3id.org/ecfo#" ;
+  a owl:Ontology .
+
+<http://purl.org/vocab/relationship/> vann:preferredNamespaceUri "http://purl.org/vocab/relationship" ;
+  vann:preferredNamespaceUri "http://purl.org/vocab/relationship/" ;
+  a owl:Ontology .
+
+ns188:v1 vann:preferredNamespaceUri "http://ontology.it/itsmo/v1#" ;
+  a owl:Ontology .
+
+ns189:vocabulary vann:preferredNamespaceUri "https://w3id.org/ontouml-models/vocabulary#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "https://w3id.org/ontouml-models/vocabulary#" ;
+  a owl:Ontology .
+
+ns190:voidext vann:preferredNamespaceUri "http://purl.org/query/voidext#" ;
+  a owl:Ontology .
+
+ns191:schema vann:preferredNamespaceUri "http://reegle.info/schema#" ;
+  a owl:Ontology .
+
+<http://purl.org/uco/ns#> vann:preferredNamespaceUri "http://purl.org/uco/ns#" ;
+  a owl:Ontology .
+
+ns192:schema vann:preferredNamespaceUri "http://dev.poderopedia.com/vocab/" ;
+  a owl:Ontology .
+
+ns21:geofla vann:preferredNamespaceUri <http://data.ign.fr/def/geofla#> ;
+  vann:preferredNamespaceUri "http://data.ign.fr/def/geofla#" ;
+  a owl:Ontology .
+
+<http://dataid.dbpedia.org/ns/core#> vann:preferredNamespaceUri <http://dataid.dbpedia.org/ns/core#> ;
+  vann:preferredNamespaceUri "http://dataid.dbpedia.org/ns/core#" ;
+  a owl:Ontology .
+
+<http://vocab.gtfs.org/terms#> vann:preferredNamespaceUri "http://vocab.gtfs.org/terms#" ;
+  a owl:Ontology .
+
+ns55:tododfa vann:preferredNamespaceUri "https://w3id.org/todo/tododfa#" ;
+  vann:preferredNamespaceUri "https://w3id.org/todo/tododfa" ;
+  a owl:Ontology .
+
+<http://purl.org/net/p-plan#> vann:preferredNamespaceUri "http://purl.org/net/p-plan#" ;
+  a owl:Ontology .
+
+ns1:cto vann:preferredNamespaceUri "https://w3id.org/cto#" ;
+  a owl:Ontology .
+
+ns4:dady vann:preferredNamespaceUri "http://purl.org/NET/dady#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/shacl#> vann:preferredNamespaceUri "http://www.w3.org/ns/shacl#" ;
+  a owl:Ontology .
+
+ns193:protontop vann:preferredNamespaceUri "http://www.ontotext.com/proton/protontop#" ;
+  a owl:Ontology .
+
+<http://purl.org/cwmo/#> vann:preferredNamespaceUri "http://purl.org/cwmo/#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/ssn/> vann:preferredNamespaceUri "http://www.w3.org/ns/ssn/" ;
+  a owl:Ontology .
+
+ns194:tmo a owl:Ontology .
+
+ns12:sport vann:preferredNamespaceUri "http://www.bbc.co.uk/ontologies/sport/" ;
+  a owl:Ontology .
+
+<http://purl.org/biotop/biotop.owl> vann:preferredNamespaceUri "http://purl.org/biotop/biotop.owl#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/mo/> vann:preferredNamespaceUri "http://purl.org/ontology/mo/" ;
+  a owl:Ontology .
+
+ns196:cim-smartgrid vann:preferredNamespaceUri "http://ns.cerise-project.nl/energy/def/cim-smartgrid#" ;
+  a owl:Ontology .
+
+ns1:ontouml vann:preferredNamespaceUri "https://w3id.org/ontouml#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "https://w3id.org/ontouml#" ;
+  a owl:Ontology .
+
+ns13:BatteryOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns197:def a owl:Ontology .
+
+ns198:v1 vann:preferredNamespaceUri "http://ns.inria.fr/ludo/v1#" ;
+  a owl:Ontology .
+
+<https://www.gleif.org/ontology/EntityLegalForm/> vann:preferredNamespaceUri "https://www.gleif.org/ontology/EntityLegalForm/" ;
+  a owl:Ontology .
+
+ns136:wf-motifs vann:preferredNamespaceUri "http://purl.org/net/wf-motifs#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "http://purl.org/net/wf-motifs#" ;
+  a owl:Ontology .
+
+<http://online-presence.net/opo/ns#> vann:preferredNamespaceUri "http://online-presence.net/opo/ns#" ;
+  a owl:Ontology .
+
+<http://ontology.eil.utoronto.ca/icontact.owl> vann:preferredNamespaceUri "http://ontology.eil.utoronto.ca/icontact.owl#" ;
+  a owl:Ontology .
+
+ns85:decomp vann:preferredNamespaceUri "http://www.w3.org/ns/lemon/decomp#" ;
+  a owl:Ontology .
+
+ns84:whois vann:preferredNamespaceUri "http://www.kanzaki.com/ns/whois#" ;
+  a owl:Ontology .
+
+ns1:sri vann:preferredNamespaceUri "https://w3id.org/sri#" ;
+  a owl:Ontology .
+
+ns1:bcom vann:preferredNamespaceUri "https://w3id.org/bcom" ;
+  vann:preferredNamespaceUri "https://w3id.org/bcom#" ;
+  a owl:Ontology .
+
+<http://purl.org/net/hifm/ontology#> vann:preferredNamespaceUri "http://purl.org/net/hifm/ontology#" ;
+  a owl:Ontology .
+
+<http://data.opendiscoveryspace.eu/lom_ontology_ods.owl#> a owl:Ontology .
+
+ns199:ontology vann:preferredNamespaceUri "http://purl.org/saws/ontology#" ;
+  a owl:Ontology .
+
+<http://rdf.myexperiment.org/ontologies/base/> vann:preferredNamespaceUri "http://rdf.myexperiment.org/ontologies/base/" ;
+  a owl:Ontology .
+
+ns200:virtualcontext a owl:Ontology .
+
+ns13:ForecastingOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+<http://data.ordnancesurvey.co.uk/ontology/admingeo/> vann:preferredNamespaceUri "http://data.ordnancesurvey.co.uk/ontology/admingeo/" ;
+  a owl:Ontology .
+
+<http://purl.org/opdm/refrigerator#> vann:preferredNamespaceUri "http://purl.org/opdm/refrigerator#" ;
+  a owl:Ontology .
+
+ns13:FeatureOfInterestOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/FeatureOfInterestOntology/" ;
+  a owl:Ontology .
+
+<http://linkeddata.finki.ukim.mk/lod/ontology/tao#> vann:preferredNamespaceUri "http://linkeddata.finki.ukim.mk/lod/ontology/tao#" ;
+  a owl:Ontology .
+
+<http://data.press.net/ontology/asset/> vann:preferredNamespaceUri "http://data.press.net/ontology/asset/" ;
+  a owl:Ontology .
+
+<http://purl.org/dc/terms/> vann:preferredNamespaceUri "http://purl.org/dc/terms/" ;
+  a owl:Ontology .
+
+<http://www.semanticweb.org/IoT-TTA/> a owl:Ontology .
+
+ns51:cultural-event vann:preferredNamespaceUri "https://w3id.org/arco/ontology/cultural-event/" ;
+  a owl:Ontology .
+
+ns1:eeo vann:preferredNamespaceUri "https://w3id.org/eeo#" ;
+  a owl:Ontology .
+
+<http://data.cochrane.org/ontologies/pico/> vann:preferredNamespaceUri "http://data.cochrane.org/ontologies/pico/" ;
+  a owl:Ontology .
+
+ns10:dataset vann:preferredNamespaceUri "http://reference.data.gov.au/def/ont/dataset#" ;
+  a owl:Ontology .
+
+<http://datos.gob.es/def/sector-publico/organizacion#> vann:preferredNamespaceUri "http://datos.gob.es/def/sector-publico/organizacion#" ;
+  a owl:Ontology .
+
+<https://vocab.eccenca.com/revision/> vann:preferredNamespaceUri "https://vocab.eccenca.com/revision/" ;
+  a owl:Ontology .
+
+ns201:cf-property vann:preferredNamespaceUri "http://purl.oclc.org/NET/ssnx/cf/cf-property#" ;
+  a owl:Ontology .
+
+<http://purl.org/net/cartCoord#> vann:preferredNamespaceUri "http://purl.org/net/cartCoord#" ;
+  a owl:Ontology .
+
+ns202:cubes vann:preferredNamespaceUri "http://purl.org/qb4olap/cubes#" ;
+  a owl:Ontology .
+
+ns203:schema vann:preferredNamespaceUri "http://purl.org/vocab/aiiso/schema#" ;
+  a owl:Ontology .
+
+ns26:omn vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn#> ;
+  vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn#" ;
+  a owl:Ontology .
+
+<http://spi-fm.uca.es/spdef/models/genericTools/vmm/1.0> vann:preferredNamespaceUri "http://spi-fm.uca.es/spdef/models/genericTools/vmm/1.0#" ;
+  a owl:Ontology .
+
+ns205:ns vann:preferredNamespaceUri "http://purl.org/innovation/ns#" ;
+  a owl:Ontology .
+
+ns44:ssso vann:preferredNamespaceUri "http://purl.org/ontology/ssso#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/cp/owl/timeindexedsituation.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/cp/owl/timeindexedsituation.owl" ;
+  a owl:Ontology .
+
+ns165:oh vann:preferredNamespaceUri <http://semweb.mmlab.be/ns/oh#> ;
+  vann:preferredNamespaceUri "http://semweb.mmlab.be/ns/oh#" ;
+  a owl:Ontology .
+
+ns206:ns vann:preferredNamespaceUri "http://www.w3.org/2003/06/sw-vocab-status/ns#" ;
+  a owl:Ontology .
+
+<http://ns.inria.fr/nrv#> vann:preferredNamespaceUri "http://ns.inria.fr/nrv#" ;
+  a owl:Ontology .
+
+ns11:coreo vann:preferredNamespaceUri "http://purl.org/coreo"@en ;
+  vann:preferredNamespaceUri "http://purl.org/coreo#" ;
+  a owl:Ontology .
+
+ns102:swrc a owl:Ontology .
+
+ns165:apps4X vann:preferredNamespaceUri "http://semweb.mmlab.be/ns/apps4X#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4watr/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4watr/" ;
+  a owl:Ontology .
+
+<http://dati.beniculturali.it/cis/> a owl:Ontology .
+
+ns207:nen3610 vann:preferredNamespaceUri "http://modellen.geostandaarden.nl/def/nen3610#" ;
+  a owl:Ontology .
+
+<http://cookingbigdata.com/linkeddata/ccsla#> a owl:Ontology .
+
+<https://w3id.org/skgo/modsci#> vann:preferredNamespaceUri "https://w3id.org/skgo/modsci#" ;
+  a owl:Ontology .
+
+<https://w3id.org/mdo/core/> vann:preferredNamespaceUri "https://w3id.org/mdo/core/1.0/" ;
+  vann:preferredNamespaceUri "https://w3id.org/mdo/core/" ;
+  a owl:Ontology .
+
+ns208:core vann:preferredNamespaceUri "http://purl.org/muto/core#" ;
+  a owl:Ontology .
+
+<http://purl.org/swan/2.0/discourse-relationships/> vann:preferredNamespaceUri "http://purl.org/swan/2.0/discourse-relationships/" ;
+  a owl:Ontology .
+
+<https://w3id.org/pep/> vann:preferredNamespaceUri <https://w3id.org/pep/> ;
+  vann:preferredNamespaceUri "https://w3id.org/pep/" ;
+  a owl:Ontology .
+
+<http://inference-web.org/2.0/ds.owl> vann:preferredNamespaceUri "http://inference-web.org/2.0/ds.owl#" ;
+  a owl:Ontology .
+
+ns54:central-government vann:preferredNamespaceUri "http://reference.data.gov.uk/def/central-government/" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/rdfa#> vann:preferredNamespaceUri "http://www.w3.org/ns/rdfa#" ;
+  a owl:Ontology .
+
+ns1:TRO vann:preferredNamespaceUri "https://w3id.org/TRO#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "https://w3id.org/TRO#" ;
+  a owl:Ontology .
+
+<http://inference-web.org/2.0/ds.owl#> a owl:Ontology .
+
+<http://cookingbigdata.com/linkeddata/ccpricing#> a owl:Ontology .
+
+<http://ns.inria.fr/ludo/v1/virtualcontext#> vann:preferredNamespaceUri "http://ns.inria.fr/ludo/v1/virtualcontext#" ;
+  a owl:Ontology .
+
+<https://vocab.eccenca.com/pubsub/> vann:preferredNamespaceUri "https://vocab.eccenca.com/pubsub/" ;
+  a owl:Ontology .
+
+<http://cookingbigdata.com/linkeddata/ccregions#> a owl:Ontology .
+
+ns209:ov vann:preferredNamespaceUri "https://w3id.org/legalhtml/ov#" ;
+  a owl:Ontology .
+
+<https://privatealpha.com/ontology/content-inventory/1#> vann:preferredNamespaceUri "https://privatealpha.com/ontology/content-inventory/1#" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/ont/web/irw.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/ont/web/irw.owl#" ;
+  a owl:Ontology .
+
+ns200:gamemodel a owl:Ontology .
+
+<http://linked.earth/ontology#> vann:preferredNamespaceUri "http://linked.earth/ontology#" ;
+  a owl:Ontology .
+
+<http://purl.org/onto-ocds/ocds#> a owl:Ontology .
+
+ns174:thors vann:preferredNamespaceUri <http://resource.geosciml.org/ontology/timescale/thors#> ;
+  vann:preferredNamespaceUri "http://resource.geosciml.org/ontology/timescale/thors#" ;
+  a owl:Ontology .
+
+ns51:catalogue vann:preferredNamespaceUri "https://w3id.org/arco/ontology/catalogue/" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/po/> vann:preferredNamespaceUri "http://purl.org/ontology/po/" ;
+  a owl:Ontology .
+
+ns211:turismo vann:preferredNamespaceUri "http://idi.fundacionctic.org/cruzar/turismo#" ;
+  a owl:Ontology .
+
+ns212:op vann:preferredNamespaceUri "http://registry.it.csiro.au/ont/op#" ;
+  vann:preferredNamespaceUri "http://environment.data.gov.au/def/op#" ;
+  a owl:Ontology .
+
+ns13:QUDTAlignment vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns1:BCI-ontology vann:preferredNamespaceUri "https://w3id.org/BCI-ontology#" ;
+  a owl:Ontology .
+
+ns213:schema vann:preferredNamespaceUri "http://purl.org/vocab/changeset/schema#" ;
+  a owl:Ontology .
+
+<http://sensormeasurement.appspot.com/ont/home/homeActivity#> vann:preferredNamespaceUri "http://sensormeasurement.appspot.com/ont/home/homeActivity#" ;
+  a owl:Ontology .
+
+ns85:vartrans vann:preferredNamespaceUri "http://www.w3.org/ns/lemon/vartrans#" ;
+  a owl:Ontology .
+
+ns214:puv vann:preferredNamespaceUri "https://w3id.org/env/puv#" ;
+  a owl:Ontology .
+
+<http://www.loc.gov/standards/mads/rdf/v1.rdf> a owl:Ontology .
+
+ns13:SystemOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+<http://www.sensormeasurement.appspot.com/ont/transport/traffic#> vann:preferredNamespaceUri "http://www.sensormeasurement.appspot.com/ont/transport/traffic#" ;
+  a owl:Ontology .
+
+<http://www.biopax.org/release/biopax-level3.owl> vann:preferredNamespaceUri "http://www.biopax.org/release/biopax-level3.owl#" ;
+  a owl:Ontology .
+
+<http://semanticscience.org/ontology/sio.owl> vann:preferredNamespaceUri "http://semanticscience.org/resource/" ;
+  a owl:Ontology .
+
+ns136:VideoGameOntology vann:preferredNamespaceUri "http://purl.org/net/VideoGameOntology#" ;
+  a owl:Ontology .
+
+ns11:tempo vann:preferredNamespaceUri "http://purl.org/tempo/" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/auth/cert#> vann:preferredNamespaceUri "http://www.w3.org/ns/auth/cert#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/olo/core#> vann:preferredNamespaceUri "http://purl.org/ontology/olo/core#" ;
+  a owl:Ontology .
+
+<http://www.holygoat.co.uk/owl/redwood/0.1/tags/> vann:preferredNamespaceUri "http://www.holygoat.co.uk/owl/redwood/0.1/tags/" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/csvw#> vann:preferredNamespaceUri "http://www.w3.org/ns/csvw#" ;
+  a owl:Ontology .
+
+<http://purl.org/dita/ns#> vann:preferredNamespaceUri <http://purl.org/dita/ns#> ;
+  vann:preferredNamespaceUri "http://purl.org/dita/ns#" ;
+  a owl:Ontology .
+
+<http://privatealpha.com/ontology/certification/1#> vann:preferredNamespaceUri "http://privatealpha.com/ontology/certification/1#" ;
+  a owl:Ontology .
+
+ns218:Ontology a owl:Ontology .
+
+ns219:core vann:preferredNamespaceUri "http://www.ics.forth.gr/isl/oncm/core#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/chord/> vann:preferredNamespaceUri "http://purl.org/ontology/chord/" ;
+  a owl:Ontology .
+
+ns220:ebucore vann:preferredNamespaceUri "http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#" ;
+  a owl:Ontology .
+
+ns221:brk vann:preferredNamespaceUri "http://brk.basisregistraties.overheid.nl/def/brk#" ;
+  a owl:Ontology .
+
+ns222:pattern vann:preferredNamespaceUri "http://www.essepuntato.it/2008/12/pattern#" ;
+  a owl:Ontology .
+
+ns1:EUTaxO vann:preferredNamespaceUri "https://w3id.org/EUTaxO#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "https://w3id.org/EUTaxO#" ;
+  a owl:Ontology .
+
+ns13:BuildingOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns223:IFC4_ADD1 vann:preferredNamespaceUri "https://w3id.org/ifc/IFC4_ADD1" ;
+  vann:preferredNamespaceUri "https://w3id.org/ifc/IFC4_ADD1#" ;
+  a owl:Ontology .
+
+<http://comicmeta.org/cbo/> vann:preferredNamespaceUri "http://comicmeta.org/cbo/" ;
+  vann:preferredNamespaceUri "http://comicmeta.org/cbo" ;
+  a owl:Ontology .
+
+<http://dati.san.beniculturali.it/SAN/> vann:preferredNamespaceUri "http://dati.san.beniculturali.it/SAN/" ;
+  a owl:Ontology .
+
+ns11:configurationontology vann:preferredNamespaceUri "http://purl.org/configurationontology#" ;
+  a owl:Ontology .
+
+<http://purl.org/limo-ontology/limo/> vann:preferredNamespaceUri "http://purl.org/limo-ontology/limo#" ;
+  a owl:Ontology .
+
+<http://data.europa.eu/eli/ontology#> a owl:Ontology .
+
+<http://www.w3.org/2007/uwa/context/deliverycontext.owl> vann:preferredNamespaceUri "http://www.w3.org/2007/uwa/context/common.owl#" ;
+  a owl:Ontology .
+
+ns225:v1 vann:preferredNamespaceUri "http://linkeddata.center/kees/v1#" ;
+  a owl:Ontology .
+
+<https://privatealpha.com/ontology/ibis/1#> vann:preferredNamespaceUri "https://privatealpha.com/ontology/ibis/1#" ;
+  a owl:Ontology .
+
+ns169:content vann:preferredNamespaceUri "http://www.w3.org/2011/content#" ;
+  a owl:Ontology .
+
+<http://purl.org/pav/> vann:preferredNamespaceUri "http://purl.org/pav/" ;
+  a owl:Ontology .
+
+<http://www.sealitproject.eu/ontology/> vann:preferredNamespaceUri <http://www.sealitproject.eu/ontology/> ;
+  vann:preferredNamespaceUri "http://www.sealitproject.eu/ontology/" ;
+  a owl:Ontology .
+
+ns226:lexinfo vann:preferredNamespaceUri "http://www.lexinfo.net/ontology/2.0/lexinfo#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "http://www.lexinfo.net/ontology/2.0/lexinfo#" ;
+  a owl:Ontology .
+
+ns227:lv vann:preferredNamespaceUri "http://purl.org/lobid/lv#" ;
+  a owl:Ontology .
+
+ns51:context-description vann:preferredNamespaceUri "https://w3id.org/arco/ontology/context-description/" ;
+  a owl:Ontology .
+
+<http://www.ontologydesignpatterns.org/ont/lmm/LMM_L1.owl> vann:preferredNamespaceUri "http://www.ontologydesignpatterns.org/ont/lmm/LMM_L1.owl#" ;
+  a owl:Ontology .
+
+ns228:uneskos vann:preferredNamespaceUri "http://purl.org/umu/uneskos#" ;
+  a owl:Ontology .
+
+ns42:food vann:preferredNamespaceUri "http://data.lirmm.fr/ontologies/food#" ;
+  a owl:Ontology .
+
+<http://purl.org/nemo/gufo#> vann:preferredNamespaceUri "http://purl.org/nemo/gufo#"^^xsd:anyURI ;
+  vann:preferredNamespaceUri "http://purl.org/nemo/gufo#" ;
+  a owl:Ontology .
+
+ns229:core vann:preferredNamespaceUri "http://purl.org/ipo/core#" ;
+  a owl:Ontology .
+
+ns230:ontology vann:preferredNamespaceUri "https://purl.org/edifact/ontology#" ;
+  a owl:Ontology .
+
+ns92:SAN vann:preferredNamespaceUri "http://www.irit.fr/recherches/MELODI/ontologies/SAN#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/prov-dc#> a owl:Ontology .
+
+<http://contextus.net/ontology/ontomedia/ext/common/being#> vann:preferredNamespaceUri "http://contextus.net/ontology/ontomedia/ext/common/being#" ;
+  a owl:Ontology .
+
+<https://w3id.org/inrupt/namespace/vocab/authn_provider/> vann:preferredNamespaceUri "https://w3id.org/inrupt/namespace/vocab/authn_provider/" ;
+  a owl:Ontology .
+
+ns55:tododw vann:preferredNamespaceUri "https://w3id.org/todo/tododw" ;
+  vann:preferredNamespaceUri "https://w3id.org/todo/tododw#" ;
+  a owl:Ontology .
+
+<http://dbpedia.org/ontology/> vann:preferredNamespaceUri "http://dbpedia.org/ontology/" ;
+  a owl:Ontology .
+
+ns55:tododt vann:preferredNamespaceUri "https://w3id.org/todo/tododt#" ;
+  vann:preferredNamespaceUri "https://w3id.org/todo/tododt" ;
+  a owl:Ontology .
+
+ns1:CEMontology vann:preferredNamespaceUri "https://w3id.org/CEMontology/" ;
+  a owl:Ontology .
+
+<http://xmlns.com/wot/0.1/> vann:preferredNamespaceUri "http://xmlns.com/wot/0.1/" ;
+  a owl:Ontology .
+
+<http://ontologi.es/doap-deps#> vann:preferredNamespaceUri "http://ontologi.es/doap-deps#" ;
+  a owl:Ontology .
+
+ns55:tododm vann:preferredNamespaceUri "https://w3id.org/todo/tododm#" ;
+  vann:preferredNamespaceUri "https://w3id.org/todo/tododm" ;
+  a owl:Ontology .
+
+ns138:phdd vann:preferredNamespaceUri "http://rdf-vocabulary.ddialliance.org/phdd#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4agri/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4agri/" ;
+  a owl:Ontology .
+
+<http://w3id.org/rml/star/> vann:preferredNamespaceUri "http://w3id.org/rml/" ;
+  a owl:Ontology .
+
+ns148:Basisinformatie-elementen a owl:Ontology .
+
+<http://data.press.net/ontology/classification/> vann:preferredNamespaceUri "http://data.press.net/ontology/classification/" ;
+  a owl:Ontology .
+
+ns3:deo vann:preferredNamespaceUri "http://purl.org/spar/deo/" ;
+  a owl:Ontology .
+
+<http://w3id.org/vcb/fel#> vann:preferredNamespaceUri "http://w3id.org/vcb/fel#" ;
+  a owl:Ontology .
+
+ns231:22-rdf-syntax-ns a owl:Ontology .
+
+ns13:StatisticsOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+ns193:protonext vann:preferredNamespaceUri "http://www.ontotext.com/proton/protonext#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/similarity/> vann:preferredNamespaceUri "http://purl.org/ontology/similarity/" ;
+  a owl:Ontology .
+
+<http://purl.org/vocab/bio/0.1/> vann:preferredNamespaceUri "http://purl.org/vocab/bio/0.1/" ;
+  a owl:Ontology .
+
+ns232:ns vann:preferredNamespaceUri "http://www.gsi.dit.upm.es/ontologies/onyx/ns#" ;
+  a owl:Ontology .
+
+ns65:organizacion vann:preferredNamespaceUri "http://purl.org/ctic/infraestructuras/organizacion#" ;
+  a owl:Ontology .
+
+ns13:DeviceOntology vann:preferredNamespaceUri <https://w3id.org/seas/> ;
+  vann:preferredNamespaceUri "https://w3id.org/seas/" ;
+  a owl:Ontology .
+
+<http://paul.staroch.name/thesis/SmartHomeWeather.owl#> vann:preferredNamespaceUri "http://paul.staroch.name/thesis/SmartHomeWeather.owl" ;
+  vann:preferredNamespaceUri "http://paul.staroch.name/thesis/SmartHomeWeather.owl#" ;
+  a owl:Ontology .
+
+<http://purl.org/voc/summa/> vann:preferredNamespaceUri "http://purl.org/voc/summa/" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/ldp#> vann:preferredNamespaceUri "http://www.w3.org/ns/ldp#" ;
+  a owl:Ontology .
+
+<http://www.mindswap.org/2003/owl/geo/geoFeatures20040307.owl> vann:preferredNamespaceUri "http://www.mindswap.org/2003/owl/geo/geoFeatures20040307.owl#" ;
+  a owl:Ontology .
+
+<http://linked.opendata.cz/ontology/ldvm/> vann:preferredNamespaceUri "http://linked.opendata.cz/ontology/ldvm/" ;
+  a owl:Ontology .
+
+<http://www.identity.org/ontologies/identity.owl> vann:preferredNamespaceUri "http://www.identity.org/ontologies/identity.owl#" ;
+  a owl:Ontology .
+
+ns1:fog vann:preferredNamespaceUri "https://w3id.org/fog#" ;
+  a owl:Ontology .
+
+ns235:basic vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19150/-2/2012/basic#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19150/-2/2012/basic#" ;
+  a owl:Ontology .
+
+ns148:Waardelijsten a owl:Ontology .
+
+ns236:ontology vann:preferredNamespaceUri "https://w3id.org/multidimensional-interface/ontology#" ;
+  a owl:Ontology .
+
+ns237:wine vann:preferredNamespaceUri "http://www.w3.org/TR/2003/PR-owl-guide-20031209/wine#" ;
+  a owl:Ontology .
+
+<https://www.w3id.org/simulation/ontology/> vann:preferredNamespaceUri "https://www.w3id.org/simulation/ontology/" ;
+  a owl:Ontology .
+
+<http://purl.oclc.org/NET/ldr/ns#> vann:preferredNamespaceUri "http://purl.oclc.org/NET/ldr/ns#" ;
+  a owl:Ontology .
+
+<http://elite.polito.it/ontologies/eupont.owl> vann:preferredNamespaceUri "http://elite.polito.it/ontologies/eupont.owl#" ;
+  a owl:Ontology .
+
+<http://d-nb.info/standards/elementset/dnb#> vann:preferredNamespaceUri "http://d-nb.info/standards/elementset/dnb#" ;
+  a owl:Ontology .
+
+<http://rdf.myexperiment.org/ontologies/snarm/> vann:preferredNamespaceUri "http://rdf.myexperiment.org/ontologies/snarm/" ;
+  a owl:Ontology .
+
+ns40:metadata vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19115/2003/metadata#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19115/2003/metadata#" ;
+  a owl:Ontology .
+
+<http://data.press.net/ontology/identifier/> vann:preferredNamespaceUri "http://data.press.net/ontology/identifier/" ;
+  a owl:Ontology .
+
+ns4:tao vann:preferredNamespaceUri "http://vocab.deri.ie/tao#" ;
+  a owl:Ontology .
+
+ns238:powder-s vann:preferredNamespaceUri "http://www.w3.org/2007/05/powder-s#" ;
+  a owl:Ontology .
+
+ns239:localgov vann:preferredNamespaceUri "http://purl.org/oslo/ns/localgov#" ;
+  a owl:Ontology .
+
+<http://w3id.org/vir#> vann:preferredNamespaceUri "http://w3id.org/vir#" ;
+  a owl:Ontology .
+
+ns240:schema vann:preferredNamespaceUri "http://purl.org/vocab/participation/schema#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/is/core#> vann:preferredNamespaceUri "http://purl.org/ontology/is/core#" ;
+  a owl:Ontology .
+
+ns241:ei2av2 a owl:Ontology .
+
+ns242:fridge vann:preferredNamespaceUri "http://owlrep.eu01.aws.af.cm/fridge#" ;
+  a owl:Ontology .
+
+<http://purl.org/NET/biol/botany#> vann:preferredNamespaceUri "http://purl.org/NET/biol/botany#" ;
+  a owl:Ontology .
+
+<http://open-services.net/ns/asset#> vann:preferredNamespaceUri "http://open-services.net/ns/asset#" ;
+  a owl:Ontology .
+
+ns201:cf-feature vann:preferredNamespaceUri "http://purl.oclc.org/NET/ssnx/cf/cf-feature#" ;
+  a owl:Ontology .
+
+<http://purl.org/cerif/frapo/> vann:preferredNamespaceUri "http://purl.org/cerif/frapo/" ;
+  a owl:Ontology .
+
+ns26:omn-lifecycle vann:preferredNamespaceUri <http://open-multinet.info/ontology/omn-lifecycle#> ;
+  vann:preferredNamespaceUri "http://open-multinet.info/ontology/omn-lifecycle#" ;
+  a owl:Ontology .
+
+ns243:v1 vann:preferredNamespaceUri "http://purl.org/healthcarevocab/v1#" ;
+  a owl:Ontology .
+
+ns136:wf-invocation vann:preferredNamespaceUri "http://purl.org/net/wf-invocation#" ;
+  a owl:Ontology .
+
+<http://purl.org/twc/vocab/conversion/> vann:preferredNamespaceUri "http://purl.org/twc/vocab/conversion/" ;
+  a owl:Ontology .
+
+<https://www.gleif.org/ontology/Geocoding/> vann:preferredNamespaceUri "https://www.gleif.org/ontology/Geocoding/" ;
+  a owl:Ontology .
+
+<https://www.w3.org/2019/wot/hypermedia#> vann:preferredNamespaceUri "https://www.w3.org/2019/wot/hypermedia#" ;
+  a owl:Ontology .
+
+<http://securitytoolbox.appspot.com/securityMain#> vann:preferredNamespaceUri "http://securitytoolbox.appspot.com/securityMain#" ;
+  a owl:Ontology .
+
+<http://bblfish.net/work/atom-owl/2006-06-06/> vann:preferredNamespaceUri "http://bblfish.net/work/atom-owl/2006-06-06/#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4envi/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4envi/" ;
+  a owl:Ontology .
+
+<http://theme-e.adaptcentre.ie/dave#> vann:preferredNamespaceUri "http://theme-e.adaptcentre.ie/dave#" ;
+  a owl:Ontology .
+
+<http://schema.mobivoc.org/> vann:preferredNamespaceUri "http://schema.mobivoc.org/" ;
+  a owl:Ontology .
+
+<http://www.ontology-of-units-of-measure.org/resource/om-2/> vann:preferredNamespaceUri "http://www.ontology-of-units-of-measure.org/resource/om-2/" ;
+  a owl:Ontology .
+
+ns244:opmo vann:preferredNamespaceUri "http://openprovenance.org/model/opmo#" ;
+  a owl:Ontology .
+
+ns245:vrank vann:preferredNamespaceUri "http://purl.org/voc/vrank#" ;
+  a owl:Ontology .
+
+ns42:passim vann:preferredNamespaceUri "http://data.lirmm.fr/ontologies/passim#" ;
+  a owl:Ontology .
+
+ns246:visual-analytics vann:preferredNamespaceUri "http://code-research.eu/ontology/visual-analytics#" ;
+  a owl:Ontology .
+
+<http://streamreasoning.org/ontologies/frappe#> vann:preferredNamespaceUri "http://streamreasoning.org/ontologies/frappe#" ;
+  a owl:Ontology .
+
+ns247:persoon vann:preferredNamespaceUri "http://data.vlaanderen.be/ns/persoon" ;
+  vann:preferredNamespaceUri "http://data.vlaanderen.be/ns/persoon#" ;
+  a owl:Ontology .
+
+ns248:voaf vann:preferredNamespaceUri "http://purl.org/vocommons/voaf#" ;
+  a owl:Ontology .
+
+ns249:Ontology vann:preferredNamespaceUri "https://w3id.org/opentrafficlights#" ;
+  a owl:Ontology .
+
+ns1:isCharacterisedBy vann:preferredNamespaceUri "https://w3id.org/isCharacterisedBy" ;
+  vann:preferredNamespaceUri "https://w3id.org/isCharacterisedBy#" ;
+  a owl:Ontology .
+
+<http://www.tele.pw.edu.pl/~sims-onto/ConnectivityType.owl> vann:preferredNamespaceUri "http://www.tele.pw.edu.pl/~sims-onto/ConnectivityType.owl#" ;
+  a owl:Ontology .
+
+ns251:mex-algo vann:preferredNamespaceUri "http://mex.aksw.org/mex-algo#" ;
+  a owl:Ontology .
+
+<http://purl.org/coo/ns#> vann:preferredNamespaceUri "http://purl.org/coo/ns#" ;
+  a owl:Ontology .
+
+ns1:tribont vann:preferredNamespaceUri "https://w3id.org/tribont" ;
+  vann:preferredNamespaceUri "https://w3id.org/tribont#" ;
+  a owl:Ontology .
+
+ns127:geosparql vann:preferredNamespaceUri "http://www.opengis.net/ont/geosparql#" ;
+  a owl:Ontology .
+
+<http://www.data-knowledge.org/dk/> vann:preferredNamespaceUri "http://www.data-knowledge.org/dk/" ;
+  a owl:Ontology .
+
+<https://yogaontology.org/ontology/> vann:preferredNamespaceUri "https://yogaontology.org/ontology/" ;
+  a owl:Ontology .
+
+ns4:rooms vann:preferredNamespaceUri "http://vocab.deri.ie/rooms#" ;
+  a owl:Ontology .
+
+<http://kmi.open.ac.uk/projects/smartproducts/ontologies/food.owl> vann:preferredNamespaceUri "http://kmi.open.ac.uk/projects/smartproducts/ontologies/food.owl#" ;
+  a owl:Ontology .
+
+ns253:bag vann:preferredNamespaceUri "http://bag.basisregistraties.overheid.nl/def/bag#" ;
+  a owl:Ontology .
+
+ns70:general a owl:Ontology .
+
+<http://www.ics.forth.gr/isl/VoIDWarehouse/VoID_Extension_Schema.owl> vann:preferredNamespaceUri "http://www.ics.forth.gr/isl/VoIDWarehouse/VoID_Extension_Schema.owl" ;
+  a owl:Ontology .
+
+ns1:peco vann:preferredNamespaceUri "https://w3id.org/peco#" ;
+  a owl:Ontology .
+
+<http://purl.org/SemSur/> vann:preferredNamespaceUri "http://purl.org/SemSur/"^^<http://purl.org/dc/terms/URI> ;
+  vann:preferredNamespaceUri "http://purl.org/SemSur/" ;
+  a owl:Ontology .
+
+ns255:spatial vann:preferredNamespaceUri "http://geovocab.org/spatial#" ;
+  a owl:Ontology .
+
+ns256:ns vann:preferredNamespaceUri "http://purl.org/vso/ns#" ;
+  a owl:Ontology .
+
+<http://purl.org/NET/c4dm/keys.owl> vann:preferredNamespaceUri "http://purl.org/NET/c4dm/keys.owl#" ;
+  a owl:Ontology .
+
+<https://w3id.org/mdo/structure/> vann:preferredNamespaceUri "https://w3id.org/mdo/structure/1.0/" ;
+  vann:preferredNamespaceUri "https://w3id.org/mdo/structure/" ;
+  a owl:Ontology .
+
+ns257:ontology-07 vann:preferredNamespaceUri "http://swrc.ontoware.org/ontology#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/rec/core#> vann:preferredNamespaceUri "http://purl.org/ontology/rec/core#" ;
+  a owl:Ontology .
+
+ns32:agr vann:preferredNamespaceUri "http://promsns.org/def/agr#" ;
+  a owl:Ontology .
+
+ns44:service vann:preferredNamespaceUri "http://purl.org/ontology/service#" ;
+  a owl:Ontology .
+
+ns258:feature vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19109/2005/feature#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19109/2005/feature#" ;
+  a owl:Ontology .
+
+<http://purl.org/biodiversity/taxon/> vann:preferredNamespaceUri "http://purl.org/biodiversity/taxon/" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4bldg/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4bldg/" ;
+  a owl:Ontology .
+
+<http://data.ordnancesurvey.co.uk/ontology/50kGazetteer/> vann:preferredNamespaceUri "http://data.ordnancesurvey.co.uk/ontology/50kGazetteer/" ;
+  a owl:Ontology .
+
+<https://w3id.org/mdo/full/> vann:preferredNamespaceUri "https://w3id.org/mdo/full/1.0/" ;
+  vann:preferredNamespaceUri "https://w3id.org/mdo/full/" ;
+  a owl:Ontology .
+
+<http://open-services.net/ns/core#> vann:preferredNamespaceUri "http://open-services.net/ns/core#" ;
+  a owl:Ontology .
+
+<http://www.loa-cnr.it/ontologies/DUL.owl> a owl:Ontology .
+
+ns9:incident vann:preferredNamespaceUri "http://vocab.resc.info/incident#" ;
+  a owl:Ontology .
+
+ns3:pwo vann:preferredNamespaceUri "http://purl.org/spar/pwo/" ;
+  a owl:Ontology .
+
+ns3:cito vann:preferredNamespaceUri "http://purl.org/spar/cito/" ;
+  a owl:Ontology .
+
+ns260:irao vann:preferredNamespaceUri "http://ontology.ethereal.cz/irao/" ;
+  a owl:Ontology .
+
+ns1:cdc vann:preferredNamespaceUri "https://w3id.org/cdc#" ;
+  a owl:Ontology .
+
+ns4:scsv vann:preferredNamespaceUri "http://purl.org/NET/schema-org-csv#" ;
+  a owl:Ontology .
+
+ns261:ns vann:preferredNamespaceUri "http://www.w3.org/2006/vcard/ns#" ;
+  a owl:Ontology .
+
+<http://bimerr.iot.linkeddata.es/def/occupancy-profile#> vann:preferredNamespaceUri "http://bimerr.iot.linkeddata.es/def/occupancy-profile#" ;
+  a owl:Ontology .
+
+ns251:mex-perf vann:preferredNamespaceUri "http://mex.aksw.org/mex-perf#" ;
+  a owl:Ontology .
+
+ns11:eem vann:preferredNamespaceUri "http://purl.org/eem#" ;
+  a owl:Ontology .
+
+ns87:time-entry vann:preferredNamespaceUri "http://www.w3.org/2006/time-entry#" ;
+  a owl:Ontology .
+
+<http://ontology.cybershare.utep.edu/dbowl/relational-to-ontology-mapping-primitive.owl> vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/dbowl/" ;
+  a owl:Ontology .
+
+<http://data.doremus.org/ontology#> vann:preferredNamespaceUri "http://data.doremus.org/ontology#" ;
+  a owl:Ontology .
+
+<http://www.telegraphis.net/ontology/measurement/measurement#> vann:preferredNamespaceUri "http://www.telegraphis.net/ontology/measurement/measurement#" ;
+  a owl:Ontology .
+
+<https://saref.etsi.org/saref4wear/> vann:preferredNamespaceUri "https://saref.etsi.org/saref4wear/" ;
+  a owl:Ontology .
+
+ns27:vaem vann:preferredNamespaceUri "http://www.linkedmodel.org/schema/vaem#" ;
+  a owl:Ontology .
+
+<http://purl.org/ontology/wo/core#> vann:preferredNamespaceUri "http://purl.org/ontology/wo/core#" ;
+  a owl:Ontology .
+
+ns46:sample vann:preferredNamespaceUri "https://w3id.org/tribont/sample" ;
+  vann:preferredNamespaceUri "https://w3id.org/tribont/sample#" ;
+  a owl:Ontology .
+
+<http://purl.org/theatre#> vann:preferredNamespaceUri "http://purl.org/theatre#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/radion#> vann:preferredNamespaceUri "http://www.w3.org/ns/radion#"@en ;
+  vann:preferredNamespaceUri "http://www.w3.org/ns/radion#" ;
+  a owl:Ontology .
+
+ns263:nschema vann:preferredNamespaceUri "http://www.nanopub.org/nschema#" ;
+  a owl:Ontology .
+
+ns264:def a owl:Ontology .
+
+ns265:triple-access-control vann:preferredNamespaceUri "http://ns.bergnet.org/tac/0.1/triple-access-control#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/ns/prov-o#> vann:preferredNamespaceUri "http://ontology.cybershare.utep.edu/ELSEWeb/" ;
+  a owl:Ontology .
+
+<http://rdf.geospecies.org/ont/geospecies.owl> a owl:Ontology .
+
+<http://purl.org/ontology/cco/core#> vann:preferredNamespaceUri "http://purl.org/ontology/cco/core#" ;
+  a owl:Ontology .
+
+ns176:ro vann:preferredNamespaceUri "http://purl.org/wf4ever/ro#" ;
+  a owl:Ontology .
+
+<https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/WeatherOntology.owl> vann:preferredNamespaceUri "https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/WeatherOntology.owl" ;
+  a owl:Ontology .
+
+ns268:cbs vann:preferredNamespaceUri "http://betalinkeddata.cbs.nl/def/cbs#" ;
+  a owl:Ontology .
+
+ns75:portal vann:preferredNamespaceUri "http://www.aktors.org/ontology/portal#" ;
+  a owl:Ontology .
+
+ns50:dcat vann:preferredNamespaceUri "http://www.w3.org/ns/dcat#" ;
+  a owl:Ontology .
+
+ns255:geometry vann:preferredNamespaceUri "http://geovocab.org/geometry#" ;
+  a owl:Ontology .
+
+ns4:scovo vann:preferredNamespaceUri "http://purl.org/NET/scovo#" ;
+  a owl:Ontology .
+
+<http://lod.taxonconcept.org/ontology/sci_people.owl> vann:preferredNamespaceUri "http://lod.taxonconcept.org/ontology/sci_people.owl#" ;
+  a owl:Ontology .
+
+ns1:sao vann:preferredNamespaceUri "https://w3id.org/sao#" ;
+  a owl:Ontology .
+
+ns269:endpointStatus vann:preferredNamespaceUri "http://labs.mondeca.com/vocab/endpointStatus#" ;
+  a owl:Ontology .
+
+ns1:AIRO vann:preferredNamespaceUri "https://w3id.org/AIRO#" ;
+  a owl:Ontology .
+
+<http://w3id.org/medred/medred#> vann:preferredNamespaceUri "http://w3id.org/medred/medred#" ;
+  a owl:Ontology .
+
+ns270:basic vann:preferredNamespaceUri <http://def.seegrid.csiro.au/isotc211/iso19103/2005/basic#> ;
+  vann:preferredNamespaceUri "http://def.seegrid.csiro.au/isotc211/iso19103/2005/basic#" ;
+  a owl:Ontology .
+
+ns271:ontology a owl:Ontology .
+
+ns89:military vann:preferredNamespaceUri "http://rdf.muninn-project.org/ontologies/military#" ;
+  a owl:Ontology .
+
+<https://rhizomik.net/ontologies/copyrightonto.owl> a owl:Ontology .
+
+ns251:mex-core vann:preferredNamespaceUri "http://mex.aksw.org/mex-core#" ;
+  a owl:Ontology .
+
+<http://reference.data.gov.uk/def/intervals/> a owl:Ontology .
+
+<http://purl.org/twc/ontology/cdm.owl#> vann:preferredNamespaceUri "http://purl.org/twc/ontology/cdm.owl#" ;
+  a owl:Ontology .
+
+<http://linkeddata.finki.ukim.mk/lod/ontology/cfrl#> vann:preferredNamespaceUri "http://linkeddata.finki.ukim.mk/lod/ontology/cfrl#" ;
+  a owl:Ontology .
+
+<http://purl.org/prog/> vann:preferredNamespaceUri "http://purl.org/prog/" ;
+  a owl:Ontology .
+
+ns273:dq-constraints vann:preferredNamespaceUri "http://semwebquality.org/ontologies/dq-constraints#" ;
+  a owl:Ontology .
+
+ns200:xapi vann:preferredNamespaceUri "http://ns.inria.fr/ludo/v1/xapi#" ;
+  a owl:Ontology .
+
+ns1:amv vann:preferredNamespaceUri "https://w3id.org/amv" ;
+  vann:preferredNamespaceUri "https://w3id.org/amv#" ;
+  a owl:Ontology .
+
+<http://purl.org/toco/> vann:preferredNamespaceUri "http://purl.org/toco/" ;
+  a owl:Ontology .
+
+ns274:ontology vann:preferredNamespaceUri "http://lexvo.org/ontology#" ;
+  a owl:Ontology .
+
+<http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> vann:preferredNamespaceUri "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#" ;
+  a owl:Ontology .
+
+ns275:core vann:preferredNamespaceUri "http://w3id.org/rml/" ;
+  a owl:Ontology .
+
+<http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1> vann:preferredNamespaceUri "http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#" ;
+  a owl:Ontology .
+
+ns237:food a owl:Ontology .
+
+<https://www.gleif.org/ontology/Base/> vann:preferredNamespaceUri "https://www.gleif.org/ontology/Base/" ;
+  a owl:Ontology .
+
+<http://purl.org/net/po#> vann:preferredNamespaceUri "http://purl.org/net/po#" ;
+  a owl:Ontology .
+
+<http://www.w3.org/2004/02/skos/core#> a owl:Ontology .
+
+<http://purl.org/iot/vocab/m3-lite#> vann:preferredNamespaceUri "http://purl.org/iot/vocab/m3-lite#" ;
+  a owl:Ontology .
+
+ns1:todo vann:preferredNamespaceUri "https://w3id.org/todo" ;
+  vann:preferredNamespaceUri "https://w3id.org/todo#" ;
+  a owl:Ontology .
+
+<http://securitytoolbox.appspot.com/stac#> vann:preferredNamespaceUri "http://securitytoolbox.appspot.com/stac#" ;
+  a owl:Ontology .
+
