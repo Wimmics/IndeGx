@@ -138,6 +138,32 @@ SELECT DISTINCT ?server (COUNT(DISTINCT ?endpoint) AS ?count) {
 } GROUP BY ?server
 ```
 
+## Vocabularies and their usages
+
+### List of vocabularies
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT DISTINCT ?vocab {
+    ?vocab a owl:Ontology .
+}
+```
+
+### Vocabularies and the number of endpoints using them
+
+```sparql
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX kgi: <http://ns.inria.fr/kg/index#>
+PREFIX vann: <http://purl.org/vocab/vann/>
+PREFIX voaf: <http://purl.org/vocommons/voaf#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT DISTINCT ?vocab (COUNT(DISTINCT ?endpoint) AS ?count) {
+    ?vocab voaf:usageInDataset ?occurrence .
+    ?occurrence voaf:inDataset ?endpoint .
+} GROUP BY ?vocab
+                
+```
+
 ## LOV subset
 
 The `lov_namespaces_18042024.ttl` was extracted from the LOV endpoint on the 18/04/2024 using the query:
