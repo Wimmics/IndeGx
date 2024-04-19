@@ -2425,7 +2425,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns224:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FBotterK%2FANDB-ADB-all%2Fsparql> ns2:importedFrom ns63:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FBotterK%2FANDB-ADB-all%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns63:datasets ;
   ns8:sparqlEndpoint ns225:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns225:sparql .
@@ -5236,7 +5237,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns628:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.uniprot.org%2F> ns2:importedFrom ns7:search ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.uniprot.org%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns7:search ;
   ns8:sparqlEndpoint <https://sparql.uniprot.org/> ;
   a ns10:Dataset ;
   ns10:endpointURL <https://sparql.uniprot.org/> .
@@ -5944,7 +5946,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns724:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-04-18T07:37:03.912Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-04-19T07:36:38.306Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
