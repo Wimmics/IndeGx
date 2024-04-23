@@ -21,7 +21,8 @@
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     ASK { 
         kgi: sd:namedGraph $rawEndpointUrl .
-        SERVICE $rawEndpointUrl { 
+        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1" ) ) AS ?editedEndpointUrl )
+        SERVICE ?editedEndpointUrl {
             {
                 SELECT ?whatever WHERE {
                     ?s a ?whatever .
@@ -43,7 +44,8 @@
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     ASK { 
         kgi: sd:namedGraph $rawEndpointUrl .
-        SERVICE $rawEndpointUrl { 
+        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1" ) ) AS ?editedEndpointUrl )
+        SERVICE ?editedEndpointUrl {
             {
                 SELECT ?whatever WHERE {
                     ?s ?whatever ?o .
