@@ -115,9 +115,15 @@ function sendQueryWithTraceHandling(queryFunction: (a: string, b: string, c: str
                 return results;
             });
         } else if (results !== undefined && results.error === undefined) {
-            return sendSuccessReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime).then(() => {
-                return results;
-            });
+            if (SPARQLUtils.isSparqlAsk(queryString) && results == false) {
+                return sendFailureReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime, "false").then(() => {
+                    return results;
+                });
+            } else {
+                return sendSuccessReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime).then(() => {
+                    return results;
+                });
+            }
         } else if (results === undefined && SPARQLUtils.isSparqlUpdate(queryString)) {
             return sendSuccessReportUpdate(endpointUrl, queryString, baseURI, entryObject, startTime, endTime).then(() => {
                 return results;
