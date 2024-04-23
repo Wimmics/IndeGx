@@ -21,14 +21,10 @@
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     ASK { 
         kgi: sd:namedGraph $rawEndpointUrl .
-        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1" ) ) AS ?editedEndpointUrl )
+        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1&timeout=1000" ) ) AS ?editedEndpointUrl )
         SERVICE ?editedEndpointUrl {
-            {
-                SELECT ?whatever WHERE {
-                    ?s a ?whatever .
-                    FILTER( STRSTARTS( STR(?whatever), STR(<http://vocab.data.gov/def/fea>) ) )
-                } LIMIT 1
-            }
+            ?s a ?whatever .
+            FILTER( STRSTARTS( STR(?whatever), STR(<http://vocab.data.gov/def/fea>) ) )
         }
     }""" ,
     """PREFIX voaf: <http://purl.org/vocommons/voaf#>
@@ -44,13 +40,9 @@
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     ASK { 
         kgi: sd:namedGraph $rawEndpointUrl .
-        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1" ) ) AS ?editedEndpointUrl )
+        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1&timeout=1000" ) ) AS ?editedEndpointUrl )
         SERVICE ?editedEndpointUrl {
-            {
-                SELECT ?whatever WHERE {
-                    ?s ?whatever ?o .
-                    FILTER( STRSTARTS( STR(?whatever), STR(<http://vocab.data.gov/def/fea>) ) )
-                } LIMIT 1
-            }
+            ?s ?whatever ?o .
+            FILTER( STRSTARTS( STR(?whatever), STR(<http://vocab.data.gov/def/fea>) ) )
         }
     }""" .
