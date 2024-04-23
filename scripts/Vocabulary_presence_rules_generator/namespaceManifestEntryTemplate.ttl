@@ -23,7 +23,7 @@
                 ?occurrence a voaf:DatasetOccurences ;
                     voaf:inDataset $rawEndpointUrl .
             } WHERE {
-                BIND(CONCAT( STR(kgi:), MD5( STR(?vocab) ) ) AS ?occurrence)
+                BIND(CONCAT( STR(kgi:), MD5( STR(%%%namespace%%%) ) ) AS ?occurrence)
             }"""
         ]
     ) .
