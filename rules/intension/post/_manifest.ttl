@@ -9,9 +9,10 @@
         <moveReasonerGraph.ttl>
         <extractEndpointExtension.ttl>
         <annotateEndpointWithLocation.ttl>
+        <applyEquivalences.ttl>
     ) .
 
-<applyEquivalencesOfType.ttl> a mf:ManifestEntry ;
+<applyEquivalences.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             a mf:Action ;
