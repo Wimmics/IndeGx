@@ -11,7 +11,10 @@
     dcterms:description "SPARQL SELECT query with a UNION of two triple patterns using REDUCED." ;
     kgi:query """SELECT DISTINCT * WHERE { 
         SERVICE $rawEndpointUrl {
-            <http://nonsensical.com/1> <http://example.org/type> ?o 
+            SELECT REDUCED ?o {
+                { <http://nonsensical.com/1> <http://example.org/type> ?o }
+                UNION { <http://nonsensical.com/2> <http://example.org/type> ?o }
+            } LIMIT 1
         }
     } 
-    LIMIT 10"""  .
+    LIMIT 1"""  .
