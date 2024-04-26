@@ -7,7 +7,9 @@ if [ ! -e $corese_jar ]; then
     wget -q https://github.com/Wimmics/corese/releases/download/release-$corese_version/$corese_jar
 fi
 
-rm -f rules/*
+rm -rf rules/*
+mkdir rules/main
+mkdir rules/post
 
 # Extraction of the namespace and property list
 java -jar $corese_jar sparql -w -i lov_namespaces_18042024.ttl -o namespaceList.csv -of csv -q ./namespaceList.rq
@@ -19,8 +21,10 @@ entry_list=""
 
 # Create the manifest for all the tests
 manifest_file=_manifest.ttl
-manifest_file_path=rules/$manifest_file
-cat ./manifestTemplate.ttl > $manifest_file_path
+post_manifest_file_path=rules/post/$manifest_file
+main_manifest_file_path=rules/main/$manifest_file
+cat ./postManifestTemplate.ttl > $post_manifest_file_path
+cat ./mainManifestTemplate.ttl > $main_manifest_file_path
 
 # Create the test for each namespace and property
 file_number=0
@@ -29,7 +33,7 @@ while read namespace; do
     file_number=$((file_number+1))
     namespace_test_file=namespaceTest$file_number.ttl
     echo "Processing namespace $namespace to $namespace_test_file..."
-    namespace_test_file_path=rules/namespaceTest$file_number.ttl
+    namespace_test_file_path=rules/post/namespaceTest$file_number.ttl
     # Create the test file
     cat ./namespaceTestTemplate.ttl > $namespace_test_file_path
     replace "%%%namespace%%%" "<$namespace>" -- $namespace_test_file_path 
@@ -41,7 +45,7 @@ while read namespace; do
 done < namespaceList.csv
 
 # Replace the entry list in the manifest
-replace "%%%ENTRY_LIST%%%" "$entry_list" -- $manifest_file_path
-echo "$(cat $manifest_file_path) $namespace_entry_definitions" > $manifest_file_path
+replace "%%%ENTRY_LIST%%%" "$entry_list" -- $post_manifest_file_path
+echo "$(cat $post_manifest_file_path) $namespace_entry_definitions" > $post_manifest_file_path
 
-cp init.ttl rules/init.ttl
+cp init.ttl rules/main/init.ttl

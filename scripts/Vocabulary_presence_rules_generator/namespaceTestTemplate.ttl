@@ -7,7 +7,7 @@
 
 <> rdf:type kgi:TestQuery ;
     dcterms:isReferencedBy <manifest.ttl> ;
-    dcterms:title "Text of the presence of class %%%namespace%%%" ;
+    dcterms:title "Test of the presence of class %%%namespace%%%" ;
     kgi:query """PREFIX voaf: <http://purl.org/vocommons/voaf#>
     PREFIX kgi: <http://ns.inria.fr/kg/index#>
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -21,9 +21,8 @@
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     ASK { 
         kgi: sd:namedGraph $rawEndpointUrl .
-        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1&timeout=1000" ) ) AS ?editedEndpointUrl )
-        SERVICE ?editedEndpointUrl {
-            ?s a ?whatever .
+        GRAPH $rawEndpointUrl {
+            $rawEndpointUrl void:classPartition ?whatever .
             FILTER( STRSTARTS( STR(?whatever), STR(%%%namespace%%%) ) )
         }
     }""" ,
@@ -40,9 +39,8 @@
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     ASK { 
         kgi: sd:namedGraph $rawEndpointUrl .
-        BIND( IRI( CONCAT( STR($rawEndpointUrl), "?limit=1&timeout=1000" ) ) AS ?editedEndpointUrl )
-        SERVICE ?editedEndpointUrl {
-            ?s ?whatever ?o .
+        GRAPH $rawEndpointUrl {
+            $rawEndpointUrl void:propertyPartition ?whatever .
             FILTER( STRSTARTS( STR(?whatever), STR(%%%namespace%%%) ) )
         }
     }""" .
