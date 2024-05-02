@@ -1017,6 +1017,7 @@
   ns10:endpointURL ns23:around .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.imgt.org%2Ffuseki%2FImgtKg%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+  ns2:importedFrom ns7:search ;
   ns8:sparqlEndpoint ns24:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns24:sparql .
@@ -2619,8 +2620,7 @@
   a ns10:Dataset ;
   ns10:endpointURL ns251:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.enzyme.org%2Fsparql> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.enzyme.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint ns252:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns252:sparql .
@@ -4063,7 +4063,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns458:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhamap.expasy.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns8:sparqlEndpoint ns459:sparql ;
   a ns10:Dataset ;
@@ -5949,7 +5950,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns724:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-05-01T07:37:32.345Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-05-02T07:36:44.992Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
