@@ -3255,6 +3255,11 @@
   a ns10:Dataset ;
   ns10:endpointURL ns340:sparql .
 
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2F> ns2:importedFrom ns3:sparql ;
+  ns8:sparqlEndpoint <https://rdf.metanetx.org/> ;
+  a ns10:Dataset ;
+  ns10:endpointURL <https://rdf.metanetx.org/> .
+
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fintegbio.jp%2Frdf%2Fkero%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom ns7:search ;
   ns8:sparqlEndpoint ns341:sparql ;
@@ -5950,7 +5955,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns724:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-05-02T07:36:44.992Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-05-03T07:36:25.084Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
@@ -6319,6 +6324,7 @@ ns1:Catalog ns2:lastRefreshedOn "2024-05-02T07:36:44.992Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fbiomodels.bio2rdf.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpathwaycommons.bio2rdf.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.parliament.uk%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fintegbio.jp%2Frdf%2Fkero%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fobchodn%C3%AD-rejst%C5%99%C3%ADk.stirdata.opendata.cz%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.cooperationdatabank.org%2Fdatasets%2Fcoda%2Fdatabank%2Fservices%2Fdatabank%2Fsparql> ;
