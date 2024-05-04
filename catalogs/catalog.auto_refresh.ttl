@@ -1750,7 +1750,8 @@
   a ns10:Dataset ;
   ns10:endpointURL ns131:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns2:importedFrom ns7:search ;
@@ -3255,7 +3256,7 @@
   a ns10:Dataset ;
   ns10:endpointURL ns340:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2F> ns2:importedFrom ns3:sparql ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2F> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns8:sparqlEndpoint <https://rdf.metanetx.org/> ;
   a ns10:Dataset ;
   ns10:endpointURL <https://rdf.metanetx.org/> .
@@ -5955,7 +5956,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns724:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-05-03T07:36:25.084Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-05-04T07:37:35.293Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
