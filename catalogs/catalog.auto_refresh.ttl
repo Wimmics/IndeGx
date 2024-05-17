@@ -2011,6 +2011,11 @@
   a ns10:Dataset ;
   ns10:endpointURL ns169:query .
 
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.roceeh.uni-tuebingen.de%2Froad%2F> ns2:importedFrom ns3:sparql ;
+  ns8:sparqlEndpoint <https://www.roceeh.uni-tuebingen.de/road/> ;
+  a ns10:Dataset ;
+  ns10:endpointURL <https://www.roceeh.uni-tuebingen.de/road/> .
+
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.datao.net%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
@@ -5959,7 +5964,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns725:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-05-16T07:37:23.298Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-05-17T07:37:00.982Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
@@ -6131,6 +6136,7 @@ ns1:Catalog ns2:lastRefreshedOn "2024-05-16T07:37:23.298Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.cnr.it%2Fsparql-proxy> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsophox.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fecowlim.tfri.gov.tw%2Fsparql%2Fquery> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.roceeh.uni-tuebingen.de%2Froad%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.datao.net%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fbio2rdf.org%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.glygen.org%3A8880%2Fsparql> ;
