@@ -117,15 +117,11 @@ output/
 
 *.pdf
 
-*.trig
-
 config/corese-profile.ttl
 
 scripts/FAIR-Checker_score_comparison/src/*.js
 
 scripts/FAIR-Checker_score_retrieval/src/*.js
-
-*.csv
 
 *.ods#
 
@@ -155,6 +151,13 @@ scripts/clean_Turtle_RDF_File/package-lock.json
 
 input/LOV_redux.ttl
 
-input/LOV_redux.ttl
-
 scripts/Vocabulary_rules_generator/rules/
+scripts/*/*.csv
+
+input/*.trig
+input/*.gz
+
+
+scripts/clean_Turtle_RDF_File/result.trig
+
+scripts/Experiment_partition_launch/online_endpoint_catalog.trig
