@@ -3,11 +3,19 @@
 # Upload to virtuoso
 upload_file(){
     file=$1
+
     filename=`basename $file`
     echo "Uploading $filename"
 
-    # Moving file in view of the virtuoso docker image
-    cp $file import/
+    if [ `grep -q "(http|https)\:\/\/" $file`]; then
+        # Download the file
+        curl -s $file
+        # Moving file in view of the virtuoso docker image
+        mv $filename import/
+    else
+        # Copying file in view of the virtuoso docker image
+        cp $file import/
+    fi
 
     sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL LOAD <file:///database/import/$filename>;"
 
