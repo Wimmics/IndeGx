@@ -7,12 +7,15 @@ upload_file(){
     filename=`basename $file`
     echo "Uploading $filename"
 
-    if [ `echo "file" | grep -q -e "/^(http|https):/"`]; then
+    if echo $file | grep -q "http" 
+    then
+        echo "Downloading remote file $file"
         # Download the file
         curl -s $file
         # Moving file in view of the virtuoso docker image
         mv $filename import/
     else
+        echo "Copying local file $file"
         # Copying file in view of the virtuoso docker image
         cp $file import/
     fi
