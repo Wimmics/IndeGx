@@ -11,7 +11,7 @@ upload_file(){
     then
         echo "Downloading remote file $file"
         # Download the file
-        curl -s $file
+        curl -s -LO $file
         # Moving file in view of the virtuoso docker image
         mv $filename import/
     else
