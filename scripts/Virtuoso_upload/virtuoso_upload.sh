@@ -12,7 +12,7 @@ upload_file(){
     sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL LOAD <file:///database/import/$filename>;"
 
     # cleanup
-    rm import/$file
+    rm import/$filename
 }
 
 # corese_version=4.5.0
