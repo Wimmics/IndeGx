@@ -11,7 +11,7 @@ upload_file(){
     echo "Uploading $filename"
     local_file=$file
 
-    if echo $file | grep -q "/^http/" 
+    if echo $file | grep -q "http" 
     then
         echo "Downloading remote file $file"
         # Download the file
