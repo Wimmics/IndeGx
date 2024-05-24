@@ -3,12 +3,4 @@ SELECT DISTINCT ?graph {
         ?s ?p ?o .
     }
     FILTER ( ?graph != <http://ns.inria.fr/corese/kgram/default>)
-    SERVICE <http://localhost:1111/sparql> {
-        VALUES ?graph { UNDEF }
-        FILTER( NOT EXISTS {
-                GRAPH ?graph {
-                    ?sv ?pv ?ov .
-                }
-        })
-    }
 }

@@ -3,6 +3,28 @@
 corese_version=4.5.0
 corese_jar=corese-command-$corese_version.jar
 
+if [ $# -le 1 ]; then
+    echo "Expected arguments: $0 <dba password> <file1> ..."
+    exit 0
+fi
+
+# Check if the virtuoso container is running
+if [ ! "$(sudo docker ps -q -f name=virtuoso)" ]; then
+    echo "The virtuoso container is not running"
+    exit 1
+fi
+
+# Retrieve password from command line
+DBA_PASSWORD=$1
+
+
+# Retrieve file names from command line
+nb_files=$(($#-1))
+echo "Uploading $nb_files files"
+
+# Retrieve the list of graphs in the virtuoso server
+virtuoso_graph_list=$(sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL SELECT DISTINCT ?g WHERE { GRAPH ?g {?s ?p ?o} };")
+
 # Upload to virtuoso
 upload_file(){
     file=$1
@@ -38,7 +60,8 @@ upload_file(){
 
         for graph in `cat named_graph_list.txt`
         do
-            if [[ ! $graph == "graph" && ! $graph == "http://ns.inria.fr/corese/kgram/default" ]]; then
+            # If the graph name is not the header and is not in the virtuoso graph list
+            if [[ ! $graph == "graph" && ! -z $(echo $virtuoso_graph_list | grep "$graph") ]]; then
                 echo "Creating graph $graph"
                 sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL CREATE GRAPH <$graph>;"
             fi
@@ -50,22 +73,10 @@ upload_file(){
     sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL LOAD <file:///database/$local_file>;"
 
     # cleanup
-    rm import/$filename
+    rm $local_file
 }
 
-if [ $# -le 1 ]; then
-    echo "Expected arguments: $0 <dba password> <file1> ..."
-    exit 0
-fi
-
-# Retrieve password from command line
-DBA_PASSWORD=$1
-
-
-# Retrieve file names from command line
-nb_files=$(($#-1))
-echo "Uploading $nb_files files"
-
+# Iteration of the file list in the arguments
 current_file_nb=1
 while [ $current_file_nb -le $nb_files ] 
 do
@@ -75,4 +86,3 @@ do
     upload_file $filename
     
 done
-
