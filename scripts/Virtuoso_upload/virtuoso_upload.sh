@@ -23,7 +23,9 @@ nb_files=$(($#-1))
 echo "Uploading $nb_files files"
 
 # Retrieve the list of graphs in the virtuoso server
-virtuoso_graph_list=$(sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL SELECT DISTINCT ?g WHERE { GRAPH ?g {?s ?p ?o} };")
+echo "Retrieving the list of graphs in the virtuoso server"
+sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL SELECT DISTINCT ?g WHERE { GRAPH ?g {?s ?p ?o} };" > virtuoso_graph_list.txt
+virtuoso_graph_list=virtuoso_graph_list.txt
 
 # Upload to virtuoso
 upload_file(){
@@ -61,7 +63,7 @@ upload_file(){
         for graph in `cat named_graph_list.txt`
         do
             # If the graph name is not the header and is not in the virtuoso graph list
-            if [[ ! $graph == "graph" && ! -z $(echo $virtuoso_graph_list | grep "$graph") ]]; then
+            if [[ ! $graph == "graph" && ! -z $(cat $virtuoso_graph_list | grep "$graph") ]]; then
                 echo "Creating graph $graph"
                 sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL CREATE GRAPH <$graph>;"
             fi
