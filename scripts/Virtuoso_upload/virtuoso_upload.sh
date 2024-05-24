@@ -28,9 +28,8 @@ fi
 
 # Retrieve the list of graphs in the virtuoso server
 echo "Retrieving the list of graphs in the virtuoso server"
-sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL SELECT DISTINCT ?g WHERE { GRAPH ?g {?s ?p ?o} };" > virtuoso_graph_list.txt
-
 virtuoso_graph_list=virtuoso_graph_list.txt
+echo "java -jar $corese_jar remote-sparql -q named_graphs_list.rq -o $virtuoso_graph_list -of csv -e http://localhost:8890/sparql"
 java -jar $corese_jar remote-sparql -q named_graphs_list.rq -o $virtuoso_graph_list -of csv -e http://localhost:8890/sparql
 
 # Upload to virtuoso
