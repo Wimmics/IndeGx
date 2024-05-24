@@ -22,10 +22,16 @@ DBA_PASSWORD=$1
 nb_files=$(($#-1))
 echo "Uploading $nb_files files"
 
+if [ ! -e $corese_jar ]; then
+    wget -q https://github.com/Wimmics/corese/releases/download/release-$corese_version/$corese_jar
+fi
+
 # Retrieve the list of graphs in the virtuoso server
 echo "Retrieving the list of graphs in the virtuoso server"
 sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL SELECT DISTINCT ?g WHERE { GRAPH ?g {?s ?p ?o} };" > virtuoso_graph_list.txt
+
 virtuoso_graph_list=virtuoso_graph_list.txt
+java -jar $corese_jar remote-sparql -q named_graphs_list.rq -o $virtuoso_graph_list -of csv -e http://localhost:8890/sparql
 
 # Upload to virtuoso
 upload_file(){
@@ -52,9 +58,6 @@ upload_file(){
     # Named graph have to be created explicitely
     if [[ $filename == *.trig || $filename == *.nq ]]; then
         echo "$filename may contain named graphs that must be created explicitly"
-        if [ ! -e $corese_jar ]; then
-            wget -q https://github.com/Wimmics/corese/releases/download/release-$corese_version/$corese_jar
-        fi
 
         # Listing the named graphs in the file
         echo "Listing the graphs in $filename"
