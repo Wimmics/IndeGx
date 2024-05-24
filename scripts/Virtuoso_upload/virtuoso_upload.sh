@@ -29,8 +29,8 @@ fi
 # Retrieve the list of graphs in the virtuoso server
 echo "Retrieving the list of graphs in the virtuoso server"
 virtuoso_graph_list=virtuoso_graph_list.txt
-echo "java -jar $corese_jar remote-sparql -q named_graphs_list.rq -o $virtuoso_graph_list -of csv -e http://localhost:8890/sparql"
-java -jar $corese_jar remote-sparql -q named_graphs_list.rq -o $virtuoso_graph_list -of csv -e http://localhost:8890/sparql
+# echo "java -jar $corese_jar remote-sparql -q named_graphs_list.rq -o $virtuoso_graph_list -a text/csv -e http://localhost:8890/sparql"
+java -jar $corese_jar remote-sparql -q named_graphs_list.rq -o $virtuoso_graph_list -a text/csv -e http://localhost:8890/sparql
 
 # Upload to virtuoso
 upload_file(){
@@ -65,7 +65,7 @@ upload_file(){
         for graph in `cat named_graph_list.txt`
         do
             # If the graph name is not the header and is not in the virtuoso graph list
-            if [[ ! $graph == "graph" && ! -z $(cat $virtuoso_graph_list | grep "$graph") ]]; then
+            if grep -q $graph "$virtuoso_graph_list"; then
                 echo "Creating graph $graph"
                 sudo docker exec virtuoso isql -H localhost -U dba -P $DBA_PASSWORD exec="SPARQL CREATE GRAPH <$graph>;"
             fi
