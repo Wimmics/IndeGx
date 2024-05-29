@@ -3087,7 +3087,6 @@
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fbgee.org%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
-  ns2:importedFrom ns7:search ;
   ns8:sparqlEndpoint ns315:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns315:sparql .
@@ -4399,6 +4398,11 @@
   ns8:sparqlEndpoint ns502:sparql ;
   a ns10:Dataset ;
   ns10:endpointURL ns502:sparql .
+
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.bgee.org%2F> ns2:importedFrom ns7:search ;
+  ns8:sparqlEndpoint <http://www.bgee.org/> ;
+  a ns10:Dataset ;
+  ns10:endpointURL <http://www.bgee.org/> .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fcr3.eionet.europa.eu%2Fsparql> ns2:importedFrom <https://github.com/Wimmics/IndeGx/raw/catalog_auto_refresh/catalogs/catalog.auto_refresh.ttl> ;
   ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
@@ -5962,7 +5966,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://github.com/Wimmics
   a ns10:Dataset ;
   ns10:endpointURL ns724:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-05-28T07:36:36.844Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-05-29T07:37:58.843Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
@@ -6513,6 +6517,7 @@ ns1:Catalog ns2:lastRefreshedOn "2024-05-28T07:36:36.844Z"^^xsd:dateTime ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.dbacademic.tech%2Fds%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_2018> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fpurl.org%2Fweso%2Fsparql> ;
+  ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.bgee.org%2F> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcr3.eionet.europa.eu%2Fsparql> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fgnd%2Fquery> ;
   ns10:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhgnc.bio2rdf.org%2Fsparql> ;
