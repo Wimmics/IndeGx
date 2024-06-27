@@ -1,0 +1,6 @@
+SELECT DISTINCT ?graph {
+    GRAPH ?graph {
+        ?s ?p ?o .
+    }
+    FILTER ( ?graph != <http://ns.inria.fr/corese/kgram/default>)
+}
