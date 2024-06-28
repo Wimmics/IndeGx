@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 if [ $# -le 1 ]; then
     echo "Expected arguments: $0 <file1> ..."
     exit 0
@@ -20,3 +18,7 @@ do
 
     ./Experiment_partition_launch.sh $template_filename
 done
+
+./appli/virtuoso/virtuoso-opensource/virtuoso_upload.sh dekalog /database /appli/virtuoso/virtuoso-opensource ../../ouput/*.trig
+
+rm -rf ../../output/*.trig
