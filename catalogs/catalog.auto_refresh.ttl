@@ -2241,6 +2241,7 @@
   ns9:endpointURL ns234:sparql .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.bgee.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom ns6:search ;
   ns7:sparqlEndpoint ns235:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns235:sparql .
@@ -5089,7 +5090,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://lod-cloud.net/lod-
   a ns9:Dataset ;
   ns9:endpointURL ns711:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2024-06-28T07:37:16.645Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2024-06-29T07:36:53.928Z"^^xsd:dateTime ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fel.dbpedia.org%2Fsparql> ;
