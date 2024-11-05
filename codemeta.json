@@ -1,0 +1,51 @@
+{
+    "@context": "https://w3id.org/codemeta/3.0",
+    "type": "SoftwareSourceCode",
+    "applicationCategory": "Semantic web",
+    "author": [
+        {
+            "id": "https://orcid.org/0000-0002-9814-439X",
+            "type": "Person",
+            "affiliation": {
+                "type": "Organization",
+                "name": "INRIA"
+            },
+            "email": "pierre.maillot@gmail.com",
+            "familyName": "Maillot",
+            "givenName": "Pierre"
+        },
+        {
+            "type": "Role",
+            "schema:author": "https://orcid.org/0000-0002-9814-439X",
+            "endDate": "2024-04-10",
+            "roleName": "Developper",
+            "startDate": "2021-01-01"
+        }
+    ],
+    "codeRepository": "git+https://github.com/Wimmics/IndeGx.git",
+    "dateCreated": "2021-01-01",
+    "dateModified": "2024-04-10",
+    "datePublished": "2021-08-31",
+    "description": "IndeGx is a framework created for the creation of an RDF knowledge graph that can be used as an index of knowledge graphs available online. It uses a set of rules to extract and compute the content of this index using SPARQL queries.\n\nIndeGx is designed to make full use of semantic web standards. Any rules expressed with a standard SPARQL syntax can be used to generate a knowledge graph.",
+    "downloadUrl": "https://github.com/Wimmics/IndeGx/releases/tag/v2.2.1",
+    "funder": {
+        "type": "Organization",
+        "name": "ANR"
+    },
+    "identifier": "10.5281/zenodo.10794312",
+    "keywords": [
+        "semantic index",
+        "metadata extraction",
+        "dataset description",
+        "endpoint description",
+        "knowledge graph"
+    ],
+    "license": "https://spdx.org/licenses/GPL-3.0-or-later",
+    "name": "IndeGx",
+    "programmingLanguage": "Typescript",
+    "relatedLink": "https://hal.science/hal-03946680",
+    "releaseNotes": "Change log: Due to bugs and the fact that it limits the possibility to query the local KG in tests, the test queries will no longer be edited by adding a SERVICE clause if there are none.\n\nThis change may break some rulesets.",
+    "version": "2.2.1",
+    "funding": " ANR-19-CE23-0014",
+    "issueTracker": "https://github.com/Wimmics/IndeGx/issues"
+}
