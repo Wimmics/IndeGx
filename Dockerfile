@@ -13,9 +13,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
     apt-get install -f -y nodejs
 RUN apt-get install -y aptitude
 RUN aptitude install -y npm
-RUN npm install npm@latest -g && \
+RUN npm install npm@10.9.2 -g && \
     npm install n -g && \
-    n latest
+    n 23.6.1
 
 WORKDIR /indegx
 COPY indegx/package.json package.json
