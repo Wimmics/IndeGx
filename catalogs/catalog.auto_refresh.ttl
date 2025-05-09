@@ -355,9 +355,9 @@
 @prefix ns333: <https://sparql.glycoinfo.org/> .
 @prefix ns575: <https://jpsearch.go.jp/rdf/> .
 @prefix ns332: <http://homologene.bio2rdf.org/> .
-@prefix ns574: <https://query.wikitrek.org/> .
+@prefix ns574: <https://sparql.sibils.org/> .
 @prefix ns331: <http://kaiko.getalp.org/> .
-@prefix ns573: <https://sparql.sibils.org/> .
+@prefix ns573: <https://query.wikitrek.org/> .
 @prefix ns338: <http://biomodels.bio2rdf.org/> .
 @prefix ns337: <https://api.druid.datalegend.net/datasets/mromanello/hucit/> .
 @prefix ns579: <https://ontology.inrae.fr/weather/> .
@@ -4288,12 +4288,12 @@
   a ns9:Dataset ;
   ns9:endpointURL ns572:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.sibils.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikitrek.org%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns7:sparqlEndpoint ns573:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns573:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikitrek.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.sibils.org%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns7:sparqlEndpoint ns574:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns574:sparql .
@@ -5217,7 +5217,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://lod-cloud.net/lod-
   a ns9:Dataset ;
   ns9:endpointURL ns729:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2025-05-08T07:41:01.969Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2025-05-09T07:38:58.873Z"^^xsd:dateTime ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FSStuurman%2FmicroHeights%2Fsparql> ;
@@ -5847,8 +5847,8 @@ ns1:Catalog ns2:lastRefreshedOn "2025-05-08T07:41:01.969Z"^^xsd:dateTime ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fedan.si.edu%2Fsaam%2Fsparql%20> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fstw%2Fquery> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwifo5-04.informatik.uni-mannheim.de%2Fdrugbank%2Fsparql> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikitrek.org%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.sibils.org%2Fsparql> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikitrek.org%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fjpsearch.go.jp%2Frdf%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ffun.rkbexplorer.com%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fhawaii.eagle-i.net%2Fsparqler%2Fsparql> ;
@@ -6217,19 +6217,19 @@ ns1:Catalog ns2:lastRefreshedOn "2025-05-08T07:41:01.969Z"^^xsd:dateTime ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.wikidata.org%2F.well-known%2Fgenid%2Fd43fd94af6d220b91081eca1450ecba6> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flingualibre.org%2Fsparql> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fedan.si.edu%2Fsaam%2Fsparql> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_international-chronostratigraphic-chart> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2F> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ardc.edu.au%2Frepository%2Fapi%2Fsparql%2Faas_the-unified-astronomy-thesaurus_4-0-1> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.nobelprize.org%2F> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.dictionnairedesfrancophones.org%2Fsparql> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fdcatap%2Fsparql> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.kunstmuseum.nl%2Fquery%2Fproxy%2Fwdqs%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.nlg.gr%2Fquery> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fnfdi4culture.de%2Fsparql> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.dictionnairedesfrancophones.org%2Fsparql> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ardc.edu.au%2Frepository%2Fapi%2Fsparql%2Faas_the-unified-astronomy-thesaurus_4-0-1> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.kunstmuseum.nl%2Fquery%2Fproxy%2Fwdqs%2Fbigdata%2Fnamespace%2Fwdq%2Fsparql> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.wikidata.org%2Fbigdata%2Fnamespace%2Fdcatap%2Fsparql> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fedan.si.edu%2Fsaam%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fschema.gov.it%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.library.sh.cn%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fqlever.cs.uni-freiburg.de%2Fapi%2Fosm-planet> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_international-chronostratigraphic-chart> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.nobelprize.org%2F> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fnfdi4culture.de%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.glyconavi.org%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2Fendpoint%2Fchebi> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fknowledge.brc.riken.jp%2Fsparql> ;
