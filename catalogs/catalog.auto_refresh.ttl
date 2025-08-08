@@ -1642,7 +1642,6 @@
 <http://ns.inria.fr/kg/index#https%3A%2F%2Frdf.metanetx.org%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
-  ns2:importedFrom ns6:search ;
   ns7:sparqlEndpoint ns135:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns135:sparql .
@@ -2298,7 +2297,6 @@
   ns9:endpointURL ns240:sparql .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fwww.bgee.org%2Fsparql> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom ns6:search ;
   ns7:sparqlEndpoint ns241:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns241:sparql .
@@ -4743,7 +4741,6 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://lod-cloud.net/lod-
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fideal-rdf.dbcls.jp%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
-  ns2:importedFrom ns6:search ;
   ns7:sparqlEndpoint ns653:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns653:sparql .
@@ -5245,7 +5242,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://lod-cloud.net/lod-
   a ns9:Dataset ;
   ns9:endpointURL ns733:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2025-08-07T07:47:47.424Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2025-08-08T07:47:36.742Z"^^xsd:dateTime ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FSStuurman%2FmicroHeights%2Fsparql> ;
