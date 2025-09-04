@@ -54,5 +54,8 @@ kgi:catalog a dcat:Catalog ;
         [ void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql> ],
         [ void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> ],
         [ void:sparqlEndpoint <https://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/sparql> ],
-        [ void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> ] .
+        [ void:sparqlEndpoint <http://ws49-cl4-jena.tl.teralab-datascience.fr/SemJoconde/query> ],
+        [ void:sparqlEndpoint <https://enpkg.commons-lab.org/graphdb/sparql> ],
+        [ void:sparqlEndpoint <https://semopenalex.org/sparql> ] 
+.
     
