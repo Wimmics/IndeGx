@@ -119,17 +119,17 @@
 @prefix ns179: <http://147.100.179.235:8082/blazegraph/namespace/AnaEE_sites/> .
 @prefix ns178: <http://sparql.linkedopendata.it/> .
 @prefix ns177: <https://ma-graph.org/> .
-@prefix ns381: <http://sparql.api.identifiers.org/> .
+@prefix ns381: <https://api.druid.datalegend.net/datasets/kahaip/iisg-kg/> .
 @prefix ns380: <http://api.talis.com/stores/jgoodwin-genealogy/services/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ns143: <http://sparql.proconsortium.org/virtuoso/> .
-@prefix ns385: <https://dati.camera.it/> .
+@prefix ns385: <https://id.sgcb.mcu.es/> .
 @prefix ns142: <http://foodpedia.tk/> .
-@prefix ns384: <https://id.sgcb.mcu.es/> .
+@prefix ns384: <http://data.utpl.edu.ec/ecuadorresearch/lod/> .
 @prefix ns141: <https://relate.racai.ro/datasets/legalnero/> .
-@prefix ns383: <http://data.utpl.edu.ec/ecuadorresearch/lod/> .
+@prefix ns383: <http://twarql.org:8890/> .
 @prefix ns140: <http://interpro.bio2rdf.org/> .
-@prefix ns382: <http://twarql.org:8890/> .
+@prefix ns382: <http://sparql.api.identifiers.org/> .
 @prefix ns147: <https://opendata.aragon.es/> .
 @prefix ns389: <https://ldf.fi/warsa/> .
 @prefix ns146: <https://bnb.data.bl.uk/> .
@@ -137,7 +137,7 @@
 @prefix ns145: <https://shared.eagle-i.net/sparqler/> .
 @prefix ns387: <http://cordis.rkbexplorer.com/> .
 @prefix ns144: <http://bfs.270a.info/> .
-@prefix ns386: <https://api.druid.datalegend.net/datasets/IISG/historic-maps/> .
+@prefix ns386: <https://dati.camera.it/> .
 @prefix ns149: <http://bmrbpub.protein.osaka-u.ac.jp/search/> .
 @prefix ns148: <http://www4.wiwiss.fu-berlin.de/stitch/> .
 @prefix ns150: <http://api.talis.com/stores/climb/services/> .
@@ -3144,32 +3144,32 @@
   a ns9:Dataset ;
   ns9:endpointURL ns380:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.api.identifiers.org%2Fsparql> ns2:importedFrom ns3:sparql ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fkahaip%2Fiisg-kg%2Fsparql> ns2:importedFrom ns11:datasets ;
   ns7:sparqlEndpoint ns381:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns381:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Ftwarql.org%3A8890%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.api.identifiers.org%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns7:sparqlEndpoint ns382:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns382:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.utpl.edu.ec%2Fecuadorresearch%2Flod%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Ftwarql.org%3A8890%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
   ns7:sparqlEndpoint ns383:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns383:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fid.sgcb.mcu.es%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.utpl.edu.ec%2Fecuadorresearch%2Flod%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
   ns7:sparqlEndpoint ns384:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns384:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.camera.it%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fid.sgcb.mcu.es%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns7:sparqlEndpoint ns385:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns385:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fhistoric-maps%2Fsparql> ns2:importedFrom ns11:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.camera.it%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns7:sparqlEndpoint ns386:sparql ;
   a ns9:Dataset ;
   ns9:endpointURL ns386:sparql .
@@ -5254,7 +5254,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://lod-cloud.net/lod-
   a ns9:Dataset ;
   ns9:endpointURL ns731:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2025-12-04T07:41:49.654Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2025-12-05T07:41:49.152Z"^^xsd:dateTime ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FSStuurman%2FmicroHeights%2Fsparql> ;
@@ -5669,12 +5669,12 @@ ns1:Catalog ns2:lastRefreshedOn "2025-12-04T07:41:49.654Z"^^xsd:dateTime ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fjsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fws49-cl4-jena.tl.teralab-datascience.fr%2FSemJoconde%2Fquery> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.talis.com%2Fstores%2Fjgoodwin-genealogy%2Fservices%2Fsparql> ;
+  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fkahaip%2Fiisg-kg%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.api.identifiers.org%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Ftwarql.org%3A8890%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.utpl.edu.ec%2Fecuadorresearch%2Flod%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fid.sgcb.mcu.es%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.camera.it%2Fsparql> ;
-  ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FIISG%2Fhistoric-maps%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fquery.mimotext.uni-trier.de%2F> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcordis.rkbexplorer.com%2Fsparql> ;
   ns9:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fsparql.nibb.ac.jp%2Fsparql> ;
