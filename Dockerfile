@@ -9,13 +9,13 @@ RUN set -eux; \
        bash sudo curl software-properties-common ca-certificates findutils coreutils gettext pwgen procps tini wget \
     ;
 
-RUN curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash - &&\
     apt-get install -f -y nodejs
 RUN apt-get install -y aptitude
 RUN aptitude install -y npm
-RUN npm install npm@10.9.2 -g && \
+RUN npm install npm@11.6.0 -g && \
     npm install n -g && \
-    n 23.6.1
+    n 24.13.0
 
 WORKDIR /indegx
 COPY indegx/package.json package.json
