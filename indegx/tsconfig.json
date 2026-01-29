@@ -4,7 +4,8 @@
         "sourceMap": false,
         "target": "ES2021",
         "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true
     },
     "include": [
         "./src/**/*"

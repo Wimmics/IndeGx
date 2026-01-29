@@ -1,6 +1,6 @@
 # Set of rules for the test of well known pitfalls in SPARQL servers and RDF datasets
 
-
+This set of rules is meant to test the presence of common pitfalls in SPARQL servers and RDF datasets. This is not meant to be an exhaustive list of all possible pitfalls, but a list of the most common ones. In the same way, the testing of the presence of these pitfalls is not meant to be a complete test of the quality of a SPARQL server or RDF dataset, but a first step in the evaluation of the quality of the data.
 
 ## Number of endpoints
 
@@ -81,8 +81,3 @@ SELECT DISTINCT ?endpoint ?badRandom ?badTimeNow ?noRDFSEntailment {
 - Load endpoint description, check for features and RDFSEntailment
 - https://github.com/w3c/sparql-dev/issues/195
 
-## Notes:
-
-19/03/2024:
-154 endpoints with bad random
-21 with bad NOW

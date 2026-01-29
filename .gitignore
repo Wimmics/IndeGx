@@ -154,8 +154,10 @@ input/LOV_redux.ttl
 scripts/Vocabulary_rules_generator/rules/
 scripts/*/*.csv
 
-input/*.trig
-input/*.gz
+*.gz
+
+scripts/Vocabulary_presence_rules_generator/rules/
+
 
 
 scripts/clean_Turtle_RDF_File/result.trig
@@ -163,3 +165,5 @@ scripts/clean_Turtle_RDF_File/result.trig
 scripts/Experiment_partition_launch/online_endpoint_catalog.trig
 
 rules/QualityShopper/FAIR/data/LOV_redux.22022024.trig
+
+config/config_online_endpoint_catalog.trig-partition_0-20.ttl.json
