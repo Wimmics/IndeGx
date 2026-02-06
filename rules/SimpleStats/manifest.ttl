@@ -1,0 +1,1086 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> a mf:Manifest ;
+    mf:entries  (
+            <tripleCount.ttl>
+            <classCount.ttl>
+            <propertyCount.ttl>
+            <sportalClassPartition.ttl>
+            <sportalPropertyPartition.ttl>
+            # <literalCount.ttl>
+            # <classPopulation.ttl>
+            # <sportalDistinctUrisObjects.ttl>
+            # <sportalDistinctUrisSubjects.ttl>
+            # <sportalDistinctBlankNodeObjects.ttl>
+            # <sportalDistinctBlankNodeSubjects.ttl>
+            # <sportalDistinctBlankNodes.ttl>
+            # <sportalDistinctIRIReferences.ttl>
+            # <sportalDistinctRDFNodes.ttl>
+            # <sportalDistinctLiterals.ttl>
+            # <sportalClassPartitionClasses.ttl>
+            # <sportalClassPartitionTriples.ttl>
+            # <sportalClassPartitionDistinctObjects.ttl>
+            # <sportalClassPartitionDistinctSubjects.ttl>
+            # <sportalClassPartitionProperties.ttl>
+            # <sportalClassPartitionPropertyPartitionTriples.ttl>
+            # <sportalClassPartitionPropertyPartitionDistinctSubjects.ttl>
+            # <sportalPropertyPartitionDistinctObject.ttl>
+            # <sportalPropertyPartitionDistinctSubject.ttl>
+            # <vocabularyPartition.ttl>
+            # <resourceHostnamePartition.ttl>
+        ) .
+
+<classCount.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classes ?count .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (count(DISTINCT ?class) AS ?count) WHERE {
+#                                    { 
+#                                        ?class a owl:Class 
+#                                    } UNION { 
+#                                        ?class a rdfs:Class 
+#                                    } UNION { 
+                                        ?whatever a ?class 
+#                                    }
+                                }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<propertyCount.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:properties ?count .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (count(DISTINCT ?p) AS ?count) WHERE {
+                                    ?s ?p ?o
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<tripleCount.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:triples ?count .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (count( DISTINCT *) AS ?count) WHERE {
+                                   ?s ?p ?o .
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<literalCount.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription kgi:literals ?count .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?o) AS ?count) {
+                                ?s ?p ?o .
+                                FILTER(isLiteral(?o))
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<classPopulation.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?class ;
+                                void:entities ?count .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT ?class (count(?instance) AS ?count)
+                            WHERE {
+                                SELECT DISTINCT ?class ?instance
+                                WHERE {
+                                    ?instance a ?class
+                                }
+                            } GROUP BY ?class
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<sportalDistinctRDFNodes.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription voidex:distinctRDFNodes ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?s ) AS ?x) {
+                                ?s ?p ?o
+                                FILTER(isIri(?s))
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<sportalDistinctUrisObjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription voidex:distinctIRIReferenceObjects ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?o ) AS ?x) {
+                                ?s ?p ?o
+                                FILTER(isIri(?o))
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                }
+            """
+        ]
+    ) .
+
+<sportalDistinctUrisSubjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription voidex:distinctIRIReferenceSubjects ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?s) AS ?x) {
+                                ?s ?p ?o
+                                FILTER(isIRI(?s))
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<sportalDistinctBlankNodeSubjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription voidex:distinctBlankNodeSubjects ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?s) AS ?x) {
+                                ?s ?p ?o
+                                FILTER(isBlank(?s))
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<sportalDistinctBlankNodeObjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription voidex:distinctBlankNodeObjects ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?o) AS ?x) {
+                                ?s ?p ?o
+                                FILTER(isBlank(?o))
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<sportalDistinctBlankNodes.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?datasetDescription voidex:distinctBlankNodes ?x .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT (COUNT(DISTINCT ?b ) AS ?x) {
+                            { ?s ?p ?b }
+                            UNION { ?b ?p ?o }
+                            FILTER(isBlank(?b))
+                        }
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+            }
+            """
+        ]
+    ) .
+
+<sportalDistinctIRIReferences.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?datasetDescription voidex:distinctIRIReferences ?x .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT (COUNT(DISTINCT ?u ) AS ?x) {
+                            { ?u ?p ?o } UNION { ?s ?p ?u } FILTER(isIri(?u))
+                        }
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+            }
+            """
+        ]
+    ) .
+
+<sportalDistinctLiterals.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?datasetDescription voidex:distinctLiterals ?x .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT (COUNT(DISTINCT ?o ) AS ?x) {
+                            ?s ?p ?o
+                            FILTER(isLiteral(?o))
+                        }
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+            }
+            """
+        ]
+    ) .
+
+<sportalClassPartition.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT DISTINCT ?c {
+                                ?s a ?c .
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionTriples.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:triples ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(?p) AS ?x) ?c WHERE { ?s a ?c ; ?p ?o } GROUP BY ?c
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+  					BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))) , "ClassPartition" )) AS ?classPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionClasses.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                                void:classes ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?d) AS ?x) ?c WHERE { ?s a ?c , ?d } GROUP BY ?c
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionProperties.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:properties ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?p) AS ?x) ?c WHERE { ?s a ?c ; ?p ?o } GROUP BY ?c
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition" )) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:distinctSubjects ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT (COUNT(DISTINCT ?s) AS ?x) ?c WHERE { ?s a ?c } GROUP BY ?c
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionDistinctObjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:distinctObjects ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        { SELECT (COUNT(DISTINCT ?o) AS ?x) ?c WHERE { ?s a ?c ; ?p ?o } GROUP BY ?c }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionPropertyPartition.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:propertyPartition ?classPropertyPartition .
+                        ?classPropertyPartition void:property ?p .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        { ?s a ?c ; ?p ?o }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:propertyPartition ?classPropertyPartition .
+                        ?classPropertyPartition void:property ?p ;
+                            void:triples ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        { SELECT (COUNT(?o) AS ?x) ?p WHERE { ?s a ?c ; ?p ?o } GROUP BY ?c ?p }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalClassPartitionPropertyPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c ;
+                            void:propertyPartition ?classPropertyPartition .
+                        ?classPropertyPartition void:property ?p ;
+                            void:distinctSubjects ?x .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        { SELECT (COUNT(DISTINCT ?s) AS ?x) ?c ?p WHERE { ?s a ?c ; ?p ?o } GROUP BY ?c ?p }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                }
+            """
+        ]
+    ) .
+
+<sportalPropertyPartition.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?datasetDescription void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?p ;
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    { SELECT DISTINCT ?p WHERE { ?s ?p ?o } }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
+            }"""
+        ]
+    ) .
+
+<sportalPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionTriples.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }"""
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?p ;
+                        void:triples ?x .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    { SELECT (COUNT(?o) AS ?x) ?p WHERE { ?s ?p ?o } GROUP BY ?p }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }"""
+        ]
+    ) .
+
+<sportalPropertyPartitionDistinctSubject.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctSubject.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }"""
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?p ;
+                        void:distinctSubjects ?x .
+                }
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    { SELECT (COUNT(DISTINCT ?s) AS ?x) ?p WHERE { ?s ?p ?o } GROUP BY ?p }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }"""
+        ]
+    ) .
+
+<sportalPropertyPartitionDistinctObject.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/sportalPropertyPartitionDistinctObject.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            } WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }"""
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?p ;
+                        void:distinctObjects ?x .
+                }
+            } WHERE {
+                SERVICE $rawEndpointUrl {
+                    { SELECT (COUNT(DISTINCT ?o) AS ?x) ?p WHERE { ?s ?p ?o } GROUP BY ?p }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }"""
+        ]
+    ) .
+
+<vocabularyPartition.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/vocabularyPartition.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                    ?vocabularyPartition void:vocabulary ?ns .
+                    ?vocabularyPartition void:classes ?count .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT ?ns (COUNT(?elem) AS ?count) {
+                            {
+                                SELECT DISTINCT ?elem {
+                                    ?s a ?elem .
+                                }
+                            }
+                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                        }
+                        GROUP BY ?ns
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                        ?vocabularyPartition void:vocabulary ?ns .
+                        ?vocabularyPartition void:properties ?count .
+                    }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT ?ns (COUNT(?elem) AS ?count) {
+                            {
+                                SELECT DISTINCT ?elem {
+                                    ?s ?elem ?o .
+                                }
+                            }
+                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                        }
+                        GROUP BY ?ns
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }
+            """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                        ?vocabularyPartition void:vocabulary ?ns .
+                    }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT ?ns {
+                            {
+                                SELECT DISTINCT ?elem {
+                                    ?s ?elem ?o .
+                                }
+                            }
+                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                        }
+                        GROUP BY ?ns
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Metadata")) AS ?metadataDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }
+            """
+        ]
+    ) .
+
+<resourceHostnamePartition.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?metadataDescriptionGraph {
+                    ?datasetDescription prov:wasGeneratedBy <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl#activity> .
+                    <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl#activity> prov:used <https://raw.githubusercontent.com/Wimmics/IndeGx/main/rules/statistics/resourceHostnamePartition.ttl> ;
+                        prov:wasAssociatedWith <https://orcid.org/0000-0002-9814-439X> .
+                }
+            }
+            WHERE {
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Metadata")) AS ?metadataDescriptionGraph)
+            }
+        """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            INSERT {
+                GRAPH ?curatedDescriptionGraph {
+                    ?datasetDescription kgi:hostnamePartition ?hostnamePartition .
+                    ?hostnamePartition kgi:resourceHostname ?ns .
+                    ?hostnamePartition void:distinctSubjects ?count .
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    {
+                        SELECT DISTINCT ?ns (COUNT(DISTINCT ?elem) AS ?count) {
+                            {
+                                SELECT DISTINCT ((IRI(SUBSTR(str(?elem), 1, ?elemLength - ?elemEndLength ))) AS ?ns) ?elem {
+                                    ?elem ?p ?o .
+                                    FILTER(! STRSTARTS(str(?p), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+                                    FILTER(isIri(?elem)).
+                                    BIND( REPLACE(str(?elem), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?urlEnd)
+                  					BIND(STRLEN(str(?elem)) AS ?elemLength)
+                  					BIND(STRLEN(str(?urlEnd)) AS ?elemEndLength)
+                                }
+                            }
+                        }
+                        GROUP BY ?ns
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))), "HostnamePartition" )) AS ?hostnamePartition)
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+            }
+        """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:hostnamePartition ?hostnamePartition .
+                        ?hostnamePartition kgi:resourceHostname ?ns .
+                        ?hostnamePartition void:distinctObjects ?count .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT DISTINCT ?ns (COUNT(DISTINCT ?elem) AS ?count) {
+                                {
+                                    SELECT DISTINCT ((IRI(SUBSTR(str(?elem), 1, ?elemLength - ?elemEndLength ))) AS ?ns) ?elem {
+                                        ?s ?p ?elem .
+                                        FILTER(! STRSTARTS(str(?p), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+                                        FILTER(isIri(?elem)).
+                                        BIND( REPLACE(str(?elem), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?urlEnd)
+                      					BIND(STRLEN(str(?elem)) AS ?elemLength)
+                      					BIND(STRLEN(str(?urlEnd)) AS ?elemEndLength)
+                                    }
+                                }
+                            }
+                            GROUP BY ?ns
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))), "HostnamePartition" )) AS ?hostnamePartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                }
+        """
+        ]
+        [
+            kgi:timeout "PT120S"^^xsd:duration ;
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?curatedDescriptionGraph {
+                        ?datasetDescription kgi:hostnamePartition ?hostnamePartition .
+                        ?hostnamePartition kgi:resourceHostname ?ns .
+                        ?hostnamePartition void:entities ?count .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT DISTINCT ?ns (COUNT(DISTINCT ?elem) AS ?count) {
+                                {
+                                    SELECT DISTINCT ((IRI(SUBSTR(str(?elem), 1, ?elemLength - ?elemEndLength ))) AS ?ns) ?elem {
+                                        {
+                                            ?s ?p ?elem .
+                                        }
+                                        UNION {
+                                            ?elem ?p ?o .
+                                        }
+                                        FILTER(! STRSTARTS(str(?p), "http://www.w3.org/1999/02/22-rdf-syntax-ns#"))
+                                        FILTER(isIri(?elem)).
+                                        BIND( REPLACE(str(?elem), "^[a-z][a-z0-9+.]*://([a-z0-9._~%!$&'()*+,;=]+@)?([a-z0-9-._~%]+|[a-f0-9:.]+|[[a-f0-9][a-z0-9-._~%!$&'()*+,;=:]+])(:[0-9]+)?", "") AS ?urlEnd)
+                      					BIND(STRLEN(str(?elem)) AS ?elemLength)
+                      					BIND(STRLEN(str(?urlEnd)) AS ?elemEndLength)
+                                    }
+                                }
+                            }
+                            GROUP BY ?ns
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))), "HostnamePartition" )) AS ?hostnamePartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "_", DAY(NOW()), "-", MONTH(NOW()), "-", YEAR(NOW()) , "_" , "Curated")) AS ?curatedDescriptionGraph)
+                }
+        """
+        ]
+    ) .

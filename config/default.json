@@ -1,8 +1,6 @@
 {
-    "pre": "file:///rules/KRInTheWild/_pre_manifest.ttl",
-    "manifest": "file:///rules/KRInTheWild/_manifest.ttl",
-    "post": "file:///rules/KRInTheWild/_post_manifest.ttl",
-    "catalog": "file:///catalogs/catalog.auto_refresh.ttl",
+    "manifest": "file:///rules/SimpleStats/manifest.ttl",
+    "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
     "millisecondsBetweenRetries": 5000,
