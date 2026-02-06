@@ -633,7 +633,7 @@
                 }
                 WHERE {
                     SERVICE $rawEndpointUrl {
-                        { SELECT (COUNT(?o) AS ?x) ?p WHERE { ?s a ?c ; ?p ?o } GROUP BY ?c ?p }
+                        { SELECT ?c (COUNT(?o) AS ?x) ?p WHERE { ?s a ?c ; ?p ?o } GROUP BY ?c ?p }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                     BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)

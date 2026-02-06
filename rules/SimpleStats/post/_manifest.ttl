@@ -9,6 +9,7 @@
     mf:entries  (
             <recountClasses.ttl>
             <recountProperties.ttl>
+            <clean.ttl>
     )
     .
 
@@ -69,6 +70,40 @@
                                 }
                         }
                         BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<clean.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                DELETE {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription void:properties ?countLower .
+                    }
+                }
+                WHERE {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription void:properties ?countLower , ?countHigher .
+                    }
+                    FILTER(STR(?countLower) < STR(?countHigher) )
+                }
+            """
+        ]
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                DELETE {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription void:classes ?countLower .
+                    }
+                }
+                WHERE {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription void:classes ?countLower , ?countHigher .
+                    }
+                    FILTER(STR(?countLower) < STR(?countHigher) )
                 }
             """
         ]
