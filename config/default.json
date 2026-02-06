@@ -1,5 +1,6 @@
 {
-    "manifest": "file:///rules/SimpleStats/manifest.ttl",
+    "manifest": "file:///rules/SimpleStats/main/_manifest.ttl",
+    "post": "file:///rules/SimpleStats/post/_manifest.ttl",
     "catalog": "file:///catalogs/debug_catalog.ttl",
     "defaultQueryTimeout": 300,
     "nbFetchRetries": 10,
@@ -9,6 +10,6 @@
     "manifestJSON": "/output/rules.json",
     "logFile": "/output/indegx.log",
     "outputFile": "/output/indegx.trig",
-    "queryLog": true,
+    "queryLog": false,
     "resilience": false
 }

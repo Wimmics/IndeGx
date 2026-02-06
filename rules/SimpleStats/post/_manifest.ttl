@@ -1,0 +1,75 @@
+@prefix mf: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix kgi: <http://ns.inria.fr/kg/index#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<> a mf:Manifest ;
+    mf:entries  (
+            <recountClasses.ttl>
+            <recountProperties.ttl>
+    )
+    .
+
+<recountClasses.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription void:classes ?count .
+                    }
+                }
+                WHERE {
+                        {
+                                SELECT ?endpointUrl (COUNT(?c) AS ?count) {
+                                        GRAPH ?endpointUrl {
+                                                ?datasetDescription void:classPartition ?classPartition .
+                                                ?classPartition void:class ?c .
+                                        }
+                                }
+                        }
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
+
+<recountProperties.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX dcat: <http://www.w3.org/ns/dcat#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                INSERT {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription void:properties ?count .
+                    }
+                }
+                WHERE {
+                        {
+                                SELECT ?endpointUrl (COUNT(?p) AS ?count) {
+                                        GRAPH ?endpointUrl {
+                                                ?datasetDescription void:propertyPartition ?propertyPartition .
+                                                ?propertyPartition void:property ?p ;
+                                        }
+                                }
+                        }
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)
+                }
+            """
+        ]
+    ) .
