@@ -13,8 +13,8 @@
 
 kgi:catalogResource  a dcat:Catalog ;
     dcat:dataset [ 
-        void:sparqlEndpoint  <https://sparql.uniprot.org/sparql> ;
+        # void:sparqlEndpoint  <https://sparql.uniprot.org/sparql> ;
         # void:sparqlEndpoint <https://idsm.elixir-czech.cz/sparql/endpoint/chebi> ;
-        # void:sparqlEndpoint <https://sparql.rhea-db.org/> 
+        void:sparqlEndpoint <https://sparql.rhea-db.org/> 
         # void:sparqlEndpoint <http://fr.dbpedia.org/sparql> 
     ] .

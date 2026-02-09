@@ -7,9 +7,8 @@
 
 <> a mf:Manifest ;
     mf:entries  (
-            <recountClasses.ttl>
-            <recountProperties.ttl>
-            <clean.ttl>
+        <recountClasses.ttl>
+        <recountProperties.ttl>
     )
     .
 
@@ -17,28 +16,23 @@
     kgi:onSuccess (
         [
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX earl: <http://www.w3.org/ns/earl#>
-                PREFIX kgi: <http://ns.inria.fr/kg/index#>
-                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?endpointUrl {
                         ?datasetDescription void:classes ?count .
                     }
                 }
                 WHERE {
-                        {
-                                SELECT ?endpointUrl (COUNT(?c) AS ?count) {
-                                        GRAPH ?endpointUrl {
-                                                ?datasetDescription void:classPartition ?classPartition .
-                                                ?classPartition void:class ?c .
-                                        }
-                                }
-                        }
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)
+                    {
+                        SELECT DISTINCT ?endpointUrl (COUNT(DISTINCT ?class) AS ?count) {
+                            BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
+                            GRAPH ?endpointUrl {
+                                ?datasetDescription void:classPartition ?classPartition .
+                                ?classPartition void:class ?class .
+                            }
+                        } GROUP BY ?endpointUrl
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
                 }
             """
         ]
@@ -48,52 +42,33 @@
     kgi:onSuccess (
         [
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX dcat: <http://www.w3.org/ns/dcat#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX sd: <http://www.w3.org/ns/sparql-service-description#>
-                PREFIX earl: <http://www.w3.org/ns/earl#>
-                PREFIX kgi: <http://ns.inria.fr/kg/index#>
-                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 INSERT {
                     GRAPH ?endpointUrl {
                         ?datasetDescription void:properties ?count .
                     }
                 }
                 WHERE {
-                        {
-                                SELECT ?endpointUrl (COUNT(?p) AS ?count) {
-                                        GRAPH ?endpointUrl {
-                                                ?datasetDescription void:propertyPartition ?propertyPartition .
-                                                ?propertyPartition void:property ?p ;
-                                        }
-                                }
-                        }
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)
+                    {
+                        SELECT DISTINCT ?endpointUrl (COUNT(DISTINCT ?property) AS ?count) {
+                            BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
+                            GRAPH ?endpointUrl {
+                                ?datasetDescription void:propertyPartition ?propertyPartition . 
+                                ?propertyPartition void:property ?property .
+                            }
+                        }  GROUP BY ?endpointUrl
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
                 }
             """
         ]
     ) .
 
-<clean.ttl> a mf:ManifestEntry ;
+<cleanClasses.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-                DELETE {
-                    GRAPH ?endpointUrl {
-                        ?datasetDescription void:properties ?countLower .
-                    }
-                }
-                WHERE {
-                    GRAPH ?endpointUrl {
-                        ?datasetDescription void:properties ?countLower , ?countHigher .
-                    }
-                    FILTER(STR(?countLower) < STR(?countHigher) )
-                }
-            """
-        ]
-        [
-            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
                 DELETE {
                     GRAPH ?endpointUrl {
                         ?datasetDescription void:classes ?countLower .
@@ -101,7 +76,29 @@
                 }
                 WHERE {
                     GRAPH ?endpointUrl {
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
                         ?datasetDescription void:classes ?countLower , ?countHigher .
+                    }
+                    FILTER(STR(?countLower) < STR(?countHigher) )
+                }
+            """
+        ]
+    ) .
+
+<cleanProperties.ttl> a mf:ManifestEntry ;
+    kgi:onSuccess (
+        [
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                DELETE {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription void:properties ?countLower .
+                    }
+                }
+                WHERE {
+                    GRAPH ?endpointUrl {
+                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
+                        ?datasetDescription void:properties ?countLower , ?countHigher .
                     }
                     FILTER(STR(?countLower) < STR(?countHigher) )
                 }

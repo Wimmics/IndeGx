@@ -8,8 +8,8 @@
 <> a mf:Manifest ;
     mf:entries  (
             <tripleCount.ttl>
-            <classCount.ttl>
-            <propertyCount.ttl>
+            # <classCount.ttl>
+            # <propertyCount.ttl>
             <sportalClassPartition.ttl>
             <sportalPropertyPartition.ttl>
             <literalCount.ttl>
@@ -40,7 +40,6 @@
 <classCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -58,14 +57,8 @@
                     SERVICE $rawEndpointUrl {
                         {
                             SELECT (count(DISTINCT ?class) AS ?count) WHERE {
-                                    { 
-                                        ?class a owl:Class 
-                                    } UNION { 
-                                        ?class a rdfs:Class 
-                                    } UNION { 
-                                        ?whatever a ?class 
-                                    }
-                                }
+                                ?whatever a ?class 
+                            }
                         }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
@@ -77,7 +70,6 @@
 <propertyCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -95,7 +87,7 @@
                     SERVICE $rawEndpointUrl {
                         {
                             SELECT (count(DISTINCT ?p) AS ?count) WHERE {
-                                    ?s ?p ?o
+                                ?s ?p ?o
                             }
                         }
                     }
@@ -108,7 +100,6 @@
 <tripleCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -124,7 +115,7 @@
                     SERVICE $rawEndpointUrl {
                         {
                             SELECT (count( DISTINCT *) AS ?count) WHERE {
-                                   ?s ?p ?o .
+                                ?s ?p ?o .
                             }
                         }
                     }
@@ -137,7 +128,6 @@
 <literalCount.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX dcat: <http://www.w3.org/ns/dcat#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -167,7 +157,6 @@
 <classPopulation.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -202,7 +191,6 @@
 <sportalDistinctRDFNodes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -229,7 +217,6 @@
 <sportalDistinctUrisObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -256,7 +243,6 @@
 <sportalDistinctUrisSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -283,7 +269,6 @@
 <sportalDistinctBlankNodeSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -310,7 +295,6 @@
 <sportalDistinctBlankNodeObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -337,7 +321,6 @@
 <sportalDistinctBlankNodes.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -365,7 +348,6 @@
 <sportalDistinctIRIReferences.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -391,7 +373,6 @@
 <sportalDistinctLiterals.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX voidex: <http://ldf.fi/void-ext#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -418,7 +399,6 @@
 <sportalClassPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 10 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -444,12 +424,39 @@
                 }
             """
         ]
+        [
+            kgi:recommendedPagination 10 ;
+            mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX void: <http://rdfs.org/ns/void#>
+                INSERT {
+                    GRAPH $rawEndpointUrl {
+                        ?datasetDescription void:classPartition ?classPartition .
+                        ?classPartition void:class ?c .
+                    }
+                }
+                WHERE {
+                    SERVICE $rawEndpointUrl {
+                        {
+                            SELECT DISTINCT ?c {
+                                GRAPH ?graph {
+                                    ?s a ?c .
+                                }
+                            }
+                        }
+                    }
+                    BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition")) AS ?classPartition)
+                }
+            """
+        ]
     ) .
 
 <sportalClassPartitionTriples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
                 PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -476,7 +483,6 @@
 <sportalClassPartitionClasses.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -504,7 +510,6 @@
 <sportalClassPartitionProperties.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -533,7 +538,6 @@
 <sportalClassPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -552,7 +556,7 @@
                         }
                     }
                     BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c), str(?p))), "ClassPropertyPartition" )) AS ?classPropertyPartition)
+                    BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?c))), "ClassPartition" )) AS ?classPartition)
                 }
             """
         ]
@@ -561,7 +565,6 @@
 <sportalClassPartitionDistinctObjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -588,7 +591,6 @@
 <sportalClassPartitionPropertyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
@@ -617,7 +619,6 @@
 <sportalClassPartitionPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -646,7 +647,6 @@
 <sportalClassPartitionPropertyPartitionDistinctSubjects.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX earl: <http://www.w3.org/ns/earl#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -675,7 +675,6 @@
 <sportalPropertyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 10 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -694,12 +693,36 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
             }"""
         ]
+        [
+            kgi:recommendedPagination 10 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX kgi: <http://ns.inria.fr/kg/index#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            INSERT {
+                GRAPH $rawEndpointUrl {
+                    ?datasetDescription void:propertyPartition ?propertyPartition .
+                    ?propertyPartition void:property ?p ;
+                }
+            }
+            WHERE {
+                SERVICE $rawEndpointUrl {
+                    { 
+                        SELECT DISTINCT ?p WHERE { 
+                            GRAPH ?graph {
+                                ?s ?p ?o 
+                            }
+                        } 
+                    }
+                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
+            }"""
+        ]
     ) .
 
 <sportalPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -723,7 +746,6 @@
 <sportalPropertyPartitionDistinctSubject.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -746,7 +768,6 @@
 <sportalPropertyPartitionDistinctObject.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
@@ -769,7 +790,6 @@
 <vocabularyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -803,7 +823,6 @@
             """
         ]
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -837,7 +856,6 @@
             """
         ]
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -874,7 +892,6 @@
 <resourceHostnamePartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
             PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -911,7 +928,6 @@
         """
         ]
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -948,7 +964,6 @@
         """
         ]
         [
-            kgi:timeout "PT120S"^^xsd:duration ;
             kgi:recommendedPagination 100 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
                 PREFIX prov: <http://www.w3.org/ns/prov#>
