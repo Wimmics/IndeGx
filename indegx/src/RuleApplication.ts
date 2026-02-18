@@ -10,7 +10,7 @@ import { replacePlaceholders } from "./QueryRewrite.js";
 import { EndpointObject } from "./CatalogInput.js";
 import sparqljs from "sparqljs";
 import { AssetTracker } from "./AssetTracker.js";
-import { coreseServerUrl, sendAsk } from "./CoreseInterface.js";
+import { coreseServerQueryUrl, sendAsk } from "./CoreseInterface.js";
 
 let resilienceMode = false;
 

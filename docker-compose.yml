@@ -1,17 +1,20 @@
-version: '3.8'
 services:
   corese:
-    image: wimmics/corese:4.5.1-nightly-20240202
+    image: secoresearch/fuseki:5.5.0
     hostname: corese
     environment:
-      OPTIONS: "-o -su"
-      JVM_XMX: "15g"
+      TDB: "2"
+      QUERY_TIMEOUT: "240000"
+      ENABLE_UPDATE: "true"
+      ENABLE_DATA_WRITE: "true"
+      ADMIN_PASSWORD: "admin"
     expose: 
-      - "8080"
+      - "3030"
     volumes:
-      - ./input:/input
-      - ./output:/usr/local/corese/log
-      - ./config:/usr/local/corese/config
+      # - ./input:/input
+      # - ./data:/fuseki-base/databases
+      - ./output:/output
+      - ./config:/fuseki-configuration
       - ./rules:/rules
     extra_hosts:
       - host.docker.internal:host-gateway

@@ -1,4 +1,4 @@
-import { coreseServerUrl, sendUpdate } from "./CoreseInterface.js";
+import { coreseServerQueryUrl, sendUpdate } from "./CoreseInterface.js";
 import * as GlobalUtils from "./GlobalUtils.js";
 import * as SparqlUtils from "./SPARQLUtils.js";
 import * as RuleApplication from "./RuleApplication.js";
@@ -179,7 +179,7 @@ function indegxProcess(): Promise<void> {
 
         return initPromise.then(() => {
             Logger.info("Pre-treatment manifest tree read")
-            return RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, preManifest, true).then(() => {
+            return RuleApplication.applyRuleTree({ endpoint: coreseServerQueryUrl }, preManifest, true).then(() => {
                 Logger.info("Pre treatment ends");
                 return;
             })
@@ -199,7 +199,7 @@ function indegxProcess(): Promise<void> {
             saveManifestFile = GlobalUtils.writeFile(postManifestTreeFile, JSON.stringify(postManifest))
         }
         Logger.info("Post treatment starts");
-        return saveManifestFile.then(() => RuleApplication.applyRuleTree({ endpoint: coreseServerUrl }, postManifest, true).then(() => {
+        return saveManifestFile.then(() => RuleApplication.applyRuleTree({ endpoint: coreseServerQueryUrl }, postManifest, true).then(() => {
             Logger.info("Post treatment ends");
             return;
         }))

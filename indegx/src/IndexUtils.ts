@@ -1,4 +1,4 @@
-import { coreseServerUrl } from "./CoreseInterface.js";
+import { coreseServerQueryUrl, coreseServerUpdateUrl } from "./CoreseInterface.js";
 import * as Logger from "./LogUtils.js"
 import * as Global from "./GlobalUtils.js";
 import * as RDFUtils from "./RDFUtils.js";
@@ -13,7 +13,7 @@ import * as SPARQLUtils from "./SPARQLUtils.js";
     */
 export function writeIndex(filename: string): Promise<void> {
     let trigHeader = { "accept": "application/trig" } as Record<string, string>;
-    return Global.fetchGETPromise(coreseServerUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g { ?sg ?pg ?og } ?s ?p ?o } WHERE { { GRAPH ?g { ?sg ?pg ?og } } UNION { ?s ?p ?o } }"), trigHeader).then(trig => {
+    return Global.fetchGETPromise(coreseServerQueryUrl + "?query=" + encodeURIComponent("CONSTRUCT { GRAPH ?g { ?sg ?pg ?og } ?s ?p ?o } WHERE { { GRAPH ?g { ?sg ?pg ?og } } UNION { ?s ?p ?o } }"), trigHeader).then(trig => {
         Global.writeFile(filename, RDFUtils.fixCommonTurtleStringErrors(trig))
         Logger.info("IndeGx treatment done")
         return ;
@@ -34,7 +34,7 @@ export function sendFileToIndex(filename: string, graph?: string): Promise<void>
     if (graph !== undefined) {
         query = encodeURIComponent("LOAD <" + filename + "> INTO GRAPH <" + graph + ">");
     }
-    return Global.fetchPOSTPromise(coreseServerUrl + "?query=" + query)
+    return Global.fetchPOSTPromise(coreseServerUpdateUrl + "?query=" + query)
         .catch(error => {
             Logger.error("Loading file", filename, error);
         });
@@ -44,9 +44,9 @@ export function sendStoreContentToIndex(store: $rdf.Store, graph?: string): Prom
     return RDFUtils.serializeStoreToNTriplesPromise(store).then(trig => {
         store.close();
         if (graph === undefined) {
-            return SPARQLUtils.sendUpdateQuery(coreseServerUrl, `INSERT DATA { ${trig} }`)
+            return SPARQLUtils.sendUpdateQuery(coreseServerUpdateUrl, `INSERT DATA { ${trig} }`)
         } else {
-            return SPARQLUtils.sendUpdateQuery(coreseServerUrl, `INSERT DATA { GRAPH <${graph}> { ${trig} } }`)
+            return SPARQLUtils.sendUpdateQuery(coreseServerUpdateUrl, `INSERT DATA { GRAPH <${graph}> { ${trig} } }`)
         }
     })
 }
