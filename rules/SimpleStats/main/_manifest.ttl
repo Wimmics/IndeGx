@@ -8,8 +8,6 @@
 <> a mf:Manifest ;
     mf:entries  (
             <tripleCount.ttl>
-            # <classCount.ttl>
-            # <propertyCount.ttl>
             <sportalClassPartition.ttl>
             <sportalPropertyPartition.ttl>
             <literalCount.ttl>
@@ -22,18 +20,6 @@
             <sportalDistinctIRIReferences.ttl>
             <sportalDistinctRDFNodes.ttl>
             <sportalDistinctLiterals.ttl>
-            <sportalClassPartitionClasses.ttl>
-            <sportalClassPartitionTriples.ttl>
-            <sportalClassPartitionDistinctObjects.ttl>
-            <sportalClassPartitionDistinctSubjects.ttl>
-            <sportalClassPartitionProperties.ttl>
-            <sportalClassPartitionPropertyPartition.ttl>
-            <sportalClassPartitionPropertyPartitionTriples.ttl>
-            <sportalClassPartitionPropertyPartitionDistinctSubjects.ttl>
-            <sportalPropertyPartitionTriples.ttl>
-            <sportalPropertyPartitionDistinctObject.ttl>
-            <sportalPropertyPartitionDistinctSubject.ttl>
-            <vocabularyPartition.ttl>
             <resourceHostnamePartition.ttl>
         ) .
 
@@ -452,6 +438,12 @@
                 }
             """
         ]
+        <sportalClassPartitionClasses.ttl>
+        <sportalClassPartitionTriples.ttl>
+        <sportalClassPartitionDistinctObjects.ttl>
+        <sportalClassPartitionDistinctSubjects.ttl>
+        <sportalClassPartitionProperties.ttl>
+        <sportalClassPartitionPropertyPartition.ttl>
     ) .
 
 <sportalClassPartitionTriples.ttl> a mf:ManifestEntry ;
@@ -614,6 +606,8 @@
                 }
             """
         ]
+        <sportalClassPartitionPropertyPartitionTriples.ttl>
+        <sportalClassPartitionPropertyPartitionDistinctSubjects.ttl>
     ) .
 
 <sportalClassPartitionPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
@@ -718,6 +712,9 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
             }"""
         ]
+        <sportalPropertyPartitionTriples.ttl>
+        <sportalPropertyPartitionDistinctObject.ttl>
+        <sportalPropertyPartitionDistinctSubject.ttl>
     ) .
 
 <sportalPropertyPartitionTriples.ttl> a mf:ManifestEntry ;
@@ -784,108 +781,6 @@
                 BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
                 BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?p))), "PropertyPartition")) AS ?propertyPartition)
             }"""
-        ]
-    ) .
-
-<vocabularyPartition.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
-        [
-            kgi:recommendedPagination 100 ;
-            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-            PREFIX prov: <http://www.w3.org/ns/prov#>
-            PREFIX earl: <http://www.w3.org/ns/earl#>
-            PREFIX dcterms: <http://purl.org/dc/terms/>
-            PREFIX kgi: <http://ns.inria.fr/kg/index#>
-            INSERT {
-                GRAPH $rawEndpointUrl {
-                    ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
-                    ?vocabularyPartition void:vocabulary ?ns .
-                    ?vocabularyPartition void:classes ?count .
-                }
-            }
-            WHERE {
-                SERVICE $rawEndpointUrl {
-                    {
-                        SELECT ?ns (COUNT(?elem) AS ?count) {
-                            {
-                                SELECT DISTINCT ?elem {
-                                    ?s a ?elem .
-                                }
-                            }
-                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
-                        }
-                        GROUP BY ?ns
-                    }
-                }
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
-            }
-            """
-        ]
-        [
-            kgi:recommendedPagination 100 ;
-            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX earl: <http://www.w3.org/ns/earl#>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX kgi: <http://ns.inria.fr/kg/index#>
-                INSERT {
-                    GRAPH $rawEndpointUrl {
-                        ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
-                        ?vocabularyPartition void:vocabulary ?ns .
-                        ?vocabularyPartition void:properties ?count .
-                    }
-            }
-            WHERE {
-                SERVICE $rawEndpointUrl {
-                    {
-                        SELECT ?ns (COUNT(?elem) AS ?count) {
-                            {
-                                SELECT DISTINCT ?elem {
-                                    ?s ?elem ?o .
-                                }
-                            }
-                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
-                        }
-                        GROUP BY ?ns
-                    }
-                }
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
-            }
-            """
-        ]
-        [
-            kgi:recommendedPagination 100 ;
-            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
-                PREFIX prov: <http://www.w3.org/ns/prov#>
-                PREFIX earl: <http://www.w3.org/ns/earl#>
-                PREFIX dcterms: <http://purl.org/dc/terms/>
-                PREFIX kgi: <http://ns.inria.fr/kg/index#>
-                INSERT {
-                    GRAPH $rawEndpointUrl {
-                        ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
-                        ?vocabularyPartition void:vocabulary ?ns .
-                    }
-            }
-            WHERE {
-                SERVICE $rawEndpointUrl {
-                    {
-                        SELECT ?ns {
-                            {
-                                SELECT DISTINCT ?elem {
-                                    ?s ?elem ?o .
-                                }
-                            }
-                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
-                        }
-                        GROUP BY ?ns
-                    }
-                }
-                BIND(Iri(CONCAT(str(kgi:), MD5(str($rawEndpointUrl)), "Dataset")) AS ?datasetDescription)
-                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str($rawEndpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
-            }
-            """
         ]
     ) .
 

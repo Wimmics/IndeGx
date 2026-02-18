@@ -9,6 +9,7 @@
     mf:entries  (
         <recountClasses.ttl>
         <recountProperties.ttl>
+        <vocabularyPartition.ttl>
     )
     .
 
@@ -63,45 +64,135 @@
             """
         ]
     ) .
+    
 
-<cleanClasses.ttl> a mf:ManifestEntry ;
+
+<vocabularyPartition.ttl> a mf:ManifestEntry ;
     kgi:onSuccess (
         [
+            kgi:recommendedPagination 10 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
-                DELETE {
-                    GRAPH ?endpointUrl {
-                        ?datasetDescription void:classes ?countLower .
-                    }
+            INSERT {
+                GRAPH ?endpointUrl {
+                    ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                    ?vocabularyPartition void:vocabulary ?ns .
                 }
-                WHERE {
-                    GRAPH ?endpointUrl {
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
-                        ?datasetDescription void:classes ?countLower , ?countHigher .
+            }
+            WHERE {
+                    {
+                        SELECT DISTINCT ?ns {
+                            {
+                                SELECT DISTINCT ?elem {
+                                    GRAPH ?endpointUrl {
+                                        ?datasetDescription void:classPartition ?classPartition .
+                                        ?classPartition void:class ?elem .
+                                    }
+                                }
+                            }
+                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                        } GROUP BY ?ns
                     }
-                    FILTER(STR(?countLower) < STR(?countHigher) )
-                }
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+            }
             """
         ]
-    ) .
-
-<cleanProperties.ttl> a mf:ManifestEntry ;
-    kgi:onSuccess (
         [
+            kgi:recommendedPagination 10 ;
             mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+            PREFIX prov: <http://www.w3.org/ns/prov#>
+            PREFIX earl: <http://www.w3.org/ns/earl#>
+            PREFIX dcterms: <http://purl.org/dc/terms/>
             PREFIX kgi: <http://ns.inria.fr/kg/index#>
-                DELETE {
-                    GRAPH ?endpointUrl {
-                        ?datasetDescription void:properties ?countLower .
-                    }
+            INSERT {
+                GRAPH ?endpointUrl {
+                    ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                    ?vocabularyPartition void:vocabulary ?ns .
+                    ?vocabularyPartition void:classes ?count .
                 }
-                WHERE {
-                    GRAPH ?endpointUrl {
-                        BIND(Iri(CONCAT(str(kgi:), MD5(str(?endpointUrl)), "Dataset")) AS ?datasetDescription)  
-                        ?datasetDescription void:properties ?countLower , ?countHigher .
+            }
+            WHERE {
+                    {
+                        SELECT ?ns (COUNT(?elem) AS ?count) {
+                            {
+                                SELECT DISTINCT ?elem {
+                                    GRAPH ?endpointUrl {
+                                        ?datasetDescription void:classPartition ?classPartition .
+                                        ?classPartition void:class ?elem .
+                                    }
+                                }
+                            }
+                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                        } GROUP BY ?ns
                     }
-                    FILTER(STR(?countLower) < STR(?countHigher) )
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                        ?vocabularyPartition void:vocabulary ?ns .
+                    }
+            }
+            WHERE {
+                {
+                    SELECT ?ns {
+                        {
+                            SELECT DISTINCT ?elem {
+                                GRAPH ?endpointUrl {
+                                    ?datasetDescription void:propertyPartition ?propertyPartition .
+                                    ?propertyPartition void:property ?elem ;
+                                }
+                           }
+                        }
+                        BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                    } GROUP BY ?ns
                 }
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+            }
+            """
+        ]
+        [
+            kgi:recommendedPagination 100 ;
+            mf:action """PREFIX void: <http://rdfs.org/ns/void#>
+                PREFIX prov: <http://www.w3.org/ns/prov#>
+                PREFIX earl: <http://www.w3.org/ns/earl#>
+                PREFIX dcterms: <http://purl.org/dc/terms/>
+                PREFIX kgi: <http://ns.inria.fr/kg/index#>
+                INSERT {
+                    GRAPH ?endpointUrl {
+                        ?datasetDescription kgi:vocabularyPartition ?vocabularyPartition .
+                        ?vocabularyPartition void:vocabulary ?ns .
+                        ?vocabularyPartition void:properties ?count .
+                    }
+            }
+            WHERE {
+                    {
+                        SELECT ?ns (COUNT(?elem) AS ?count) {
+                            {
+                                SELECT DISTINCT ?elem {
+                                    GRAPH ?endpointUrl {
+                                        ?datasetDescription void:propertyPartition ?propertyPartition .
+                                        ?propertyPartition void:property ?elem ;
+                                    }
+                                }
+                            }
+                            BIND(IRI(REPLACE( str(?elem), "(#|/)[^#/]*$", "$1")) AS ?ns)
+                        } GROUP BY ?ns
+                    }
+                BIND(Iri(CONCAT(str(kgi:), MD5(CONCAT(str(?endpointUrl), str(?ns))) , "VocabularyPartition")) AS ?vocabularyPartition)
+            }
             """
         ]
     ) .

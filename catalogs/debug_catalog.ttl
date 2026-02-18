@@ -12,9 +12,25 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 kgi:catalogResource  a dcat:Catalog ;
-    dcat:dataset [ 
-        # void:sparqlEndpoint  <https://sparql.uniprot.org/sparql> ;
-        # void:sparqlEndpoint <https://idsm.elixir-czech.cz/sparql/endpoint/chebi> ;
+    dcat:dataset
+    [ 
         void:sparqlEndpoint <https://sparql.rhea-db.org/> 
-        # void:sparqlEndpoint <http://fr.dbpedia.org/sparql> 
+    ] ,
+    [ 
+        void:sparqlEndpoint <https://sparql.swisslipids.org/sparql> 
+    ] ,
+    [ 
+        void:sparqlEndpoint <https://www.bgee.org/sparql/> 
+    ] ,
+    [ 
+        void:sparqlEndpoint <https://rdf.metanetx.org/sparql/> 
+    ] ,
+    [ 
+        void:sparqlEndpoint <https://enpkg.commons-lab.org/graphdb/repositories/ENPKG> 
+    ] ,
+    [ 
+        void:sparqlEndpoint <https://sparql.uniprot.org/sparql> 
+    ] ,
+    [ 
+        void:sparqlEndpoint <https://idsm.elixir-czech.cz/sparql/endpoint/isdm>
     ] .
