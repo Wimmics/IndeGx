@@ -1450,7 +1450,6 @@
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
-  ns2:importedFrom ns17:search ;
   ns6:sparqlEndpoint ns147:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns147:sparql .
@@ -1550,6 +1549,7 @@
   ns8:endpointURL ns164:sparql .
 
 <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.allie.dbcls.jp%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+  ns2:importedFrom ns17:search ;
   ns6:sparqlEndpoint ns165:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns165:sparql .
@@ -3637,7 +3637,7 @@
   a ns8:Dataset ;
   ns8:endpointURL ns522:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2026-03-17T08:07:00.139Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2026-03-18T08:07:30.765Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FSStuurman%2FmicroHeights%2Fsparql> ;
