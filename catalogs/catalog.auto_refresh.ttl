@@ -182,19 +182,20 @@
 @prefix ns199: <http://wormbase.bio2rdf.org/> .
 @prefix ns921: <https://dati.isprambiente.it/> .
 @prefix ns920: <http://api.talis.com/stores/ordnance-survey/services/> .
-@prefix ns925: <http://nextprot.bio2rdf.org/> .
+@prefix ns925: <https://betamasaheft.eu/> .
 @prefix ns924: <https://api.druid.datalegend.net/datasets/andb/ANDB-diamantslijperijen/> .
 @prefix ns923: <https://hdt.lod.labs.vu.nl/> .
 @prefix ns922: <https://rdfportal.org/proteinatlas/> .
-@prefix ns929: <http://api.kasabi.com/dataset/sanskrit-english-lexicon/apis/> .
-@prefix ns928: <https://io.datascience-paris-saclay.fr/> .
-@prefix ns927: <http://data.odw.tw/> .
-@prefix ns926: <https://metadb.riken.jp/> .
-@prefix ns932: <https://api.druid.datalegend.net/datasets/RubenS/marc21/> .
-@prefix ns931: <https://hunter-cuny.eagle-i.net/sparqler/> .
-@prefix ns930: <http://pisa.rkbexplorer.com/> .
-@prefix ns934: <https://api.finto.fi/rest/v1/yso-places/> .
-@prefix ns933: <http://www.ebi.ac.uk/rdf/services/atlas/> .
+@prefix ns929: <https://io.datascience-paris-saclay.fr/> .
+@prefix ns928: <http://data.odw.tw/> .
+@prefix ns927: <https://metadb.riken.jp/> .
+@prefix ns926: <http://nextprot.bio2rdf.org/> .
+@prefix ns932: <https://hunter-cuny.eagle-i.net/sparqler/> .
+@prefix ns931: <http://pisa.rkbexplorer.com/> .
+@prefix ns930: <http://api.kasabi.com/dataset/sanskrit-english-lexicon/apis/> .
+@prefix ns935: <https://api.finto.fi/rest/v1/yso-places/> .
+@prefix ns934: <http://www.ebi.ac.uk/rdf/services/atlas/> .
+@prefix ns933: <https://api.druid.datalegend.net/datasets/RubenS/marc21/> .
 @prefix ns903: <https://semanticweb.cs.vu.nl/iati/> .
 @prefix ns902: <https://www.icane.es/opendata/> .
 @prefix ns901: <http://api.talis.com/stores/moseley/services/> .
@@ -5329,7 +5330,7 @@ ns1:https%3A%2F%2Ftest-svu%2Fsparql ns2:importedFrom <https://lod-cloud.net/lod-
   a ns8:Dataset ;
   ns8:endpointURL ns739:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2026-04-02T08:34:34.981Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2026-04-03T08:11:37.258Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FSStuurman%2FmicroHeights%2Fsparql> ;
@@ -6344,12 +6345,7 @@ ns1:Catalog ns2:lastRefreshedOn "2026-04-02T08:34:34.981Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fmeducator.open.ac.uk%2Fresourcesrestapi%2Frest%2Fmeducator%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fct-linkdata.aegean.gr%2Fgcam%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Fsparql> ;
-  ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_international-chronostratigraphic-chart> ;
-  ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.nobelprize.org%2F> ;
-  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fnfdi4culture.de%2Fsparql> ;
-  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.dnb.de%2F> ;
-  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fqlever.dev%2Fapi%2Fohm-planet> ;
-  ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcourage.btk.mta.hu%3A3030%2Fcourage%2Fquery> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fbetamasaheft.eu%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Flingualibre.org%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fid.nlm.nih.gov%2Fmesh%2Fquery> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2F> ;
@@ -6362,6 +6358,12 @@ ns1:Catalog ns2:lastRefreshedOn "2026-04-02T08:34:34.981Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fschema.gov.it%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdata.library.sh.cn%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fvirtuoso.virtualtreasury.ie%2F> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocabs.ands.org.au%2Frepository%2Fapi%2Fsparql%2Fcsiro_international-chronostratigraphic-chart_international-chronostratigraphic-chart> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.nobelprize.org%2F> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fnfdi4culture.de%2Fsparql> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.dnb.de%2F> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fqlever.dev%2Fapi%2Fohm-planet> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fcourage.btk.mta.hu%3A3030%2Fcourage%2Fquery> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fsparql.glyconavi.org%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Frdfportal.org%2Fbioportal%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fidsm.elixir-czech.cz%2Fsparql%2Fendpoint%2Fchebi> ;
@@ -7516,15 +7518,20 @@ ns1:Catalog ns2:lastRefreshedOn "2026-04-02T08:34:34.981Z"^^xsd:dateTime ;
   a ns8:Dataset ;
   ns8:endpointURL ns924:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fnextprot.bio2rdf.org%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fbetamasaheft.eu%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns6:sparqlEndpoint ns925:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns925:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fmetadb.riken.jp%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fnextprot.bio2rdf.org%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
   ns6:sparqlEndpoint ns926:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns926:sparql .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fmetadb.riken.jp%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+  ns6:sparqlEndpoint ns927:sparql ;
+  a ns8:Dataset ;
+  ns8:endpointURL ns927:sparql .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fid.ndl.go.jp%2Fauth%2Fndla%2F> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
   ns6:sparqlEndpoint <http://id.ndl.go.jp/auth/ndla/> ;
@@ -7533,46 +7540,46 @@ ns1:Catalog ns2:lastRefreshedOn "2026-04-02T08:34:34.981Z"^^xsd:dateTime ;
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fdata.odw.tw%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
-  ns6:sparqlEndpoint ns927:sparql ;
-  a ns8:Dataset ;
-  ns8:endpointURL ns927:sparql .
-
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fio.datascience-paris-saclay.fr%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
-  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
-  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns6:sparqlEndpoint ns928:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns928:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.kasabi.com%2Fdataset%2Fsanskrit-english-lexicon%2Fapis%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fio.datascience-paris-saclay.fr%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/crawling_catalog.ttl> ;
   ns6:sparqlEndpoint ns929:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns929:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fpisa.rkbexplorer.com%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fapi.kasabi.com%2Fdataset%2Fsanskrit-english-lexicon%2Fapis%2Fsparql> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
   ns6:sparqlEndpoint ns930:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns930:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fhunter-cuny.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
-  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpisa.rkbexplorer.com%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns6:sparqlEndpoint ns931:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns931:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FRubenS%2Fmarc21%2Fsparql> ns2:importedFrom ns10:datasets ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fhunter-cuny.eagle-i.net%2Fsparqler%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
+  ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns6:sparqlEndpoint ns932:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns932:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Fatlas%2Fsparql> ns2:importedFrom ns3:sparql ;
-  ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FRubenS%2Fmarc21%2Fsparql> ns2:importedFrom ns10:datasets ;
   ns6:sparqlEndpoint ns933:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns933:sparql .
 
-<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.finto.fi%2Frest%2Fv1%2Fyso-places%2Fdata> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
-  ns6:sparqlEndpoint ns934:data ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fwww.ebi.ac.uk%2Frdf%2Fservices%2Fatlas%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
+  ns6:sparqlEndpoint ns934:sparql ;
   a ns8:Dataset ;
-  ns8:endpointURL ns934:data .
+  ns8:endpointURL ns934:sparql .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.finto.fi%2Frest%2Fv1%2Fyso-places%2Fdata> ns2:importedFrom <https://lod-cloud.net/lod-data.json> ;
+  ns6:sparqlEndpoint ns935:data ;
+  a ns8:Dataset ;
+  ns8:endpointURL ns935:data .
 
