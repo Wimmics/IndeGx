@@ -2512,7 +2512,8 @@
   a ns8:Dataset ;
   ns8:endpointURL ns328:sparql .
 
-<http://ns.inria.fr/kg/index#http%3A%2F%2Fpublications.europa.eu%2Fwebapi%2Frdf%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
+<http://ns.inria.fr/kg/index#http%3A%2F%2Fpublications.europa.eu%2Fwebapi%2Frdf%2Fsparql> ns2:importedFrom ns3:sparql ;
+  ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
   ns6:sparqlEndpoint ns329:sparql ;
   a ns8:Dataset ;
@@ -3660,7 +3661,7 @@
   a ns8:Dataset ;
   ns8:endpointURL ns523:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2026-08-11T08:32:49.173Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2026-08-12T08:47:36.152Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FSStuurman%2FmicroHeights%2Fsparql> ;
