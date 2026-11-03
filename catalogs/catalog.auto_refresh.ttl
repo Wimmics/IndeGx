@@ -3027,6 +3027,11 @@
   a ns8:Dataset ;
   ns8:endpointURL ns412:sparql .
 
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.inapp.gov.it%2Fendpoint%2F> ns2:importedFrom ns3:sparql ;
+  ns6:sparqlEndpoint <https://dati.inapp.gov.it/endpoint/> ;
+  a ns8:Dataset ;
+  ns8:endpointURL <https://dati.inapp.gov.it/endpoint/> .
+
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocab.getty.edu%2Fsparql> ns2:importedFrom ns3:sparql ;
   ns6:sparqlEndpoint ns413:sparql ;
   a ns8:Dataset ;
@@ -3212,6 +3217,11 @@
   ns6:sparqlEndpoint ns446:sparql ;
   a ns8:Dataset ;
   ns8:endpointURL ns446:sparql .
+
+<http://ns.inria.fr/kg/index#https%3A%2F%2Fclimatepolicyradar.wikibase.cloud%2Fquery%2F> ns2:importedFrom ns3:sparql ;
+  ns6:sparqlEndpoint <https://climatepolicyradar.wikibase.cloud/query/> ;
+  a ns8:Dataset ;
+  ns8:endpointURL <https://climatepolicyradar.wikibase.cloud/query/> .
 
 <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bcn.cl%2Fsparql> ns2:importedFrom <https://raw.githubusercontent.com/OpenLinkSoftware/general-turtle-doc-collection/master/LODCloud_SPARQL_Endpoints.ttl> ;
   ns2:importedFrom <https://raw.githubusercontent.com/Wimmics/IndeGx/main/catalogs/all_catalog_edited.ttl> ;
@@ -3689,7 +3699,7 @@
   a ns8:Dataset ;
   ns8:endpointURL ns527:query .
 
-ns1:Catalog ns2:lastRefreshedOn "2026-11-02T17:22:26.238Z"^^xsd:dateTime ;
+ns1:Catalog ns2:lastRefreshedOn "2026-11-03T15:24:55.953Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvulcan.cs.uga.edu%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Ftsu.eagle-i.net%2Fsparqler%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FSStuurman%2FmicroHeights%2Fsparql> ;
@@ -4133,6 +4143,7 @@ ns1:Catalog ns2:lastRefreshedOn "2026-11-02T17:22:26.238Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Ffolklore%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdati.beniculturali.it%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fldf.fi%2Fmmm%2Fsparql> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fdati.inapp.gov.it%2Fendpoint%2F> ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fvocab.getty.edu%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fgraph.openbiodiv.net%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fzbw.eu%2Fbeta%2Fsparql%2Fstw%2Fquery> ;
@@ -4168,6 +4179,7 @@ ns1:Catalog ns2:lastRefreshedOn "2026-11-02T17:22:26.238Z"^^xsd:dateTime ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fd2kab.i3s.unice.fr%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2Fandb%2FANDB-ADB-all%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fde.dbpedia.org%2Fsparql> ;
+  ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fclimatepolicyradar.wikibase.cloud%2Fquery%2F> ;
   ns8:dataset <http://ns.inria.fr/kg/index#http%3A%2F%2Fdatos.bcn.cl%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fapi.druid.datalegend.net%2Fdatasets%2FHistoryOfWork%2FhistoryOfWork-all-latest%2Fsparql> ;
   ns8:dataset <http://ns.inria.fr/kg/index#https%3A%2F%2Fopendata1.opendata.u-psud.fr%2Fsparql> ;
